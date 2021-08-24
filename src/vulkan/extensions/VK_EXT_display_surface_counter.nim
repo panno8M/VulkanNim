@@ -5,8 +5,7 @@ import VK_KHR_display
 
 
 type
-  SurfaceCounterFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
-    Vblank = 0x00000001
+  SurfaceCounterFlagBitsEXT* = UnusedEnum
   SurfaceCapabilities2EXT* = object
     sType*: StructureType
     pNext*: pointer
@@ -21,7 +20,7 @@ type
     supportedCompositeAlpha*: CompositeAlphaFlagsKHR
     supportedUsageFlags*: ImageUsageFlags
     supportedSurfaceCounters*: SurfaceCounterFlagsEXT
-  SurfaceCounterFlagsEXT* = Flags
+  SurfaceCounterFlagsEXT* = distinct Flags
 
 const ExtDisplaySurfaceCounterSpecVersion* = 1
 const ExtDisplaySurfaceCounterExtensionName* = "VK_EXT_display_surface_counter"

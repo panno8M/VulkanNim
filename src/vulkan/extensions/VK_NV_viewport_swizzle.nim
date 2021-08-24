@@ -24,7 +24,7 @@ type
     flags*: PipelineViewportSwizzleStateCreateFlagsNV
     viewportCount*: uint32
     pViewportSwizzles*: ptr ViewportSwizzleNV
-  PipelineViewportSwizzleStateCreateFlagsNV* = Flags
+  PipelineViewportSwizzleStateCreateFlagsNV* = distinct Flags
 
 const NvViewportSwizzleSpecVersion* = 1
 const NvViewportSwizzleExtensionName* = "VK_NV_viewport_swizzle"

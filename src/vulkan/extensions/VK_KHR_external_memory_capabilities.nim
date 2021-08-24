@@ -10,11 +10,9 @@ type
   PhysicalDeviceExternalBufferInfoKHR* = object
   ExternalMemoryFeatureFlagBitsKHR* = UnusedEnum
   ExternalMemoryHandleTypeFlagBitsKHR* = UnusedEnum
-  # TODO: [Unsupported Type]
-  # (name: "VkExternalMemoryHandleTypeFlagsKHR", kind: nkrType)
+  {name}* = {Alias}
   ExternalImageFormatPropertiesKHR* = object
-  # TODO: [Unsupported Type]
-  # (name: "VkExternalMemoryFeatureFlagsKHR", kind: nkrType)
+  {name}* = {Alias}
   ExternalMemoryPropertiesKHR* = object
   ExternalBufferPropertiesKHR* = object
 

@@ -9,7 +9,7 @@ type
     sType*: StructureType
     pNext*: pointer
     coverageReductionMode*: Bool32
-  PipelineCoverageReductionStateCreateFlagsNV* = Flags
+  PipelineCoverageReductionStateCreateFlagsNV* = distinct Flags
   PipelineCoverageReductionStateCreateInfoNV* = object
     sType*: StructureType
     pNext*: pointer

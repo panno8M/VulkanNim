@@ -8,8 +8,7 @@ type
   SemaphoreWaitFlagBitsKHR* = UnusedEnum
   SemaphoreSignalInfoKHR* = object
   TimelineSemaphoreSubmitInfoKHR* = object
-  # TODO: [Unsupported Type]
-  # (name: "VkSemaphoreWaitFlagsKHR", kind: nkrType)
+  {name}* = {Alias}
   SemaphoreTypeCreateInfoKHR* = object
   SemaphoreTypeKHR* = UnusedEnum
   SemaphoreWaitInfoKHR* = object

@@ -16,7 +16,7 @@ type
     discardRectangleMode*: DiscardRectangleModeEXT
     discardRectangleCount*: uint32
     pDiscardRectangles*: ptr Rect2D
-  PipelineDiscardRectangleStateCreateFlagsEXT* = Flags
+  PipelineDiscardRectangleStateCreateFlagsEXT* = distinct Flags
   DiscardRectangleModeEXT* {.size: sizeof(int32), pure.} = enum
     Inclusive = 0
     Exclusive = 1

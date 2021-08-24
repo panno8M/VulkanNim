@@ -95,8 +95,7 @@ type
     indexData*: DeviceOrHostAddressConstKHR
     transformData*: DeviceOrHostAddressConstKHR
   GeometryFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    Opaque = 0x00000001
-    NoDuplicateAnyHitInvocation = 0x00000002
+    
   BindAccelerationStructureMemoryInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -109,10 +108,7 @@ type
     TopLevel = 0
     BottomLevel = 1
   GeometryInstanceFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    TriangleFacingCullDisable = 0x00000001
-    TriangleFrontCounterclockwise = 0x00000002
-    ForceOpaque = 0x00000004
-    ForceNoOpaque = 0x00000008
+    
   PhysicalDeviceRayTracingFeaturesKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -182,7 +178,7 @@ type
     maxPayloadSize*: uint32
     maxAttributeSize*: uint32
     maxCallableSize*: uint32
-  GeometryInstanceFlagsKHR* = Flags
+  GeometryInstanceFlagsKHR* = distinct Flags
   TransformMatrixKHR* = object
     matrix*: array[3, array[4, float32]]
   AccelerationStructureBuildOffsetInfoKHR* = object
@@ -204,8 +200,8 @@ type
     pNext*: pointer
     data*: DeviceOrHostAddressConstKHR
     stride*: DeviceSize
-  GeometryFlagsKHR* = Flags
-  BuildAccelerationStructureFlagsKHR* = Flags
+  GeometryFlagsKHR* = distinct Flags
+  BuildAccelerationStructureFlagsKHR* = distinct Flags
   AccelerationStructureMemoryRequirementsTypeKHR* {.size: sizeof(int32), pure.} = enum
     Object = 0
     BuildScratch = 1
@@ -236,11 +232,7 @@ type
     aabbs*: AccelerationStructureGeometryAabbsDataKHR
     instances*: AccelerationStructureGeometryInstancesDataKHR
   BuildAccelerationStructureFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    AllowUpdate = 0x00000001
-    AllowCompaction = 0x00000002
-    PreferFastTrace = 0x00000004
-    PreferFastBuild = 0x00000008
-    LowMemory = 0x00000010
+    
   GeometryTypeKHR* {.size: sizeof(int32), pure.} = enum
     Triangles = 0
     Aabbs = 1
@@ -293,7 +285,7 @@ BuildAccelerationStructureFlagBitsKHR.defineAlias(LowMemory, LowMemory)
 GeometryTypeKHR.defineAlias(Triangles, Triangles)
 # Provided by VK_NV_ray_tracing
 GeometryTypeKHR.defineAlias(Aabbs, Aabbs)
-const ShaderUnusedKhr* = high(uint)
+const ShaderUnusedKhr* = (uint.high)
 const KhrRayTracingExtensionName* = "VK_KHR_ray_tracing"
 const KhrRayTracingSpecVersion* = 8
 var # commands

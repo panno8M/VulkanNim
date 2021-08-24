@@ -1,4 +1,4 @@
-# Generated at 2021-08-22T22:53:59+09:00
+# Generated at 2021-08-24T18:23:16+09:00
 # vulkan 1.2
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -232,10 +232,6 @@ type
   # Promoted from VK_KHR_driver_properties (extension 197)
   # ------------------------------------------------------
   DriverId* {.size: sizeof(int32), pure.} = enum
-    # FIXME: [ENUMS Unexpected ID(comment)]
-    # <comment>Driver IDs are now represented as enums instead of the old
-    #                  &lt;driverids&gt; tag, allowing them to be included in the
-    #                  API headers.</comment>
     AmdProprietary = 1 # Advanced Micro Devices, Inc.
     AmdOpenSource = 2 # Advanced Micro Devices, Inc.
     MesaRadv = 3 # Mesa open source project
@@ -318,7 +314,7 @@ type
     pNext*: pointer
     descriptorSetCount*: uint32
     pDescriptorCounts*: ptr uint32
-  DescriptorBindingFlags* = Flags
+  DescriptorBindingFlags* = distinct Flags
   DescriptorSetVariableDescriptorCountLayoutSupport* = object
     sType*: StructureType
     pNext*: pointer
@@ -350,10 +346,7 @@ type
     maxDescriptorSetUpdateAfterBindStorageImages*: uint32
     maxDescriptorSetUpdateAfterBindInputAttachments*: uint32
   DescriptorBindingFlagBits* {.size: sizeof(int32), pure.} = enum
-    UpdateAfterBind = 0x00000001
-    UpdateUnusedWhilePending = 0x00000002
-    PartiallyBound = 0x00000004
-    VariableDescriptorCount = 0x00000008
+    
   PhysicalDeviceDescriptorIndexingFeatures* = object
     sType*: StructureType
     pNext*: pointer
@@ -381,18 +374,14 @@ type
   # Promoted from VK_KHR_depth_stencil_resolve (extension 200)
   # ----------------------------------------------------------
   ResolveModeFlagBits* {.size: sizeof(int32), pure.} = enum
-    None = 0
-    SampleZero = 0x00000001
-    Average = 0x00000002
-    Min = 0x00000004
-    Max = 0x00000008
+    
   SubpassDescriptionDepthStencilResolve* = object
     sType*: StructureType
     pNext*: pointer
     depthResolveMode*: ResolveModeFlagBits
     stencilResolveMode*: ResolveModeFlagBits
     pDepthStencilResolveAttachment*: ptr AttachmentReference2
-  ResolveModeFlags* = Flags
+  ResolveModeFlags* = distinct Flags
   PhysicalDeviceDepthStencilResolveProperties* = object
     sType*: StructureType
     pNext*: pointer
@@ -521,7 +510,7 @@ type
     sType*: StructureType
     pNext*: pointer
     timelineSemaphore*: Bool32
-  SemaphoreWaitFlags* = Flags
+  SemaphoreWaitFlags* = distinct Flags
   SemaphoreSignalInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -531,7 +520,7 @@ type
     Binary = 0
     Timeline = 1
   SemaphoreWaitFlagBits* {.size: sizeof(int32), pure.} = enum
-    Any = 0x00000001
+    
   SemaphoreTypeCreateInfo* = object
     sType*: StructureType
     pNext*: pointer

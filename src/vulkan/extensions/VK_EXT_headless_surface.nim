@@ -9,7 +9,7 @@ type
     sType*: StructureType
     pNext*: pointer
     flags*: HeadlessSurfaceCreateFlagsEXT
-  HeadlessSurfaceCreateFlagsEXT* = Flags
+  HeadlessSurfaceCreateFlagsEXT* = distinct Flags
 
 const ExtHeadlessSurfaceExtensionName* = "VK_EXT_headless_surface"
 const ExtHeadlessSurfaceSpecVersion* = 1

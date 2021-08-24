@@ -4,10 +4,7 @@ import ../features/vk10
 
 
 type
-  DebugUtilsMessageTypeFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
-    General = 0x00000001
-    Validation = 0x00000002
-    Performance = 0x00000004
+  DebugUtilsMessageTypeFlagBitsEXT* = UnusedEnum
   DebugUtilsMessengerCallbackDataEXT* = object
     sType*: StructureType
     pNext*: pointer
@@ -29,13 +26,9 @@ type
     messageType*: DebugUtilsMessageTypeFlagsEXT
     pfnUserCallback*: DebugUtilsMessengerCallbackEXT
     pUserData*: pointer
-  DebugUtilsMessengerCreateFlagsEXT* = Flags
-  DebugUtilsMessageSeverityFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
-    Verbose = 0x00000001
-    Info = 0x00000010
-    Warning = 0x00000100
-    Error = 0x00001000
-  DebugUtilsMessageSeverityFlagsEXT* = Flags
+  DebugUtilsMessengerCreateFlagsEXT* = distinct Flags
+  DebugUtilsMessageSeverityFlagBitsEXT* = UnusedEnum
+  DebugUtilsMessageSeverityFlagsEXT* = distinct Flags
   DebugUtilsLabelEXT* = object
     sType*: StructureType
     pNext*: pointer
@@ -53,8 +46,8 @@ type
       pCallbackData: ptr DebugUtilsMessengerCallbackDataEXT;
       pUserData: pointer;
     ): Bool32 {.cdecl.}
-  DebugUtilsMessengerCallbackDataFlagsEXT* = Flags
-  DebugUtilsMessageTypeFlagsEXT* = Flags
+  DebugUtilsMessengerCallbackDataFlagsEXT* = distinct Flags
+  DebugUtilsMessageTypeFlagsEXT* = distinct Flags
   DebugUtilsObjectTagInfoEXT* = object
     sType*: StructureType
     pNext*: pointer

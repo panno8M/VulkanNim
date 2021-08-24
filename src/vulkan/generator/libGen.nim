@@ -91,4 +91,4 @@ proc generate*() =
     #   echo repr libFile.compile(resources)
 
 
-  echo "done!"
+  notice "Generate Complate!"

@@ -5,9 +5,7 @@ import VK_KHR_get_physical_device_properties2
 
 
 type
-  PerformanceCounterDescriptionFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    PerformanceImpacting = 0x00000001
-    ConcurrentlyImpacted = 0x00000002
+  PerformanceCounterDescriptionFlagBitsKHR* = UnusedEnum
   PerformanceCounterStorageKHR* {.size: sizeof(int32), pure.} = enum
     Int32 = 0
     Int64 = 1
@@ -20,7 +18,7 @@ type
     pNext*: pointer
     flags*: AcquireProfilingLockFlagsKHR
     timeout*: uint64
-  PerformanceCounterDescriptionFlagsKHR* = Flags
+  PerformanceCounterDescriptionFlagsKHR* = distinct Flags
   AcquireProfilingLockFlagBitsKHR* = UnusedEnum
   PerformanceCounterDescriptionKHR* = object
     sType*: StructureType
@@ -46,10 +44,7 @@ type
     pNext*: pointer
     performanceCounterQueryPools*: Bool32
     performanceCounterMultipleQueryPools*: Bool32
-  PerformanceCounterScopeKHR* {.size: sizeof(int32), pure.} = enum
-    CommandBuffer = 0
-    RenderPass = 1
-    Command = 2
+  PerformanceCounterScopeKHR* = UnusedEnum
   PerformanceCounterKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -79,11 +74,8 @@ type
     Amps = 8
     Hertz = 9
     Cycles = 10
-  AcquireProfilingLockFlagsKHR* = Flags
+  AcquireProfilingLockFlagsKHR* = distinct Flags
 
-PerformanceCounterScopeKHR.defineAlias(QueryScopeCommandBuffer, CommandBuffer)
-PerformanceCounterScopeKHR.defineAlias(QueryScopeRenderPass, RenderPass)
-PerformanceCounterScopeKHR.defineAlias(QueryScopeCommand, Command)
 const KhrPerformanceQuerySpecVersion* = 1
 const KhrPerformanceQueryExtensionName* = "VK_KHR_performance_query"
 var # commands

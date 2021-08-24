@@ -11,7 +11,7 @@ type
     flags*: AndroidSurfaceCreateFlagsKHR
     window*: ptr ANativeWindow
   ANativeWindow* = distinct object
-  AndroidSurfaceCreateFlagsKHR* = Flags
+  AndroidSurfaceCreateFlagsKHR* = distinct Flags
 
 const KhrAndroidSurfaceExtensionName* = "VK_KHR_android_surface"
 const KhrAndroidSurfaceSpecVersion* = 6

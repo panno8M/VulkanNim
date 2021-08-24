@@ -10,7 +10,7 @@ type
     pNext*: pointer
     flags*: MacOSSurfaceCreateFlagsMVK
     pView*: pointer
-  MacOSSurfaceCreateFlagsMVK* = Flags
+  MacOSSurfaceCreateFlagsMVK* = distinct Flags
 
 const MmacosSurfaceExtensionName* = "VK_MVK_macos_surface"
 const MmacosSurfaceSpecVersion* = 3

@@ -7,13 +7,11 @@ import VK_KHR_get_physical_device_properties2
 type
   PhysicalDeviceIDPropertiesKHR* = object
   ExternalFencePropertiesKHR* = object
-  # TODO: [Unsupported Type]
-  # (name: "VkExternalFenceFeatureFlagsKHR", kind: nkrType)
+  {name}* = {Alias}
   ExternalFenceFeatureFlagBitsKHR* = UnusedEnum
   PhysicalDeviceExternalFenceInfoKHR* = object
   ExternalFenceHandleTypeFlagBitsKHR* = UnusedEnum
-  # TODO: [Unsupported Type]
-  # (name: "VkExternalFenceHandleTypeFlagsKHR", kind: nkrType)
+  {name}* = {Alias}
 
 template LuidSizeKhr*(): untyped =
   VkLuidSize

@@ -13,7 +13,10 @@ import ./utils
 import ./liblogger
 import ./defineTypeComponents
 
+{.pragma: raiseInExtractor, raises: [UnexpectedXmlError].}
+
 type
+  UnexpectedXmlError* = object of ValueError
   Resources* = ref object
     vendorTags*: VendorTags
     commands*: TableRef[string, NodeCommand]
@@ -108,10 +111,15 @@ type
     name*: string
     comment*: Option[string]
     members*: seq[tuple[name, theType: string; ptrLv: Natural; length: seq[Natural]]]
+  NodeKindBitmask* = enum
+    nkbNormal, nkbAlias
   NodeBitmask* = ref object
     name*: string
-    theType*: string
-    requires*: Option[string]
+    case kind*: NodeKindBitmask
+    of nkbNormal:
+      flagbitsReq*: Option[string]
+    of nkbAlias:
+      alias*: string
   NodeHandle* = ref object
     name*: string
     handleType*: string
@@ -165,6 +173,11 @@ type
       nodesUnexpected*: TableRef[string, string]
     of false:
       targets*: seq[NodeRequireVal]
+
+proc raiseUnexpectedXmlError(title: Title; msg: varargs[string, `$`]) =
+  raise newException(UnexpectedXmlError,
+    logMsg(title, msg)
+  )
 
 proc cmp(a, b: NodeEnumVal): int =
   case a.kind
@@ -245,18 +258,18 @@ proc renderAliases*(enums: NodeEnum; vendorTags: VendorTags): string =
     .mapIt(it.render(vendorTags, name))
     .join("\n")
 
-proc render*(apiCons: NodeConst): string =
-  let name = apiCons.name.removeVkPrefix.toUpperCamel
-  case apiCons.kind
+proc render*(constant: NodeConst): string =
+  let name = constant.name.removeVkPrefix.toUpperCamel
+  case constant.kind
   of nkacValue:
-    result = "const {name}* = {apiCons.value}".fmt
-    if apiCons.comment.isSome:
-      result &= apiCons.comment.get.commentify.indent(1)
+    result = "const {name}* = {constant.value}".fmt
+    if constant.comment.isSome:
+      result &= constant.comment.get.commentify.indent(1)
   of nkacAlias:
     result = "template {name}*(): untyped =\n".fmt
-    if apiCons.comment.isSome:
-      result &= apiCons.comment.get.commentify.indent(2).LF
-    result &= apiCons.alias.toUpperCamel.indent(2)
+    if constant.comment.isSome:
+      result &= constant.comment.get.commentify.indent(2).LF
+    result &= constant.alias.toUpperCamel.indent(2)
     return
 
 proc render*(funcPtr: NodeFuncPtr): string =
@@ -296,10 +309,13 @@ proc render*(struct: Nodestruct): string =
     result &= members.join("\n")
 
 proc render*(bitmask: NodeBitmask): string =
-  let
-    name = bitmask.name.replaceBasicTypes
-    theType = bitmask.theType.replaceBasicTypes.replacePtrTypes
-  "{name}* = {theType}".fmt
+  let name = bitmask.name.replaceBasicTypes
+  case bitmask.kind
+  of nkbNormal:
+    "{name}* = distinct Flags".fmt
+  of nkbAlias:
+    "{name}* = {Alias}"
+
 
 proc render*(handle: NodeHandle): string =
   let
@@ -566,109 +582,128 @@ proc compile*(libFile: var LibFile; resources: Resources): LibFile =
 #!SECTION
 
 # SECTION extractors
-proc extractNodeEnum*(enumDef: XmlNode): NodeEnum =
-  assert enumDef.tag == "enums"
-  assert enumDef.name != "API Constants"
+proc extractNodeEnumValue*(typeDef: XmlNode): Option[NodeEnumVal] {.raises: [UnexpectedXmlError].} =
+  # Extract enum data from each <enum> tag of <enums>.
+  #   <enums name="VkResult" type="enum" comment="API result codes">
+  #           <comment>Return codes (positive values)</comment>
+  #       <enum value="0"     name="VK_SUCCESS" comment="Command completed successfully"/>
+  #       <enum value="1"     name="VK_NOT_READY" comment="A fence or query has not yet completed"/>
+  # ...
+  #       <enum value="5"     name="VK_INCOMPLETE" comment="A return array was too small for the result"/>
+  #           <comment>Error codes (negative values)</comment>
+  #       <enum value="-1"    name="VK_ERROR_OUT_OF_HOST_MEMORY" comment="A host memory allocation has failed"/>
+  #       <enum value="-2"    name="VK_ERROR_OUT_OF_DEVICE_MEMORY" comment="A device memory allocation has failed"/>
+  # ...
+  #       <enum value="-13"   name="VK_ERROR_UNKNOWN" comment="An unknown error has occurred, due to an implementation or application bug"/>
+  #           <unused start="-14" comment="This is the next unused available error code (negative value)"/>
+  #   </enums>
+  block Handle_invalid_nodes:
+    if typeDef.kind in {xnText, xnComment}: # Meaningless blank value
+      return
+    if typeDef.kind != xnElement: raiseUnexpectedXmlError(
+      title"@Enum Value Extraction >",
+      $typeDef)
 
-  result = NodeEnum(
-    name: enumDef.name,
-    comment: ?enumDef.comment
-  )
-  for child in enumDef:
-    # result.enumVals.add case child.kind
-    case child.kind
-      of xnElement:
-        case child.tag
-        of "enum":
-          let
-            name = child.name
-            comment = ?child.comment
+    if typeDef.tag in ["unused", "comment"]:
+      # Since enum values are later sorted, it is difficult to handle such comment tag.
+      return
+    if typeDef.tag != "enum": raiseUnexpectedXmlError(
+      title"@Enum Value Extraction >",
+      $typeDef)
 
-          let value =
-            try:
-              let oValue = ?child{"value"}
-              try: (val: oValue.get.parseInt, isHex: false).some
-              except: (val: oValue.get.parseHexInt, isHex: true).some
-            except: (int, bool).none
-          if value.isSome:
-            result.enumVals.add NodeEnumVal( kind: nkeValue,
-              name: name,
-              comment: comment,
-              value: value.get.val,
-              isHex: value.get.isHex)
-            continue
+  var xResult = NodeEnumVal(
+    name: typeDef.name,
+    comment: ?typeDef.comment)
 
-          let bitpos =
-            try: child{"bitpos"}.parseInt.some
-            except: int.none
-          if bitpos.isSome:
-            result.enumVals.add NodeEnumVal( kind: nkeBitpos,
-              name: name,
-              comment: comment,
-              bitpos: bitpos.get.int32)
-            continue
-
-          let alias = ?child{"alias"}
-          if alias.isSome:
-            result.enumVals.add NodeEnumVal(
-              kind: nkeAlias,
-              name: name,
-              comment: comment,
-              alias: alias.get)
-            continue
-
-          result.enumVals.add NodeEnumVal( kind: nkeUnexpected,
-            id: child.tag,
-            info: $child)
-        else:
-          result.enumVals.add NodeEnumVal( kind: nkeUnexpected,
-            id: child.tag,
-            info: $child)
-      of xnText: continue # Meaningless blank value
-      else:
-       result.enumVals.add NodeEnumVal(
-        kind: nkeUnexpected,
-        id: $child.kind,
-        info: $child)
-
-proc extractNodeConst(typeDef: XmlNode): NodeConst =
-  assert typeDef.tag == "enum"
-  let
-    name    = typeDef.name
-    value   = ?typeDef{"value"}
-    alias   = ?typeDef{"alias"}
-    comment = ?typeDef.comment
+  let value: Option[tuple[val: int; isHex: bool]] =
+    # input        100  0x100 abcde
+    # -------------------------------
+    # parseInt      o     x     x
+    # parseHexInt   o     o     x
+    try: some (typeDef{"value"}.parseInt, false)
+    except:
+      try:    some (typeDef{"value"}.parseHexInt, true)
+      except: none (int, bool)
   if value.isSome:
-    result = NodeConst(
-      kind: nkacValue,
-      name: name,
-      comment: comment)
-    let v = value.get
-    let pos = v.find("~0U")
-    result.value =
-      if pos == -1: v
+    xResult.kind  = nkeValue
+    xResult.value = value.get.val
+    xResult.isHex = value.get.isHex
+    return some xResult
+
+  let bitpos =
+    try: some typeDef{"bitpos"}.parseInt.int32
+    except: none int32
+  if bitpos.isSome:
+    xResult.kind   = nkeBitpos
+    xResult.bitpos = bitpos.get
+    return some xResult
+
+  let alias = ?typeDef{"alias"}
+  if alias.isSome:
+    xResult.kind  = nkeAlias
+    xResult.alias = alias.get
+    return some xResult
+
+  raiseUnexpectedXmlError(
+    title"The enum value does'nt has any value, bitpos or alias attr.",
+    $typeDef)
+
+proc extractNodeEnum*(enumDef: XmlNode): Option[NodeEnum] {.raiseInExtractor.} =
+  if enumDef.kind != xnElement or
+     enumDef.tag != "enums":
+    return
+  if enumDef.name == "API Constants":
+    return
+
+  var xResult = NodeEnum(
+    name: enumDef.name,
+    comment: ?enumDef.comment)
+
+  for child in enumDef:
+    try: xResult.enumVals.add child.extractNodeEnumValue.get
+    except UnpackDefect: discard
+    # except UnexpectedXmlError:
+  return some xResult
+
+proc extractNodeApiConstVal(typeDef: XmlNode): NodeConst {.raises: [UnexpectedXmlError].} =
+  if typeDef.tag != "enum":
+    raiseUnexpectedXmlError(
+      title"@API Constant Value Extraction >",
+      $typeDef)
+  result = NodeConst(
+    name: typeDef.name,
+    comment: ?typeDef.comment,
+    kind:
+      if (?typeDef.value).isSome: nkacValue
+      elif (?typeDef.alias).isSome: nkacAlias
       else:
-        v .replace("(", "")
-          .replace(")", "")
-          .replace("~0ULL", "high(uint)")
-          .replace("~0U", "high(uint)")
-  elif alias.isSome:
-    result = NodeConst(
-      kind: nkacAlias,
-      name: name,
-      alias: alias.get,
-      comment: comment
+        raiseUnexpectedXmlError(
+          title"The API Constant does'nt has both value and alias attr.",
+          $typeDef); return
     )
+
+  case result.kind
+  of nkacValue:
+    result.value = typeDef.value
+      .replace("~0ULL", "uint.high")
+      .replace("~0U", "uint.high")
+  of nkacAlias:
+    result.alias = typeDef.alias
 
 proc extractVendorTags*(tags: XmlNode): VendorTags =
   assert tags.tag == "tags"
   tags
     .findAll("tag")
-    .mapIt(?it.name)
-    .filterIt(it.isSome)
-    .mapIt((name: it.get))
+    .mapIt((name: it.name))
+    .filterIt((?it.name).isSome)
 
 proc extractNodeFuncPointer*(typeDef: XmlNode): NodeFuncPtr =
+  # extract funcpointer definition data from such as following xml:
+  # <type category="funcpointer">typedef void (VKAPI_PTR *<name>PFN_vkInternalAllocationNotification</name>)(
+  #   <type>void</type>*                    pUserData,
+  #   <type>size_t</type>                   size,
+  #   <type>VkInternalAllocationType</type> allocationType,
+  #   <type>VkSystemAllocationScope</type>  allocationScope);</type>
   assert typeDef.tag == "type"
   assert typeDef.category == "funcpointer"
   new result
@@ -677,9 +712,10 @@ proc extractNodeFuncPointer*(typeDef: XmlNode): NodeFuncPtr =
     case child.kind
     of xnElement:
       case child.tag
-      of "name": # at function definition
+      of "name": # The name tag in "funcpointer" represents the func name.
         result.name = child.innerText.parseWords[0]
-      of "type": # at args definition
+      of "type": # The type tag in "funcpointer" represents the arg names.
+        #                name, theType,                     ptrLv
         result.args.add ("", child.innerText.parseWords[0], 0.Natural)
       if not atArgDef:
         atArgDef = true
@@ -692,12 +728,12 @@ proc extractNodeFuncPointer*(typeDef: XmlNode): NodeFuncPtr =
       if words.len == 0: continue
 
       if not atArgDef:
-        result.ptrLv = words[0].count("*")
+        result.ptrLv += words[0].count("*")
         result.theType = words[0].replace("*", "")
       else:
         if result.args.len == 0: # for the func that has no (void) arguments
           continue
-        result.args[^1].ptrLv = words.join(" ").count("*")
+        result.args[^1].ptrLv += words.mapIt(it.count("*")).foldl(a+b)
         result.args[^1].name = words
           .mapIt(it.replace("*", ""))
           .filterIt(it.len != 0)
@@ -709,13 +745,21 @@ proc extractNodeDefine*(typeDef: XmlNode): NodeDefine =
   assert typeDef.tag == "type"
   result = NodeDefine(
     name:
-      if not typeDef.name.isEmptyOrWhitespace: typeDef.name
+      if (?typeDef.name).isSome: typeDef.name
       else: typeDef["name"].innerText.parseWords[0])
   result.str =
     try: defineComponents[result.name](typeDef)
-    except: commentify(&"FIXME: [Unsupported Macro]\n{typeDef}") & "\n"
+    except: error UndefinedMacro, $typedef; return
 
 proc extractNodeStruct*(typeDef: XmlNode): NodeStruct =
+  # Extract struct definition data from such as following xml:
+  #
+  # <type category="struct" name="VkImageBlit">
+  #   <member><type>VkImageSubresourceLayers</type> <name>srcSubresource</name></member>
+  #   <member><type>VkOffset3D</type>             <name>srcOffsets</name>[2]<comment>Specified in pixels for both compressed and uncompressed images</comment></member>
+  #   <member><type>VkImageSubresourceLayers</type> <name>dstSubresource</name></member>
+  #   <member><type>VkOffset3D</type>             <name>dstOffsets</name>[2]<comment>Specified in pixels for both compressed and uncompressed images</comment></member>
+  # </type>
   template lastMember(node: NodeStruct): untyped = node.members[^1]
   assert typeDef.tag == "type"
   assert typeDef.category in ["struct", "union"]
@@ -727,36 +771,54 @@ proc extractNodeStruct*(typeDef: XmlNode): NodeStruct =
       of "union": true
       else: return nil)
   for member in typeDef.findAll("member"):
-    result.members.add ("", "", 0.Natural, newSeq[Natural]())
+    #                   name, theType, ptrLv,     arrLens
+    result.members.add ("",    "",     0.Natural, newSeq[Natural]())
     for m in member:
       case m.kind
       of xnElement:
-        if   m.tag == "type":
+        case m.tag
+        of "type":
           result.lastMember.theType = m.innerText.parseWords[0]
-        elif m.tag == "name":
+        of "name":
           result.lastMember.name = m.innerText.parseWords[0]
       of xnText:
         let words = m.innerText.parseWords.filterInvalidArgParams
         if words.len == 0: continue
         result.lastMember.ptrLv += words.join.count("*")
+        #  E.g. "[3]", "[2][3]" or "[1][2][3]".
+        #  Raise exception if it pattern is as "[a][b]"
         if words[0][0] == '[' and words[0][^1] == ']':
           result.lastMember.length =
             words[0].parseWords({'[', ']'}).mapIt(it.parseInt.Natural)
       else: discard
 
-proc extractNodeBitmask*(typeDef: Xmlnode): NodeBitmask =
-  assert typeDef.tag == "type"
-  assert typeDef.category == "bitmask"
+proc extractNodeBitmask*(typeDef: Xmlnode): NodeBitmask {.raises: [UnexpectedXmlError]} =
+  if typeDef.tag != "type" or typeDef.category != "bitmask":
+    raiseUnexpectedXmlError(
+      title"@Bitmask Extraction >",
+      typeDef.rawText.splitLines.filter((i, x) => i < 5).join("\n")
+    )
   result = NodeBitmask(
-    requires: ?typeDef{"requires"})
-  for child in typeDef:
-    case child.kind
-    of xnElement:
-      if child.tag == "type":
-        result.theType = child.innerText.parseWords[0]
-      elif child.tag == "name":
-        result.name = child.innerText.parseWords[0]
-    else: discard
+    kind:
+      if typeDef["type"] != nil and
+         typeDef["name"] != nil :
+        nkbNormal
+
+      elif (?typeDef{"alias"}).isSome and
+           (?typeDef{"name"}).isSome:
+        nkbAlias
+
+      else: raiseUnexpectedXmlError(
+        title"@Flagbits Extraction >",
+        $typeDef); return
+  )
+  case result.kind
+  of nkbNormal:
+    result.name = typeDef["name"].innerText.parseWords[0]
+    result.flagbitsReq = ?typeDef{"requires"}
+  of nkbAlias:
+    result.name = typeDef{"name"}
+    result.alias = typeDef{"alias"}
 
 proc extractNodeHandle*(typeDef: XmlNode): NodeHandle =
   assert typeDef.tag == "type"
@@ -773,7 +835,7 @@ proc extractNodeHandle*(typeDef: XmlNode): NodeHandle =
     else: discard
 
 proc extractNodeCommand*(typeDef: XmlNode): NodeCommand =
-  # Extract command definition data from following xml:
+  # Extract command definition data from such as following xml:
   #
   # <command name="vkGetDeviceMemoryOpaqueCaptureAddressKHR"        alias="vkGetDeviceMemoryOpaqueCaptureAddress"/>
   #
@@ -947,7 +1009,7 @@ proc extractNodeRequire*(typeDef: XmlNode): NodeRequire =
       name: child.name,
       kind: case child.tag
         of "comment":
-          debug "Unprocessed Comment in require section\n" & child.innerText.parseWords.join(" ")
+          info title"Unprocessed Comment in require section", child.innerText.parseWords.join(" ")
           continue
         of "type": nkrType
         of "command": nkrCommand
@@ -986,7 +1048,7 @@ proc extractResources*(rootXml: XmlNode): Resources =
 
   result.apiConstants = enumsXmlTable["API Constants"]
     .findAll("enum")
-    .mapIt(it.extractNodeConst)
+    .mapIt(it.extractNodeApiConstVal)
     .zipTable
 
   result.defines = typeXmlSeq
@@ -1006,7 +1068,7 @@ proc extractResources*(rootXml: XmlNode): Resources =
     .filterByCategory("enum")
     .mapIt( block:
       var retval: NodeEnum =
-        try: enumsXmlTable[it.name].extractNodeEnum
+        try: enumsXmlTable[it.name].extractNodeEnum.get
         except: NodeEnum(name: it.name, enumVals: @[])
       if enumExts.hasKey(retval.name):
         retval.enumVals.add enumExts[retval.name]
@@ -1022,7 +1084,12 @@ proc extractResources*(rootXml: XmlNode): Resources =
       .mapIt((it.name, NodeType(kind: nktEnum, nodeEnum: it))),
     typeXmlSeq
       .filterByCategory("bitmask")
-      .mapIt(it.extractNodeBitmask)
+      .mapIt(
+        try: it.extractNodeBitmask
+        except UnexpectedXmlError:
+          error getCurrentExceptionMsg()
+          nil)
+      .filterIt(not it.isNil)
       .mapIt((it.name, NodeType(kind: nktBitmask, nodeBitmask: it))),
     typeXmlSeq
       .filterByCategory("funcpointer")

@@ -8,8 +8,7 @@ import VK_KHR_maintenance3
 type
   PhysicalDeviceDescriptorIndexingFeaturesEXT* = object
   DescriptorBindingFlagBitsEXT* = UnusedEnum
-  # TODO: [Unsupported Type]
-  # (name: "VkDescriptorBindingFlagsEXT", kind: nkrType)
+  {name}* = {Alias}
   DescriptorSetLayoutBindingFlagsCreateInfoEXT* = object
   DescriptorSetVariableDescriptorCountAllocateInfoEXT* = object
   PhysicalDeviceDescriptorIndexingPropertiesEXT* = object

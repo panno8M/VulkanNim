@@ -5,8 +5,7 @@ import ../features/vk10
 
 type
   DescriptorUpdateTemplateTypeKHR* = UnusedEnum
-  # TODO: [Unsupported Type]
-  # (name: "VkDescriptorUpdateTemplateCreateFlagsKHR", kind: nkrType)
+  {name}* = {Alias}
   DescriptorUpdateTemplateCreateInfoKHR* = object
   # TODO: [Unsupported Type]
   # (name: "VkDescriptorUpdateTemplateKHR", kind: nkrType)

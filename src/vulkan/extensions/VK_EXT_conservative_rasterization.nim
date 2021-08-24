@@ -27,7 +27,7 @@ type
     degenerateLinesRasterized*: Bool32
     fullyCoveredFragmentShaderInputVariable*: Bool32
     conservativeRasterizationPostDepthCoverage*: Bool32
-  PipelineRasterizationConservativeStateCreateFlagsEXT* = Flags
+  PipelineRasterizationConservativeStateCreateFlagsEXT* = distinct Flags
 
 const ExtConservativeRasterizationSpecVersion* = 1
 const ExtConservativeRasterizationExtensionName* = "VK_EXT_conservative_rasterization"

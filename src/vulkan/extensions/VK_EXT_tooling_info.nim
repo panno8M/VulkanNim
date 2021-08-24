@@ -4,7 +4,7 @@ import ../features/vk10
 
 
 type
-  ToolPurposeFlagsEXT* = Flags
+  ToolPurposeFlagsEXT* = distinct Flags
   PhysicalDeviceToolPropertiesEXT* = object
     sType*: StructureType
     pNext*: pointer
@@ -14,11 +14,6 @@ type
     description*: char
     layer*: char
   ToolPurposeFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
-    Validation = 0x00000001
-    Profiling = 0x00000002
-    Tracing = 0x00000004
-    AdditionalFeatures = 0x00000008
-    ModifyingFeatures = 0x00000010
     # Provided by VK_EXT_tooling_info
     DebugReporting = 0x00000020
     # Provided by VK_EXT_tooling_info

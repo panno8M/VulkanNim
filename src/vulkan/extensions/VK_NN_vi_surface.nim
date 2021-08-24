@@ -10,7 +10,7 @@ type
     pNext*: pointer
     flags*: ViSurfaceCreateFlagsNN
     window*: pointer
-  ViSurfaceCreateFlagsNN* = Flags
+  ViSurfaceCreateFlagsNN* = distinct Flags
 
 const NnViSurfaceSpecVersion* = 1
 const NnViSurfaceExtensionName* = "VK_NN_vi_surface"

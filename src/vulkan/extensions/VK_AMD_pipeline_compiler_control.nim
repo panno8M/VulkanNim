@@ -4,7 +4,7 @@ import ../features/vk10
 
 
 type
-  PipelineCompilerControlFlagsAMD* = Flags
+  PipelineCompilerControlFlagsAMD* = distinct Flags
   PipelineCompilerControlCreateInfoAMD* = object
     sType*: StructureType
     pNext*: pointer

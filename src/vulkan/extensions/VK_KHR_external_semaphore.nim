@@ -7,8 +7,7 @@ import VK_KHR_external_semaphore_capabilities
 type
   ExportSemaphoreCreateInfoKHR* = object
   SemaphoreImportFlagBitsKHR* = UnusedEnum
-  # TODO: [Unsupported Type]
-  # (name: "VkSemaphoreImportFlagsKHR", kind: nkrType)
+  {name}* = {Alias}
 
 const KhrExternalSemaphoreSpecVersion* = 1
 const KhrExternalSemaphoreExtensionName* = "VK_KHR_external_semaphore"

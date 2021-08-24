@@ -18,7 +18,7 @@ type
     sType*: StructureType
     pNext*: pointer
     privateDataSlotRequestCount*: uint32
-  PrivateDataSlotCreateFlagsEXT* = Flags
+  PrivateDataSlotCreateFlagsEXT* = distinct Flags
 
 const ExtPrivateDataExtensionName* = "VK_EXT_private_data"
 const ExtPrivateDataSpecVersion* = 1

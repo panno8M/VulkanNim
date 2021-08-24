@@ -5,7 +5,7 @@ import VK_KHR_surface
 
 
 type
-  WaylandSurfaceCreateFlagsKHR* = Flags
+  WaylandSurfaceCreateFlagsKHR* = distinct Flags
   WaylandSurfaceCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer

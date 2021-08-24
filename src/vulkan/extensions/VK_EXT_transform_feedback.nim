@@ -15,7 +15,7 @@ type
     pNext*: pointer
     transformFeedback*: Bool32
     geometryStreams*: Bool32
-  PipelineRasterizationStateStreamCreateFlagsEXT* = Flags
+  PipelineRasterizationStateStreamCreateFlagsEXT* = distinct Flags
   PhysicalDeviceTransformFeedbackPropertiesEXT* = object
     sType*: StructureType
     pNext*: pointer

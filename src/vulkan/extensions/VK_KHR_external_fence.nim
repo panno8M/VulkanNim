@@ -5,8 +5,7 @@ import VK_KHR_external_fence_capabilities
 
 
 type
-  # TODO: [Unsupported Type]
-  # (name: "VkFenceImportFlagsKHR", kind: nkrType)
+  {name}* = {Alias}
   ExportFenceCreateInfoKHR* = object
   FenceImportFlagBitsKHR* = UnusedEnum
 

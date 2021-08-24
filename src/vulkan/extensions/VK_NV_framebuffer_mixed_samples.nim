@@ -4,7 +4,7 @@ import ../features/vk10
 
 
 type
-  PipelineCoverageModulationStateCreateFlagsNV* = Flags
+  PipelineCoverageModulationStateCreateFlagsNV* = distinct Flags
   CoverageModulationModeNV* {.size: sizeof(int32), pure.} = enum
     None = 0
     Rgb = 1

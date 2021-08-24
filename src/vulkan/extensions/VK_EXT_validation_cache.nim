@@ -4,7 +4,7 @@ import ../features/vk10
 
 
 type
-  ValidationCacheCreateFlagsEXT* = Flags
+  ValidationCacheCreateFlagsEXT* = distinct Flags
   ValidationCacheHeaderVersionEXT* {.size: sizeof(int32), pure.} = enum
     One = 1
   ValidationCacheEXT* = distinct NonDispatchableHandle

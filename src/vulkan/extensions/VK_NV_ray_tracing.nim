@@ -30,8 +30,7 @@ type
     stride*: uint32
     offset*: DeviceSize
   RayTracingShaderGroupTypeNV* = UnusedEnum
-  # TODO: [Unsupported Type]
-  # (name: "VkGeometryInstanceFlagsNV", kind: nkrType)
+  {name}* = {Alias}
   RayTracingPipelineCreateInfoNV* = object
     sType*: StructureType
     pNext*: pointer
@@ -53,8 +52,7 @@ type
     anyHitShader*: uint32
     intersectionShader*: uint32
   AccelerationStructureTypeNV* = UnusedEnum
-  # TODO: [Unsupported Type]
-  # (name: "VkGeometryFlagsNV", kind: nkrType)
+  {name}* = {Alias}
   GeometryInstanceFlagBitsNV* = UnusedEnum
   AccelerationStructureInfoNV* = object
     sType*: StructureType
@@ -81,8 +79,7 @@ type
     triangles*: GeometryTrianglesNV
     aabbs*: GeometryAABBNV
   AccelerationStructureMemoryRequirementsTypeNV* = UnusedEnum
-  # TODO: [Unsupported Type]
-  # (name: "VkBuildAccelerationStructureFlagsNV", kind: nkrType)
+  {name}* = {Alias}
   # TODO: [Unsupported Type]
   # (name: "VkAccelerationStructureNV", kind: nkrType)
   AccelerationStructureCreateInfoNV* = object

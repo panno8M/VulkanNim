@@ -6,7 +6,7 @@ import VK_AMD_shader_core_properties
 
 type
   ShaderCorePropertiesFlagBitsAMD* = UnusedEnum
-  ShaderCorePropertiesFlagsAMD* = Flags
+  ShaderCorePropertiesFlagsAMD* = distinct Flags
   PhysicalDeviceShaderCoreProperties2AMD* = object
     sType*: StructureType
     pNext*: pointer

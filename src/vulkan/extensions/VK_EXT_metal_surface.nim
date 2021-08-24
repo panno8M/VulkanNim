@@ -10,7 +10,7 @@ type
     pNext*: pointer
     flags*: MetalSurfaceCreateFlagsEXT
     pLayer*: ptr CAMetalLayer
-  MetalSurfaceCreateFlagsEXT* = Flags
+  MetalSurfaceCreateFlagsEXT* = distinct Flags
   CAMetalLayer* = distinct object
 
 const ExtMetalSurfaceSpecVersion* = 1

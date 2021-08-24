@@ -19,9 +19,8 @@ type
     pNext*: pointer
     conditionalRendering*: Bool32
     inheritedConditionalRendering*: Bool32
-  ConditionalRenderingFlagsEXT* = Flags
-  ConditionalRenderingFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
-    Inverted = 0x00000001
+  ConditionalRenderingFlagsEXT* = distinct Flags
+  ConditionalRenderingFlagBitsEXT* = UnusedEnum
 
 const ExtConditionalRenderingSpecVersion* = 2
 const ExtConditionalRenderingExtensionName* = "VK_EXT_conditional_rendering"

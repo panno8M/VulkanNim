@@ -5,7 +5,7 @@ import VK_KHR_surface
 
 
 type
-  StreamDescriptorSurfaceCreateFlagsGGP* = Flags
+  StreamDescriptorSurfaceCreateFlagsGGP* = distinct Flags
   StreamDescriptorSurfaceCreateInfoGGP* = object
     sType*: StructureType
     pNext*: pointer

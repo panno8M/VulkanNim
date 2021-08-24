@@ -5,7 +5,7 @@ import VK_KHR_surface
 
 
 type
-  XlibSurfaceCreateFlagsKHR* = Flags
+  XlibSurfaceCreateFlagsKHR* = distinct Flags
   XlibSurfaceCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer

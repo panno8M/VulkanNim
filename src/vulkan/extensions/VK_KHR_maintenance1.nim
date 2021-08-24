@@ -3,9 +3,8 @@ import ../platform
 import ../features/vk10
 
 
-# type
-  # TODO: [Unsupported Type]
-  # (name: "VkCommandPoolTrimFlagsKHR", kind: nkrType)
+type
+  {name}* = {Alias}
 
 const KhrMaintenance1ExtensionName* = "VK_KHR_maintenance1"
 const KhrMaintenance1SpecVersion* = 2

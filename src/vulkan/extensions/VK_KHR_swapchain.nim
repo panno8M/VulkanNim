@@ -37,7 +37,7 @@ type
     presentMode*: PresentModeKHR
     clipped*: Bool32
     oldSwapchain*: SwapchainKHR
-  SwapchainCreateFlagsKHR* = Flags
+  SwapchainCreateFlagsKHR* = distinct Flags
 
   AcquireNextImageInfoKHR* = object
     sType*: StructureType
@@ -66,12 +66,8 @@ type
     sType*: StructureType
     pNext*: pointer
     swapchain*: SwapchainKHR
-  DeviceGroupPresentModeFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    Local = 0x00000001 # Present from local memory
-    Remote = 0x00000002 # Present from remote memory
-    Sum = 0x00000004 # Present sum of local and/or remote memory
-    LocalMultiDevice = 0x00000008 # Each physical device presents from local memory
-  DeviceGroupPresentModeFlagsKHR* = Flags
+  DeviceGroupPresentModeFlagBitsKHR* = UnusedEnum
+  DeviceGroupPresentModeFlagsKHR* = distinct Flags
   BindImageMemorySwapchainInfoKHR* = object
     sType*: StructureType
     pNext*: pointer

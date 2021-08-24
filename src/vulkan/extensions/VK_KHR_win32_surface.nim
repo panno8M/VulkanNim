@@ -11,7 +11,7 @@ type
     flags*: Win32SurfaceCreateFlagsKHR
     hinstance*: HINSTANCE
     hwnd*: HWND
-  Win32SurfaceCreateFlagsKHR* = Flags
+  Win32SurfaceCreateFlagsKHR* = distinct Flags
 
 const KhrWin32SurfaceSpecVersion* = 6
 const KhrWin32SurfaceExtensionName* = "VK_KHR_win32_surface"

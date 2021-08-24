@@ -10,7 +10,7 @@ type
     pNext*: pointer
     flags*: IOSSurfaceCreateFlagsMVK
     pView*: pointer
-  IOSSurfaceCreateFlagsMVK* = Flags
+  IOSSurfaceCreateFlagsMVK* = distinct Flags
 
 const MiosSurfaceSpecVersion* = 3
 const MiosSurfaceExtensionName* = "VK_MVK_ios_surface"

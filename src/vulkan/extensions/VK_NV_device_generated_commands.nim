@@ -31,11 +31,8 @@ type
     bufferAddress*: DeviceAddress
     size*: uint32
     stride*: uint32
-  IndirectCommandsLayoutUsageFlagsNV* = Flags
-  IndirectCommandsLayoutUsageFlagBitsNV* {.size: sizeof(int32), pure.} = enum
-    ExplicitPreprocess = 0x00000001
-    IndexedSequences = 0x00000002
-    UnorderedSequences = 0x00000004
+  IndirectCommandsLayoutUsageFlagsNV* = distinct Flags
+  IndirectCommandsLayoutUsageFlagBitsNV* = UnusedEnum
   GraphicsShaderGroupCreateInfoNV* = object
     sType*: StructureType
     pNext*: pointer
@@ -68,13 +65,12 @@ type
     sequencesCountOffset*: DeviceSize
     sequencesIndexBuffer*: Buffer
     sequencesIndexOffset*: DeviceSize
-  IndirectStateFlagBitsNV* {.size: sizeof(int32), pure.} = enum
-    FlagFrontface = 0x00000001
+  IndirectStateFlagBitsNV* = UnusedEnum
   BindIndexBufferIndirectCommandNV* = object
     bufferAddress*: DeviceAddress
     size*: uint32
     indexType*: IndexType
-  IndirectStateFlagsNV* = Flags
+  IndirectStateFlagsNV* = distinct Flags
   PhysicalDeviceDeviceGeneratedCommandsFeaturesNV* = object
     sType*: StructureType
     pNext*: pointer

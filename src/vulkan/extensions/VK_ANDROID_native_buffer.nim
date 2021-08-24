@@ -4,12 +4,11 @@ import ../features/vk10
 
 
 type
-  SwapchainImageUsageFlagBitsANDROID* {.size: sizeof(int32), pure.} = enum
-    Shared = 0x00000001
+  SwapchainImageUsageFlagBitsANDROID* = UnusedEnum
   NativeBufferUsage2ANDROID* = object
     consumer*: uint64
     producer*: uint64
-  SwapchainImageUsageFlagsANDROID* = Flags
+  SwapchainImageUsageFlagsANDROID* = distinct Flags
   NativeBufferANDROID* = object
     sType*: StructureType
     pNext*: pointer

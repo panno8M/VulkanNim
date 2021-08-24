@@ -11,7 +11,7 @@ type
     flags*: XcbSurfaceCreateFlagsKHR
     connection*: ptr xcb_connection_t
     window*: xcb_window_t
-  XcbSurfaceCreateFlagsKHR* = Flags
+  XcbSurfaceCreateFlagsKHR* = distinct Flags
 
 const KhrXcbSurfaceExtensionName* = "VK_KHR_xcb_surface"
 const KhrXcbSurfaceSpecVersion* = 6

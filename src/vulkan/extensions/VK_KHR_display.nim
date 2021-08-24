@@ -22,7 +22,7 @@ type
     alphaMode*: DisplayPlaneAlphaFlagBitsKHR
     imageExtent*: Extent2D
   DisplayKHR* = distinct NonDispatchableHandle
-  DisplayModeCreateFlagsKHR* = Flags
+  DisplayModeCreateFlagsKHR* = distinct Flags
   DisplayPlaneCapabilitiesKHR* = object
     supportedAlpha*: DisplayPlaneAlphaFlagsKHR
     minSrcPosition*: Offset2D
@@ -33,7 +33,7 @@ type
     maxDstPosition*: Offset2D
     minDstExtent*: Extent2D
     maxDstExtent*: Extent2D
-  DisplayPlaneAlphaFlagsKHR* = Flags
+  DisplayPlaneAlphaFlagsKHR* = distinct Flags
   DisplayPropertiesKHR* = object
     display*: DisplayKHR
     displayName*: cstring
@@ -48,17 +48,13 @@ type
   DisplayPlanePropertiesKHR* = object
     currentDisplay*: DisplayKHR
     currentStackIndex*: uint32
-  DisplayPlaneAlphaFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    Opaque = 0x00000001
-    Global = 0x00000002
-    PerPixel = 0x00000004
-    PerPixelPremultiplied = 0x00000008
+  DisplayPlaneAlphaFlagBitsKHR* = UnusedEnum
   DisplayModeKHR* = distinct NonDispatchableHandle
   DisplayModePropertiesKHR* = object
     displayMode*: DisplayModeKHR
     parameters*: DisplayModeParametersKHR
-  SurfaceTransformFlagsKHR* = Flags
-  DisplaySurfaceCreateFlagsKHR* = Flags
+  SurfaceTransformFlagsKHR* = distinct Flags
+  DisplaySurfaceCreateFlagsKHR* = distinct Flags
 
 const KhrDisplayExtensionName* = "VK_KHR_display"
 const KhrDisplaySpecVersion* = 23

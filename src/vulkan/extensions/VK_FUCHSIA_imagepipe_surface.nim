@@ -10,7 +10,7 @@ type
     pNext*: pointer
     flags*: ImagePipeSurfaceCreateFlagsFUCHSIA
     imagePipeHandle*: zx_handle_t
-  ImagePipeSurfaceCreateFlagsFUCHSIA* = Flags
+  ImagePipeSurfaceCreateFlagsFUCHSIA* = distinct Flags
 
 const FuchsiaImagepipeSurfaceSpecVersion* = 1
 const FuchsiaImagepipeSurfaceExtensionName* = "VK_FUCHSIA_imagepipe_surface"

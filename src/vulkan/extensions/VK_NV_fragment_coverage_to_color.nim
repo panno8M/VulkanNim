@@ -4,7 +4,7 @@ import ../features/vk10
 
 
 type
-  PipelineCoverageToColorStateCreateFlagsNV* = Flags
+  PipelineCoverageToColorStateCreateFlagsNV* = distinct Flags
   PipelineCoverageToColorStateCreateInfoNV* = object
     sType*: StructureType
     pNext*: pointer

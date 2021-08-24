@@ -4,10 +4,7 @@ import ../features/vk10
 
 
 type
-  PipelineCreationFeedbackFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
-    Valid = 0x00000001
-    ApplicationPipelineCacheHit = 0x00000002
-    BasePipelineAcceleration = 0x00000004
+  PipelineCreationFeedbackFlagBitsEXT* = UnusedEnum
   PipelineCreationFeedbackEXT* = object
     flags*: PipelineCreationFeedbackFlagsEXT
     duration*: uint64
@@ -17,7 +14,7 @@ type
     pPipelineCreationFeedback*: ptr PipelineCreationFeedbackEXT
     pipelineStageCreationFeedbackCount*: uint32
     pPipelineStageCreationFeedbacks*: ptr PipelineCreationFeedbackEXT
-  PipelineCreationFeedbackFlagsEXT* = Flags
+  PipelineCreationFeedbackFlagsEXT* = distinct Flags
 
 const ExtPipelineCreationFeedbackSpecVersion* = 1
 const ExtPipelineCreationFeedbackExtensionName* = "VK_EXT_pipeline_creation_feedback"

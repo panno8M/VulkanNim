@@ -4,7 +4,7 @@ import ../features/vk10
 
 
 type
-  PipelineRasterizationDepthClipStateCreateFlagsEXT* = Flags
+  PipelineRasterizationDepthClipStateCreateFlagsEXT* = distinct Flags
   PhysicalDeviceDepthClipEnableFeaturesEXT* = object
     sType*: StructureType
     pNext*: pointer

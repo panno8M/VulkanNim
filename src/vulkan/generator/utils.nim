@@ -116,6 +116,12 @@ proc parseStatement*(str: string): string =
 
   str.substr(cStart, cLast)
 
+proc filter*[T](s: openArray[T], pred: proc(i: Natural, x: T): bool {.closure.}): seq[T]
+                                                                  {.inline.} =
+  result = newSeq[T]()
+  for i in 0 ..< s.len:
+    if pred(i, s[i]):
+      result.add(s[i])
 
 # general ==============================================================
 # ----------------------------------------------------------------------
@@ -240,6 +246,8 @@ proc filterByCategory*[T](s: openArray[T]; strs: varargs[string]): seq[T] =
 template `{}`*(xmlNode: XmlNode, attrStr: string): untyped =
   xmlNode.attr(attrStr)
 template name*(xmlNode: XmlNode): untyped = xmlNode{"name"}
+template value*(xmlNode: XmlNode): untyped = xmlNode{"value"}
+template alias*(xmlNode: XmlNode): untyped = xmlNode{"alias"}
 template comment*(xmlNode: XmlNode): untyped = xmlNode{"comment"}
 template category*(xmlNode: XmlNode): untyped = xmlNode{"category"}
 template `[]`*(xmlNode: XmlNode, childStr: string): untyped =

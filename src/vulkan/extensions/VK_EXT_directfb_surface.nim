@@ -11,7 +11,7 @@ type
     flags*: DirectFBSurfaceCreateFlagsEXT
     dfb*: ptr IDirectFB
     surface*: ptr IDirectFBSurface
-  DirectFBSurfaceCreateFlagsEXT* = Flags
+  DirectFBSurfaceCreateFlagsEXT* = distinct Flags
 
 const ExtDirectfbSurfaceSpecVersion* = 1
 const ExtDirectfbSurfaceExtensionName* = "VK_EXT_directfb_surface"
