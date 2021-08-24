@@ -4,7 +4,10 @@ import ../features/vk10
 
 
 type
-  DebugUtilsMessageTypeFlagBitsEXT* = UnusedEnum
+  DebugUtilsMessageTypeFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
+    General = 0x00000001
+    Validation = 0x00000002
+    Performance = 0x00000004
   DebugUtilsMessengerCallbackDataEXT* = object
     sType*: StructureType
     pNext*: pointer
@@ -27,7 +30,11 @@ type
     pfnUserCallback*: DebugUtilsMessengerCallbackEXT
     pUserData*: pointer
   DebugUtilsMessengerCreateFlagsEXT* = distinct Flags
-  DebugUtilsMessageSeverityFlagBitsEXT* = UnusedEnum
+  DebugUtilsMessageSeverityFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
+    Verbose = 0x00000001
+    Info = 0x00000010
+    Warning = 0x00000100
+    Error = 0x00001000
   DebugUtilsMessageSeverityFlagsEXT* = distinct Flags
   DebugUtilsLabelEXT* = object
     sType*: StructureType

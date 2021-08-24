@@ -1,4 +1,4 @@
-# Generated at 2021-08-24T18:23:16+09:00
+# Generated at 2021-08-24T20:18:44+09:00
 # vulkan 1.1
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -11,6 +11,14 @@ type
   # Originally based on VK_KHR_subgroup (extension 94), but the actual enum block used was, incorrectly, that of extension 95
   # -------------------------------------------------------------------------------------------------------------------------
   SubgroupFeatureFlagBits* {.size: sizeof(int32), pure.} = enum
+    Basic = 0x00000001 # Basic subgroup operations
+    Vote = 0x00000002 # Vote subgroup operations
+    Arithmetic = 0x00000004 # Arithmetic subgroup operations
+    Ballot = 0x00000008 # Ballot subgroup operations
+    Shuffle = 0x00000010 # Shuffle subgroup operations
+    ShuffleRelative = 0x00000020 # Shuffle relative subgroup operations
+    Clustered = 0x00000040 # Clustered subgroup operations
+    Quad = 0x00000080 # Quad subgroup operations
     # Provided by VK_NV_shader_subgroup_partitioned
     Partitioned = 0x00000100
   PhysicalDeviceSubgroupProperties* = object
@@ -63,6 +71,7 @@ type
   # Promoted from VK_KHR_device_group
   # ---------------------------------
   MemoryAllocateFlagBits* {.size: sizeof(int32), pure.} = enum
+    DeviceMask = 0x00000001 # Force allocation on specific devices
     # Provided by VK_VERSION_1_2
     DeviceAddress = 0x00000002
   DeviceGroupRenderPassBeginInfo* = object
@@ -85,7 +94,10 @@ type
     pNext*: pointer
     deviceMask*: uint32
   PeerMemoryFeatureFlagBits* {.size: sizeof(int32), pure.} = enum
-    
+    CopySrc = 0x00000001 # Can read with vkCmdCopy commands
+    CopyDst = 0x00000002 # Can write with vkCmdCopy commands
+    GenericSrc = 0x00000004 # Can read with any access type/command
+    GenericDst = 0x00000008 # Can write with and access type/command
   MemoryAllocateFlagsInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -365,7 +377,9 @@ type
     pNext*: pointer
     externalMemoryProperties*: ExternalMemoryProperties
   ExternalMemoryFeatureFlagBits* {.size: sizeof(int32), pure.} = enum
-    
+    DedicatedOnly = 0x00000001
+    Exportable = 0x00000002
+    Importable = 0x00000004
   PhysicalDeviceExternalImageFormatInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -389,6 +403,13 @@ type
     usage*: BufferUsageFlags
     handleType*: ExternalMemoryHandleTypeFlagBits
   ExternalMemoryHandleTypeFlagBits* {.size: sizeof(int32), pure.} = enum
+    OpaqueFd = 0x00000001
+    OpaqueWin32 = 0x00000002
+    OpaqueWin32Kmt = 0x00000004
+    D3d11Texture = 0x00000008
+    D3d11TextureKmt = 0x00000010
+    D3d12Heap = 0x00000020
+    D3d12Resource = 0x00000040
     # Provided by VK_EXT_external_memory_host
     HostAllocation = 0x00000080
     # Provided by VK_EXT_external_memory_host
@@ -433,15 +454,19 @@ type
     externalFenceFeatures*: ExternalFenceFeatureFlags
   ExternalFenceHandleTypeFlags* = distinct Flags
   ExternalFenceHandleTypeFlagBits* {.size: sizeof(int32), pure.} = enum
-    
+    OpaqueFd = 0x00000001
+    OpaqueWin32 = 0x00000002
+    OpaqueWin32Kmt = 0x00000004
+    SyncFd = 0x00000008
   ExternalFenceFeatureFlagBits* {.size: sizeof(int32), pure.} = enum
-    
+    Exportable = 0x00000001
+    Importable = 0x00000002
 
   # Promoted from VK_KHR_external_fence
   # -----------------------------------
   FenceImportFlags* = distinct Flags
   FenceImportFlagBits* {.size: sizeof(int32), pure.} = enum
-    
+    Temporary = 0x00000001
   ExportFenceCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -451,7 +476,7 @@ type
   # ---------------------------------------
   SemaphoreImportFlags* = distinct Flags
   SemaphoreImportFlagBits* {.size: sizeof(int32), pure.} = enum
-    
+    Temporary = 0x00000001
   ExportSemaphoreCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -460,7 +485,8 @@ type
   # Promoted from VK_KHR_external_semaphore_capabilities
   # ----------------------------------------------------
   ExternalSemaphoreFeatureFlagBits* {.size: sizeof(int32), pure.} = enum
-    
+    Exportable = 0x00000001
+    Importable = 0x00000002
   ExternalSemaphoreProperties* = object
     sType*: StructureType
     pNext*: pointer
@@ -469,7 +495,11 @@ type
     externalSemaphoreFeatures*: ExternalSemaphoreFeatureFlags
   ExternalSemaphoreHandleTypeFlags* = distinct Flags
   ExternalSemaphoreHandleTypeFlagBits* {.size: sizeof(int32), pure.} = enum
-    
+    OpaqueFd = 0x00000001
+    OpaqueWin32 = 0x00000002
+    OpaqueWin32Kmt = 0x00000004
+    D3d12Fence = 0x00000008
+    SyncFd = 0x00000010
   PhysicalDeviceExternalSemaphoreInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -890,6 +920,7 @@ SemaphoreImportFlagBits.defineAlias(Temporary, Temporary)
 ExternalSemaphoreFeatureFlagBits.defineAlias(Exportable, Exportable)
 # Provided by VK_KHR_external_semaphore_capabilities
 ExternalSemaphoreFeatureFlagBits.defineAlias(Importable, Importable)
+ExternalSemaphoreHandleTypeFlagBits.defineAlias(D3d11Fence, D3d12Fence)
 # Provided by VK_KHR_external_semaphore_capabilities
 ExternalSemaphoreHandleTypeFlagBits.defineAlias(OpaqueFd, OpaqueFd)
 # Provided by VK_KHR_external_semaphore_capabilities

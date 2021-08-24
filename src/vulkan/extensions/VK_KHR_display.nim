@@ -48,7 +48,11 @@ type
   DisplayPlanePropertiesKHR* = object
     currentDisplay*: DisplayKHR
     currentStackIndex*: uint32
-  DisplayPlaneAlphaFlagBitsKHR* = UnusedEnum
+  DisplayPlaneAlphaFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+    Opaque = 0x00000001
+    Global = 0x00000002
+    PerPixel = 0x00000004
+    PerPixelPremultiplied = 0x00000008
   DisplayModeKHR* = distinct NonDispatchableHandle
   DisplayModePropertiesKHR* = object
     displayMode*: DisplayModeKHR

@@ -23,7 +23,11 @@ type
     pNext*: pointer
     presentMask*: uint32
     modes*: DeviceGroupPresentModeFlagsKHR
-  DeviceGroupPresentModeFlagBitsKHR* = UnusedEnum
+  DeviceGroupPresentModeFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+    Local = 0x00000001 # Present from local memory
+    Remote = 0x00000002 # Present from remote memory
+    Sum = 0x00000004 # Present sum of local and/or remote memory
+    LocalMultiDevice = 0x00000008 # Each physical device presents from local memory
   DeviceGroupPresentModeFlagsKHR* = distinct Flags
 
   AcquireNextImageInfoKHR* = object

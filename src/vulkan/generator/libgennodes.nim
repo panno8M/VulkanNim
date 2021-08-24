@@ -62,7 +62,6 @@ type
     nkeValue
     nkeBitpos
     nkeAlias
-    nkeUnexpected
   NodeEnumVal* = ref object
     name*: string
     comment*: Option[string]
@@ -74,9 +73,6 @@ type
       bitpos*: int
     of nkeAlias:
       alias*: string
-    of nkeUnexpected:
-      id*: string
-      info*: string
     case isExtended*: bool
     of true:
       extends*: string
@@ -202,9 +198,6 @@ proc cmp(a, b: NodeEnumVal): int =
   if a.kind == nkeAlias: return 1
   if b.kind == nkeAlias: return -1
 
-  if a.kind == nkeUnexpected: return -1
-  if b.kind == nkeUnexpected: return 1
-
 # SECTION renderers
 
 proc render*(enumVal: NodeEnumVal; vendorTags: VendorTags; enumsName: string): string =
@@ -231,8 +224,6 @@ proc render*(enumVal: NodeEnumVal; vendorTags: VendorTags; enumsName: string): s
     result &= "{enumsName}.defineAlias({name}, {alias})".fmt
     if enumVal.comment.isSome:
       result &= enumVal.comment.get.commentify.indent(1)
-  of nkeUnexpected:
-    result = "FIXME: [ENUMS Unexpected ID({enumVal.id})]\n{enumVal.info}".fmt.commentify
 
 proc renderBasics*(enums: NodeEnum; vendorTags: VendorTags): string =
   let name = enums.name.removeVkPrefix
@@ -611,10 +602,6 @@ proc extractNodeEnumValue*(typeDef: XmlNode): Option[NodeEnumVal] {.raises: [Une
       title"@Enum Value Extraction >",
       $typeDef)
 
-  var xResult = NodeEnumVal(
-    name: typeDef.name,
-    comment: ?typeDef.comment)
-
   let value: Option[tuple[val: int; isHex: bool]] =
     # input        100  0x100 abcde
     # -------------------------------
@@ -624,31 +611,37 @@ proc extractNodeEnumValue*(typeDef: XmlNode): Option[NodeEnumVal] {.raises: [Une
     except:
       try:    some (typeDef{"value"}.parseHexInt, true)
       except: none (int, bool)
-  if value.isSome:
-    xResult.kind  = nkeValue
-    xResult.value = value.get.val
-    xResult.isHex = value.get.isHex
-    return some xResult
-
   let bitpos =
     try: some typeDef{"bitpos"}.parseInt.int32
     except: none int32
-  if bitpos.isSome:
-    xResult.kind   = nkeBitpos
+  let alias = ?typeDef{"alias"}
+
+  var xResult = NodeEnumVal(
+    name: typeDef.name,
+    comment: ?typeDef.comment,
+    kind:
+      if value.isSome: nkeValue
+      elif bitpos.isSome: nkeBitpos
+      elif alias.isSome: nkeAlias
+      else: raiseUnexpectedXmlError(
+        title"The enum value does'nt has any value, bitpos or alias attr.",
+        $typeDef); return
+    )
+
+  case xResult.kind
+  of nkeValue:
+    xResult.value = value.get.val
+    xResult.isHex = value.get.isHex
+    return some xResult
+  of nkeBitpos:
     xResult.bitpos = bitpos.get
     return some xResult
-
-  let alias = ?typeDef{"alias"}
-  if alias.isSome:
-    xResult.kind  = nkeAlias
+  of nkeAlias:
     xResult.alias = alias.get
     return some xResult
 
-  raiseUnexpectedXmlError(
-    title"The enum value does'nt has any value, bitpos or alias attr.",
-    $typeDef)
 
-proc extractNodeEnum*(enumDef: XmlNode): Option[NodeEnum] {.raiseInExtractor.} =
+proc extractNodeEnum*(enumDef: XmlNode): Option[NodeEnum] {.raises: [UnexpectedXmlError].} =
   if enumDef.kind != xnElement or
      enumDef.tag != "enums":
     return
@@ -662,10 +655,10 @@ proc extractNodeEnum*(enumDef: XmlNode): Option[NodeEnum] {.raiseInExtractor.} =
   for child in enumDef:
     try: xResult.enumVals.add child.extractNodeEnumValue.get
     except UnpackDefect: discard
-    # except UnexpectedXmlError:
+
   return some xResult
 
-proc extractNodeApiConstVal(typeDef: XmlNode): NodeConst {.raises: [UnexpectedXmlError].} =
+proc extractNodeApiConstVal*(typeDef: XmlNode): NodeConst {.raises: [UnexpectedXmlError].} =
   if typeDef.tag != "enum":
     raiseUnexpectedXmlError(
       title"@API Constant Value Extraction >",
@@ -906,7 +899,7 @@ proc extractAllNodeEnumExtensions*(rootXml: XmlNode; vendorTags: VendorTags): Ta
           if (?it[1]{"extnumber"}).isSome and (?it[1]{"offset"}).isSome: nkeValue
           elif (?it[1]{"bitpos"}).isSome: nkeBitpos
           elif (?it[1]{"alias"}).isSome: nkeAlias
-          else: nkeUnexpected,
+          else: return nil,
         name: it[1]{"name"},
         comment: ?it[1]{"comment"},
         isExtended: true,
@@ -919,8 +912,8 @@ proc extractAllNodeEnumExtensions*(rootXml: XmlNode; vendorTags: VendorTags): Ta
         result.bitpos = it[1]{"bitpos"}.parseInt
       of nkeAlias:
         result.alias = it[1]{"alias"}
-      of nkeUnexpected: discard
     )
+    .filterIt(it != nil)
   let extExtensions = rootXml
     .findAll("extensions")[0]
     .findAll("extension")
@@ -935,7 +928,7 @@ proc extractAllNodeEnumExtensions*(rootXml: XmlNode; vendorTags: VendorTags): Ta
           if (?it[2]{"offset"}).isSome: nkeValue
           elif (?it[2]{"bitpos"}).isSome: nkeBitpos
           elif (?it[2]{"alias"}).isSome: nkeAlias
-          else: nkeUnexpected,
+          else: return nil,
         name: it[2]{"name"},
         comment: ?it[2]{"comment"},
         isExtended: true,
@@ -948,8 +941,8 @@ proc extractAllNodeEnumExtensions*(rootXml: XmlNode; vendorTags: VendorTags): Ta
         result.bitpos = it[2]{"bitpos"}.parseInt
       of nkeAlias:
         result.alias = it[2]{"alias"}
-      of nkeUnexpected: discard
     )
+    .filterIt(it != nil)
 
   var enumExts = concat(extFeatures, extExtensions)
     .mapit((valName: it.name.parseEnumName(it.extends, vendorTags), E: it))
@@ -1069,7 +1062,11 @@ proc extractResources*(rootXml: XmlNode): Resources =
     .mapIt( block:
       var retval: NodeEnum =
         try: enumsXmlTable[it.name].extractNodeEnum.get
-        except: NodeEnum(name: it.name, enumVals: @[])
+        except UnexpectedXmlError:
+          error getCurrentExceptionMsg()
+          NodeEnum(name: it.name, enumVals: @[])
+        except KeyError, UnpackDefect:
+          NodeEnum(name: it.name, enumVals: @[])
       if enumExts.hasKey(retval.name):
         retval.enumVals.add enumExts[retval.name]
       retval

@@ -10,7 +10,10 @@ type
     sType*: StructureType
     pNext*: pointer
     diagnosticsConfig*: Bool32
-  DeviceDiagnosticsConfigFlagBitsNV* = UnusedEnum
+  DeviceDiagnosticsConfigFlagBitsNV* {.size: sizeof(int32), pure.} = enum
+    EnableShaderDebugInfo = 0x00000001
+    EnableResourceTracking = 0x00000002
+    EnableAutomaticCheckpoints = 0x00000004
   DeviceDiagnosticsConfigCreateInfoNV* = object
     sType*: StructureType
     pNext*: pointer

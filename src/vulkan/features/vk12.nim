@@ -1,4 +1,4 @@
-# Generated at 2021-08-24T18:23:16+09:00
+# Generated at 2021-08-24T20:18:44+09:00
 # vulkan 1.2
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -346,7 +346,10 @@ type
     maxDescriptorSetUpdateAfterBindStorageImages*: uint32
     maxDescriptorSetUpdateAfterBindInputAttachments*: uint32
   DescriptorBindingFlagBits* {.size: sizeof(int32), pure.} = enum
-    
+    UpdateAfterBind = 0x00000001
+    UpdateUnusedWhilePending = 0x00000002
+    PartiallyBound = 0x00000004
+    VariableDescriptorCount = 0x00000008
   PhysicalDeviceDescriptorIndexingFeatures* = object
     sType*: StructureType
     pNext*: pointer
@@ -374,7 +377,11 @@ type
   # Promoted from VK_KHR_depth_stencil_resolve (extension 200)
   # ----------------------------------------------------------
   ResolveModeFlagBits* {.size: sizeof(int32), pure.} = enum
-    
+    None = 0
+    SampleZero = 0x00000001
+    Average = 0x00000002
+    Min = 0x00000004
+    Max = 0x00000008
   SubpassDescriptionDepthStencilResolve* = object
     sType*: StructureType
     pNext*: pointer
@@ -520,7 +527,7 @@ type
     Binary = 0
     Timeline = 1
   SemaphoreWaitFlagBits* {.size: sizeof(int32), pure.} = enum
-    
+    Any = 0x00000001
   SemaphoreTypeCreateInfo* = object
     sType*: StructureType
     pNext*: pointer

@@ -95,7 +95,8 @@ type
     indexData*: DeviceOrHostAddressConstKHR
     transformData*: DeviceOrHostAddressConstKHR
   GeometryFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    
+    Opaque = 0x00000001
+    NoDuplicateAnyHitInvocation = 0x00000002
   BindAccelerationStructureMemoryInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -108,7 +109,10 @@ type
     TopLevel = 0
     BottomLevel = 1
   GeometryInstanceFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    
+    TriangleFacingCullDisable = 0x00000001
+    TriangleFrontCounterclockwise = 0x00000002
+    ForceOpaque = 0x00000004
+    ForceNoOpaque = 0x00000008
   PhysicalDeviceRayTracingFeaturesKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -232,7 +236,11 @@ type
     aabbs*: AccelerationStructureGeometryAabbsDataKHR
     instances*: AccelerationStructureGeometryInstancesDataKHR
   BuildAccelerationStructureFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    
+    AllowUpdate = 0x00000001
+    AllowCompaction = 0x00000002
+    PreferFastTrace = 0x00000004
+    PreferFastBuild = 0x00000008
+    LowMemory = 0x00000010
   GeometryTypeKHR* {.size: sizeof(int32), pure.} = enum
     Triangles = 0
     Aabbs = 1

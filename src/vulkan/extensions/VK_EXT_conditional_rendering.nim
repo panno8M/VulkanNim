@@ -20,7 +20,8 @@ type
     conditionalRendering*: Bool32
     inheritedConditionalRendering*: Bool32
   ConditionalRenderingFlagsEXT* = distinct Flags
-  ConditionalRenderingFlagBitsEXT* = UnusedEnum
+  ConditionalRenderingFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
+    Inverted = 0x00000001
 
 const ExtConditionalRenderingSpecVersion* = 2
 const ExtConditionalRenderingExtensionName* = "VK_EXT_conditional_rendering"

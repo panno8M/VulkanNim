@@ -5,7 +5,8 @@ import VK_KHR_display
 
 
 type
-  SurfaceCounterFlagBitsEXT* = UnusedEnum
+  SurfaceCounterFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
+    Vblank = 0x00000001
   SurfaceCapabilities2EXT* = object
     sType*: StructureType
     pNext*: pointer

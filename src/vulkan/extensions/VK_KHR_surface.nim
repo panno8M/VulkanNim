@@ -17,7 +17,16 @@ type
     currentTransform*: SurfaceTransformFlagBitsKHR
     supportedCompositeAlpha*: CompositeAlphaFlagsKHR
     supportedUsageFlags*: ImageUsageFlags
-  SurfaceTransformFlagBitsKHR* = UnusedEnum
+  SurfaceTransformFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+    Identity = 0x00000001
+    Rotate90 = 0x00000002
+    Rotate180 = 0x00000004
+    Rotate270 = 0x00000008
+    HorizontalMirror = 0x00000010
+    HorizontalMirrorRotate90 = 0x00000020
+    HorizontalMirrorRotate180 = 0x00000040
+    HorizontalMirrorRotate270 = 0x00000080
+    Inherit = 0x00000100
   PresentModeKHR* {.size: sizeof(int32), pure.} = enum
     Immediate = 0
     Mailbox = 1
@@ -30,8 +39,13 @@ type
   SurfaceFormatKHR* = object
     format*: Format
     colorSpace*: ColorSpaceKHR
-  CompositeAlphaFlagBitsKHR* = UnusedEnum
+  CompositeAlphaFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+    Opaque = 0x00000001
+    PreMultiplied = 0x00000002
+    PostMultiplied = 0x00000004
+    Inherit = 0x00000008
   ColorSpaceKHR* {.size: sizeof(int32), pure.} = enum
+    SrgbNonlinear = 0
     # Provided by VK_EXT_swapchain_colorspace
     DisplayP3Nonlinear = 100001040001
     # Provided by VK_EXT_swapchain_colorspace
@@ -63,6 +77,7 @@ type
     # Provided by VK_AMD_display_native_hdr
     DisplayNative = 100002130000
 
+ColorSpaceKHR.defineAlias(ColorspaceSrgbNonlinear, SrgbNonlinear) # Backwards-compatible alias containing a typo
 const KhrSurfaceExtensionName* = "VK_KHR_surface"
 const KhrSurfaceSpecVersion* = 25
 var # commands
