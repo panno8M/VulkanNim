@@ -49,7 +49,7 @@ proc createPrivateDataSlotEXT*(
       pCreateInfo: ptr PrivateDataSlotCreateInfoEXT;
       pAllocator: ptr AllocationCallbacks;
       pPrivateDataSlot: ptr PrivateDataSlotEXT;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createPrivateDataSlotEXTCage(device,pCreateInfo,pAllocator,pPrivateDataSlot)
 
 proc setPrivateDataEXT*(
@@ -58,7 +58,7 @@ proc setPrivateDataEXT*(
       objectHandle: uint64;
       privateDataSlot: PrivateDataSlotEXT;
       data: uint64;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   setPrivateDataEXTCage(device,objectType,objectHandle,privateDataSlot,data)
 
 

@@ -37,7 +37,7 @@ proc getMemoryWin32HandleKHR*(
       device: Device;
       pGetWin32HandleInfo: ptr MemoryGetWin32HandleInfoKHR;
       pHandle: ptr HANDLE;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getMemoryWin32HandleKHRCage(device,pGetWin32HandleInfo,pHandle)
 
 proc getMemoryWin32HandlePropertiesKHR*(
@@ -45,7 +45,7 @@ proc getMemoryWin32HandlePropertiesKHR*(
       handleType: ExternalMemoryHandleTypeFlagBits;
       handle: HANDLE;
       pMemoryWin32HandleProperties: ptr MemoryWin32HandlePropertiesKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getMemoryWin32HandlePropertiesKHRCage(device,handleType,handle,pMemoryWin32HandleProperties)
 
 

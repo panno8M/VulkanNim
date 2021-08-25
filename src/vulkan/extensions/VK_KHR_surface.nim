@@ -98,7 +98,7 @@ proc getPhysicalDeviceSurfaceCapabilitiesKHR*(
       physicalDevice: PhysicalDevice;
       surface: SurfaceKHR;
       pSurfaceCapabilities: ptr SurfaceCapabilitiesKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPhysicalDeviceSurfaceCapabilitiesKHRCage(physicalDevice,surface,pSurfaceCapabilities)
 
 proc getPhysicalDeviceSurfaceFormatsKHR*(
@@ -106,7 +106,7 @@ proc getPhysicalDeviceSurfaceFormatsKHR*(
       surface: SurfaceKHR;
       pSurfaceFormatCount: ptr uint32;
       pSurfaceFormats: ptr SurfaceFormatKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPhysicalDeviceSurfaceFormatsKHRCage(physicalDevice,surface,pSurfaceFormatCount,pSurfaceFormats)
 
 proc getPhysicalDeviceSurfacePresentModesKHR*(
@@ -114,7 +114,7 @@ proc getPhysicalDeviceSurfacePresentModesKHR*(
       surface: SurfaceKHR;
       pPresentModeCount: ptr uint32;
       pPresentModes: ptr PresentModeKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPhysicalDeviceSurfacePresentModesKHRCage(physicalDevice,surface,pPresentModeCount,pPresentModes)
 
 proc getPhysicalDeviceSurfaceSupportKHR*(
@@ -122,7 +122,7 @@ proc getPhysicalDeviceSurfaceSupportKHR*(
       queueFamilyIndex: uint32;
       surface: SurfaceKHR;
       pSupported: ptr Bool32;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPhysicalDeviceSurfaceSupportKHRCage(physicalDevice,queueFamilyIndex,surface,pSupported)
 
 

@@ -31,14 +31,14 @@ proc getMemoryFdPropertiesKHR*(
       handleType: ExternalMemoryHandleTypeFlagBits;
       fd: int;
       pMemoryFdProperties: ptr MemoryFdPropertiesKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getMemoryFdPropertiesKHRCage(device,handleType,fd,pMemoryFdProperties)
 
 proc getMemoryFdKHR*(
       device: Device;
       pGetFdInfo: ptr MemoryGetFdInfoKHR;
       pFd: ptr int;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getMemoryFdKHRCage(device,pGetFdInfo,pFd)
 
 

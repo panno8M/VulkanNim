@@ -39,19 +39,19 @@ proc getPhysicalDeviceSurfacePresentModes2EXT*(
       pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR;
       pPresentModeCount: ptr uint32;
       pPresentModes: ptr PresentModeKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPhysicalDeviceSurfacePresentModes2EXTCage(physicalDevice,pSurfaceInfo,pPresentModeCount,pPresentModes)
 
 proc releaseFullScreenExclusiveModeEXT*(
       device: Device;
       swapchain: SwapchainKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   releaseFullScreenExclusiveModeEXTCage(device,swapchain)
 
 proc acquireFullScreenExclusiveModeEXT*(
       device: Device;
       swapchain: SwapchainKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   acquireFullScreenExclusiveModeEXTCage(device,swapchain)
 
 
@@ -63,7 +63,7 @@ proc getDeviceGroupSurfacePresentModes2EXT*(
       device: Device;
       pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR;
       pModes: ptr DeviceGroupPresentModeFlagsKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getDeviceGroupSurfacePresentModes2EXTCage(device,pSurfaceInfo,pModes)
 
 

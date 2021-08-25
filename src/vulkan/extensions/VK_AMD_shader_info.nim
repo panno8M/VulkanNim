@@ -35,7 +35,7 @@ proc getShaderInfoAMD*(
       infoType: ShaderInfoTypeAMD;
       pInfoSize: ptr uint;
       pInfo: pointer;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getShaderInfoAMDCage(device,pipeline,shaderStage,infoType,pInfoSize,pInfo)
 
 

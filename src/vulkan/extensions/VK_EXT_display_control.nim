@@ -43,7 +43,7 @@ proc displayPowerControlEXT*(
       device: Device;
       display: DisplayKHR;
       pDisplayPowerInfo: ptr DisplayPowerInfoEXT;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   displayPowerControlEXTCage(device,display,pDisplayPowerInfo)
 
 proc getSwapchainCounterEXT*(
@@ -51,7 +51,7 @@ proc getSwapchainCounterEXT*(
       swapchain: SwapchainKHR;
       counter: SurfaceCounterFlagBitsEXT;
       pCounterValue: ptr uint64;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getSwapchainCounterEXTCage(device,swapchain,counter,pCounterValue)
 
 proc registerDisplayEventEXT*(
@@ -60,7 +60,7 @@ proc registerDisplayEventEXT*(
       pDisplayEventInfo: ptr DisplayEventInfoEXT;
       pAllocator: ptr AllocationCallbacks;
       pFence: ptr Fence;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   registerDisplayEventEXTCage(device,display,pDisplayEventInfo,pAllocator,pFence)
 
 proc registerDeviceEventEXT*(
@@ -68,7 +68,7 @@ proc registerDeviceEventEXT*(
       pDeviceEventInfo: ptr DeviceEventInfoEXT;
       pAllocator: ptr AllocationCallbacks;
       pFence: ptr Fence;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   registerDeviceEventEXTCage(device,pDeviceEventInfo,pAllocator,pFence)
 
 

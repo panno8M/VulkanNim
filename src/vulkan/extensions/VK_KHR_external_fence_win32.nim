@@ -34,14 +34,14 @@ var # commands
 proc importFenceWin32HandleKHR*(
       device: Device;
       pImportFenceWin32HandleInfo: ptr ImportFenceWin32HandleInfoKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   importFenceWin32HandleKHRCage(device,pImportFenceWin32HandleInfo)
 
 proc getFenceWin32HandleKHR*(
       device: Device;
       pGetWin32HandleInfo: ptr FenceGetWin32HandleInfoKHR;
       pHandle: ptr HANDLE;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getFenceWin32HandleKHRCage(device,pGetWin32HandleInfo,pHandle)
 
 

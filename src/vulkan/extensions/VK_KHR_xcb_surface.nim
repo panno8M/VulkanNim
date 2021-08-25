@@ -24,7 +24,7 @@ proc createXcbSurfaceKHR*(
       pCreateInfo: ptr XcbSurfaceCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createXcbSurfaceKHRCage(instance,pCreateInfo,pAllocator,pSurface)
 
 proc getPhysicalDeviceXcbPresentationSupportKHR*(

@@ -49,7 +49,7 @@ proc getImageDrmFormatModifierPropertiesEXT*(
       device: Device;
       image: Image;
       pProperties: ptr ImageDrmFormatModifierPropertiesEXT;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getImageDrmFormatModifierPropertiesEXTCage(device,image,pProperties)
 
 

@@ -128,7 +128,7 @@ proc createAccelerationStructureNV*(
       pCreateInfo: ptr AccelerationStructureCreateInfoNV;
       pAllocator: ptr AllocationCallbacks;
       pAccelerationStructure: ptr AccelerationStructureNV;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createAccelerationStructureNVCage(device,pCreateInfo,pAllocator,pAccelerationStructure)
 
 proc getAccelerationStructureHandleNV*(
@@ -136,7 +136,7 @@ proc getAccelerationStructureHandleNV*(
       accelerationStructure: AccelerationStructureKHR;
       dataSize: uint;
       pData: pointer;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getAccelerationStructureHandleNVCage(device,accelerationStructure,dataSize,pData)
 
 proc getAccelerationStructureMemoryRequirementsNV*(
@@ -150,7 +150,7 @@ proc compileDeferredNV*(
       device: Device;
       pipeline: Pipeline;
       shader: uint32;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   compileDeferredNVCage(device,pipeline,shader)
 
 const getRayTracingShaderGroupHandlesNV* = getRayTracingShaderGroupHandlesKHR
@@ -204,7 +204,7 @@ proc createRayTracingPipelinesNV*(
       pCreateInfos: ptr RayTracingPipelineCreateInfoNV;
       pAllocator: ptr AllocationCallbacks;
       pPipelines: ptr Pipeline;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createRayTracingPipelinesNVCage(device,pipelineCache,createInfoCount,pCreateInfos,pAllocator,pPipelines)
 
 const bindAccelerationStructureMemoryNV* = bindAccelerationStructureMemoryKHR

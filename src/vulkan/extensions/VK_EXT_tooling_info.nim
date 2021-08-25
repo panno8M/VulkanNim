@@ -33,7 +33,7 @@ proc getPhysicalDeviceToolPropertiesEXT*(
       physicalDevice: PhysicalDevice;
       pToolCount: ptr uint32;
       pToolProperties: ptr PhysicalDeviceToolPropertiesEXT;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPhysicalDeviceToolPropertiesEXTCage(physicalDevice,pToolCount,pToolProperties)
 
 

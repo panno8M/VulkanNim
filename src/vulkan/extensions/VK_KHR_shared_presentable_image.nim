@@ -20,7 +20,7 @@ var # commands
 proc getSwapchainStatusKHR*(
       device: Device;
       swapchain: SwapchainKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getSwapchainStatusKHRCage(device,swapchain)
 
 

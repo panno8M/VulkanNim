@@ -23,7 +23,7 @@ proc createMetalSurfaceEXT*(
       pCreateInfo: ptr MetalSurfaceCreateInfoEXT;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createMetalSurfaceEXTCage(instance,pCreateInfo,pAllocator,pSurface)
 
 

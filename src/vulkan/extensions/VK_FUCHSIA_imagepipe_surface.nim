@@ -22,7 +22,7 @@ proc createImagePipeSurfaceFUCHSIA*(
       pCreateInfo: ptr ImagePipeSurfaceCreateInfoFUCHSIA;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createImagePipeSurfaceFUCHSIACage(instance,pCreateInfo,pAllocator,pSurface)
 
 

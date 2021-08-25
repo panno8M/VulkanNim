@@ -1,4 +1,4 @@
-# Generated at 2021-08-24T20:18:44+09:00
+# Generated at 2021-08-25T14:20:43+09:00
 # vulkan 1.2
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -617,7 +617,7 @@ proc createRenderPass2*(
       pCreateInfo: ptr RenderPassCreateInfo2;
       pAllocator: ptr AllocationCallbacks;
       pRenderPass: ptr RenderPass;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createRenderPass2Cage(device,pCreateInfo,pAllocator,pRenderPass)
 
 proc cmdEndRenderPass2*(
@@ -772,21 +772,21 @@ var # commands
 proc signalSemaphore*(
       device: Device;
       pSignalInfo: ptr SemaphoreSignalInfo;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   signalSemaphoreCage(device,pSignalInfo)
 
 proc getSemaphoreCounterValue*(
       device: Device;
       semaphore: Semaphore;
       pValue: ptr uint64;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getSemaphoreCounterValueCage(device,semaphore,pValue)
 
 proc waitSemaphores*(
       device: Device;
       pWaitInfo: ptr SemaphoreWaitInfo;
       timeout: uint64;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   waitSemaphoresCage(device,pWaitInfo,timeout)
 
 

@@ -92,7 +92,7 @@ proc createSwapchainKHR*(
       pCreateInfo: ptr SwapchainCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pSwapchain: ptr SwapchainKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createSwapchainKHRCage(device,pCreateInfo,pAllocator,pSwapchain)
 
 proc getSwapchainImagesKHR*(
@@ -100,7 +100,7 @@ proc getSwapchainImagesKHR*(
       swapchain: SwapchainKHR;
       pSwapchainImageCount: ptr uint32;
       pSwapchainImages: ptr Image;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getSwapchainImagesKHRCage(device,swapchain,pSwapchainImageCount,pSwapchainImages)
 
 proc acquireNextImageKHR*(
@@ -110,7 +110,7 @@ proc acquireNextImageKHR*(
       semaphore: Semaphore;
       fence: Fence;
       pImageIndex: ptr uint32;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   acquireNextImageKHRCage(device,swapchain,timeout,semaphore,fence,pImageIndex)
 
 proc destroySwapchainKHR*(
@@ -123,7 +123,7 @@ proc destroySwapchainKHR*(
 proc queuePresentKHR*(
       queue: Queue;
       pPresentInfo: ptr PresentInfoKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   queuePresentKHRCage(queue,pPresentInfo)
 
 
@@ -136,14 +136,14 @@ var # commands
 proc getDeviceGroupPresentCapabilitiesKHR*(
       device: Device;
       pDeviceGroupPresentCapabilities: ptr DeviceGroupPresentCapabilitiesKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getDeviceGroupPresentCapabilitiesKHRCage(device,pDeviceGroupPresentCapabilities)
 
 proc getDeviceGroupSurfacePresentModesKHR*(
       device: Device;
       surface: SurfaceKHR;
       pModes: ptr DeviceGroupPresentModeFlagsKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getDeviceGroupSurfacePresentModesKHRCage(device,surface,pModes)
 
 proc getPhysicalDevicePresentRectanglesKHR*(
@@ -151,14 +151,14 @@ proc getPhysicalDevicePresentRectanglesKHR*(
       surface: SurfaceKHR;
       pRectCount: ptr uint32;
       pRects: ptr Rect2D;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPhysicalDevicePresentRectanglesKHRCage(physicalDevice,surface,pRectCount,pRects)
 
 proc acquireNextImage2KHR*(
       device: Device;
       pAcquireInfo: ptr AcquireNextImageInfoKHR;
       pImageIndex: ptr uint32;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   acquireNextImage2KHRCage(device,pAcquireInfo,pImageIndex)
 
 

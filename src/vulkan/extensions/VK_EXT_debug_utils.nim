@@ -128,19 +128,19 @@ proc createDebugUtilsMessengerEXT*(
       pCreateInfo: ptr DebugUtilsMessengerCreateInfoEXT;
       pAllocator: ptr AllocationCallbacks;
       pMessenger: ptr DebugUtilsMessengerEXT;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createDebugUtilsMessengerEXTCage(instance,pCreateInfo,pAllocator,pMessenger)
 
 proc setDebugUtilsObjectNameEXT*(
       device: Device;
       pNameInfo: ptr DebugUtilsObjectNameInfoEXT;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   setDebugUtilsObjectNameEXTCage(device,pNameInfo)
 
 proc setDebugUtilsObjectTagEXT*(
       device: Device;
       pTagInfo: ptr DebugUtilsObjectTagInfoEXT;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   setDebugUtilsObjectTagEXTCage(device,pTagInfo)
 
 proc cmdInsertDebugUtilsLabelEXT*(

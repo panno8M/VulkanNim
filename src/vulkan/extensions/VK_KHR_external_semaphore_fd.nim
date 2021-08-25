@@ -27,14 +27,14 @@ var # commands
 proc importSemaphoreFdKHR*(
       device: Device;
       pImportSemaphoreFdInfo: ptr ImportSemaphoreFdInfoKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   importSemaphoreFdKHRCage(device,pImportSemaphoreFdInfo)
 
 proc getSemaphoreFdKHR*(
       device: Device;
       pGetFdInfo: ptr SemaphoreGetFdInfoKHR;
       pFd: ptr int;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getSemaphoreFdKHRCage(device,pGetFdInfo,pFd)
 
 

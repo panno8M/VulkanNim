@@ -100,7 +100,7 @@ proc releaseProfilingLockKHR*(
 proc acquireProfilingLockKHR*(
       device: Device;
       pInfo: ptr AcquireProfilingLockInfoKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   acquireProfilingLockKHRCage(device,pInfo)
 
 proc enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR*(
@@ -109,7 +109,7 @@ proc enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR*(
       pCounterCount: ptr uint32;
       pCounters: ptr PerformanceCounterKHR;
       pCounterDescriptions: ptr PerformanceCounterDescriptionKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHRCage(physicalDevice,queueFamilyIndex,pCounterCount,pCounters,pCounterDescriptions)
 
 proc getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR*(

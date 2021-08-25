@@ -33,14 +33,14 @@ proc getPastPresentationTimingGOOGLE*(
       swapchain: SwapchainKHR;
       pPresentationTimingCount: ptr uint32;
       pPresentationTimings: ptr PastPresentationTimingGOOGLE;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPastPresentationTimingGOOGLECage(device,swapchain,pPresentationTimingCount,pPresentationTimings)
 
 proc getRefreshCycleDurationGOOGLE*(
       device: Device;
       swapchain: SwapchainKHR;
       pDisplayTimingProperties: ptr RefreshCycleDurationGOOGLE;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getRefreshCycleDurationGOOGLECage(device,swapchain,pDisplayTimingProperties)
 
 

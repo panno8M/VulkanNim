@@ -324,13 +324,13 @@ proc bindAccelerationStructureMemoryKHR*(
       device: Device;
       bindInfoCount: uint32;
       pBindInfos: ptr BindAccelerationStructureMemoryInfoKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   bindAccelerationStructureMemoryKHRCage(device,bindInfoCount,pBindInfos)
 
 proc copyAccelerationStructureKHR*(
       device: Device;
       pInfo: ptr CopyAccelerationStructureInfoKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   copyAccelerationStructureKHRCage(device,pInfo)
 
 proc getRayTracingCaptureReplayShaderGroupHandlesKHR*(
@@ -340,7 +340,7 @@ proc getRayTracingCaptureReplayShaderGroupHandlesKHR*(
       groupCount: uint32;
       dataSize: uint;
       pData: pointer;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getRayTracingCaptureReplayShaderGroupHandlesKHRCage(device,pipeline,firstGroup,groupCount,dataSize,pData)
 
 proc createRayTracingPipelinesKHR*(
@@ -350,7 +350,7 @@ proc createRayTracingPipelinesKHR*(
       pCreateInfos: ptr RayTracingPipelineCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pPipelines: ptr Pipeline;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createRayTracingPipelinesKHRCage(device,pipelineCache,createInfoCount,pCreateInfos,pAllocator,pPipelines)
 
 proc cmdBuildAccelerationStructureKHR*(
@@ -374,7 +374,7 @@ proc getRayTracingShaderGroupHandlesKHR*(
       groupCount: uint32;
       dataSize: uint;
       pData: pointer;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getRayTracingShaderGroupHandlesKHRCage(device,pipeline,firstGroup,groupCount,dataSize,pData)
 
 proc cmdTraceRaysIndirectKHR*(
@@ -391,13 +391,13 @@ proc cmdTraceRaysIndirectKHR*(
 proc copyMemoryToAccelerationStructureKHR*(
       device: Device;
       pInfo: ptr CopyMemoryToAccelerationStructureInfoKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   copyMemoryToAccelerationStructureKHRCage(device,pInfo)
 
 proc copyAccelerationStructureToMemoryKHR*(
       device: Device;
       pInfo: ptr CopyAccelerationStructureToMemoryInfoKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   copyAccelerationStructureToMemoryKHRCage(device,pInfo)
 
 proc cmdCopyAccelerationStructureToMemoryKHR*(
@@ -432,7 +432,7 @@ proc writeAccelerationStructuresPropertiesKHR*(
       dataSize: uint;
       pData: pointer;
       stride: uint;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   writeAccelerationStructuresPropertiesKHRCage(device,accelerationStructureCount,pAccelerationStructures,queryType,dataSize,pData,stride)
 
 proc getAccelerationStructureDeviceAddressKHR*(
@@ -446,7 +446,7 @@ proc createAccelerationStructureKHR*(
       pCreateInfo: ptr AccelerationStructureCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pAccelerationStructure: ptr AccelerationStructureKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createAccelerationStructureKHRCage(device,pCreateInfo,pAllocator,pAccelerationStructure)
 
 proc destroyAccelerationStructureKHR*(
@@ -461,13 +461,13 @@ proc buildAccelerationStructureKHR*(
       infoCount: uint32;
       pInfos: ptr AccelerationStructureBuildGeometryInfoKHR;
       ppOffsetInfos: ptr ptr AccelerationStructureBuildOffsetInfoKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   buildAccelerationStructureKHRCage(device,infoCount,pInfos,ppOffsetInfos)
 
 proc getDeviceAccelerationStructureCompatibilityKHR*(
       device: Device;
       version: ptr AccelerationStructureVersionKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getDeviceAccelerationStructureCompatibilityKHRCage(device,version)
 
 proc getAccelerationStructureMemoryRequirementsKHR*(

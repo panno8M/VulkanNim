@@ -81,14 +81,14 @@ var # commands
 proc getDeviceGroupPresentCapabilitiesKHR*(
       device: Device;
       pDeviceGroupPresentCapabilities: ptr DeviceGroupPresentCapabilitiesKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getDeviceGroupPresentCapabilitiesKHRCage(device,pDeviceGroupPresentCapabilities)
 
 proc getDeviceGroupSurfacePresentModesKHR*(
       device: Device;
       surface: SurfaceKHR;
       pModes: ptr DeviceGroupPresentModeFlagsKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getDeviceGroupSurfacePresentModesKHRCage(device,surface,pModes)
 
 proc getPhysicalDevicePresentRectanglesKHR*(
@@ -96,7 +96,7 @@ proc getPhysicalDevicePresentRectanglesKHR*(
       surface: SurfaceKHR;
       pRectCount: ptr uint32;
       pRects: ptr Rect2D;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPhysicalDevicePresentRectanglesKHRCage(physicalDevice,surface,pRectCount,pRects)
 
 
@@ -107,7 +107,7 @@ proc acquireNextImage2KHR*(
       device: Device;
       pAcquireInfo: ptr AcquireNextImageInfoKHR;
       pImageIndex: ptr uint32;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   acquireNextImage2KHRCage(device,pAcquireInfo,pImageIndex)
 
 

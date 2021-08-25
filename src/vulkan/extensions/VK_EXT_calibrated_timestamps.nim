@@ -24,7 +24,7 @@ proc getPhysicalDeviceCalibrateableTimeDomainsEXT*(
       physicalDevice: PhysicalDevice;
       pTimeDomainCount: ptr uint32;
       pTimeDomains: ptr TimeDomainEXT;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPhysicalDeviceCalibrateableTimeDomainsEXTCage(physicalDevice,pTimeDomainCount,pTimeDomains)
 
 proc getCalibratedTimestampsEXT*(
@@ -33,7 +33,7 @@ proc getCalibratedTimestampsEXT*(
       pTimestampInfos: ptr CalibratedTimestampInfoEXT;
       pTimestamps: ptr uint64;
       pMaxDeviation: ptr uint64;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getCalibratedTimestampsEXTCage(device,timestampCount,pTimestampInfos,pTimestamps,pMaxDeviation)
 
 

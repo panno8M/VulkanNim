@@ -29,7 +29,7 @@ proc getMemoryHostPointerPropertiesEXT*(
       handleType: ExternalMemoryHandleTypeFlagBits;
       pHostPointer: pointer;
       pMemoryHostPointerProperties: ptr MemoryHostPointerPropertiesEXT;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getMemoryHostPointerPropertiesEXTCage(device,handleType,pHostPointer,pMemoryHostPointerProperties)
 
 

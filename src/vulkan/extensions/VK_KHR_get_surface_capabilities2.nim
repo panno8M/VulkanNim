@@ -29,14 +29,14 @@ proc getPhysicalDeviceSurfaceFormats2KHR*(
       pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR;
       pSurfaceFormatCount: ptr uint32;
       pSurfaceFormats: ptr SurfaceFormat2KHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPhysicalDeviceSurfaceFormats2KHRCage(physicalDevice,pSurfaceInfo,pSurfaceFormatCount,pSurfaceFormats)
 
 proc getPhysicalDeviceSurfaceCapabilities2KHR*(
       physicalDevice: PhysicalDevice;
       pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR;
       pSurfaceCapabilities: ptr SurfaceCapabilities2KHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPhysicalDeviceSurfaceCapabilities2KHRCage(physicalDevice,pSurfaceInfo,pSurfaceCapabilities)
 
 

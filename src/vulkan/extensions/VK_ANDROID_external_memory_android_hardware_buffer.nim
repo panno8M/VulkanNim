@@ -52,14 +52,14 @@ proc getAndroidHardwareBufferPropertiesANDROID*(
       device: Device;
       buffer: ptr AHardwareBuffer;
       pProperties: ptr AndroidHardwareBufferPropertiesANDROID;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getAndroidHardwareBufferPropertiesANDROIDCage(device,buffer,pProperties)
 
 proc getMemoryAndroidHardwareBufferANDROID*(
       device: Device;
       pInfo: ptr MemoryGetAndroidHardwareBufferInfoANDROID;
       pBuffer: ptr ptr AHardwareBuffer;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getMemoryAndroidHardwareBufferANDROIDCage(device,pInfo,pBuffer)
 
 

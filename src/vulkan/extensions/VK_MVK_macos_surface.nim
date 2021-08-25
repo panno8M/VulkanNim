@@ -22,7 +22,7 @@ proc createMacOSSurfaceMVK*(
       pCreateInfo: ptr MacOSSurfaceCreateInfoMVK;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createMacOSSurfaceMVKCage(instance,pCreateInfo,pAllocator,pSurface)
 
 

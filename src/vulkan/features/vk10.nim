@@ -1,4 +1,4 @@
-# Generated at 2021-08-24T20:18:44+09:00
+# Generated at 2021-08-25T14:20:42+09:00
 # vulkan 1.0
 # Vulkan core API interface definitions
 # ======================================
@@ -3251,14 +3251,14 @@ proc getPhysicalDeviceImageFormatProperties*(
       usage: ImageUsageFlags;
       flags: ImageCreateFlags;
       pImageFormatProperties: ptr ImageFormatProperties;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPhysicalDeviceImageFormatPropertiesCage(physicalDevice,format,theType,tiling,usage,flags,pImageFormatProperties)
 
 proc createInstance*(
       pCreateInfo: ptr InstanceCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pInstance: ptr Instance;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createInstanceCage(pCreateInfo,pAllocator,pInstance)
 
 proc destroyInstance*(
@@ -3271,7 +3271,7 @@ proc enumeratePhysicalDevices*(
       instance: Instance;
       pPhysicalDeviceCount: ptr uint32;
       pPhysicalDevices: ptr PhysicalDevice;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   enumeratePhysicalDevicesCage(instance,pPhysicalDeviceCount,pPhysicalDevices)
 
 proc getPhysicalDeviceMemoryProperties*(
@@ -3330,7 +3330,7 @@ proc createDevice*(
       pCreateInfo: ptr DeviceCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pDevice: ptr Device;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createDeviceCage(physicalDevice,pCreateInfo,pAllocator,pDevice)
 
 proc destroyDevice*(
@@ -3351,14 +3351,14 @@ proc enumerateDeviceExtensionProperties*(
       pLayerName: cstring;
       pPropertyCount: ptr uint32;
       pProperties: ptr ExtensionProperties;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   enumerateDeviceExtensionPropertiesCage(physicalDevice,pLayerName,pPropertyCount,pProperties)
 
 proc enumerateInstanceExtensionProperties*(
       pLayerName: cstring;
       pPropertyCount: ptr uint32;
       pProperties: ptr ExtensionProperties;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   enumerateInstanceExtensionPropertiesCage(pLayerName,pPropertyCount,pProperties)
 
 
@@ -3372,13 +3372,13 @@ proc enumerateDeviceLayerProperties*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
       pProperties: ptr LayerProperties;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   enumerateDeviceLayerPropertiesCage(physicalDevice,pPropertyCount,pProperties)
 
 proc enumerateInstanceLayerProperties*(
       pPropertyCount: ptr uint32;
       pProperties: ptr LayerProperties;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   enumerateInstanceLayerPropertiesCage(pPropertyCount,pProperties)
 
 
@@ -3400,12 +3400,12 @@ proc getDeviceQueue*(
 
 proc queueWaitIdle*(
       queue: Queue;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   queueWaitIdleCage(queue)
 
 proc deviceWaitIdle*(
       device: Device;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   deviceWaitIdleCage(device)
 
 proc queueSubmit*(
@@ -3413,7 +3413,7 @@ proc queueSubmit*(
       submitCount: uint32;
       pSubmits: ptr SubmitInfo;
       fence: Fence;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   queueSubmitCage(queue,submitCount,pSubmits,fence)
 
 
@@ -3452,14 +3452,14 @@ proc invalidateMappedMemoryRanges*(
       device: Device;
       memoryRangeCount: uint32;
       pMemoryRanges: ptr MappedMemoryRange;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   invalidateMappedMemoryRangesCage(device,memoryRangeCount,pMemoryRanges)
 
 proc flushMappedMemoryRanges*(
       device: Device;
       memoryRangeCount: uint32;
       pMemoryRanges: ptr MappedMemoryRange;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   flushMappedMemoryRangesCage(device,memoryRangeCount,pMemoryRanges)
 
 proc mapMemory*(
@@ -3469,7 +3469,7 @@ proc mapMemory*(
       size: DeviceSize;
       flags: MemoryMapFlags;
       ppData: ptr pointer;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   mapMemoryCage(device,memory,offset,size,flags,ppData)
 
 proc allocateMemory*(
@@ -3477,7 +3477,7 @@ proc allocateMemory*(
       pAllocateInfo: ptr MemoryAllocateInfo;
       pAllocator: ptr AllocationCallbacks;
       pMemory: ptr DeviceMemory;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   allocateMemoryCage(device,pAllocateInfo,pAllocator,pMemory)
 
 
@@ -3501,7 +3501,7 @@ proc bindBufferMemory*(
       buffer: Buffer;
       memory: DeviceMemory;
       memoryOffset: DeviceSize;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   bindBufferMemoryCage(device,buffer,memory,memoryOffset)
 
 proc bindImageMemory*(
@@ -3509,7 +3509,7 @@ proc bindImageMemory*(
       image: Image;
       memory: DeviceMemory;
       memoryOffset: DeviceSize;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   bindImageMemoryCage(device,image,memory,memoryOffset)
 
 proc getBufferMemoryRequirements*(
@@ -3552,7 +3552,7 @@ proc queueBindSparse*(
       bindInfoCount: uint32;
       pBindInfo: ptr BindSparseInfo;
       fence: Fence;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   queueBindSparseCage(queue,bindInfoCount,pBindInfo,fence)
 
 
@@ -3571,7 +3571,7 @@ proc waitForFences*(
       pFences: ptr Fence;
       waitAll: Bool32;
       timeout: uint64;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   waitForFencesCage(device,fenceCount,pFences,waitAll,timeout)
 
 proc destroyFence*(
@@ -3586,20 +3586,20 @@ proc createFence*(
       pCreateInfo: ptr FenceCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pFence: ptr Fence;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createFenceCage(device,pCreateInfo,pAllocator,pFence)
 
 proc getFenceStatus*(
       device: Device;
       fence: Fence;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getFenceStatusCage(device,fence)
 
 proc resetFences*(
       device: Device;
       fenceCount: uint32;
       pFences: ptr Fence;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   resetFencesCage(device,fenceCount,pFences)
 
 
@@ -3614,7 +3614,7 @@ proc createSemaphore*(
       pCreateInfo: ptr SemaphoreCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pSemaphore: ptr Semaphore;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createSemaphoreCage(device,pCreateInfo,pAllocator,pSemaphore)
 
 proc destroySemaphore*(
@@ -3644,13 +3644,13 @@ proc destroyEvent*(
 proc setEvent*(
       device: Device;
       event: Event;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   setEventCage(device,event)
 
 proc getEventStatus*(
       device: Device;
       event: Event;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getEventStatusCage(device,event)
 
 proc createEvent*(
@@ -3658,13 +3658,13 @@ proc createEvent*(
       pCreateInfo: ptr EventCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pEvent: ptr Event;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createEventCage(device,pCreateInfo,pAllocator,pEvent)
 
 proc resetEvent*(
       device: Device;
       event: Event;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   resetEventCage(device,event)
 
 
@@ -3680,7 +3680,7 @@ proc createQueryPool*(
       pCreateInfo: ptr QueryPoolCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pQueryPool: ptr QueryPool;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createQueryPoolCage(device,pCreateInfo,pAllocator,pQueryPool)
 
 proc destroyQueryPool*(
@@ -3699,7 +3699,7 @@ proc getQueryPoolResults*(
       pData: pointer;
       stride: DeviceSize;
       flags: QueryResultFlags;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getQueryPoolResultsCage(device,queryPool,firstQuery,queryCount,dataSize,pData,stride,flags)
 
 
@@ -3721,7 +3721,7 @@ proc createBuffer*(
       pCreateInfo: ptr BufferCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pBuffer: ptr Buffer;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createBufferCage(device,pCreateInfo,pAllocator,pBuffer)
 
 
@@ -3736,7 +3736,7 @@ proc createBufferView*(
       pCreateInfo: ptr BufferViewCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pView: ptr BufferView;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createBufferViewCage(device,pCreateInfo,pAllocator,pView)
 
 proc destroyBufferView*(
@@ -3774,7 +3774,7 @@ proc createImage*(
       pCreateInfo: ptr ImageCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pImage: ptr Image;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createImageCage(device,pCreateInfo,pAllocator,pImage)
 
 
@@ -3789,7 +3789,7 @@ proc createImageView*(
       pCreateInfo: ptr ImageViewCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pView: ptr ImageView;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createImageViewCage(device,pCreateInfo,pAllocator,pView)
 
 proc destroyImageView*(
@@ -3818,7 +3818,7 @@ proc createShaderModule*(
       pCreateInfo: ptr ShaderModuleCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pShaderModule: ptr ShaderModule;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createShaderModuleCage(device,pCreateInfo,pAllocator,pShaderModule)
 
 
@@ -3835,7 +3835,7 @@ proc getPipelineCacheData*(
       pipelineCache: PipelineCache;
       pDataSize: ptr uint;
       pData: pointer;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPipelineCacheDataCage(device,pipelineCache,pDataSize,pData)
 
 proc createPipelineCache*(
@@ -3843,7 +3843,7 @@ proc createPipelineCache*(
       pCreateInfo: ptr PipelineCacheCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pPipelineCache: ptr PipelineCache;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createPipelineCacheCage(device,pCreateInfo,pAllocator,pPipelineCache)
 
 proc mergePipelineCaches*(
@@ -3851,7 +3851,7 @@ proc mergePipelineCaches*(
       dstCache: PipelineCache;
       srcCacheCount: uint32;
       pSrcCaches: ptr PipelineCache;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   mergePipelineCachesCage(device,dstCache,srcCacheCount,pSrcCaches)
 
 proc destroyPipelineCache*(
@@ -3876,7 +3876,7 @@ proc createGraphicsPipelines*(
       pCreateInfos: ptr GraphicsPipelineCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pPipelines: ptr Pipeline;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createGraphicsPipelinesCage(device,pipelineCache,createInfoCount,pCreateInfos,pAllocator,pPipelines)
 
 proc createComputePipelines*(
@@ -3886,7 +3886,7 @@ proc createComputePipelines*(
       pCreateInfos: ptr ComputePipelineCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pPipelines: ptr Pipeline;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createComputePipelinesCage(device,pipelineCache,createInfoCount,pCreateInfos,pAllocator,pPipelines)
 
 proc destroyPipeline*(
@@ -3915,7 +3915,7 @@ proc createPipelineLayout*(
       pCreateInfo: ptr PipelineLayoutCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pPipelineLayout: ptr PipelineLayout;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createPipelineLayoutCage(device,pCreateInfo,pAllocator,pPipelineLayout)
 
 
@@ -3932,7 +3932,7 @@ proc createSampler*(
       pCreateInfo: ptr SamplerCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pSampler: ptr Sampler;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createSamplerCage(device,pCreateInfo,pAllocator,pSampler)
 
 proc destroySampler*(
@@ -3960,7 +3960,7 @@ proc createDescriptorSetLayout*(
       pCreateInfo: ptr DescriptorSetLayoutCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pSetLayout: ptr DescriptorSetLayout;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createDescriptorSetLayoutCage(device,pCreateInfo,pAllocator,pSetLayout)
 
 proc destroyDescriptorPool*(
@@ -3974,7 +3974,7 @@ proc resetDescriptorPool*(
       device: Device;
       descriptorPool: DescriptorPool;
       flags: DescriptorPoolResetFlags;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   resetDescriptorPoolCage(device,descriptorPool,flags)
 
 proc createDescriptorPool*(
@@ -3982,7 +3982,7 @@ proc createDescriptorPool*(
       pCreateInfo: ptr DescriptorPoolCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pDescriptorPool: ptr DescriptorPool;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createDescriptorPoolCage(device,pCreateInfo,pAllocator,pDescriptorPool)
 
 proc destroyDescriptorSetLayout*(
@@ -3997,14 +3997,14 @@ proc freeDescriptorSets*(
       descriptorPool: DescriptorPool;
       descriptorSetCount: uint32;
       pDescriptorSets: ptr DescriptorSet;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   freeDescriptorSetsCage(device,descriptorPool,descriptorSetCount,pDescriptorSets)
 
 proc allocateDescriptorSets*(
       device: Device;
       pAllocateInfo: ptr DescriptorSetAllocateInfo;
       pDescriptorSets: ptr DescriptorSet;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   allocateDescriptorSetsCage(device,pAllocateInfo,pDescriptorSets)
 
 proc updateDescriptorSets*(
@@ -4038,7 +4038,7 @@ proc createFramebuffer*(
       pCreateInfo: ptr FramebufferCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pFramebuffer: ptr Framebuffer;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createFramebufferCage(device,pCreateInfo,pAllocator,pFramebuffer)
 
 proc getRenderAreaGranularity*(
@@ -4060,7 +4060,7 @@ proc createRenderPass*(
       pCreateInfo: ptr RenderPassCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pRenderPass: ptr RenderPass;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createRenderPassCage(device,pCreateInfo,pAllocator,pRenderPass)
 
 
@@ -4075,7 +4075,7 @@ proc resetCommandPool*(
       device: Device;
       commandPool: CommandPool;
       flags: CommandPoolResetFlags;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   resetCommandPoolCage(device,commandPool,flags)
 
 proc destroyCommandPool*(
@@ -4090,7 +4090,7 @@ proc createCommandPool*(
       pCreateInfo: ptr CommandPoolCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pCommandPool: ptr CommandPool;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createCommandPoolCage(device,pCreateInfo,pAllocator,pCommandPool)
 
 
@@ -4107,18 +4107,18 @@ proc allocateCommandBuffers*(
       device: Device;
       pAllocateInfo: ptr CommandBufferAllocateInfo;
       pCommandBuffers: ptr CommandBuffer;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   allocateCommandBuffersCage(device,pAllocateInfo,pCommandBuffers)
 
 proc endCommandBuffer*(
       commandBuffer: CommandBuffer;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   endCommandBufferCage(commandBuffer)
 
 proc resetCommandBuffer*(
       commandBuffer: CommandBuffer;
       flags: CommandBufferResetFlags;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   resetCommandBufferCage(commandBuffer,flags)
 
 proc freeCommandBuffers*(
@@ -4132,7 +4132,7 @@ proc freeCommandBuffers*(
 proc beginCommandBuffer*(
       commandBuffer: CommandBuffer;
       pBeginInfo: ptr CommandBufferBeginInfo;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   beginCommandBufferCage(commandBuffer,pBeginInfo)
 
 

@@ -75,7 +75,7 @@ proc getPhysicalDeviceDisplayPropertiesKHR*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
       pProperties: ptr DisplayPropertiesKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPhysicalDeviceDisplayPropertiesKHRCage(physicalDevice,pPropertyCount,pProperties)
 
 proc createDisplayPlaneSurfaceKHR*(
@@ -83,7 +83,7 @@ proc createDisplayPlaneSurfaceKHR*(
       pCreateInfo: ptr DisplaySurfaceCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createDisplayPlaneSurfaceKHRCage(instance,pCreateInfo,pAllocator,pSurface)
 
 proc getDisplayModePropertiesKHR*(
@@ -91,14 +91,14 @@ proc getDisplayModePropertiesKHR*(
       display: DisplayKHR;
       pPropertyCount: ptr uint32;
       pProperties: ptr DisplayModePropertiesKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getDisplayModePropertiesKHRCage(physicalDevice,display,pPropertyCount,pProperties)
 
 proc getPhysicalDeviceDisplayPlanePropertiesKHR*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
       pProperties: ptr DisplayPlanePropertiesKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPhysicalDeviceDisplayPlanePropertiesKHRCage(physicalDevice,pPropertyCount,pProperties)
 
 proc getDisplayPlaneSupportedDisplaysKHR*(
@@ -106,7 +106,7 @@ proc getDisplayPlaneSupportedDisplaysKHR*(
       planeIndex: uint32;
       pDisplayCount: ptr uint32;
       pDisplays: ptr DisplayKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getDisplayPlaneSupportedDisplaysKHRCage(physicalDevice,planeIndex,pDisplayCount,pDisplays)
 
 proc getDisplayPlaneCapabilitiesKHR*(
@@ -114,7 +114,7 @@ proc getDisplayPlaneCapabilitiesKHR*(
       mode: DisplayModeKHR;
       planeIndex: uint32;
       pCapabilities: ptr DisplayPlaneCapabilitiesKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getDisplayPlaneCapabilitiesKHRCage(physicalDevice,mode,planeIndex,pCapabilities)
 
 proc createDisplayModeKHR*(
@@ -123,7 +123,7 @@ proc createDisplayModeKHR*(
       pCreateInfo: ptr DisplayModeCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pMode: ptr DisplayModeKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createDisplayModeKHRCage(physicalDevice,display,pCreateInfo,pAllocator,pMode)
 
 

@@ -74,27 +74,27 @@ var # commands
 proc cmdSetPerformanceOverrideINTEL*(
       commandBuffer: CommandBuffer;
       pOverrideInfo: ptr PerformanceOverrideInfoINTEL;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   cmdSetPerformanceOverrideINTELCage(commandBuffer,pOverrideInfo)
 
 proc acquirePerformanceConfigurationINTEL*(
       device: Device;
       pAcquireInfo: ptr PerformanceConfigurationAcquireInfoINTEL;
       pConfiguration: ptr PerformanceConfigurationINTEL;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   acquirePerformanceConfigurationINTELCage(device,pAcquireInfo,pConfiguration)
 
 proc getPerformanceParameterINTEL*(
       device: Device;
       parameter: PerformanceParameterTypeINTEL;
       pValue: ptr PerformanceValueINTEL;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPerformanceParameterINTELCage(device,parameter,pValue)
 
 proc releasePerformanceConfigurationINTEL*(
       device: Device;
       configuration: PerformanceConfigurationINTEL;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   releasePerformanceConfigurationINTELCage(device,configuration)
 
 proc uninitializePerformanceApiINTEL*(
@@ -105,25 +105,25 @@ proc uninitializePerformanceApiINTEL*(
 proc queueSetPerformanceConfigurationINTEL*(
       queue: Queue;
       configuration: PerformanceConfigurationINTEL;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   queueSetPerformanceConfigurationINTELCage(queue,configuration)
 
 proc cmdSetPerformanceMarkerINTEL*(
       commandBuffer: CommandBuffer;
       pMarkerInfo: ptr PerformanceMarkerInfoINTEL;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   cmdSetPerformanceMarkerINTELCage(commandBuffer,pMarkerInfo)
 
 proc cmdSetPerformanceStreamMarkerINTEL*(
       commandBuffer: CommandBuffer;
       pMarkerInfo: ptr PerformanceStreamMarkerInfoINTEL;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   cmdSetPerformanceStreamMarkerINTELCage(commandBuffer,pMarkerInfo)
 
 proc initializePerformanceApiINTEL*(
       device: Device;
       pInitializeInfo: ptr InitializePerformanceApiInfoINTEL;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   initializePerformanceApiINTELCage(device,pInitializeInfo)
 
 

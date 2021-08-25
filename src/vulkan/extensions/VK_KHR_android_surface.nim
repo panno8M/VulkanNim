@@ -23,7 +23,7 @@ proc createAndroidSurfaceKHR*(
       pCreateInfo: ptr AndroidSurfaceCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createAndroidSurfaceKHRCage(instance,pCreateInfo,pAllocator,pSurface)
 
 

@@ -26,7 +26,7 @@ proc getImageViewAddressNVX*(
       device: Device;
       imageView: ImageView;
       pProperties: ptr ImageViewAddressPropertiesNVX;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getImageViewAddressNVXCage(device,imageView,pProperties)
 
 proc getImageViewHandleNVX*(

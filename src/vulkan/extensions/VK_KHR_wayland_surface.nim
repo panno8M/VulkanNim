@@ -24,7 +24,7 @@ proc createWaylandSurfaceKHR*(
       pCreateInfo: ptr WaylandSurfaceCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createWaylandSurfaceKHRCage(instance,pCreateInfo,pAllocator,pSurface)
 
 proc getPhysicalDeviceWaylandPresentationSupportKHR*(

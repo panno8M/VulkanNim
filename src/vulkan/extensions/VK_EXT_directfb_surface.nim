@@ -24,7 +24,7 @@ proc createDirectFBSurfaceEXT*(
       pCreateInfo: ptr DirectFBSurfaceCreateInfoEXT;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createDirectFBSurfaceEXTCage(instance,pCreateInfo,pAllocator,pSurface)
 
 proc getPhysicalDeviceDirectFBPresentationSupportEXT*(

@@ -28,13 +28,13 @@ proc getDeferredOperationMaxConcurrencyKHR*(
 proc getDeferredOperationResultKHR*(
       device: Device;
       operation: DeferredOperationKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getDeferredOperationResultKHRCage(device,operation)
 
 proc deferredOperationJoinKHR*(
       device: Device;
       operation: DeferredOperationKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   deferredOperationJoinKHRCage(device,operation)
 
 proc destroyDeferredOperationKHR*(
@@ -48,7 +48,7 @@ proc createDeferredOperationKHR*(
       device: Device;
       pAllocator: ptr AllocationCallbacks;
       pDeferredOperation: ptr DeferredOperationKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createDeferredOperationKHRCage(device,pAllocator,pDeferredOperation)
 
 

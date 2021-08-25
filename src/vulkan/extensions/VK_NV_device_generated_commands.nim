@@ -137,7 +137,7 @@ proc createIndirectCommandsLayoutNV*(
       pCreateInfo: ptr IndirectCommandsLayoutCreateInfoNV;
       pAllocator: ptr AllocationCallbacks;
       pIndirectCommandsLayout: ptr IndirectCommandsLayoutNV;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createIndirectCommandsLayoutNVCage(device,pCreateInfo,pAllocator,pIndirectCommandsLayout)
 
 proc cmdBindPipelineShaderGroupNV*(

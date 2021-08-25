@@ -24,7 +24,7 @@ proc createSharedSwapchainsKHR*(
       pCreateInfos: ptr SwapchainCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pSwapchains: ptr SwapchainKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createSharedSwapchainsKHRCage(device,swapchainCount,pCreateInfos,pAllocator,pSwapchains)
 
 

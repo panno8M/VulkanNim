@@ -35,7 +35,7 @@ proc getPhysicalDeviceExternalImageFormatPropertiesNV*(
       flags: ImageCreateFlags;
       externalHandleType: ExternalMemoryHandleTypeFlagsNV;
       pExternalImageFormatProperties: ptr ExternalImageFormatPropertiesNV;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPhysicalDeviceExternalImageFormatPropertiesNVCage(physicalDevice,format,theType,tiling,usage,flags,externalHandleType,pExternalImageFormatProperties)
 
 

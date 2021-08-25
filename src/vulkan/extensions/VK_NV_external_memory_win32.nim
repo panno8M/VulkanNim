@@ -26,7 +26,7 @@ proc getMemoryWin32HandleNV*(
       memory: DeviceMemory;
       handleType: ExternalMemoryHandleTypeFlagsNV;
       pHandle: ptr HANDLE;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getMemoryWin32HandleNVCage(device,memory,handleType,pHandle)
 
 

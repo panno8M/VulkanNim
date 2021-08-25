@@ -344,7 +344,9 @@ proc renderAccessor*(command: NodeCommand): string =
         let name = it.name.parseParamName
         let theType = it.theType.parseTypeName(it.ptrLv)
         "      {name}: {theType};".fmt)
-    let procFutter = "    ): {theType} {commandPragma} =\n".fmt
+    let procFutter =
+      if theType == "Result": "    ): {theType} {discardableCommandPragma} =\n".fmt
+      else: "    ): {theType} {commandPragma} =\n".fmt
     let cageName = name & "Cage"
     let cageParams = command.params.mapIt(it.name.parseParamName)
 
@@ -884,6 +886,49 @@ proc extractNodeBasetype*(typeDef: XmlNode): NodeBasetype =
       else: "object"
   )
 
+proc extractAllNodeEnumExtensions2*(rootXml: XmlNode; vendorTags: VendorTags): TableRef[string, seq[NodeEnumVal]] =
+  type deduplicateComponent = tuple[willDelete: bool; id: string; contents: NodeEnumVal]
+  var enumExtValues: seq[deduplicateComponent]
+  var enumExtBitposes: seq[deduplicateComponent]
+  var enumExtAliases: seq[deduplicateComponent]
+  for enumsRoot in concat[tuple[isFeature: bool; xml: XmlNode]](
+        rootXml.findAll("feature").mapIt((true, it)),
+        rootXml["extensions"].findAll("extension").mapIt((false, it))):
+    let enums = enumsRoot.xml
+      .findAll("enum")
+      .filterIt((?it{"extends"}).isSome)
+    for theEnum in enums:
+      let extnumber = 
+        try:
+          if enumsRoot.isFeature: some theEnum{"extnumber"}.parseInt
+          else: some enumsRoot.xml{"number"}.parseInt
+        except: none int
+      let offset = 
+        try: some theEnum{"offset"}.parseInt
+        except: none int
+      let bitpos = 
+        try: some theEnum{"bitpos"}.parseInt
+        except: none int
+      let alias = ?theEnum{"alias"}
+      var nodeEnumVal = NodeEnumVal(
+        name: theEnum.name,
+        comment: ?theEnum.comment,
+        isExtended: true,
+        extends: theEnum{"extends"},
+        providedBy: enumsRoot.xml.name,
+        kind:
+          if extnumber.isSome and offset.isSome: nkeValue
+          elif bitpos.isSome: nkeBitpos
+          elif alias.isSome: nkeAlias
+          else: continue,
+      )
+      case nodeEnumVal.kind
+      of nkeValue:
+        nodeEnumVal.value = "1000{extnumber.get-1:04}{offset.get:04}".fmt.parseInt
+      of nkeBitpos:
+        nodeEnumVal.bitpos = bitpos.get
+      of nkeAlias:
+        nodeEnumVal.alias = alias.get
 proc extractAllNodeEnumExtensions*(rootXml: XmlNode; vendorTags: VendorTags): TableRef[string, seq[NodeEnumVal]] =
   debug ":::Extracting enum extending info..."
   let extFeatures = rootXml
@@ -893,25 +938,25 @@ proc extractAllNodeEnumExtensions*(rootXml: XmlNode; vendorTags: VendorTags): Ta
       .filter(E => (?E{"extends"}).isSome)
       .map(E => (xml{"name"}, E)))
     .concat
-    .map( proc(it: (string, XmlNode)): NodeEnumVal =
+    .map( proc(E: tuple[providedBy: string; xml: XmlNode]): NodeEnumVal =
       result = NodeEnumVal(
         kind:
-          if (?it[1]{"extnumber"}).isSome and (?it[1]{"offset"}).isSome: nkeValue
-          elif (?it[1]{"bitpos"}).isSome: nkeBitpos
-          elif (?it[1]{"alias"}).isSome: nkeAlias
+          if (?E.xml{"extnumber"}).isSome and (?E.xml{"offset"}).isSome: nkeValue
+          elif (?E.xml{"bitpos"}).isSome: nkeBitpos
+          elif (?E.xml{"alias"}).isSome: nkeAlias
           else: return nil,
-        name: it[1]{"name"},
-        comment: ?it[1]{"comment"},
+        name: E.xml{"name"},
+        comment: ?E.xml{"comment"},
         isExtended: true,
-        extends: it[1]{"extends"},
-        providedBy: it[0])
+        extends: E.xml{"extends"},
+        providedBy: E.providedBy)
       case result.kind
       of nkeValue:
-        result.value = "1000{it[1].attr(\"extnumber\").parseInt-1:04}{it[1].attr(\"offset\").parseInt:04}".fmt.parseInt
+        result.value = "1000{E.xml.attr(\"extnumber\").parseInt-1:04}{E.xml.attr(\"offset\").parseInt:04}".fmt.parseInt
       of nkeBitpos:
-        result.bitpos = it[1]{"bitpos"}.parseInt
+        result.bitpos = E.xml{"bitpos"}.parseInt
       of nkeAlias:
-        result.alias = it[1]{"alias"}
+        result.alias = E.xml{"alias"}
     )
     .filterIt(it != nil)
   let extExtensions = rootXml
@@ -946,41 +991,43 @@ proc extractAllNodeEnumExtensions*(rootXml: XmlNode; vendorTags: VendorTags): Ta
 
   var enumExts = concat(extFeatures, extExtensions)
     .mapit((valName: it.name.parseEnumName(it.extends, vendorTags), E: it))
-  var enumExtValues = enumExts.filterIt(it.E.kind == nkeValue)
-  var enumExtBitposes = enumExts.filterIt(it.E.kind == nkeBitpos)
-  var enumExtAliases = enumExts.filterIt(it.E.kind == nkeAlias)
+  
+  block Remove_duplicates:
+    var enumExtValues = enumExts.filterIt(it.E.kind == nkeValue)
+    var enumExtBitposes = enumExts.filterIt(it.E.kind == nkeBitpos)
+    var enumExtAliases = enumExts.filterIt(it.E.kind == nkeAlias)
 
-  for i in countdown(enumExtValues.high, enumExtValues.low):
-    for j in enumExtValues.low..<i:
-      if enumExtValues[i].valName == enumExtValues[j].valName:
-        enumExtValues.delete(i)
-        break
-      if enumExtValues[i].E.extends == enumExtValues[j].E.extends:
-        if enumExtValues[i].E.value == enumExtValues[j].E.value:
+    for i in countdown(enumExtValues.high, enumExtValues.low):
+      for j in enumExtValues.low..<i:
+        if enumExtValues[i].valName == enumExtValues[j].valName:
           enumExtValues.delete(i)
           break
-  for i in countdown(enumExtBitposes.high, enumExtBitposes.low):
-    for j in enumExtBitposes.low..<i:
-      if enumExtBitposes[i].valName == enumExtBitposes[j].valName:
-        enumExtBitposes.delete(i)
-        break
-      if enumExtBitposes[i].E.extends == enumExtBitposes[j].E.extends:
-        if enumExtBitposes[i].E.bitpos == enumExtBitposes[j].E.bitpos:
+        if enumExtValues[i].E.extends == enumExtValues[j].E.extends:
+          if enumExtValues[i].E.value == enumExtValues[j].E.value:
+            enumExtValues.delete(i)
+            break
+    for i in countdown(enumExtBitposes.high, enumExtBitposes.low):
+      for j in enumExtBitposes.low..<i:
+        if enumExtBitposes[i].valName == enumExtBitposes[j].valName:
           enumExtBitposes.delete(i)
           break
-  for i in countdown(enumExtAliases.high, enumExtAliases.low):
-    let aliasNameI = enumExtAliases[i].E.alias.parseEnumName(enumExtAliases[i].E.extends, vendorTags)
-    block remove_duplicate_alias:
-      for enumv in enumExtValues:
-        if aliasNameI == enumv.valName:
-          enumExtAliases.delete(i)
-          break remove_duplicate_alias
-      for enumb in enumExtBitposes:
-        if aliasNameI == enumb.valName:
-          enumExtAliases.delete(i)
-          break remove_duplicate_alias
+        if enumExtBitposes[i].E.extends == enumExtBitposes[j].E.extends:
+          if enumExtBitposes[i].E.bitpos == enumExtBitposes[j].E.bitpos:
+            enumExtBitposes.delete(i)
+            break
+    for i in countdown(enumExtAliases.high, enumExtAliases.low):
+      let aliasNameI = enumExtAliases[i].E.alias.parseEnumName(enumExtAliases[i].E.extends, vendorTags)
+      block remove_duplicate_alias:
+        for enumv in enumExtValues:
+          if aliasNameI == enumv.valName:
+            enumExtAliases.delete(i)
+            break remove_duplicate_alias
+        for enumb in enumExtBitposes:
+          if aliasNameI == enumb.valName:
+            enumExtAliases.delete(i)
+            break remove_duplicate_alias
 
-  enumExts = concat(enumExtValues, enumExtBitposes, enumExtAliases)
+    enumExts = concat(enumExtValues, enumExtBitposes, enumExtAliases)
 
   result = enumExts
     .mapIt(it.E.extends)

@@ -41,14 +41,14 @@ var # commands
 proc importSemaphoreWin32HandleKHR*(
       device: Device;
       pImportSemaphoreWin32HandleInfo: ptr ImportSemaphoreWin32HandleInfoKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   importSemaphoreWin32HandleKHRCage(device,pImportSemaphoreWin32HandleInfo)
 
 proc getSemaphoreWin32HandleKHR*(
       device: Device;
       pGetWin32HandleInfo: ptr SemaphoreGetWin32HandleInfoKHR;
       pHandle: ptr HANDLE;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getSemaphoreWin32HandleKHRCage(device,pGetWin32HandleInfo,pHandle)
 
 

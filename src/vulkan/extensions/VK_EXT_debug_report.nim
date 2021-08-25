@@ -85,7 +85,7 @@ proc createDebugReportCallbackEXT*(
       pCreateInfo: ptr DebugReportCallbackCreateInfoEXT;
       pAllocator: ptr AllocationCallbacks;
       pCallback: ptr DebugReportCallbackEXT;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createDebugReportCallbackEXTCage(instance,pCreateInfo,pAllocator,pCallback)
 
 proc debugReportMessageEXT*(

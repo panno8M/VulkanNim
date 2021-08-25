@@ -80,13 +80,13 @@ proc cmdDebugMarkerBeginEXT*(
 proc debugMarkerSetObjectTagEXT*(
       device: Device;
       pTagInfo: ptr DebugMarkerObjectTagInfoEXT;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   debugMarkerSetObjectTagEXTCage(device,pTagInfo)
 
 proc debugMarkerSetObjectNameEXT*(
       device: Device;
       pNameInfo: ptr DebugMarkerObjectNameInfoEXT;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   debugMarkerSetObjectNameEXTCage(device,pNameInfo)
 
 proc cmdDebugMarkerEndEXT*(

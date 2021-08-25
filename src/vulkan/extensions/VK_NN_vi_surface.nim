@@ -22,7 +22,7 @@ proc createViSurfaceNN*(
       pCreateInfo: ptr ViSurfaceCreateInfoNN;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createViSurfaceNNCage(instance,pCreateInfo,pAllocator,pSurface)
 
 

@@ -63,7 +63,7 @@ proc getPipelineExecutableStatisticsKHR*(
       pExecutableInfo: ptr PipelineExecutableInfoKHR;
       pStatisticCount: ptr uint32;
       pStatistics: ptr PipelineExecutableStatisticKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPipelineExecutableStatisticsKHRCage(device,pExecutableInfo,pStatisticCount,pStatistics)
 
 proc getPipelineExecutableInternalRepresentationsKHR*(
@@ -71,7 +71,7 @@ proc getPipelineExecutableInternalRepresentationsKHR*(
       pExecutableInfo: ptr PipelineExecutableInfoKHR;
       pInternalRepresentationCount: ptr uint32;
       pInternalRepresentations: ptr PipelineExecutableInternalRepresentationKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPipelineExecutableInternalRepresentationsKHRCage(device,pExecutableInfo,pInternalRepresentationCount,pInternalRepresentations)
 
 proc getPipelineExecutablePropertiesKHR*(
@@ -79,7 +79,7 @@ proc getPipelineExecutablePropertiesKHR*(
       pPipelineInfo: ptr PipelineInfoKHR;
       pExecutableCount: ptr uint32;
       pProperties: ptr PipelineExecutablePropertiesKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPipelineExecutablePropertiesKHRCage(device,pPipelineInfo,pExecutableCount,pProperties)
 
 

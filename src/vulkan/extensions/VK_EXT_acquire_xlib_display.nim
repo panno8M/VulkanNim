@@ -18,14 +18,14 @@ proc getRandROutputDisplayEXT*(
       dpy: ptr Display;
       rrOutput: RROutput;
       pDisplay: ptr DisplayKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getRandROutputDisplayEXTCage(physicalDevice,dpy,rrOutput,pDisplay)
 
 proc acquireXlibDisplayEXT*(
       physicalDevice: PhysicalDevice;
       dpy: ptr Display;
       display: DisplayKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   acquireXlibDisplayEXTCage(physicalDevice,dpy,display)
 
 

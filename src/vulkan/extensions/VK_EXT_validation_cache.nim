@@ -32,7 +32,7 @@ proc mergeValidationCachesEXT*(
       dstCache: ValidationCacheEXT;
       srcCacheCount: uint32;
       pSrcCaches: ptr ValidationCacheEXT;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   mergeValidationCachesEXTCage(device,dstCache,srcCacheCount,pSrcCaches)
 
 proc getValidationCacheDataEXT*(
@@ -40,7 +40,7 @@ proc getValidationCacheDataEXT*(
       validationCache: ValidationCacheEXT;
       pDataSize: ptr uint;
       pData: pointer;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getValidationCacheDataEXTCage(device,validationCache,pDataSize,pData)
 
 proc createValidationCacheEXT*(
@@ -48,7 +48,7 @@ proc createValidationCacheEXT*(
       pCreateInfo: ptr ValidationCacheCreateInfoEXT;
       pAllocator: ptr AllocationCallbacks;
       pValidationCache: ptr ValidationCacheEXT;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createValidationCacheEXTCage(device,pCreateInfo,pAllocator,pValidationCache)
 
 proc destroyValidationCacheEXT*(

@@ -27,14 +27,14 @@ var # commands
 proc importFenceFdKHR*(
       device: Device;
       pImportFenceFdInfo: ptr ImportFenceFdInfoKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   importFenceFdKHRCage(device,pImportFenceFdInfo)
 
 proc getFenceFdKHR*(
       device: Device;
       pGetFdInfo: ptr FenceGetFdInfoKHR;
       pFd: ptr int;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getFenceFdKHRCage(device,pGetFdInfo,pFd)
 
 

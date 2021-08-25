@@ -41,7 +41,11 @@ const
 proc deco*(str: string; colorCode: ColorCode): string =
   $colorCode & str & $Clear
 proc logMsg*(title: Title; msg: varargs[string, `$`]): string =
-  title.string & "\n" & msg.join.deco(LightGray)
+  let msg = msg.join
+  if msg.len == 0:
+    title.string
+  else:
+    title.string & "\n" & msg.join.deco(LightGray)
 
 proc title*(str: string): Title = Title(str)
 proc info*(title: Title; msg: varargs[string, `$`]) {.raises: [LoggingFailure].} =

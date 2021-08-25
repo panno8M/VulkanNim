@@ -39,7 +39,7 @@ proc getDisplayPlaneCapabilities2KHR*(
       physicalDevice: PhysicalDevice;
       pDisplayPlaneInfo: ptr DisplayPlaneInfo2KHR;
       pCapabilities: ptr DisplayPlaneCapabilities2KHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getDisplayPlaneCapabilities2KHRCage(physicalDevice,pDisplayPlaneInfo,pCapabilities)
 
 proc getDisplayModeProperties2KHR*(
@@ -47,21 +47,21 @@ proc getDisplayModeProperties2KHR*(
       display: DisplayKHR;
       pPropertyCount: ptr uint32;
       pProperties: ptr DisplayModeProperties2KHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getDisplayModeProperties2KHRCage(physicalDevice,display,pPropertyCount,pProperties)
 
 proc getPhysicalDeviceDisplayPlaneProperties2KHR*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
       pProperties: ptr DisplayPlaneProperties2KHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPhysicalDeviceDisplayPlaneProperties2KHRCage(physicalDevice,pPropertyCount,pProperties)
 
 proc getPhysicalDeviceDisplayProperties2KHR*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
       pProperties: ptr DisplayProperties2KHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPhysicalDeviceDisplayProperties2KHRCage(physicalDevice,pPropertyCount,pProperties)
 
 

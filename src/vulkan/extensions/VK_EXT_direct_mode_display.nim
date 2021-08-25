@@ -15,7 +15,7 @@ var # commands
 proc releaseDisplayEXT*(
       physicalDevice: PhysicalDevice;
       display: DisplayKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   releaseDisplayEXTCage(physicalDevice,display)
 
 

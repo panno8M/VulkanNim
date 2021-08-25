@@ -21,7 +21,7 @@ proc createHeadlessSurfaceEXT*(
       pCreateInfo: ptr HeadlessSurfaceCreateInfoEXT;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createHeadlessSurfaceEXTCage(instance,pCreateInfo,pAllocator,pSurface)
 
 

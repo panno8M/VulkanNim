@@ -24,7 +24,7 @@ proc createWin32SurfaceKHR*(
       pCreateInfo: ptr Win32SurfaceCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createWin32SurfaceKHRCage(instance,pCreateInfo,pAllocator,pSurface)
 
 proc getPhysicalDeviceWin32PresentationSupportKHR*(

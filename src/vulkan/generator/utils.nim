@@ -123,6 +123,23 @@ proc filter*[T](s: openArray[T], pred: proc(i: Natural, x: T): bool {.closure.})
     if pred(i, s[i]):
       result.add(s[i])
 
+#               00
+#       01              02
+#   03      04      05      06
+# 07  08  09  10  11  12  13  14
+#  2i+1 = i_right
+#  2i+2 = i_left
+type
+  Sbt*[T] = ref object # String Binary Tree
+    tree*: seq[tuple[id: string; item: T]]
+proc nextCapacity*(x: Natural = 0): Natural =
+  if x < 10: 10
+  else: 2 * x
+proc newSbt*[T](): Sbt[T] =
+  new result
+  result.tree.setLen(nextCapacity())
+# proc add*[T](sbt: Sbt[T]; item: T) =
+
 # general ==============================================================
 # ----------------------------------------------------------------------
 # specialization =======================================================
@@ -261,3 +278,4 @@ template `?`*(str: string): Option[string] =
 const
   enumPragma* = "{.size: sizeof(int32), pure.}"
   commandPragma* = "{.cdecl.}"
+  discardableCommandPragma* = "{.cdecl, discardable.}"

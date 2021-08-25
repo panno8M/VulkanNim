@@ -1,4 +1,4 @@
-# Generated at 2021-08-24T20:18:44+09:00
+# Generated at 2021-08-25T14:20:43+09:00
 # vulkan 1.1
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -535,7 +535,7 @@ var # commands
 
 proc enumerateInstanceVersion*(
       pApiVersion: ptr uint32;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   enumerateInstanceVersionCage(pApiVersion)
 
 
@@ -558,14 +558,14 @@ proc bindBufferMemory2*(
       device: Device;
       bindInfoCount: uint32;
       pBindInfos: ptr BindBufferMemoryInfo;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   bindBufferMemory2Cage(device,bindInfoCount,pBindInfos)
 
 proc bindImageMemory2*(
       device: Device;
       bindInfoCount: uint32;
       pBindInfos: ptr BindImageMemoryInfo;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   bindImageMemory2Cage(device,bindInfoCount,pBindInfos)
 
 
@@ -632,7 +632,7 @@ proc enumeratePhysicalDeviceGroups*(
       instance: Instance;
       pPhysicalDeviceGroupCount: ptr uint32;
       pPhysicalDeviceGroupProperties: ptr PhysicalDeviceGroupProperties;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   enumeratePhysicalDeviceGroupsCage(instance,pPhysicalDeviceGroupCount,pPhysicalDeviceGroupProperties)
 
 
@@ -721,7 +721,7 @@ proc getPhysicalDeviceImageFormatProperties2*(
       physicalDevice: PhysicalDevice;
       pImageFormatInfo: ptr PhysicalDeviceImageFormatInfo2;
       pImageFormatProperties: ptr ImageFormatProperties2;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getPhysicalDeviceImageFormatProperties2Cage(physicalDevice,pImageFormatInfo,pImageFormatProperties)
 
 
@@ -797,7 +797,7 @@ proc createSamplerYcbcrConversion*(
       pCreateInfo: ptr SamplerYcbcrConversionCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pYcbcrConversion: ptr SamplerYcbcrConversion;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createSamplerYcbcrConversionCage(device,pCreateInfo,pAllocator,pYcbcrConversion)
 
 proc destroySamplerYcbcrConversion*(
@@ -829,7 +829,7 @@ proc createDescriptorUpdateTemplate*(
       pCreateInfo: ptr DescriptorUpdateTemplateCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pDescriptorUpdateTemplate: ptr DescriptorUpdateTemplate;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createDescriptorUpdateTemplateCage(device,pCreateInfo,pAllocator,pDescriptorUpdateTemplate)
 
 proc updateDescriptorSetWithTemplate*(

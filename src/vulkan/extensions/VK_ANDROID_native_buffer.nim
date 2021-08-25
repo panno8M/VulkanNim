@@ -45,7 +45,7 @@ proc getSwapchainGrallocUsage2ANDROID*(
       swapchainImageUsage: SwapchainImageUsageFlagsANDROID;
       grallocConsumerUsage: ptr uint64;
       grallocProducerUsage: ptr uint64;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getSwapchainGrallocUsage2ANDROIDCage(device,format,imageUsage,swapchainImageUsage,grallocConsumerUsage,grallocProducerUsage)
 
 proc acquireImageANDROID*(
@@ -54,7 +54,7 @@ proc acquireImageANDROID*(
       nativeFenceFd: int;
       semaphore: Semaphore;
       fence: Fence;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   acquireImageANDROIDCage(device,image,nativeFenceFd,semaphore,fence)
 
 proc getSwapchainGrallocUsageANDROID*(
@@ -62,7 +62,7 @@ proc getSwapchainGrallocUsageANDROID*(
       format: Format;
       imageUsage: ImageUsageFlags;
       grallocUsage: ptr int;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   getSwapchainGrallocUsageANDROIDCage(device,format,imageUsage,grallocUsage)
 
 proc queueSignalReleaseImageANDROID*(
@@ -71,7 +71,7 @@ proc queueSignalReleaseImageANDROID*(
       pWaitSemaphores: ptr Semaphore;
       image: Image;
       pNativeFenceFd: ptr int;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   queueSignalReleaseImageANDROIDCage(queue,waitSemaphoreCount,pWaitSemaphores,image,pNativeFenceFd)
 
 

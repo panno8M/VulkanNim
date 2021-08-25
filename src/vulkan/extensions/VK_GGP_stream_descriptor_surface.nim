@@ -22,7 +22,7 @@ proc createStreamDescriptorSurfaceGGP*(
       pCreateInfo: ptr StreamDescriptorSurfaceCreateInfoGGP;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createStreamDescriptorSurfaceGGPCage(instance,pCreateInfo,pAllocator,pSurface)
 
 

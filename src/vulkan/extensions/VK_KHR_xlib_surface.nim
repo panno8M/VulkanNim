@@ -32,7 +32,7 @@ proc createXlibSurfaceKHR*(
       pCreateInfo: ptr XlibSurfaceCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl.} =
+    ): Result {.cdecl, discardable.} =
   createXlibSurfaceKHRCage(instance,pCreateInfo,pAllocator,pSurface)
 
 
