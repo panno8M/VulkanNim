@@ -4,12 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
+
+
 type
-  ScopeNV* {.size: sizeof(int32), pure.} = enum
-    Device = 1
-    Workgroup = 2
-    Subgroup = 3
-    QueueFamily = 5
   CooperativeMatrixPropertiesNV* = object
     sType*: StructureType
     pNext*: pointer
@@ -21,41 +18,41 @@ type
     CType*: ComponentTypeNV
     DType*: ComponentTypeNV
     scope*: ScopeNV
-  PhysicalDeviceCooperativeMatrixPropertiesNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    cooperativeMatrixSupportedStages*: ShaderStageFlags
+  ScopeNV* {.size: sizeof(int32), pure.} = enum
+    DeviceNv = 1
+    WorkgroupNv = 2
+    SubgroupNv = 3
+    QueueFamilyNv = 5
+  ComponentTypeNV* {.size: sizeof(int32), pure.} = enum
+    Float16Nv = 0
+    Float32Nv = 1
+    Float64Nv = 2
+    Sint8Nv = 3
+    Sint16Nv = 4
+    Sint32Nv = 5
+    Sint64Nv = 6
+    Uint8Nv = 7
+    Uint16Nv = 8
+    Uint32Nv = 9
+    Uint64Nv = 10
   PhysicalDeviceCooperativeMatrixFeaturesNV* = object
     sType*: StructureType
     pNext*: pointer
     cooperativeMatrix*: Bool32
     cooperativeMatrixRobustBufferAccess*: Bool32
-  ComponentTypeNV* {.size: sizeof(int32), pure.} = enum
-    Float16 = 0
-    Float32 = 1
-    Float64 = 2
-    Sint8 = 3
-    Sint16 = 4
-    Sint32 = 5
-    Sint64 = 6
-    Uint8 = 7
-    Uint16 = 8
-    Uint32 = 9
-    Uint64 = 10
+  PhysicalDeviceCooperativeMatrixPropertiesNV* = object
+    sType*: StructureType
+    pNext*: pointer
+    cooperativeMatrixSupportedStages*: ShaderStageFlags
 
-const NvCooperativeMatrixExtensionName* = "VK_NV_cooperative_matrix"
-const NvCooperativeMatrixSpecVersion* = 1
 var # commands
   getPhysicalDeviceCooperativeMatrixPropertiesNVCage: proc(physicalDevice: PhysicalDevice; pPropertyCount: ptr uint32; pProperties: ptr CooperativeMatrixPropertiesNV;): Result {.cdecl.}
-
 proc getPhysicalDeviceCooperativeMatrixPropertiesNV*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
       pProperties: ptr CooperativeMatrixPropertiesNV;
     ): Result {.cdecl, discardable.} =
   getPhysicalDeviceCooperativeMatrixPropertiesNVCage(physicalDevice,pPropertyCount,pProperties)
-
-
 proc loadVK_NV_cooperative_matrix*(instance: Instance) =
   instance.defineLoader(`<<`)
 

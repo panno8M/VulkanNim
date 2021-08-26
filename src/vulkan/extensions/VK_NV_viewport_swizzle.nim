@@ -3,21 +3,23 @@ import ../platform
 import ../features/vk10
 
 
+
+
 type
-  ViewportCoordinateSwizzleNV* {.size: sizeof(int32), pure.} = enum
-    PositiveX = 0
-    NegativeX = 1
-    PositiveY = 2
-    NegativeY = 3
-    PositiveZ = 4
-    NegativeZ = 5
-    PositiveW = 6
-    NegativeW = 7
   ViewportSwizzleNV* = object
     x*: ViewportCoordinateSwizzleNV
     y*: ViewportCoordinateSwizzleNV
     z*: ViewportCoordinateSwizzleNV
     w*: ViewportCoordinateSwizzleNV
+  ViewportCoordinateSwizzleNV* {.size: sizeof(int32), pure.} = enum
+    PositiveXNv = 0
+    NegativeXNv = 1
+    PositiveYNv = 2
+    NegativeYNv = 3
+    PositiveZNv = 4
+    NegativeZNv = 5
+    PositiveWNv = 6
+    NegativeWNv = 7
   PipelineViewportSwizzleStateCreateInfoNV* = object
     sType*: StructureType
     pNext*: pointer
@@ -26,6 +28,4 @@ type
     pViewportSwizzles*: ptr ViewportSwizzleNV
   PipelineViewportSwizzleStateCreateFlagsNV* = distinct Flags
 
-const NvViewportSwizzleSpecVersion* = 1
-const NvViewportSwizzleExtensionName* = "VK_NV_viewport_swizzle"
 

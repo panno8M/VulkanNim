@@ -7,8 +7,18 @@ import VK_EXT_queue_family_foreign
 import VK_KHR_dedicated_allocation
 
 
+
+
 type
-  AHardwareBuffer* = distinct object
+  AndroidHardwareBufferUsageANDROID* = object
+    sType*: StructureType
+    pNext*: pointer
+    androidHardwareBufferUsage*: uint64
+  AndroidHardwareBufferPropertiesANDROID* = object
+    sType*: StructureType
+    pNext*: pointer
+    allocationSize*: DeviceSize
+    memoryTypeBits*: uint32
   AndroidHardwareBufferFormatPropertiesANDROID* = object
     sType*: StructureType
     pNext*: pointer
@@ -20,6 +30,10 @@ type
     suggestedYcbcrRange*: SamplerYcbcrRange
     suggestedXChromaOffset*: ChromaLocation
     suggestedYChromaOffset*: ChromaLocation
+  ImportAndroidHardwareBufferInfoANDROID* = object
+    sType*: StructureType
+    pNext*: pointer
+    buffer*: ptr AHardwareBuffer
   MemoryGetAndroidHardwareBufferInfoANDROID* = object
     sType*: StructureType
     pNext*: pointer
@@ -28,41 +42,23 @@ type
     sType*: StructureType
     pNext*: pointer
     externalFormat*: uint64
-  AndroidHardwareBufferPropertiesANDROID* = object
-    sType*: StructureType
-    pNext*: pointer
-    allocationSize*: DeviceSize
-    memoryTypeBits*: uint32
-  ImportAndroidHardwareBufferInfoANDROID* = object
-    sType*: StructureType
-    pNext*: pointer
-    buffer*: ptr AHardwareBuffer
-  AndroidHardwareBufferUsageANDROID* = object
-    sType*: StructureType
-    pNext*: pointer
-    androidHardwareBufferUsage*: uint64
+  AHardwareBuffer* = distinct object
 
-const AndroidExternalMemoryAndroidHardwareBufferExtensionName* = "VK_ANDROID_external_memory_android_hardware_buffer"
-const AndroidExternalMemoryAndroidHardwareBufferSpecVersion* = 3
 var # commands
   getAndroidHardwareBufferPropertiesANDROIDCage: proc(device: Device; buffer: ptr AHardwareBuffer; pProperties: ptr AndroidHardwareBufferPropertiesANDROID;): Result {.cdecl.}
   getMemoryAndroidHardwareBufferANDROIDCage: proc(device: Device; pInfo: ptr MemoryGetAndroidHardwareBufferInfoANDROID; pBuffer: ptr ptr AHardwareBuffer;): Result {.cdecl.}
-
 proc getAndroidHardwareBufferPropertiesANDROID*(
       device: Device;
       buffer: ptr AHardwareBuffer;
       pProperties: ptr AndroidHardwareBufferPropertiesANDROID;
     ): Result {.cdecl, discardable.} =
   getAndroidHardwareBufferPropertiesANDROIDCage(device,buffer,pProperties)
-
 proc getMemoryAndroidHardwareBufferANDROID*(
       device: Device;
       pInfo: ptr MemoryGetAndroidHardwareBufferInfoANDROID;
       pBuffer: ptr ptr AHardwareBuffer;
     ): Result {.cdecl, discardable.} =
   getMemoryAndroidHardwareBufferANDROIDCage(device,pInfo,pBuffer)
-
-
 proc loadVK_ANDROID_external_memory_android_hardware_buffer*(instance: Instance) =
   instance.defineLoader(`<<`)
 

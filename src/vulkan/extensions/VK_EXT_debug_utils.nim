@@ -3,11 +3,31 @@ import ../platform
 import ../features/vk10
 
 
+
+
 type
+  DebugUtilsMessengerCallbackEXT* = proc(
+      messageSeverity: DebugUtilsMessageSeverityFlagBitsEXT;
+      messageTypes: DebugUtilsMessageTypeFlagsEXT;
+      pCallbackData: ptr DebugUtilsMessengerCallbackDataEXT;
+      pUserData: pointer;
+    ): ptr Bool32 {.cdecl.}
+  DebugUtilsLabelEXT* = object
+    sType*: StructureType
+    pNext*: pointer
+    pLabelName*: cstring
+    color*: array[4, float32]
+  DebugUtilsMessageSeverityFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
+    VerboseBitExt = 0x00000001
+    InfoBitExt = 0x00000010
+    WarningBitExt = 0x00000100
+    ErrorBitExt = 0x00001000
+  DebugUtilsMessageSeverityFlagsEXT* = distinct Flags
   DebugUtilsMessageTypeFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
-    General = 0x00000001
-    Validation = 0x00000002
-    Performance = 0x00000004
+    GeneralBitExt = 0x00000001
+    ValidationBitExt = 0x00000002
+    PerformanceBitExt = 0x00000004
+  DebugUtilsMessageTypeFlagsEXT* = distinct Flags
   DebugUtilsMessengerCallbackDataEXT* = object
     sType*: StructureType
     pNext*: pointer
@@ -21,6 +41,8 @@ type
     pCmdBufLabels*: ptr DebugUtilsLabelEXT
     objectCount*: uint32
     pObjects*: ptr DebugUtilsObjectNameInfoEXT
+  DebugUtilsMessengerCallbackDataFlagsEXT* = distinct Flags
+  DebugUtilsMessengerCreateFlagsEXT* = distinct Flags
   DebugUtilsMessengerCreateInfoEXT* = object
     sType*: StructureType
     pNext*: pointer
@@ -29,32 +51,13 @@ type
     messageType*: DebugUtilsMessageTypeFlagsEXT
     pfnUserCallback*: DebugUtilsMessengerCallbackEXT
     pUserData*: pointer
-  DebugUtilsMessengerCreateFlagsEXT* = distinct Flags
-  DebugUtilsMessageSeverityFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
-    Verbose = 0x00000001
-    Info = 0x00000010
-    Warning = 0x00000100
-    Error = 0x00001000
-  DebugUtilsMessageSeverityFlagsEXT* = distinct Flags
-  DebugUtilsLabelEXT* = object
-    sType*: StructureType
-    pNext*: pointer
-    pLabelName*: cstring
-    color*: array[4, float32]
+  DebugUtilsMessengerEXT* = distinct NonDispatchableHandle
   DebugUtilsObjectNameInfoEXT* = object
     sType*: StructureType
     pNext*: pointer
     objectType*: ObjectType
     objectHandle*: uint64
     pObjectName*: cstring
-  DebugUtilsMessengerCallbackEXT* = proc(
-      messageSeverity: DebugUtilsMessageSeverityFlagBitsEXT;
-      messageTypes: DebugUtilsMessageTypeFlagsEXT;
-      pCallbackData: ptr DebugUtilsMessengerCallbackDataEXT;
-      pUserData: pointer;
-    ): Bool32 {.cdecl.}
-  DebugUtilsMessengerCallbackDataFlagsEXT* = distinct Flags
-  DebugUtilsMessageTypeFlagsEXT* = distinct Flags
   DebugUtilsObjectTagInfoEXT* = object
     sType*: StructureType
     pNext*: pointer
@@ -63,66 +66,57 @@ type
     tagName*: uint64
     tagSize*: uint
     pTag*: pointer
-  DebugUtilsMessengerEXT* = distinct NonDispatchableHandle
 
-const ExtDebugUtilsExtensionName* = "VK_EXT_debug_utils"
-const ExtDebugUtilsSpecVersion* = 2
 var # commands
-  queueEndDebugUtilsLabelEXTCage: proc(queue: Queue;): void {.cdecl.}
-  cmdEndDebugUtilsLabelEXTCage: proc(commandBuffer: CommandBuffer;): void {.cdecl.}
-  queueBeginDebugUtilsLabelEXTCage: proc(queue: Queue; pLabelInfo: ptr DebugUtilsLabelEXT;): void {.cdecl.}
-  cmdBeginDebugUtilsLabelEXTCage: proc(commandBuffer: CommandBuffer; pLabelInfo: ptr DebugUtilsLabelEXT;): void {.cdecl.}
-  submitDebugUtilsMessageEXTCage: proc(instance: Instance; messageSeverity: DebugUtilsMessageSeverityFlagBitsEXT; messageTypes: DebugUtilsMessageTypeFlagsEXT; pCallbackData: ptr DebugUtilsMessengerCallbackDataEXT;): void {.cdecl.}
-  queueInsertDebugUtilsLabelEXTCage: proc(queue: Queue; pLabelInfo: ptr DebugUtilsLabelEXT;): void {.cdecl.}
-  destroyDebugUtilsMessengerEXTCage: proc(instance: Instance; messenger: DebugUtilsMessengerEXT; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  createDebugUtilsMessengerEXTCage: proc(instance: Instance; pCreateInfo: ptr DebugUtilsMessengerCreateInfoEXT; pAllocator: ptr AllocationCallbacks; pMessenger: ptr DebugUtilsMessengerEXT;): Result {.cdecl.}
   setDebugUtilsObjectNameEXTCage: proc(device: Device; pNameInfo: ptr DebugUtilsObjectNameInfoEXT;): Result {.cdecl.}
   setDebugUtilsObjectTagEXTCage: proc(device: Device; pTagInfo: ptr DebugUtilsObjectTagInfoEXT;): Result {.cdecl.}
+  queueBeginDebugUtilsLabelEXTCage: proc(queue: Queue; pLabelInfo: ptr DebugUtilsLabelEXT;): void {.cdecl.}
+  queueEndDebugUtilsLabelEXTCage: proc(queue: Queue;): void {.cdecl.}
+  queueInsertDebugUtilsLabelEXTCage: proc(queue: Queue; pLabelInfo: ptr DebugUtilsLabelEXT;): void {.cdecl.}
+  cmdBeginDebugUtilsLabelEXTCage: proc(commandBuffer: CommandBuffer; pLabelInfo: ptr DebugUtilsLabelEXT;): void {.cdecl.}
+  cmdEndDebugUtilsLabelEXTCage: proc(commandBuffer: CommandBuffer;): void {.cdecl.}
   cmdInsertDebugUtilsLabelEXTCage: proc(commandBuffer: CommandBuffer; pLabelInfo: ptr DebugUtilsLabelEXT;): void {.cdecl.}
-
-proc queueEndDebugUtilsLabelEXT*(
-      queue: Queue;
-    ): void {.cdecl.} =
-  queueEndDebugUtilsLabelEXTCage(queue)
-
-proc cmdEndDebugUtilsLabelEXT*(
-      commandBuffer: CommandBuffer;
-    ): void {.cdecl.} =
-  cmdEndDebugUtilsLabelEXTCage(commandBuffer)
-
+  createDebugUtilsMessengerEXTCage: proc(instance: Instance; pCreateInfo: ptr DebugUtilsMessengerCreateInfoEXT; pAllocator: ptr AllocationCallbacks; pMessenger: ptr DebugUtilsMessengerEXT;): Result {.cdecl.}
+  destroyDebugUtilsMessengerEXTCage: proc(instance: Instance; messenger: DebugUtilsMessengerEXT; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
+  submitDebugUtilsMessageEXTCage: proc(instance: Instance; messageSeverity: DebugUtilsMessageSeverityFlagBitsEXT; messageTypes: DebugUtilsMessageTypeFlagsEXT; pCallbackData: ptr DebugUtilsMessengerCallbackDataEXT;): void {.cdecl.}
+proc setDebugUtilsObjectNameEXT*(
+      device: Device;
+      pNameInfo: ptr DebugUtilsObjectNameInfoEXT;
+    ): Result {.cdecl, discardable.} =
+  setDebugUtilsObjectNameEXTCage(device,pNameInfo)
+proc setDebugUtilsObjectTagEXT*(
+      device: Device;
+      pTagInfo: ptr DebugUtilsObjectTagInfoEXT;
+    ): Result {.cdecl, discardable.} =
+  setDebugUtilsObjectTagEXTCage(device,pTagInfo)
 proc queueBeginDebugUtilsLabelEXT*(
       queue: Queue;
       pLabelInfo: ptr DebugUtilsLabelEXT;
     ): void {.cdecl.} =
   queueBeginDebugUtilsLabelEXTCage(queue,pLabelInfo)
-
-proc cmdBeginDebugUtilsLabelEXT*(
-      commandBuffer: CommandBuffer;
-      pLabelInfo: ptr DebugUtilsLabelEXT;
+proc queueEndDebugUtilsLabelEXT*(
+      queue: Queue;
     ): void {.cdecl.} =
-  cmdBeginDebugUtilsLabelEXTCage(commandBuffer,pLabelInfo)
-
-proc submitDebugUtilsMessageEXT*(
-      instance: Instance;
-      messageSeverity: DebugUtilsMessageSeverityFlagBitsEXT;
-      messageTypes: DebugUtilsMessageTypeFlagsEXT;
-      pCallbackData: ptr DebugUtilsMessengerCallbackDataEXT;
-    ): void {.cdecl.} =
-  submitDebugUtilsMessageEXTCage(instance,messageSeverity,messageTypes,pCallbackData)
-
+  queueEndDebugUtilsLabelEXTCage(queue)
 proc queueInsertDebugUtilsLabelEXT*(
       queue: Queue;
       pLabelInfo: ptr DebugUtilsLabelEXT;
     ): void {.cdecl.} =
   queueInsertDebugUtilsLabelEXTCage(queue,pLabelInfo)
-
-proc destroyDebugUtilsMessengerEXT*(
-      instance: Instance;
-      messenger: DebugUtilsMessengerEXT;
-      pAllocator: ptr AllocationCallbacks;
+proc cmdBeginDebugUtilsLabelEXT*(
+      commandBuffer: CommandBuffer;
+      pLabelInfo: ptr DebugUtilsLabelEXT;
     ): void {.cdecl.} =
-  destroyDebugUtilsMessengerEXTCage(instance,messenger,pAllocator)
-
+  cmdBeginDebugUtilsLabelEXTCage(commandBuffer,pLabelInfo)
+proc cmdEndDebugUtilsLabelEXT*(
+      commandBuffer: CommandBuffer;
+    ): void {.cdecl.} =
+  cmdEndDebugUtilsLabelEXTCage(commandBuffer)
+proc cmdInsertDebugUtilsLabelEXT*(
+      commandBuffer: CommandBuffer;
+      pLabelInfo: ptr DebugUtilsLabelEXT;
+    ): void {.cdecl.} =
+  cmdInsertDebugUtilsLabelEXTCage(commandBuffer,pLabelInfo)
 proc createDebugUtilsMessengerEXT*(
       instance: Instance;
       pCreateInfo: ptr DebugUtilsMessengerCreateInfoEXT;
@@ -130,37 +124,30 @@ proc createDebugUtilsMessengerEXT*(
       pMessenger: ptr DebugUtilsMessengerEXT;
     ): Result {.cdecl, discardable.} =
   createDebugUtilsMessengerEXTCage(instance,pCreateInfo,pAllocator,pMessenger)
-
-proc setDebugUtilsObjectNameEXT*(
-      device: Device;
-      pNameInfo: ptr DebugUtilsObjectNameInfoEXT;
-    ): Result {.cdecl, discardable.} =
-  setDebugUtilsObjectNameEXTCage(device,pNameInfo)
-
-proc setDebugUtilsObjectTagEXT*(
-      device: Device;
-      pTagInfo: ptr DebugUtilsObjectTagInfoEXT;
-    ): Result {.cdecl, discardable.} =
-  setDebugUtilsObjectTagEXTCage(device,pTagInfo)
-
-proc cmdInsertDebugUtilsLabelEXT*(
-      commandBuffer: CommandBuffer;
-      pLabelInfo: ptr DebugUtilsLabelEXT;
+proc destroyDebugUtilsMessengerEXT*(
+      instance: Instance;
+      messenger: DebugUtilsMessengerEXT;
+      pAllocator: ptr AllocationCallbacks;
     ): void {.cdecl.} =
-  cmdInsertDebugUtilsLabelEXTCage(commandBuffer,pLabelInfo)
-
-
+  destroyDebugUtilsMessengerEXTCage(instance,messenger,pAllocator)
+proc submitDebugUtilsMessageEXT*(
+      instance: Instance;
+      messageSeverity: DebugUtilsMessageSeverityFlagBitsEXT;
+      messageTypes: DebugUtilsMessageTypeFlagsEXT;
+      pCallbackData: ptr DebugUtilsMessengerCallbackDataEXT;
+    ): void {.cdecl.} =
+  submitDebugUtilsMessageEXTCage(instance,messageSeverity,messageTypes,pCallbackData)
 proc loadVK_EXT_debug_utils*(instance: Instance) =
   instance.defineLoader(`<<`)
 
-  queueEndDebugUtilsLabelEXTCage << "vkQueueEndDebugUtilsLabelEXT"
-  cmdEndDebugUtilsLabelEXTCage << "vkCmdEndDebugUtilsLabelEXT"
-  queueBeginDebugUtilsLabelEXTCage << "vkQueueBeginDebugUtilsLabelEXT"
-  cmdBeginDebugUtilsLabelEXTCage << "vkCmdBeginDebugUtilsLabelEXT"
-  submitDebugUtilsMessageEXTCage << "vkSubmitDebugUtilsMessageEXT"
-  queueInsertDebugUtilsLabelEXTCage << "vkQueueInsertDebugUtilsLabelEXT"
-  destroyDebugUtilsMessengerEXTCage << "vkDestroyDebugUtilsMessengerEXT"
-  createDebugUtilsMessengerEXTCage << "vkCreateDebugUtilsMessengerEXT"
   setDebugUtilsObjectNameEXTCage << "vkSetDebugUtilsObjectNameEXT"
   setDebugUtilsObjectTagEXTCage << "vkSetDebugUtilsObjectTagEXT"
+  queueBeginDebugUtilsLabelEXTCage << "vkQueueBeginDebugUtilsLabelEXT"
+  queueEndDebugUtilsLabelEXTCage << "vkQueueEndDebugUtilsLabelEXT"
+  queueInsertDebugUtilsLabelEXTCage << "vkQueueInsertDebugUtilsLabelEXT"
+  cmdBeginDebugUtilsLabelEXTCage << "vkCmdBeginDebugUtilsLabelEXT"
+  cmdEndDebugUtilsLabelEXTCage << "vkCmdEndDebugUtilsLabelEXT"
   cmdInsertDebugUtilsLabelEXTCage << "vkCmdInsertDebugUtilsLabelEXT"
+  createDebugUtilsMessengerEXTCage << "vkCreateDebugUtilsMessengerEXT"
+  destroyDebugUtilsMessengerEXTCage << "vkDestroyDebugUtilsMessengerEXT"
+  submitDebugUtilsMessageEXTCage << "vkSubmitDebugUtilsMessageEXT"

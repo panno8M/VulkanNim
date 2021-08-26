@@ -3,12 +3,9 @@ import ../platform
 import ../features/vk10
 
 
+
+
 type
-  DedicatedAllocationMemoryAllocateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    image*: Image
-    buffer*: Buffer
   DedicatedAllocationImageCreateInfoNV* = object
     sType*: StructureType
     pNext*: pointer
@@ -17,7 +14,10 @@ type
     sType*: StructureType
     pNext*: pointer
     dedicatedAllocation*: Bool32
+  DedicatedAllocationMemoryAllocateInfoNV* = object
+    sType*: StructureType
+    pNext*: pointer
+    image*: Image
+    buffer*: Buffer
 
-const NvDedicatedAllocationSpecVersion* = 1
-const NvDedicatedAllocationExtensionName* = "VK_NV_dedicated_allocation"
 

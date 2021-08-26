@@ -9,6 +9,8 @@ import osproc
 import streams
 import options
 
+import ./nodedefs
+
 proc pipe*[T, S](arg: T; op: proc(arg: T): S): S =
   runnableExamples:
     import sugar, math
@@ -161,8 +163,6 @@ proc toLowerCamel*(str: string): string =
 proc toLowerInitial*(str: string): string =
   str[0].toLowerAscii & str[1..^1]
 
-type VendorTags* = seq[tuple[name: string]]
-
 proc removeTerminalUnderScore*(str: string): string =
   result = str
   while true:
@@ -205,8 +205,6 @@ proc parseEnumName*(str: string; enumsName: string; vendorTags: VendorTags): str
       result = &"Vk{result}"
   except: return
 
-  var tmp = result.removeVendorTags(vendorTags)
-  if tmp != "": result = tmp
   result.removeSuffix("Bit")
 
 proc replaceBasicTypes*(str: string): string =
@@ -241,16 +239,20 @@ proc parseCommandName*(str: string): string =
 proc parseCommandNameFromSnake*(str: string): string =
   str.removeVkPrefix.toLowerCamel
 
+proc parseVariableNameFromSnake*(str: string): string =
+  str.removeVkPrefix.toUpperCamel
+
 proc parseParamName*(str: string): string =
   if str == "type": "theType"
   else: str
 
-proc parseTypeName*(str: string; ptrLv: Natural = 0; arrayLen: seq[Natural] = @[]): string =
+proc parseTypeName*(str: string; ptrLv: Natural = 0; arrayLen: seq[NodeArrayLength] = @[]): string =
   ("ptr ".repeat(ptrLv) & str)
     .replaceBasicTypes
     .replacePtrTypes
     .pipe(x => arrayLen
-      .mapIt($it)
+      .mapIt( if it.useConst: it.name.parseVariableNameFromSnake
+              else: $it.value)
       .concat(@[x])
       .foldr("array[{a}, {b}]".fmt))
 

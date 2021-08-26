@@ -5,7 +5,7 @@ import os
 import times
 
 type
-  LoggingFailure* = object of Exception
+  LoggingFailure* = object of CatchableError
   ColorCode* = enum
     None         = ""
     Black        = "\e[30m"

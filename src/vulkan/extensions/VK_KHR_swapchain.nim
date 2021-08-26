@@ -4,20 +4,19 @@ import ../features/vk10
 import VK_KHR_surface
 
 
+const MaxDeviceGroupSize* = 32
+
 type
-  SwapchainKHR* = distinct NonDispatchableHandle
-  PresentInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    waitSemaphoreCount*: uint32
-    pWaitSemaphores*: ptr Semaphore
-    swapchainCount*: uint32
-    pSwapchains*: ptr SwapchainKHR
-    pImageIndices*: ptr uint32
-    pResults*: ptr Result
   SwapchainCreateFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+    # Provided by VK_KHR_swapchain
+    SplitInstanceBindRegionsBitKhr = 0x00000001 # Allow images with VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT
+    # Provided by VK_KHR_device_group
+    SplitInstanceBindRegionsBitKhr = 0x00000001 # Allow images with VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT
+    # Provided by VK_KHR_swapchain
+    ProtectedBitKhr = 0x00000002 # Swapchain is protected
     # Provided by VK_KHR_swapchain_mutable_format
-    MutableFormat = 0x00000004
+    MutableFormatBitKhr = 0x00000004
+  SwapchainCreateFlagsKHR* = distinct Flags
   SwapchainCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -37,8 +36,26 @@ type
     presentMode*: PresentModeKHR
     clipped*: Bool32
     oldSwapchain*: SwapchainKHR
-  SwapchainCreateFlagsKHR* = distinct Flags
+  SwapchainKHR* = distinct NonDispatchableHandle
+  PresentInfoKHR* = object
+    sType*: StructureType
+    pNext*: pointer
+    waitSemaphoreCount*: uint32
+    pWaitSemaphores*: ptr Semaphore
+    swapchainCount*: uint32
+    pSwapchains*: ptr SwapchainKHR
+    pImageIndices*: ptr uint32
+    pResults*: ptr Result
 
+  ImageSwapchainCreateInfoKHR* = object
+    sType*: StructureType
+    pNext*: pointer
+    swapchain*: SwapchainKHR
+  BindImageMemorySwapchainInfoKHR* = object
+    sType*: StructureType
+    pNext*: pointer
+    swapchain*: SwapchainKHR
+    imageIndex*: uint32
   AcquireNextImageInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -47,14 +64,16 @@ type
     semaphore*: Semaphore
     fence*: Fence
     deviceMask*: uint32
+  DeviceGroupPresentModeFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+    LocalBitKhr = 0x00000001 # Present from local memory
+    RemoteBitKhr = 0x00000002 # Present from remote memory
+    SumBitKhr = 0x00000004 # Present sum of local and/or remote memory
+    LocalMultiDeviceBitKhr = 0x00000008 # Each physical device presents from local memory
+  DeviceGroupPresentModeFlagsKHR* = distinct Flags
   DeviceGroupPresentCapabilitiesKHR* = object
     sType*: StructureType
     pNext*: pointer
-    presentMask*: uint32
-    modes*: DeviceGroupPresentModeFlagsKHR
-  DeviceGroupSwapchainCreateInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    presentMask*: array[MaxDeviceGroupSize, uint32]
     modes*: DeviceGroupPresentModeFlagsKHR
   DeviceGroupPresentInfoKHR* = object
     sType*: StructureType
@@ -62,31 +81,17 @@ type
     swapchainCount*: uint32
     pDeviceMasks*: ptr uint32
     mode*: DeviceGroupPresentModeFlagBitsKHR
-  ImageSwapchainCreateInfoKHR* = object
+  DeviceGroupSwapchainCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
-    swapchain*: SwapchainKHR
-  DeviceGroupPresentModeFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    Local = 0x00000001 # Present from local memory
-    Remote = 0x00000002 # Present from remote memory
-    Sum = 0x00000004 # Present sum of local and/or remote memory
-    LocalMultiDevice = 0x00000008 # Each physical device presents from local memory
-  DeviceGroupPresentModeFlagsKHR* = distinct Flags
-  BindImageMemorySwapchainInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    swapchain*: SwapchainKHR
-    imageIndex*: uint32
+    modes*: DeviceGroupPresentModeFlagsKHR
 
-const KhrSwapchainSpecVersion* = 70
-const KhrSwapchainExtensionName* = "VK_KHR_swapchain"
 var # commands
   createSwapchainKHRCage: proc(device: Device; pCreateInfo: ptr SwapchainCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pSwapchain: ptr SwapchainKHR;): Result {.cdecl.}
+  destroySwapchainKHRCage: proc(device: Device; swapchain: SwapchainKHR; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
   getSwapchainImagesKHRCage: proc(device: Device; swapchain: SwapchainKHR; pSwapchainImageCount: ptr uint32; pSwapchainImages: ptr Image;): Result {.cdecl.}
   acquireNextImageKHRCage: proc(device: Device; swapchain: SwapchainKHR; timeout: uint64; semaphore: Semaphore; fence: Fence; pImageIndex: ptr uint32;): Result {.cdecl.}
-  destroySwapchainKHRCage: proc(device: Device; swapchain: SwapchainKHR; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
   queuePresentKHRCage: proc(queue: Queue; pPresentInfo: ptr PresentInfoKHR;): Result {.cdecl.}
-
 proc createSwapchainKHR*(
       device: Device;
       pCreateInfo: ptr SwapchainCreateInfoKHR;
@@ -94,7 +99,12 @@ proc createSwapchainKHR*(
       pSwapchain: ptr SwapchainKHR;
     ): Result {.cdecl, discardable.} =
   createSwapchainKHRCage(device,pCreateInfo,pAllocator,pSwapchain)
-
+proc destroySwapchainKHR*(
+      device: Device;
+      swapchain: SwapchainKHR;
+      pAllocator: ptr AllocationCallbacks;
+    ): void {.cdecl.} =
+  destroySwapchainKHRCage(device,swapchain,pAllocator)
 proc getSwapchainImagesKHR*(
       device: Device;
       swapchain: SwapchainKHR;
@@ -102,7 +112,6 @@ proc getSwapchainImagesKHR*(
       pSwapchainImages: ptr Image;
     ): Result {.cdecl, discardable.} =
   getSwapchainImagesKHRCage(device,swapchain,pSwapchainImageCount,pSwapchainImages)
-
 proc acquireNextImageKHR*(
       device: Device;
       swapchain: SwapchainKHR;
@@ -112,40 +121,28 @@ proc acquireNextImageKHR*(
       pImageIndex: ptr uint32;
     ): Result {.cdecl, discardable.} =
   acquireNextImageKHRCage(device,swapchain,timeout,semaphore,fence,pImageIndex)
-
-proc destroySwapchainKHR*(
-      device: Device;
-      swapchain: SwapchainKHR;
-      pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroySwapchainKHRCage(device,swapchain,pAllocator)
-
 proc queuePresentKHR*(
       queue: Queue;
       pPresentInfo: ptr PresentInfoKHR;
     ): Result {.cdecl, discardable.} =
   queuePresentKHRCage(queue,pPresentInfo)
 
-
 var # commands
   getDeviceGroupPresentCapabilitiesKHRCage: proc(device: Device; pDeviceGroupPresentCapabilities: ptr DeviceGroupPresentCapabilitiesKHR;): Result {.cdecl.}
   getDeviceGroupSurfacePresentModesKHRCage: proc(device: Device; surface: SurfaceKHR; pModes: ptr DeviceGroupPresentModeFlagsKHR;): Result {.cdecl.}
   getPhysicalDevicePresentRectanglesKHRCage: proc(physicalDevice: PhysicalDevice; surface: SurfaceKHR; pRectCount: ptr uint32; pRects: ptr Rect2D;): Result {.cdecl.}
   acquireNextImage2KHRCage: proc(device: Device; pAcquireInfo: ptr AcquireNextImageInfoKHR; pImageIndex: ptr uint32;): Result {.cdecl.}
-
 proc getDeviceGroupPresentCapabilitiesKHR*(
       device: Device;
       pDeviceGroupPresentCapabilities: ptr DeviceGroupPresentCapabilitiesKHR;
     ): Result {.cdecl, discardable.} =
   getDeviceGroupPresentCapabilitiesKHRCage(device,pDeviceGroupPresentCapabilities)
-
 proc getDeviceGroupSurfacePresentModesKHR*(
       device: Device;
       surface: SurfaceKHR;
       pModes: ptr DeviceGroupPresentModeFlagsKHR;
     ): Result {.cdecl, discardable.} =
   getDeviceGroupSurfacePresentModesKHRCage(device,surface,pModes)
-
 proc getPhysicalDevicePresentRectanglesKHR*(
       physicalDevice: PhysicalDevice;
       surface: SurfaceKHR;
@@ -153,22 +150,19 @@ proc getPhysicalDevicePresentRectanglesKHR*(
       pRects: ptr Rect2D;
     ): Result {.cdecl, discardable.} =
   getPhysicalDevicePresentRectanglesKHRCage(physicalDevice,surface,pRectCount,pRects)
-
 proc acquireNextImage2KHR*(
       device: Device;
       pAcquireInfo: ptr AcquireNextImageInfoKHR;
       pImageIndex: ptr uint32;
     ): Result {.cdecl, discardable.} =
   acquireNextImage2KHRCage(device,pAcquireInfo,pImageIndex)
-
-
 proc loadVK_KHR_swapchain*(instance: Instance) =
   instance.defineLoader(`<<`)
 
   createSwapchainKHRCage << "vkCreateSwapchainKHR"
+  destroySwapchainKHRCage << "vkDestroySwapchainKHR"
   getSwapchainImagesKHRCage << "vkGetSwapchainImagesKHR"
   acquireNextImageKHRCage << "vkAcquireNextImageKHR"
-  destroySwapchainKHRCage << "vkDestroySwapchainKHR"
   queuePresentKHRCage << "vkQueuePresentKHR"
 
   getDeviceGroupPresentCapabilitiesKHRCage << "vkGetDeviceGroupPresentCapabilitiesKHR"

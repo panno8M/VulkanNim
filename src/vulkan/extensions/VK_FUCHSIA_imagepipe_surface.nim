@@ -4,19 +4,18 @@ import ../features/vk10
 import VK_KHR_surface
 
 
+
+
 type
+  ImagePipeSurfaceCreateFlagsFUCHSIA* = distinct Flags
   ImagePipeSurfaceCreateInfoFUCHSIA* = object
     sType*: StructureType
     pNext*: pointer
     flags*: ImagePipeSurfaceCreateFlagsFUCHSIA
     imagePipeHandle*: zx_handle_t
-  ImagePipeSurfaceCreateFlagsFUCHSIA* = distinct Flags
 
-const FuchsiaImagepipeSurfaceSpecVersion* = 1
-const FuchsiaImagepipeSurfaceExtensionName* = "VK_FUCHSIA_imagepipe_surface"
 var # commands
   createImagePipeSurfaceFUCHSIACage: proc(instance: Instance; pCreateInfo: ptr ImagePipeSurfaceCreateInfoFUCHSIA; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
-
 proc createImagePipeSurfaceFUCHSIA*(
       instance: Instance;
       pCreateInfo: ptr ImagePipeSurfaceCreateInfoFUCHSIA;
@@ -24,8 +23,6 @@ proc createImagePipeSurfaceFUCHSIA*(
       pSurface: ptr SurfaceKHR;
     ): Result {.cdecl, discardable.} =
   createImagePipeSurfaceFUCHSIACage(instance,pCreateInfo,pAllocator,pSurface)
-
-
 proc loadVK_FUCHSIA_imagepipe_surface*(instance: Instance) =
   instance.defineLoader(`<<`)
 

@@ -3,13 +3,9 @@ import ../platform
 import ../features/vk10
 
 
+
+
 type
-  PipelineCoverageModulationStateCreateFlagsNV* = distinct Flags
-  CoverageModulationModeNV* {.size: sizeof(int32), pure.} = enum
-    None = 0
-    Rgb = 1
-    Alpha = 2
-    Rgba = 3
   PipelineCoverageModulationStateCreateInfoNV* = object
     sType*: StructureType
     pNext*: pointer
@@ -18,7 +14,11 @@ type
     coverageModulationTableEnable*: Bool32
     coverageModulationTableCount*: uint32
     pCoverageModulationTable*: ptr float32
+  PipelineCoverageModulationStateCreateFlagsNV* = distinct Flags
+  CoverageModulationModeNV* {.size: sizeof(int32), pure.} = enum
+    NoneNv = 0
+    RgbNv = 1
+    AlphaNv = 2
+    RgbaNv = 3
 
-const NvFramebufferMixedSamplesSpecVersion* = 1
-const NvFramebufferMixedSamplesExtensionName* = "VK_NV_framebuffer_mixed_samples"
 

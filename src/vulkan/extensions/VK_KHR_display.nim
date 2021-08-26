@@ -4,12 +4,51 @@ import ../features/vk10
 import VK_KHR_surface
 
 
+
+
 type
+  DisplayKHR* = distinct NonDispatchableHandle
+  DisplayModeCreateFlagsKHR* = distinct Flags
   DisplayModeCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
     flags*: DisplayModeCreateFlagsKHR
     parameters*: DisplayModeParametersKHR
+  DisplayModeKHR* = distinct NonDispatchableHandle
+  DisplayModeParametersKHR* = object
+    visibleRegion*: Extent2D
+    refreshRate*: uint32
+  DisplayModePropertiesKHR* = object
+    displayMode*: DisplayModeKHR
+    parameters*: DisplayModeParametersKHR
+  DisplayPlaneAlphaFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+    OpaqueBitKhr = 0x00000001
+    GlobalBitKhr = 0x00000002
+    PerPixelBitKhr = 0x00000004
+    PerPixelPremultipliedBitKhr = 0x00000008
+  DisplayPlaneAlphaFlagsKHR* = distinct Flags
+  DisplayPlaneCapabilitiesKHR* = object
+    supportedAlpha*: DisplayPlaneAlphaFlagsKHR
+    minSrcPosition*: Offset2D
+    maxSrcPosition*: Offset2D
+    minSrcExtent*: Extent2D
+    maxSrcExtent*: Extent2D
+    minDstPosition*: Offset2D
+    maxDstPosition*: Offset2D
+    minDstExtent*: Extent2D
+    maxDstExtent*: Extent2D
+  DisplayPlanePropertiesKHR* = object
+    currentDisplay*: DisplayKHR
+    currentStackIndex*: uint32
+  DisplayPropertiesKHR* = object
+    display*: DisplayKHR
+    displayName*: cstring
+    physicalDimensions*: Extent2D
+    physicalResolution*: Extent2D
+    supportedTransforms*: SurfaceTransformFlagsKHR
+    planeReorderPossible*: Bool32
+    persistentContent*: Bool32
+  DisplaySurfaceCreateFlagsKHR* = distinct Flags
   DisplaySurfaceCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -21,86 +60,28 @@ type
     globalAlpha*: float32
     alphaMode*: DisplayPlaneAlphaFlagBitsKHR
     imageExtent*: Extent2D
-  DisplayKHR* = distinct NonDispatchableHandle
-  DisplayModeCreateFlagsKHR* = distinct Flags
-  DisplayPlaneCapabilitiesKHR* = object
-    supportedAlpha*: DisplayPlaneAlphaFlagsKHR
-    minSrcPosition*: Offset2D
-    maxSrcPosition*: Offset2D
-    minSrcExtent*: Extent2D
-    maxSrcExtent*: Extent2D
-    minDstPosition*: Offset2D
-    maxDstPosition*: Offset2D
-    minDstExtent*: Extent2D
-    maxDstExtent*: Extent2D
-  DisplayPlaneAlphaFlagsKHR* = distinct Flags
-  DisplayPropertiesKHR* = object
-    display*: DisplayKHR
-    displayName*: cstring
-    physicalDimensions*: Extent2D
-    physicalResolution*: Extent2D
-    supportedTransforms*: SurfaceTransformFlagsKHR
-    planeReorderPossible*: Bool32
-    persistentContent*: Bool32
-  DisplayModeParametersKHR* = object
-    visibleRegion*: Extent2D
-    refreshRate*: uint32
-  DisplayPlanePropertiesKHR* = object
-    currentDisplay*: DisplayKHR
-    currentStackIndex*: uint32
-  DisplayPlaneAlphaFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    Opaque = 0x00000001
-    Global = 0x00000002
-    PerPixel = 0x00000004
-    PerPixelPremultiplied = 0x00000008
-  DisplayModeKHR* = distinct NonDispatchableHandle
-  DisplayModePropertiesKHR* = object
-    displayMode*: DisplayModeKHR
-    parameters*: DisplayModeParametersKHR
   SurfaceTransformFlagsKHR* = distinct Flags
-  DisplaySurfaceCreateFlagsKHR* = distinct Flags
 
-const KhrDisplayExtensionName* = "VK_KHR_display"
-const KhrDisplaySpecVersion* = 23
 var # commands
   getPhysicalDeviceDisplayPropertiesKHRCage: proc(physicalDevice: PhysicalDevice; pPropertyCount: ptr uint32; pProperties: ptr DisplayPropertiesKHR;): Result {.cdecl.}
-  createDisplayPlaneSurfaceKHRCage: proc(instance: Instance; pCreateInfo: ptr DisplaySurfaceCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
-  getDisplayModePropertiesKHRCage: proc(physicalDevice: PhysicalDevice; display: DisplayKHR; pPropertyCount: ptr uint32; pProperties: ptr DisplayModePropertiesKHR;): Result {.cdecl.}
   getPhysicalDeviceDisplayPlanePropertiesKHRCage: proc(physicalDevice: PhysicalDevice; pPropertyCount: ptr uint32; pProperties: ptr DisplayPlanePropertiesKHR;): Result {.cdecl.}
   getDisplayPlaneSupportedDisplaysKHRCage: proc(physicalDevice: PhysicalDevice; planeIndex: uint32; pDisplayCount: ptr uint32; pDisplays: ptr DisplayKHR;): Result {.cdecl.}
-  getDisplayPlaneCapabilitiesKHRCage: proc(physicalDevice: PhysicalDevice; mode: DisplayModeKHR; planeIndex: uint32; pCapabilities: ptr DisplayPlaneCapabilitiesKHR;): Result {.cdecl.}
+  getDisplayModePropertiesKHRCage: proc(physicalDevice: PhysicalDevice; display: DisplayKHR; pPropertyCount: ptr uint32; pProperties: ptr DisplayModePropertiesKHR;): Result {.cdecl.}
   createDisplayModeKHRCage: proc(physicalDevice: PhysicalDevice; display: DisplayKHR; pCreateInfo: ptr DisplayModeCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pMode: ptr DisplayModeKHR;): Result {.cdecl.}
-
+  getDisplayPlaneCapabilitiesKHRCage: proc(physicalDevice: PhysicalDevice; mode: DisplayModeKHR; planeIndex: uint32; pCapabilities: ptr DisplayPlaneCapabilitiesKHR;): Result {.cdecl.}
+  createDisplayPlaneSurfaceKHRCage: proc(instance: Instance; pCreateInfo: ptr DisplaySurfaceCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
 proc getPhysicalDeviceDisplayPropertiesKHR*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
       pProperties: ptr DisplayPropertiesKHR;
     ): Result {.cdecl, discardable.} =
   getPhysicalDeviceDisplayPropertiesKHRCage(physicalDevice,pPropertyCount,pProperties)
-
-proc createDisplayPlaneSurfaceKHR*(
-      instance: Instance;
-      pCreateInfo: ptr DisplaySurfaceCreateInfoKHR;
-      pAllocator: ptr AllocationCallbacks;
-      pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl, discardable.} =
-  createDisplayPlaneSurfaceKHRCage(instance,pCreateInfo,pAllocator,pSurface)
-
-proc getDisplayModePropertiesKHR*(
-      physicalDevice: PhysicalDevice;
-      display: DisplayKHR;
-      pPropertyCount: ptr uint32;
-      pProperties: ptr DisplayModePropertiesKHR;
-    ): Result {.cdecl, discardable.} =
-  getDisplayModePropertiesKHRCage(physicalDevice,display,pPropertyCount,pProperties)
-
 proc getPhysicalDeviceDisplayPlanePropertiesKHR*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
       pProperties: ptr DisplayPlanePropertiesKHR;
     ): Result {.cdecl, discardable.} =
   getPhysicalDeviceDisplayPlanePropertiesKHRCage(physicalDevice,pPropertyCount,pProperties)
-
 proc getDisplayPlaneSupportedDisplaysKHR*(
       physicalDevice: PhysicalDevice;
       planeIndex: uint32;
@@ -108,15 +89,13 @@ proc getDisplayPlaneSupportedDisplaysKHR*(
       pDisplays: ptr DisplayKHR;
     ): Result {.cdecl, discardable.} =
   getDisplayPlaneSupportedDisplaysKHRCage(physicalDevice,planeIndex,pDisplayCount,pDisplays)
-
-proc getDisplayPlaneCapabilitiesKHR*(
+proc getDisplayModePropertiesKHR*(
       physicalDevice: PhysicalDevice;
-      mode: DisplayModeKHR;
-      planeIndex: uint32;
-      pCapabilities: ptr DisplayPlaneCapabilitiesKHR;
+      display: DisplayKHR;
+      pPropertyCount: ptr uint32;
+      pProperties: ptr DisplayModePropertiesKHR;
     ): Result {.cdecl, discardable.} =
-  getDisplayPlaneCapabilitiesKHRCage(physicalDevice,mode,planeIndex,pCapabilities)
-
+  getDisplayModePropertiesKHRCage(physicalDevice,display,pPropertyCount,pProperties)
 proc createDisplayModeKHR*(
       physicalDevice: PhysicalDevice;
       display: DisplayKHR;
@@ -125,15 +104,27 @@ proc createDisplayModeKHR*(
       pMode: ptr DisplayModeKHR;
     ): Result {.cdecl, discardable.} =
   createDisplayModeKHRCage(physicalDevice,display,pCreateInfo,pAllocator,pMode)
-
-
+proc getDisplayPlaneCapabilitiesKHR*(
+      physicalDevice: PhysicalDevice;
+      mode: DisplayModeKHR;
+      planeIndex: uint32;
+      pCapabilities: ptr DisplayPlaneCapabilitiesKHR;
+    ): Result {.cdecl, discardable.} =
+  getDisplayPlaneCapabilitiesKHRCage(physicalDevice,mode,planeIndex,pCapabilities)
+proc createDisplayPlaneSurfaceKHR*(
+      instance: Instance;
+      pCreateInfo: ptr DisplaySurfaceCreateInfoKHR;
+      pAllocator: ptr AllocationCallbacks;
+      pSurface: ptr SurfaceKHR;
+    ): Result {.cdecl, discardable.} =
+  createDisplayPlaneSurfaceKHRCage(instance,pCreateInfo,pAllocator,pSurface)
 proc loadVK_KHR_display*(instance: Instance) =
   instance.defineLoader(`<<`)
 
   getPhysicalDeviceDisplayPropertiesKHRCage << "vkGetPhysicalDeviceDisplayPropertiesKHR"
-  createDisplayPlaneSurfaceKHRCage << "vkCreateDisplayPlaneSurfaceKHR"
-  getDisplayModePropertiesKHRCage << "vkGetDisplayModePropertiesKHR"
   getPhysicalDeviceDisplayPlanePropertiesKHRCage << "vkGetPhysicalDeviceDisplayPlanePropertiesKHR"
   getDisplayPlaneSupportedDisplaysKHRCage << "vkGetDisplayPlaneSupportedDisplaysKHR"
-  getDisplayPlaneCapabilitiesKHRCage << "vkGetDisplayPlaneCapabilitiesKHR"
+  getDisplayModePropertiesKHRCage << "vkGetDisplayModePropertiesKHR"
   createDisplayModeKHRCage << "vkCreateDisplayModeKHR"
+  getDisplayPlaneCapabilitiesKHRCage << "vkGetDisplayPlaneCapabilitiesKHR"
+  createDisplayPlaneSurfaceKHRCage << "vkCreateDisplayPlaneSurfaceKHR"

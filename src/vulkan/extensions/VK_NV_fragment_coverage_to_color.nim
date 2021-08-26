@@ -3,6 +3,8 @@ import ../platform
 import ../features/vk10
 
 
+
+
 type
   PipelineCoverageToColorStateCreateFlagsNV* = distinct Flags
   PipelineCoverageToColorStateCreateInfoNV* = object
@@ -12,6 +14,4 @@ type
     coverageToColorEnable*: Bool32
     coverageToColorLocation*: uint32
 
-const NvFragmentCoverageToColorSpecVersion* = 1
-const NvFragmentCoverageToColorExtensionName* = "VK_NV_fragment_coverage_to_color"
 

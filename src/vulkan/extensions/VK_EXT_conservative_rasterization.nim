@@ -4,17 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
+
+
 type
-  ConservativeRasterizationModeEXT* {.size: sizeof(int32), pure.} = enum
-    Disabled = 0
-    Overestimate = 1
-    Underestimate = 2
-  PipelineRasterizationConservativeStateCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineRasterizationConservativeStateCreateFlagsEXT
-    conservativeRasterizationMode*: ConservativeRasterizationModeEXT
-    extraPrimitiveOverestimationSize*: float32
   PhysicalDeviceConservativeRasterizationPropertiesEXT* = object
     sType*: StructureType
     pNext*: pointer
@@ -27,8 +19,16 @@ type
     degenerateLinesRasterized*: Bool32
     fullyCoveredFragmentShaderInputVariable*: Bool32
     conservativeRasterizationPostDepthCoverage*: Bool32
+  PipelineRasterizationConservativeStateCreateInfoEXT* = object
+    sType*: StructureType
+    pNext*: pointer
+    flags*: PipelineRasterizationConservativeStateCreateFlagsEXT
+    conservativeRasterizationMode*: ConservativeRasterizationModeEXT
+    extraPrimitiveOverestimationSize*: float32
   PipelineRasterizationConservativeStateCreateFlagsEXT* = distinct Flags
+  ConservativeRasterizationModeEXT* {.size: sizeof(int32), pure.} = enum
+    DisabledExt = 0
+    OverestimateExt = 1
+    UnderestimateExt = 2
 
-const ExtConservativeRasterizationSpecVersion* = 1
-const ExtConservativeRasterizationExtensionName* = "VK_EXT_conservative_rasterization"
 

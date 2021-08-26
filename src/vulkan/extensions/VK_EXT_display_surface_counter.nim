@@ -4,9 +4,12 @@ import ../features/vk10
 import VK_KHR_display
 
 
+
+
 type
+  SurfaceCounterFlagsEXT* = distinct Flags
   SurfaceCounterFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
-    Vblank = 0x00000001
+    VblankExt = 0x00000001
   SurfaceCapabilities2EXT* = object
     sType*: StructureType
     pNext*: pointer
@@ -21,21 +24,15 @@ type
     supportedCompositeAlpha*: CompositeAlphaFlagsKHR
     supportedUsageFlags*: ImageUsageFlags
     supportedSurfaceCounters*: SurfaceCounterFlagsEXT
-  SurfaceCounterFlagsEXT* = distinct Flags
 
-const ExtDisplaySurfaceCounterSpecVersion* = 1
-const ExtDisplaySurfaceCounterExtensionName* = "VK_EXT_display_surface_counter"
 var # commands
   getPhysicalDeviceSurfaceCapabilities2EXTCage: proc(physicalDevice: PhysicalDevice; surface: SurfaceKHR; pSurfaceCapabilities: ptr SurfaceCapabilities2EXT;): Result {.cdecl.}
-
 proc getPhysicalDeviceSurfaceCapabilities2EXT*(
       physicalDevice: PhysicalDevice;
       surface: SurfaceKHR;
       pSurfaceCapabilities: ptr SurfaceCapabilities2EXT;
     ): Result {.cdecl, discardable.} =
   getPhysicalDeviceSurfaceCapabilities2EXTCage(physicalDevice,surface,pSurfaceCapabilities)
-
-
 proc loadVK_EXT_display_surface_counter*(instance: Instance) =
   instance.defineLoader(`<<`)
 

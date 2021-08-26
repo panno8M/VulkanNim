@@ -1,4 +1,4 @@
-# Generated at 2021-08-25T14:20:43+09:00
+# Generated at 2021-08-27T00:37:04+09:00
 # vulkan 1.2
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -7,7 +7,14 @@ import ../platform
 import vk11
 export vk11
 
+const UuidSize* = 16
+const LuidSize* = 8
+const MaxDriverNameSize* = 256
+const MaxDriverInfoSize* = 256
+
 type
+  
+
   PhysicalDeviceVulkan11Features* = object
     sType*: StructureType
     pNext*: pointer
@@ -26,9 +33,9 @@ type
   PhysicalDeviceVulkan11Properties* = object
     sType*: StructureType
     pNext*: pointer
-    deviceUUID*: uint8
-    driverUUID*: uint8
-    deviceLUID*: uint8
+    deviceUUID*: array[UuidSize, uint8]
+    driverUUID*: array[UuidSize, uint8]
+    deviceLUID*: array[LuidSize, uint8]
     deviceNodeMask*: uint32
     deviceLUIDValid*: Bool32
     subgroupSize*: uint32
@@ -41,61 +48,6 @@ type
     protectedNoFault*: Bool32
     maxPerSetDescriptors*: uint32
     maxMemoryAllocationSize*: DeviceSize
-  PhysicalDeviceVulkan12Properties* = object
-    sType*: StructureType
-    pNext*: pointer
-    driverID*: DriverId
-    driverName*: char
-    driverInfo*: char
-    conformanceVersion*: ConformanceVersion
-    denormBehaviorIndependence*: ShaderFloatControlsIndependence
-    roundingModeIndependence*: ShaderFloatControlsIndependence
-    shaderSignedZeroInfNanPreserveFloat16*: Bool32
-    shaderSignedZeroInfNanPreserveFloat32*: Bool32
-    shaderSignedZeroInfNanPreserveFloat64*: Bool32
-    shaderDenormPreserveFloat16*: Bool32
-    shaderDenormPreserveFloat32*: Bool32
-    shaderDenormPreserveFloat64*: Bool32
-    shaderDenormFlushToZeroFloat16*: Bool32
-    shaderDenormFlushToZeroFloat32*: Bool32
-    shaderDenormFlushToZeroFloat64*: Bool32
-    shaderRoundingModeRTEFloat16*: Bool32
-    shaderRoundingModeRTEFloat32*: Bool32
-    shaderRoundingModeRTEFloat64*: Bool32
-    shaderRoundingModeRTZFloat16*: Bool32
-    shaderRoundingModeRTZFloat32*: Bool32
-    shaderRoundingModeRTZFloat64*: Bool32
-    maxUpdateAfterBindDescriptorsInAllPools*: uint32
-    shaderUniformBufferArrayNonUniformIndexingNative*: Bool32
-    shaderSampledImageArrayNonUniformIndexingNative*: Bool32
-    shaderStorageBufferArrayNonUniformIndexingNative*: Bool32
-    shaderStorageImageArrayNonUniformIndexingNative*: Bool32
-    shaderInputAttachmentArrayNonUniformIndexingNative*: Bool32
-    robustBufferAccessUpdateAfterBind*: Bool32
-    quadDivergentImplicitLod*: Bool32
-    maxPerStageDescriptorUpdateAfterBindSamplers*: uint32
-    maxPerStageDescriptorUpdateAfterBindUniformBuffers*: uint32
-    maxPerStageDescriptorUpdateAfterBindStorageBuffers*: uint32
-    maxPerStageDescriptorUpdateAfterBindSampledImages*: uint32
-    maxPerStageDescriptorUpdateAfterBindStorageImages*: uint32
-    maxPerStageDescriptorUpdateAfterBindInputAttachments*: uint32
-    maxPerStageUpdateAfterBindResources*: uint32
-    maxDescriptorSetUpdateAfterBindSamplers*: uint32
-    maxDescriptorSetUpdateAfterBindUniformBuffers*: uint32
-    maxDescriptorSetUpdateAfterBindUniformBuffersDynamic*: uint32
-    maxDescriptorSetUpdateAfterBindStorageBuffers*: uint32
-    maxDescriptorSetUpdateAfterBindStorageBuffersDynamic*: uint32
-    maxDescriptorSetUpdateAfterBindSampledImages*: uint32
-    maxDescriptorSetUpdateAfterBindStorageImages*: uint32
-    maxDescriptorSetUpdateAfterBindInputAttachments*: uint32
-    supportedDepthResolveModes*: ResolveModeFlags
-    supportedStencilResolveModes*: ResolveModeFlags
-    independentResolveNone*: Bool32
-    independentResolve*: Bool32
-    filterMinmaxSingleComponentFormats*: Bool32
-    filterMinmaxImageComponentMapping*: Bool32
-    maxTimelineSemaphoreValueDifference*: uint64
-    framebufferIntegerColorSampleCounts*: SampleCountFlags
   PhysicalDeviceVulkan12Features* = object
     sType*: StructureType
     pNext*: pointer
@@ -146,6 +98,61 @@ type
     shaderOutputViewportIndex*: Bool32
     shaderOutputLayer*: Bool32
     subgroupBroadcastDynamicId*: Bool32
+  PhysicalDeviceVulkan12Properties* = object
+    sType*: StructureType
+    pNext*: pointer
+    driverID*: DriverId
+    driverName*: array[MaxDriverNameSize, char]
+    driverInfo*: array[MaxDriverInfoSize, char]
+    conformanceVersion*: ConformanceVersion
+    denormBehaviorIndependence*: ShaderFloatControlsIndependence
+    roundingModeIndependence*: ShaderFloatControlsIndependence
+    shaderSignedZeroInfNanPreserveFloat16*: Bool32
+    shaderSignedZeroInfNanPreserveFloat32*: Bool32
+    shaderSignedZeroInfNanPreserveFloat64*: Bool32
+    shaderDenormPreserveFloat16*: Bool32
+    shaderDenormPreserveFloat32*: Bool32
+    shaderDenormPreserveFloat64*: Bool32
+    shaderDenormFlushToZeroFloat16*: Bool32
+    shaderDenormFlushToZeroFloat32*: Bool32
+    shaderDenormFlushToZeroFloat64*: Bool32
+    shaderRoundingModeRTEFloat16*: Bool32
+    shaderRoundingModeRTEFloat32*: Bool32
+    shaderRoundingModeRTEFloat64*: Bool32
+    shaderRoundingModeRTZFloat16*: Bool32
+    shaderRoundingModeRTZFloat32*: Bool32
+    shaderRoundingModeRTZFloat64*: Bool32
+    maxUpdateAfterBindDescriptorsInAllPools*: uint32
+    shaderUniformBufferArrayNonUniformIndexingNative*: Bool32
+    shaderSampledImageArrayNonUniformIndexingNative*: Bool32
+    shaderStorageBufferArrayNonUniformIndexingNative*: Bool32
+    shaderStorageImageArrayNonUniformIndexingNative*: Bool32
+    shaderInputAttachmentArrayNonUniformIndexingNative*: Bool32
+    robustBufferAccessUpdateAfterBind*: Bool32
+    quadDivergentImplicitLod*: Bool32
+    maxPerStageDescriptorUpdateAfterBindSamplers*: uint32
+    maxPerStageDescriptorUpdateAfterBindUniformBuffers*: uint32
+    maxPerStageDescriptorUpdateAfterBindStorageBuffers*: uint32
+    maxPerStageDescriptorUpdateAfterBindSampledImages*: uint32
+    maxPerStageDescriptorUpdateAfterBindStorageImages*: uint32
+    maxPerStageDescriptorUpdateAfterBindInputAttachments*: uint32
+    maxPerStageUpdateAfterBindResources*: uint32
+    maxDescriptorSetUpdateAfterBindSamplers*: uint32
+    maxDescriptorSetUpdateAfterBindUniformBuffers*: uint32
+    maxDescriptorSetUpdateAfterBindUniformBuffersDynamic*: uint32
+    maxDescriptorSetUpdateAfterBindStorageBuffers*: uint32
+    maxDescriptorSetUpdateAfterBindStorageBuffersDynamic*: uint32
+    maxDescriptorSetUpdateAfterBindSampledImages*: uint32
+    maxDescriptorSetUpdateAfterBindStorageImages*: uint32
+    maxDescriptorSetUpdateAfterBindInputAttachments*: uint32
+    supportedDepthResolveModes*: ResolveModeFlags
+    supportedStencilResolveModes*: ResolveModeFlags
+    independentResolveNone*: Bool32
+    independentResolve*: Bool32
+    filterMinmaxSingleComponentFormats*: Bool32
+    filterMinmaxImageComponentMapping*: Bool32
+    maxTimelineSemaphoreValueDifference*: uint64
+    framebufferIntegerColorSampleCounts*: SampleCountFlags
 
   # Promoted from VK_KHR_image_format_list (extension 148)
   # ------------------------------------------------------
@@ -157,37 +164,6 @@ type
 
   # Promoted from VK_KHR_create_renderpass2 (extension 110)
   # -------------------------------------------------------
-  SubpassDependency2* = object
-    sType*: StructureType
-    pNext*: pointer
-    srcSubpass*: uint32
-    dstSubpass*: uint32
-    srcStageMask*: PipelineStageFlags
-    dstStageMask*: PipelineStageFlags
-    srcAccessMask*: AccessFlags
-    dstAccessMask*: AccessFlags
-    dependencyFlags*: DependencyFlags
-    viewOffset*: int32
-  AttachmentReference2* = object
-    sType*: StructureType
-    pNext*: pointer
-    attachment*: uint32
-    layout*: ImageLayout
-    aspectMask*: ImageAspectFlags
-  SubpassDescription2* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: SubpassDescriptionFlags
-    pipelineBindPoint*: PipelineBindPoint
-    viewMask*: uint32
-    inputAttachmentCount*: uint32
-    pInputAttachments*: ptr AttachmentReference2
-    colorAttachmentCount*: uint32
-    pColorAttachments*: ptr AttachmentReference2
-    pResolveAttachments*: ptr AttachmentReference2
-    pDepthStencilAttachment*: ptr AttachmentReference2
-    preserveAttachmentCount*: uint32
-    pPreserveAttachments*: ptr uint32
   RenderPassCreateInfo2* = object
     sType*: StructureType
     pNext*: pointer
@@ -212,6 +188,37 @@ type
     stencilStoreOp*: AttachmentStoreOp
     initialLayout*: ImageLayout
     finalLayout*: ImageLayout
+  AttachmentReference2* = object
+    sType*: StructureType
+    pNext*: pointer
+    attachment*: uint32
+    layout*: ImageLayout
+    aspectMask*: ImageAspectFlags
+  SubpassDescription2* = object
+    sType*: StructureType
+    pNext*: pointer
+    flags*: SubpassDescriptionFlags
+    pipelineBindPoint*: PipelineBindPoint
+    viewMask*: uint32
+    inputAttachmentCount*: uint32
+    pInputAttachments*: ptr AttachmentReference2
+    colorAttachmentCount*: uint32
+    pColorAttachments*: ptr AttachmentReference2
+    pResolveAttachments*: ptr AttachmentReference2
+    pDepthStencilAttachment*: ptr AttachmentReference2
+    preserveAttachmentCount*: uint32
+    pPreserveAttachments*: ptr uint32
+  SubpassDependency2* = object
+    sType*: StructureType
+    pNext*: pointer
+    srcSubpass*: uint32
+    dstSubpass*: uint32
+    srcStageMask*: PipelineStageFlags
+    dstStageMask*: PipelineStageFlags
+    srcAccessMask*: AccessFlags
+    dstAccessMask*: AccessFlags
+    dependencyFlags*: DependencyFlags
+    viewOffset*: int32
   SubpassBeginInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -237,7 +244,7 @@ type
     MesaRadv = 3 # Mesa open source project
     NvidiaProprietary = 4 # NVIDIA Corporation
     IntelProprietaryWindows = 5 # Intel Corporation
-    IntelOpenSource = 6 # Intel Corporation
+    IntelOpenSourceMesa = 6 # Intel Corporation
     ImaginationProprietary = 7 # Imagination Technologies
     QualcommProprietary = 8 # Qualcomm Technologies, Inc.
     ArmProprietary = 9 # Arm Limited
@@ -255,8 +262,8 @@ type
     sType*: StructureType
     pNext*: pointer
     driverID*: DriverId
-    driverName*: char
-    driverInfo*: char
+    driverName*: array[MaxDriverNameSize, char]
+    driverInfo*: array[MaxDriverInfoSize, char]
     conformanceVersion*: ConformanceVersion
 
   # Promoted from VK_KHR_shader_atomic_int64 (extension 181)
@@ -309,16 +316,29 @@ type
     pNext*: pointer
     bindingCount*: uint32
     pBindingFlags*: ptr DescriptorBindingFlags
-  DescriptorSetVariableDescriptorCountAllocateInfo* = object
+  PhysicalDeviceDescriptorIndexingFeatures* = object
     sType*: StructureType
     pNext*: pointer
-    descriptorSetCount*: uint32
-    pDescriptorCounts*: ptr uint32
-  DescriptorBindingFlags* = distinct Flags
-  DescriptorSetVariableDescriptorCountLayoutSupport* = object
-    sType*: StructureType
-    pNext*: pointer
-    maxVariableDescriptorCount*: uint32
+    shaderInputAttachmentArrayDynamicIndexing*: Bool32
+    shaderUniformTexelBufferArrayDynamicIndexing*: Bool32
+    shaderStorageTexelBufferArrayDynamicIndexing*: Bool32
+    shaderUniformBufferArrayNonUniformIndexing*: Bool32
+    shaderSampledImageArrayNonUniformIndexing*: Bool32
+    shaderStorageBufferArrayNonUniformIndexing*: Bool32
+    shaderStorageImageArrayNonUniformIndexing*: Bool32
+    shaderInputAttachmentArrayNonUniformIndexing*: Bool32
+    shaderUniformTexelBufferArrayNonUniformIndexing*: Bool32
+    shaderStorageTexelBufferArrayNonUniformIndexing*: Bool32
+    descriptorBindingUniformBufferUpdateAfterBind*: Bool32
+    descriptorBindingSampledImageUpdateAfterBind*: Bool32
+    descriptorBindingStorageImageUpdateAfterBind*: Bool32
+    descriptorBindingStorageBufferUpdateAfterBind*: Bool32
+    descriptorBindingUniformTexelBufferUpdateAfterBind*: Bool32
+    descriptorBindingStorageTexelBufferUpdateAfterBind*: Bool32
+    descriptorBindingUpdateUnusedWhilePending*: Bool32
+    descriptorBindingPartiallyBound*: Bool32
+    descriptorBindingVariableDescriptorCount*: Bool32
+    runtimeDescriptorArray*: Bool32
   PhysicalDeviceDescriptorIndexingProperties* = object
     sType*: StructureType
     pNext*: pointer
@@ -345,50 +365,30 @@ type
     maxDescriptorSetUpdateAfterBindSampledImages*: uint32
     maxDescriptorSetUpdateAfterBindStorageImages*: uint32
     maxDescriptorSetUpdateAfterBindInputAttachments*: uint32
+  DescriptorSetVariableDescriptorCountAllocateInfo* = object
+    sType*: StructureType
+    pNext*: pointer
+    descriptorSetCount*: uint32
+    pDescriptorCounts*: ptr uint32
+  DescriptorSetVariableDescriptorCountLayoutSupport* = object
+    sType*: StructureType
+    pNext*: pointer
+    maxVariableDescriptorCount*: uint32
   DescriptorBindingFlagBits* {.size: sizeof(int32), pure.} = enum
     UpdateAfterBind = 0x00000001
     UpdateUnusedWhilePending = 0x00000002
     PartiallyBound = 0x00000004
     VariableDescriptorCount = 0x00000008
-  PhysicalDeviceDescriptorIndexingFeatures* = object
-    sType*: StructureType
-    pNext*: pointer
-    shaderInputAttachmentArrayDynamicIndexing*: Bool32
-    shaderUniformTexelBufferArrayDynamicIndexing*: Bool32
-    shaderStorageTexelBufferArrayDynamicIndexing*: Bool32
-    shaderUniformBufferArrayNonUniformIndexing*: Bool32
-    shaderSampledImageArrayNonUniformIndexing*: Bool32
-    shaderStorageBufferArrayNonUniformIndexing*: Bool32
-    shaderStorageImageArrayNonUniformIndexing*: Bool32
-    shaderInputAttachmentArrayNonUniformIndexing*: Bool32
-    shaderUniformTexelBufferArrayNonUniformIndexing*: Bool32
-    shaderStorageTexelBufferArrayNonUniformIndexing*: Bool32
-    descriptorBindingUniformBufferUpdateAfterBind*: Bool32
-    descriptorBindingSampledImageUpdateAfterBind*: Bool32
-    descriptorBindingStorageImageUpdateAfterBind*: Bool32
-    descriptorBindingStorageBufferUpdateAfterBind*: Bool32
-    descriptorBindingUniformTexelBufferUpdateAfterBind*: Bool32
-    descriptorBindingStorageTexelBufferUpdateAfterBind*: Bool32
-    descriptorBindingUpdateUnusedWhilePending*: Bool32
-    descriptorBindingPartiallyBound*: Bool32
-    descriptorBindingVariableDescriptorCount*: Bool32
-    runtimeDescriptorArray*: Bool32
+  DescriptorBindingFlags* = distinct Flags
 
   # Promoted from VK_KHR_depth_stencil_resolve (extension 200)
   # ----------------------------------------------------------
-  ResolveModeFlagBits* {.size: sizeof(int32), pure.} = enum
-    None = 0
-    SampleZero = 0x00000001
-    Average = 0x00000002
-    Min = 0x00000004
-    Max = 0x00000008
   SubpassDescriptionDepthStencilResolve* = object
     sType*: StructureType
     pNext*: pointer
     depthResolveMode*: ResolveModeFlagBits
     stencilResolveMode*: ResolveModeFlagBits
     pDepthStencilResolveAttachment*: ptr AttachmentReference2
-  ResolveModeFlags* = distinct Flags
   PhysicalDeviceDepthStencilResolveProperties* = object
     sType*: StructureType
     pNext*: pointer
@@ -396,6 +396,13 @@ type
     supportedStencilResolveModes*: ResolveModeFlags
     independentResolveNone*: Bool32
     independentResolve*: Bool32
+  ResolveModeFlagBits* {.size: sizeof(int32), pure.} = enum
+    None = 0
+    SampleZero = 0x00000001
+    Average = 0x00000002
+    Min = 0x00000004
+    Max = 0x00000008
+  ResolveModeFlags* = distinct Flags
 
   # Promoted from VK_EXT_scalar_block_layout (extension 222))
   # ---------------------------------------------------------
@@ -413,14 +420,14 @@ type
 
   # Promoted from VK_EXT_sampler_filter_minmax (extension 131)
   # ----------------------------------------------------------
-  SamplerReductionModeCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    reductionMode*: SamplerReductionMode
   SamplerReductionMode* {.size: sizeof(int32), pure.} = enum
     WeightedAverage = 0
     Min = 1
     Max = 2
+  SamplerReductionModeCreateInfo* = object
+    sType*: StructureType
+    pNext*: pointer
+    reductionMode*: SamplerReductionMode
   PhysicalDeviceSamplerFilterMinmaxProperties* = object
     sType*: StructureType
     pNext*: pointer
@@ -438,20 +445,15 @@ type
 
   # Promoted from VK_KHR_imageless_framebuffer (extension 109)
   # ----------------------------------------------------------
+  PhysicalDeviceImagelessFramebufferFeatures* = object
+    sType*: StructureType
+    pNext*: pointer
+    imagelessFramebuffer*: Bool32
   FramebufferAttachmentsCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
     attachmentImageInfoCount*: uint32
     pAttachmentImageInfos*: ptr FramebufferAttachmentImageInfo
-  RenderPassAttachmentBeginInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    attachmentCount*: uint32
-    pAttachments*: ptr ImageView
-  PhysicalDeviceImagelessFramebufferFeatures* = object
-    sType*: StructureType
-    pNext*: pointer
-    imagelessFramebuffer*: Bool32
   FramebufferAttachmentImageInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -462,6 +464,11 @@ type
     layerCount*: uint32
     viewFormatCount*: uint32
     pViewFormats*: ptr Format
+  RenderPassAttachmentBeginInfo* = object
+    sType*: StructureType
+    pNext*: pointer
+    attachmentCount*: uint32
+    pAttachments*: ptr ImageView
 
   # Promoted from VK_KHR_uniform_buffer_standard_layout (extension 254)
   # -------------------------------------------------------------------
@@ -479,6 +486,10 @@ type
 
   # Promoted from VK_KHR_separate_depth_stencil_layouts (extension 242)
   # -------------------------------------------------------------------
+  PhysicalDeviceSeparateDepthStencilLayoutsFeatures* = object
+    sType*: StructureType
+    pNext*: pointer
+    separateDepthStencilLayouts*: Bool32
   AttachmentReferenceStencilLayout* = object
     sType*: StructureType
     pNext*: pointer
@@ -488,10 +499,6 @@ type
     pNext*: pointer
     stencilInitialLayout*: ImageLayout
     stencilFinalLayout*: ImageLayout
-  PhysicalDeviceSeparateDepthStencilLayoutsFeatures* = object
-    sType*: StructureType
-    pNext*: pointer
-    separateDepthStencilLayouts*: Bool32
 
   # Promoted from VK_EXT_host_query_reset (extension 262)
   # -----------------------------------------------------
@@ -502,32 +509,17 @@ type
 
   # Promoted from VK_KHR_timeline_semaphore (extension 208)
   # -------------------------------------------------------
-  PhysicalDeviceTimelineSemaphoreProperties* = object
-    sType*: StructureType
-    pNext*: pointer
-    maxTimelineSemaphoreValueDifference*: uint64
-  SemaphoreWaitInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: SemaphoreWaitFlags
-    semaphoreCount*: uint32
-    pSemaphores*: ptr Semaphore
-    pValues*: ptr uint64
+  SemaphoreType* {.size: sizeof(int32), pure.} = enum
+    Binary = 0
+    Timeline = 1
   PhysicalDeviceTimelineSemaphoreFeatures* = object
     sType*: StructureType
     pNext*: pointer
     timelineSemaphore*: Bool32
-  SemaphoreWaitFlags* = distinct Flags
-  SemaphoreSignalInfo* = object
+  PhysicalDeviceTimelineSemaphoreProperties* = object
     sType*: StructureType
     pNext*: pointer
-    semaphore*: Semaphore
-    value*: uint64
-  SemaphoreType* {.size: sizeof(int32), pure.} = enum
-    Binary = 0
-    Timeline = 1
-  SemaphoreWaitFlagBits* {.size: sizeof(int32), pure.} = enum
-    Any = 0x00000001
+    maxTimelineSemaphoreValueDifference*: uint64
   SemaphoreTypeCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -540,34 +532,48 @@ type
     pWaitSemaphoreValues*: ptr uint64
     signalSemaphoreValueCount*: uint32
     pSignalSemaphoreValues*: ptr uint64
+  SemaphoreWaitFlagBits* {.size: sizeof(int32), pure.} = enum
+    Any = 0x00000001
+  SemaphoreWaitFlags* = distinct Flags
+  SemaphoreWaitInfo* = object
+    sType*: StructureType
+    pNext*: pointer
+    flags*: SemaphoreWaitFlags
+    semaphoreCount*: uint32
+    pSemaphores*: ptr Semaphore
+    pValues*: ptr uint64
+  SemaphoreSignalInfo* = object
+    sType*: StructureType
+    pNext*: pointer
+    semaphore*: Semaphore
+    value*: uint64
 
   # Promoted from VK_KHR_buffer_device_address (extension 258)
   # ----------------------------------------------------------
-  DeviceMemoryOpaqueCaptureAddressInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    memory*: DeviceMemory
   PhysicalDeviceBufferDeviceAddressFeatures* = object
     sType*: StructureType
     pNext*: pointer
     bufferDeviceAddress*: Bool32
     bufferDeviceAddressCaptureReplay*: Bool32
     bufferDeviceAddressMultiDevice*: Bool32
-  BufferOpaqueCaptureAddressCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    opaqueCaptureAddress*: uint64
   BufferDeviceAddressInfo* = object
     sType*: StructureType
     pNext*: pointer
     buffer*: Buffer
+  BufferOpaqueCaptureAddressCreateInfo* = object
+    sType*: StructureType
+    pNext*: pointer
+    opaqueCaptureAddress*: uint64
   MemoryOpaqueCaptureAddressAllocateInfo* = object
     sType*: StructureType
     pNext*: pointer
     opaqueCaptureAddress*: uint64
+  DeviceMemoryOpaqueCaptureAddressInfo* = object
+    sType*: StructureType
+    pNext*: pointer
+    memory*: DeviceMemory
 
 template apiVersion12*(): untyped = makeVersion(1, 2, 0)
-
 
 # Promoted from VK_KHR_image_format_list (extension 148)
 # ------------------------------------------------------
@@ -578,9 +584,18 @@ template apiVersion12*(): untyped = makeVersion(1, 2, 0)
 # Promoted from VK_KHR_draw_indirect_count (extension 170)
 # --------------------------------------------------------
 var # commands
-  cmdDrawIndexedIndirectCountCage: proc(commandBuffer: CommandBuffer; buffer: Buffer; offset: DeviceSize; countBuffer: Buffer; countBufferOffset: DeviceSize; maxDrawCount: uint32; stride: uint32;): void {.cdecl.}
   cmdDrawIndirectCountCage: proc(commandBuffer: CommandBuffer; buffer: Buffer; offset: DeviceSize; countBuffer: Buffer; countBufferOffset: DeviceSize; maxDrawCount: uint32; stride: uint32;): void {.cdecl.}
-
+  cmdDrawIndexedIndirectCountCage: proc(commandBuffer: CommandBuffer; buffer: Buffer; offset: DeviceSize; countBuffer: Buffer; countBufferOffset: DeviceSize; maxDrawCount: uint32; stride: uint32;): void {.cdecl.}
+proc cmdDrawIndirectCount*(
+      commandBuffer: CommandBuffer;
+      buffer: Buffer;
+      offset: DeviceSize;
+      countBuffer: Buffer;
+      countBufferOffset: DeviceSize;
+      maxDrawCount: uint32;
+      stride: uint32;
+    ): void {.cdecl.} =
+  cmdDrawIndirectCountCage(commandBuffer,buffer,offset,countBuffer,countBufferOffset,maxDrawCount,stride)
 proc cmdDrawIndexedIndirectCount*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
@@ -592,26 +607,14 @@ proc cmdDrawIndexedIndirectCount*(
     ): void {.cdecl.} =
   cmdDrawIndexedIndirectCountCage(commandBuffer,buffer,offset,countBuffer,countBufferOffset,maxDrawCount,stride)
 
-proc cmdDrawIndirectCount*(
-      commandBuffer: CommandBuffer;
-      buffer: Buffer;
-      offset: DeviceSize;
-      countBuffer: Buffer;
-      countBufferOffset: DeviceSize;
-      maxDrawCount: uint32;
-      stride: uint32;
-    ): void {.cdecl.} =
-  cmdDrawIndirectCountCage(commandBuffer,buffer,offset,countBuffer,countBufferOffset,maxDrawCount,stride)
-
-
 # Promoted from VK_KHR_create_renderpass2 (extension 110)
 # -------------------------------------------------------
+
 var # commands
   createRenderPass2Cage: proc(device: Device; pCreateInfo: ptr RenderPassCreateInfo2; pAllocator: ptr AllocationCallbacks; pRenderPass: ptr RenderPass;): Result {.cdecl.}
-  cmdEndRenderPass2Cage: proc(commandBuffer: CommandBuffer; pSubpassEndInfo: ptr SubpassEndInfo;): void {.cdecl.}
   cmdBeginRenderPass2Cage: proc(commandBuffer: CommandBuffer; pRenderPassBegin: ptr RenderPassBeginInfo; pSubpassBeginInfo: ptr SubpassBeginInfo;): void {.cdecl.}
   cmdNextSubpass2Cage: proc(commandBuffer: CommandBuffer; pSubpassBeginInfo: ptr SubpassBeginInfo; pSubpassEndInfo: ptr SubpassEndInfo;): void {.cdecl.}
-
+  cmdEndRenderPass2Cage: proc(commandBuffer: CommandBuffer; pSubpassEndInfo: ptr SubpassEndInfo;): void {.cdecl.}
 proc createRenderPass2*(
       device: Device;
       pCreateInfo: ptr RenderPassCreateInfo2;
@@ -619,59 +622,54 @@ proc createRenderPass2*(
       pRenderPass: ptr RenderPass;
     ): Result {.cdecl, discardable.} =
   createRenderPass2Cage(device,pCreateInfo,pAllocator,pRenderPass)
-
-proc cmdEndRenderPass2*(
-      commandBuffer: CommandBuffer;
-      pSubpassEndInfo: ptr SubpassEndInfo;
-    ): void {.cdecl.} =
-  cmdEndRenderPass2Cage(commandBuffer,pSubpassEndInfo)
-
 proc cmdBeginRenderPass2*(
       commandBuffer: CommandBuffer;
       pRenderPassBegin: ptr RenderPassBeginInfo;
       pSubpassBeginInfo: ptr SubpassBeginInfo;
     ): void {.cdecl.} =
   cmdBeginRenderPass2Cage(commandBuffer,pRenderPassBegin,pSubpassBeginInfo)
-
 proc cmdNextSubpass2*(
       commandBuffer: CommandBuffer;
       pSubpassBeginInfo: ptr SubpassBeginInfo;
       pSubpassEndInfo: ptr SubpassEndInfo;
     ): void {.cdecl.} =
   cmdNextSubpass2Cage(commandBuffer,pSubpassBeginInfo,pSubpassEndInfo)
-
+proc cmdEndRenderPass2*(
+      commandBuffer: CommandBuffer;
+      pSubpassEndInfo: ptr SubpassEndInfo;
+    ): void {.cdecl.} =
+  cmdEndRenderPass2Cage(commandBuffer,pSubpassEndInfo)
 
 # Promoted from VK_KHR_8bit_storage (extension 178)
 # -------------------------------------------------
 
 # Promoted from VK_KHR_driver_properties (extension 197)
 # ------------------------------------------------------
+
 # Provided by VK_KHR_driver_properties
-DriverId.defineAlias(AmdProprietary, AmdProprietary)
+DriverId.defineAlias(AmdProprietaryKhr, AmdProprietary)
 # Provided by VK_KHR_driver_properties
-DriverId.defineAlias(AmdOpenSource, AmdOpenSource)
+DriverId.defineAlias(AmdOpenSourceKhr, AmdOpenSource)
 # Provided by VK_KHR_driver_properties
-DriverId.defineAlias(MesaRadv, MesaRadv)
+DriverId.defineAlias(MesaRadvKhr, MesaRadv)
 # Provided by VK_KHR_driver_properties
-DriverId.defineAlias(NvidiaProprietary, NvidiaProprietary)
+DriverId.defineAlias(NvidiaProprietaryKhr, NvidiaProprietary)
 # Provided by VK_KHR_driver_properties
-DriverId.defineAlias(IntelProprietaryWindows, IntelProprietaryWindows)
+DriverId.defineAlias(IntelProprietaryWindowsKhr, IntelProprietaryWindows)
 # Provided by VK_KHR_driver_properties
-DriverId.defineAlias(IntelOpenSourceMesa, IntelOpenSource)
+DriverId.defineAlias(IntelOpenSourceMesaKhr, IntelOpenSourceMesa)
 # Provided by VK_KHR_driver_properties
-DriverId.defineAlias(ImaginationProprietary, ImaginationProprietary)
+DriverId.defineAlias(ImaginationProprietaryKhr, ImaginationProprietary)
 # Provided by VK_KHR_driver_properties
-DriverId.defineAlias(QualcommProprietary, QualcommProprietary)
+DriverId.defineAlias(QualcommProprietaryKhr, QualcommProprietary)
 # Provided by VK_KHR_driver_properties
-DriverId.defineAlias(ArmProprietary, ArmProprietary)
+DriverId.defineAlias(ArmProprietaryKhr, ArmProprietary)
 # Provided by VK_KHR_driver_properties
-DriverId.defineAlias(GoogleSwiftshader, GoogleSwiftshader)
+DriverId.defineAlias(GoogleSwiftshaderKhr, GoogleSwiftshader)
 # Provided by VK_KHR_driver_properties
-DriverId.defineAlias(GgpProprietary, GgpProprietary)
+DriverId.defineAlias(GgpProprietaryKhr, GgpProprietary)
 # Provided by VK_KHR_driver_properties
-DriverId.defineAlias(BroadcomProprietary, BroadcomProprietary)
-const MaxDriverInfoSize* = 256
-const MaxDriverNameSize* = 256
+DriverId.defineAlias(BroadcomProprietaryKhr, BroadcomProprietary)
 
 # Promoted from VK_KHR_shader_atomic_int64 (extension 181)
 # --------------------------------------------------------
@@ -681,30 +679,39 @@ const MaxDriverNameSize* = 256
 
 # Promoted from VK_KHR_shader_float_controls (extension 198)
 # ----------------------------------------------------------
+
 # Provided by VK_KHR_shader_float_controls
-ShaderFloatControlsIndependence.defineAlias(Vk32BitOnly, Vk32BitOnly)
+ShaderFloatControlsIndependence.defineAlias(Vk32BitOnlyKhr, Vk32BitOnly)
 # Provided by VK_KHR_shader_float_controls
-ShaderFloatControlsIndependence.defineAlias(All, All)
+ShaderFloatControlsIndependence.defineAlias(AllKhr, All)
+# Provided by VK_KHR_shader_float_controls
+ShaderFloatControlsIndependence.defineAlias(NoneKhr, None)
 
 # Promoted from VK_EXT_descriptor_indexing (extension 162)
 # --------------------------------------------------------
+
 # Provided by VK_EXT_descriptor_indexing
-DescriptorBindingFlagBits.defineAlias(UpdateUnusedWhilePending, UpdateUnusedWhilePending)
+DescriptorBindingFlagBits.defineAlias(UpdateAfterBindBitExt, UpdateAfterBind)
 # Provided by VK_EXT_descriptor_indexing
-DescriptorBindingFlagBits.defineAlias(PartiallyBound, PartiallyBound)
+DescriptorBindingFlagBits.defineAlias(UpdateUnusedWhilePendingBitExt, UpdateUnusedWhilePending)
 # Provided by VK_EXT_descriptor_indexing
-DescriptorBindingFlagBits.defineAlias(VariableDescriptorCount, VariableDescriptorCount)
+DescriptorBindingFlagBits.defineAlias(PartiallyBoundBitExt, PartiallyBound)
+# Provided by VK_EXT_descriptor_indexing
+DescriptorBindingFlagBits.defineAlias(VariableDescriptorCountBitExt, VariableDescriptorCount)
 
 # Promoted from VK_KHR_depth_stencil_resolve (extension 200)
 # ----------------------------------------------------------
+
 # Provided by VK_KHR_depth_stencil_resolve
-ResolveModeFlagBits.defineAlias(SampleZero, SampleZero)
+ResolveModeFlagBits.defineAlias(NoneKhr, None)
 # Provided by VK_KHR_depth_stencil_resolve
-ResolveModeFlagBits.defineAlias(Average, Average)
+ResolveModeFlagBits.defineAlias(SampleZeroBitKhr, SampleZero)
 # Provided by VK_KHR_depth_stencil_resolve
-ResolveModeFlagBits.defineAlias(Min, Min)
+ResolveModeFlagBits.defineAlias(AverageBitKhr, Average)
 # Provided by VK_KHR_depth_stencil_resolve
-ResolveModeFlagBits.defineAlias(Max, Max)
+ResolveModeFlagBits.defineAlias(MinBitKhr, Min)
+# Provided by VK_KHR_depth_stencil_resolve
+ResolveModeFlagBits.defineAlias(MaxBitKhr, Max)
 
 # Promoted from VK_EXT_scalar_block_layout (extension 222))
 # ---------------------------------------------------------
@@ -717,12 +724,13 @@ ResolveModeFlagBits.defineAlias(Max, Max)
 
 # Promoted from VK_EXT_sampler_filter_minmax (extension 131)
 # ----------------------------------------------------------
+
 # Provided by VK_EXT_sampler_filter_minmax
-SamplerReductionMode.defineAlias(WeightedAverage, WeightedAverage)
+SamplerReductionMode.defineAlias(WeightedAverageExt, WeightedAverage)
 # Provided by VK_EXT_sampler_filter_minmax
-SamplerReductionMode.defineAlias(Min, Min)
+SamplerReductionMode.defineAlias(MinExt, Min)
 # Provided by VK_EXT_sampler_filter_minmax
-SamplerReductionMode.defineAlias(Max, Max)
+SamplerReductionMode.defineAlias(MaxExt, Max)
 
 # Promoted from VK_KHR_vulkan_memory_model (extension 212)
 # --------------------------------------------------------
@@ -744,9 +752,9 @@ SamplerReductionMode.defineAlias(Max, Max)
 
 # Promoted from VK_EXT_host_query_reset (extension 262)
 # -----------------------------------------------------
+
 var # commands
   resetQueryPoolCage: proc(device: Device; queryPool: QueryPool; firstQuery: uint32; queryCount: uint32;): void {.cdecl.}
-
 proc resetQueryPool*(
       device: Device;
       queryPool: QueryPool;
@@ -755,81 +763,75 @@ proc resetQueryPool*(
     ): void {.cdecl.} =
   resetQueryPoolCage(device,queryPool,firstQuery,queryCount)
 
-
 # Promoted from VK_KHR_timeline_semaphore (extension 208)
 # -------------------------------------------------------
+
 # Provided by VK_KHR_timeline_semaphore
-SemaphoreType.defineAlias(Binary, Binary)
+SemaphoreType.defineAlias(BinaryKhr, Binary)
 # Provided by VK_KHR_timeline_semaphore
-SemaphoreType.defineAlias(Timeline, Timeline)
+SemaphoreType.defineAlias(TimelineKhr, Timeline)
+
 # Provided by VK_KHR_timeline_semaphore
-SemaphoreWaitFlagBits.defineAlias(Any, Any)
+SemaphoreWaitFlagBits.defineAlias(AnyBitKhr, Any)
+
 var # commands
-  signalSemaphoreCage: proc(device: Device; pSignalInfo: ptr SemaphoreSignalInfo;): Result {.cdecl.}
   getSemaphoreCounterValueCage: proc(device: Device; semaphore: Semaphore; pValue: ptr uint64;): Result {.cdecl.}
   waitSemaphoresCage: proc(device: Device; pWaitInfo: ptr SemaphoreWaitInfo; timeout: uint64;): Result {.cdecl.}
-
-proc signalSemaphore*(
-      device: Device;
-      pSignalInfo: ptr SemaphoreSignalInfo;
-    ): Result {.cdecl, discardable.} =
-  signalSemaphoreCage(device,pSignalInfo)
-
+  signalSemaphoreCage: proc(device: Device; pSignalInfo: ptr SemaphoreSignalInfo;): Result {.cdecl.}
 proc getSemaphoreCounterValue*(
       device: Device;
       semaphore: Semaphore;
       pValue: ptr uint64;
     ): Result {.cdecl, discardable.} =
   getSemaphoreCounterValueCage(device,semaphore,pValue)
-
 proc waitSemaphores*(
       device: Device;
       pWaitInfo: ptr SemaphoreWaitInfo;
       timeout: uint64;
     ): Result {.cdecl, discardable.} =
   waitSemaphoresCage(device,pWaitInfo,timeout)
-
+proc signalSemaphore*(
+      device: Device;
+      pSignalInfo: ptr SemaphoreSignalInfo;
+    ): Result {.cdecl, discardable.} =
+  signalSemaphoreCage(device,pSignalInfo)
 
 # Promoted from VK_KHR_buffer_device_address (extension 258)
 # ----------------------------------------------------------
+
 var # commands
-  getDeviceMemoryOpaqueCaptureAddressCage: proc(device: Device; pInfo: ptr DeviceMemoryOpaqueCaptureAddressInfo;): uint64 {.cdecl.}
   getBufferDeviceAddressCage: proc(device: Device; pInfo: ptr BufferDeviceAddressInfo;): DeviceAddress {.cdecl.}
   getBufferOpaqueCaptureAddressCage: proc(device: Device; pInfo: ptr BufferDeviceAddressInfo;): uint64 {.cdecl.}
-
-proc getDeviceMemoryOpaqueCaptureAddress*(
-      device: Device;
-      pInfo: ptr DeviceMemoryOpaqueCaptureAddressInfo;
-    ): uint64 {.cdecl.} =
-  getDeviceMemoryOpaqueCaptureAddressCage(device,pInfo)
-
+  getDeviceMemoryOpaqueCaptureAddressCage: proc(device: Device; pInfo: ptr DeviceMemoryOpaqueCaptureAddressInfo;): uint64 {.cdecl.}
 proc getBufferDeviceAddress*(
       device: Device;
       pInfo: ptr BufferDeviceAddressInfo;
     ): DeviceAddress {.cdecl.} =
   getBufferDeviceAddressCage(device,pInfo)
-
 proc getBufferOpaqueCaptureAddress*(
       device: Device;
       pInfo: ptr BufferDeviceAddressInfo;
     ): uint64 {.cdecl.} =
   getBufferOpaqueCaptureAddressCage(device,pInfo)
-
-
+proc getDeviceMemoryOpaqueCaptureAddress*(
+      device: Device;
+      pInfo: ptr DeviceMemoryOpaqueCaptureAddressInfo;
+    ): uint64 {.cdecl.} =
+  getDeviceMemoryOpaqueCaptureAddressCage(device,pInfo)
 proc loadVk12*(instance: Instance) =
   instance.defineLoader(`<<`)
 
   # Promoted from VK_KHR_draw_indirect_count (extension 170)
   # --------------------------------------------------------
-  cmdDrawIndexedIndirectCountCage << "vkCmdDrawIndexedIndirectCount"
   cmdDrawIndirectCountCage << "vkCmdDrawIndirectCount"
+  cmdDrawIndexedIndirectCountCage << "vkCmdDrawIndexedIndirectCount"
 
   # Promoted from VK_KHR_create_renderpass2 (extension 110)
   # -------------------------------------------------------
   createRenderPass2Cage << "vkCreateRenderPass2"
-  cmdEndRenderPass2Cage << "vkCmdEndRenderPass2"
   cmdBeginRenderPass2Cage << "vkCmdBeginRenderPass2"
   cmdNextSubpass2Cage << "vkCmdNextSubpass2"
+  cmdEndRenderPass2Cage << "vkCmdEndRenderPass2"
 
   # Promoted from VK_EXT_host_query_reset (extension 262)
   # -----------------------------------------------------
@@ -837,12 +839,12 @@ proc loadVk12*(instance: Instance) =
 
   # Promoted from VK_KHR_timeline_semaphore (extension 208)
   # -------------------------------------------------------
-  signalSemaphoreCage << "vkSignalSemaphore"
   getSemaphoreCounterValueCage << "vkGetSemaphoreCounterValue"
   waitSemaphoresCage << "vkWaitSemaphores"
+  signalSemaphoreCage << "vkSignalSemaphore"
 
   # Promoted from VK_KHR_buffer_device_address (extension 258)
   # ----------------------------------------------------------
-  getDeviceMemoryOpaqueCaptureAddressCage << "vkGetDeviceMemoryOpaqueCaptureAddress"
   getBufferDeviceAddressCage << "vkGetBufferDeviceAddress"
   getBufferOpaqueCaptureAddressCage << "vkGetBufferOpaqueCaptureAddress"
+  getDeviceMemoryOpaqueCaptureAddressCage << "vkGetDeviceMemoryOpaqueCaptureAddress"

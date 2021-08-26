@@ -4,35 +4,66 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
+const UuidSize* = 16
+const MaxDescriptionSize* = 256
+
 type
-  PerformanceCounterDescriptionFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    PerformanceImpacting = 0x00000001
-    ConcurrentlyImpacted = 0x00000002
-  PerformanceCounterStorageKHR* {.size: sizeof(int32), pure.} = enum
-    Int32 = 0
-    Int64 = 1
-    Uint32 = 2
-    Uint64 = 3
-    Float32 = 4
-    Float64 = 5
-  AcquireProfilingLockInfoKHR* = object
+  PhysicalDevicePerformanceQueryFeaturesKHR* = object
     sType*: StructureType
     pNext*: pointer
-    flags*: AcquireProfilingLockFlagsKHR
-    timeout*: uint64
-  PerformanceCounterDescriptionFlagsKHR* = distinct Flags
-  AcquireProfilingLockFlagBitsKHR* = UnusedEnum
+    performanceCounterQueryPools*: Bool32
+    performanceCounterMultipleQueryPools*: Bool32
+  PhysicalDevicePerformanceQueryPropertiesKHR* = object
+    sType*: StructureType
+    pNext*: pointer
+    allowCommandBufferQueryCopies*: Bool32
+  PerformanceCounterKHR* = object
+    sType*: StructureType
+    pNext*: pointer
+    unit*: PerformanceCounterUnitKHR
+    scope*: PerformanceCounterScopeKHR
+    storage*: PerformanceCounterStorageKHR
+    uuid*: array[UuidSize, uint8]
   PerformanceCounterDescriptionKHR* = object
     sType*: StructureType
     pNext*: pointer
     flags*: PerformanceCounterDescriptionFlagsKHR
-    name*: char
-    category*: char
-    description*: char
-  PerformanceQuerySubmitInfoKHR* = object
+    name*: array[MaxDescriptionSize, char]
+    category*: array[MaxDescriptionSize, char]
+    description*: array[MaxDescriptionSize, char]
+  PerformanceCounterDescriptionFlagsKHR* = distinct Flags
+  PerformanceCounterDescriptionFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+    PerformanceImpactingKhr = 0x00000001
+    ConcurrentlyImpactedKhr = 0x00000002
+  QueryPoolPerformanceCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
-    counterPassIndex*: uint32
+    queueFamilyIndex*: uint32
+    counterIndexCount*: uint32
+    pCounterIndices*: ptr uint32
+  PerformanceCounterScopeKHR* {.size: sizeof(int32), pure.} = enum
+    CommandBufferKhr = 0
+    RenderPassKhr = 1
+    CommandKhr = 2
+  PerformanceCounterStorageKHR* {.size: sizeof(int32), pure.} = enum
+    Int32Khr = 0
+    Int64Khr = 1
+    Uint32Khr = 2
+    Uint64Khr = 3
+    Float32Khr = 4
+    Float64Khr = 5
+  PerformanceCounterUnitKHR* {.size: sizeof(int32), pure.} = enum
+    GenericKhr = 0
+    PercentageKhr = 1
+    NanosecondsKhr = 2
+    BytesKhr = 3
+    BytesPerSecondKhr = 4
+    KelvinKhr = 5
+    WattsKhr = 6
+    VoltsKhr = 7
+    AmpsKhr = 8
+    HertzKhr = 9
+    CyclesKhr = 10
   # Union of all the possible return types a counter result could return
   PerformanceCounterResultKHR* {.union.} = object
     int32*: int32
@@ -41,68 +72,27 @@ type
     uint64*: uint64
     float32*: float32
     float64*: float64
-  PhysicalDevicePerformanceQueryFeaturesKHR* = object
+  AcquireProfilingLockInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
-    performanceCounterQueryPools*: Bool32
-    performanceCounterMultipleQueryPools*: Bool32
-  PerformanceCounterScopeKHR* {.size: sizeof(int32), pure.} = enum
-    CommandBuffer = 0
-    RenderPass = 1
-    Command = 2
-  PerformanceCounterKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    unit*: PerformanceCounterUnitKHR
-    scope*: PerformanceCounterScopeKHR
-    storage*: PerformanceCounterStorageKHR
-    uuid*: uint8
-  QueryPoolPerformanceCreateInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    queueFamilyIndex*: uint32
-    counterIndexCount*: uint32
-    pCounterIndices*: ptr uint32
-  PhysicalDevicePerformanceQueryPropertiesKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    allowCommandBufferQueryCopies*: Bool32
-  PerformanceCounterUnitKHR* {.size: sizeof(int32), pure.} = enum
-    Generic = 0
-    Percentage = 1
-    Nanoseconds = 2
-    Bytes = 3
-    BytesPerSecond = 4
-    Kelvin = 5
-    Watts = 6
-    Volts = 7
-    Amps = 8
-    Hertz = 9
-    Cycles = 10
+    flags*: AcquireProfilingLockFlagsKHR
+    timeout*: uint64
   AcquireProfilingLockFlagsKHR* = distinct Flags
+  AcquireProfilingLockFlagBitsKHR* = UnusedEnum
+  PerformanceQuerySubmitInfoKHR* = object
+    sType*: StructureType
+    pNext*: pointer
+    counterPassIndex*: uint32
 
-PerformanceCounterScopeKHR.defineAlias(QueryScopeCommandBuffer, CommandBuffer)
-PerformanceCounterScopeKHR.defineAlias(QueryScopeRenderPass, RenderPass)
-PerformanceCounterScopeKHR.defineAlias(QueryScopeCommand, Command)
-const KhrPerformanceQuerySpecVersion* = 1
-const KhrPerformanceQueryExtensionName* = "VK_KHR_performance_query"
+PerformanceCounterScopeKHR.defineAlias(QueryScopeCommandBufferKhr, CommandBufferKhr)
+PerformanceCounterScopeKHR.defineAlias(QueryScopeRenderPassKhr, RenderPassKhr)
+PerformanceCounterScopeKHR.defineAlias(QueryScopeCommandKhr, CommandKhr)
+
 var # commands
-  releaseProfilingLockKHRCage: proc(device: Device;): void {.cdecl.}
-  acquireProfilingLockKHRCage: proc(device: Device; pInfo: ptr AcquireProfilingLockInfoKHR;): Result {.cdecl.}
   enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHRCage: proc(physicalDevice: PhysicalDevice; queueFamilyIndex: uint32; pCounterCount: ptr uint32; pCounters: ptr PerformanceCounterKHR; pCounterDescriptions: ptr PerformanceCounterDescriptionKHR;): Result {.cdecl.}
   getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHRCage: proc(physicalDevice: PhysicalDevice; pPerformanceQueryCreateInfo: ptr QueryPoolPerformanceCreateInfoKHR; pNumPasses: ptr uint32;): void {.cdecl.}
-
-proc releaseProfilingLockKHR*(
-      device: Device;
-    ): void {.cdecl.} =
-  releaseProfilingLockKHRCage(device)
-
-proc acquireProfilingLockKHR*(
-      device: Device;
-      pInfo: ptr AcquireProfilingLockInfoKHR;
-    ): Result {.cdecl, discardable.} =
-  acquireProfilingLockKHRCage(device,pInfo)
-
+  acquireProfilingLockKHRCage: proc(device: Device; pInfo: ptr AcquireProfilingLockInfoKHR;): Result {.cdecl.}
+  releaseProfilingLockKHRCage: proc(device: Device;): void {.cdecl.}
 proc enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR*(
       physicalDevice: PhysicalDevice;
       queueFamilyIndex: uint32;
@@ -111,19 +101,25 @@ proc enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR*(
       pCounterDescriptions: ptr PerformanceCounterDescriptionKHR;
     ): Result {.cdecl, discardable.} =
   enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHRCage(physicalDevice,queueFamilyIndex,pCounterCount,pCounters,pCounterDescriptions)
-
 proc getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR*(
       physicalDevice: PhysicalDevice;
       pPerformanceQueryCreateInfo: ptr QueryPoolPerformanceCreateInfoKHR;
       pNumPasses: ptr uint32;
     ): void {.cdecl.} =
   getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHRCage(physicalDevice,pPerformanceQueryCreateInfo,pNumPasses)
-
-
+proc acquireProfilingLockKHR*(
+      device: Device;
+      pInfo: ptr AcquireProfilingLockInfoKHR;
+    ): Result {.cdecl, discardable.} =
+  acquireProfilingLockKHRCage(device,pInfo)
+proc releaseProfilingLockKHR*(
+      device: Device;
+    ): void {.cdecl.} =
+  releaseProfilingLockKHRCage(device)
 proc loadVK_KHR_performance_query*(instance: Instance) =
   instance.defineLoader(`<<`)
 
-  releaseProfilingLockKHRCage << "vkReleaseProfilingLockKHR"
-  acquireProfilingLockKHRCage << "vkAcquireProfilingLockKHR"
   enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHRCage << "vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR"
   getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHRCage << "vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR"
+  acquireProfilingLockKHRCage << "vkAcquireProfilingLockKHR"
+  releaseProfilingLockKHRCage << "vkReleaseProfilingLockKHR"

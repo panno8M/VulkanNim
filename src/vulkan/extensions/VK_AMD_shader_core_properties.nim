@@ -4,6 +4,8 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
+
+
 type
   PhysicalDeviceShaderCorePropertiesAMD* = object
     sType*: StructureType
@@ -23,6 +25,4 @@ type
     maxVgprAllocation*: uint32
     vgprAllocationGranularity*: uint32
 
-const AmdShaderCorePropertiesExtensionName* = "VK_AMD_shader_core_properties"
-const AmdShaderCorePropertiesSpecVersion* = 2
 

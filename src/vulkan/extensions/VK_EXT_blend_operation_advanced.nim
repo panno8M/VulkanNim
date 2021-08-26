@@ -3,13 +3,9 @@ import ../platform
 import ../features/vk10
 
 
+
+
 type
-  PipelineColorBlendAdvancedStateCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
-    srcPremultiplied*: Bool32
-    dstPremultiplied*: Bool32
-    blendOverlap*: BlendOverlapEXT
   PhysicalDeviceBlendOperationAdvancedFeaturesEXT* = object
     sType*: StructureType
     pNext*: pointer
@@ -23,11 +19,15 @@ type
     advancedBlendNonPremultipliedDstColor*: Bool32
     advancedBlendCorrelatedOverlap*: Bool32
     advancedBlendAllOperations*: Bool32
+  PipelineColorBlendAdvancedStateCreateInfoEXT* = object
+    sType*: StructureType
+    pNext*: pointer
+    srcPremultiplied*: Bool32
+    dstPremultiplied*: Bool32
+    blendOverlap*: BlendOverlapEXT
   BlendOverlapEXT* {.size: sizeof(int32), pure.} = enum
-    Uncorrelated = 0
-    Disjoint = 1
-    Conjoint = 2
+    UncorrelatedExt = 0
+    DisjointExt = 1
+    ConjointExt = 2
 
-const ExtBlendOperationAdvancedSpecVersion* = 2
-const ExtBlendOperationAdvancedExtensionName* = "VK_EXT_blend_operation_advanced"
 

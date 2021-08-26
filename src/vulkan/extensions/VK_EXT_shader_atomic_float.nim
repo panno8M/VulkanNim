@@ -4,6 +4,8 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
+
+
 type
   PhysicalDeviceShaderAtomicFloatFeaturesEXT* = object
     sType*: StructureType
@@ -21,6 +23,4 @@ type
     sparseImageFloat32Atomics*: Bool32
     sparseImageFloat32AtomicAdd*: Bool32
 
-const ExtShaderAtomicFloatExtensionName* = "VK_EXT_shader_atomic_float"
-const ExtShaderAtomicFloatSpecVersion* = 1
 

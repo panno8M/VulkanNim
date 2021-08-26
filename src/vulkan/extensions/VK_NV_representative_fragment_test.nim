@@ -3,6 +3,8 @@ import ../platform
 import ../features/vk10
 
 
+
+
 type
   PhysicalDeviceRepresentativeFragmentTestFeaturesNV* = object
     sType*: StructureType
@@ -13,6 +15,4 @@ type
     pNext*: pointer
     representativeFragmentTestEnable*: Bool32
 
-const NvRepresentativeFragmentTestSpecVersion* = 2
-const NvRepresentativeFragmentTestExtensionName* = "VK_NV_representative_fragment_test"
 

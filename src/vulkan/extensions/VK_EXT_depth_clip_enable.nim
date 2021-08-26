@@ -3,8 +3,9 @@ import ../platform
 import ../features/vk10
 
 
+
+
 type
-  PipelineRasterizationDepthClipStateCreateFlagsEXT* = distinct Flags
   PhysicalDeviceDepthClipEnableFeaturesEXT* = object
     sType*: StructureType
     pNext*: pointer
@@ -14,7 +15,6 @@ type
     pNext*: pointer
     flags*: PipelineRasterizationDepthClipStateCreateFlagsEXT
     depthClipEnable*: Bool32
+  PipelineRasterizationDepthClipStateCreateFlagsEXT* = distinct Flags
 
-const ExtDepthClipEnableExtensionName* = "VK_EXT_depth_clip_enable"
-const ExtDepthClipEnableSpecVersion* = 1
 

@@ -3,12 +3,11 @@ import strformat
 import strutils
 import sequtils
 import tables
-import os
-import options
 import logging
 import times
 
 import ./utils
+import ./nodedefs
 import ./libgennodes
 import ./liblogger
 
@@ -56,7 +55,7 @@ proc generate*() =
     for require in feature.findAll("require"):
       libFile.requires.add require.extractNodeRequire
 
-    "{featureFilePath}/{fileName[name]}.nim".fmt.writeFile libFile.compile(resources).render
+    "{featureFilePath}/{fileName[name]}.nim".fmt.writeFile libFile.render(resources)
   let dependenciesBasic = @[("../platform", false), ("../features/vk10", false)]
   for extension in xml["extensions"].findAll("extension"):
     let name = extension{"name"}
@@ -85,7 +84,7 @@ proc generate*() =
     if libFile.requires.len == 0: continue
 
     "src/vulkan/extensions/{name}.nim".fmt.writeFile(
-      libFile.compile(resources).render()
+      libFile.render(resources)
     )
     # if libFile.fileName == "VK_ANDROID_native_buffer":
     #   echo repr libFile.compile(resources)

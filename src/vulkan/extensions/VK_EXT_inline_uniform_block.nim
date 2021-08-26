@@ -5,11 +5,9 @@ import VK_KHR_get_physical_device_properties2
 import VK_KHR_maintenance1
 
 
+
+
 type
-  DescriptorPoolInlineUniformBlockCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
-    maxInlineUniformBlockBindings*: uint32
   PhysicalDeviceInlineUniformBlockFeaturesEXT* = object
     sType*: StructureType
     pNext*: pointer
@@ -28,7 +26,9 @@ type
     pNext*: pointer
     dataSize*: uint32
     pData*: pointer
+  DescriptorPoolInlineUniformBlockCreateInfoEXT* = object
+    sType*: StructureType
+    pNext*: pointer
+    maxInlineUniformBlockBindings*: uint32
 
-const ExtInlineUniformBlockExtensionName* = "VK_EXT_inline_uniform_block"
-const ExtInlineUniformBlockSpecVersion* = 1
 

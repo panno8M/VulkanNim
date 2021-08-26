@@ -5,13 +5,25 @@ import VK_EXT_display_surface_counter
 import VK_KHR_swapchain
 
 
+
+
 type
+  DisplayPowerStateEXT* {.size: sizeof(int32), pure.} = enum
+    OffExt = 0
+    SuspendExt = 1
+    OnExt = 2
+  DeviceEventTypeEXT* {.size: sizeof(int32), pure.} = enum
+    DisplayHotplugExt = 0
+  DisplayEventTypeEXT* {.size: sizeof(int32), pure.} = enum
+    FirstPixelOutExt = 0
   DisplayPowerInfoEXT* = object
     sType*: StructureType
     pNext*: pointer
     powerState*: DisplayPowerStateEXT
-  DeviceEventTypeEXT* {.size: sizeof(int32), pure.} = enum
-    DisplayHotplug = 0
+  DeviceEventInfoEXT* = object
+    sType*: StructureType
+    pNext*: pointer
+    deviceEvent*: DeviceEventTypeEXT
   DisplayEventInfoEXT* = object
     sType*: StructureType
     pNext*: pointer
@@ -20,40 +32,25 @@ type
     sType*: StructureType
     pNext*: pointer
     surfaceCounters*: SurfaceCounterFlagsEXT
-  DisplayPowerStateEXT* {.size: sizeof(int32), pure.} = enum
-    Off = 0
-    Suspend = 1
-    On = 2
-  DeviceEventInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
-    deviceEvent*: DeviceEventTypeEXT
-  DisplayEventTypeEXT* {.size: sizeof(int32), pure.} = enum
-    FirstPixelOut = 0
 
-const ExtDisplayControlExtensionName* = "VK_EXT_display_control"
-const ExtDisplayControlSpecVersion* = 1
 var # commands
   displayPowerControlEXTCage: proc(device: Device; display: DisplayKHR; pDisplayPowerInfo: ptr DisplayPowerInfoEXT;): Result {.cdecl.}
-  getSwapchainCounterEXTCage: proc(device: Device; swapchain: SwapchainKHR; counter: SurfaceCounterFlagBitsEXT; pCounterValue: ptr uint64;): Result {.cdecl.}
-  registerDisplayEventEXTCage: proc(device: Device; display: DisplayKHR; pDisplayEventInfo: ptr DisplayEventInfoEXT; pAllocator: ptr AllocationCallbacks; pFence: ptr Fence;): Result {.cdecl.}
   registerDeviceEventEXTCage: proc(device: Device; pDeviceEventInfo: ptr DeviceEventInfoEXT; pAllocator: ptr AllocationCallbacks; pFence: ptr Fence;): Result {.cdecl.}
-
+  registerDisplayEventEXTCage: proc(device: Device; display: DisplayKHR; pDisplayEventInfo: ptr DisplayEventInfoEXT; pAllocator: ptr AllocationCallbacks; pFence: ptr Fence;): Result {.cdecl.}
+  getSwapchainCounterEXTCage: proc(device: Device; swapchain: SwapchainKHR; counter: SurfaceCounterFlagBitsEXT; pCounterValue: ptr uint64;): Result {.cdecl.}
 proc displayPowerControlEXT*(
       device: Device;
       display: DisplayKHR;
       pDisplayPowerInfo: ptr DisplayPowerInfoEXT;
     ): Result {.cdecl, discardable.} =
   displayPowerControlEXTCage(device,display,pDisplayPowerInfo)
-
-proc getSwapchainCounterEXT*(
+proc registerDeviceEventEXT*(
       device: Device;
-      swapchain: SwapchainKHR;
-      counter: SurfaceCounterFlagBitsEXT;
-      pCounterValue: ptr uint64;
+      pDeviceEventInfo: ptr DeviceEventInfoEXT;
+      pAllocator: ptr AllocationCallbacks;
+      pFence: ptr Fence;
     ): Result {.cdecl, discardable.} =
-  getSwapchainCounterEXTCage(device,swapchain,counter,pCounterValue)
-
+  registerDeviceEventEXTCage(device,pDeviceEventInfo,pAllocator,pFence)
 proc registerDisplayEventEXT*(
       device: Device;
       display: DisplayKHR;
@@ -62,20 +59,17 @@ proc registerDisplayEventEXT*(
       pFence: ptr Fence;
     ): Result {.cdecl, discardable.} =
   registerDisplayEventEXTCage(device,display,pDisplayEventInfo,pAllocator,pFence)
-
-proc registerDeviceEventEXT*(
+proc getSwapchainCounterEXT*(
       device: Device;
-      pDeviceEventInfo: ptr DeviceEventInfoEXT;
-      pAllocator: ptr AllocationCallbacks;
-      pFence: ptr Fence;
+      swapchain: SwapchainKHR;
+      counter: SurfaceCounterFlagBitsEXT;
+      pCounterValue: ptr uint64;
     ): Result {.cdecl, discardable.} =
-  registerDeviceEventEXTCage(device,pDeviceEventInfo,pAllocator,pFence)
-
-
+  getSwapchainCounterEXTCage(device,swapchain,counter,pCounterValue)
 proc loadVK_EXT_display_control*(instance: Instance) =
   instance.defineLoader(`<<`)
 
   displayPowerControlEXTCage << "vkDisplayPowerControlEXT"
-  getSwapchainCounterEXTCage << "vkGetSwapchainCounterEXT"
-  registerDisplayEventEXTCage << "vkRegisterDisplayEventEXT"
   registerDeviceEventEXTCage << "vkRegisterDeviceEventEXT"
+  registerDisplayEventEXTCage << "vkRegisterDisplayEventEXT"
+  getSwapchainCounterEXTCage << "vkGetSwapchainCounterEXT"

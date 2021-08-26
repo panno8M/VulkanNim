@@ -4,15 +4,20 @@ import ../features/vk10
 import VK_EXT_direct_mode_display
 
 
-# type
 
 
-const ExtAcquireXlibDisplayExtensionName* = "VK_EXT_acquire_xlib_display"
-const ExtAcquireXlibDisplaySpecVersion* = 1
+type
+
+
 var # commands
-  getRandROutputDisplayEXTCage: proc(physicalDevice: PhysicalDevice; dpy: ptr Display; rrOutput: RROutput; pDisplay: ptr DisplayKHR;): Result {.cdecl.}
   acquireXlibDisplayEXTCage: proc(physicalDevice: PhysicalDevice; dpy: ptr Display; display: DisplayKHR;): Result {.cdecl.}
-
+  getRandROutputDisplayEXTCage: proc(physicalDevice: PhysicalDevice; dpy: ptr Display; rrOutput: RROutput; pDisplay: ptr DisplayKHR;): Result {.cdecl.}
+proc acquireXlibDisplayEXT*(
+      physicalDevice: PhysicalDevice;
+      dpy: ptr Display;
+      display: DisplayKHR;
+    ): Result {.cdecl, discardable.} =
+  acquireXlibDisplayEXTCage(physicalDevice,dpy,display)
 proc getRandROutputDisplayEXT*(
       physicalDevice: PhysicalDevice;
       dpy: ptr Display;
@@ -20,17 +25,8 @@ proc getRandROutputDisplayEXT*(
       pDisplay: ptr DisplayKHR;
     ): Result {.cdecl, discardable.} =
   getRandROutputDisplayEXTCage(physicalDevice,dpy,rrOutput,pDisplay)
-
-proc acquireXlibDisplayEXT*(
-      physicalDevice: PhysicalDevice;
-      dpy: ptr Display;
-      display: DisplayKHR;
-    ): Result {.cdecl, discardable.} =
-  acquireXlibDisplayEXTCage(physicalDevice,dpy,display)
-
-
 proc loadVK_EXT_acquire_xlib_display*(instance: Instance) =
   instance.defineLoader(`<<`)
 
-  getRandROutputDisplayEXTCage << "vkGetRandROutputDisplayEXT"
   acquireXlibDisplayEXTCage << "vkAcquireXlibDisplayEXT"
+  getRandROutputDisplayEXTCage << "vkGetRandROutputDisplayEXT"

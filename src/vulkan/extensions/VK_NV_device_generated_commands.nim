@@ -3,18 +3,9 @@ import ../platform
 import ../features/vk10
 
 
+
+
 type
-  GraphicsPipelineShaderGroupsCreateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    groupCount*: uint32
-    pGroups*: ptr GraphicsShaderGroupCreateInfoNV
-    pipelineCount*: uint32
-    pPipelines*: ptr Pipeline
-  IndirectCommandsLayoutNV* = distinct NonDispatchableHandle
-  IndirectCommandsStreamNV* = object
-    buffer*: Buffer
-    offset*: DeviceSize
   PhysicalDeviceDeviceGeneratedCommandsPropertiesNV* = object
     sType*: StructureType
     pNext*: pointer
@@ -27,15 +18,10 @@ type
     minSequencesCountBufferOffsetAlignment*: uint32
     minSequencesIndexBufferOffsetAlignment*: uint32
     minIndirectCommandsBufferOffsetAlignment*: uint32
-  BindVertexBufferIndirectCommandNV* = object
-    bufferAddress*: DeviceAddress
-    size*: uint32
-    stride*: uint32
-  IndirectCommandsLayoutUsageFlagsNV* = distinct Flags
-  IndirectCommandsLayoutUsageFlagBitsNV* {.size: sizeof(int32), pure.} = enum
-    ExplicitPreprocess = 0x00000001
-    IndexedSequences = 0x00000002
-    UnorderedSequences = 0x00000004
+  PhysicalDeviceDeviceGeneratedCommandsFeaturesNV* = object
+    sType*: StructureType
+    pNext*: pointer
+    deviceGeneratedCommands*: Bool32
   GraphicsShaderGroupCreateInfoNV* = object
     sType*: StructureType
     pNext*: pointer
@@ -43,62 +29,46 @@ type
     pStages*: ptr PipelineShaderStageCreateInfo
     pVertexInputState*: ptr PipelineVertexInputStateCreateInfo
     pTessellationState*: ptr PipelineTessellationStateCreateInfo
-  SetStateFlagsIndirectCommandNV* = object
-    data*: uint32
-  GeneratedCommandsMemoryRequirementsInfoNV* = object
+  GraphicsPipelineShaderGroupsCreateInfoNV* = object
     sType*: StructureType
     pNext*: pointer
-    pipelineBindPoint*: PipelineBindPoint
-    pipeline*: Pipeline
-    indirectCommandsLayout*: IndirectCommandsLayoutNV
-    maxSequencesCount*: uint32
-  GeneratedCommandsInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    pipelineBindPoint*: PipelineBindPoint
-    pipeline*: Pipeline
-    indirectCommandsLayout*: IndirectCommandsLayoutNV
-    streamCount*: uint32
-    pStreams*: ptr IndirectCommandsStreamNV
-    sequencesCount*: uint32
-    preprocessBuffer*: Buffer
-    preprocessOffset*: DeviceSize
-    preprocessSize*: DeviceSize
-    sequencesCountBuffer*: Buffer
-    sequencesCountOffset*: DeviceSize
-    sequencesIndexBuffer*: Buffer
-    sequencesIndexOffset*: DeviceSize
-  IndirectStateFlagBitsNV* {.size: sizeof(int32), pure.} = enum
-    FlagFrontface = 0x00000001
+    groupCount*: uint32
+    pGroups*: ptr GraphicsShaderGroupCreateInfoNV
+    pipelineCount*: uint32
+    pPipelines*: ptr Pipeline
+  BindShaderGroupIndirectCommandNV* = object
+    groupIndex*: uint32
   BindIndexBufferIndirectCommandNV* = object
     bufferAddress*: DeviceAddress
     size*: uint32
     indexType*: IndexType
+  BindVertexBufferIndirectCommandNV* = object
+    bufferAddress*: DeviceAddress
+    size*: uint32
+    stride*: uint32
+  SetStateFlagsIndirectCommandNV* = object
+    data*: uint32
+  IndirectStateFlagBitsNV* {.size: sizeof(int32), pure.} = enum
+    FlagFrontfaceBitNv = 0x00000001
   IndirectStateFlagsNV* = distinct Flags
-  PhysicalDeviceDeviceGeneratedCommandsFeaturesNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    deviceGeneratedCommands*: Bool32
+  IndirectCommandsLayoutNV* = distinct NonDispatchableHandle
   IndirectCommandsTokenTypeNV* {.size: sizeof(int32), pure.} = enum
-    ShaderGroup = 0
-    StateFlags = 1
-    IndexBuffer = 2
-    VertexBuffer = 3
-    PushConstant = 4
-    DrawIndexed = 5
-    Draw = 6
-    DrawTasks = 7
-  IndirectCommandsLayoutCreateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: IndirectCommandsLayoutUsageFlagsNV
-    pipelineBindPoint*: PipelineBindPoint
-    tokenCount*: uint32
-    pTokens*: ptr IndirectCommandsLayoutTokenNV
-    streamCount*: uint32
-    pStreamStrides*: ptr uint32
-  BindShaderGroupIndirectCommandNV* = object
-    groupIndex*: uint32
+    ShaderGroupNv = 0
+    StateFlagsNv = 1
+    IndexBufferNv = 2
+    VertexBufferNv = 3
+    PushConstantNv = 4
+    DrawIndexedNv = 5
+    DrawNv = 6
+    DrawTasksNv = 7
+  IndirectCommandsLayoutUsageFlagBitsNV* {.size: sizeof(int32), pure.} = enum
+    ExplicitPreprocessBitNv = 0x00000001
+    IndexedSequencesBitNv = 0x00000002
+    UnorderedSequencesBitNv = 0x00000004
+  IndirectCommandsLayoutUsageFlagsNV* = distinct Flags
+  IndirectCommandsStreamNV* = object
+    buffer*: Buffer
+    offset*: DeviceSize
   IndirectCommandsLayoutTokenNV* = object
     sType*: StructureType
     pNext*: pointer
@@ -115,31 +85,63 @@ type
     indexTypeCount*: uint32
     pIndexTypes*: ptr IndexType
     pIndexTypeValues*: ptr uint32
+  IndirectCommandsLayoutCreateInfoNV* = object
+    sType*: StructureType
+    pNext*: pointer
+    flags*: IndirectCommandsLayoutUsageFlagsNV
+    pipelineBindPoint*: PipelineBindPoint
+    tokenCount*: uint32
+    pTokens*: ptr IndirectCommandsLayoutTokenNV
+    streamCount*: uint32
+    pStreamStrides*: ptr uint32
+  GeneratedCommandsInfoNV* = object
+    sType*: StructureType
+    pNext*: pointer
+    pipelineBindPoint*: PipelineBindPoint
+    pipeline*: Pipeline
+    indirectCommandsLayout*: IndirectCommandsLayoutNV
+    streamCount*: uint32
+    pStreams*: ptr IndirectCommandsStreamNV
+    sequencesCount*: uint32
+    preprocessBuffer*: Buffer
+    preprocessOffset*: DeviceSize
+    preprocessSize*: DeviceSize
+    sequencesCountBuffer*: Buffer
+    sequencesCountOffset*: DeviceSize
+    sequencesIndexBuffer*: Buffer
+    sequencesIndexOffset*: DeviceSize
+  GeneratedCommandsMemoryRequirementsInfoNV* = object
+    sType*: StructureType
+    pNext*: pointer
+    pipelineBindPoint*: PipelineBindPoint
+    pipeline*: Pipeline
+    indirectCommandsLayout*: IndirectCommandsLayoutNV
+    maxSequencesCount*: uint32
 
-const NvDeviceGeneratedCommandsSpecVersion* = 3
-const NvDeviceGeneratedCommandsExtensionName* = "VK_NV_device_generated_commands"
 var # commands
-  cmdPreprocessGeneratedCommandsNVCage: proc(commandBuffer: CommandBuffer; pGeneratedCommandsInfo: ptr GeneratedCommandsInfoNV;): void {.cdecl.}
-  createIndirectCommandsLayoutNVCage: proc(device: Device; pCreateInfo: ptr IndirectCommandsLayoutCreateInfoNV; pAllocator: ptr AllocationCallbacks; pIndirectCommandsLayout: ptr IndirectCommandsLayoutNV;): Result {.cdecl.}
-  cmdBindPipelineShaderGroupNVCage: proc(commandBuffer: CommandBuffer; pipelineBindPoint: PipelineBindPoint; pipeline: Pipeline; groupIndex: uint32;): void {.cdecl.}
-  destroyIndirectCommandsLayoutNVCage: proc(device: Device; indirectCommandsLayout: IndirectCommandsLayoutNV; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  cmdExecuteGeneratedCommandsNVCage: proc(commandBuffer: CommandBuffer; isPreprocessed: Bool32; pGeneratedCommandsInfo: ptr GeneratedCommandsInfoNV;): void {.cdecl.}
   getGeneratedCommandsMemoryRequirementsNVCage: proc(device: Device; pInfo: ptr GeneratedCommandsMemoryRequirementsInfoNV; pMemoryRequirements: ptr MemoryRequirements2;): void {.cdecl.}
-
+  cmdPreprocessGeneratedCommandsNVCage: proc(commandBuffer: CommandBuffer; pGeneratedCommandsInfo: ptr GeneratedCommandsInfoNV;): void {.cdecl.}
+  cmdExecuteGeneratedCommandsNVCage: proc(commandBuffer: CommandBuffer; isPreprocessed: Bool32; pGeneratedCommandsInfo: ptr GeneratedCommandsInfoNV;): void {.cdecl.}
+  cmdBindPipelineShaderGroupNVCage: proc(commandBuffer: CommandBuffer; pipelineBindPoint: PipelineBindPoint; pipeline: Pipeline; groupIndex: uint32;): void {.cdecl.}
+  createIndirectCommandsLayoutNVCage: proc(device: Device; pCreateInfo: ptr IndirectCommandsLayoutCreateInfoNV; pAllocator: ptr AllocationCallbacks; pIndirectCommandsLayout: ptr IndirectCommandsLayoutNV;): Result {.cdecl.}
+  destroyIndirectCommandsLayoutNVCage: proc(device: Device; indirectCommandsLayout: IndirectCommandsLayoutNV; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
+proc getGeneratedCommandsMemoryRequirementsNV*(
+      device: Device;
+      pInfo: ptr GeneratedCommandsMemoryRequirementsInfoNV;
+      pMemoryRequirements: ptr MemoryRequirements2;
+    ): void {.cdecl.} =
+  getGeneratedCommandsMemoryRequirementsNVCage(device,pInfo,pMemoryRequirements)
 proc cmdPreprocessGeneratedCommandsNV*(
       commandBuffer: CommandBuffer;
       pGeneratedCommandsInfo: ptr GeneratedCommandsInfoNV;
     ): void {.cdecl.} =
   cmdPreprocessGeneratedCommandsNVCage(commandBuffer,pGeneratedCommandsInfo)
-
-proc createIndirectCommandsLayoutNV*(
-      device: Device;
-      pCreateInfo: ptr IndirectCommandsLayoutCreateInfoNV;
-      pAllocator: ptr AllocationCallbacks;
-      pIndirectCommandsLayout: ptr IndirectCommandsLayoutNV;
-    ): Result {.cdecl, discardable.} =
-  createIndirectCommandsLayoutNVCage(device,pCreateInfo,pAllocator,pIndirectCommandsLayout)
-
+proc cmdExecuteGeneratedCommandsNV*(
+      commandBuffer: CommandBuffer;
+      isPreprocessed: Bool32;
+      pGeneratedCommandsInfo: ptr GeneratedCommandsInfoNV;
+    ): void {.cdecl.} =
+  cmdExecuteGeneratedCommandsNVCage(commandBuffer,isPreprocessed,pGeneratedCommandsInfo)
 proc cmdBindPipelineShaderGroupNV*(
       commandBuffer: CommandBuffer;
       pipelineBindPoint: PipelineBindPoint;
@@ -147,35 +149,25 @@ proc cmdBindPipelineShaderGroupNV*(
       groupIndex: uint32;
     ): void {.cdecl.} =
   cmdBindPipelineShaderGroupNVCage(commandBuffer,pipelineBindPoint,pipeline,groupIndex)
-
+proc createIndirectCommandsLayoutNV*(
+      device: Device;
+      pCreateInfo: ptr IndirectCommandsLayoutCreateInfoNV;
+      pAllocator: ptr AllocationCallbacks;
+      pIndirectCommandsLayout: ptr IndirectCommandsLayoutNV;
+    ): Result {.cdecl, discardable.} =
+  createIndirectCommandsLayoutNVCage(device,pCreateInfo,pAllocator,pIndirectCommandsLayout)
 proc destroyIndirectCommandsLayoutNV*(
       device: Device;
       indirectCommandsLayout: IndirectCommandsLayoutNV;
       pAllocator: ptr AllocationCallbacks;
     ): void {.cdecl.} =
   destroyIndirectCommandsLayoutNVCage(device,indirectCommandsLayout,pAllocator)
-
-proc cmdExecuteGeneratedCommandsNV*(
-      commandBuffer: CommandBuffer;
-      isPreprocessed: Bool32;
-      pGeneratedCommandsInfo: ptr GeneratedCommandsInfoNV;
-    ): void {.cdecl.} =
-  cmdExecuteGeneratedCommandsNVCage(commandBuffer,isPreprocessed,pGeneratedCommandsInfo)
-
-proc getGeneratedCommandsMemoryRequirementsNV*(
-      device: Device;
-      pInfo: ptr GeneratedCommandsMemoryRequirementsInfoNV;
-      pMemoryRequirements: ptr MemoryRequirements2;
-    ): void {.cdecl.} =
-  getGeneratedCommandsMemoryRequirementsNVCage(device,pInfo,pMemoryRequirements)
-
-
 proc loadVK_NV_device_generated_commands*(instance: Instance) =
   instance.defineLoader(`<<`)
 
-  cmdPreprocessGeneratedCommandsNVCage << "vkCmdPreprocessGeneratedCommandsNV"
-  createIndirectCommandsLayoutNVCage << "vkCreateIndirectCommandsLayoutNV"
-  cmdBindPipelineShaderGroupNVCage << "vkCmdBindPipelineShaderGroupNV"
-  destroyIndirectCommandsLayoutNVCage << "vkDestroyIndirectCommandsLayoutNV"
-  cmdExecuteGeneratedCommandsNVCage << "vkCmdExecuteGeneratedCommandsNV"
   getGeneratedCommandsMemoryRequirementsNVCage << "vkGetGeneratedCommandsMemoryRequirementsNV"
+  cmdPreprocessGeneratedCommandsNVCage << "vkCmdPreprocessGeneratedCommandsNV"
+  cmdExecuteGeneratedCommandsNVCage << "vkCmdExecuteGeneratedCommandsNV"
+  cmdBindPipelineShaderGroupNVCage << "vkCmdBindPipelineShaderGroupNV"
+  createIndirectCommandsLayoutNVCage << "vkCreateIndirectCommandsLayoutNV"
+  destroyIndirectCommandsLayoutNVCage << "vkDestroyIndirectCommandsLayoutNV"

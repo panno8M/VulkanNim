@@ -4,6 +4,8 @@ import ../features/vk10
 import VK_NV_external_memory_win32
 
 
+
+
 type
   Win32KeyedMutexAcquireReleaseInfoNV* = object
     sType*: StructureType
@@ -16,6 +18,4 @@ type
     pReleaseSyncs*: ptr DeviceMemory
     pReleaseKeys*: ptr uint64
 
-const NvWin32KeyedMutexSpecVersion* = 2
-const NvWin32KeyedMutexExtensionName* = "VK_NV_win32_keyed_mutex"
 

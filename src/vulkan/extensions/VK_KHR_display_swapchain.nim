@@ -5,6 +5,8 @@ import VK_KHR_swapchain
 import VK_KHR_display
 
 
+
+
 type
   DisplayPresentInfoKHR* = object
     sType*: StructureType
@@ -13,11 +15,8 @@ type
     dstRect*: Rect2D
     persistent*: Bool32
 
-const KhrDisplaySwapchainSpecVersion* = 10
-const KhrDisplaySwapchainExtensionName* = "VK_KHR_display_swapchain"
 var # commands
   createSharedSwapchainsKHRCage: proc(device: Device; swapchainCount: uint32; pCreateInfos: ptr SwapchainCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pSwapchains: ptr SwapchainKHR;): Result {.cdecl.}
-
 proc createSharedSwapchainsKHR*(
       device: Device;
       swapchainCount: uint32;
@@ -26,8 +25,6 @@ proc createSharedSwapchainsKHR*(
       pSwapchains: ptr SwapchainKHR;
     ): Result {.cdecl, discardable.} =
   createSharedSwapchainsKHRCage(device,swapchainCount,pCreateInfos,pAllocator,pSwapchains)
-
-
 proc loadVK_KHR_display_swapchain*(instance: Instance) =
   instance.defineLoader(`<<`)
 

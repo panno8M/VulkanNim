@@ -2,17 +2,21 @@ import xmltree
 import strutils
 import sequtils
 import strformat
-import tables
+import options
 import ./utils
-proc genVkHeaderVersion*(typeDef: XmlNode): string =
+func genVkHeaderVersion*(typeDef: XmlNode): Option[string] {.raises: [].} =
   var version: int
   for child in typeDef:
     try:
       version = child.innerText.parseStatement.parseInt
       if version != 0: break
-    except: continue
-  result = "template headerVersion*(): untyped = {version}".fmt
-proc genVkHeaderVersionComplete*(typeDef: XmlNode): string =
+    except ValueError: continue
+  try:
+    some "template headerVersion*(): untyped = {version}".fmt
+  except ValueError:
+    none string
+
+func genVkHeaderVersionComplete*(typeDef: XmlNode): Option[string] {.raises: [].} =
   var args: string
   var isNextOfType: bool
   for c in typeDef:
@@ -23,47 +27,51 @@ proc genVkHeaderVersionComplete*(typeDef: XmlNode): string =
       break
     if c.kind == xnElement and c.tag == "type":
       isNextOfType = true
-  result =
-    "template headerVersionComplete*(): untyped =\n" &
-    "  makeVersion{args}".fmt
-proc genDefineHandle*(typeDef: XmlNode): string =
+  try:
+    some "template headerVersionComplete*(): untyped =\n" &
+         "  makeVersion{args}".fmt
+  except ValueError:
+    none string
+const
+  genDefineHandle* =
     "template defineHandle*(ObjectName: untyped) =\n" &
-    "  type ObjectName* = distinct pointer"
-proc genDefineNonDispatchableHandle*(typeDef: XmlNode): string =
+    "  type ObjectName* = distinct Handle"
+  genDefineNonDispatchableHandle* =
     "template defineNonDispatchableHandle*(ObjectName: untyped) =\n" &
-    "  type ObjectName* = distinct pointer"
-proc genApiVersion*(typeDef: XmlNode): string =
+    "  type ObjectName* = distinct NonDispatchableHandle"
+  genApiVersion* =
     "template apiVersion*(): untyped = makeVersion(1, 0, 0)"
-proc genApiVersion10*(typeDef: XmlNode): string =
+  genApiVersion10* =
     "template apiVersion10*(): untyped = makeVersion(1, 0, 0)"
-proc genApiVersion11*(typeDef: XmlNode): string =
+  genApiVersion11* =
     "template apiVersion11*(): untyped = makeVersion(1, 1, 0)"
-proc genApiVersion12*(typeDef: XmlNode): string =
+  genApiVersion12* =
     "template apiVersion12*(): untyped = makeVersion(1, 2, 0)"
-proc genMakeVersion*(typeDef: XmlNode): string =
+  genMakeVersion* =
     "template makeVersion*(major, minor, patch: uint32): untyped =\n" &
     "  ( (major shl 22) or (minor shl 12) or patch )"
-proc genVersionMajor*(typeDef: XmlNode): string =
+  genVersionMajor* =
     "template versionMajor*(major: uint32): untyped = ( major shl 22 )"
-proc genVersionMinor*(typeDef: XmlNode): string =
+  genVersionMinor* =
     "template versionMajor*(minor: uint32): untyped = ( minor shl 12 )"
-proc genVersionPatch*(typeDef: XmlNode): string =
+  genVersionPatch* =
     "template versionPatch*(patch: uint32): untyped = ( patch )"
-proc genNullHandle*(typeDef: XmlNode): string =
+  genNullHandle* =
     "template nullHandle*(): untyped = ( cast[pointer](0) )"
 
-let defineComponents* = newTable([
-  ("VK_DEFINE_HANDLE", genDefineHandle),
-  ("VK_DEFINE_NON_DISPATCHABLE_HANDLE", genDefineNonDispatchableHandle),
-  ("VK_MAKE_VERSION", genMakeVersion),
-  ("VK_API_VERSION", genApiVersion),
-  ("VK_API_VERSION_1_0", genApiVersion10),
-  ("VK_API_VERSION_1_1", genApiVersion11),
-  ("VK_API_VERSION_1_2", genApiVersion12),
-  ("VK_HEADER_VERSION", genVkHeaderVersion),
-  ("VK_HEADER_VERSION_COMPLETE", genVkHeaderVersionComplete),
-  ("VK_VERSION_MAJOR", genVersionMajor),
-  ("VK_VERSION_MINOR", genVersionMinor),
-  ("VK_VERSION_PATCH", genVersionPatch),
-  ("VK_NULL_HANDLE", genNullHandle),
-])
+func define*(id: string; typeDef: XmlNode): Option[string] {.raises: [].} =
+  case id
+  of "VK_DEFINE_HANDLE": some genDefineHandle
+  of "VK_DEFINE_NON_DISPATCHABLE_HANDLE": some genDefineNonDispatchableHandle
+  of "VK_MAKE_VERSION": some genMakeVersion
+  of "VK_API_VERSION": some genApiVersion
+  of "VK_API_VERSION_1_0": some genApiVersion10
+  of "VK_API_VERSION_1_1": some genApiVersion11
+  of "VK_API_VERSION_1_2": some genApiVersion12
+  of "VK_HEADER_VERSION": genVkHeaderVersion(typeDef)
+  of "VK_HEADER_VERSION_COMPLETE": genVkHeaderVersionComplete(typeDef)
+  of "VK_VERSION_MAJOR": some genVersionMajor
+  of "VK_VERSION_MINOR": some genVersionMinor
+  of "VK_VERSION_PATCH": some genVersionPatch
+  of "VK_NULL_HANDLE": some genNullHandle
+  else: none string
