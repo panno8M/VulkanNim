@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_surface
 
 
-
+const
+  ExtMetalSurfaceSpecVersion* = 1
+  ExtMetalSurfaceExtensionName* = "VK_EXT_metal_surface"
 
 type
   MetalSurfaceCreateFlagsEXT* = distinct Flags

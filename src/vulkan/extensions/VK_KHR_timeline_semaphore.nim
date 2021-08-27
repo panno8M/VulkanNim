@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  KhrTimelineSemaphoreSpecVersion* = 2
+  KhrTimelineSemaphoreExtensionName* = "VK_KHR_timeline_semaphore"
 
 type
   SemaphoreTypeKHR* = UnusedEnum

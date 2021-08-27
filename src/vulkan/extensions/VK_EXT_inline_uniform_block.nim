@@ -5,7 +5,9 @@ import VK_KHR_get_physical_device_properties2
 import VK_KHR_maintenance1
 
 
-
+const
+  ExtInlineUniformBlockSpecVersion* = 1
+  ExtInlineUniformBlockExtensionName* = "VK_EXT_inline_uniform_block"
 
 type
   PhysicalDeviceInlineUniformBlockFeaturesEXT* = object

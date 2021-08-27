@@ -3,9 +3,8 @@ import ../platform
 import ../features/vk10
 
 
-
-
-type
-
+const
+  ExtShaderStencilExportSpecVersion* = 1
+  ExtShaderStencilExportExtensionName* = "VK_EXT_shader_stencil_export"
 
 

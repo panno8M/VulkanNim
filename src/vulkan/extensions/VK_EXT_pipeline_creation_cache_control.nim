@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  ExtPipelineCreationCacheControlSpecVersion* = 3
+  ExtPipelineCreationCacheControlExtensionName* = "VK_EXT_pipeline_creation_cache_control"
 
 type
   PhysicalDevicePipelineCreationCacheControlFeaturesEXT* = object

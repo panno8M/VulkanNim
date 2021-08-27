@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  ExtDepthClipEnableSpecVersion* = 1
+  ExtDepthClipEnableExtensionName* = "VK_EXT_depth_clip_enable"
 
 type
   PhysicalDeviceDepthClipEnableFeaturesEXT* = object

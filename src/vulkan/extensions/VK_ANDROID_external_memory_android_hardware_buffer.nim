@@ -7,7 +7,9 @@ import VK_EXT_queue_family_foreign
 import VK_KHR_dedicated_allocation
 
 
-
+const
+  AndroidExternalMemoryAndroidHardwareBufferSpecVersion* = 3
+  AndroidExternalMemoryAndroidHardwareBufferExtensionName* = "VK_ANDROID_external_memory_android_hardware_buffer"
 
 type
   AndroidHardwareBufferUsageANDROID* = object

@@ -3,9 +3,8 @@ import ../platform
 import ../features/vk10
 
 
-
-
-type
-
+const
+  NvFillRectangleSpecVersion* = 1
+  NvFillRectangleExtensionName* = "VK_NV_fill_rectangle"
 
 

@@ -3,8 +3,10 @@ import ../platform
 import ../features/vk10
 
 
-template MaxDeviceGroupSizeKhr*(): untyped =
-  VkMaxDeviceGroupSize
+const
+  KhrDeviceGroupCreationSpecVersion* = 1
+  KhrDeviceGroupCreationExtensionName* = "VK_KHR_device_group_creation"
+  MaxDeviceGroupSizeKhr* = MaxDeviceGroupSize
 
 type
   PhysicalDeviceGroupPropertiesKHR* = object

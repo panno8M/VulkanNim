@@ -6,9 +6,8 @@ import VK_KHR_maintenance2
 import VK_KHR_image_format_list
 
 
-
-
-type
-
+const
+  KhrSwapchainMutableFormatSpecVersion* = 1
+  KhrSwapchainMutableFormatExtensionName* = "VK_KHR_swapchain_mutable_format"
 
 

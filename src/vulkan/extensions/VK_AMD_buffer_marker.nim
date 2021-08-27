@@ -3,10 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
-
-type
-
+const
+  AmdBufferMarkerSpecVersion* = 1
+  AmdBufferMarkerExtensionName* = "VK_AMD_buffer_marker"
 
 var # commands
   cmdWriteBufferMarkerAMDCage: proc(commandBuffer: CommandBuffer; pipelineStage: PipelineStageFlagBits; dstBuffer: Buffer; dstOffset: DeviceSize; marker: uint32;): void {.cdecl.}

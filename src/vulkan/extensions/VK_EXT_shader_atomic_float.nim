@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  ExtShaderAtomicFloatSpecVersion* = 1
+  ExtShaderAtomicFloatExtensionName* = "VK_EXT_shader_atomic_float"
 
 type
   PhysicalDeviceShaderAtomicFloatFeaturesEXT* = object

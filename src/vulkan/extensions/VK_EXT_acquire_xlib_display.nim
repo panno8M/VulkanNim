@@ -4,10 +4,9 @@ import ../features/vk10
 import VK_EXT_direct_mode_display
 
 
-
-
-type
-
+const
+  ExtAcquireXlibDisplaySpecVersion* = 1
+  ExtAcquireXlibDisplayExtensionName* = "VK_EXT_acquire_xlib_display"
 
 var # commands
   acquireXlibDisplayEXTCage: proc(physicalDevice: PhysicalDevice; dpy: ptr Display; display: DisplayKHR;): Result {.cdecl.}

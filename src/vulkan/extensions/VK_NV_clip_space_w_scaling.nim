@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  NvClipSpaceWScalingSpecVersion* = 1
+  NvClipSpaceWScalingExtensionName* = "VK_NV_clip_space_w_scaling"
 
 type
   ViewportWScalingNV* = object

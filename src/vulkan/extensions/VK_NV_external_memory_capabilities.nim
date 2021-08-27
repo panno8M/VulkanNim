@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  NvExternalMemoryCapabilitiesSpecVersion* = 1
+  NvExternalMemoryCapabilitiesExtensionName* = "VK_NV_external_memory_capabilities"
 
 type
   ExternalMemoryHandleTypeFlagsNV* = distinct Flags

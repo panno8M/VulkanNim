@@ -5,8 +5,10 @@ import VK_KHR_get_physical_device_properties2
 import VK_KHR_get_memory_requirements2
 
 
-template ShaderUnusedNv*(): untyped =
-  VkShaderUnusedKhr
+const
+  NvRayTracingSpecVersion* = 3
+  NvRayTracingExtensionName* = "VK_NV_ray_tracing"
+  ShaderUnusedNv* = ShaderUnusedKhr
 
 type
   RayTracingShaderGroupCreateInfoNV* = object

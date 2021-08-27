@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  ExtImageRobustnessSpecVersion* = 1
+  ExtImageRobustnessExtensionName* = "VK_EXT_image_robustness"
 
 type
   PhysicalDeviceImageRobustnessFeaturesEXT* = object

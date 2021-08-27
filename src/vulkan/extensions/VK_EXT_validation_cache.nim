@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  ExtValidationCacheSpecVersion* = 1
+  ExtValidationCacheExtensionName* = "VK_EXT_validation_cache"
 
 type
   ValidationCacheEXT* = distinct NonDispatchableHandle

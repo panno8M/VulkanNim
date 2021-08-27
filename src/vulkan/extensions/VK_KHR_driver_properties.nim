@@ -4,10 +4,11 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-template MaxDriverNameSizeKhr*(): untyped =
-  VkMaxDriverNameSize
-template MaxDriverInfoSizeKhr*(): untyped =
-  VkMaxDriverInfoSize
+const
+  KhrDriverPropertiesSpecVersion* = 1
+  KhrDriverPropertiesExtensionName* = "VK_KHR_driver_properties"
+  MaxDriverNameSizeKhr* = MaxDriverNameSize
+  MaxDriverInfoSizeKhr* = MaxDriverInfoSize
 
 type
   DriverIdKHR* = UnusedEnum

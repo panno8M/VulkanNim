@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  KhrDescriptorUpdateTemplateSpecVersion* = 1
+  KhrDescriptorUpdateTemplateExtensionName* = "VK_KHR_descriptor_update_template"
 
 type
   DescriptorUpdateTemplateKHR* = DescriptorUpdateTemplate
@@ -19,6 +21,7 @@ var # commands
 const createDescriptorUpdateTemplateKHR* = createDescriptorUpdateTemplate
 const destroyDescriptorUpdateTemplateKHR* = destroyDescriptorUpdateTemplate
 const updateDescriptorSetWithTemplateKHR* = updateDescriptorSetWithTemplate
+
 
 var # commands
   cmdPushDescriptorSetWithTemplateKHRCage: proc(commandBuffer: CommandBuffer; descriptorUpdateTemplate: DescriptorUpdateTemplate; layout: PipelineLayout; set: uint32; pData: pointer;): void {.cdecl.}

@@ -187,7 +187,7 @@ proc removeSuffix*(str, suffix: string): string =
   str.removeSuffix(suffix)
   return str
 
-proc parseEnumName*(str: string; enumsName: string; vendorTags: VendorTags): string =
+proc parseEnumValue*(str: string; enumsName: string; vendorTags: VendorTags): string =
   let removablePrefix = enumsName
     .removeVkPrefix
     .removeVendorTags(vendorTags)

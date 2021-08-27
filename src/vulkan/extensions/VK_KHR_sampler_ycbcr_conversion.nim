@@ -7,7 +7,9 @@ import VK_KHR_get_memory_requirements2
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  KhrSamplerYcbcrConversionSpecVersion* = 14
+  KhrSamplerYcbcrConversionExtensionName* = "VK_KHR_sampler_ycbcr_conversion"
 
 type
   SamplerYcbcrConversionCreateInfoKHR* = object

@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_surface
 
 
-
+const
+  KhrGetSurfaceCapabilities2SpecVersion* = 1
+  KhrGetSurfaceCapabilities2ExtensionName* = "VK_KHR_get_surface_capabilities2"
 
 type
   PhysicalDeviceSurfaceInfo2KHR* = object

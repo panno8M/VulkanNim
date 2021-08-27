@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  ExtConservativeRasterizationSpecVersion* = 1
+  ExtConservativeRasterizationExtensionName* = "VK_EXT_conservative_rasterization"
 
 type
   PhysicalDeviceConservativeRasterizationPropertiesEXT* = object

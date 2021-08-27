@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  NvDeviceGeneratedCommandsSpecVersion* = 3
+  NvDeviceGeneratedCommandsExtensionName* = "VK_NV_device_generated_commands"
 
 type
   PhysicalDeviceDeviceGeneratedCommandsPropertiesNV* = object

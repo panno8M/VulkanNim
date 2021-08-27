@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_NV_framebuffer_mixed_samples
 
 
-
+const
+  NvCoverageReductionModeSpecVersion* = 1
+  NvCoverageReductionModeExtensionName* = "VK_NV_coverage_reduction_mode"
 
 type
   PhysicalDeviceCoverageReductionModeFeaturesNV* = object

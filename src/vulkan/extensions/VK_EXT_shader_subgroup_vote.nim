@@ -3,9 +3,8 @@ import ../platform
 import ../features/vk10
 
 
-
-
-type
-
+const
+  ExtShaderSubgroupVoteSpecVersion* = 1
+  ExtShaderSubgroupVoteExtensionName* = "VK_EXT_shader_subgroup_vote"
 
 

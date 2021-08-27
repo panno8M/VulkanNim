@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  AmdMemoryOverallocationBehaviorSpecVersion* = 1
+  AmdMemoryOverallocationBehaviorExtensionName* = "VK_AMD_memory_overallocation_behavior"
 
 type
   MemoryOverallocationBehaviorAMD* {.size: sizeof(int32), pure.} = enum

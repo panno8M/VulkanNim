@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T00:37:04+09:00
+# Generated at 2021-08-27T14:10:15+09:00
 # vulkan 1.2
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -7,14 +7,13 @@ import ../platform
 import vk11
 export vk11
 
-const UuidSize* = 16
-const LuidSize* = 8
-const MaxDriverNameSize* = 256
-const MaxDriverInfoSize* = 256
+const
+  UuidSize* = 16
+  LuidSize* = 8
+  MaxDriverNameSize* = 256
+  MaxDriverInfoSize* = 256
 
 type
-  
-
   PhysicalDeviceVulkan11Features* = object
     sType*: StructureType
     pNext*: pointer
@@ -575,11 +574,14 @@ type
 
 template apiVersion12*(): untyped = makeVersion(1, 2, 0)
 
+
 # Promoted from VK_KHR_image_format_list (extension 148)
 # ------------------------------------------------------
 
+
 # Promoted from VK_KHR_sampler_mirror_clamp_to_edge (extension 15)
 # ----------------------------------------------------------------
+
 
 # Promoted from VK_KHR_draw_indirect_count (extension 170)
 # --------------------------------------------------------
@@ -607,9 +609,9 @@ proc cmdDrawIndexedIndirectCount*(
     ): void {.cdecl.} =
   cmdDrawIndexedIndirectCountCage(commandBuffer,buffer,offset,countBuffer,countBufferOffset,maxDrawCount,stride)
 
+
 # Promoted from VK_KHR_create_renderpass2 (extension 110)
 # -------------------------------------------------------
-
 var # commands
   createRenderPass2Cage: proc(device: Device; pCreateInfo: ptr RenderPassCreateInfo2; pAllocator: ptr AllocationCallbacks; pRenderPass: ptr RenderPass;): Result {.cdecl.}
   cmdBeginRenderPass2Cage: proc(commandBuffer: CommandBuffer; pRenderPassBegin: ptr RenderPassBeginInfo; pSubpassBeginInfo: ptr SubpassBeginInfo;): void {.cdecl.}
@@ -640,119 +642,141 @@ proc cmdEndRenderPass2*(
     ): void {.cdecl.} =
   cmdEndRenderPass2Cage(commandBuffer,pSubpassEndInfo)
 
+
 # Promoted from VK_KHR_8bit_storage (extension 178)
 # -------------------------------------------------
 
+
 # Promoted from VK_KHR_driver_properties (extension 197)
 # ------------------------------------------------------
+DriverId.defineAliases:
+  # Provided by VK_KHR_driver_properties
+  AmdProprietary as AmdProprietaryKhr
+  # Provided by VK_KHR_driver_properties
+  AmdOpenSource as AmdOpenSourceKhr
+  # Provided by VK_KHR_driver_properties
+  MesaRadv as MesaRadvKhr
+  # Provided by VK_KHR_driver_properties
+  NvidiaProprietary as NvidiaProprietaryKhr
+  # Provided by VK_KHR_driver_properties
+  IntelProprietaryWindows as IntelProprietaryWindowsKhr
+  # Provided by VK_KHR_driver_properties
+  IntelOpenSourceMesa as IntelOpenSourceMesaKhr
+  # Provided by VK_KHR_driver_properties
+  ImaginationProprietary as ImaginationProprietaryKhr
+  # Provided by VK_KHR_driver_properties
+  QualcommProprietary as QualcommProprietaryKhr
+  # Provided by VK_KHR_driver_properties
+  ArmProprietary as ArmProprietaryKhr
+  # Provided by VK_KHR_driver_properties
+  GoogleSwiftshader as GoogleSwiftshaderKhr
+  # Provided by VK_KHR_driver_properties
+  GgpProprietary as GgpProprietaryKhr
+  # Provided by VK_KHR_driver_properties
+  BroadcomProprietary as BroadcomProprietaryKhr
 
-# Provided by VK_KHR_driver_properties
-DriverId.defineAlias(AmdProprietaryKhr, AmdProprietary)
-# Provided by VK_KHR_driver_properties
-DriverId.defineAlias(AmdOpenSourceKhr, AmdOpenSource)
-# Provided by VK_KHR_driver_properties
-DriverId.defineAlias(MesaRadvKhr, MesaRadv)
-# Provided by VK_KHR_driver_properties
-DriverId.defineAlias(NvidiaProprietaryKhr, NvidiaProprietary)
-# Provided by VK_KHR_driver_properties
-DriverId.defineAlias(IntelProprietaryWindowsKhr, IntelProprietaryWindows)
-# Provided by VK_KHR_driver_properties
-DriverId.defineAlias(IntelOpenSourceMesaKhr, IntelOpenSourceMesa)
-# Provided by VK_KHR_driver_properties
-DriverId.defineAlias(ImaginationProprietaryKhr, ImaginationProprietary)
-# Provided by VK_KHR_driver_properties
-DriverId.defineAlias(QualcommProprietaryKhr, QualcommProprietary)
-# Provided by VK_KHR_driver_properties
-DriverId.defineAlias(ArmProprietaryKhr, ArmProprietary)
-# Provided by VK_KHR_driver_properties
-DriverId.defineAlias(GoogleSwiftshaderKhr, GoogleSwiftshader)
-# Provided by VK_KHR_driver_properties
-DriverId.defineAlias(GgpProprietaryKhr, GgpProprietary)
-# Provided by VK_KHR_driver_properties
-DriverId.defineAlias(BroadcomProprietaryKhr, BroadcomProprietary)
+
 
 # Promoted from VK_KHR_shader_atomic_int64 (extension 181)
 # --------------------------------------------------------
 
+
 # Promoted from VK_KHR_shader_float16_int8 (extension 83)
 # -------------------------------------------------------
 
+
 # Promoted from VK_KHR_shader_float_controls (extension 198)
 # ----------------------------------------------------------
+ShaderFloatControlsIndependence.defineAliases:
+  # Provided by VK_KHR_shader_float_controls
+  Vk32BitOnly as Vk32BitOnlyKhr
+  # Provided by VK_KHR_shader_float_controls
+  All as AllKhr
+  # Provided by VK_KHR_shader_float_controls
+  None as NoneKhr
 
-# Provided by VK_KHR_shader_float_controls
-ShaderFloatControlsIndependence.defineAlias(Vk32BitOnlyKhr, Vk32BitOnly)
-# Provided by VK_KHR_shader_float_controls
-ShaderFloatControlsIndependence.defineAlias(AllKhr, All)
-# Provided by VK_KHR_shader_float_controls
-ShaderFloatControlsIndependence.defineAlias(NoneKhr, None)
+
 
 # Promoted from VK_EXT_descriptor_indexing (extension 162)
 # --------------------------------------------------------
+DescriptorBindingFlagBits.defineAliases:
+  # Provided by VK_EXT_descriptor_indexing
+  UpdateAfterBind as UpdateAfterBindBitExt
+  # Provided by VK_EXT_descriptor_indexing
+  UpdateUnusedWhilePending as UpdateUnusedWhilePendingBitExt
+  # Provided by VK_EXT_descriptor_indexing
+  PartiallyBound as PartiallyBoundBitExt
+  # Provided by VK_EXT_descriptor_indexing
+  VariableDescriptorCount as VariableDescriptorCountBitExt
 
-# Provided by VK_EXT_descriptor_indexing
-DescriptorBindingFlagBits.defineAlias(UpdateAfterBindBitExt, UpdateAfterBind)
-# Provided by VK_EXT_descriptor_indexing
-DescriptorBindingFlagBits.defineAlias(UpdateUnusedWhilePendingBitExt, UpdateUnusedWhilePending)
-# Provided by VK_EXT_descriptor_indexing
-DescriptorBindingFlagBits.defineAlias(PartiallyBoundBitExt, PartiallyBound)
-# Provided by VK_EXT_descriptor_indexing
-DescriptorBindingFlagBits.defineAlias(VariableDescriptorCountBitExt, VariableDescriptorCount)
+
 
 # Promoted from VK_KHR_depth_stencil_resolve (extension 200)
 # ----------------------------------------------------------
+ResolveModeFlagBits.defineAliases:
+  # Provided by VK_KHR_depth_stencil_resolve
+  None as NoneKhr
+  # Provided by VK_KHR_depth_stencil_resolve
+  SampleZero as SampleZeroBitKhr
+  # Provided by VK_KHR_depth_stencil_resolve
+  Average as AverageBitKhr
+  # Provided by VK_KHR_depth_stencil_resolve
+  Min as MinBitKhr
+  # Provided by VK_KHR_depth_stencil_resolve
+  Max as MaxBitKhr
 
-# Provided by VK_KHR_depth_stencil_resolve
-ResolveModeFlagBits.defineAlias(NoneKhr, None)
-# Provided by VK_KHR_depth_stencil_resolve
-ResolveModeFlagBits.defineAlias(SampleZeroBitKhr, SampleZero)
-# Provided by VK_KHR_depth_stencil_resolve
-ResolveModeFlagBits.defineAlias(AverageBitKhr, Average)
-# Provided by VK_KHR_depth_stencil_resolve
-ResolveModeFlagBits.defineAlias(MinBitKhr, Min)
-# Provided by VK_KHR_depth_stencil_resolve
-ResolveModeFlagBits.defineAlias(MaxBitKhr, Max)
+
 
 # Promoted from VK_EXT_scalar_block_layout (extension 222))
 # ---------------------------------------------------------
 
+
 # Promoted from VK_EXT_shader_viewport_index_layer, which has no API (extension 163)
 # ----------------------------------------------------------------------------------
+
 
 # Promoted from VK_EXT_separate_stencil_usage (extension 247)
 # -----------------------------------------------------------
 
+
 # Promoted from VK_EXT_sampler_filter_minmax (extension 131)
 # ----------------------------------------------------------
+SamplerReductionMode.defineAliases:
+  # Provided by VK_EXT_sampler_filter_minmax
+  WeightedAverage as WeightedAverageExt
+  # Provided by VK_EXT_sampler_filter_minmax
+  Min as MinExt
+  # Provided by VK_EXT_sampler_filter_minmax
+  Max as MaxExt
 
-# Provided by VK_EXT_sampler_filter_minmax
-SamplerReductionMode.defineAlias(WeightedAverageExt, WeightedAverage)
-# Provided by VK_EXT_sampler_filter_minmax
-SamplerReductionMode.defineAlias(MinExt, Min)
-# Provided by VK_EXT_sampler_filter_minmax
-SamplerReductionMode.defineAlias(MaxExt, Max)
+
 
 # Promoted from VK_KHR_vulkan_memory_model (extension 212)
 # --------------------------------------------------------
 
+
 # Promoted from VK_KHR_imageless_framebuffer (extension 109)
 # ----------------------------------------------------------
+
 
 # Promoted from VK_KHR_uniform_buffer_standard_layout (extension 254)
 # -------------------------------------------------------------------
 
+
 # Promoted from VK_KHR_shader_subgroup_extended_types (extension 176)
 # -------------------------------------------------------------------
+
 
 # Promoted from VK_KHR_spirv_1_4 (extension 237)
 # ----------------------------------------------
 
+
 # Promoted from VK_KHR_separate_depth_stencil_layouts (extension 242)
 # -------------------------------------------------------------------
 
+
 # Promoted from VK_EXT_host_query_reset (extension 262)
 # -----------------------------------------------------
-
 var # commands
   resetQueryPoolCage: proc(device: Device; queryPool: QueryPool; firstQuery: uint32; queryCount: uint32;): void {.cdecl.}
 proc resetQueryPool*(
@@ -763,16 +787,18 @@ proc resetQueryPool*(
     ): void {.cdecl.} =
   resetQueryPoolCage(device,queryPool,firstQuery,queryCount)
 
+
 # Promoted from VK_KHR_timeline_semaphore (extension 208)
 # -------------------------------------------------------
+SemaphoreType.defineAliases:
+  # Provided by VK_KHR_timeline_semaphore
+  Binary as BinaryKhr
+  # Provided by VK_KHR_timeline_semaphore
+  Timeline as TimelineKhr
 
-# Provided by VK_KHR_timeline_semaphore
-SemaphoreType.defineAlias(BinaryKhr, Binary)
-# Provided by VK_KHR_timeline_semaphore
-SemaphoreType.defineAlias(TimelineKhr, Timeline)
-
-# Provided by VK_KHR_timeline_semaphore
-SemaphoreWaitFlagBits.defineAlias(AnyBitKhr, Any)
+SemaphoreWaitFlagBits.defineAliases:
+  # Provided by VK_KHR_timeline_semaphore
+  Any as AnyBitKhr
 
 var # commands
   getSemaphoreCounterValueCage: proc(device: Device; semaphore: Semaphore; pValue: ptr uint64;): Result {.cdecl.}
@@ -796,9 +822,9 @@ proc signalSemaphore*(
     ): Result {.cdecl, discardable.} =
   signalSemaphoreCage(device,pSignalInfo)
 
+
 # Promoted from VK_KHR_buffer_device_address (extension 258)
 # ----------------------------------------------------------
-
 var # commands
   getBufferDeviceAddressCage: proc(device: Device; pInfo: ptr BufferDeviceAddressInfo;): DeviceAddress {.cdecl.}
   getBufferOpaqueCaptureAddressCage: proc(device: Device; pInfo: ptr BufferDeviceAddressInfo;): uint64 {.cdecl.}
@@ -822,29 +848,24 @@ proc loadVk12*(instance: Instance) =
   instance.defineLoader(`<<`)
 
   # Promoted from VK_KHR_draw_indirect_count (extension 170)
-  # --------------------------------------------------------
   cmdDrawIndirectCountCage << "vkCmdDrawIndirectCount"
   cmdDrawIndexedIndirectCountCage << "vkCmdDrawIndexedIndirectCount"
 
   # Promoted from VK_KHR_create_renderpass2 (extension 110)
-  # -------------------------------------------------------
   createRenderPass2Cage << "vkCreateRenderPass2"
   cmdBeginRenderPass2Cage << "vkCmdBeginRenderPass2"
   cmdNextSubpass2Cage << "vkCmdNextSubpass2"
   cmdEndRenderPass2Cage << "vkCmdEndRenderPass2"
 
   # Promoted from VK_EXT_host_query_reset (extension 262)
-  # -----------------------------------------------------
   resetQueryPoolCage << "vkResetQueryPool"
 
   # Promoted from VK_KHR_timeline_semaphore (extension 208)
-  # -------------------------------------------------------
   getSemaphoreCounterValueCage << "vkGetSemaphoreCounterValue"
   waitSemaphoresCage << "vkWaitSemaphores"
   signalSemaphoreCage << "vkSignalSemaphore"
 
   # Promoted from VK_KHR_buffer_device_address (extension 258)
-  # ----------------------------------------------------------
   getBufferDeviceAddressCage << "vkGetBufferDeviceAddress"
   getBufferOpaqueCaptureAddressCage << "vkGetBufferOpaqueCaptureAddress"
   getDeviceMemoryOpaqueCaptureAddressCage << "vkGetDeviceMemoryOpaqueCaptureAddress"

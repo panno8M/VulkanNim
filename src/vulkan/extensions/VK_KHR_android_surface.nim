@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_surface
 
 
-
+const
+  KhrAndroidSurfaceSpecVersion* = 6
+  KhrAndroidSurfaceExtensionName* = "VK_KHR_android_surface"
 
 type
   ANativeWindow* = distinct object

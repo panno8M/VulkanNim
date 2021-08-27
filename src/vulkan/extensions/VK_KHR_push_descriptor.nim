@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  KhrPushDescriptorSpecVersion* = 2
+  KhrPushDescriptorExtensionName* = "VK_KHR_push_descriptor"
 
 type
   PhysicalDevicePushDescriptorPropertiesKHR* = object
@@ -24,6 +26,7 @@ proc cmdPushDescriptorSetKHR*(
     ): void {.cdecl.} =
   cmdPushDescriptorSetKHRCage(commandBuffer,pipelineBindPoint,layout,set,descriptorWriteCount,pDescriptorWrites)
 
+
 var # commands
   cmdPushDescriptorSetWithTemplateKHRCage: proc(commandBuffer: CommandBuffer; descriptorUpdateTemplate: DescriptorUpdateTemplate; layout: PipelineLayout; set: uint32; pData: pointer;): void {.cdecl.}
 proc cmdPushDescriptorSetWithTemplateKHR*(
@@ -34,6 +37,7 @@ proc cmdPushDescriptorSetWithTemplateKHR*(
       pData: pointer;
     ): void {.cdecl.} =
   cmdPushDescriptorSetWithTemplateKHRCage(commandBuffer,descriptorUpdateTemplate,layout,set,pData)
+
 
 var # commands
 proc loadVK_KHR_push_descriptor*(instance: Instance) =

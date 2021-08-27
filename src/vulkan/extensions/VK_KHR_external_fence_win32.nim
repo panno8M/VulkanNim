@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_external_fence
 
 
-
+const
+  KhrExternalFenceWin32SpecVersion* = 1
+  KhrExternalFenceWin32ExtensionName* = "VK_KHR_external_fence_win32"
 
 type
   ImportFenceWin32HandleInfoKHR* = object

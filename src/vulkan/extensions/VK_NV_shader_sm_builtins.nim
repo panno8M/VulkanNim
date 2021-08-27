@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  NvShaderSmBuiltinsSpecVersion* = 1
+  NvShaderSmBuiltinsExtensionName* = "VK_NV_shader_sm_builtins"
 
 type
   PhysicalDeviceShaderSMBuiltinsPropertiesNV* = object

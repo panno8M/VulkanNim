@@ -4,7 +4,11 @@ import ../features/vk10
 import VK_KHR_surface
 
 
-const MaxDeviceGroupSize* = 32
+const
+  KhrSwapchainSpecVersion* = 70
+  KhrSwapchainExtensionName* = "VK_KHR_swapchain"
+
+  MaxDeviceGroupSize* = 32
 
 type
   SwapchainCreateFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
@@ -126,6 +130,7 @@ proc queuePresentKHR*(
       pPresentInfo: ptr PresentInfoKHR;
     ): Result {.cdecl, discardable.} =
   queuePresentKHRCage(queue,pPresentInfo)
+
 
 var # commands
   getDeviceGroupPresentCapabilitiesKHRCage: proc(device: Device; pDeviceGroupPresentCapabilities: ptr DeviceGroupPresentCapabilitiesKHR;): Result {.cdecl.}

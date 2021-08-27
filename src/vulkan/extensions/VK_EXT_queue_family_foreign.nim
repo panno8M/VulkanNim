@@ -4,9 +4,9 @@ import ../features/vk10
 import VK_KHR_external_memory
 
 
-const QueueFamilyForeignExt* = (uint.high-2)
-
-type
-
+const
+  ExtQueueFamilyForeignSpecVersion* = 1
+  ExtQueueFamilyForeignExtensionName* = "VK_EXT_queue_family_foreign"
+  QueueFamilyForeignExt* = (uint.high-2)
 
 

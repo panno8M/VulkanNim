@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  KhrMaintenance3SpecVersion* = 1
+  KhrMaintenance3ExtensionName* = "VK_KHR_maintenance3"
 
 type
   PhysicalDeviceMaintenance3PropertiesKHR* = object

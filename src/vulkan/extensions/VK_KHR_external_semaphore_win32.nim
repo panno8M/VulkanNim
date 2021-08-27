@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_external_semaphore
 
 
-
+const
+  KhrExternalSemaphoreWin32SpecVersion* = 1
+  KhrExternalSemaphoreWin32ExtensionName* = "VK_KHR_external_semaphore_win32"
 
 type
   ImportSemaphoreWin32HandleInfoKHR* = object

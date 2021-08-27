@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  NvDeviceDiagnosticsConfigSpecVersion* = 1
+  NvDeviceDiagnosticsConfigExtensionName* = "VK_NV_device_diagnostics_config"
 
 type
   PhysicalDeviceDiagnosticsConfigFeaturesNV* = object

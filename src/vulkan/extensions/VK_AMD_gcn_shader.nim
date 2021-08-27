@@ -3,9 +3,8 @@ import ../platform
 import ../features/vk10
 
 
-
-
-type
-
+const
+  AmdGcnShaderSpecVersion* = 1
+  AmdGcnShaderExtensionName* = "VK_AMD_gcn_shader"
 
 

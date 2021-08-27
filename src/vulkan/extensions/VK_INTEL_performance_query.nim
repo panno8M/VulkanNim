@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  IntelPerformanceQuerySpecVersion* = 2
+  IntelPerformanceQueryExtensionName* = "VK_INTEL_performance_query"
 
 type
   PerformanceConfigurationTypeINTEL* {.size: sizeof(int32), pure.} = enum

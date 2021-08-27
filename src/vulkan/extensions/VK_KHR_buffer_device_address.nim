@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  KhrBufferDeviceAddressSpecVersion* = 1
+  KhrBufferDeviceAddressExtensionName* = "VK_KHR_buffer_device_address"
 
 type
   PhysicalDeviceBufferDeviceAddressFeaturesKHR* = object

@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_surface
 
 
-
+const
+  KhrDisplaySpecVersion* = 23
+  KhrDisplayExtensionName* = "VK_KHR_display"
 
 type
   DisplayKHR* = distinct NonDispatchableHandle

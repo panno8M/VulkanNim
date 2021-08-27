@@ -5,7 +5,9 @@ import VK_KHR_swapchain
 import VK_GGP_stream_descriptor_surface
 
 
-
+const
+  GgpFrameTokenSpecVersion* = 1
+  GgpFrameTokenExtensionName* = "VK_GGP_frame_token"
 
 type
   PresentFrameTokenGGP* = object

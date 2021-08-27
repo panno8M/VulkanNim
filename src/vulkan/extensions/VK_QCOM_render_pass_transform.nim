@@ -5,7 +5,9 @@ import VK_KHR_swapchain
 import VK_KHR_surface
 
 
-
+const
+  QcomRenderPassTransformSpecVersion* = 1
+  QcomRenderPassTransformExtensionName* = "VK_QCOM_render_pass_transform"
 
 type
   RenderPassTransformBeginInfoQCOM* = object

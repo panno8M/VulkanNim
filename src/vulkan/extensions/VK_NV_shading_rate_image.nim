@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  NvShadingRateImageSpecVersion* = 3
+  NvShadingRateImageExtensionName* = "VK_NV_shading_rate_image"
 
 type
   ShadingRatePaletteEntryNV* {.size: sizeof(int32), pure.} = enum
@@ -60,7 +62,6 @@ type
     CustomNv = 1
     PixelMajorNv = 2
     SampleMajorNv = 3
-
 
 var # commands
   cmdBindShadingRateImageNVCage: proc(commandBuffer: CommandBuffer; imageView: ImageView; imageLayout: ImageLayout;): void {.cdecl.}

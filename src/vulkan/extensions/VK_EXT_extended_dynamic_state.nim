@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  ExtExtendedDynamicStateSpecVersion* = 1
+  ExtExtendedDynamicStateExtensionName* = "VK_EXT_extended_dynamic_state"
 
 type
   PhysicalDeviceExtendedDynamicStateFeaturesEXT* = object

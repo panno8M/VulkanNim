@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_surface
 
 
-
+const
+  MmacosSurfaceSpecVersion* = 3
+  MmacosSurfaceExtensionName* = "VK_MVK_macos_surface"
 
 type
   MacOSSurfaceCreateFlagsMVK* = distinct Flags

@@ -3,9 +3,8 @@ import ../platform
 import ../features/vk10
 
 
-
-
-type
-
+const
+  NvGlslShaderSpecVersion* = 1
+  NvGlslShaderExtensionName* = "VK_NV_glsl_shader"
 
 

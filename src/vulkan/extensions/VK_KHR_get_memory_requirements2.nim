@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  KhrGetMemoryRequirements2SpecVersion* = 1
+  KhrGetMemoryRequirements2ExtensionName* = "VK_KHR_get_memory_requirements2"
 
 type
   BufferMemoryRequirementsInfo2KHR* = object

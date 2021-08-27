@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  ExtCustomBorderColorSpecVersion* = 12
+  ExtCustomBorderColorExtensionName* = "VK_EXT_custom_border_color"
 
 type
   SamplerCustomBorderColorCreateInfoEXT* = object

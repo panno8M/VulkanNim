@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  ExtDebugUtilsSpecVersion* = 2
+  ExtDebugUtilsExtensionName* = "VK_EXT_debug_utils"
 
 type
   DebugUtilsMessengerCallbackEXT* = proc(

@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  KhrDeferredHostOperationsSpecVersion* = 3
+  KhrDeferredHostOperationsExtensionName* = "VK_KHR_deferred_host_operations"
 
 type
   DeferredOperationKHR* = distinct NonDispatchableHandle

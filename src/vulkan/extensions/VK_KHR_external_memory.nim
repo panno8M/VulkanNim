@@ -4,8 +4,10 @@ import ../features/vk10
 import VK_KHR_external_memory_capabilities
 
 
-template QueueFamilyExternalKhr*(): untyped =
-  VkQueueFamilyExternal
+const
+  KhrExternalMemorySpecVersion* = 1
+  KhrExternalMemoryExtensionName* = "VK_KHR_external_memory"
+  QueueFamilyExternalKhr* = QueueFamilyExternal
 
 type
   ExternalMemoryImageCreateInfoKHR* = object

@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  KhrSurfaceSpecVersion* = 25
+  KhrSurfaceExtensionName* = "VK_KHR_surface"
 
 type
   SurfaceKHR* = distinct NonDispatchableHandle
@@ -79,9 +81,10 @@ type
     format*: Format
     colorSpace*: ColorSpaceKHR
 
-ColorSpaceKHR.defineAlias(ColorspaceSrgbNonlinearKhr, SrgbNonlinearKhr) # Backwards-compatible alias containing a typo
-# Provided by VK_EXT_swapchain_colorspace
-ColorSpaceKHR.defineAlias(DciP3LinearExt, DisplayP3LinearExt) # Deprecated name for backwards compatibility
+ColorSpaceKHR.defineAliases:
+  SrgbNonlinearKhr as ColorspaceSrgbNonlinearKhr # Backwards-compatible alias containing a typo
+  # Provided by VK_EXT_swapchain_colorspace
+  DisplayP3LinearExt as DciP3LinearExt # Deprecated name for backwards compatibility
 
 var # commands
   destroySurfaceKHRCage: proc(instance: Instance; surface: SurfaceKHR; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}

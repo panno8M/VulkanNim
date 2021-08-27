@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  ExtTexelBufferAlignmentSpecVersion* = 1
+  ExtTexelBufferAlignmentExtensionName* = "VK_EXT_texel_buffer_alignment"
 
 type
   PhysicalDeviceTexelBufferAlignmentFeaturesEXT* = object

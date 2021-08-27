@@ -3,9 +3,8 @@ import ../platform
 import ../features/vk10
 
 
-
-
-type
-
+const
+  AmdShaderBallotSpecVersion* = 1
+  AmdShaderBallotExtensionName* = "VK_AMD_shader_ballot"
 
 

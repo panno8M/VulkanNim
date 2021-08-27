@@ -4,7 +4,11 @@ import ../features/vk10
 import VK_KHR_device_group_creation
 
 
-const MaxDeviceGroupSize* = 32
+const
+  KhrDeviceGroupSpecVersion* = 4
+  KhrDeviceGroupExtensionName* = "VK_KHR_device_group"
+
+  MaxDeviceGroupSize* = 32
 
 type
   {name}* = {Alias}
@@ -68,6 +72,7 @@ const getDeviceGroupPeerMemoryFeaturesKHR* = getDeviceGroupPeerMemoryFeatures
 const cmdSetDeviceMaskKHR* = cmdSetDeviceMask
 const cmdDispatchBaseKHR* = cmdDispatchBase
 
+
 var # commands
   getDeviceGroupPresentCapabilitiesKHRCage: proc(device: Device; pDeviceGroupPresentCapabilities: ptr DeviceGroupPresentCapabilitiesKHR;): Result {.cdecl.}
   getDeviceGroupSurfacePresentModesKHRCage: proc(device: Device; surface: SurfaceKHR; pModes: ptr DeviceGroupPresentModeFlagsKHR;): Result {.cdecl.}
@@ -90,6 +95,7 @@ proc getPhysicalDevicePresentRectanglesKHR*(
       pRects: ptr Rect2D;
     ): Result {.cdecl, discardable.} =
   getPhysicalDevicePresentRectanglesKHRCage(physicalDevice,surface,pRectCount,pRects)
+
 
 var # commands
   acquireNextImage2KHRCage: proc(device: Device; pAcquireInfo: ptr AcquireNextImageInfoKHR; pImageIndex: ptr uint32;): Result {.cdecl.}

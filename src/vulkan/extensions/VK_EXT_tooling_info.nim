@@ -3,8 +3,11 @@ import ../platform
 import ../features/vk10
 
 
-const MaxExtensionNameSize* = 256
-const MaxDescriptionSize* = 256
+const
+  ExtToolingInfoSpecVersion* = 1
+  ExtToolingInfoExtensionName* = "VK_EXT_tooling_info"
+  MaxExtensionNameSize* = 256
+  MaxDescriptionSize* = 256
 
 type
   ToolPurposeFlagBitsEXT* {.size: sizeof(int32), pure.} = enum

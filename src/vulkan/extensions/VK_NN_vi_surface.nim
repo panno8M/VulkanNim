@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_surface
 
 
-
+const
+  NnViSurfaceSpecVersion* = 1
+  NnViSurfaceExtensionName* = "VK_NN_vi_surface"
 
 type
   ViSurfaceCreateFlagsNN* = distinct Flags

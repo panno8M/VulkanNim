@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  ExtSubgroupSizeControlSpecVersion* = 2
+  ExtSubgroupSizeControlExtensionName* = "VK_EXT_subgroup_size_control"
 
 type
   PhysicalDeviceSubgroupSizeControlFeaturesEXT* = object

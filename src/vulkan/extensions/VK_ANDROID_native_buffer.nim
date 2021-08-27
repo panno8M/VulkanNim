@@ -3,7 +3,11 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  AndroidNativeBufferSpecVersion* = 8
+  AndroidNativeBufferNumber* = 11
+  AndroidNativeBufferName* = "VK_ANDROID_native_buffer"
+  AndroidNativeBufferExtensionName* = AndroidNativeBufferName
 
 type
   NativeBufferANDROID* = object

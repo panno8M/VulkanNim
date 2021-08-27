@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  AmdShaderInfoSpecVersion* = 1
+  AmdShaderInfoExtensionName* = "VK_AMD_shader_info"
 
 type
   ShaderInfoTypeAMD* {.size: sizeof(int32), pure.} = enum

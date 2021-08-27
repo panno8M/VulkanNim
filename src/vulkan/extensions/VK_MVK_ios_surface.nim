@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_surface
 
 
-
+const
+  MiosSurfaceSpecVersion* = 3
+  MiosSurfaceExtensionName* = "VK_MVK_ios_surface"
 
 type
   IOSSurfaceCreateFlagsMVK* = distinct Flags

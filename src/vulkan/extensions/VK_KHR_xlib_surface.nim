@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_surface
 
 
-
+const
+  KhrXlibSurfaceSpecVersion* = 6
+  KhrXlibSurfaceExtensionName* = "VK_KHR_xlib_surface"
 
 type
   XlibSurfaceCreateFlagsKHR* = distinct Flags

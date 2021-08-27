@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  ExtRobustness2SpecVersion* = 1
+  ExtRobustness2ExtensionName* = "VK_EXT_robustness2"
 
 type
   PhysicalDeviceRobustness2FeaturesEXT* = object

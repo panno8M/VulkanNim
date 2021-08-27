@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T00:37:04+09:00
+# Generated at 2021-08-27T14:10:15+09:00
 # vulkan 1.0
 # Vulkan core API interface definitions
 # ======================================
@@ -6,37 +6,31 @@
 import ../platform
 
 
-# API constants
-# -------------
-const AttachmentUnused* = (uint.high)
-const False* = 0
-const LodClampNone* = 1000.0f
-const QueueFamilyIgnored* = (uint.high)
-const RemainingArrayLayers* = (uint.high)
-const RemainingMipLevels* = (uint.high)
-const SubpassExternal* = (uint.high)
-const True* = 1
-const WholeSize* = (uint.high)
+const
+  # API constants
+  AttachmentUnused* = (uint.high)
+  False* = 0
+  LodClampNone* = 1000.0f
+  QueueFamilyIgnored* = (uint.high)
+  RemainingArrayLayers* = (uint.high)
+  RemainingMipLevels* = (uint.high)
+  SubpassExternal* = (uint.high)
+  True* = 1
+  WholeSize* = (uint.high)
 
-# Device initialization
-# ---------------------
-const MaxMemoryTypes* = 32
-const MaxMemoryHeaps* = 16 # The maximum number of unique memory heaps, each of which supporting 1 or more memory types
-const MaxPhysicalDeviceNameSize* = 256
-const UuidSize* = 16
+  # Device initialization
+  MaxMemoryTypes* = 32
+  MaxMemoryHeaps* = 16 # The maximum number of unique memory heaps, each of which supporting 1 or more memory types
+  MaxPhysicalDeviceNameSize* = 256
+  UuidSize* = 16
 
-# Extension discovery commands
-# ----------------------------
-const MaxExtensionNameSize* = 256
+  # Extension discovery commands
+  MaxExtensionNameSize* = 256
 
-# Layer discovery commands
-# ------------------------
-const MaxDescriptionSize* = 256
+  # Layer discovery commands
+  MaxDescriptionSize* = 256
 
 type
-  # Header boilerplate
-  # ------------------
-
   # Fundamental types used by many commands and structures
   # ------------------------------------------------------
   Bool32* = distinct uint32
@@ -1072,9 +1066,6 @@ type
     Kazan = 0x00010003 # Kazan Software Renderer
     Codeplay = 0x00010004 # Codeplay Software Ltd. vendor ID
     Mesa = 0x00010005 # Mesa vendor ID
-
-  # API version macros
-  # ------------------
 
   # API constants
   # -------------
@@ -3293,650 +3284,650 @@ type
 
 # Header boilerplate
 # ------------------
-
 template defineHandle*(ObjectName: untyped) =
   type ObjectName* = distinct Handle
-
 template defineNonDispatchableHandle*(ObjectName: untyped) =
   type ObjectName* = distinct NonDispatchableHandle
 
+
 # Fundamental types used by many commands and structures
 # ------------------------------------------------------
+Result.defineAliases:
+  # Provided by VK_KHR_maintenance1
+  ErrorOutOfPoolMemory as ErrorOutOfPoolMemoryKhr
+  # Provided by VK_KHR_external_memory
+  ErrorInvalidExternalHandle as ErrorInvalidExternalHandleKhr
+  # Provided by VK_EXT_descriptor_indexing
+  ErrorFragmentation as ErrorFragmentationExt
+  # Provided by VK_EXT_buffer_device_address
+  ErrorInvalidOpaqueCaptureAddress as ErrorInvalidDeviceAddressExt
+  # Provided by VK_KHR_buffer_device_address
+  ErrorInvalidOpaqueCaptureAddress as ErrorInvalidOpaqueCaptureAddressKhr
+  # Provided by VK_EXT_pipeline_creation_cache_control
+  PipelineCompileRequiredExt as ErrorPipelineCompileRequiredExt
 
-# Provided by VK_KHR_maintenance1
-Result.defineAlias(ErrorOutOfPoolMemoryKhr, ErrorOutOfPoolMemory)
-# Provided by VK_KHR_external_memory
-Result.defineAlias(ErrorInvalidExternalHandleKhr, ErrorInvalidExternalHandle)
-# Provided by VK_EXT_descriptor_indexing
-Result.defineAlias(ErrorFragmentationExt, ErrorFragmentation)
-# Provided by VK_EXT_buffer_device_address
-Result.defineAlias(ErrorInvalidDeviceAddressExt, ErrorInvalidOpaqueCaptureAddress)
-# Provided by VK_KHR_buffer_device_address
-Result.defineAlias(ErrorInvalidOpaqueCaptureAddressKhr, ErrorInvalidOpaqueCaptureAddress)
-# Provided by VK_EXT_pipeline_creation_cache_control
-Result.defineAlias(ErrorPipelineCompileRequiredExt, PipelineCompileRequiredExt)
+StructureType.defineAliases:
+  # Provided by VK_VERSION_1_1
+  PhysicalDeviceVariablePointersFeatures as PhysicalDeviceVariablePointerFeatures
+  # Provided by VK_VERSION_1_1
+  PhysicalDeviceShaderDrawParametersFeatures as PhysicalDeviceShaderDrawParameterFeatures
+  # Provided by VK_EXT_debug_report
+  DebugReportCallbackCreateInfoExt as DebugReportCreateInfoExt # Backwards-compatible alias containing a typo
+  # Provided by VK_KHR_multiview
+  RenderPassMultiviewCreateInfo as RenderPassMultiviewCreateInfoKhr
+  # Provided by VK_KHR_multiview
+  PhysicalDeviceMultiviewFeatures as PhysicalDeviceMultiviewFeaturesKhr
+  # Provided by VK_KHR_multiview
+  PhysicalDeviceMultiviewProperties as PhysicalDeviceMultiviewPropertiesKhr
+  # Provided by VK_KHR_get_physical_device_properties2
+  PhysicalDeviceFeatures2 as PhysicalDeviceFeatures2Khr
+  # Provided by VK_KHR_get_physical_device_properties2
+  PhysicalDeviceProperties2 as PhysicalDeviceProperties2Khr
+  # Provided by VK_KHR_get_physical_device_properties2
+  FormatProperties2 as FormatProperties2Khr
+  # Provided by VK_KHR_get_physical_device_properties2
+  ImageFormatProperties2 as ImageFormatProperties2Khr
+  # Provided by VK_KHR_get_physical_device_properties2
+  PhysicalDeviceImageFormatInfo2 as PhysicalDeviceImageFormatInfo2Khr
+  # Provided by VK_KHR_get_physical_device_properties2
+  QueueFamilyProperties2 as QueueFamilyProperties2Khr
+  # Provided by VK_KHR_get_physical_device_properties2
+  PhysicalDeviceMemoryProperties2 as PhysicalDeviceMemoryProperties2Khr
+  # Provided by VK_KHR_get_physical_device_properties2
+  SparseImageFormatProperties2 as SparseImageFormatProperties2Khr
+  # Provided by VK_KHR_get_physical_device_properties2
+  PhysicalDeviceSparseImageFormatInfo2 as PhysicalDeviceSparseImageFormatInfo2Khr
+  # Provided by VK_KHR_device_group
+  MemoryAllocateFlagsInfo as MemoryAllocateFlagsInfoKhr
+  # Provided by VK_KHR_device_group
+  DeviceGroupRenderPassBeginInfo as DeviceGroupRenderPassBeginInfoKhr
+  # Provided by VK_KHR_device_group
+  DeviceGroupCommandBufferBeginInfo as DeviceGroupCommandBufferBeginInfoKhr
+  # Provided by VK_KHR_device_group
+  DeviceGroupSubmitInfo as DeviceGroupSubmitInfoKhr
+  # Provided by VK_KHR_device_group
+  DeviceGroupBindSparseInfo as DeviceGroupBindSparseInfoKhr
+  # Provided by VK_KHR_device_group
+  BindBufferMemoryDeviceGroupInfo as BindBufferMemoryDeviceGroupInfoKhr
+  # Provided by VK_KHR_device_group
+  BindImageMemoryDeviceGroupInfo as BindImageMemoryDeviceGroupInfoKhr
+  # Provided by VK_KHR_device_group_creation
+  PhysicalDeviceGroupProperties as PhysicalDeviceGroupPropertiesKhr
+  # Provided by VK_KHR_device_group_creation
+  DeviceGroupDeviceCreateInfo as DeviceGroupDeviceCreateInfoKhr
+  # Provided by VK_KHR_external_memory_capabilities
+  PhysicalDeviceExternalImageFormatInfo as PhysicalDeviceExternalImageFormatInfoKhr
+  # Provided by VK_KHR_external_memory_capabilities
+  ExternalImageFormatProperties as ExternalImageFormatPropertiesKhr
+  # Provided by VK_KHR_external_memory_capabilities
+  PhysicalDeviceExternalBufferInfo as PhysicalDeviceExternalBufferInfoKhr
+  # Provided by VK_KHR_external_memory_capabilities
+  ExternalBufferProperties as ExternalBufferPropertiesKhr
+  # Provided by VK_KHR_external_memory_capabilities
+  PhysicalDeviceIdProperties as PhysicalDeviceIdPropertiesKhr
+  # Provided by VK_KHR_external_memory
+  ExternalMemoryBufferCreateInfo as ExternalMemoryBufferCreateInfoKhr
+  # Provided by VK_KHR_external_memory
+  ExternalMemoryImageCreateInfo as ExternalMemoryImageCreateInfoKhr
+  # Provided by VK_KHR_external_memory
+  ExportMemoryAllocateInfo as ExportMemoryAllocateInfoKhr
+  # Provided by VK_KHR_external_semaphore_capabilities
+  PhysicalDeviceExternalSemaphoreInfo as PhysicalDeviceExternalSemaphoreInfoKhr
+  # Provided by VK_KHR_external_semaphore_capabilities
+  ExternalSemaphoreProperties as ExternalSemaphorePropertiesKhr
+  # Provided by VK_KHR_external_semaphore_capabilities
+  PhysicalDeviceIdProperties as PhysicalDeviceIdPropertiesKhr
+  # Provided by VK_KHR_external_semaphore
+  ExportSemaphoreCreateInfo as ExportSemaphoreCreateInfoKhr
+  # Provided by VK_KHR_shader_float16_int8
+  PhysicalDeviceShaderFloat16Int8Features as PhysicalDeviceShaderFloat16Int8FeaturesKhr
+  # Provided by VK_KHR_shader_float16_int8
+  PhysicalDeviceShaderFloat16Int8Features as PhysicalDeviceFloat16Int8FeaturesKhr
+  # Provided by VK_KHR_16bit_storage
+  PhysicalDevice16bitStorageFeatures as PhysicalDevice16bitStorageFeaturesKhr
+  # Provided by VK_KHR_descriptor_update_template
+  DescriptorUpdateTemplateCreateInfo as DescriptorUpdateTemplateCreateInfoKhr
+  # Provided by VK_EXT_display_surface_counter
+  SurfaceCapabilities2Ext as SurfaceCapabilities2Ext # Backwards-compatible alias containing a typo
+  # Provided by VK_KHR_imageless_framebuffer
+  PhysicalDeviceImagelessFramebufferFeatures as PhysicalDeviceImagelessFramebufferFeaturesKhr
+  # Provided by VK_KHR_imageless_framebuffer
+  FramebufferAttachmentsCreateInfo as FramebufferAttachmentsCreateInfoKhr
+  # Provided by VK_KHR_imageless_framebuffer
+  FramebufferAttachmentImageInfo as FramebufferAttachmentImageInfoKhr
+  # Provided by VK_KHR_imageless_framebuffer
+  RenderPassAttachmentBeginInfo as RenderPassAttachmentBeginInfoKhr
+  # Provided by VK_KHR_create_renderpass2
+  AttachmentDescription2 as AttachmentDescription2Khr
+  # Provided by VK_KHR_create_renderpass2
+  AttachmentReference2 as AttachmentReference2Khr
+  # Provided by VK_KHR_create_renderpass2
+  SubpassDescription2 as SubpassDescription2Khr
+  # Provided by VK_KHR_create_renderpass2
+  SubpassDependency2 as SubpassDependency2Khr
+  # Provided by VK_KHR_create_renderpass2
+  RenderPassCreateInfo2 as RenderPassCreateInfo2Khr
+  # Provided by VK_KHR_create_renderpass2
+  SubpassBeginInfo as SubpassBeginInfoKhr
+  # Provided by VK_KHR_create_renderpass2
+  SubpassEndInfo as SubpassEndInfoKhr
+  # Provided by VK_KHR_external_fence_capabilities
+  PhysicalDeviceExternalFenceInfo as PhysicalDeviceExternalFenceInfoKhr
+  # Provided by VK_KHR_external_fence_capabilities
+  ExternalFenceProperties as ExternalFencePropertiesKhr
+  # Provided by VK_KHR_external_fence_capabilities
+  PhysicalDeviceIdProperties as PhysicalDeviceIdPropertiesKhr
+  # Provided by VK_KHR_external_fence
+  ExportFenceCreateInfo as ExportFenceCreateInfoKhr
+  # Provided by VK_KHR_maintenance2
+  PhysicalDevicePointClippingProperties as PhysicalDevicePointClippingPropertiesKhr
+  # Provided by VK_KHR_maintenance2
+  RenderPassInputAttachmentAspectCreateInfo as RenderPassInputAttachmentAspectCreateInfoKhr
+  # Provided by VK_KHR_maintenance2
+  ImageViewUsageCreateInfo as ImageViewUsageCreateInfoKhr
+  # Provided by VK_KHR_maintenance2
+  PipelineTessellationDomainOriginStateCreateInfo as PipelineTessellationDomainOriginStateCreateInfoKhr
+  # Provided by VK_KHR_variable_pointers
+  PhysicalDeviceVariablePointersFeatures as PhysicalDeviceVariablePointersFeaturesKhr
+  # Provided by VK_KHR_variable_pointers
+  PhysicalDeviceVariablePointersFeaturesKhr as PhysicalDeviceVariablePointerFeaturesKhr
+  # Provided by VK_KHR_dedicated_allocation
+  MemoryDedicatedRequirements as MemoryDedicatedRequirementsKhr
+  # Provided by VK_KHR_dedicated_allocation
+  MemoryDedicatedAllocateInfo as MemoryDedicatedAllocateInfoKhr
+  # Provided by VK_EXT_sampler_filter_minmax
+  PhysicalDeviceSamplerFilterMinmaxProperties as PhysicalDeviceSamplerFilterMinmaxPropertiesExt
+  # Provided by VK_EXT_sampler_filter_minmax
+  SamplerReductionModeCreateInfo as SamplerReductionModeCreateInfoExt
+  # Provided by VK_KHR_get_memory_requirements2
+  BufferMemoryRequirementsInfo2 as BufferMemoryRequirementsInfo2Khr
+  # Provided by VK_KHR_get_memory_requirements2
+  ImageMemoryRequirementsInfo2 as ImageMemoryRequirementsInfo2Khr
+  # Provided by VK_KHR_get_memory_requirements2
+  ImageSparseMemoryRequirementsInfo2 as ImageSparseMemoryRequirementsInfo2Khr
+  # Provided by VK_KHR_get_memory_requirements2
+  MemoryRequirements2 as MemoryRequirements2Khr
+  # Provided by VK_KHR_get_memory_requirements2
+  SparseImageMemoryRequirements2 as SparseImageMemoryRequirements2Khr
+  # Provided by VK_KHR_image_format_list
+  ImageFormatListCreateInfo as ImageFormatListCreateInfoKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  SamplerYcbcrConversionCreateInfo as SamplerYcbcrConversionCreateInfoKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  SamplerYcbcrConversionInfo as SamplerYcbcrConversionInfoKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  BindImagePlaneMemoryInfo as BindImagePlaneMemoryInfoKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  ImagePlaneMemoryRequirementsInfo as ImagePlaneMemoryRequirementsInfoKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  PhysicalDeviceSamplerYcbcrConversionFeatures as PhysicalDeviceSamplerYcbcrConversionFeaturesKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  SamplerYcbcrConversionImageFormatProperties as SamplerYcbcrConversionImageFormatPropertiesKhr
+  # Provided by VK_KHR_bind_memory2
+  BindBufferMemoryInfo as BindBufferMemoryInfoKhr
+  # Provided by VK_KHR_bind_memory2
+  BindImageMemoryInfo as BindImageMemoryInfoKhr
+  # Provided by VK_EXT_descriptor_indexing
+  DescriptorSetLayoutBindingFlagsCreateInfo as DescriptorSetLayoutBindingFlagsCreateInfoExt
+  # Provided by VK_EXT_descriptor_indexing
+  PhysicalDeviceDescriptorIndexingFeatures as PhysicalDeviceDescriptorIndexingFeaturesExt
+  # Provided by VK_EXT_descriptor_indexing
+  PhysicalDeviceDescriptorIndexingProperties as PhysicalDeviceDescriptorIndexingPropertiesExt
+  # Provided by VK_EXT_descriptor_indexing
+  DescriptorSetVariableDescriptorCountAllocateInfo as DescriptorSetVariableDescriptorCountAllocateInfoExt
+  # Provided by VK_EXT_descriptor_indexing
+  DescriptorSetVariableDescriptorCountLayoutSupport as DescriptorSetVariableDescriptorCountLayoutSupportExt
+  # Provided by VK_NV_ray_tracing
+  BindAccelerationStructureMemoryInfoKhr as BindAccelerationStructureMemoryInfoNv
+  # Provided by VK_NV_ray_tracing
+  WriteDescriptorSetAccelerationStructureKhr as WriteDescriptorSetAccelerationStructureNv
+  # Provided by VK_KHR_maintenance3
+  PhysicalDeviceMaintenance3Properties as PhysicalDeviceMaintenance3PropertiesKhr
+  # Provided by VK_KHR_maintenance3
+  DescriptorSetLayoutSupport as DescriptorSetLayoutSupportKhr
+  # Provided by VK_KHR_shader_subgroup_extended_types
+  PhysicalDeviceShaderSubgroupExtendedTypesFeatures as PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKhr
+  # Provided by VK_KHR_8bit_storage
+  PhysicalDevice8bitStorageFeatures as PhysicalDevice8bitStorageFeaturesKhr
+  # Provided by VK_KHR_shader_atomic_int64
+  PhysicalDeviceShaderAtomicInt64Features as PhysicalDeviceShaderAtomicInt64FeaturesKhr
+  # Provided by VK_KHR_driver_properties
+  PhysicalDeviceDriverProperties as PhysicalDeviceDriverPropertiesKhr
+  # Provided by VK_KHR_shader_float_controls
+  PhysicalDeviceFloatControlsProperties as PhysicalDeviceFloatControlsPropertiesKhr
+  # Provided by VK_KHR_depth_stencil_resolve
+  PhysicalDeviceDepthStencilResolveProperties as PhysicalDeviceDepthStencilResolvePropertiesKhr
+  # Provided by VK_KHR_depth_stencil_resolve
+  SubpassDescriptionDepthStencilResolve as SubpassDescriptionDepthStencilResolveKhr
+  # Provided by VK_KHR_timeline_semaphore
+  PhysicalDeviceTimelineSemaphoreFeatures as PhysicalDeviceTimelineSemaphoreFeaturesKhr
+  # Provided by VK_KHR_timeline_semaphore
+  PhysicalDeviceTimelineSemaphoreProperties as PhysicalDeviceTimelineSemaphorePropertiesKhr
+  # Provided by VK_KHR_timeline_semaphore
+  SemaphoreTypeCreateInfo as SemaphoreTypeCreateInfoKhr
+  # Provided by VK_KHR_timeline_semaphore
+  TimelineSemaphoreSubmitInfo as TimelineSemaphoreSubmitInfoKhr
+  # Provided by VK_KHR_timeline_semaphore
+  SemaphoreWaitInfo as SemaphoreWaitInfoKhr
+  # Provided by VK_KHR_timeline_semaphore
+  SemaphoreSignalInfo as SemaphoreSignalInfoKhr
+  # Provided by VK_INTEL_performance_query
+  QueryPoolPerformanceQueryCreateInfoIntel as QueryPoolCreateInfoIntel # Backwards-compatible alias
+  # Provided by VK_KHR_vulkan_memory_model
+  PhysicalDeviceVulkanMemoryModelFeatures as PhysicalDeviceVulkanMemoryModelFeaturesKhr
+  # Provided by VK_EXT_scalar_block_layout
+  PhysicalDeviceScalarBlockLayoutFeatures as PhysicalDeviceScalarBlockLayoutFeaturesExt
+  # Provided by VK_KHR_separate_depth_stencil_layouts
+  PhysicalDeviceSeparateDepthStencilLayoutsFeatures as PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKhr
+  # Provided by VK_KHR_separate_depth_stencil_layouts
+  AttachmentReferenceStencilLayout as AttachmentReferenceStencilLayoutKhr
+  # Provided by VK_KHR_separate_depth_stencil_layouts
+  AttachmentDescriptionStencilLayout as AttachmentDescriptionStencilLayoutKhr
+  # Provided by VK_EXT_buffer_device_address
+  PhysicalDeviceBufferDeviceAddressFeaturesExt as PhysicalDeviceBufferAddressFeaturesExt
+  # Provided by VK_EXT_buffer_device_address
+  BufferDeviceAddressInfo as BufferDeviceAddressInfoExt
+  # Provided by VK_EXT_separate_stencil_usage
+  ImageStencilUsageCreateInfo as ImageStencilUsageCreateInfoExt
+  # Provided by VK_KHR_uniform_buffer_standard_layout
+  PhysicalDeviceUniformBufferStandardLayoutFeatures as PhysicalDeviceUniformBufferStandardLayoutFeaturesKhr
+  # Provided by VK_KHR_buffer_device_address
+  PhysicalDeviceBufferDeviceAddressFeatures as PhysicalDeviceBufferDeviceAddressFeaturesKhr
+  # Provided by VK_KHR_buffer_device_address
+  BufferDeviceAddressInfo as BufferDeviceAddressInfoKhr
+  # Provided by VK_KHR_buffer_device_address
+  BufferOpaqueCaptureAddressCreateInfo as BufferOpaqueCaptureAddressCreateInfoKhr
+  # Provided by VK_KHR_buffer_device_address
+  MemoryOpaqueCaptureAddressAllocateInfo as MemoryOpaqueCaptureAddressAllocateInfoKhr
+  # Provided by VK_KHR_buffer_device_address
+  DeviceMemoryOpaqueCaptureAddressInfo as DeviceMemoryOpaqueCaptureAddressInfoKhr
+  # Provided by VK_EXT_host_query_reset
+  PhysicalDeviceHostQueryResetFeatures as PhysicalDeviceHostQueryResetFeaturesExt
 
-# Provided by VK_VERSION_1_1
-StructureType.defineAlias(PhysicalDeviceVariablePointerFeatures, PhysicalDeviceVariablePointersFeatures)
-# Provided by VK_VERSION_1_1
-StructureType.defineAlias(PhysicalDeviceShaderDrawParameterFeatures, PhysicalDeviceShaderDrawParametersFeatures)
-# Provided by VK_EXT_debug_report
-StructureType.defineAlias(DebugReportCreateInfoExt, DebugReportCallbackCreateInfoExt) # Backwards-compatible alias containing a typo
-# Provided by VK_KHR_multiview
-StructureType.defineAlias(RenderPassMultiviewCreateInfoKhr, RenderPassMultiviewCreateInfo)
-# Provided by VK_KHR_multiview
-StructureType.defineAlias(PhysicalDeviceMultiviewFeaturesKhr, PhysicalDeviceMultiviewFeatures)
-# Provided by VK_KHR_multiview
-StructureType.defineAlias(PhysicalDeviceMultiviewPropertiesKhr, PhysicalDeviceMultiviewProperties)
-# Provided by VK_KHR_get_physical_device_properties2
-StructureType.defineAlias(PhysicalDeviceFeatures2Khr, PhysicalDeviceFeatures2)
-# Provided by VK_KHR_get_physical_device_properties2
-StructureType.defineAlias(PhysicalDeviceProperties2Khr, PhysicalDeviceProperties2)
-# Provided by VK_KHR_get_physical_device_properties2
-StructureType.defineAlias(FormatProperties2Khr, FormatProperties2)
-# Provided by VK_KHR_get_physical_device_properties2
-StructureType.defineAlias(ImageFormatProperties2Khr, ImageFormatProperties2)
-# Provided by VK_KHR_get_physical_device_properties2
-StructureType.defineAlias(PhysicalDeviceImageFormatInfo2Khr, PhysicalDeviceImageFormatInfo2)
-# Provided by VK_KHR_get_physical_device_properties2
-StructureType.defineAlias(QueueFamilyProperties2Khr, QueueFamilyProperties2)
-# Provided by VK_KHR_get_physical_device_properties2
-StructureType.defineAlias(PhysicalDeviceMemoryProperties2Khr, PhysicalDeviceMemoryProperties2)
-# Provided by VK_KHR_get_physical_device_properties2
-StructureType.defineAlias(SparseImageFormatProperties2Khr, SparseImageFormatProperties2)
-# Provided by VK_KHR_get_physical_device_properties2
-StructureType.defineAlias(PhysicalDeviceSparseImageFormatInfo2Khr, PhysicalDeviceSparseImageFormatInfo2)
-# Provided by VK_KHR_device_group
-StructureType.defineAlias(MemoryAllocateFlagsInfoKhr, MemoryAllocateFlagsInfo)
-# Provided by VK_KHR_device_group
-StructureType.defineAlias(DeviceGroupRenderPassBeginInfoKhr, DeviceGroupRenderPassBeginInfo)
-# Provided by VK_KHR_device_group
-StructureType.defineAlias(DeviceGroupCommandBufferBeginInfoKhr, DeviceGroupCommandBufferBeginInfo)
-# Provided by VK_KHR_device_group
-StructureType.defineAlias(DeviceGroupSubmitInfoKhr, DeviceGroupSubmitInfo)
-# Provided by VK_KHR_device_group
-StructureType.defineAlias(DeviceGroupBindSparseInfoKhr, DeviceGroupBindSparseInfo)
-# Provided by VK_KHR_device_group
-StructureType.defineAlias(BindBufferMemoryDeviceGroupInfoKhr, BindBufferMemoryDeviceGroupInfo)
-# Provided by VK_KHR_device_group
-StructureType.defineAlias(BindImageMemoryDeviceGroupInfoKhr, BindImageMemoryDeviceGroupInfo)
-# Provided by VK_KHR_device_group_creation
-StructureType.defineAlias(PhysicalDeviceGroupPropertiesKhr, PhysicalDeviceGroupProperties)
-# Provided by VK_KHR_device_group_creation
-StructureType.defineAlias(DeviceGroupDeviceCreateInfoKhr, DeviceGroupDeviceCreateInfo)
-# Provided by VK_KHR_external_memory_capabilities
-StructureType.defineAlias(PhysicalDeviceExternalImageFormatInfoKhr, PhysicalDeviceExternalImageFormatInfo)
-# Provided by VK_KHR_external_memory_capabilities
-StructureType.defineAlias(ExternalImageFormatPropertiesKhr, ExternalImageFormatProperties)
-# Provided by VK_KHR_external_memory_capabilities
-StructureType.defineAlias(PhysicalDeviceExternalBufferInfoKhr, PhysicalDeviceExternalBufferInfo)
-# Provided by VK_KHR_external_memory_capabilities
-StructureType.defineAlias(ExternalBufferPropertiesKhr, ExternalBufferProperties)
-# Provided by VK_KHR_external_memory_capabilities
-StructureType.defineAlias(PhysicalDeviceIdPropertiesKhr, PhysicalDeviceIdProperties)
-# Provided by VK_KHR_external_memory
-StructureType.defineAlias(ExternalMemoryBufferCreateInfoKhr, ExternalMemoryBufferCreateInfo)
-# Provided by VK_KHR_external_memory
-StructureType.defineAlias(ExternalMemoryImageCreateInfoKhr, ExternalMemoryImageCreateInfo)
-# Provided by VK_KHR_external_memory
-StructureType.defineAlias(ExportMemoryAllocateInfoKhr, ExportMemoryAllocateInfo)
-# Provided by VK_KHR_external_semaphore_capabilities
-StructureType.defineAlias(PhysicalDeviceExternalSemaphoreInfoKhr, PhysicalDeviceExternalSemaphoreInfo)
-# Provided by VK_KHR_external_semaphore_capabilities
-StructureType.defineAlias(ExternalSemaphorePropertiesKhr, ExternalSemaphoreProperties)
-# Provided by VK_KHR_external_semaphore_capabilities
-StructureType.defineAlias(PhysicalDeviceIdPropertiesKhr, PhysicalDeviceIdProperties)
-# Provided by VK_KHR_external_semaphore
-StructureType.defineAlias(ExportSemaphoreCreateInfoKhr, ExportSemaphoreCreateInfo)
-# Provided by VK_KHR_shader_float16_int8
-StructureType.defineAlias(PhysicalDeviceShaderFloat16Int8FeaturesKhr, PhysicalDeviceShaderFloat16Int8Features)
-# Provided by VK_KHR_shader_float16_int8
-StructureType.defineAlias(PhysicalDeviceFloat16Int8FeaturesKhr, PhysicalDeviceShaderFloat16Int8Features)
-# Provided by VK_KHR_16bit_storage
-StructureType.defineAlias(PhysicalDevice16bitStorageFeaturesKhr, PhysicalDevice16bitStorageFeatures)
-# Provided by VK_KHR_descriptor_update_template
-StructureType.defineAlias(DescriptorUpdateTemplateCreateInfoKhr, DescriptorUpdateTemplateCreateInfo)
-# Provided by VK_EXT_display_surface_counter
-StructureType.defineAlias(SurfaceCapabilities2Ext, SurfaceCapabilities2Ext) # Backwards-compatible alias containing a typo
-# Provided by VK_KHR_imageless_framebuffer
-StructureType.defineAlias(PhysicalDeviceImagelessFramebufferFeaturesKhr, PhysicalDeviceImagelessFramebufferFeatures)
-# Provided by VK_KHR_imageless_framebuffer
-StructureType.defineAlias(FramebufferAttachmentsCreateInfoKhr, FramebufferAttachmentsCreateInfo)
-# Provided by VK_KHR_imageless_framebuffer
-StructureType.defineAlias(FramebufferAttachmentImageInfoKhr, FramebufferAttachmentImageInfo)
-# Provided by VK_KHR_imageless_framebuffer
-StructureType.defineAlias(RenderPassAttachmentBeginInfoKhr, RenderPassAttachmentBeginInfo)
-# Provided by VK_KHR_create_renderpass2
-StructureType.defineAlias(AttachmentDescription2Khr, AttachmentDescription2)
-# Provided by VK_KHR_create_renderpass2
-StructureType.defineAlias(AttachmentReference2Khr, AttachmentReference2)
-# Provided by VK_KHR_create_renderpass2
-StructureType.defineAlias(SubpassDescription2Khr, SubpassDescription2)
-# Provided by VK_KHR_create_renderpass2
-StructureType.defineAlias(SubpassDependency2Khr, SubpassDependency2)
-# Provided by VK_KHR_create_renderpass2
-StructureType.defineAlias(RenderPassCreateInfo2Khr, RenderPassCreateInfo2)
-# Provided by VK_KHR_create_renderpass2
-StructureType.defineAlias(SubpassBeginInfoKhr, SubpassBeginInfo)
-# Provided by VK_KHR_create_renderpass2
-StructureType.defineAlias(SubpassEndInfoKhr, SubpassEndInfo)
-# Provided by VK_KHR_external_fence_capabilities
-StructureType.defineAlias(PhysicalDeviceExternalFenceInfoKhr, PhysicalDeviceExternalFenceInfo)
-# Provided by VK_KHR_external_fence_capabilities
-StructureType.defineAlias(ExternalFencePropertiesKhr, ExternalFenceProperties)
-# Provided by VK_KHR_external_fence_capabilities
-StructureType.defineAlias(PhysicalDeviceIdPropertiesKhr, PhysicalDeviceIdProperties)
-# Provided by VK_KHR_external_fence
-StructureType.defineAlias(ExportFenceCreateInfoKhr, ExportFenceCreateInfo)
-# Provided by VK_KHR_maintenance2
-StructureType.defineAlias(PhysicalDevicePointClippingPropertiesKhr, PhysicalDevicePointClippingProperties)
-# Provided by VK_KHR_maintenance2
-StructureType.defineAlias(RenderPassInputAttachmentAspectCreateInfoKhr, RenderPassInputAttachmentAspectCreateInfo)
-# Provided by VK_KHR_maintenance2
-StructureType.defineAlias(ImageViewUsageCreateInfoKhr, ImageViewUsageCreateInfo)
-# Provided by VK_KHR_maintenance2
-StructureType.defineAlias(PipelineTessellationDomainOriginStateCreateInfoKhr, PipelineTessellationDomainOriginStateCreateInfo)
-# Provided by VK_KHR_variable_pointers
-StructureType.defineAlias(PhysicalDeviceVariablePointersFeaturesKhr, PhysicalDeviceVariablePointersFeatures)
-# Provided by VK_KHR_variable_pointers
-StructureType.defineAlias(PhysicalDeviceVariablePointerFeaturesKhr, PhysicalDeviceVariablePointersFeaturesKhr)
-# Provided by VK_KHR_dedicated_allocation
-StructureType.defineAlias(MemoryDedicatedRequirementsKhr, MemoryDedicatedRequirements)
-# Provided by VK_KHR_dedicated_allocation
-StructureType.defineAlias(MemoryDedicatedAllocateInfoKhr, MemoryDedicatedAllocateInfo)
-# Provided by VK_EXT_sampler_filter_minmax
-StructureType.defineAlias(PhysicalDeviceSamplerFilterMinmaxPropertiesExt, PhysicalDeviceSamplerFilterMinmaxProperties)
-# Provided by VK_EXT_sampler_filter_minmax
-StructureType.defineAlias(SamplerReductionModeCreateInfoExt, SamplerReductionModeCreateInfo)
-# Provided by VK_KHR_get_memory_requirements2
-StructureType.defineAlias(BufferMemoryRequirementsInfo2Khr, BufferMemoryRequirementsInfo2)
-# Provided by VK_KHR_get_memory_requirements2
-StructureType.defineAlias(ImageMemoryRequirementsInfo2Khr, ImageMemoryRequirementsInfo2)
-# Provided by VK_KHR_get_memory_requirements2
-StructureType.defineAlias(ImageSparseMemoryRequirementsInfo2Khr, ImageSparseMemoryRequirementsInfo2)
-# Provided by VK_KHR_get_memory_requirements2
-StructureType.defineAlias(MemoryRequirements2Khr, MemoryRequirements2)
-# Provided by VK_KHR_get_memory_requirements2
-StructureType.defineAlias(SparseImageMemoryRequirements2Khr, SparseImageMemoryRequirements2)
-# Provided by VK_KHR_image_format_list
-StructureType.defineAlias(ImageFormatListCreateInfoKhr, ImageFormatListCreateInfo)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-StructureType.defineAlias(SamplerYcbcrConversionCreateInfoKhr, SamplerYcbcrConversionCreateInfo)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-StructureType.defineAlias(SamplerYcbcrConversionInfoKhr, SamplerYcbcrConversionInfo)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-StructureType.defineAlias(BindImagePlaneMemoryInfoKhr, BindImagePlaneMemoryInfo)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-StructureType.defineAlias(ImagePlaneMemoryRequirementsInfoKhr, ImagePlaneMemoryRequirementsInfo)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-StructureType.defineAlias(PhysicalDeviceSamplerYcbcrConversionFeaturesKhr, PhysicalDeviceSamplerYcbcrConversionFeatures)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-StructureType.defineAlias(SamplerYcbcrConversionImageFormatPropertiesKhr, SamplerYcbcrConversionImageFormatProperties)
-# Provided by VK_KHR_bind_memory2
-StructureType.defineAlias(BindBufferMemoryInfoKhr, BindBufferMemoryInfo)
-# Provided by VK_KHR_bind_memory2
-StructureType.defineAlias(BindImageMemoryInfoKhr, BindImageMemoryInfo)
-# Provided by VK_EXT_descriptor_indexing
-StructureType.defineAlias(DescriptorSetLayoutBindingFlagsCreateInfoExt, DescriptorSetLayoutBindingFlagsCreateInfo)
-# Provided by VK_EXT_descriptor_indexing
-StructureType.defineAlias(PhysicalDeviceDescriptorIndexingFeaturesExt, PhysicalDeviceDescriptorIndexingFeatures)
-# Provided by VK_EXT_descriptor_indexing
-StructureType.defineAlias(PhysicalDeviceDescriptorIndexingPropertiesExt, PhysicalDeviceDescriptorIndexingProperties)
-# Provided by VK_EXT_descriptor_indexing
-StructureType.defineAlias(DescriptorSetVariableDescriptorCountAllocateInfoExt, DescriptorSetVariableDescriptorCountAllocateInfo)
-# Provided by VK_EXT_descriptor_indexing
-StructureType.defineAlias(DescriptorSetVariableDescriptorCountLayoutSupportExt, DescriptorSetVariableDescriptorCountLayoutSupport)
-# Provided by VK_NV_ray_tracing
-StructureType.defineAlias(BindAccelerationStructureMemoryInfoNv, BindAccelerationStructureMemoryInfoKhr)
-# Provided by VK_NV_ray_tracing
-StructureType.defineAlias(WriteDescriptorSetAccelerationStructureNv, WriteDescriptorSetAccelerationStructureKhr)
-# Provided by VK_KHR_maintenance3
-StructureType.defineAlias(PhysicalDeviceMaintenance3PropertiesKhr, PhysicalDeviceMaintenance3Properties)
-# Provided by VK_KHR_maintenance3
-StructureType.defineAlias(DescriptorSetLayoutSupportKhr, DescriptorSetLayoutSupport)
-# Provided by VK_KHR_shader_subgroup_extended_types
-StructureType.defineAlias(PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKhr, PhysicalDeviceShaderSubgroupExtendedTypesFeatures)
-# Provided by VK_KHR_8bit_storage
-StructureType.defineAlias(PhysicalDevice8bitStorageFeaturesKhr, PhysicalDevice8bitStorageFeatures)
-# Provided by VK_KHR_shader_atomic_int64
-StructureType.defineAlias(PhysicalDeviceShaderAtomicInt64FeaturesKhr, PhysicalDeviceShaderAtomicInt64Features)
-# Provided by VK_KHR_driver_properties
-StructureType.defineAlias(PhysicalDeviceDriverPropertiesKhr, PhysicalDeviceDriverProperties)
-# Provided by VK_KHR_shader_float_controls
-StructureType.defineAlias(PhysicalDeviceFloatControlsPropertiesKhr, PhysicalDeviceFloatControlsProperties)
-# Provided by VK_KHR_depth_stencil_resolve
-StructureType.defineAlias(PhysicalDeviceDepthStencilResolvePropertiesKhr, PhysicalDeviceDepthStencilResolveProperties)
-# Provided by VK_KHR_depth_stencil_resolve
-StructureType.defineAlias(SubpassDescriptionDepthStencilResolveKhr, SubpassDescriptionDepthStencilResolve)
-# Provided by VK_KHR_timeline_semaphore
-StructureType.defineAlias(PhysicalDeviceTimelineSemaphoreFeaturesKhr, PhysicalDeviceTimelineSemaphoreFeatures)
-# Provided by VK_KHR_timeline_semaphore
-StructureType.defineAlias(PhysicalDeviceTimelineSemaphorePropertiesKhr, PhysicalDeviceTimelineSemaphoreProperties)
-# Provided by VK_KHR_timeline_semaphore
-StructureType.defineAlias(SemaphoreTypeCreateInfoKhr, SemaphoreTypeCreateInfo)
-# Provided by VK_KHR_timeline_semaphore
-StructureType.defineAlias(TimelineSemaphoreSubmitInfoKhr, TimelineSemaphoreSubmitInfo)
-# Provided by VK_KHR_timeline_semaphore
-StructureType.defineAlias(SemaphoreWaitInfoKhr, SemaphoreWaitInfo)
-# Provided by VK_KHR_timeline_semaphore
-StructureType.defineAlias(SemaphoreSignalInfoKhr, SemaphoreSignalInfo)
-# Provided by VK_INTEL_performance_query
-StructureType.defineAlias(QueryPoolCreateInfoIntel, QueryPoolPerformanceQueryCreateInfoIntel) # Backwards-compatible alias
-# Provided by VK_KHR_vulkan_memory_model
-StructureType.defineAlias(PhysicalDeviceVulkanMemoryModelFeaturesKhr, PhysicalDeviceVulkanMemoryModelFeatures)
-# Provided by VK_EXT_scalar_block_layout
-StructureType.defineAlias(PhysicalDeviceScalarBlockLayoutFeaturesExt, PhysicalDeviceScalarBlockLayoutFeatures)
-# Provided by VK_KHR_separate_depth_stencil_layouts
-StructureType.defineAlias(PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKhr, PhysicalDeviceSeparateDepthStencilLayoutsFeatures)
-# Provided by VK_KHR_separate_depth_stencil_layouts
-StructureType.defineAlias(AttachmentReferenceStencilLayoutKhr, AttachmentReferenceStencilLayout)
-# Provided by VK_KHR_separate_depth_stencil_layouts
-StructureType.defineAlias(AttachmentDescriptionStencilLayoutKhr, AttachmentDescriptionStencilLayout)
-# Provided by VK_EXT_buffer_device_address
-StructureType.defineAlias(PhysicalDeviceBufferAddressFeaturesExt, PhysicalDeviceBufferDeviceAddressFeaturesExt)
-# Provided by VK_EXT_buffer_device_address
-StructureType.defineAlias(BufferDeviceAddressInfoExt, BufferDeviceAddressInfo)
-# Provided by VK_EXT_separate_stencil_usage
-StructureType.defineAlias(ImageStencilUsageCreateInfoExt, ImageStencilUsageCreateInfo)
-# Provided by VK_KHR_uniform_buffer_standard_layout
-StructureType.defineAlias(PhysicalDeviceUniformBufferStandardLayoutFeaturesKhr, PhysicalDeviceUniformBufferStandardLayoutFeatures)
-# Provided by VK_KHR_buffer_device_address
-StructureType.defineAlias(PhysicalDeviceBufferDeviceAddressFeaturesKhr, PhysicalDeviceBufferDeviceAddressFeatures)
-# Provided by VK_KHR_buffer_device_address
-StructureType.defineAlias(BufferDeviceAddressInfoKhr, BufferDeviceAddressInfo)
-# Provided by VK_KHR_buffer_device_address
-StructureType.defineAlias(BufferOpaqueCaptureAddressCreateInfoKhr, BufferOpaqueCaptureAddressCreateInfo)
-# Provided by VK_KHR_buffer_device_address
-StructureType.defineAlias(MemoryOpaqueCaptureAddressAllocateInfoKhr, MemoryOpaqueCaptureAddressAllocateInfo)
-# Provided by VK_KHR_buffer_device_address
-StructureType.defineAlias(DeviceMemoryOpaqueCaptureAddressInfoKhr, DeviceMemoryOpaqueCaptureAddressInfo)
-# Provided by VK_EXT_host_query_reset
-StructureType.defineAlias(PhysicalDeviceHostQueryResetFeaturesExt, PhysicalDeviceHostQueryResetFeatures)
+
 
 # These types are part of the API, though not directly used in API commands or data structures
 # --------------------------------------------------------------------------------------------
+ObjectType.defineAliases:
+  # Provided by VK_KHR_descriptor_update_template
+  DescriptorUpdateTemplate as DescriptorUpdateTemplateKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  SamplerYcbcrConversion as SamplerYcbcrConversionKhr
+  # Provided by VK_NV_ray_tracing
+  AccelerationStructureKhr as AccelerationStructureNv
 
-# Provided by VK_KHR_descriptor_update_template
-ObjectType.defineAlias(DescriptorUpdateTemplateKhr, DescriptorUpdateTemplate)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-ObjectType.defineAlias(SamplerYcbcrConversionKhr, SamplerYcbcrConversion)
-# Provided by VK_NV_ray_tracing
-ObjectType.defineAlias(AccelerationStructureNv, AccelerationStructureKhr)
+
 
 # API version macros
 # ------------------
-
 template apiVersion*(): untyped = makeVersion(1, 0, 0)
-
 template apiVersion10*(): untyped = makeVersion(1, 0, 0)
-
 template headerVersion*(): untyped = 152
-
 template headerVersionComplete*(): untyped =
   makeVersion(1, 2, headerVersion)
-
 template makeVersion*(major, minor, patch: uint32): untyped =
   ( (major shl 22) or (minor shl 12) or patch )
-
 template versionMajor*(major: uint32): untyped = ( major shl 22 )
-
 template versionMajor*(minor: uint32): untyped = ( minor shl 12 )
-
 template versionPatch*(patch: uint32): untyped = ( patch )
+
 
 # API constants
 # -------------
-
 template nullHandle*(): untyped = ( cast[pointer](0) )
+
 
 # Device initialization
 # ---------------------
+Format.defineAliases:
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G8b8g8r8422Unorm as G8b8g8r8422UnormKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  B8g8r8g8422Unorm as B8g8r8g8422UnormKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G8B8R83plane420Unorm as G8B8R83plane420UnormKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G8B8r82plane420Unorm as G8B8r82plane420UnormKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G8B8R83plane422Unorm as G8B8R83plane422UnormKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G8B8r82plane422Unorm as G8B8r82plane422UnormKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G8B8R83plane444Unorm as G8B8R83plane444UnormKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  R10x6UnormPack16 as R10x6UnormPack16Khr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  R10x6g10x6Unorm2pack16 as R10x6g10x6Unorm2pack16Khr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  R10x6g10x6b10x6a10x6Unorm4pack16 as R10x6g10x6b10x6a10x6Unorm4pack16Khr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G10x6b10x6g10x6r10x6422Unorm4pack16 as G10x6b10x6g10x6r10x6422Unorm4pack16Khr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  B10x6g10x6r10x6g10x6422Unorm4pack16 as B10x6g10x6r10x6g10x6422Unorm4pack16Khr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G10x6B10x6R10x63plane420Unorm3pack16 as G10x6B10x6R10x63plane420Unorm3pack16Khr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G10x6B10x6r10x62plane420Unorm3pack16 as G10x6B10x6r10x62plane420Unorm3pack16Khr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G10x6B10x6R10x63plane422Unorm3pack16 as G10x6B10x6R10x63plane422Unorm3pack16Khr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G10x6B10x6r10x62plane422Unorm3pack16 as G10x6B10x6r10x62plane422Unorm3pack16Khr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G10x6B10x6R10x63plane444Unorm3pack16 as G10x6B10x6R10x63plane444Unorm3pack16Khr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  R12x4UnormPack16 as R12x4UnormPack16Khr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  R12x4g12x4Unorm2pack16 as R12x4g12x4Unorm2pack16Khr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  R12x4g12x4b12x4a12x4Unorm4pack16 as R12x4g12x4b12x4a12x4Unorm4pack16Khr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G12x4b12x4g12x4r12x4422Unorm4pack16 as G12x4b12x4g12x4r12x4422Unorm4pack16Khr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  B12x4g12x4r12x4g12x4422Unorm4pack16 as B12x4g12x4r12x4g12x4422Unorm4pack16Khr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G12x4B12x4R12x43plane420Unorm3pack16 as G12x4B12x4R12x43plane420Unorm3pack16Khr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G12x4B12x4r12x42plane420Unorm3pack16 as G12x4B12x4r12x42plane420Unorm3pack16Khr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G12x4B12x4R12x43plane422Unorm3pack16 as G12x4B12x4R12x43plane422Unorm3pack16Khr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G12x4B12x4r12x42plane422Unorm3pack16 as G12x4B12x4r12x42plane422Unorm3pack16Khr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G12x4B12x4R12x43plane444Unorm3pack16 as G12x4B12x4R12x43plane444Unorm3pack16Khr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G16b16g16r16422Unorm as G16b16g16r16422UnormKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  B16g16r16g16422Unorm as B16g16r16g16422UnormKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G16B16R163plane420Unorm as G16B16R163plane420UnormKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G16B16r162plane420Unorm as G16B16r162plane420UnormKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G16B16R163plane422Unorm as G16B16R163plane422UnormKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G16B16r162plane422Unorm as G16B16r162plane422UnormKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  G16B16R163plane444Unorm as G16B16R163plane444UnormKhr
 
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G8b8g8r8422UnormKhr, G8b8g8r8422Unorm)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(B8g8r8g8422UnormKhr, B8g8r8g8422Unorm)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G8B8R83plane420UnormKhr, G8B8R83plane420Unorm)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G8B8r82plane420UnormKhr, G8B8r82plane420Unorm)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G8B8R83plane422UnormKhr, G8B8R83plane422Unorm)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G8B8r82plane422UnormKhr, G8B8r82plane422Unorm)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G8B8R83plane444UnormKhr, G8B8R83plane444Unorm)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(R10x6UnormPack16Khr, R10x6UnormPack16)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(R10x6g10x6Unorm2pack16Khr, R10x6g10x6Unorm2pack16)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(R10x6g10x6b10x6a10x6Unorm4pack16Khr, R10x6g10x6b10x6a10x6Unorm4pack16)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G10x6b10x6g10x6r10x6422Unorm4pack16Khr, G10x6b10x6g10x6r10x6422Unorm4pack16)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(B10x6g10x6r10x6g10x6422Unorm4pack16Khr, B10x6g10x6r10x6g10x6422Unorm4pack16)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G10x6B10x6R10x63plane420Unorm3pack16Khr, G10x6B10x6R10x63plane420Unorm3pack16)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G10x6B10x6r10x62plane420Unorm3pack16Khr, G10x6B10x6r10x62plane420Unorm3pack16)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G10x6B10x6R10x63plane422Unorm3pack16Khr, G10x6B10x6R10x63plane422Unorm3pack16)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G10x6B10x6r10x62plane422Unorm3pack16Khr, G10x6B10x6r10x62plane422Unorm3pack16)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G10x6B10x6R10x63plane444Unorm3pack16Khr, G10x6B10x6R10x63plane444Unorm3pack16)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(R12x4UnormPack16Khr, R12x4UnormPack16)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(R12x4g12x4Unorm2pack16Khr, R12x4g12x4Unorm2pack16)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(R12x4g12x4b12x4a12x4Unorm4pack16Khr, R12x4g12x4b12x4a12x4Unorm4pack16)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G12x4b12x4g12x4r12x4422Unorm4pack16Khr, G12x4b12x4g12x4r12x4422Unorm4pack16)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(B12x4g12x4r12x4g12x4422Unorm4pack16Khr, B12x4g12x4r12x4g12x4422Unorm4pack16)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G12x4B12x4R12x43plane420Unorm3pack16Khr, G12x4B12x4R12x43plane420Unorm3pack16)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G12x4B12x4r12x42plane420Unorm3pack16Khr, G12x4B12x4r12x42plane420Unorm3pack16)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G12x4B12x4R12x43plane422Unorm3pack16Khr, G12x4B12x4R12x43plane422Unorm3pack16)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G12x4B12x4r12x42plane422Unorm3pack16Khr, G12x4B12x4r12x42plane422Unorm3pack16)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G12x4B12x4R12x43plane444Unorm3pack16Khr, G12x4B12x4R12x43plane444Unorm3pack16)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G16b16g16r16422UnormKhr, G16b16g16r16422Unorm)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(B16g16r16g16422UnormKhr, B16g16r16g16422Unorm)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G16B16R163plane420UnormKhr, G16B16R163plane420Unorm)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G16B16r162plane420UnormKhr, G16B16r162plane420Unorm)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G16B16R163plane422UnormKhr, G16B16R163plane422Unorm)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G16B16r162plane422UnormKhr, G16B16r162plane422Unorm)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-Format.defineAlias(G16B16R163plane444UnormKhr, G16B16R163plane444Unorm)
+FormatFeatureFlagBits.defineAliases:
+  # Provided by VK_KHR_maintenance1
+  TransferSrc as TransferSrcBitKhr
+  # Provided by VK_KHR_maintenance1
+  TransferDst as TransferDstBitKhr
+  # Provided by VK_EXT_sampler_filter_minmax
+  SampledImageFilterMinmax as SampledImageFilterMinmaxBitExt
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  MidpointChromaSamples as MidpointChromaSamplesBitKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  SampledImageYcbcrConversionLinearFilter as SampledImageYcbcrConversionLinearFilterBitKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  SampledImageYcbcrConversionSeparateReconstructionFilter as SampledImageYcbcrConversionSeparateReconstructionFilterBitKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  SampledImageYcbcrConversionChromaReconstructionExplicit as SampledImageYcbcrConversionChromaReconstructionExplicitBitKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  SampledImageYcbcrConversionChromaReconstructionExplicitForceable as SampledImageYcbcrConversionChromaReconstructionExplicitForceableBitKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  Disjoint as DisjointBitKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  CositedChromaSamples as CositedChromaSamplesBitKhr
+  # Provided by VK_EXT_filter_cubic
+  SampledImageFilterCubicBitImg as SampledImageFilterCubicBitExt
 
-# Provided by VK_KHR_maintenance1
-FormatFeatureFlagBits.defineAlias(TransferSrcBitKhr, TransferSrc)
-# Provided by VK_KHR_maintenance1
-FormatFeatureFlagBits.defineAlias(TransferDstBitKhr, TransferDst)
-# Provided by VK_EXT_sampler_filter_minmax
-FormatFeatureFlagBits.defineAlias(SampledImageFilterMinmaxBitExt, SampledImageFilterMinmax)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-FormatFeatureFlagBits.defineAlias(MidpointChromaSamplesBitKhr, MidpointChromaSamples)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-FormatFeatureFlagBits.defineAlias(SampledImageYcbcrConversionLinearFilterBitKhr, SampledImageYcbcrConversionLinearFilter)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-FormatFeatureFlagBits.defineAlias(SampledImageYcbcrConversionSeparateReconstructionFilterBitKhr, SampledImageYcbcrConversionSeparateReconstructionFilter)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-FormatFeatureFlagBits.defineAlias(SampledImageYcbcrConversionChromaReconstructionExplicitBitKhr, SampledImageYcbcrConversionChromaReconstructionExplicit)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-FormatFeatureFlagBits.defineAlias(SampledImageYcbcrConversionChromaReconstructionExplicitForceableBitKhr, SampledImageYcbcrConversionChromaReconstructionExplicitForceable)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-FormatFeatureFlagBits.defineAlias(DisjointBitKhr, Disjoint)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-FormatFeatureFlagBits.defineAlias(CositedChromaSamplesBitKhr, CositedChromaSamples)
-# Provided by VK_EXT_filter_cubic
-FormatFeatureFlagBits.defineAlias(SampledImageFilterCubicBitExt, SampledImageFilterCubicBitImg)
+ImageCreateFlagBits.defineAliases:
+  # Provided by VK_KHR_device_group
+  SplitInstanceBindRegions as SplitInstanceBindRegionsBitKhr
+  # Provided by VK_KHR_maintenance1
+  Vk2dArrayCompatible as Vk2dArrayCompatibleBitKhr
+  # Provided by VK_KHR_maintenance2
+  BlockTexelViewCompatible as BlockTexelViewCompatibleBitKhr
+  # Provided by VK_KHR_maintenance2
+  ExtendedUsage as ExtendedUsageBitKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  Disjoint as DisjointBitKhr
+  # Provided by VK_KHR_bind_memory2
+  Alias as AliasBitKhr
 
-# Provided by VK_KHR_device_group
-ImageCreateFlagBits.defineAlias(SplitInstanceBindRegionsBitKhr, SplitInstanceBindRegions)
-# Provided by VK_KHR_maintenance1
-ImageCreateFlagBits.defineAlias(Vk2dArrayCompatibleBitKhr, Vk2dArrayCompatible)
-# Provided by VK_KHR_maintenance2
-ImageCreateFlagBits.defineAlias(BlockTexelViewCompatibleBitKhr, BlockTexelViewCompatible)
-# Provided by VK_KHR_maintenance2
-ImageCreateFlagBits.defineAlias(ExtendedUsageBitKhr, ExtendedUsage)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-ImageCreateFlagBits.defineAlias(DisjointBitKhr, Disjoint)
-# Provided by VK_KHR_bind_memory2
-ImageCreateFlagBits.defineAlias(AliasBitKhr, Alias)
+MemoryHeapFlagBits.defineAliases:
+  # Provided by VK_KHR_device_group_creation
+  MultiInstance as MultiInstanceBitKhr
 
-# Provided by VK_KHR_device_group_creation
-MemoryHeapFlagBits.defineAlias(MultiInstanceBitKhr, MultiInstance)
-
-# Provided by VK_VERSION_1_1
-StructureType.defineAlias(PhysicalDeviceVariablePointerFeatures, PhysicalDeviceVariablePointersFeatures)
-# Provided by VK_VERSION_1_1
-StructureType.defineAlias(PhysicalDeviceShaderDrawParameterFeatures, PhysicalDeviceShaderDrawParametersFeatures)
-# Provided by VK_EXT_debug_report
-StructureType.defineAlias(DebugReportCreateInfoExt, DebugReportCallbackCreateInfoExt) # Backwards-compatible alias containing a typo
-# Provided by VK_KHR_multiview
-StructureType.defineAlias(RenderPassMultiviewCreateInfoKhr, RenderPassMultiviewCreateInfo)
-# Provided by VK_KHR_multiview
-StructureType.defineAlias(PhysicalDeviceMultiviewFeaturesKhr, PhysicalDeviceMultiviewFeatures)
-# Provided by VK_KHR_multiview
-StructureType.defineAlias(PhysicalDeviceMultiviewPropertiesKhr, PhysicalDeviceMultiviewProperties)
-# Provided by VK_KHR_get_physical_device_properties2
-StructureType.defineAlias(PhysicalDeviceFeatures2Khr, PhysicalDeviceFeatures2)
-# Provided by VK_KHR_get_physical_device_properties2
-StructureType.defineAlias(PhysicalDeviceProperties2Khr, PhysicalDeviceProperties2)
-# Provided by VK_KHR_get_physical_device_properties2
-StructureType.defineAlias(FormatProperties2Khr, FormatProperties2)
-# Provided by VK_KHR_get_physical_device_properties2
-StructureType.defineAlias(ImageFormatProperties2Khr, ImageFormatProperties2)
-# Provided by VK_KHR_get_physical_device_properties2
-StructureType.defineAlias(PhysicalDeviceImageFormatInfo2Khr, PhysicalDeviceImageFormatInfo2)
-# Provided by VK_KHR_get_physical_device_properties2
-StructureType.defineAlias(QueueFamilyProperties2Khr, QueueFamilyProperties2)
-# Provided by VK_KHR_get_physical_device_properties2
-StructureType.defineAlias(PhysicalDeviceMemoryProperties2Khr, PhysicalDeviceMemoryProperties2)
-# Provided by VK_KHR_get_physical_device_properties2
-StructureType.defineAlias(SparseImageFormatProperties2Khr, SparseImageFormatProperties2)
-# Provided by VK_KHR_get_physical_device_properties2
-StructureType.defineAlias(PhysicalDeviceSparseImageFormatInfo2Khr, PhysicalDeviceSparseImageFormatInfo2)
-# Provided by VK_KHR_device_group
-StructureType.defineAlias(MemoryAllocateFlagsInfoKhr, MemoryAllocateFlagsInfo)
-# Provided by VK_KHR_device_group
-StructureType.defineAlias(DeviceGroupRenderPassBeginInfoKhr, DeviceGroupRenderPassBeginInfo)
-# Provided by VK_KHR_device_group
-StructureType.defineAlias(DeviceGroupCommandBufferBeginInfoKhr, DeviceGroupCommandBufferBeginInfo)
-# Provided by VK_KHR_device_group
-StructureType.defineAlias(DeviceGroupSubmitInfoKhr, DeviceGroupSubmitInfo)
-# Provided by VK_KHR_device_group
-StructureType.defineAlias(DeviceGroupBindSparseInfoKhr, DeviceGroupBindSparseInfo)
-# Provided by VK_KHR_device_group
-StructureType.defineAlias(BindBufferMemoryDeviceGroupInfoKhr, BindBufferMemoryDeviceGroupInfo)
-# Provided by VK_KHR_device_group
-StructureType.defineAlias(BindImageMemoryDeviceGroupInfoKhr, BindImageMemoryDeviceGroupInfo)
-# Provided by VK_KHR_device_group_creation
-StructureType.defineAlias(PhysicalDeviceGroupPropertiesKhr, PhysicalDeviceGroupProperties)
-# Provided by VK_KHR_device_group_creation
-StructureType.defineAlias(DeviceGroupDeviceCreateInfoKhr, DeviceGroupDeviceCreateInfo)
-# Provided by VK_KHR_external_memory_capabilities
-StructureType.defineAlias(PhysicalDeviceExternalImageFormatInfoKhr, PhysicalDeviceExternalImageFormatInfo)
-# Provided by VK_KHR_external_memory_capabilities
-StructureType.defineAlias(ExternalImageFormatPropertiesKhr, ExternalImageFormatProperties)
-# Provided by VK_KHR_external_memory_capabilities
-StructureType.defineAlias(PhysicalDeviceExternalBufferInfoKhr, PhysicalDeviceExternalBufferInfo)
-# Provided by VK_KHR_external_memory_capabilities
-StructureType.defineAlias(ExternalBufferPropertiesKhr, ExternalBufferProperties)
-# Provided by VK_KHR_external_memory_capabilities
-StructureType.defineAlias(PhysicalDeviceIdPropertiesKhr, PhysicalDeviceIdProperties)
-# Provided by VK_KHR_external_memory
-StructureType.defineAlias(ExternalMemoryBufferCreateInfoKhr, ExternalMemoryBufferCreateInfo)
-# Provided by VK_KHR_external_memory
-StructureType.defineAlias(ExternalMemoryImageCreateInfoKhr, ExternalMemoryImageCreateInfo)
-# Provided by VK_KHR_external_memory
-StructureType.defineAlias(ExportMemoryAllocateInfoKhr, ExportMemoryAllocateInfo)
-# Provided by VK_KHR_external_semaphore_capabilities
-StructureType.defineAlias(PhysicalDeviceExternalSemaphoreInfoKhr, PhysicalDeviceExternalSemaphoreInfo)
-# Provided by VK_KHR_external_semaphore_capabilities
-StructureType.defineAlias(ExternalSemaphorePropertiesKhr, ExternalSemaphoreProperties)
-# Provided by VK_KHR_external_semaphore_capabilities
-StructureType.defineAlias(PhysicalDeviceIdPropertiesKhr, PhysicalDeviceIdProperties)
-# Provided by VK_KHR_external_semaphore
-StructureType.defineAlias(ExportSemaphoreCreateInfoKhr, ExportSemaphoreCreateInfo)
-# Provided by VK_KHR_shader_float16_int8
-StructureType.defineAlias(PhysicalDeviceShaderFloat16Int8FeaturesKhr, PhysicalDeviceShaderFloat16Int8Features)
-# Provided by VK_KHR_shader_float16_int8
-StructureType.defineAlias(PhysicalDeviceFloat16Int8FeaturesKhr, PhysicalDeviceShaderFloat16Int8Features)
-# Provided by VK_KHR_16bit_storage
-StructureType.defineAlias(PhysicalDevice16bitStorageFeaturesKhr, PhysicalDevice16bitStorageFeatures)
-# Provided by VK_KHR_descriptor_update_template
-StructureType.defineAlias(DescriptorUpdateTemplateCreateInfoKhr, DescriptorUpdateTemplateCreateInfo)
-# Provided by VK_EXT_display_surface_counter
-StructureType.defineAlias(SurfaceCapabilities2Ext, SurfaceCapabilities2Ext) # Backwards-compatible alias containing a typo
-# Provided by VK_KHR_imageless_framebuffer
-StructureType.defineAlias(PhysicalDeviceImagelessFramebufferFeaturesKhr, PhysicalDeviceImagelessFramebufferFeatures)
-# Provided by VK_KHR_imageless_framebuffer
-StructureType.defineAlias(FramebufferAttachmentsCreateInfoKhr, FramebufferAttachmentsCreateInfo)
-# Provided by VK_KHR_imageless_framebuffer
-StructureType.defineAlias(FramebufferAttachmentImageInfoKhr, FramebufferAttachmentImageInfo)
-# Provided by VK_KHR_imageless_framebuffer
-StructureType.defineAlias(RenderPassAttachmentBeginInfoKhr, RenderPassAttachmentBeginInfo)
-# Provided by VK_KHR_create_renderpass2
-StructureType.defineAlias(AttachmentDescription2Khr, AttachmentDescription2)
-# Provided by VK_KHR_create_renderpass2
-StructureType.defineAlias(AttachmentReference2Khr, AttachmentReference2)
-# Provided by VK_KHR_create_renderpass2
-StructureType.defineAlias(SubpassDescription2Khr, SubpassDescription2)
-# Provided by VK_KHR_create_renderpass2
-StructureType.defineAlias(SubpassDependency2Khr, SubpassDependency2)
-# Provided by VK_KHR_create_renderpass2
-StructureType.defineAlias(RenderPassCreateInfo2Khr, RenderPassCreateInfo2)
-# Provided by VK_KHR_create_renderpass2
-StructureType.defineAlias(SubpassBeginInfoKhr, SubpassBeginInfo)
-# Provided by VK_KHR_create_renderpass2
-StructureType.defineAlias(SubpassEndInfoKhr, SubpassEndInfo)
-# Provided by VK_KHR_external_fence_capabilities
-StructureType.defineAlias(PhysicalDeviceExternalFenceInfoKhr, PhysicalDeviceExternalFenceInfo)
-# Provided by VK_KHR_external_fence_capabilities
-StructureType.defineAlias(ExternalFencePropertiesKhr, ExternalFenceProperties)
-# Provided by VK_KHR_external_fence_capabilities
-StructureType.defineAlias(PhysicalDeviceIdPropertiesKhr, PhysicalDeviceIdProperties)
-# Provided by VK_KHR_external_fence
-StructureType.defineAlias(ExportFenceCreateInfoKhr, ExportFenceCreateInfo)
-# Provided by VK_KHR_maintenance2
-StructureType.defineAlias(PhysicalDevicePointClippingPropertiesKhr, PhysicalDevicePointClippingProperties)
-# Provided by VK_KHR_maintenance2
-StructureType.defineAlias(RenderPassInputAttachmentAspectCreateInfoKhr, RenderPassInputAttachmentAspectCreateInfo)
-# Provided by VK_KHR_maintenance2
-StructureType.defineAlias(ImageViewUsageCreateInfoKhr, ImageViewUsageCreateInfo)
-# Provided by VK_KHR_maintenance2
-StructureType.defineAlias(PipelineTessellationDomainOriginStateCreateInfoKhr, PipelineTessellationDomainOriginStateCreateInfo)
-# Provided by VK_KHR_variable_pointers
-StructureType.defineAlias(PhysicalDeviceVariablePointersFeaturesKhr, PhysicalDeviceVariablePointersFeatures)
-# Provided by VK_KHR_variable_pointers
-StructureType.defineAlias(PhysicalDeviceVariablePointerFeaturesKhr, PhysicalDeviceVariablePointersFeaturesKhr)
-# Provided by VK_KHR_dedicated_allocation
-StructureType.defineAlias(MemoryDedicatedRequirementsKhr, MemoryDedicatedRequirements)
-# Provided by VK_KHR_dedicated_allocation
-StructureType.defineAlias(MemoryDedicatedAllocateInfoKhr, MemoryDedicatedAllocateInfo)
-# Provided by VK_EXT_sampler_filter_minmax
-StructureType.defineAlias(PhysicalDeviceSamplerFilterMinmaxPropertiesExt, PhysicalDeviceSamplerFilterMinmaxProperties)
-# Provided by VK_EXT_sampler_filter_minmax
-StructureType.defineAlias(SamplerReductionModeCreateInfoExt, SamplerReductionModeCreateInfo)
-# Provided by VK_KHR_get_memory_requirements2
-StructureType.defineAlias(BufferMemoryRequirementsInfo2Khr, BufferMemoryRequirementsInfo2)
-# Provided by VK_KHR_get_memory_requirements2
-StructureType.defineAlias(ImageMemoryRequirementsInfo2Khr, ImageMemoryRequirementsInfo2)
-# Provided by VK_KHR_get_memory_requirements2
-StructureType.defineAlias(ImageSparseMemoryRequirementsInfo2Khr, ImageSparseMemoryRequirementsInfo2)
-# Provided by VK_KHR_get_memory_requirements2
-StructureType.defineAlias(MemoryRequirements2Khr, MemoryRequirements2)
-# Provided by VK_KHR_get_memory_requirements2
-StructureType.defineAlias(SparseImageMemoryRequirements2Khr, SparseImageMemoryRequirements2)
-# Provided by VK_KHR_image_format_list
-StructureType.defineAlias(ImageFormatListCreateInfoKhr, ImageFormatListCreateInfo)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-StructureType.defineAlias(SamplerYcbcrConversionCreateInfoKhr, SamplerYcbcrConversionCreateInfo)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-StructureType.defineAlias(SamplerYcbcrConversionInfoKhr, SamplerYcbcrConversionInfo)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-StructureType.defineAlias(BindImagePlaneMemoryInfoKhr, BindImagePlaneMemoryInfo)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-StructureType.defineAlias(ImagePlaneMemoryRequirementsInfoKhr, ImagePlaneMemoryRequirementsInfo)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-StructureType.defineAlias(PhysicalDeviceSamplerYcbcrConversionFeaturesKhr, PhysicalDeviceSamplerYcbcrConversionFeatures)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-StructureType.defineAlias(SamplerYcbcrConversionImageFormatPropertiesKhr, SamplerYcbcrConversionImageFormatProperties)
-# Provided by VK_KHR_bind_memory2
-StructureType.defineAlias(BindBufferMemoryInfoKhr, BindBufferMemoryInfo)
-# Provided by VK_KHR_bind_memory2
-StructureType.defineAlias(BindImageMemoryInfoKhr, BindImageMemoryInfo)
-# Provided by VK_EXT_descriptor_indexing
-StructureType.defineAlias(DescriptorSetLayoutBindingFlagsCreateInfoExt, DescriptorSetLayoutBindingFlagsCreateInfo)
-# Provided by VK_EXT_descriptor_indexing
-StructureType.defineAlias(PhysicalDeviceDescriptorIndexingFeaturesExt, PhysicalDeviceDescriptorIndexingFeatures)
-# Provided by VK_EXT_descriptor_indexing
-StructureType.defineAlias(PhysicalDeviceDescriptorIndexingPropertiesExt, PhysicalDeviceDescriptorIndexingProperties)
-# Provided by VK_EXT_descriptor_indexing
-StructureType.defineAlias(DescriptorSetVariableDescriptorCountAllocateInfoExt, DescriptorSetVariableDescriptorCountAllocateInfo)
-# Provided by VK_EXT_descriptor_indexing
-StructureType.defineAlias(DescriptorSetVariableDescriptorCountLayoutSupportExt, DescriptorSetVariableDescriptorCountLayoutSupport)
-# Provided by VK_NV_ray_tracing
-StructureType.defineAlias(BindAccelerationStructureMemoryInfoNv, BindAccelerationStructureMemoryInfoKhr)
-# Provided by VK_NV_ray_tracing
-StructureType.defineAlias(WriteDescriptorSetAccelerationStructureNv, WriteDescriptorSetAccelerationStructureKhr)
-# Provided by VK_KHR_maintenance3
-StructureType.defineAlias(PhysicalDeviceMaintenance3PropertiesKhr, PhysicalDeviceMaintenance3Properties)
-# Provided by VK_KHR_maintenance3
-StructureType.defineAlias(DescriptorSetLayoutSupportKhr, DescriptorSetLayoutSupport)
-# Provided by VK_KHR_shader_subgroup_extended_types
-StructureType.defineAlias(PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKhr, PhysicalDeviceShaderSubgroupExtendedTypesFeatures)
-# Provided by VK_KHR_8bit_storage
-StructureType.defineAlias(PhysicalDevice8bitStorageFeaturesKhr, PhysicalDevice8bitStorageFeatures)
-# Provided by VK_KHR_shader_atomic_int64
-StructureType.defineAlias(PhysicalDeviceShaderAtomicInt64FeaturesKhr, PhysicalDeviceShaderAtomicInt64Features)
-# Provided by VK_KHR_driver_properties
-StructureType.defineAlias(PhysicalDeviceDriverPropertiesKhr, PhysicalDeviceDriverProperties)
-# Provided by VK_KHR_shader_float_controls
-StructureType.defineAlias(PhysicalDeviceFloatControlsPropertiesKhr, PhysicalDeviceFloatControlsProperties)
-# Provided by VK_KHR_depth_stencil_resolve
-StructureType.defineAlias(PhysicalDeviceDepthStencilResolvePropertiesKhr, PhysicalDeviceDepthStencilResolveProperties)
-# Provided by VK_KHR_depth_stencil_resolve
-StructureType.defineAlias(SubpassDescriptionDepthStencilResolveKhr, SubpassDescriptionDepthStencilResolve)
-# Provided by VK_KHR_timeline_semaphore
-StructureType.defineAlias(PhysicalDeviceTimelineSemaphoreFeaturesKhr, PhysicalDeviceTimelineSemaphoreFeatures)
-# Provided by VK_KHR_timeline_semaphore
-StructureType.defineAlias(PhysicalDeviceTimelineSemaphorePropertiesKhr, PhysicalDeviceTimelineSemaphoreProperties)
-# Provided by VK_KHR_timeline_semaphore
-StructureType.defineAlias(SemaphoreTypeCreateInfoKhr, SemaphoreTypeCreateInfo)
-# Provided by VK_KHR_timeline_semaphore
-StructureType.defineAlias(TimelineSemaphoreSubmitInfoKhr, TimelineSemaphoreSubmitInfo)
-# Provided by VK_KHR_timeline_semaphore
-StructureType.defineAlias(SemaphoreWaitInfoKhr, SemaphoreWaitInfo)
-# Provided by VK_KHR_timeline_semaphore
-StructureType.defineAlias(SemaphoreSignalInfoKhr, SemaphoreSignalInfo)
-# Provided by VK_INTEL_performance_query
-StructureType.defineAlias(QueryPoolCreateInfoIntel, QueryPoolPerformanceQueryCreateInfoIntel) # Backwards-compatible alias
-# Provided by VK_KHR_vulkan_memory_model
-StructureType.defineAlias(PhysicalDeviceVulkanMemoryModelFeaturesKhr, PhysicalDeviceVulkanMemoryModelFeatures)
-# Provided by VK_EXT_scalar_block_layout
-StructureType.defineAlias(PhysicalDeviceScalarBlockLayoutFeaturesExt, PhysicalDeviceScalarBlockLayoutFeatures)
-# Provided by VK_KHR_separate_depth_stencil_layouts
-StructureType.defineAlias(PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKhr, PhysicalDeviceSeparateDepthStencilLayoutsFeatures)
-# Provided by VK_KHR_separate_depth_stencil_layouts
-StructureType.defineAlias(AttachmentReferenceStencilLayoutKhr, AttachmentReferenceStencilLayout)
-# Provided by VK_KHR_separate_depth_stencil_layouts
-StructureType.defineAlias(AttachmentDescriptionStencilLayoutKhr, AttachmentDescriptionStencilLayout)
-# Provided by VK_EXT_buffer_device_address
-StructureType.defineAlias(PhysicalDeviceBufferAddressFeaturesExt, PhysicalDeviceBufferDeviceAddressFeaturesExt)
-# Provided by VK_EXT_buffer_device_address
-StructureType.defineAlias(BufferDeviceAddressInfoExt, BufferDeviceAddressInfo)
-# Provided by VK_EXT_separate_stencil_usage
-StructureType.defineAlias(ImageStencilUsageCreateInfoExt, ImageStencilUsageCreateInfo)
-# Provided by VK_KHR_uniform_buffer_standard_layout
-StructureType.defineAlias(PhysicalDeviceUniformBufferStandardLayoutFeaturesKhr, PhysicalDeviceUniformBufferStandardLayoutFeatures)
-# Provided by VK_KHR_buffer_device_address
-StructureType.defineAlias(PhysicalDeviceBufferDeviceAddressFeaturesKhr, PhysicalDeviceBufferDeviceAddressFeatures)
-# Provided by VK_KHR_buffer_device_address
-StructureType.defineAlias(BufferDeviceAddressInfoKhr, BufferDeviceAddressInfo)
-# Provided by VK_KHR_buffer_device_address
-StructureType.defineAlias(BufferOpaqueCaptureAddressCreateInfoKhr, BufferOpaqueCaptureAddressCreateInfo)
-# Provided by VK_KHR_buffer_device_address
-StructureType.defineAlias(MemoryOpaqueCaptureAddressAllocateInfoKhr, MemoryOpaqueCaptureAddressAllocateInfo)
-# Provided by VK_KHR_buffer_device_address
-StructureType.defineAlias(DeviceMemoryOpaqueCaptureAddressInfoKhr, DeviceMemoryOpaqueCaptureAddressInfo)
-# Provided by VK_EXT_host_query_reset
-StructureType.defineAlias(PhysicalDeviceHostQueryResetFeaturesExt, PhysicalDeviceHostQueryResetFeatures)
-
+StructureType.defineAliases:
+  # Provided by VK_VERSION_1_1
+  PhysicalDeviceVariablePointersFeatures as PhysicalDeviceVariablePointerFeatures
+  # Provided by VK_VERSION_1_1
+  PhysicalDeviceShaderDrawParametersFeatures as PhysicalDeviceShaderDrawParameterFeatures
+  # Provided by VK_EXT_debug_report
+  DebugReportCallbackCreateInfoExt as DebugReportCreateInfoExt # Backwards-compatible alias containing a typo
+  # Provided by VK_KHR_multiview
+  RenderPassMultiviewCreateInfo as RenderPassMultiviewCreateInfoKhr
+  # Provided by VK_KHR_multiview
+  PhysicalDeviceMultiviewFeatures as PhysicalDeviceMultiviewFeaturesKhr
+  # Provided by VK_KHR_multiview
+  PhysicalDeviceMultiviewProperties as PhysicalDeviceMultiviewPropertiesKhr
+  # Provided by VK_KHR_get_physical_device_properties2
+  PhysicalDeviceFeatures2 as PhysicalDeviceFeatures2Khr
+  # Provided by VK_KHR_get_physical_device_properties2
+  PhysicalDeviceProperties2 as PhysicalDeviceProperties2Khr
+  # Provided by VK_KHR_get_physical_device_properties2
+  FormatProperties2 as FormatProperties2Khr
+  # Provided by VK_KHR_get_physical_device_properties2
+  ImageFormatProperties2 as ImageFormatProperties2Khr
+  # Provided by VK_KHR_get_physical_device_properties2
+  PhysicalDeviceImageFormatInfo2 as PhysicalDeviceImageFormatInfo2Khr
+  # Provided by VK_KHR_get_physical_device_properties2
+  QueueFamilyProperties2 as QueueFamilyProperties2Khr
+  # Provided by VK_KHR_get_physical_device_properties2
+  PhysicalDeviceMemoryProperties2 as PhysicalDeviceMemoryProperties2Khr
+  # Provided by VK_KHR_get_physical_device_properties2
+  SparseImageFormatProperties2 as SparseImageFormatProperties2Khr
+  # Provided by VK_KHR_get_physical_device_properties2
+  PhysicalDeviceSparseImageFormatInfo2 as PhysicalDeviceSparseImageFormatInfo2Khr
+  # Provided by VK_KHR_device_group
+  MemoryAllocateFlagsInfo as MemoryAllocateFlagsInfoKhr
+  # Provided by VK_KHR_device_group
+  DeviceGroupRenderPassBeginInfo as DeviceGroupRenderPassBeginInfoKhr
+  # Provided by VK_KHR_device_group
+  DeviceGroupCommandBufferBeginInfo as DeviceGroupCommandBufferBeginInfoKhr
+  # Provided by VK_KHR_device_group
+  DeviceGroupSubmitInfo as DeviceGroupSubmitInfoKhr
+  # Provided by VK_KHR_device_group
+  DeviceGroupBindSparseInfo as DeviceGroupBindSparseInfoKhr
+  # Provided by VK_KHR_device_group
+  BindBufferMemoryDeviceGroupInfo as BindBufferMemoryDeviceGroupInfoKhr
+  # Provided by VK_KHR_device_group
+  BindImageMemoryDeviceGroupInfo as BindImageMemoryDeviceGroupInfoKhr
+  # Provided by VK_KHR_device_group_creation
+  PhysicalDeviceGroupProperties as PhysicalDeviceGroupPropertiesKhr
+  # Provided by VK_KHR_device_group_creation
+  DeviceGroupDeviceCreateInfo as DeviceGroupDeviceCreateInfoKhr
+  # Provided by VK_KHR_external_memory_capabilities
+  PhysicalDeviceExternalImageFormatInfo as PhysicalDeviceExternalImageFormatInfoKhr
+  # Provided by VK_KHR_external_memory_capabilities
+  ExternalImageFormatProperties as ExternalImageFormatPropertiesKhr
+  # Provided by VK_KHR_external_memory_capabilities
+  PhysicalDeviceExternalBufferInfo as PhysicalDeviceExternalBufferInfoKhr
+  # Provided by VK_KHR_external_memory_capabilities
+  ExternalBufferProperties as ExternalBufferPropertiesKhr
+  # Provided by VK_KHR_external_memory_capabilities
+  PhysicalDeviceIdProperties as PhysicalDeviceIdPropertiesKhr
+  # Provided by VK_KHR_external_memory
+  ExternalMemoryBufferCreateInfo as ExternalMemoryBufferCreateInfoKhr
+  # Provided by VK_KHR_external_memory
+  ExternalMemoryImageCreateInfo as ExternalMemoryImageCreateInfoKhr
+  # Provided by VK_KHR_external_memory
+  ExportMemoryAllocateInfo as ExportMemoryAllocateInfoKhr
+  # Provided by VK_KHR_external_semaphore_capabilities
+  PhysicalDeviceExternalSemaphoreInfo as PhysicalDeviceExternalSemaphoreInfoKhr
+  # Provided by VK_KHR_external_semaphore_capabilities
+  ExternalSemaphoreProperties as ExternalSemaphorePropertiesKhr
+  # Provided by VK_KHR_external_semaphore_capabilities
+  PhysicalDeviceIdProperties as PhysicalDeviceIdPropertiesKhr
+  # Provided by VK_KHR_external_semaphore
+  ExportSemaphoreCreateInfo as ExportSemaphoreCreateInfoKhr
+  # Provided by VK_KHR_shader_float16_int8
+  PhysicalDeviceShaderFloat16Int8Features as PhysicalDeviceShaderFloat16Int8FeaturesKhr
+  # Provided by VK_KHR_shader_float16_int8
+  PhysicalDeviceShaderFloat16Int8Features as PhysicalDeviceFloat16Int8FeaturesKhr
+  # Provided by VK_KHR_16bit_storage
+  PhysicalDevice16bitStorageFeatures as PhysicalDevice16bitStorageFeaturesKhr
+  # Provided by VK_KHR_descriptor_update_template
+  DescriptorUpdateTemplateCreateInfo as DescriptorUpdateTemplateCreateInfoKhr
+  # Provided by VK_EXT_display_surface_counter
+  SurfaceCapabilities2Ext as SurfaceCapabilities2Ext # Backwards-compatible alias containing a typo
+  # Provided by VK_KHR_imageless_framebuffer
+  PhysicalDeviceImagelessFramebufferFeatures as PhysicalDeviceImagelessFramebufferFeaturesKhr
+  # Provided by VK_KHR_imageless_framebuffer
+  FramebufferAttachmentsCreateInfo as FramebufferAttachmentsCreateInfoKhr
+  # Provided by VK_KHR_imageless_framebuffer
+  FramebufferAttachmentImageInfo as FramebufferAttachmentImageInfoKhr
+  # Provided by VK_KHR_imageless_framebuffer
+  RenderPassAttachmentBeginInfo as RenderPassAttachmentBeginInfoKhr
+  # Provided by VK_KHR_create_renderpass2
+  AttachmentDescription2 as AttachmentDescription2Khr
+  # Provided by VK_KHR_create_renderpass2
+  AttachmentReference2 as AttachmentReference2Khr
+  # Provided by VK_KHR_create_renderpass2
+  SubpassDescription2 as SubpassDescription2Khr
+  # Provided by VK_KHR_create_renderpass2
+  SubpassDependency2 as SubpassDependency2Khr
+  # Provided by VK_KHR_create_renderpass2
+  RenderPassCreateInfo2 as RenderPassCreateInfo2Khr
+  # Provided by VK_KHR_create_renderpass2
+  SubpassBeginInfo as SubpassBeginInfoKhr
+  # Provided by VK_KHR_create_renderpass2
+  SubpassEndInfo as SubpassEndInfoKhr
+  # Provided by VK_KHR_external_fence_capabilities
+  PhysicalDeviceExternalFenceInfo as PhysicalDeviceExternalFenceInfoKhr
+  # Provided by VK_KHR_external_fence_capabilities
+  ExternalFenceProperties as ExternalFencePropertiesKhr
+  # Provided by VK_KHR_external_fence_capabilities
+  PhysicalDeviceIdProperties as PhysicalDeviceIdPropertiesKhr
+  # Provided by VK_KHR_external_fence
+  ExportFenceCreateInfo as ExportFenceCreateInfoKhr
+  # Provided by VK_KHR_maintenance2
+  PhysicalDevicePointClippingProperties as PhysicalDevicePointClippingPropertiesKhr
+  # Provided by VK_KHR_maintenance2
+  RenderPassInputAttachmentAspectCreateInfo as RenderPassInputAttachmentAspectCreateInfoKhr
+  # Provided by VK_KHR_maintenance2
+  ImageViewUsageCreateInfo as ImageViewUsageCreateInfoKhr
+  # Provided by VK_KHR_maintenance2
+  PipelineTessellationDomainOriginStateCreateInfo as PipelineTessellationDomainOriginStateCreateInfoKhr
+  # Provided by VK_KHR_variable_pointers
+  PhysicalDeviceVariablePointersFeatures as PhysicalDeviceVariablePointersFeaturesKhr
+  # Provided by VK_KHR_variable_pointers
+  PhysicalDeviceVariablePointersFeaturesKhr as PhysicalDeviceVariablePointerFeaturesKhr
+  # Provided by VK_KHR_dedicated_allocation
+  MemoryDedicatedRequirements as MemoryDedicatedRequirementsKhr
+  # Provided by VK_KHR_dedicated_allocation
+  MemoryDedicatedAllocateInfo as MemoryDedicatedAllocateInfoKhr
+  # Provided by VK_EXT_sampler_filter_minmax
+  PhysicalDeviceSamplerFilterMinmaxProperties as PhysicalDeviceSamplerFilterMinmaxPropertiesExt
+  # Provided by VK_EXT_sampler_filter_minmax
+  SamplerReductionModeCreateInfo as SamplerReductionModeCreateInfoExt
+  # Provided by VK_KHR_get_memory_requirements2
+  BufferMemoryRequirementsInfo2 as BufferMemoryRequirementsInfo2Khr
+  # Provided by VK_KHR_get_memory_requirements2
+  ImageMemoryRequirementsInfo2 as ImageMemoryRequirementsInfo2Khr
+  # Provided by VK_KHR_get_memory_requirements2
+  ImageSparseMemoryRequirementsInfo2 as ImageSparseMemoryRequirementsInfo2Khr
+  # Provided by VK_KHR_get_memory_requirements2
+  MemoryRequirements2 as MemoryRequirements2Khr
+  # Provided by VK_KHR_get_memory_requirements2
+  SparseImageMemoryRequirements2 as SparseImageMemoryRequirements2Khr
+  # Provided by VK_KHR_image_format_list
+  ImageFormatListCreateInfo as ImageFormatListCreateInfoKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  SamplerYcbcrConversionCreateInfo as SamplerYcbcrConversionCreateInfoKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  SamplerYcbcrConversionInfo as SamplerYcbcrConversionInfoKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  BindImagePlaneMemoryInfo as BindImagePlaneMemoryInfoKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  ImagePlaneMemoryRequirementsInfo as ImagePlaneMemoryRequirementsInfoKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  PhysicalDeviceSamplerYcbcrConversionFeatures as PhysicalDeviceSamplerYcbcrConversionFeaturesKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  SamplerYcbcrConversionImageFormatProperties as SamplerYcbcrConversionImageFormatPropertiesKhr
+  # Provided by VK_KHR_bind_memory2
+  BindBufferMemoryInfo as BindBufferMemoryInfoKhr
+  # Provided by VK_KHR_bind_memory2
+  BindImageMemoryInfo as BindImageMemoryInfoKhr
+  # Provided by VK_EXT_descriptor_indexing
+  DescriptorSetLayoutBindingFlagsCreateInfo as DescriptorSetLayoutBindingFlagsCreateInfoExt
+  # Provided by VK_EXT_descriptor_indexing
+  PhysicalDeviceDescriptorIndexingFeatures as PhysicalDeviceDescriptorIndexingFeaturesExt
+  # Provided by VK_EXT_descriptor_indexing
+  PhysicalDeviceDescriptorIndexingProperties as PhysicalDeviceDescriptorIndexingPropertiesExt
+  # Provided by VK_EXT_descriptor_indexing
+  DescriptorSetVariableDescriptorCountAllocateInfo as DescriptorSetVariableDescriptorCountAllocateInfoExt
+  # Provided by VK_EXT_descriptor_indexing
+  DescriptorSetVariableDescriptorCountLayoutSupport as DescriptorSetVariableDescriptorCountLayoutSupportExt
+  # Provided by VK_NV_ray_tracing
+  BindAccelerationStructureMemoryInfoKhr as BindAccelerationStructureMemoryInfoNv
+  # Provided by VK_NV_ray_tracing
+  WriteDescriptorSetAccelerationStructureKhr as WriteDescriptorSetAccelerationStructureNv
+  # Provided by VK_KHR_maintenance3
+  PhysicalDeviceMaintenance3Properties as PhysicalDeviceMaintenance3PropertiesKhr
+  # Provided by VK_KHR_maintenance3
+  DescriptorSetLayoutSupport as DescriptorSetLayoutSupportKhr
+  # Provided by VK_KHR_shader_subgroup_extended_types
+  PhysicalDeviceShaderSubgroupExtendedTypesFeatures as PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKhr
+  # Provided by VK_KHR_8bit_storage
+  PhysicalDevice8bitStorageFeatures as PhysicalDevice8bitStorageFeaturesKhr
+  # Provided by VK_KHR_shader_atomic_int64
+  PhysicalDeviceShaderAtomicInt64Features as PhysicalDeviceShaderAtomicInt64FeaturesKhr
+  # Provided by VK_KHR_driver_properties
+  PhysicalDeviceDriverProperties as PhysicalDeviceDriverPropertiesKhr
+  # Provided by VK_KHR_shader_float_controls
+  PhysicalDeviceFloatControlsProperties as PhysicalDeviceFloatControlsPropertiesKhr
+  # Provided by VK_KHR_depth_stencil_resolve
+  PhysicalDeviceDepthStencilResolveProperties as PhysicalDeviceDepthStencilResolvePropertiesKhr
+  # Provided by VK_KHR_depth_stencil_resolve
+  SubpassDescriptionDepthStencilResolve as SubpassDescriptionDepthStencilResolveKhr
+  # Provided by VK_KHR_timeline_semaphore
+  PhysicalDeviceTimelineSemaphoreFeatures as PhysicalDeviceTimelineSemaphoreFeaturesKhr
+  # Provided by VK_KHR_timeline_semaphore
+  PhysicalDeviceTimelineSemaphoreProperties as PhysicalDeviceTimelineSemaphorePropertiesKhr
+  # Provided by VK_KHR_timeline_semaphore
+  SemaphoreTypeCreateInfo as SemaphoreTypeCreateInfoKhr
+  # Provided by VK_KHR_timeline_semaphore
+  TimelineSemaphoreSubmitInfo as TimelineSemaphoreSubmitInfoKhr
+  # Provided by VK_KHR_timeline_semaphore
+  SemaphoreWaitInfo as SemaphoreWaitInfoKhr
+  # Provided by VK_KHR_timeline_semaphore
+  SemaphoreSignalInfo as SemaphoreSignalInfoKhr
+  # Provided by VK_INTEL_performance_query
+  QueryPoolPerformanceQueryCreateInfoIntel as QueryPoolCreateInfoIntel # Backwards-compatible alias
+  # Provided by VK_KHR_vulkan_memory_model
+  PhysicalDeviceVulkanMemoryModelFeatures as PhysicalDeviceVulkanMemoryModelFeaturesKhr
+  # Provided by VK_EXT_scalar_block_layout
+  PhysicalDeviceScalarBlockLayoutFeatures as PhysicalDeviceScalarBlockLayoutFeaturesExt
+  # Provided by VK_KHR_separate_depth_stencil_layouts
+  PhysicalDeviceSeparateDepthStencilLayoutsFeatures as PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKhr
+  # Provided by VK_KHR_separate_depth_stencil_layouts
+  AttachmentReferenceStencilLayout as AttachmentReferenceStencilLayoutKhr
+  # Provided by VK_KHR_separate_depth_stencil_layouts
+  AttachmentDescriptionStencilLayout as AttachmentDescriptionStencilLayoutKhr
+  # Provided by VK_EXT_buffer_device_address
+  PhysicalDeviceBufferDeviceAddressFeaturesExt as PhysicalDeviceBufferAddressFeaturesExt
+  # Provided by VK_EXT_buffer_device_address
+  BufferDeviceAddressInfo as BufferDeviceAddressInfoExt
+  # Provided by VK_EXT_separate_stencil_usage
+  ImageStencilUsageCreateInfo as ImageStencilUsageCreateInfoExt
+  # Provided by VK_KHR_uniform_buffer_standard_layout
+  PhysicalDeviceUniformBufferStandardLayoutFeatures as PhysicalDeviceUniformBufferStandardLayoutFeaturesKhr
+  # Provided by VK_KHR_buffer_device_address
+  PhysicalDeviceBufferDeviceAddressFeatures as PhysicalDeviceBufferDeviceAddressFeaturesKhr
+  # Provided by VK_KHR_buffer_device_address
+  BufferDeviceAddressInfo as BufferDeviceAddressInfoKhr
+  # Provided by VK_KHR_buffer_device_address
+  BufferOpaqueCaptureAddressCreateInfo as BufferOpaqueCaptureAddressCreateInfoKhr
+  # Provided by VK_KHR_buffer_device_address
+  MemoryOpaqueCaptureAddressAllocateInfo as MemoryOpaqueCaptureAddressAllocateInfoKhr
+  # Provided by VK_KHR_buffer_device_address
+  DeviceMemoryOpaqueCaptureAddressInfo as DeviceMemoryOpaqueCaptureAddressInfoKhr
+  # Provided by VK_EXT_host_query_reset
+  PhysicalDeviceHostQueryResetFeatures as PhysicalDeviceHostQueryResetFeaturesExt
 
 var # commands
   createInstanceCage: proc(pCreateInfo: ptr InstanceCreateInfo; pAllocator: ptr AllocationCallbacks; pInstance: ptr Instance;): Result {.cdecl.}
@@ -4015,9 +4006,9 @@ proc getDeviceProcAddr*(
     ): VoidFunction {.cdecl.} =
   getDeviceProcAddrCage(device,pName)
 
+
 # Device commands
 # ---------------
-
 var # commands
   createDeviceCage: proc(physicalDevice: PhysicalDevice; pCreateInfo: ptr DeviceCreateInfo; pAllocator: ptr AllocationCallbacks; pDevice: ptr Device;): Result {.cdecl.}
   destroyDeviceCage: proc(device: Device; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
@@ -4034,9 +4025,9 @@ proc destroyDevice*(
     ): void {.cdecl.} =
   destroyDeviceCage(device,pAllocator)
 
+
 # Extension discovery commands
 # ----------------------------
-
 var # commands
   enumerateInstanceExtensionPropertiesCage: proc(pLayerName: cstring; pPropertyCount: ptr uint32; pProperties: ptr ExtensionProperties;): Result {.cdecl.}
   enumerateDeviceExtensionPropertiesCage: proc(physicalDevice: PhysicalDevice; pLayerName: cstring; pPropertyCount: ptr uint32; pProperties: ptr ExtensionProperties;): Result {.cdecl.}
@@ -4054,9 +4045,9 @@ proc enumerateDeviceExtensionProperties*(
     ): Result {.cdecl, discardable.} =
   enumerateDeviceExtensionPropertiesCage(physicalDevice,pLayerName,pPropertyCount,pProperties)
 
+
 # Layer discovery commands
 # ------------------------
-
 var # commands
   enumerateInstanceLayerPropertiesCage: proc(pPropertyCount: ptr uint32; pProperties: ptr LayerProperties;): Result {.cdecl.}
   enumerateDeviceLayerPropertiesCage: proc(physicalDevice: PhysicalDevice; pPropertyCount: ptr uint32; pProperties: ptr LayerProperties;): Result {.cdecl.}
@@ -4072,13 +4063,14 @@ proc enumerateDeviceLayerProperties*(
     ): Result {.cdecl, discardable.} =
   enumerateDeviceLayerPropertiesCage(physicalDevice,pPropertyCount,pProperties)
 
+
 # Queue commands
 # --------------
-
-# Provided by VK_NV_ray_tracing
-PipelineStageFlagBits.defineAlias(RayTracingShaderBitNv, RayTracingShaderBitKhr)
-# Provided by VK_NV_ray_tracing
-PipelineStageFlagBits.defineAlias(AccelerationStructureBuildBitNv, AccelerationStructureBuildBitKhr)
+PipelineStageFlagBits.defineAliases:
+  # Provided by VK_NV_ray_tracing
+  RayTracingShaderBitKhr as RayTracingShaderBitNv
+  # Provided by VK_NV_ray_tracing
+  AccelerationStructureBuildBitKhr as AccelerationStructureBuildBitNv
 
 var # commands
   getDeviceQueueCage: proc(device: Device; queueFamilyIndex: uint32; queueIndex: uint32; pQueue: ptr Queue;): void {.cdecl.}
@@ -4108,9 +4100,9 @@ proc deviceWaitIdle*(
     ): Result {.cdecl, discardable.} =
   deviceWaitIdleCage(device)
 
+
 # Memory commands
 # ---------------
-
 var # commands
   allocateMemoryCage: proc(device: Device; pAllocateInfo: ptr MemoryAllocateInfo; pAllocator: ptr AllocationCallbacks; pMemory: ptr DeviceMemory;): Result {.cdecl.}
   freeMemoryCage: proc(device: Device; memory: DeviceMemory; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
@@ -4165,9 +4157,9 @@ proc getDeviceMemoryCommitment*(
     ): void {.cdecl.} =
   getDeviceMemoryCommitmentCage(device,memory,pCommittedMemoryInBytes)
 
+
 # Memory management API commands
 # ------------------------------
-
 var # commands
   bindBufferMemoryCage: proc(device: Device; buffer: Buffer; memory: DeviceMemory; memoryOffset: DeviceSize;): Result {.cdecl.}
   bindImageMemoryCage: proc(device: Device; image: Image; memory: DeviceMemory; memoryOffset: DeviceSize;): Result {.cdecl.}
@@ -4200,15 +4192,16 @@ proc getImageMemoryRequirements*(
     ): void {.cdecl.} =
   getImageMemoryRequirementsCage(device,image,pMemoryRequirements)
 
+
 # Sparse resource memory management API commands
 # ----------------------------------------------
-
-# Provided by VK_KHR_sampler_ycbcr_conversion
-ImageAspectFlagBits.defineAlias(Plane0BitKhr, Plane0)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-ImageAspectFlagBits.defineAlias(Plane1BitKhr, Plane1)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-ImageAspectFlagBits.defineAlias(Plane2BitKhr, Plane2)
+ImageAspectFlagBits.defineAliases:
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  Plane0 as Plane0BitKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  Plane1 as Plane1BitKhr
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  Plane2 as Plane2BitKhr
 
 var # commands
   getImageSparseMemoryRequirementsCage: proc(device: Device; image: Image; pSparseMemoryRequirementCount: ptr uint32; pSparseMemoryRequirements: ptr SparseImageMemoryRequirements;): void {.cdecl.}
@@ -4240,9 +4233,9 @@ proc queueBindSparse*(
     ): Result {.cdecl, discardable.} =
   queueBindSparseCage(queue,bindInfoCount,pBindInfo,fence)
 
+
 # Fence commands
 # --------------
-
 var # commands
   createFenceCage: proc(device: Device; pCreateInfo: ptr FenceCreateInfo; pAllocator: ptr AllocationCallbacks; pFence: ptr Fence;): Result {.cdecl.}
   destroyFenceCage: proc(device: Device; fence: Fence; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
@@ -4282,9 +4275,9 @@ proc waitForFences*(
     ): Result {.cdecl, discardable.} =
   waitForFencesCage(device,fenceCount,pFences,waitAll,timeout)
 
+
 # Queue semaphore commands
 # ------------------------
-
 var # commands
   createSemaphoreCage: proc(device: Device; pCreateInfo: ptr SemaphoreCreateInfo; pAllocator: ptr AllocationCallbacks; pSemaphore: ptr Semaphore;): Result {.cdecl.}
   destroySemaphoreCage: proc(device: Device; semaphore: Semaphore; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
@@ -4302,9 +4295,9 @@ proc destroySemaphore*(
     ): void {.cdecl.} =
   destroySemaphoreCage(device,semaphore,pAllocator)
 
+
 # Event commands
 # --------------
-
 var # commands
   createEventCage: proc(device: Device; pCreateInfo: ptr EventCreateInfo; pAllocator: ptr AllocationCallbacks; pEvent: ptr Event;): Result {.cdecl.}
   destroyEventCage: proc(device: Device; event: Event; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
@@ -4340,11 +4333,13 @@ proc resetEvent*(
     ): Result {.cdecl, discardable.} =
   resetEventCage(device,event)
 
+
 # Query commands
 # --------------
+QueryType.defineAliases:
+  # Provided by VK_NV_ray_tracing
+  AccelerationStructureCompactedSizeKhr as AccelerationStructureCompactedSizeNv
 
-# Provided by VK_NV_ray_tracing
-QueryType.defineAlias(AccelerationStructureCompactedSizeNv, AccelerationStructureCompactedSizeKhr)
 var # commands
   createQueryPoolCage: proc(device: Device; pCreateInfo: ptr QueryPoolCreateInfo; pAllocator: ptr AllocationCallbacks; pQueryPool: ptr QueryPool;): Result {.cdecl.}
   destroyQueryPoolCage: proc(device: Device; queryPool: QueryPool; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
@@ -4374,21 +4369,22 @@ proc getQueryPoolResults*(
     ): Result {.cdecl, discardable.} =
   getQueryPoolResultsCage(device,queryPool,firstQuery,queryCount,dataSize,pData,stride,flags)
 
+
 # Buffer commands
 # ---------------
+BufferCreateFlagBits.defineAliases:
+  # Provided by VK_EXT_buffer_device_address
+  DeviceAddressCaptureReplay as DeviceAddressCaptureReplayBitExt
+  # Provided by VK_KHR_buffer_device_address
+  DeviceAddressCaptureReplay as DeviceAddressCaptureReplayBitKhr
 
-# Provided by VK_EXT_buffer_device_address
-BufferCreateFlagBits.defineAlias(DeviceAddressCaptureReplayBitExt, DeviceAddressCaptureReplay)
-# Provided by VK_KHR_buffer_device_address
-BufferCreateFlagBits.defineAlias(DeviceAddressCaptureReplayBitKhr, DeviceAddressCaptureReplay)
-
-# Provided by VK_NV_ray_tracing
-BufferUsageFlagBits.defineAlias(RayTracingBitNv, RayTracingBitKhr)
-# Provided by VK_EXT_buffer_device_address
-BufferUsageFlagBits.defineAlias(ShaderDeviceAddressBitExt, ShaderDeviceAddress)
-# Provided by VK_KHR_buffer_device_address
-BufferUsageFlagBits.defineAlias(ShaderDeviceAddressBitKhr, ShaderDeviceAddress)
-
+BufferUsageFlagBits.defineAliases:
+  # Provided by VK_NV_ray_tracing
+  RayTracingBitKhr as RayTracingBitNv
+  # Provided by VK_EXT_buffer_device_address
+  ShaderDeviceAddress as ShaderDeviceAddressBitExt
+  # Provided by VK_KHR_buffer_device_address
+  ShaderDeviceAddress as ShaderDeviceAddressBitKhr
 
 var # commands
   createBufferCage: proc(device: Device; pCreateInfo: ptr BufferCreateInfo; pAllocator: ptr AllocationCallbacks; pBuffer: ptr Buffer;): Result {.cdecl.}
@@ -4407,9 +4403,9 @@ proc destroyBuffer*(
     ): void {.cdecl.} =
   destroyBufferCage(device,buffer,pAllocator)
 
+
 # Buffer view commands
 # --------------------
-
 var # commands
   createBufferViewCage: proc(device: Device; pCreateInfo: ptr BufferViewCreateInfo; pAllocator: ptr AllocationCallbacks; pView: ptr BufferView;): Result {.cdecl.}
   destroyBufferViewCage: proc(device: Device; bufferView: BufferView; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
@@ -4427,21 +4423,22 @@ proc destroyBufferView*(
     ): void {.cdecl.} =
   destroyBufferViewCage(device,bufferView,pAllocator)
 
+
 # Image commands
 # --------------
-
-# Provided by VK_KHR_maintenance2
-ImageLayout.defineAlias(DepthReadOnlyStencilAttachmentOptimalKhr, DepthReadOnlyStencilAttachmentOptimal)
-# Provided by VK_KHR_maintenance2
-ImageLayout.defineAlias(DepthAttachmentStencilReadOnlyOptimalKhr, DepthAttachmentStencilReadOnlyOptimal)
-# Provided by VK_KHR_separate_depth_stencil_layouts
-ImageLayout.defineAlias(DepthAttachmentOptimalKhr, DepthAttachmentOptimal)
-# Provided by VK_KHR_separate_depth_stencil_layouts
-ImageLayout.defineAlias(DepthReadOnlyOptimalKhr, DepthReadOnlyOptimal)
-# Provided by VK_KHR_separate_depth_stencil_layouts
-ImageLayout.defineAlias(StencilAttachmentOptimalKhr, StencilAttachmentOptimal)
-# Provided by VK_KHR_separate_depth_stencil_layouts
-ImageLayout.defineAlias(StencilReadOnlyOptimalKhr, StencilReadOnlyOptimal)
+ImageLayout.defineAliases:
+  # Provided by VK_KHR_maintenance2
+  DepthReadOnlyStencilAttachmentOptimal as DepthReadOnlyStencilAttachmentOptimalKhr
+  # Provided by VK_KHR_maintenance2
+  DepthAttachmentStencilReadOnlyOptimal as DepthAttachmentStencilReadOnlyOptimalKhr
+  # Provided by VK_KHR_separate_depth_stencil_layouts
+  DepthAttachmentOptimal as DepthAttachmentOptimalKhr
+  # Provided by VK_KHR_separate_depth_stencil_layouts
+  DepthReadOnlyOptimal as DepthReadOnlyOptimalKhr
+  # Provided by VK_KHR_separate_depth_stencil_layouts
+  StencilAttachmentOptimal as StencilAttachmentOptimalKhr
+  # Provided by VK_KHR_separate_depth_stencil_layouts
+  StencilReadOnlyOptimal as StencilReadOnlyOptimalKhr
 
 var # commands
   createImageCage: proc(device: Device; pCreateInfo: ptr ImageCreateInfo; pAllocator: ptr AllocationCallbacks; pImage: ptr Image;): Result {.cdecl.}
@@ -4468,10 +4465,9 @@ proc getImageSubresourceLayout*(
     ): void {.cdecl.} =
   getImageSubresourceLayoutCage(device,image,pSubresource,pLayout)
 
+
 # Image view commands
 # -------------------
-
-
 var # commands
   createImageViewCage: proc(device: Device; pCreateInfo: ptr ImageViewCreateInfo; pAllocator: ptr AllocationCallbacks; pView: ptr ImageView;): Result {.cdecl.}
   destroyImageViewCage: proc(device: Device; imageView: ImageView; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
@@ -4489,9 +4485,9 @@ proc destroyImageView*(
     ): void {.cdecl.} =
   destroyImageViewCage(device,imageView,pAllocator)
 
+
 # Shader commands
 # ---------------
-
 var # commands
   createShaderModuleCage: proc(device: Device; pCreateInfo: ptr ShaderModuleCreateInfo; pAllocator: ptr AllocationCallbacks; pShaderModule: ptr ShaderModule;): Result {.cdecl.}
   destroyShaderModuleCage: proc(device: Device; shaderModule: ShaderModule; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
@@ -4509,9 +4505,9 @@ proc destroyShaderModule*(
     ): void {.cdecl.} =
   destroyShaderModuleCage(device,shaderModule,pAllocator)
 
+
 # Pipeline Cache commands
 # -----------------------
-
 var # commands
   createPipelineCacheCage: proc(device: Device; pCreateInfo: ptr PipelineCacheCreateInfo; pAllocator: ptr AllocationCallbacks; pPipelineCache: ptr PipelineCache;): Result {.cdecl.}
   destroyPipelineCacheCage: proc(device: Device; pipelineCache: PipelineCache; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
@@ -4545,28 +4541,30 @@ proc mergePipelineCaches*(
     ): Result {.cdecl, discardable.} =
   mergePipelineCachesCage(device,dstCache,srcCacheCount,pSrcCaches)
 
+
 # Pipeline commands
 # -----------------
+PipelineCreateFlagBits.defineAliases:
+  # Provided by VK_VERSION_1_1
+  DispatchBase as DispatchBase
+  # Provided by VK_KHR_device_group
+  ViewIndexFromDeviceIndex as ViewIndexFromDeviceIndexBitKhr
+  # Provided by VK_KHR_device_group
+  DispatchBase as DispatchBaseKhr
 
-# Provided by VK_VERSION_1_1
-PipelineCreateFlagBits.defineAlias(DispatchBase, DispatchBase)
-# Provided by VK_KHR_device_group
-PipelineCreateFlagBits.defineAlias(ViewIndexFromDeviceIndexBitKhr, ViewIndexFromDeviceIndex)
-# Provided by VK_KHR_device_group
-PipelineCreateFlagBits.defineAlias(DispatchBaseKhr, DispatchBase)
-
-# Provided by VK_NV_ray_tracing
-ShaderStageFlagBits.defineAlias(RaygenBitNv, RaygenBitKhr)
-# Provided by VK_NV_ray_tracing
-ShaderStageFlagBits.defineAlias(AnyHitBitNv, AnyHitBitKhr)
-# Provided by VK_NV_ray_tracing
-ShaderStageFlagBits.defineAlias(ClosestHitBitNv, ClosestHitBitKhr)
-# Provided by VK_NV_ray_tracing
-ShaderStageFlagBits.defineAlias(MissBitNv, MissBitKhr)
-# Provided by VK_NV_ray_tracing
-ShaderStageFlagBits.defineAlias(IntersectionBitNv, IntersectionBitKhr)
-# Provided by VK_NV_ray_tracing
-ShaderStageFlagBits.defineAlias(CallableBitNv, CallableBitKhr)
+ShaderStageFlagBits.defineAliases:
+  # Provided by VK_NV_ray_tracing
+  RaygenBitKhr as RaygenBitNv
+  # Provided by VK_NV_ray_tracing
+  AnyHitBitKhr as AnyHitBitNv
+  # Provided by VK_NV_ray_tracing
+  ClosestHitBitKhr as ClosestHitBitNv
+  # Provided by VK_NV_ray_tracing
+  MissBitKhr as MissBitNv
+  # Provided by VK_NV_ray_tracing
+  IntersectionBitKhr as IntersectionBitNv
+  # Provided by VK_NV_ray_tracing
+  CallableBitKhr as CallableBitNv
 
 var # commands
   createGraphicsPipelinesCage: proc(device: Device; pipelineCache: PipelineCache; createInfoCount: uint32; pCreateInfos: ptr GraphicsPipelineCreateInfo; pAllocator: ptr AllocationCallbacks; pPipelines: ptr Pipeline;): Result {.cdecl.}
@@ -4597,9 +4595,9 @@ proc destroyPipeline*(
     ): void {.cdecl.} =
   destroyPipelineCage(device,pipeline,pAllocator)
 
+
 # Pipeline layout commands
 # ------------------------
-
 var # commands
   createPipelineLayoutCage: proc(device: Device; pCreateInfo: ptr PipelineLayoutCreateInfo; pAllocator: ptr AllocationCallbacks; pPipelineLayout: ptr PipelineLayout;): Result {.cdecl.}
   destroyPipelineLayoutCage: proc(device: Device; pipelineLayout: PipelineLayout; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
@@ -4617,15 +4615,16 @@ proc destroyPipelineLayout*(
     ): void {.cdecl.} =
   destroyPipelineLayoutCage(device,pipelineLayout,pAllocator)
 
+
 # Sampler commands
 # ----------------
+Filter.defineAliases:
+  # Provided by VK_EXT_filter_cubic
+  CubicImg as CubicExt
 
-# Provided by VK_EXT_filter_cubic
-Filter.defineAlias(CubicExt, CubicImg)
-
-# Provided by VK_KHR_sampler_mirror_clamp_to_edge
-SamplerAddressMode.defineAlias(MirrorClampToEdgeKhr, MirrorClampToEdge) # Alias introduced for consistency with extension suffixing rules
-
+SamplerAddressMode.defineAliases:
+  # Provided by VK_KHR_sampler_mirror_clamp_to_edge
+  MirrorClampToEdge as MirrorClampToEdgeKhr # Alias introduced for consistency with extension suffixing rules
 
 var # commands
   createSamplerCage: proc(device: Device; pCreateInfo: ptr SamplerCreateInfo; pAllocator: ptr AllocationCallbacks; pSampler: ptr Sampler;): Result {.cdecl.}
@@ -4644,17 +4643,20 @@ proc destroySampler*(
     ): void {.cdecl.} =
   destroySamplerCage(device,sampler,pAllocator)
 
+
 # Descriptor set commands
 # -----------------------
+DescriptorPoolCreateFlagBits.defineAliases:
+  # Provided by VK_EXT_descriptor_indexing
+  UpdateAfterBind as UpdateAfterBindBitExt
 
-# Provided by VK_EXT_descriptor_indexing
-DescriptorPoolCreateFlagBits.defineAlias(UpdateAfterBindBitExt, UpdateAfterBind)
+DescriptorSetLayoutCreateFlagBits.defineAliases:
+  # Provided by VK_EXT_descriptor_indexing
+  UpdateAfterBindPool as UpdateAfterBindPoolBitExt
 
-# Provided by VK_EXT_descriptor_indexing
-DescriptorSetLayoutCreateFlagBits.defineAlias(UpdateAfterBindPoolBitExt, UpdateAfterBindPool)
-
-# Provided by VK_NV_ray_tracing
-DescriptorType.defineAlias(AccelerationStructureNv, AccelerationStructureKhr)
+DescriptorType.defineAliases:
+  # Provided by VK_NV_ray_tracing
+  AccelerationStructureKhr as AccelerationStructureNv
 
 var # commands
   createDescriptorSetLayoutCage: proc(device: Device; pCreateInfo: ptr DescriptorSetLayoutCreateInfo; pAllocator: ptr AllocationCallbacks; pSetLayout: ptr DescriptorSetLayout;): Result {.cdecl.}
@@ -4719,24 +4721,28 @@ proc updateDescriptorSets*(
     ): void {.cdecl.} =
   updateDescriptorSetsCage(device,descriptorWriteCount,pDescriptorWrites,descriptorCopyCount,pDescriptorCopies)
 
+
 # Pass commands
 # -------------
+AccessFlagBits.defineAliases:
+  # Provided by VK_NV_ray_tracing
+  AccelerationStructureReadBitKhr as AccelerationStructureReadBitNv
+  # Provided by VK_NV_ray_tracing
+  AccelerationStructureWriteBitKhr as AccelerationStructureWriteBitNv
 
-# Provided by VK_NV_ray_tracing
-AccessFlagBits.defineAlias(AccelerationStructureReadBitNv, AccelerationStructureReadBitKhr)
-# Provided by VK_NV_ray_tracing
-AccessFlagBits.defineAlias(AccelerationStructureWriteBitNv, AccelerationStructureWriteBitKhr)
+DependencyFlagBits.defineAliases:
+  # Provided by VK_KHR_multiview
+  ViewLocal as ViewLocalBitKhr
+  # Provided by VK_KHR_device_group
+  DeviceGroup as DeviceGroupBitKhr
 
-# Provided by VK_KHR_multiview
-DependencyFlagBits.defineAlias(ViewLocalBitKhr, ViewLocal)
-# Provided by VK_KHR_device_group
-DependencyFlagBits.defineAlias(DeviceGroupBitKhr, DeviceGroup)
+FramebufferCreateFlagBits.defineAliases:
+  # Provided by VK_KHR_imageless_framebuffer
+  Imageless as ImagelessBitKhr
 
-# Provided by VK_KHR_imageless_framebuffer
-FramebufferCreateFlagBits.defineAlias(ImagelessBitKhr, Imageless)
-
-# Provided by VK_NV_ray_tracing
-PipelineBindPoint.defineAlias(RayTracingNv, RayTracingKhr)
+PipelineBindPoint.defineAliases:
+  # Provided by VK_NV_ray_tracing
+  RayTracingKhr as RayTracingNv
 
 var # commands
   createFramebufferCage: proc(device: Device; pCreateInfo: ptr FramebufferCreateInfo; pAllocator: ptr AllocationCallbacks; pFramebuffer: ptr Framebuffer;): Result {.cdecl.}
@@ -4777,9 +4783,9 @@ proc getRenderAreaGranularity*(
     ): void {.cdecl.} =
   getRenderAreaGranularityCage(device,renderPass,pGranularity)
 
+
 # Command pool commands
 # ---------------------
-
 var # commands
   createCommandPoolCage: proc(device: Device; pCreateInfo: ptr CommandPoolCreateInfo; pAllocator: ptr AllocationCallbacks; pCommandPool: ptr CommandPool;): Result {.cdecl.}
   destroyCommandPoolCage: proc(device: Device; commandPool: CommandPool; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
@@ -4804,9 +4810,9 @@ proc resetCommandPool*(
     ): Result {.cdecl, discardable.} =
   resetCommandPoolCage(device,commandPool,flags)
 
+
 # Command buffer commands
 # -----------------------
-
 var # commands
   allocateCommandBuffersCage: proc(device: Device; pAllocateInfo: ptr CommandBufferAllocateInfo; pCommandBuffers: ptr CommandBuffer;): Result {.cdecl.}
   freeCommandBuffersCage: proc(device: Device; commandPool: CommandPool; commandBufferCount: uint32; pCommandBuffers: ptr CommandBuffer;): void {.cdecl.}
@@ -4841,14 +4847,15 @@ proc resetCommandBuffer*(
     ): Result {.cdecl, discardable.} =
   resetCommandBufferCage(commandBuffer,flags)
 
+
 # Command buffer building commands
 # --------------------------------
+IndexType.defineAliases:
+  # Provided by VK_NV_ray_tracing
+  NoneKhr as NoneNv
 
-# Provided by VK_NV_ray_tracing
-IndexType.defineAlias(NoneNv, NoneKhr)
-
-StencilFaceFlagBits.defineAlias(StencilFrontAndBack, FrontAndBack) # Alias for backwards compatibility
-
+StencilFaceFlagBits.defineAliases:
+  FrontAndBack as StencilFrontAndBack # Alias for backwards compatibility
 
 var # commands
   cmdBindPipelineCage: proc(commandBuffer: CommandBuffer; pipelineBindPoint: PipelineBindPoint; pipeline: Pipeline;): void {.cdecl.}
@@ -5245,7 +5252,6 @@ proc loadVk10*(instance: Instance) =
   instance.defineLoader(`<<`)
 
   # Device initialization
-  # ---------------------
   createInstanceCage << "vkCreateInstance"
   destroyInstanceCage << "vkDestroyInstance"
   enumeratePhysicalDevicesCage << "vkEnumeratePhysicalDevices"
@@ -5259,29 +5265,24 @@ proc loadVk10*(instance: Instance) =
   getDeviceProcAddrCage << "vkGetDeviceProcAddr"
 
   # Device commands
-  # ---------------
   createDeviceCage << "vkCreateDevice"
   destroyDeviceCage << "vkDestroyDevice"
 
   # Extension discovery commands
-  # ----------------------------
   enumerateInstanceExtensionPropertiesCage << "vkEnumerateInstanceExtensionProperties"
   enumerateDeviceExtensionPropertiesCage << "vkEnumerateDeviceExtensionProperties"
 
   # Layer discovery commands
-  # ------------------------
   enumerateInstanceLayerPropertiesCage << "vkEnumerateInstanceLayerProperties"
   enumerateDeviceLayerPropertiesCage << "vkEnumerateDeviceLayerProperties"
 
   # Queue commands
-  # --------------
   getDeviceQueueCage << "vkGetDeviceQueue"
   queueSubmitCage << "vkQueueSubmit"
   queueWaitIdleCage << "vkQueueWaitIdle"
   deviceWaitIdleCage << "vkDeviceWaitIdle"
 
   # Memory commands
-  # ---------------
   allocateMemoryCage << "vkAllocateMemory"
   freeMemoryCage << "vkFreeMemory"
   mapMemoryCage << "vkMapMemory"
@@ -5291,20 +5292,17 @@ proc loadVk10*(instance: Instance) =
   getDeviceMemoryCommitmentCage << "vkGetDeviceMemoryCommitment"
 
   # Memory management API commands
-  # ------------------------------
   bindBufferMemoryCage << "vkBindBufferMemory"
   bindImageMemoryCage << "vkBindImageMemory"
   getBufferMemoryRequirementsCage << "vkGetBufferMemoryRequirements"
   getImageMemoryRequirementsCage << "vkGetImageMemoryRequirements"
 
   # Sparse resource memory management API commands
-  # ----------------------------------------------
   getImageSparseMemoryRequirementsCage << "vkGetImageSparseMemoryRequirements"
   getPhysicalDeviceSparseImageFormatPropertiesCage << "vkGetPhysicalDeviceSparseImageFormatProperties"
   queueBindSparseCage << "vkQueueBindSparse"
 
   # Fence commands
-  # --------------
   createFenceCage << "vkCreateFence"
   destroyFenceCage << "vkDestroyFence"
   resetFencesCage << "vkResetFences"
@@ -5312,12 +5310,10 @@ proc loadVk10*(instance: Instance) =
   waitForFencesCage << "vkWaitForFences"
 
   # Queue semaphore commands
-  # ------------------------
   createSemaphoreCage << "vkCreateSemaphore"
   destroySemaphoreCage << "vkDestroySemaphore"
 
   # Event commands
-  # --------------
   createEventCage << "vkCreateEvent"
   destroyEventCage << "vkDestroyEvent"
   getEventStatusCage << "vkGetEventStatus"
@@ -5325,62 +5321,51 @@ proc loadVk10*(instance: Instance) =
   resetEventCage << "vkResetEvent"
 
   # Query commands
-  # --------------
   createQueryPoolCage << "vkCreateQueryPool"
   destroyQueryPoolCage << "vkDestroyQueryPool"
   getQueryPoolResultsCage << "vkGetQueryPoolResults"
 
   # Buffer commands
-  # ---------------
   createBufferCage << "vkCreateBuffer"
   destroyBufferCage << "vkDestroyBuffer"
 
   # Buffer view commands
-  # --------------------
   createBufferViewCage << "vkCreateBufferView"
   destroyBufferViewCage << "vkDestroyBufferView"
 
   # Image commands
-  # --------------
   createImageCage << "vkCreateImage"
   destroyImageCage << "vkDestroyImage"
   getImageSubresourceLayoutCage << "vkGetImageSubresourceLayout"
 
   # Image view commands
-  # -------------------
   createImageViewCage << "vkCreateImageView"
   destroyImageViewCage << "vkDestroyImageView"
 
   # Shader commands
-  # ---------------
   createShaderModuleCage << "vkCreateShaderModule"
   destroyShaderModuleCage << "vkDestroyShaderModule"
 
   # Pipeline Cache commands
-  # -----------------------
   createPipelineCacheCage << "vkCreatePipelineCache"
   destroyPipelineCacheCage << "vkDestroyPipelineCache"
   getPipelineCacheDataCage << "vkGetPipelineCacheData"
   mergePipelineCachesCage << "vkMergePipelineCaches"
 
   # Pipeline commands
-  # -----------------
   createGraphicsPipelinesCage << "vkCreateGraphicsPipelines"
   createComputePipelinesCage << "vkCreateComputePipelines"
   destroyPipelineCage << "vkDestroyPipeline"
 
   # Pipeline layout commands
-  # ------------------------
   createPipelineLayoutCage << "vkCreatePipelineLayout"
   destroyPipelineLayoutCage << "vkDestroyPipelineLayout"
 
   # Sampler commands
-  # ----------------
   createSamplerCage << "vkCreateSampler"
   destroySamplerCage << "vkDestroySampler"
 
   # Descriptor set commands
-  # -----------------------
   createDescriptorSetLayoutCage << "vkCreateDescriptorSetLayout"
   destroyDescriptorSetLayoutCage << "vkDestroyDescriptorSetLayout"
   createDescriptorPoolCage << "vkCreateDescriptorPool"
@@ -5391,7 +5376,6 @@ proc loadVk10*(instance: Instance) =
   updateDescriptorSetsCage << "vkUpdateDescriptorSets"
 
   # Pass commands
-  # -------------
   createFramebufferCage << "vkCreateFramebuffer"
   destroyFramebufferCage << "vkDestroyFramebuffer"
   createRenderPassCage << "vkCreateRenderPass"
@@ -5399,13 +5383,11 @@ proc loadVk10*(instance: Instance) =
   getRenderAreaGranularityCage << "vkGetRenderAreaGranularity"
 
   # Command pool commands
-  # ---------------------
   createCommandPoolCage << "vkCreateCommandPool"
   destroyCommandPoolCage << "vkDestroyCommandPool"
   resetCommandPoolCage << "vkResetCommandPool"
 
   # Command buffer commands
-  # -----------------------
   allocateCommandBuffersCage << "vkAllocateCommandBuffers"
   freeCommandBuffersCage << "vkFreeCommandBuffers"
   beginCommandBufferCage << "vkBeginCommandBuffer"
@@ -5413,7 +5395,6 @@ proc loadVk10*(instance: Instance) =
   resetCommandBufferCage << "vkResetCommandBuffer"
 
   # Command buffer building commands
-  # --------------------------------
   cmdBindPipelineCage << "vkCmdBindPipeline"
   cmdSetViewportCage << "vkCmdSetViewport"
   cmdSetScissorCage << "vkCmdSetScissor"

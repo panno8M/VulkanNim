@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  ExtPipelineCreationFeedbackSpecVersion* = 1
+  ExtPipelineCreationFeedbackExtensionName* = "VK_EXT_pipeline_creation_feedback"
 
 type
   PipelineCreationFeedbackFlagBitsEXT* {.size: sizeof(int32), pure.} = enum

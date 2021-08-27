@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_external_memory
 
 
-
+const
+  ExtExternalMemoryHostSpecVersion* = 1
+  ExtExternalMemoryHostExtensionName* = "VK_EXT_external_memory_host"
 
 type
   ImportMemoryHostPointerInfoEXT* = object

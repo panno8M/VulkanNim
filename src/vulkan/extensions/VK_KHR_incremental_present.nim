@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_swapchain
 
 
-
+const
+  KhrIncrementalPresentSpecVersion* = 1
+  KhrIncrementalPresentExtensionName* = "VK_KHR_incremental_present"
 
 type
   PresentRegionsKHR* = object

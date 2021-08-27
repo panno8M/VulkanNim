@@ -4,8 +4,11 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-const UuidSize* = 16
-const MaxDescriptionSize* = 256
+const
+  KhrPerformanceQuerySpecVersion* = 1
+  KhrPerformanceQueryExtensionName* = "VK_KHR_performance_query"
+  UuidSize* = 16
+  MaxDescriptionSize* = 256
 
 type
   PhysicalDevicePerformanceQueryFeaturesKHR* = object
@@ -84,9 +87,10 @@ type
     pNext*: pointer
     counterPassIndex*: uint32
 
-PerformanceCounterScopeKHR.defineAlias(QueryScopeCommandBufferKhr, CommandBufferKhr)
-PerformanceCounterScopeKHR.defineAlias(QueryScopeRenderPassKhr, RenderPassKhr)
-PerformanceCounterScopeKHR.defineAlias(QueryScopeCommandKhr, CommandKhr)
+PerformanceCounterScopeKHR.defineAliases:
+  CommandBufferKhr as QueryScopeCommandBufferKhr
+  RenderPassKhr as QueryScopeRenderPassKhr
+  CommandKhr as QueryScopeCommandKhr
 
 var # commands
   enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHRCage: proc(physicalDevice: PhysicalDevice; queueFamilyIndex: uint32; pCounterCount: ptr uint32; pCounters: ptr PerformanceCounterKHR; pCounterDescriptions: ptr PerformanceCounterDescriptionKHR;): Result {.cdecl.}

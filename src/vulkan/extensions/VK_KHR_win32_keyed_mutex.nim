@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_external_memory_win32
 
 
-
+const
+  KhrWin32KeyedMutexSpecVersion* = 1
+  KhrWin32KeyedMutexExtensionName* = "VK_KHR_win32_keyed_mutex"
 
 type
   Win32KeyedMutexAcquireReleaseInfoKHR* = object

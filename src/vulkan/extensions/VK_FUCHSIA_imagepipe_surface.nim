@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_surface
 
 
-
+const
+  FuchsiaImagepipeSurfaceSpecVersion* = 1
+  FuchsiaImagepipeSurfaceExtensionName* = "VK_FUCHSIA_imagepipe_surface"
 
 type
   ImagePipeSurfaceCreateFlagsFUCHSIA* = distinct Flags

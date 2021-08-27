@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_external_memory
 
 
-
+const
+  KhrExternalMemoryFdSpecVersion* = 1
+  KhrExternalMemoryFdExtensionName* = "VK_KHR_external_memory_fd"
 
 type
   ImportMemoryFdInfoKHR* = object

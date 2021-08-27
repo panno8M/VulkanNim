@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  NvMeshShaderSpecVersion* = 1
+  NvMeshShaderExtensionName* = "VK_NV_mesh_shader"
 
 type
   PhysicalDeviceMeshShaderFeaturesNV* = object

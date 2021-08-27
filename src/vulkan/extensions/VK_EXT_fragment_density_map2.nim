@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_EXT_fragment_density_map
 
 
-
+const
+  ExtFragmentDensityMap2SpecVersion* = 1
+  ExtFragmentDensityMap2ExtensionName* = "VK_EXT_fragment_density_map2"
 
 type
   PhysicalDeviceFragmentDensityMap2FeaturesEXT* = object

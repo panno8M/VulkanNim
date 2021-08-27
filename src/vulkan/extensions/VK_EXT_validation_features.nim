@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  ExtValidationFeaturesSpecVersion* = 4
+  ExtValidationFeaturesExtensionName* = "VK_EXT_validation_features"
 
 type
   ValidationFeaturesEXT* = object

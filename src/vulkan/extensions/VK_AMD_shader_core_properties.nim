@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  AmdShaderCorePropertiesSpecVersion* = 2
+  AmdShaderCorePropertiesExtensionName* = "VK_AMD_shader_core_properties"
 
 type
   PhysicalDeviceShaderCorePropertiesAMD* = object

@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  NvDeviceDiagnosticCheckpointsSpecVersion* = 2
+  NvDeviceDiagnosticCheckpointsExtensionName* = "VK_NV_device_diagnostic_checkpoints"
 
 type
   QueueFamilyCheckpointPropertiesNV* = object

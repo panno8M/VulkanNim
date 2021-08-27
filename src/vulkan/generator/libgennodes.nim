@@ -19,73 +19,79 @@ import ./defineTypeComponents
 type UnexpectedXmlStructureError* = object of CatchableError
 template xmlError*(title: Title; strs: varargs[string, `$`]): untyped =
   raise UnexpectedXmlStructureError.newException(logMsg(title, strs))
-proc invalidStructure*(at: string): Title = 
+func invalidStructure*(at: string): Title =
     title("@" & at & " > invalid structure")
-proc cmp(a, b: NodeEnumVal): int =
+func cmp(a, b: NodeEnumVal): int =
   case a.kind
     of nkeValue:
       case b.kind
-      of nkeValue: cmp(a.value, b.value)
+      of nkeValue:  cmp(a.value, b.value)
       of nkeBitpos: cmp(a.value, 1.shl(b.bitpos))
     of nkeBitpos:
       case b.kind
-      of nkeValue: cmp(1.shl(a.bitpos), b.value)
+      of nkeValue:  cmp(1.shl(a.bitpos), b.value)
       of nkeBitpos: cmp(1.shl(a.bitpos), 1.shl(b.bitpos))
 
 # SECTION renderers
 
 proc render*(enumVal: NodeEnumVal; vendorTags: VendorTags; enumsName: string): string =
-  let name = enumVal.name.parseEnumName(enumsName, vendorTags)
-  case enumVal.kind
-  of nkeValue:
-    if enumVal.isExtended:
-      result &= "# Provided by {enumVal.providedBy}\n".fmt
-    result
-      .add if enumVal.isHex: "{name} = 0x{enumVal.value.toHex(8)}".fmt
+  let name = enumVal.name.parseEnumValue(enumsName, vendorTags)
+  if enumVal.isExtended:
+    result.add "# Provided by {enumVal.providedBy}\n".fmt
+
+  result.add case enumVal.kind
+    of nkeValue:
+      if enumVal.isHex: "{name} = 0x{enumVal.value.toHex(8)}".fmt
       else: "{name} = {enumVal.value}".fmt
-    if enumVal.comment.isSome:
-      result &= enumVal.comment.get.commentify.indent(1)
-  of nkeBitpos:
-    if enumVal.isExtended:
-      result &= "# Provided by {enumVal.providedBy}\n".fmt
-    result &= "{name} = 0x{1.shl(enumVal.bitpos).toHex(8)}".fmt
-    if enumVal.comment.isSome:
-      result &= enumVal.comment.get.commentify.indent(1)
-proc render*(enumAlias: NodeEnumAlias; vendorTags: VendorTags): string =
-  let name = enumAlias.name.parseEnumName(enumAlias.enumName, vendorTags)
-  let alias = enumAlias.alias.parseEnumName(enumAlias.enumName, vendorTags)
-  if enumAlias.isExtended:
-    result &= "# Provided by {enumAlias.providedBy}\n".fmt
-  result &= "{enumAlias.enumName.removeVkPrefix}.defineAlias({name}, {alias})".fmt
-  if enumAlias.comment.isSome:
-    result &= enumAlias.comment.get.commentify.indent(1)
+    of nkeBitpos:
+      "{name} = 0x{1.shl(enumVal.bitpos).toHex(8)}".fmt
+
+  if enumVal.comment.isSome:
+    result.add " # " & enumVal.comment.get
 
 proc render*(enums: NodeEnum; vendorTags: VendorTags): string =
   let name = enums.name.removeVkPrefix
+
   if enums.comment.isSome:
-    result &= enums.comment.get.commentify.LF
+    result = "# {enums.comment.get}\n".fmt
+
   if enums.enumVals.len == 0:
-    result &= "{name}* = UnusedEnum".fmt
-    return
-  result &= "{name}* {enumPragma} = enum\n".fmt
-  result &= enums
-    .enumVals
+    return result & "{name}* = UnusedEnum".fmt
+
+  result.add "{name}* {enumPragma} = enum\n".fmt
+  result.add enums.enumVals
     .sorted(cmp)
-    .mapIt(it.render(vendorTags, name))
-    .join("\n").indent(2)
+    .mapIt(it.render(vendorTags, name).indent(2))
+    .join("\n")
+
+proc render*(enumAlias: NodeEnumAlias; vendorTags: VendorTags; enumName: string): string =
+  let name = enumAlias.name.parseEnumValue(enumName, vendorTags)
+  let alias = enumAlias.alias.parseEnumValue(enumName, vendorTags)
+  if enumAlias.isExtended:
+    result.add "# Provided by {enumAlias.providedBy}\n".fmt
+  result.add "{alias} as {name}".fmt
+  if enumAlias.comment.isSome:
+    result.add " # " & enumAlias.comment.get
+proc render*(enumAliases: NodeEnumAliases; vendorTags: VendorTags): string =
+  if enumAliases.aliases.len == 0: return
+  let name = enumAliases.name.removeVkPrefix
+  result.add "{name}.defineAliases:\n".fmt
+  for alias in enumAliases.aliases:
+    result.add alias.render(vendorTags, name).indent(2) & "\n"
+
 
 proc render*(cons: NodeConst): string =
   let name = cons.name.parseVariableNameFromSnake
-  result = "const {name}* = {cons.value}".fmt
+  result = "{name}* = {cons.value}".fmt
   if cons.comment.isSome:
-    result &= cons.comment.get.commentify.indent(1)
+    result.add " # " & cons.comment.get
 
 proc render*(consAlias: NodeConstAlias): string =
-  let name = consAlias.name.removeVkPrefix.toUpperCamel
-  result = "template {name}*(): untyped =\n".fmt
+  let name = consAlias.name.parseVariableNameFromSnake
+  let alias = consAlias.alias.parseVariableNameFromSnake
+  result = "{name}* = {alias}".fmt
   if consAlias.comment.isSome:
-    result &= consAlias.comment.get.commentify.indent(2).LF
-  result &= consAlias.alias.toUpperCamel.indent(2)
+    result.add " # " & consAlias.comment.get
 
 proc render*(funcPtr: NodeFuncPtr): string =
   let name = funcPtr.name.parseTypeName
@@ -199,7 +205,7 @@ proc renderCommandLoaderComponent*(require: NodeRequire; resources: Resources): 
   var commandLoaderDef = newSeq[string]()
 
   if require.comment.isSome:
-    commandLoaderDef.add require.comment.get.underline('-').commentify
+    commandLoaderDef.add require.comment.get.commentify
   for req in require.targets.filter(x => x.kind == nkrCommand):
     commandLoaderDef.add "{req.name.parseCommandName}Cage << \"{req.name}\"".fmt
 
@@ -219,7 +225,7 @@ proc renderCommandLoader*(libFile: LibFile; resources: Resources): string =
     "  instance.defineLoader(`<<`)\n\n" &
     commandLoaderDefs.mapIt(it.indent(2)).join("\n\n")
 
-proc renderInstanceCommandLoader*(fileName: string): string =
+func renderInstanceCommandLoader*(fileName: string): string =
   assert fileName in ["vk10", "vk11"]
   case fileName
   of "vk10":
@@ -239,7 +245,7 @@ proc renderInstanceCommandLoader*(fileName: string): string =
 
 proc render*(libFile: LibFile; resources: Resources): string =
   var renderedNodes: seq[string]
-  var enumAliasesRequired: seq[NodeEnumAlias]
+  var enumAliasesRequired: seq[NodeEnumAliases]
   result &= libFile.fileHeader
   result.LF
   result &= libFile
@@ -261,76 +267,92 @@ proc render*(libFile: LibFile; resources: Resources): string =
   block Solve_consts:
     var reqDefs: seq[seq[string]]
     for require in libFile.requires:
-      reqDefs.add @[]
-      # result &= require.render.LF
-      if require.comment.isSome:
-        reqDefs[^1].add require.comment.get.underline('-').commentify
+      var reqDef: seq[string]
 
       for req in require.targets.filter(x => x.kind in {nkrApiConst, nkrConst, nkrConstAlias, nkrType}):
         if req.name in renderedNodes: continue
 
-        if resources.consts.hasKey(req.name):
-          reqDefs[^1].add resources.consts[req.name].render
+        case req.kind
+        of nkrConst:
+          reqDef.add NodeConst(name: req.name, value: req.value).render
           renderedNodes.add req.name
 
-        elif resources.constAliases.hasKey(req.name):
-          reqDefs[^1].add resources.constAliases[req.name].render
+        of nkrConstAlias:
+          reqDef.add NodeConstAlias(name: req.name, alias: req.alias).render
           renderedNodes.add req.name
 
-        elif resources.structs.hasKey(req.name):
-          let struct = resources.structs[req.name]
-          if struct.requiredConstNames.len == 0: continue
-          for reqConst in struct.requiredConstNames:
-            if reqConst in renderedNodes: continue
-            if resources.consts.hasKey(reqConst):
-              reqDefs[^1].add resources.consts[reqConst].render
-              renderedNodes.add reqConst
+        of nkrApiConst:
+          if resources.consts.hasKey(req.name):
+            reqDef.add resources.consts[req.name].render
+            renderedNodes.add req.name
 
-      if (require.comment.isSome and reqDefs[^1].len == 1) or
-         (require.comment.isNone and reqDefs[^1].len == 0):
-        reqDefs.del(reqDefs.high)
+          elif resources.constAliases.hasKey(req.name):
+            reqDef.add resources.constAliases[req.name].render
+            renderedNodes.add req.name
 
+        of nkrType:
+          if resources.structs.hasKey(req.name):
+            let struct = resources.structs[req.name]
+            if struct.requiredConstNames.len == 0: continue
+            for reqConst in struct.requiredConstNames:
+              if reqConst in renderedNodes: continue
+              if resources.consts.hasKey(reqConst):
+                reqDef.add resources.consts[reqConst].render
+                renderedNodes.add reqConst
 
-    result &= reqDefs.mapIt(it.join("\n")).filterIt(it.len != 0).join("\n\n")
+        else: discard
+      if reqDef.len != 0:
+        reqDefs.add case require.comment.isSome
+          of true: concat(@[require.comment.get.commentify], reqDef)
+          of false: reqDef
+
+    result.add "const\n"
+    result.add reqDefs
+      .mapIt(it.map(s => s.indent(2)).join("\n"))
+      .join("\n\n")
     result.LF
     result.LF
 
-  block Solve_types_first:
+  block Solve_types:
     var typeDefs: seq[seq[string]]
     for require in libFile.requires:
       let typeTargets = require.targets.filterIt(it.kind in {nkrType})
       if typeTargets.len == 0: continue
 
-      typeDefs.add @[]
-      if require.comment.isSome:
-        typeDefs[^1].add @[require.comment.get.underline('-').commentify]
+      var typeDef: seq[string]
 
       for req in typeTargets:
-        if req.name notin renderedNodes:
-          if resources.basetypes.hasKey(req.name):
-            typeDefs[^1].add resources.basetypes[req.name].render
-            renderedNodes.add req.name
-          elif resources.bitmasks.hasKey(req.name):
-            typeDefs[^1].add resources.bitmasks[req.name].render
-            renderedNodes.add req.name
-          elif resources.structs.hasKey(req.name):
-            typeDefs[^1].add resources.structs[req.name].render
-            renderedNodes.add req.name
-          elif resources.funcPtrs.hasKey(req.name):
-            typeDefs[^1].add resources.funcPtrs[req.name].render
-            renderedNodes.add req.name
-          elif resources.handles.hasKey(req.name):
-            typeDefs[^1].add resources.handles[req.name].render
-            renderedNodes.add req.name
-          elif resources.enums.hasKey(req.name):
-            typeDefs[^1].add resources.enums[req.name].render(resources.vendorTags)
-            if resources.enumAliases.hasKey(req.name):
-              for alias in resources.enumAliases[req.name]:
-                enumAliasesRequired.add alias
-            renderedNodes.add req.name
+        if req.name in renderedNodes: continue
 
-    result.add "type".LF
-    result &= typeDefs.mapIt(it.join("\n").indent(2)).join("\n\n").LF.LF
+        if resources.basetypes.hasKey(req.name):
+          typeDef.add resources.basetypes[req.name].render
+          renderedNodes.add req.name
+        elif resources.bitmasks.hasKey(req.name):
+          typeDef.add resources.bitmasks[req.name].render
+          renderedNodes.add req.name
+        elif resources.structs.hasKey(req.name):
+          typeDef.add resources.structs[req.name].render
+          renderedNodes.add req.name
+        elif resources.funcPtrs.hasKey(req.name):
+          typeDef.add resources.funcPtrs[req.name].render
+          renderedNodes.add req.name
+        elif resources.handles.hasKey(req.name):
+          typeDef.add resources.handles[req.name].render
+          renderedNodes.add req.name
+        elif resources.enums.hasKey(req.name):
+          typeDef.add resources.enums[req.name].render(resources.vendorTags)
+          if resources.enumAliases.hasKey(req.name):
+            enumAliasesRequired.add resources.enumAliases[req.name]
+          renderedNodes.add req.name
+
+      if typeDef.len != 0:
+        typeDefs.add case require.comment.isSome
+          of true: concat(@[require.comment.get.underline('-').commentify], typeDef)
+          of false: typeDef
+
+    if typeDefs.len != 0:
+      result.add "type".LF
+      result &= typeDefs.mapIt(it.join("\n").indent(2)).join("\n\n").LF.LF
 
   block Solve_others:
     var reqDefs: seq[seq[string]]
@@ -341,13 +363,12 @@ proc render*(libFile: LibFile; resources: Resources): string =
         reqDefs[^1].add require.comment.get.underline('-').commentify
 
       for req in require.targets.filter(x => x.kind == nkrType):
-        reqDefs.add @[]
         if req.name notin renderedNodes:
           if resources.defines.hasKey(req.name):
             reqDefs[^1].add resources.defines[req.name].render
             renderedNodes.add req.name
         if resources.enumAliases.hasKey(req.name):
-          reqDefs[^1].add resources.enumAliases[req.name].mapIt(it.render(resources.vendorTags)).join("\n")
+          reqDefs[^1].add resources.enumAliases[req.name].render(resources.vendorTags)
 
       let reqCommands = require.targets.filter(x => x.kind == nkrCommand)
       if reqCommands.len != 0:
@@ -362,7 +383,7 @@ proc render*(libFile: LibFile; resources: Resources): string =
               reqDefs[^1].add resources.commands[reqCommand.name].renderAccessor
               renderedNodes.add reqCommand.name
 
-    result &= reqDefs.mapIt(it.join("\n")).filterIt(it.len != 0).join("\n\n")
+    result &= reqDefs.mapIt(it.join("\n")).filterIt(it.len != 0).join("\n\n\n")
     result.LF
 
   if libFile.fileName in ["vk10", "vk11"]: # Insert_basic_loader:
@@ -439,27 +460,26 @@ func extractNodeEnumValue*(typeDef: XmlNode): (Option[NodeEnumVal], Option[NodeE
   else:
     xmlError title"The enum value does'nt has any value, bitpos or alias attr.": $typeDef
 
-func extractNodeEnum*(enumDef: XmlNode): (Option[NodeEnum], seq[NodeEnumAlias]) {.raises: [UnexpectedXmlStructureError].} =
+func extractNodeEnum*(enumDef: XmlNode): (Option[NodeEnum], Option[NodeEnumAliases]) {.raises: [UnexpectedXmlStructureError].} =
   if enumDef.kind != xnElement or
      enumDef.tag != "enums":
     return
   if enumDef.name == "API Constants":
     return
 
-  var resultAliases = newSeq[NodeEnumAlias]()
   var resultEnum = NodeEnum(
     name: enumDef.name,
     comment: ?enumDef.comment)
+  var resultAliases = NodeEnumAliases(
+    name: enumDef.name)
 
   for child in enumDef:
     let (value, alias) = child.extractNodeEnumValue
-    if value.isSome:
-      resultEnum.enumVals.add value.get
-    if alias.isSome:
-      resultAliases.add alias.get |> (x => (x.enumName = resultEnum.name; x))
+    if value.isSome: resultEnum.enumVals.add value.get
+    if alias.isSome: resultAliases.aliases.add alias.get
 
   result[0] = some resultEnum
-  result[1] = resultAliases
+  if resultAliases.aliases.len != 0: result[1] = some resultAliases
 
 func extractNodeApiConstVal*(typeDef: XmlNode): (Option[NodeConst], Option[NodeConstAlias]) {.raises: [UnexpectedXmlStructureError].} =
   if typeDef.tag != "enum":
@@ -600,7 +620,7 @@ func extractNodeBitmask*(typeDef: Xmlnode): NodeBitmask {.raises: [UnexpectedXml
      typeDef.tag != "type" or
      typeDef.category != "bitmask":
     xmlError invalidStructure("bitmask Extraction"): $typeDef
-    
+
   result = NodeBitmask(
     kind:
       if typeDef["type"] != nil and
@@ -732,17 +752,17 @@ proc extractAllNodeEnumExtensions*(rootXml: XmlNode; resources: var Resources) {
           except KeyError:
             xmlError title"@enum extends Extraction >": $theEnum
       elif alias.isSome:
+        let enumName = theEnum{"extends"}
         var enumAlias = NodeEnumAlias(
-          enumName: theEnum{"extends"},
           name: theEnum.name,
           alias: theEnum.alias,
           comment: ?theEnum.comment,
           isExtended: true,
           providedBy: enumsRoot.name)
         try:
-          resources.enumAliases[enumAlias.enumName].add enumAlias
+          resources.enumAliases[enumName].aliases.add enumAlias
         except KeyError:
-          resources.enumAliases[enumAlias.enumName] = @[enumAlias]
+          resources.enumAliases[enumName] = NodeEnumAliases(name: enumName, aliases: @[enumAlias])
       else: continue
 
 #!SECTION
@@ -792,7 +812,7 @@ proc extractResources*(rootXml: XmlNode): Resources {.raises: [LoggingFailure, E
     constAliases: newTable[string, NodeConstAlias](),
     structs: newTable[string, NodeStruct](),
     enums: newTable[string, NodeEnum](),
-    enumAliases: newTable[string, seq[NodeEnumAlias]](),
+    enumAliases: newTable[string, NodeEnumAliases](),
   )
 
   try:
@@ -829,7 +849,8 @@ proc extractResources*(rootXml: XmlNode): Resources {.raises: [LoggingFailure, E
       let (theEnum, enumAliases) = enumsXmlTable[xmlType.name].extractNodeEnum()
       if theEnum.isSome:
         result.enums[xmlType.name] = theEnum.get
-      result.enumAliases[xmlType.name] = enumAliases
+      if enumAliases.isSome:
+        result.enumAliases[xmlType.name] = enumAliases.get
     except KeyError:
       result.enums[xmlType.name] = NodeEnum(name: xmlType.name, enumVals: @[])
     except UnexpectedXmlStructureError:

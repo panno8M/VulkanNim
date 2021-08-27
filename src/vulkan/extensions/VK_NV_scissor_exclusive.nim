@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  NvScissorExclusiveSpecVersion* = 1
+  NvScissorExclusiveExtensionName* = "VK_NV_scissor_exclusive"
 
 type
   PipelineViewportExclusiveScissorStateCreateInfoNV* = object

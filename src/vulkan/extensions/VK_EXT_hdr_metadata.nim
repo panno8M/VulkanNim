@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_swapchain
 
 
-
+const
+  ExtHdrMetadataSpecVersion* = 2
+  ExtHdrMetadataExtensionName* = "VK_EXT_hdr_metadata"
 
 type
   HdrMetadataEXT* = object

@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_surface
 
 
-
+const
+  KhrWin32SurfaceSpecVersion* = 6
+  KhrWin32SurfaceExtensionName* = "VK_KHR_win32_surface"
 
 type
   Win32SurfaceCreateFlagsKHR* = distinct Flags

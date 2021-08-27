@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  ExtLineRasterizationSpecVersion* = 1
+  ExtLineRasterizationExtensionName* = "VK_EXT_line_rasterization"
 
 type
   PhysicalDeviceLineRasterizationFeaturesEXT* = object
@@ -32,7 +34,6 @@ type
     RectangularExt = 1
     BresenhamExt = 2
     RectangularSmoothExt = 3
-
 
 var # commands
   cmdSetLineStippleEXTCage: proc(commandBuffer: CommandBuffer; lineStippleFactor: uint32; lineStipplePattern: uint16;): void {.cdecl.}

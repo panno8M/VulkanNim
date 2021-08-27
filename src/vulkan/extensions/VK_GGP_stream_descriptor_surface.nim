@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_surface
 
 
-
+const
+  GgpStreamDescriptorSurfaceSpecVersion* = 1
+  GgpStreamDescriptorSurfaceExtensionName* = "VK_GGP_stream_descriptor_surface"
 
 type
   StreamDescriptorSurfaceCreateFlagsGGP* = distinct Flags

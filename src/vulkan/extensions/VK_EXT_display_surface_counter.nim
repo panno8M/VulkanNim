@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_display
 
 
-
+const
+  ExtDisplaySurfaceCounterSpecVersion* = 1
+  ExtDisplaySurfaceCounterExtensionName* = "VK_EXT_display_surface_counter"
 
 type
   SurfaceCounterFlagsEXT* = distinct Flags

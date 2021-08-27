@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  ExtPrivateDataSpecVersion* = 1
+  ExtPrivateDataExtensionName* = "VK_EXT_private_data"
 
 type
   PhysicalDevicePrivateDataFeaturesEXT* = object
@@ -21,7 +23,6 @@ type
   PrivateDataSlotEXT* = distinct NonDispatchableHandle
   PrivateDataSlotCreateFlagsEXT* = distinct Flags
   PrivateDataSlotCreateFlagBitsEXT* = UnusedEnum
-
 
 var # commands
   createPrivateDataSlotEXTCage: proc(device: Device; pCreateInfo: ptr PrivateDataSlotCreateInfoEXT; pAllocator: ptr AllocationCallbacks; pPrivateDataSlot: ptr PrivateDataSlotEXT;): Result {.cdecl.}

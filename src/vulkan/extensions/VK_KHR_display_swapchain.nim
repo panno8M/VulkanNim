@@ -5,7 +5,9 @@ import VK_KHR_swapchain
 import VK_KHR_display
 
 
-
+const
+  KhrDisplaySwapchainSpecVersion* = 10
+  KhrDisplaySwapchainExtensionName* = "VK_KHR_display_swapchain"
 
 type
   DisplayPresentInfoKHR* = object

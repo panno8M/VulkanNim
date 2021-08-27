@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  ExtGlobalPrioritySpecVersion* = 2
+  ExtGlobalPriorityExtensionName* = "VK_EXT_global_priority"
 
 type
   DeviceQueueGlobalPriorityCreateInfoEXT* = object

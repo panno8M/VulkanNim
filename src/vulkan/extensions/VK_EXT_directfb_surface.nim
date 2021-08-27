@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_surface
 
 
-
+const
+  ExtDirectfbSurfaceSpecVersion* = 1
+  ExtDirectfbSurfaceExtensionName* = "VK_EXT_directfb_surface"
 
 type
   DirectFBSurfaceCreateFlagsEXT* = distinct Flags

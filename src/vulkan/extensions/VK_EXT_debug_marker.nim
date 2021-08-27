@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_EXT_debug_report
 
 
-
+const
+  ExtDebugMarkerSpecVersion* = 4
+  ExtDebugMarkerExtensionName* = "VK_EXT_debug_marker"
 
 type
   DebugReportObjectTypeEXT* {.size: sizeof(int32), pure.} = enum
@@ -66,14 +68,15 @@ type
     pMarkerName*: cstring
     color*: array[4, float32]
 
-DebugReportObjectTypeEXT.defineAlias(DebugReportExt, DebugReportCallbackExtExt) # Backwards-compatible alias containing a typo
-DebugReportObjectTypeEXT.defineAlias(ValidationCacheExt, ValidationCacheExtExt) # Backwards-compatible alias containing a typo
-# Provided by VK_KHR_descriptor_update_template
-DebugReportObjectTypeEXT.defineAlias(DescriptorUpdateTemplateKhrExt, DescriptorUpdateTemplateExt)
-# Provided by VK_KHR_sampler_ycbcr_conversion
-DebugReportObjectTypeEXT.defineAlias(SamplerYcbcrConversionKhrExt, SamplerYcbcrConversionExt)
-# Provided by VK_NV_ray_tracing
-DebugReportObjectTypeEXT.defineAlias(AccelerationStructureNvExt, AccelerationStructureKhrExt)
+DebugReportObjectTypeEXT.defineAliases:
+  DebugReportCallbackExtExt as DebugReportExt # Backwards-compatible alias containing a typo
+  ValidationCacheExtExt as ValidationCacheExt # Backwards-compatible alias containing a typo
+  # Provided by VK_KHR_descriptor_update_template
+  DescriptorUpdateTemplateExt as DescriptorUpdateTemplateKhrExt
+  # Provided by VK_KHR_sampler_ycbcr_conversion
+  SamplerYcbcrConversionExt as SamplerYcbcrConversionKhrExt
+  # Provided by VK_NV_ray_tracing
+  AccelerationStructureKhrExt as AccelerationStructureNvExt
 
 var # commands
   debugMarkerSetObjectTagEXTCage: proc(device: Device; pTagInfo: ptr DebugMarkerObjectTagInfoEXT;): Result {.cdecl.}

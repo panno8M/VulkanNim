@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  ExtConditionalRenderingSpecVersion* = 2
+  ExtConditionalRenderingExtensionName* = "VK_EXT_conditional_rendering"
 
 type
   ConditionalRenderingFlagsEXT* = distinct Flags

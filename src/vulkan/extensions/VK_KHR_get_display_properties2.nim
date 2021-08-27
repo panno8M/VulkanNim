@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_display
 
 
-
+const
+  KhrGetDisplayProperties2SpecVersion* = 1
+  KhrGetDisplayProperties2ExtensionName* = "VK_KHR_get_display_properties2"
 
 type
   DisplayProperties2KHR* = object

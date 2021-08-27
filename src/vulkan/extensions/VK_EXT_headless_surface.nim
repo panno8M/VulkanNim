@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_surface
 
 
-
+const
+  ExtHeadlessSurfaceSpecVersion* = 1
+  ExtHeadlessSurfaceExtensionName* = "VK_EXT_headless_surface"
 
 type
   HeadlessSurfaceCreateFlagsEXT* = distinct Flags

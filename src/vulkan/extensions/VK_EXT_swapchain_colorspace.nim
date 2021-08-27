@@ -4,9 +4,8 @@ import ../features/vk10
 import VK_KHR_surface
 
 
-
-
-type
-
+const
+  ExtSwapchainColorSpaceSpecVersion* = 4
+  ExtSwapchainColorSpaceExtensionName* = "VK_EXT_swapchain_colorspace"
 
 

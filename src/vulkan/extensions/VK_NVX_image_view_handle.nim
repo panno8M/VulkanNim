@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  NvxImageViewHandleSpecVersion* = 2
+  NvxImageViewHandleExtensionName* = "VK_NVX_image_view_handle"
 
 type
   ImageViewHandleInfoNVX* = object

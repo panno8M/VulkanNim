@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_external_fence
 
 
-
+const
+  KhrExternalFenceFdSpecVersion* = 1
+  KhrExternalFenceFdExtensionName* = "VK_KHR_external_fence_fd"
 
 type
   ImportFenceFdInfoKHR* = object

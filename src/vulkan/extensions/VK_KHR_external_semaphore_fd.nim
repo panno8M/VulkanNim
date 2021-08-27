@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_external_semaphore
 
 
-
+const
+  KhrExternalSemaphoreFdSpecVersion* = 1
+  KhrExternalSemaphoreFdExtensionName* = "VK_KHR_external_semaphore_fd"
 
 type
   ImportSemaphoreFdInfoKHR* = object

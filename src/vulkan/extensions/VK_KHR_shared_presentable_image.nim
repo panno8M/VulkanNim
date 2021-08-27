@@ -6,7 +6,9 @@ import VK_KHR_get_physical_device_properties2
 import VK_KHR_get_surface_capabilities2
 
 
-
+const
+  KhrSharedPresentableImageSpecVersion* = 1
+  KhrSharedPresentableImageExtensionName* = "VK_KHR_shared_presentable_image"
 
 type
   SharedPresentSurfaceCapabilitiesKHR* = object

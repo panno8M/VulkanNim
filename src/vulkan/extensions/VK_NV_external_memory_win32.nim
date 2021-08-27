@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_NV_external_memory
 
 
-
+const
+  NvExternalMemoryWin32SpecVersion* = 1
+  NvExternalMemoryWin32ExtensionName* = "VK_NV_external_memory_win32"
 
 type
   ImportMemoryWin32HandleInfoNV* = object

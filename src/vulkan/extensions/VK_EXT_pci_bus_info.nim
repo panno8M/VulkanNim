@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  ExtPciBusInfoSpecVersion* = 2
+  ExtPciBusInfoExtensionName* = "VK_EXT_pci_bus_info"
 
 type
   PhysicalDevicePCIBusInfoPropertiesEXT* = object

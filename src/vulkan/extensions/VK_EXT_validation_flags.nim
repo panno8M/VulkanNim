@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  ExtValidationFlagsSpecVersion* = 2
+  ExtValidationFlagsExtensionName* = "VK_EXT_validation_flags"
 
 type
   ValidationFlagsEXT* = object

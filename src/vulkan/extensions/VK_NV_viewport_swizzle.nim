@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  NvViewportSwizzleSpecVersion* = 1
+  NvViewportSwizzleExtensionName* = "VK_NV_viewport_swizzle"
 
 type
   ViewportSwizzleNV* = object

@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  Ext4444FormatsSpecVersion* = 1
+  Ext4444FormatsExtensionName* = "VK_EXT_4444_formats"
 
 type
   PhysicalDevice4444FormatsFeaturesEXT* = object

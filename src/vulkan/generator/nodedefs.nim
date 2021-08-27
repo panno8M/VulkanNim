@@ -13,7 +13,7 @@ type
     funcPtrs*: TableRef[string,  NodeFuncPtr]
     handles*: TableRef[string,  NodeHandle]
     enums*: TableRef[string,  NodeEnum]
-    enumAliases*: TableRef[string, seq[NodeEnumAlias]]
+    enumAliases*: TableRef[string, NodeEnumAliases]
     commands*: TableRef[string, NodeCommand]
     consts*: TableRef[string, NodeConst]
     constAliases*: TableRef[string, NodeConstAlias]
@@ -38,7 +38,6 @@ type
     nkbrAlias
 
   NodeEnumAlias* = ref object
-    enumName*: string
     name*: string
     comment*: Option[string]
     alias*: string
@@ -46,6 +45,9 @@ type
     of true:
       providedBy*: string
     of false: discard
+  NodeEnumAliases* = ref object
+    name*: string
+    aliases*: seq[NodeEnumAlias]
   NodeEnumVal* = ref object
     name*: string
     comment*: Option[string]

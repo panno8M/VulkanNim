@@ -3,10 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
-
-type
-
+const
+  AmdDrawIndirectCountSpecVersion* = 2
+  AmdDrawIndirectCountExtensionName* = "VK_AMD_draw_indirect_count"
 
 var # commands
   

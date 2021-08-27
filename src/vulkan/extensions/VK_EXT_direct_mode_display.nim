@@ -4,10 +4,9 @@ import ../features/vk10
 import VK_KHR_display
 
 
-
-
-type
-
+const
+  ExtDirectModeDisplaySpecVersion* = 1
+  ExtDirectModeDisplayExtensionName* = "VK_EXT_direct_mode_display"
 
 var # commands
   releaseDisplayEXTCage: proc(physicalDevice: PhysicalDevice; display: DisplayKHR;): Result {.cdecl.}

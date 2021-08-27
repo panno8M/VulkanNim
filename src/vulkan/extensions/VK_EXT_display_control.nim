@@ -5,7 +5,9 @@ import VK_EXT_display_surface_counter
 import VK_KHR_swapchain
 
 
-
+const
+  ExtDisplayControlSpecVersion* = 1
+  ExtDisplayControlExtensionName* = "VK_EXT_display_control"
 
 type
   DisplayPowerStateEXT* {.size: sizeof(int32), pure.} = enum

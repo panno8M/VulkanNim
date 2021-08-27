@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  ExtCalibratedTimestampsSpecVersion* = 1
+  ExtCalibratedTimestampsExtensionName* = "VK_EXT_calibrated_timestamps"
 
 type
   TimeDomainEXT* {.size: sizeof(int32), pure.} = enum

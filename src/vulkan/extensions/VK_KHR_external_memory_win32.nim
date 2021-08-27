@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_external_memory
 
 
-
+const
+  KhrExternalMemoryWin32SpecVersion* = 1
+  KhrExternalMemoryWin32ExtensionName* = "VK_KHR_external_memory_win32"
 
 type
   ImportMemoryWin32HandleInfoKHR* = object

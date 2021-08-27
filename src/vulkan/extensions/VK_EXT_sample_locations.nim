@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  ExtSampleLocationsSpecVersion* = 1
+  ExtSampleLocationsExtensionName* = "VK_EXT_sample_locations"
 
 type
   SampleLocationEXT* = object

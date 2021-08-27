@@ -6,7 +6,9 @@ import VK_KHR_get_surface_capabilities2
 import VK_KHR_swapchain
 
 
-
+const
+  AmdDisplayNativeHdrSpecVersion* = 1
+  AmdDisplayNativeHdrExtensionName* = "VK_AMD_display_native_hdr"
 
 type
   DisplayNativeHdrSurfaceCapabilitiesAMD* = object

@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  KhrBindMemory2SpecVersion* = 1
+  KhrBindMemory2ExtensionName* = "VK_KHR_bind_memory2"
 
 type
   BindBufferMemoryInfoKHR* = object

@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  NvFramebufferMixedSamplesSpecVersion* = 1
+  NvFramebufferMixedSamplesExtensionName* = "VK_NV_framebuffer_mixed_samples"
 
 type
   PipelineCoverageModulationStateCreateInfoNV* = object

@@ -4,8 +4,10 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-template LuidSizeKhr*(): untyped =
-  VkLuidSize
+const
+  KhrExternalFenceCapabilitiesSpecVersion* = 1
+  KhrExternalFenceCapabilitiesExtensionName* = "VK_KHR_external_fence_capabilities"
+  LuidSizeKhr* = LuidSize
 
 type
   {name}* = {Alias}

@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_swapchain
 
 
-
+const
+  GoogleDisplayTimingSpecVersion* = 1
+  GoogleDisplayTimingExtensionName* = "VK_GOOGLE_display_timing"
 
 type
   RefreshCycleDurationGOOGLE* = object

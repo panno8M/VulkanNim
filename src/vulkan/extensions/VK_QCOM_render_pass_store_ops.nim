@@ -3,9 +3,8 @@ import ../platform
 import ../features/vk10
 
 
-
-
-type
-
+const
+  QcomRenderPassStoreOpsSpecVersion* = 2
+  QcomRenderPassStoreOpsExtensionName* = "VK_QCOM_render_pass_store_ops"
 
 

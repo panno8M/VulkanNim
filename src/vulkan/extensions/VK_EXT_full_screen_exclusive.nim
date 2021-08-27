@@ -7,7 +7,9 @@ import VK_KHR_get_surface_capabilities2
 import VK_KHR_swapchain
 
 
-
+const
+  ExtFullScreenExclusiveSpecVersion* = 4
+  ExtFullScreenExclusiveExtensionName* = "VK_EXT_full_screen_exclusive"
 
 type
   FullScreenExclusiveEXT* {.size: sizeof(int32), pure.} = enum
@@ -51,6 +53,7 @@ proc releaseFullScreenExclusiveModeEXT*(
     ): Result {.cdecl, discardable.} =
   releaseFullScreenExclusiveModeEXTCage(device,swapchain)
 
+
 var # commands
   getDeviceGroupSurfacePresentModes2EXTCage: proc(device: Device; pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR; pModes: ptr DeviceGroupPresentModeFlagsKHR;): Result {.cdecl.}
 proc getDeviceGroupSurfacePresentModes2EXT*(
@@ -59,6 +62,7 @@ proc getDeviceGroupSurfacePresentModes2EXT*(
       pModes: ptr DeviceGroupPresentModeFlagsKHR;
     ): Result {.cdecl, discardable.} =
   getDeviceGroupSurfacePresentModes2EXTCage(device,pSurfaceInfo,pModes)
+
 
 var # commands
 proc loadVK_EXT_full_screen_exclusive*(instance: Instance) =

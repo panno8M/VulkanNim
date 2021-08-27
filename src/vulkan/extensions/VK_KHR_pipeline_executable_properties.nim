@@ -4,7 +4,10 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-const MaxDescriptionSize* = 256
+const
+  KhrPipelineExecutablePropertiesSpecVersion* = 1
+  KhrPipelineExecutablePropertiesExtensionName* = "VK_KHR_pipeline_executable_properties"
+  MaxDescriptionSize* = 256
 
 type
   PhysicalDevicePipelineExecutablePropertiesFeaturesKHR* = object

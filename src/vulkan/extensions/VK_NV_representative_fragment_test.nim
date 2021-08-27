@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  NvRepresentativeFragmentTestSpecVersion* = 2
+  NvRepresentativeFragmentTestExtensionName* = "VK_NV_representative_fragment_test"
 
 type
   PhysicalDeviceRepresentativeFragmentTestFeaturesNV* = object

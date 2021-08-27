@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  ExtMemoryPrioritySpecVersion* = 1
+  ExtMemoryPriorityExtensionName* = "VK_EXT_memory_priority"
 
 type
   PhysicalDeviceMemoryPriorityFeaturesEXT* = object

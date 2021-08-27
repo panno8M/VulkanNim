@@ -3,7 +3,9 @@ import ../platform
 import ../features/vk10
 
 
-
+const
+  ExtBlendOperationAdvancedSpecVersion* = 2
+  ExtBlendOperationAdvancedExtensionName* = "VK_EXT_blend_operation_advanced"
 
 type
   PhysicalDeviceBlendOperationAdvancedFeaturesEXT* = object

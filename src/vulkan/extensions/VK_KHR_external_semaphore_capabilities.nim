@@ -4,8 +4,10 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-template LuidSizeKhr*(): untyped =
-  VkLuidSize
+const
+  KhrExternalSemaphoreCapabilitiesSpecVersion* = 1
+  KhrExternalSemaphoreCapabilitiesExtensionName* = "VK_KHR_external_semaphore_capabilities"
+  LuidSizeKhr* = LuidSize
 
 type
   {name}* = {Alias}

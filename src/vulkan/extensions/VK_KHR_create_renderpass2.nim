@@ -5,7 +5,9 @@ import VK_KHR_multiview
 import VK_KHR_maintenance2
 
 
-
+const
+  KhrCreateRenderpass2SpecVersion* = 1
+  KhrCreateRenderpass2ExtensionName* = "VK_KHR_create_renderpass2"
 
 type
   RenderPassCreateInfo2KHR* = object

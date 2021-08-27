@@ -7,7 +7,9 @@ import VK_KHR_image_format_list
 import VK_KHR_sampler_ycbcr_conversion
 
 
-
+const
+  ExtImageDrmFormatModifierSpecVersion* = 1
+  ExtImageDrmFormatModifierExtensionName* = "VK_EXT_image_drm_format_modifier"
 
 type
   DrmFormatModifierPropertiesListEXT* = object

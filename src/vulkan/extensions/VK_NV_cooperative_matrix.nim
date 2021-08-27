@@ -4,7 +4,9 @@ import ../features/vk10
 import VK_KHR_get_physical_device_properties2
 
 
-
+const
+  NvCooperativeMatrixSpecVersion* = 1
+  NvCooperativeMatrixExtensionName* = "VK_NV_cooperative_matrix"
 
 type
   CooperativeMatrixPropertiesNV* = object
