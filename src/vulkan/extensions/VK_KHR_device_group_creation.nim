@@ -1,3 +1,6 @@
+# Generated at 2021-08-27T06:01:02Z
+# VK_KHR_device_group_creation
+# =================================
 
 import ../platform
 import ../features/vk10

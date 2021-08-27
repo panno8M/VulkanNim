@@ -1,3 +1,6 @@
+# Generated at 2021-08-27T06:01:03Z
+# VK_EXT_fragment_density_map
+# =================================
 
 import ../platform
 import ../features/vk10

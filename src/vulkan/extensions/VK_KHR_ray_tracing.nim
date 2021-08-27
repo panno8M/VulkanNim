@@ -1,3 +1,7 @@
+# Generated at 2021-08-27T06:01:02Z
+# VK_KHR_ray_tracing
+# Explicit sort order to require processing after VK_NV_ray_tracing
+# =================================================================
 
 import ../platform
 import ../features/vk10

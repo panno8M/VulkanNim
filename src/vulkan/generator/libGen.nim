@@ -7,7 +7,7 @@ import tables
 import logging
 import times
 import options
-import hashes
+import streams
 
 import ./utils
 import ./nodedefs
@@ -50,7 +50,7 @@ proc generate*() =
           dependencies: dependencies[name]
         )
 
-    headerComment &= "Generated at {now()}\n".fmt
+    headerComment &= "Generated at {now().utc()}\n".fmt
     headerComment &= "{api} {number}".fmt
     if (?comment).isSome: headerComment &= "\n" & comment
     libFile.fileHeader &= headerComment.underline('=').commentify.LF
@@ -59,14 +59,13 @@ proc generate*() =
       libFile.requires.add require.extractNodeRequire
 
     block:
-      let f = "{featureFilePath}/{fileName[name]}.nim".fmt.open(fmReadWrite)
-      defer: f.close
-      let res = libFile.render(resources)
-      let resStart = res.skipUntil('\n')
-      let store = f.readAll()
-      let storeStart = store.skipUntil('\n')
-      if res[resStart..^1].hash != store[storeStart..^1].hash:
-        f.write res
+      let
+        filePath = "{featureFilePath}/{fileName[name]}.nim".fmt
+        res = libFile.render(resources)
+        resStart = res.skipUntil('\n')
+        store = filePath.readFile
+        storeStart = store.skipUntil('\n')
+      if res[resStart..^1] != store[storeStart..^1]: filePath.writeFile res
 
   let dependenciesBasic = @[("../platform", false), ("../features/vk10", false)]
   for extension in xml["extensions"].findAll("extension"):
@@ -86,7 +85,7 @@ proc generate*() =
           fileName: name,
           dependencies: dependenciesBasic.concat(requires.mapIt((it, false)))
         )
-    headerComment &= "Generated at {now()}\n{name}".fmt
+    headerComment &= "Generated at {now().utc()}\n{name}".fmt
     if (?extension.comment).isSome: headerComment &= '\n' & extension.comment
     libFile.fileHeader &= headerComment.underline('=').commentify.LF
 
@@ -100,16 +99,13 @@ proc generate*() =
     if libFile.requires.len == 0: continue
 
     block:
-      let f = "src/vulkan/extensions/{name}.nim".fmt.open(fmReadWrite)
-      defer: f.close
-      let res = libFile.render(resources)
-      let resStart = res.skipUntil('\n')
-      let store = f.readAll()
-      let storeStart = store.skipUntil('\n')
-      if res[resStart..^1].hash != store[storeStart..^1].hash:
-        f.write res
-    # if libFile.fileName == "VK_ANDROID_native_buffer":
-    #   echo repr libFile.compile(resources)
+      let
+        filePath = "src/vulkan/extensions/{name}.nim".fmt
+        res = libFile.render(resources)
+        resStart = res.skipUntil('\n')
+        store = filePath.readFile
+        storeStart = store.skipUntil('\n')
+      if res[resStart..^1] != store[storeStart..^1]: filePath.writeFile res
 
 
   notice "Generate Complate!"

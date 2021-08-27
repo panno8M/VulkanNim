@@ -1,3 +1,6 @@
+# Generated at 2021-08-27T06:01:02Z
+# VK_KHR_get_display_properties2
+# =================================
 
 import ../platform
 import ../features/vk10

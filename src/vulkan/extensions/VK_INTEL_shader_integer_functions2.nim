@@ -1,3 +1,6 @@
+# Generated at 2021-08-27T06:01:03Z
+# VK_INTEL_shader_integer_functions2
+# ==================================
 
 import ../platform
 import ../features/vk10

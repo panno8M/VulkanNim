@@ -1,3 +1,6 @@
+# Generated at 2021-08-27T06:01:02Z
+# VK_EXT_blend_operation_advanced
+# =================================
 
 import ../platform
 import ../features/vk10

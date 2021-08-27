@@ -1,3 +1,6 @@
+# Generated at 2021-08-27T06:01:03Z
+# VK_EXT_image_drm_format_modifier
+# =================================
 
 import ../platform
 import ../features/vk10

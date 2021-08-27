@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T14:20:42+09:00
+# Generated at 2021-08-27T05:59:50Z
 # vulkan 1.1
 # Vulkan 1.1 core API interface definitions.
 # ==========================================

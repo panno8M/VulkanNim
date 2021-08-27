@@ -1,3 +1,6 @@
+# Generated at 2021-08-27T06:01:02Z
+# VK_NV_external_memory_win32
+# =================================
 
 import ../platform
 import ../features/vk10

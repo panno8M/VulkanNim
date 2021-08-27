@@ -1,3 +1,6 @@
+# Generated at 2021-08-27T06:01:03Z
+# VK_AMD_display_native_hdr
+# =================================
 
 import ../platform
 import ../features/vk10
