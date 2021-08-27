@@ -32,6 +32,7 @@ let dependencies = newTable [
 ]
 
 proc generate*() =
+  var updatedFiles: seq[string]
   let
     xml = getVulkanXML()
     resources = xml.extractResources
@@ -65,7 +66,9 @@ proc generate*() =
         resStart = res.skipUntil('\n')
         store = filePath.readFile
         storeStart = store.skipUntil('\n')
-      if res[resStart..^1] != store[storeStart..^1]: filePath.writeFile res
+      if res[resStart..^1] != store[storeStart..^1]:
+        filePath.writeFile res
+        updatedFiles.add filePath
 
   let dependenciesBasic = @[("../platform", false), ("../features/vk10", false)]
   for extension in xml["extensions"].findAll("extension"):
@@ -105,7 +108,13 @@ proc generate*() =
         resStart = res.skipUntil('\n')
         store = filePath.readFile
         storeStart = store.skipUntil('\n')
-      if res[resStart..^1] != store[storeStart..^1]: filePath.writeFile res
+      if res[resStart..^1] != store[storeStart..^1]:
+        filePath.writeFile res
+        updatedFiles.add filePath
 
 
-  notice "Generate Complate!"
+  if updatedFiles.len == 0:
+    notice title"Generate Complate! No API files have been updated."
+  else:
+    notice title"Generate Complate! Following API files have been updated:":
+      updatedFiles.join("\n").indent(2)

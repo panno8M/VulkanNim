@@ -54,6 +54,9 @@ proc info*(title: Title; msg: varargs[string, `$`]) {.raises: [LoggingFailure].}
 proc error*(title: Title; msg: varargs[string, `$`]) {.raises: [LoggingFailure].} =
   try: error title.logMsg(msg)
   except: raise LoggingFailure.newException(getCurrentExceptionMsg())
+proc notice*(title: Title; msg: varargs[string, `$`]) {.raises: [LoggingFailure].} =
+  try: notice title.logMsg(msg)
+  except: raise LoggingFailure.newException(getCurrentExceptionMsg())
 template errorWithException*(exception: typedesc; title: Title, msg: varargs[string, `$`]) =
   error(title, msg)
   raise newException(exception, title.logMsg(msg))
