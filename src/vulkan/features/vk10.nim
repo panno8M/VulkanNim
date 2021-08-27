@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T14:10:15+09:00
+# Generated at 2021-08-27T14:20:42+09:00
 # vulkan 1.0
 # Vulkan core API interface definitions
 # ======================================
@@ -166,6 +166,14 @@ type
     MemoryBarrier = 46
     LoaderInstanceCreateInfo = 47 # Reserved for internal use by the loader, layers, and ICDs
     LoaderDeviceCreateInfo = 48 # Reserved for internal use by the loader, layers, and ICDs
+    # Provided by VK_VERSION_1_2
+    PhysicalDeviceVulkan11Features = 49
+    # Provided by VK_VERSION_1_2
+    PhysicalDeviceVulkan11Properties = 50
+    # Provided by VK_VERSION_1_2
+    PhysicalDeviceVulkan12Features = 51
+    # Provided by VK_VERSION_1_2
+    PhysicalDeviceVulkan12Properties = 52
     # Provided by VK_KHR_swapchain
     SwapchainCreateInfoKhr = 100000010000
     # Provided by VK_KHR_swapchain
@@ -2879,6 +2887,8 @@ type
     MirroredRepeat = 1
     ClampToEdge = 2
     ClampToBorder = 3
+    # Provided by VK_VERSION_1_2
+    MirrorClampToEdge = 4 # No need to add an extnumber attribute, since this uses a core enum value
   SamplerCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     # Provided by VK_EXT_fragment_density_map
     SubsampledBitExt = 0x00000001

@@ -2,9 +2,12 @@ import xmltree
 import strformat
 import strutils
 import sequtils
+import parseutils
 import tables
 import logging
 import times
+import options
+import hashes
 
 import ./utils
 import ./nodedefs
@@ -49,13 +52,22 @@ proc generate*() =
 
     headerComment &= "Generated at {now()}\n".fmt
     headerComment &= "{api} {number}".fmt
-    if not comment.isEmptyOrWhitespace: headerComment &= "\n" & comment
+    if (?comment).isSome: headerComment &= "\n" & comment
     libFile.fileHeader &= headerComment.underline('=').commentify.LF
 
     for require in feature.findAll("require"):
       libFile.requires.add require.extractNodeRequire
 
-    "{featureFilePath}/{fileName[name]}.nim".fmt.writeFile libFile.render(resources)
+    block:
+      let f = "{featureFilePath}/{fileName[name]}.nim".fmt.open(fmReadWrite)
+      defer: f.close
+      let res = libFile.render(resources)
+      let resStart = res.skipUntil('\n')
+      let store = f.readAll()
+      let storeStart = store.skipUntil('\n')
+      if res[resStart..^1].hash != store[storeStart..^1].hash:
+        f.write res
+
   let dependenciesBasic = @[("../platform", false), ("../features/vk10", false)]
   for extension in xml["extensions"].findAll("extension"):
     let name = extension{"name"}
@@ -69,10 +81,14 @@ proc generate*() =
           except: break Invalid_Extension_Test
     let requires = extension{"requires"}.parseWords({','})
     var
+      headerComment: string
       libFile = LibFile(requires: newSeq[NodeRequire](),
           fileName: name,
           dependencies: dependenciesBasic.concat(requires.mapIt((it, false)))
         )
+    headerComment &= "Generated at {now()}\n{name}".fmt
+    if (?extension.comment).isSome: headerComment &= '\n' & extension.comment
+    libFile.fileHeader &= headerComment.underline('=').commentify.LF
 
     for require in extension.findAll("require"):
       try:
@@ -80,12 +96,18 @@ proc generate*() =
       except:
         echo getCurrentExceptionMsg()
         echo "extract error @" & name
-    
+
     if libFile.requires.len == 0: continue
 
-    "src/vulkan/extensions/{name}.nim".fmt.writeFile(
-      libFile.render(resources)
-    )
+    block:
+      let f = "src/vulkan/extensions/{name}.nim".fmt.open(fmReadWrite)
+      defer: f.close
+      let res = libFile.render(resources)
+      let resStart = res.skipUntil('\n')
+      let store = f.readAll()
+      let storeStart = store.skipUntil('\n')
+      if res[resStart..^1].hash != store[storeStart..^1].hash:
+        f.write res
     # if libFile.fileName == "VK_ANDROID_native_buffer":
     #   echo repr libFile.compile(resources)
 

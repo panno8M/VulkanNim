@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T14:10:15+09:00
+# Generated at 2021-08-27T14:20:42+09:00
 # vulkan 1.1
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -363,6 +363,8 @@ type
   DescriptorUpdateTemplateCreateFlags* = distinct Flags
   DescriptorUpdateTemplateType* {.size: sizeof(int32), pure.} = enum
     DescriptorSet = 0 # Create descriptor update template for descriptor set updates
+    # Provided by VK_KHR_push_descriptor
+    PushDescriptorsKhr = 1 # Create descriptor update template for pushed descriptor updates
   DescriptorUpdateTemplateEntry* = object
     dstBinding*: uint32
     dstArrayElement*: uint32

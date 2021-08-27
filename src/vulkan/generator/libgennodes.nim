@@ -717,6 +717,9 @@ proc extractAllNodeEnumExtensions*(rootXml: XmlNode; resources: var Resources) {
         except: 
           try: some enumsRoot{"number"}.parseInt
           except: none int
+      let value =
+        try: some theEnum{"value"}.parseInt
+        except: none int
       let offset =
         try: some theEnum{"offset"}.parseInt
         except: none int
@@ -724,7 +727,7 @@ proc extractAllNodeEnumExtensions*(rootXml: XmlNode; resources: var Resources) {
         try: some theEnum{"bitpos"}.parseInt
         except: none int
       let alias = ?theEnum{"alias"}
-      if (extnumber.isSome and offset.isSome) or bitpos.isSome:
+      if (extnumber.isSome and offset.isSome) or value.isSome or bitpos.isSome:
         var nodeEnumVal = NodeEnumVal(
           name: theEnum.name,
           comment: ?theEnum.comment,
@@ -732,13 +735,15 @@ proc extractAllNodeEnumExtensions*(rootXml: XmlNode; resources: var Resources) {
           extends: theEnum{"extends"},
           providedBy: enumsRoot.name,
           kind:
-            if extnumber.isSome and offset.isSome: nkeValue
-            else: nkeBitpos
+            if bitpos.isSome: nkeBitpos
+            else: nkeValue
         )
         case nodeEnumVal.kind
         of nkeValue:
           try:
-            nodeEnumVal.value = "1000{extnumber.get-1:04}{offset.get:04}".fmt.parseInt
+            nodeEnumVal.value =
+              if value.isSome: value.get
+              else: "1000{extnumber.get-1:04}{offset.get:04}".fmt.parseInt
             if resources.enums[nodeEnumVal.extends].enumVals.findIt(it.value == nodeEnumVal.value) == nil:
               resources.enums[nodeEnumVal.extends].enumVals.add nodeEnumVal
           except ValueError:
