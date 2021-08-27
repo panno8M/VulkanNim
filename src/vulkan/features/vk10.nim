@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T05:59:50Z
+# Generated at 2021-08-27T23:50:21Z
 # vulkan 1.0
 # Vulkan core API interface definitions
 # =====================================
@@ -1087,31 +1087,31 @@ type
       size: uint;
       alignment: uint;
       allocationScope: SystemAllocationScope;
-    ): ptr pointer {.cdecl.}
+    ): pointer {.cdecl.}
   FreeFunction* = proc(
       pUserData: pointer;
       pMemory: pointer;
-    ): pointer {.cdecl.}
+    ): void {.cdecl.}
   InternalAllocationNotification* = proc(
       pUserData: pointer;
       size: uint;
       allocationType: InternalAllocationType;
       allocationScope: SystemAllocationScope;
-    ): pointer {.cdecl.}
+    ): void {.cdecl.}
   InternalFreeNotification* = proc(
       pUserData: pointer;
       size: uint;
       allocationType: InternalAllocationType;
       allocationScope: SystemAllocationScope;
-    ): pointer {.cdecl.}
+    ): void {.cdecl.}
   ReallocationFunction* = proc(
       pUserData: pointer;
       pOriginal: pointer;
       size: uint;
       alignment: uint;
       allocationScope: SystemAllocationScope;
-    ): ptr pointer {.cdecl.}
-  VoidFunction* = proc(): pointer {.cdecl.}
+    ): pointer {.cdecl.}
+  VoidFunction* = proc(): void {.cdecl.}
   AllocationCallbacks* = object
     pUserData*: pointer
     pfnAllocation*: AllocationFunction

@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-27T23:50:22Z
 # VK_EXT_debug_utils
 # =================================
 
@@ -16,7 +16,7 @@ type
       messageTypes: DebugUtilsMessageTypeFlagsEXT;
       pCallbackData: ptr DebugUtilsMessengerCallbackDataEXT;
       pUserData: pointer;
-    ): ptr Bool32 {.cdecl.}
+    ): Bool32 {.cdecl.}
   DebugUtilsLabelEXT* = object
     sType*: StructureType
     pNext*: pointer

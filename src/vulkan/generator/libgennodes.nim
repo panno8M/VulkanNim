@@ -554,6 +554,10 @@ func extractNodeFuncPointer*(typeDef: XmlNode): NodeFuncPtr {.raises: [Unexpecte
     else:
       xmlError title"@funcpointer Extraction > unhandled xml has found": $typeDef
 
+  #  <type category="funcpointer">typedef void (VKAPI_PTR *<name>PFN_vkFreeFunction</name>)(
+  #                     This one means the above astarisk ^
+  result.ptrLv -= 1
+
 func extractNodeDefine*(typeDef: XmlNode): NodeDefine {.raises: [UnexpectedXmlStructureError].} =
   if typeDef.kind != xnElement or typeDef.tag != "type":
     xmlError invalidStructure("define Extraction"): $typeDef

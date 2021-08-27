@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-27T23:50:21Z
 # VK_EXT_debug_report
 # =================================
 
@@ -21,7 +21,7 @@ type
       pLayerPrefix: cstring;
       pMessage: cstring;
       pUserData: pointer;
-    ): ptr Bool32 {.cdecl.}
+    ): Bool32 {.cdecl.}
   DebugReportFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
     InformationBitExt = 0x00000001
     WarningBitExt = 0x00000002
