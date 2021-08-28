@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T04:06:29Z
 # VK_KHR_android_surface
 # =================================
 
@@ -7,12 +7,14 @@ import ../features/vk10
 import VK_KHR_surface
 
 
+type # basetypes
+  ANativeWindow* = distinct object
+
 const
   KhrAndroidSurfaceSpecVersion* = 6
   KhrAndroidSurfaceExtensionName* = "VK_KHR_android_surface"
 
 type
-  ANativeWindow* = distinct object
   AndroidSurfaceCreateFlagsKHR* = distinct Flags
   AndroidSurfaceCreateInfoKHR* = object
     sType*: StructureType

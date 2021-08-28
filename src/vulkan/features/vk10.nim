@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T04:07:22Z
 # vulkan 1.0
 # Vulkan core API interface definitions
 # =====================================
@@ -6,16 +6,26 @@
 import ../platform
 
 
+type # basetypes
+  # Fundamental types used by many commands and structures
+  Bool32* = distinct uint32
+  DeviceAddress* = distinct uint64
+  DeviceSize* = distinct uint64
+  Flags* = distinct uint32
+
+  # Pipeline commands
+  SampleMask* = distinct uint32
+
 const
   # API constants
   AttachmentUnused* = (uint.high)
-  False* = 0
+  False* = Bool32(0)
   LodClampNone* = 1000.0f
   QueueFamilyIgnored* = (uint.high)
   RemainingArrayLayers* = (uint.high)
   RemainingMipLevels* = (uint.high)
   SubpassExternal* = (uint.high)
-  True* = 1
+  True* = Bool32(1)
   WholeSize* = (uint.high)
 
   # Device initialization
@@ -33,9 +43,6 @@ const
 type
   # Fundamental types used by many commands and structures
   # ------------------------------------------------------
-  Bool32* = distinct uint32
-  DeviceAddress* = distinct uint64
-  DeviceSize* = distinct uint64
   Extent2D* = object
     width*: uint32
     height*: uint32
@@ -43,7 +50,6 @@ type
     width*: uint32
     height*: uint32
     depth*: uint32
-  Flags* = distinct uint32
   Offset2D* = object
     x*: int32
     y*: int32
@@ -2774,7 +2780,6 @@ type
     TriangleListWithAdjacency = 8
     TriangleStripWithAdjacency = 9
     PatchList = 10
-  SampleMask* = distinct uint32
   ShaderStageFlagBits* {.size: sizeof(int32), pure.} = enum
     Vertex = 0x00000001
     TessellationControl = 0x00000002

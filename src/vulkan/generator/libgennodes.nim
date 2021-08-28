@@ -82,7 +82,10 @@ proc render*(enumAliases: NodeEnumAliases; vendorTags: VendorTags): string =
 
 proc render*(cons: NodeConst): string =
   let name = cons.name.parseVariableNameFromSnake
-  result = "{name}* = {cons.value}".fmt
+  let value = case name
+    of "True", "False": "Bool32({cons.value})".fmt
+    else: cons.value
+  result = "{name}* = {value}".fmt
   if cons.comment.isSome:
     result.add " # " & cons.comment.get
 
@@ -264,6 +267,30 @@ proc render*(libFile: LibFile; resources: Resources): string =
     .join("\n").LF
   result.LF
 
+  block Solve_basetypes:
+    var typeDefs: seq[seq[string]]
+    for require in libFile.requires:
+      let typeTargets = require.targets.filterIt(it.kind in {nkrType})
+      if typeTargets.len == 0: continue
+
+      var typeDef: seq[string]
+
+      for req in typeTargets:
+        if req.name in renderedNodes: continue
+
+        if resources.basetypes.hasKey(req.name):
+          typeDef.add resources.basetypes[req.name].render
+          renderedNodes.add req.name
+
+      if typeDef.len != 0:
+        typeDefs.add case require.comment.isSome
+          of true: concat(@[require.comment.get.commentify], typeDef)
+          of false: typeDef
+
+    if typeDefs.len != 0:
+      result.add "type # basetypes\n"
+      result &= typeDefs.mapIt(it.join("\n").indent(2)).join("\n\n").LF.LF
+
   block Solve_consts:
     var reqDefs: seq[seq[string]]
     for require in libFile.requires:
@@ -324,10 +351,10 @@ proc render*(libFile: LibFile; resources: Resources): string =
       for req in typeTargets:
         if req.name in renderedNodes: continue
 
-        if resources.basetypes.hasKey(req.name):
-          typeDef.add resources.basetypes[req.name].render
-          renderedNodes.add req.name
-        elif resources.bitmasks.hasKey(req.name):
+        # if resources.basetypes.hasKey(req.name):
+        #   typeDef.add resources.basetypes[req.name].render
+        #   renderedNodes.add req.name
+        if resources.bitmasks.hasKey(req.name):
           typeDef.add resources.bitmasks[req.name].render
           renderedNodes.add req.name
         elif resources.structs.hasKey(req.name):

@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T04:06:29Z
 # VK_ANDROID_external_memory_android_hardware_buffer
 # ==================================================
 
@@ -9,6 +9,9 @@ import VK_KHR_external_memory
 import VK_EXT_queue_family_foreign
 import VK_KHR_dedicated_allocation
 
+
+type # basetypes
+  AHardwareBuffer* = distinct object
 
 const
   AndroidExternalMemoryAndroidHardwareBufferSpecVersion* = 3
@@ -47,7 +50,6 @@ type
     sType*: StructureType
     pNext*: pointer
     externalFormat*: uint64
-  AHardwareBuffer* = distinct object
 
 var # commands
   getAndroidHardwareBufferPropertiesANDROIDCage: proc(device: Device; buffer: ptr AHardwareBuffer; pProperties: ptr AndroidHardwareBufferPropertiesANDROID;): Result {.cdecl.}

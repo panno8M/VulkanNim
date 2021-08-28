@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T04:06:29Z
 # VK_EXT_metal_surface
 # =================================
 
@@ -6,6 +6,9 @@ import ../platform
 import ../features/vk10
 import VK_KHR_surface
 
+
+type # basetypes
+  CAMetalLayer* = distinct object
 
 const
   ExtMetalSurfaceSpecVersion* = 1
@@ -18,7 +21,6 @@ type
     pNext*: pointer
     flags*: MetalSurfaceCreateFlagsEXT
     pLayer*: ptr CAMetalLayer
-  CAMetalLayer* = distinct object
 
 var # commands
   createMetalSurfaceEXTCage: proc(instance: Instance; pCreateInfo: ptr MetalSurfaceCreateInfoEXT; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
