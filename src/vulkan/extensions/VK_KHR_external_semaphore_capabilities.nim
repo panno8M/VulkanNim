@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_external_semaphore_capabilities
 # ======================================
 
@@ -14,9 +14,9 @@ const
 
 type
   {name}* = {Alias}
-  ExternalSemaphoreHandleTypeFlagBitsKHR* = UnusedEnum
+  ExternalSemaphoreHandleTypeFlagBitsKHR* = distinct UnusedEnum
   {name}* = {Alias}
-  ExternalSemaphoreFeatureFlagBitsKHR* = UnusedEnum
+  ExternalSemaphoreFeatureFlagBitsKHR* = distinct UnusedEnum
   PhysicalDeviceExternalSemaphoreInfoKHR* = object
   ExternalSemaphorePropertiesKHR* = object
   PhysicalDeviceIDPropertiesKHR* = object
@@ -25,20 +25,20 @@ var # commands
   
 const getPhysicalDeviceExternalSemaphorePropertiesKHR* = getPhysicalDeviceExternalSemaphoreProperties
 ExternalSemaphoreFeatureFlagBits.defineAliases:
-  Exportable as ExportableBitKhr
-  Importable as ImportableBitKhr
+  exportable as exportableKhr
+  importable as importableKhr
 
 ExternalSemaphoreHandleTypeFlagBits.defineAliases:
-  OpaqueFd as OpaqueFdBitKhr
-  OpaqueWin32 as OpaqueWin32BitKhr
-  OpaqueWin32Kmt as OpaqueWin32KmtBitKhr
-  D3d12Fence as D3d12FenceBitKhr
-  SyncFd as SyncFdBitKhr
+  opaqueFd as opaqueFdKhr
+  opaqueWin32 as opaqueWin32Khr
+  opaqueWin32Kmt as opaqueWin32KmtKhr
+  d3d12Fence as d3d12FenceKhr
+  syncFd as syncFdKhr
 
 StructureType.defineAliases:
-  PhysicalDeviceExternalSemaphoreInfo as PhysicalDeviceExternalSemaphoreInfoKhr
-  ExternalSemaphoreProperties as ExternalSemaphorePropertiesKhr
-  PhysicalDeviceIdProperties as PhysicalDeviceIdPropertiesKhr
+  physicalDeviceExternalSemaphoreInfo as physicalDeviceExternalSemaphoreInfoKhr
+  externalSemaphoreProperties as externalSemaphorePropertiesKhr
+  physicalDeviceIdProperties as physicalDeviceIdPropertiesKhr
 
 proc loadVK_KHR_external_semaphore_capabilities*(instance: Instance) =
   instance.defineLoader(`<<`)

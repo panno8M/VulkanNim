@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_KHR_timeline_semaphore
 # =================================
 
@@ -12,12 +12,12 @@ const
   KhrTimelineSemaphoreExtensionName* = "VK_KHR_timeline_semaphore"
 
 type
-  SemaphoreTypeKHR* = UnusedEnum
+  SemaphoreTypeKHR* = distinct UnusedEnum
   PhysicalDeviceTimelineSemaphoreFeaturesKHR* = object
   PhysicalDeviceTimelineSemaphorePropertiesKHR* = object
   SemaphoreTypeCreateInfoKHR* = object
   TimelineSemaphoreSubmitInfoKHR* = object
-  SemaphoreWaitFlagBitsKHR* = UnusedEnum
+  SemaphoreWaitFlagBitsKHR* = distinct UnusedEnum
   {name}* = {Alias}
   SemaphoreWaitInfoKHR* = object
   SemaphoreSignalInfoKHR* = object
@@ -30,19 +30,19 @@ const getSemaphoreCounterValueKHR* = getSemaphoreCounterValue
 const waitSemaphoresKHR* = waitSemaphores
 const signalSemaphoreKHR* = signalSemaphore
 SemaphoreType.defineAliases:
-  Binary as BinaryKhr
-  Timeline as TimelineKhr
+  binary as binaryKhr
+  timeline as timelineKhr
 
 StructureType.defineAliases:
-  PhysicalDeviceTimelineSemaphoreFeatures as PhysicalDeviceTimelineSemaphoreFeaturesKhr
-  PhysicalDeviceTimelineSemaphoreProperties as PhysicalDeviceTimelineSemaphorePropertiesKhr
-  SemaphoreTypeCreateInfo as SemaphoreTypeCreateInfoKhr
-  TimelineSemaphoreSubmitInfo as TimelineSemaphoreSubmitInfoKhr
-  SemaphoreWaitInfo as SemaphoreWaitInfoKhr
-  SemaphoreSignalInfo as SemaphoreSignalInfoKhr
+  physicalDeviceTimelineSemaphoreFeatures as physicalDeviceTimelineSemaphoreFeaturesKhr
+  physicalDeviceTimelineSemaphoreProperties as physicalDeviceTimelineSemaphorePropertiesKhr
+  semaphoreTypeCreateInfo as semaphoreTypeCreateInfoKhr
+  timelineSemaphoreSubmitInfo as timelineSemaphoreSubmitInfoKhr
+  semaphoreWaitInfo as semaphoreWaitInfoKhr
+  semaphoreSignalInfo as semaphoreSignalInfoKhr
 
 SemaphoreWaitFlagBits.defineAliases:
-  Any as AnyBitKhr
+  any as anyKhr
 
 proc loadVK_KHR_timeline_semaphore*(instance: Instance) =
   instance.defineLoader(`<<`)

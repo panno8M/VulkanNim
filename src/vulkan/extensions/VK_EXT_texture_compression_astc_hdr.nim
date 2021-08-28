@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_EXT_texture_compression_astc_hdr
 # ===================================
 
@@ -16,5 +16,6 @@ type
     sType*: StructureType
     pNext*: pointer
     textureCompressionASTC_HDR*: Bool32
+
 
 

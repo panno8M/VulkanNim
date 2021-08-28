@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_EXT_blend_operation_advanced
 # =================================
 
@@ -31,8 +31,9 @@ type
     dstPremultiplied*: Bool32
     blendOverlap*: BlendOverlapEXT
   BlendOverlapEXT* {.size: sizeof(int32), pure.} = enum
-    UncorrelatedExt = 0
-    DisjointExt = 1
-    ConjointExt = 2
+    uncorrelatedExt = 0
+    disjointExt = 1
+    conjointExt = 2
+
 
 

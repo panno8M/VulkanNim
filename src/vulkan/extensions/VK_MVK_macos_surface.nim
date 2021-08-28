@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_MVK_macos_surface
 # =================================
 
@@ -12,7 +12,7 @@ const
   MmacosSurfaceExtensionName* = "VK_MVK_macos_surface"
 
 type
-  MacOSSurfaceCreateFlagsMVK* = distinct Flags
+  MacOSSurfaceCreateFlagsMVK* = Flags[distinct UnusedEnum]
   MacOSSurfaceCreateInfoMVK* = object
     sType*: StructureType
     pNext*: pointer

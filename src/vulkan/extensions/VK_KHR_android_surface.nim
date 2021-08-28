@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T04:06:29Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_android_surface
 # =================================
 
@@ -15,7 +15,7 @@ const
   KhrAndroidSurfaceExtensionName* = "VK_KHR_android_surface"
 
 type
-  AndroidSurfaceCreateFlagsKHR* = distinct Flags
+  AndroidSurfaceCreateFlagsKHR* = Flags[distinct UnusedEnum]
   AndroidSurfaceCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer

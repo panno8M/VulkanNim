@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_ANDROID_native_buffer
 # =================================
 
@@ -33,8 +33,8 @@ type
     consumer*: uint64
     producer*: uint64
   SwapchainImageUsageFlagBitsANDROID* {.size: sizeof(int32), pure.} = enum
-    SharedBitAndroid = 0x00000001
-  SwapchainImageUsageFlagsANDROID* = distinct Flags
+    sharedAndroid = 0x00000001
+  SwapchainImageUsageFlagsANDROID* = Flags[SwapchainImageUsageFlagBitsANDROID]
 
 var # commands
   getSwapchainGrallocUsageANDROIDCage: proc(device: Device; format: Format; imageUsage: ImageUsageFlags; grallocUsage: ptr int;): Result {.cdecl.}

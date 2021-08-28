@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_EXT_validation_flags
 # =================================
 
@@ -17,7 +17,8 @@ type
     disabledValidationCheckCount*: uint32
     pDisabledValidationChecks*: ptr ValidationCheckEXT
   ValidationCheckEXT* {.size: sizeof(int32), pure.} = enum
-    AllExt = 0
-    ShadersExt = 1
+    allExt = 0
+    shadersExt = 1
+
 
 

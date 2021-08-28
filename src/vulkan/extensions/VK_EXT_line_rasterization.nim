@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_EXT_line_rasterization
 # =================================
 
@@ -33,10 +33,10 @@ type
     lineStippleFactor*: uint32
     lineStipplePattern*: uint16
   LineRasterizationModeEXT* {.size: sizeof(int32), pure.} = enum
-    DefaultExt = 0
-    RectangularExt = 1
-    BresenhamExt = 2
-    RectangularSmoothExt = 3
+    defaultExt = 0
+    rectangularExt = 1
+    bresenhamExt = 2
+    rectangularSmoothExt = 3
 
 var # commands
   cmdSetLineStippleEXTCage: proc(commandBuffer: CommandBuffer; lineStippleFactor: uint32; lineStipplePattern: uint16;): void {.cdecl.}

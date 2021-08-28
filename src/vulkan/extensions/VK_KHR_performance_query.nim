@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_performance_query
 # =================================
 
@@ -37,10 +37,10 @@ type
     name*: array[MaxDescriptionSize, char]
     category*: array[MaxDescriptionSize, char]
     description*: array[MaxDescriptionSize, char]
-  PerformanceCounterDescriptionFlagsKHR* = distinct Flags
+  PerformanceCounterDescriptionFlagsKHR* = Flags[PerformanceCounterDescriptionFlagBitsKHR]
   PerformanceCounterDescriptionFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    PerformanceImpactingKhr = 0x00000001
-    ConcurrentlyImpactedKhr = 0x00000002
+    performanceImpactingKhr = 0x00000001
+    concurrentlyImpactedKhr = 0x00000002
   QueryPoolPerformanceCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -48,28 +48,28 @@ type
     counterIndexCount*: uint32
     pCounterIndices*: ptr uint32
   PerformanceCounterScopeKHR* {.size: sizeof(int32), pure.} = enum
-    CommandBufferKhr = 0
-    RenderPassKhr = 1
-    CommandKhr = 2
+    commandBufferKhr = 0
+    renderPassKhr = 1
+    commandKhr = 2
   PerformanceCounterStorageKHR* {.size: sizeof(int32), pure.} = enum
-    Int32Khr = 0
-    Int64Khr = 1
-    Uint32Khr = 2
-    Uint64Khr = 3
-    Float32Khr = 4
-    Float64Khr = 5
+    int32Khr = 0
+    int64Khr = 1
+    uint32Khr = 2
+    uint64Khr = 3
+    float32Khr = 4
+    float64Khr = 5
   PerformanceCounterUnitKHR* {.size: sizeof(int32), pure.} = enum
-    GenericKhr = 0
-    PercentageKhr = 1
-    NanosecondsKhr = 2
-    BytesKhr = 3
-    BytesPerSecondKhr = 4
-    KelvinKhr = 5
-    WattsKhr = 6
-    VoltsKhr = 7
-    AmpsKhr = 8
-    HertzKhr = 9
-    CyclesKhr = 10
+    genericKhr = 0
+    percentageKhr = 1
+    nanosecondsKhr = 2
+    bytesKhr = 3
+    bytesPerSecondKhr = 4
+    kelvinKhr = 5
+    wattsKhr = 6
+    voltsKhr = 7
+    ampsKhr = 8
+    hertzKhr = 9
+    cyclesKhr = 10
   # Union of all the possible return types a counter result could return
   PerformanceCounterResultKHR* {.union.} = object
     int32*: int32
@@ -83,17 +83,17 @@ type
     pNext*: pointer
     flags*: AcquireProfilingLockFlagsKHR
     timeout*: uint64
-  AcquireProfilingLockFlagsKHR* = distinct Flags
-  AcquireProfilingLockFlagBitsKHR* = UnusedEnum
+  AcquireProfilingLockFlagsKHR* = Flags[AcquireProfilingLockFlagBitsKHR]
+  AcquireProfilingLockFlagBitsKHR* = distinct UnusedEnum
   PerformanceQuerySubmitInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
     counterPassIndex*: uint32
 
 PerformanceCounterScopeKHR.defineAliases:
-  CommandBufferKhr as QueryScopeCommandBufferKhr
-  RenderPassKhr as QueryScopeRenderPassKhr
-  CommandKhr as QueryScopeCommandKhr
+  commandBufferKhr as queryScopeCommandBufferKhr
+  renderPassKhr as queryScopeRenderPassKhr
+  commandKhr as queryScopeCommandKhr
 
 var # commands
   enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHRCage: proc(physicalDevice: PhysicalDevice; queueFamilyIndex: uint32; pCounterCount: ptr uint32; pCounters: ptr PerformanceCounterKHR; pCounterDescriptions: ptr PerformanceCounterDescriptionKHR;): Result {.cdecl.}

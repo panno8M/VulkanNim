@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_NN_vi_surface
 # =================================
 
@@ -12,7 +12,7 @@ const
   NnViSurfaceExtensionName* = "VK_NN_vi_surface"
 
 type
-  ViSurfaceCreateFlagsNN* = distinct Flags
+  ViSurfaceCreateFlagsNN* = Flags[distinct UnusedEnum]
   ViSurfaceCreateInfoNN* = object
     sType*: StructureType
     pNext*: pointer

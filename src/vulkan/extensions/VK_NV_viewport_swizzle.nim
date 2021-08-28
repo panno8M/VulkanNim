@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_NV_viewport_swizzle
 # =================================
 
@@ -17,20 +17,21 @@ type
     z*: ViewportCoordinateSwizzleNV
     w*: ViewportCoordinateSwizzleNV
   ViewportCoordinateSwizzleNV* {.size: sizeof(int32), pure.} = enum
-    PositiveXNv = 0
-    NegativeXNv = 1
-    PositiveYNv = 2
-    NegativeYNv = 3
-    PositiveZNv = 4
-    NegativeZNv = 5
-    PositiveWNv = 6
-    NegativeWNv = 7
+    positiveXNv = 0
+    negativeXNv = 1
+    positiveYNv = 2
+    negativeYNv = 3
+    positiveZNv = 4
+    negativeZNv = 5
+    positiveWNv = 6
+    negativeWNv = 7
   PipelineViewportSwizzleStateCreateInfoNV* = object
     sType*: StructureType
     pNext*: pointer
     flags*: PipelineViewportSwizzleStateCreateFlagsNV
     viewportCount*: uint32
     pViewportSwizzles*: ptr ViewportSwizzleNV
-  PipelineViewportSwizzleStateCreateFlagsNV* = distinct Flags
+  PipelineViewportSwizzleStateCreateFlagsNV* = Flags[distinct UnusedEnum]
+
 
 

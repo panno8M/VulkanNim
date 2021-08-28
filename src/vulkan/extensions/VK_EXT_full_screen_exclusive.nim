@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_EXT_full_screen_exclusive
 # =================================
 
@@ -16,10 +16,10 @@ const
 
 type
   FullScreenExclusiveEXT* {.size: sizeof(int32), pure.} = enum
-    DefaultExt = 0
-    AllowedExt = 1
-    DisallowedExt = 2
-    ApplicationControlledExt = 3
+    defaultExt = 0
+    allowedExt = 1
+    disallowedExt = 2
+    applicationControlledExt = 3
   SurfaceFullScreenExclusiveInfoEXT* = object
     sType*: StructureType
     pNext*: pointer

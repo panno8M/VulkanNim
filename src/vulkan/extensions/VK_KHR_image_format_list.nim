@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_image_format_list
 # =================================
 
@@ -14,5 +14,6 @@ type
   ImageFormatListCreateInfoKHR* = object
 
 StructureType.defineAliases:
-  ImageFormatListCreateInfo as ImageFormatListCreateInfoKhr
+  imageFormatListCreateInfo as imageFormatListCreateInfoKhr
+
 

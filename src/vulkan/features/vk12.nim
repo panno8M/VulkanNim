@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:00Z
 # vulkan 1.2
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -245,20 +245,20 @@ type
   # Promoted from VK_KHR_driver_properties (extension 197)
   # ------------------------------------------------------
   DriverId* {.size: sizeof(int32), pure.} = enum
-    AmdProprietary = 1 # Advanced Micro Devices, Inc.
-    AmdOpenSource = 2 # Advanced Micro Devices, Inc.
-    MesaRadv = 3 # Mesa open source project
-    NvidiaProprietary = 4 # NVIDIA Corporation
-    IntelProprietaryWindows = 5 # Intel Corporation
-    IntelOpenSourceMesa = 6 # Intel Corporation
-    ImaginationProprietary = 7 # Imagination Technologies
-    QualcommProprietary = 8 # Qualcomm Technologies, Inc.
-    ArmProprietary = 9 # Arm Limited
-    GoogleSwiftshader = 10 # Google LLC
-    GgpProprietary = 11 # Google LLC
-    BroadcomProprietary = 12 # Broadcom Inc.
-    MesaLlvmpipe = 13 # Mesa
-    Molten = 14 # MoltenVK
+    amdProprietary = 1 # Advanced Micro Devices, Inc.
+    amdOpenSource = 2 # Advanced Micro Devices, Inc.
+    mesaRadv = 3 # Mesa open source project
+    nvidiaProprietary = 4 # NVIDIA Corporation
+    intelProprietaryWindows = 5 # Intel Corporation
+    intelOpenSourceMesa = 6 # Intel Corporation
+    imaginationProprietary = 7 # Imagination Technologies
+    qualcommProprietary = 8 # Qualcomm Technologies, Inc.
+    armProprietary = 9 # Arm Limited
+    googleSwiftshader = 10 # Google LLC
+    ggpProprietary = 11 # Google LLC
+    broadcomProprietary = 12 # Broadcom Inc.
+    mesaLlvmpipe = 13 # Mesa
+    molten = 14 # MoltenVK
   ConformanceVersion* = object
     major*: uint8
     minor*: uint8
@@ -311,9 +311,9 @@ type
     shaderRoundingModeRTZFloat32*: Bool32
     shaderRoundingModeRTZFloat64*: Bool32
   ShaderFloatControlsIndependence* {.size: sizeof(int32), pure.} = enum
-    Vk32BitOnly = 0
-    All = 1
-    None = 2
+    vk32Only = 0
+    all = 1
+    none = 2
 
   # Promoted from VK_EXT_descriptor_indexing (extension 162)
   # --------------------------------------------------------
@@ -381,11 +381,11 @@ type
     pNext*: pointer
     maxVariableDescriptorCount*: uint32
   DescriptorBindingFlagBits* {.size: sizeof(int32), pure.} = enum
-    UpdateAfterBind = 0x00000001
-    UpdateUnusedWhilePending = 0x00000002
-    PartiallyBound = 0x00000004
-    VariableDescriptorCount = 0x00000008
-  DescriptorBindingFlags* = distinct Flags
+    updateAfterBind = 0x00000001
+    updateUnusedWhilePending = 0x00000002
+    partiallyBound = 0x00000004
+    variableDescriptorCount = 0x00000008
+  DescriptorBindingFlags* = Flags[DescriptorBindingFlagBits]
 
   # Promoted from VK_KHR_depth_stencil_resolve (extension 200)
   # ----------------------------------------------------------
@@ -403,12 +403,12 @@ type
     independentResolveNone*: Bool32
     independentResolve*: Bool32
   ResolveModeFlagBits* {.size: sizeof(int32), pure.} = enum
-    None = 0
-    SampleZero = 0x00000001
-    Average = 0x00000002
-    Min = 0x00000004
-    Max = 0x00000008
-  ResolveModeFlags* = distinct Flags
+    none = 0
+    sampleZero = 0x00000001
+    average = 0x00000002
+    min = 0x00000004
+    max = 0x00000008
+  ResolveModeFlags* = Flags[ResolveModeFlagBits]
 
   # Promoted from VK_EXT_scalar_block_layout (extension 222))
   # ---------------------------------------------------------
@@ -427,9 +427,9 @@ type
   # Promoted from VK_EXT_sampler_filter_minmax (extension 131)
   # ----------------------------------------------------------
   SamplerReductionMode* {.size: sizeof(int32), pure.} = enum
-    WeightedAverage = 0
-    Min = 1
-    Max = 2
+    weightedAverage = 0
+    min = 1
+    max = 2
   SamplerReductionModeCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -516,8 +516,8 @@ type
   # Promoted from VK_KHR_timeline_semaphore (extension 208)
   # -------------------------------------------------------
   SemaphoreType* {.size: sizeof(int32), pure.} = enum
-    Binary = 0
-    Timeline = 1
+    binary = 0
+    timeline = 1
   PhysicalDeviceTimelineSemaphoreFeatures* = object
     sType*: StructureType
     pNext*: pointer
@@ -539,8 +539,8 @@ type
     signalSemaphoreValueCount*: uint32
     pSignalSemaphoreValues*: ptr uint64
   SemaphoreWaitFlagBits* {.size: sizeof(int32), pure.} = enum
-    Any = 0x00000001
-  SemaphoreWaitFlags* = distinct Flags
+    any = 0x00000001
+  SemaphoreWaitFlags* = Flags[SemaphoreWaitFlagBits]
   SemaphoreWaitInfo* = object
     sType*: StructureType
     pNext*: pointer

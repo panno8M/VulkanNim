@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_incremental_present
 # =================================
 
@@ -24,5 +24,6 @@ type
     offset*: Offset2D
     extent*: Extent2D
     layer*: uint32
+
 
 

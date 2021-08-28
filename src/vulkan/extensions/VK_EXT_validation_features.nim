@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_EXT_validation_features
 # =================================
 
@@ -19,18 +19,19 @@ type
     disabledValidationFeatureCount*: uint32
     pDisabledValidationFeatures*: ptr ValidationFeatureDisableEXT
   ValidationFeatureEnableEXT* {.size: sizeof(int32), pure.} = enum
-    GpuAssistedExt = 0
-    GpuAssistedReserveBindingSlotExt = 1
-    BestPracticesExt = 2
-    DebugPrintfExt = 3
-    SynchronizationValidationExt = 4
+    gpuAssistedExt = 0
+    gpuAssistedReserveBindingSlotExt = 1
+    bestPracticesExt = 2
+    debugPrintfExt = 3
+    synchronizationValidationExt = 4
   ValidationFeatureDisableEXT* {.size: sizeof(int32), pure.} = enum
-    AllExt = 0
-    ShadersExt = 1
-    ThreadSafetyExt = 2
-    ApiParametersExt = 3
-    ObjectLifetimesExt = 4
-    CoreChecksExt = 5
-    UniqueHandlesExt = 6
+    allExt = 0
+    shadersExt = 1
+    threadSafetyExt = 2
+    apiParametersExt = 3
+    objectLifetimesExt = 4
+    coreChecksExt = 5
+    uniqueHandlesExt = 6
+
 
 

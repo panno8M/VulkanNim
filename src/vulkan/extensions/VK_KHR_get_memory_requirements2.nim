@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_get_memory_requirements2
 # =================================
 
@@ -25,11 +25,11 @@ const getImageMemoryRequirements2KHR* = getImageMemoryRequirements2
 const getBufferMemoryRequirements2KHR* = getBufferMemoryRequirements2
 const getImageSparseMemoryRequirements2KHR* = getImageSparseMemoryRequirements2
 StructureType.defineAliases:
-  BufferMemoryRequirementsInfo2 as BufferMemoryRequirementsInfo2Khr
-  ImageMemoryRequirementsInfo2 as ImageMemoryRequirementsInfo2Khr
-  ImageSparseMemoryRequirementsInfo2 as ImageSparseMemoryRequirementsInfo2Khr
-  MemoryRequirements2 as MemoryRequirements2Khr
-  SparseImageMemoryRequirements2 as SparseImageMemoryRequirements2Khr
+  bufferMemoryRequirementsInfo2 as bufferMemoryRequirementsInfo2Khr
+  imageMemoryRequirementsInfo2 as imageMemoryRequirementsInfo2Khr
+  imageSparseMemoryRequirementsInfo2 as imageSparseMemoryRequirementsInfo2Khr
+  memoryRequirements2 as memoryRequirements2Khr
+  sparseImageMemoryRequirements2 as sparseImageMemoryRequirements2Khr
 
 proc loadVK_KHR_get_memory_requirements2*(instance: Instance) =
   instance.defineLoader(`<<`)

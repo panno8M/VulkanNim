@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_win32_surface
 # =================================
 
@@ -12,7 +12,7 @@ const
   KhrWin32SurfaceExtensionName* = "VK_KHR_win32_surface"
 
 type
-  Win32SurfaceCreateFlagsKHR* = distinct Flags
+  Win32SurfaceCreateFlagsKHR* = Flags[distinct UnusedEnum]
   Win32SurfaceCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer

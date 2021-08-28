@@ -56,7 +56,7 @@ proc render*(enums: NodeEnum; vendorTags: VendorTags): string =
     result = "# {enums.comment.get}\n".fmt
 
   if enums.enumVals.len == 0:
-    return result & "{name}* = UnusedEnum".fmt
+    return result & "{name}* = distinct UnusedEnum".fmt
 
   result.add "{name}* {enumPragma} = enum\n".fmt
   result.add enums.enumVals
@@ -136,7 +136,10 @@ proc render*(bitmask: NodeBitmask): string =
   let name = bitmask.name.replaceBasicTypes
   case bitmask.kind
   of nkbrNormal:
-    "{name}* = distinct Flags".fmt
+    if bitmask.flagbitsReq.isSome:
+      "{name}* = Flags[{bitmask.flagbitsReq.get.removeVkPrefix}]".fmt
+    else:
+      "{name}* = Flags[distinct UnusedEnum]".fmt
   of nkbrAlias:
     "{name}* = {Alias}"
 
@@ -201,7 +204,10 @@ proc render*(basetype: NodeBasetype): string =
   let
     name = basetype.name.removeVkPrefix
     theType = basetype.theType.replaceBasicTypes
-  "{name}* = distinct {theType}".fmt
+  case name
+  of "Flags": "{name}*[Flagbits] = distinct {theType}".fmt
+  else:
+    "{name}* = distinct {theType}".fmt
 
 proc renderCommandLoaderComponent*(require: NodeRequire; resources: Resources): string =
   if require.targets.filterIt(it.kind == nkrCommand).len == 0: return
@@ -439,6 +445,8 @@ proc render*(libFile: LibFile; resources: Resources): string =
     result.LF
 
   result &= libFile.renderCommandLoader(resources)
+  result.LF
+  result &= libFile.fileFooter
 
 #!SECTION
 

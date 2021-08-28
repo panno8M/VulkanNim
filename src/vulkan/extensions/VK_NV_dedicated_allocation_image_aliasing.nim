@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_NV_dedicated_allocation_image_aliasing
 # =========================================
 
@@ -16,5 +16,6 @@ type
     sType*: StructureType
     pNext*: pointer
     dedicatedAllocationImageAliasing*: Bool32
+
 
 

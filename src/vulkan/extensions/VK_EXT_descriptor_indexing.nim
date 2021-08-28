@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_EXT_descriptor_indexing
 # =================================
 
@@ -18,28 +18,29 @@ type
   PhysicalDeviceDescriptorIndexingPropertiesEXT* = object
   DescriptorSetVariableDescriptorCountAllocateInfoEXT* = object
   DescriptorSetVariableDescriptorCountLayoutSupportEXT* = object
-  DescriptorBindingFlagBitsEXT* = UnusedEnum
+  DescriptorBindingFlagBitsEXT* = distinct UnusedEnum
   {name}* = {Alias}
 
 DescriptorPoolCreateFlagBits.defineAliases:
-  UpdateAfterBind as UpdateAfterBindBitExt
+  updateAfterBind as updateAfterBindExt
 
 Result.defineAliases:
-  ErrorFragmentation as ErrorFragmentationExt
+  errorFragmentation as errorFragmentationExt
 
 StructureType.defineAliases:
-  DescriptorSetLayoutBindingFlagsCreateInfo as DescriptorSetLayoutBindingFlagsCreateInfoExt
-  PhysicalDeviceDescriptorIndexingFeatures as PhysicalDeviceDescriptorIndexingFeaturesExt
-  PhysicalDeviceDescriptorIndexingProperties as PhysicalDeviceDescriptorIndexingPropertiesExt
-  DescriptorSetVariableDescriptorCountAllocateInfo as DescriptorSetVariableDescriptorCountAllocateInfoExt
-  DescriptorSetVariableDescriptorCountLayoutSupport as DescriptorSetVariableDescriptorCountLayoutSupportExt
+  descriptorSetLayoutBindingFlagsCreateInfo as descriptorSetLayoutBindingFlagsCreateInfoExt
+  physicalDeviceDescriptorIndexingFeatures as physicalDeviceDescriptorIndexingFeaturesExt
+  physicalDeviceDescriptorIndexingProperties as physicalDeviceDescriptorIndexingPropertiesExt
+  descriptorSetVariableDescriptorCountAllocateInfo as descriptorSetVariableDescriptorCountAllocateInfoExt
+  descriptorSetVariableDescriptorCountLayoutSupport as descriptorSetVariableDescriptorCountLayoutSupportExt
 
 DescriptorBindingFlagBits.defineAliases:
-  UpdateAfterBind as UpdateAfterBindBitExt
-  UpdateUnusedWhilePending as UpdateUnusedWhilePendingBitExt
-  PartiallyBound as PartiallyBoundBitExt
-  VariableDescriptorCount as VariableDescriptorCountBitExt
+  updateAfterBind as updateAfterBindExt
+  updateUnusedWhilePending as updateUnusedWhilePendingExt
+  partiallyBound as partiallyBoundExt
+  variableDescriptorCount as variableDescriptorCountExt
 
 DescriptorSetLayoutCreateFlagBits.defineAliases:
-  UpdateAfterBindPool as UpdateAfterBindPoolBitExt
+  updateAfterBindPool as updateAfterBindPoolExt
+
 

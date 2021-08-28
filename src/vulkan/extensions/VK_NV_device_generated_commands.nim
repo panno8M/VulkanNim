@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_NV_device_generated_commands
 # =================================
 
@@ -54,23 +54,23 @@ type
   SetStateFlagsIndirectCommandNV* = object
     data*: uint32
   IndirectStateFlagBitsNV* {.size: sizeof(int32), pure.} = enum
-    FlagFrontfaceBitNv = 0x00000001
-  IndirectStateFlagsNV* = distinct Flags
+    flagFrontfaceNv = 0x00000001
+  IndirectStateFlagsNV* = Flags[IndirectStateFlagBitsNV]
   IndirectCommandsLayoutNV* = distinct NonDispatchableHandle
   IndirectCommandsTokenTypeNV* {.size: sizeof(int32), pure.} = enum
-    ShaderGroupNv = 0
-    StateFlagsNv = 1
-    IndexBufferNv = 2
-    VertexBufferNv = 3
-    PushConstantNv = 4
-    DrawIndexedNv = 5
-    DrawNv = 6
-    DrawTasksNv = 7
+    shaderGroupNv = 0
+    stateFlagsNv = 1
+    indexBufferNv = 2
+    vertexBufferNv = 3
+    pushConstantNv = 4
+    drawIndexedNv = 5
+    drawNv = 6
+    drawTasksNv = 7
   IndirectCommandsLayoutUsageFlagBitsNV* {.size: sizeof(int32), pure.} = enum
-    ExplicitPreprocessBitNv = 0x00000001
-    IndexedSequencesBitNv = 0x00000002
-    UnorderedSequencesBitNv = 0x00000004
-  IndirectCommandsLayoutUsageFlagsNV* = distinct Flags
+    explicitPreprocessNv = 0x00000001
+    indexedSequencesNv = 0x00000002
+    unorderedSequencesNv = 0x00000004
+  IndirectCommandsLayoutUsageFlagsNV* = Flags[IndirectCommandsLayoutUsageFlagBitsNV]
   IndirectCommandsStreamNV* = object
     buffer*: Buffer
     offset*: DeviceSize

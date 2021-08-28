@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_display
 # =================================
 
@@ -13,7 +13,7 @@ const
 
 type
   DisplayKHR* = distinct NonDispatchableHandle
-  DisplayModeCreateFlagsKHR* = distinct Flags
+  DisplayModeCreateFlagsKHR* = Flags[distinct UnusedEnum]
   DisplayModeCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -27,11 +27,11 @@ type
     displayMode*: DisplayModeKHR
     parameters*: DisplayModeParametersKHR
   DisplayPlaneAlphaFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    OpaqueBitKhr = 0x00000001
-    GlobalBitKhr = 0x00000002
-    PerPixelBitKhr = 0x00000004
-    PerPixelPremultipliedBitKhr = 0x00000008
-  DisplayPlaneAlphaFlagsKHR* = distinct Flags
+    opaqueKhr = 0x00000001
+    globalKhr = 0x00000002
+    perPixelKhr = 0x00000004
+    perPixelPremultipliedKhr = 0x00000008
+  DisplayPlaneAlphaFlagsKHR* = Flags[DisplayPlaneAlphaFlagBitsKHR]
   DisplayPlaneCapabilitiesKHR* = object
     supportedAlpha*: DisplayPlaneAlphaFlagsKHR
     minSrcPosition*: Offset2D
@@ -53,7 +53,7 @@ type
     supportedTransforms*: SurfaceTransformFlagsKHR
     planeReorderPossible*: Bool32
     persistentContent*: Bool32
-  DisplaySurfaceCreateFlagsKHR* = distinct Flags
+  DisplaySurfaceCreateFlagsKHR* = Flags[distinct UnusedEnum]
   DisplaySurfaceCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -65,7 +65,7 @@ type
     globalAlpha*: float32
     alphaMode*: DisplayPlaneAlphaFlagBitsKHR
     imageExtent*: Extent2D
-  SurfaceTransformFlagsKHR* = distinct Flags
+  SurfaceTransformFlagsKHR* = Flags[SurfaceTransformFlagBitsKHR]
 
 var # commands
   getPhysicalDeviceDisplayPropertiesKHRCage: proc(physicalDevice: PhysicalDevice; pPropertyCount: ptr uint32; pProperties: ptr DisplayPropertiesKHR;): Result {.cdecl.}

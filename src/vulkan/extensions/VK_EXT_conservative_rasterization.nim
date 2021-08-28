@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_EXT_conservative_rasterization
 # =================================
 
@@ -30,10 +30,11 @@ type
     flags*: PipelineRasterizationConservativeStateCreateFlagsEXT
     conservativeRasterizationMode*: ConservativeRasterizationModeEXT
     extraPrimitiveOverestimationSize*: float32
-  PipelineRasterizationConservativeStateCreateFlagsEXT* = distinct Flags
+  PipelineRasterizationConservativeStateCreateFlagsEXT* = Flags[distinct UnusedEnum]
   ConservativeRasterizationModeEXT* {.size: sizeof(int32), pure.} = enum
-    DisabledExt = 0
-    OverestimateExt = 1
-    UnderestimateExt = 2
+    disabledExt = 0
+    overestimateExt = 1
+    underestimateExt = 2
+
 
 

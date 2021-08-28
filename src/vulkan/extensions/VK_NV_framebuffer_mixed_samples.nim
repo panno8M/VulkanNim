@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_NV_framebuffer_mixed_samples
 # =================================
 
@@ -19,11 +19,12 @@ type
     coverageModulationTableEnable*: Bool32
     coverageModulationTableCount*: uint32
     pCoverageModulationTable*: ptr float32
-  PipelineCoverageModulationStateCreateFlagsNV* = distinct Flags
+  PipelineCoverageModulationStateCreateFlagsNV* = Flags[distinct UnusedEnum]
   CoverageModulationModeNV* {.size: sizeof(int32), pure.} = enum
-    NoneNv = 0
-    RgbNv = 1
-    AlphaNv = 2
-    RgbaNv = 3
+    noneNv = 0
+    rgbNv = 1
+    alphaNv = 2
+    rgbaNv = 3
+
 
 

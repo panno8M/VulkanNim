@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_NV_shading_rate_image
 # =================================
 
@@ -13,18 +13,18 @@ const
 
 type
   ShadingRatePaletteEntryNV* {.size: sizeof(int32), pure.} = enum
-    NoInvocationsNv = 0
-    Vk16InvocationsPerPixelNv = 1
-    Vk8InvocationsPerPixelNv = 2
-    Vk4InvocationsPerPixelNv = 3
-    Vk2InvocationsPerPixelNv = 4
-    Vk1InvocationPerPixelNv = 5
-    Vk1InvocationPer2x1PixelsNv = 6
-    Vk1InvocationPer1x2PixelsNv = 7
-    Vk1InvocationPer2x2PixelsNv = 8
-    Vk1InvocationPer4x2PixelsNv = 9
-    Vk1InvocationPer2x4PixelsNv = 10
-    Vk1InvocationPer4x4PixelsNv = 11
+    noInvocationsNv = 0
+    vk16InvocationsPerPixelNv = 1
+    vk8InvocationsPerPixelNv = 2
+    vk4InvocationsPerPixelNv = 3
+    vk2InvocationsPerPixelNv = 4
+    vk1InvocationPerPixelNv = 5
+    vk1InvocationPer2x1PixelsNv = 6
+    vk1InvocationPer1x2PixelsNv = 7
+    vk1InvocationPer2x2PixelsNv = 8
+    vk1InvocationPer4x2PixelsNv = 9
+    vk1InvocationPer2x4PixelsNv = 10
+    vk1InvocationPer4x4PixelsNv = 11
   ShadingRatePaletteNV* = object
     shadingRatePaletteEntryCount*: uint32
     pShadingRatePaletteEntries*: ptr ShadingRatePaletteEntryNV
@@ -61,10 +61,10 @@ type
     customSampleOrderCount*: uint32
     pCustomSampleOrders*: ptr CoarseSampleOrderCustomNV
   CoarseSampleOrderTypeNV* {.size: sizeof(int32), pure.} = enum
-    DefaultNv = 0
-    CustomNv = 1
-    PixelMajorNv = 2
-    SampleMajorNv = 3
+    defaultNv = 0
+    customNv = 1
+    pixelMajorNv = 2
+    sampleMajorNv = 3
 
 var # commands
   cmdBindShadingRateImageNVCage: proc(commandBuffer: CommandBuffer; imageView: ImageView; imageLayout: ImageLayout;): void {.cdecl.}

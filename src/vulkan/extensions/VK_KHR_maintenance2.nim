@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_maintenance2
 # =================================
 
@@ -12,32 +12,33 @@ const
 
 type
   PhysicalDevicePointClippingPropertiesKHR* = object
-  PointClippingBehaviorKHR* = UnusedEnum
+  PointClippingBehaviorKHR* = distinct UnusedEnum
   RenderPassInputAttachmentAspectCreateInfoKHR* = object
   InputAttachmentAspectReferenceKHR* = object
   ImageViewUsageCreateInfoKHR* = object
-  TessellationDomainOriginKHR* = UnusedEnum
+  TessellationDomainOriginKHR* = distinct UnusedEnum
   PipelineTessellationDomainOriginStateCreateInfoKHR* = object
 
 PointClippingBehavior.defineAliases:
-  AllClipPlanes as AllClipPlanesKhr
-  UserClipPlanesOnly as UserClipPlanesOnlyKhr
+  allClipPlanes as allClipPlanesKhr
+  userClipPlanesOnly as userClipPlanesOnlyKhr
 
 StructureType.defineAliases:
-  PhysicalDevicePointClippingProperties as PhysicalDevicePointClippingPropertiesKhr
-  RenderPassInputAttachmentAspectCreateInfo as RenderPassInputAttachmentAspectCreateInfoKhr
-  ImageViewUsageCreateInfo as ImageViewUsageCreateInfoKhr
-  PipelineTessellationDomainOriginStateCreateInfo as PipelineTessellationDomainOriginStateCreateInfoKhr
+  physicalDevicePointClippingProperties as physicalDevicePointClippingPropertiesKhr
+  renderPassInputAttachmentAspectCreateInfo as renderPassInputAttachmentAspectCreateInfoKhr
+  imageViewUsageCreateInfo as imageViewUsageCreateInfoKhr
+  pipelineTessellationDomainOriginStateCreateInfo as pipelineTessellationDomainOriginStateCreateInfoKhr
 
 TessellationDomainOrigin.defineAliases:
-  UpperLeft as UpperLeftKhr
-  LowerLeft as LowerLeftKhr
+  upperLeft as upperLeftKhr
+  lowerLeft as lowerLeftKhr
 
 ImageCreateFlagBits.defineAliases:
-  BlockTexelViewCompatible as BlockTexelViewCompatibleBitKhr
-  ExtendedUsage as ExtendedUsageBitKhr
+  blockTexelViewCompatible as blockTexelViewCompatibleKhr
+  extendedUsage as extendedUsageKhr
 
 ImageLayout.defineAliases:
-  DepthReadOnlyStencilAttachmentOptimal as DepthReadOnlyStencilAttachmentOptimalKhr
-  DepthAttachmentStencilReadOnlyOptimal as DepthAttachmentStencilReadOnlyOptimalKhr
+  depthReadOnlyStencilAttachmentOptimal as depthReadOnlyStencilAttachmentOptimalKhr
+  depthAttachmentStencilReadOnlyOptimal as depthAttachmentStencilReadOnlyOptimalKhr
+
 

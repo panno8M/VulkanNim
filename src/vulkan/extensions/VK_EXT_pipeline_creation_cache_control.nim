@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_EXT_pipeline_creation_cache_control
 # ======================================
 
@@ -17,5 +17,6 @@ type
     pipelineCreationCacheControl*: Bool32
 
 Result.defineAliases:
-  PipelineCompileRequiredExt as ErrorPipelineCompileRequiredExt
+  pipelineCompileRequiredExt as errorPipelineCompileRequiredExt
+
 

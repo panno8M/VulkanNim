@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_external_memory_capabilities
 # ===================================
 
@@ -14,9 +14,9 @@ const
 
 type
   {name}* = {Alias}
-  ExternalMemoryHandleTypeFlagBitsKHR* = UnusedEnum
+  ExternalMemoryHandleTypeFlagBitsKHR* = distinct UnusedEnum
   {name}* = {Alias}
-  ExternalMemoryFeatureFlagBitsKHR* = UnusedEnum
+  ExternalMemoryFeatureFlagBitsKHR* = distinct UnusedEnum
   ExternalMemoryPropertiesKHR* = object
   PhysicalDeviceExternalImageFormatInfoKHR* = object
   ExternalImageFormatPropertiesKHR* = object
@@ -28,25 +28,25 @@ var # commands
   
 const getPhysicalDeviceExternalBufferPropertiesKHR* = getPhysicalDeviceExternalBufferProperties
 ExternalMemoryFeatureFlagBits.defineAliases:
-  DedicatedOnly as DedicatedOnlyBitKhr
-  Exportable as ExportableBitKhr
-  Importable as ImportableBitKhr
+  dedicatedOnly as dedicatedOnlyKhr
+  exportable as exportableKhr
+  importable as importableKhr
 
 StructureType.defineAliases:
-  PhysicalDeviceExternalImageFormatInfo as PhysicalDeviceExternalImageFormatInfoKhr
-  ExternalImageFormatProperties as ExternalImageFormatPropertiesKhr
-  PhysicalDeviceExternalBufferInfo as PhysicalDeviceExternalBufferInfoKhr
-  ExternalBufferProperties as ExternalBufferPropertiesKhr
-  PhysicalDeviceIdProperties as PhysicalDeviceIdPropertiesKhr
+  physicalDeviceExternalImageFormatInfo as physicalDeviceExternalImageFormatInfoKhr
+  externalImageFormatProperties as externalImageFormatPropertiesKhr
+  physicalDeviceExternalBufferInfo as physicalDeviceExternalBufferInfoKhr
+  externalBufferProperties as externalBufferPropertiesKhr
+  physicalDeviceIdProperties as physicalDeviceIdPropertiesKhr
 
 ExternalMemoryHandleTypeFlagBits.defineAliases:
-  OpaqueFd as OpaqueFdBitKhr
-  OpaqueWin32 as OpaqueWin32BitKhr
-  OpaqueWin32Kmt as OpaqueWin32KmtBitKhr
-  D3d11Texture as D3d11TextureBitKhr
-  D3d11TextureKmt as D3d11TextureKmtBitKhr
-  D3d12Heap as D3d12HeapBitKhr
-  D3d12Resource as D3d12ResourceBitKhr
+  opaqueFd as opaqueFdKhr
+  opaqueWin32 as opaqueWin32Khr
+  opaqueWin32Kmt as opaqueWin32KmtKhr
+  d3d11Texture as d3d11TextureKhr
+  d3d11TextureKmt as d3d11TextureKmtKhr
+  d3d12Heap as d3d12HeapKhr
+  d3d12Resource as d3d12ResourceKhr
 
 proc loadVK_KHR_external_memory_capabilities*(instance: Instance) =
   instance.defineLoader(`<<`)

@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_external_memory
 # =================================
 
@@ -18,10 +18,11 @@ type
   ExportMemoryAllocateInfoKHR* = object
 
 Result.defineAliases:
-  ErrorInvalidExternalHandle as ErrorInvalidExternalHandleKhr
+  errorInvalidExternalHandle as errorInvalidExternalHandleKhr
 
 StructureType.defineAliases:
-  ExternalMemoryBufferCreateInfo as ExternalMemoryBufferCreateInfoKhr
-  ExternalMemoryImageCreateInfo as ExternalMemoryImageCreateInfoKhr
-  ExportMemoryAllocateInfo as ExportMemoryAllocateInfoKhr
+  externalMemoryBufferCreateInfo as externalMemoryBufferCreateInfoKhr
+  externalMemoryImageCreateInfo as externalMemoryImageCreateInfoKhr
+  exportMemoryAllocateInfo as exportMemoryAllocateInfoKhr
+
 

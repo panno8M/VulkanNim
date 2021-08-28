@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_KHR_vulkan_memory_model
 # =================================
 
@@ -14,5 +14,6 @@ type
   PhysicalDeviceVulkanMemoryModelFeaturesKHR* = object
 
 StructureType.defineAliases:
-  PhysicalDeviceVulkanMemoryModelFeatures as PhysicalDeviceVulkanMemoryModelFeaturesKhr
+  physicalDeviceVulkanMemoryModelFeatures as physicalDeviceVulkanMemoryModelFeaturesKhr
+
 

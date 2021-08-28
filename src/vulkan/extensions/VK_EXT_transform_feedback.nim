@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_EXT_transform_feedback
 # =================================
 
@@ -35,7 +35,7 @@ type
     pNext*: pointer
     flags*: PipelineRasterizationStateStreamCreateFlagsEXT
     rasterizationStream*: uint32
-  PipelineRasterizationStateStreamCreateFlagsEXT* = distinct Flags
+  PipelineRasterizationStateStreamCreateFlagsEXT* = Flags[distinct UnusedEnum]
 
 var # commands
   cmdBindTransformFeedbackBuffersEXTCage: proc(commandBuffer: CommandBuffer; firstBinding: uint32; bindingCount: uint32; pBuffers: ptr Buffer; pOffsets: ptr DeviceSize; pSizes: ptr DeviceSize;): void {.cdecl.}

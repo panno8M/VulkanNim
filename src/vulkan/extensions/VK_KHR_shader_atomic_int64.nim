@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_KHR_shader_atomic_int64
 # =================================
 
@@ -15,5 +15,6 @@ type
   PhysicalDeviceShaderAtomicInt64FeaturesKHR* = object
 
 StructureType.defineAliases:
-  PhysicalDeviceShaderAtomicInt64Features as PhysicalDeviceShaderAtomicInt64FeaturesKhr
+  physicalDeviceShaderAtomicInt64Features as physicalDeviceShaderAtomicInt64FeaturesKhr
+
 

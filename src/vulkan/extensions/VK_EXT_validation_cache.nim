@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_EXT_validation_cache
 # =================================
 
@@ -23,8 +23,8 @@ type
     pNext*: pointer
     validationCache*: ValidationCacheEXT
   ValidationCacheHeaderVersionEXT* {.size: sizeof(int32), pure.} = enum
-    OneExt = 1
-  ValidationCacheCreateFlagsEXT* = distinct Flags
+    oneExt = 1
+  ValidationCacheCreateFlagsEXT* = Flags[distinct UnusedEnum]
 
 var # commands
   createValidationCacheEXTCage: proc(device: Device; pCreateInfo: ptr ValidationCacheCreateInfoEXT; pAllocator: ptr AllocationCallbacks; pValidationCache: ptr ValidationCacheEXT;): Result {.cdecl.}

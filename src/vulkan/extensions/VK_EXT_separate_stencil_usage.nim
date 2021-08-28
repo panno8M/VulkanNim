@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_EXT_separate_stencil_usage
 # =================================
 
@@ -14,5 +14,6 @@ type
   ImageStencilUsageCreateInfoEXT* = object
 
 StructureType.defineAliases:
-  ImageStencilUsageCreateInfo as ImageStencilUsageCreateInfoExt
+  imageStencilUsageCreateInfo as imageStencilUsageCreateInfoExt
+
 

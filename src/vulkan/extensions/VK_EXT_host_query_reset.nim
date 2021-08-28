@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_EXT_host_query_reset
 # =================================
 
@@ -18,7 +18,7 @@ var # commands
   
 const resetQueryPoolEXT* = resetQueryPool
 StructureType.defineAliases:
-  PhysicalDeviceHostQueryResetFeatures as PhysicalDeviceHostQueryResetFeaturesExt
+  physicalDeviceHostQueryResetFeatures as physicalDeviceHostQueryResetFeaturesExt
 
 proc loadVK_EXT_host_query_reset*(instance: Instance) =
   instance.defineLoader(`<<`)

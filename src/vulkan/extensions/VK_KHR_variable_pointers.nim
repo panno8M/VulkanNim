@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_variable_pointers
 # =================================
 
@@ -17,6 +17,7 @@ type
   PhysicalDeviceVariablePointersFeaturesKHR* = object
 
 StructureType.defineAliases:
-  PhysicalDeviceVariablePointersFeatures as PhysicalDeviceVariablePointersFeaturesKhr
-  PhysicalDeviceVariablePointersFeaturesKhr as PhysicalDeviceVariablePointerFeaturesKhr
+  physicalDeviceVariablePointersFeatures as physicalDeviceVariablePointersFeaturesKhr
+  physicalDeviceVariablePointersFeaturesKhr as physicalDeviceVariablePointerFeaturesKhr
+
 

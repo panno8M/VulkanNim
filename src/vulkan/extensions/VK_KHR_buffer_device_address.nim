@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_KHR_buffer_device_address
 # =================================
 
@@ -26,24 +26,24 @@ const getBufferDeviceAddressKHR* = getBufferDeviceAddress
 const getBufferOpaqueCaptureAddressKHR* = getBufferOpaqueCaptureAddress
 const getDeviceMemoryOpaqueCaptureAddressKHR* = getDeviceMemoryOpaqueCaptureAddress
 BufferUsageFlagBits.defineAliases:
-  ShaderDeviceAddress as ShaderDeviceAddressBitKhr
+  shaderDeviceAddress as shaderDeviceAddressKhr
 
 Result.defineAliases:
-  ErrorInvalidOpaqueCaptureAddress as ErrorInvalidOpaqueCaptureAddressKhr
+  errorInvalidOpaqueCaptureAddress as errorInvalidOpaqueCaptureAddressKhr
 
 MemoryAllocateFlagBits.defineAliases:
-  DeviceAddress as DeviceAddressBitKhr
-  DeviceAddressCaptureReplay as DeviceAddressCaptureReplayBitKhr
+  deviceAddress as deviceAddressKhr
+  deviceAddressCaptureReplay as deviceAddressCaptureReplayKhr
 
 StructureType.defineAliases:
-  PhysicalDeviceBufferDeviceAddressFeatures as PhysicalDeviceBufferDeviceAddressFeaturesKhr
-  BufferDeviceAddressInfo as BufferDeviceAddressInfoKhr
-  BufferOpaqueCaptureAddressCreateInfo as BufferOpaqueCaptureAddressCreateInfoKhr
-  MemoryOpaqueCaptureAddressAllocateInfo as MemoryOpaqueCaptureAddressAllocateInfoKhr
-  DeviceMemoryOpaqueCaptureAddressInfo as DeviceMemoryOpaqueCaptureAddressInfoKhr
+  physicalDeviceBufferDeviceAddressFeatures as physicalDeviceBufferDeviceAddressFeaturesKhr
+  bufferDeviceAddressInfo as bufferDeviceAddressInfoKhr
+  bufferOpaqueCaptureAddressCreateInfo as bufferOpaqueCaptureAddressCreateInfoKhr
+  memoryOpaqueCaptureAddressAllocateInfo as memoryOpaqueCaptureAddressAllocateInfoKhr
+  deviceMemoryOpaqueCaptureAddressInfo as deviceMemoryOpaqueCaptureAddressInfoKhr
 
 BufferCreateFlagBits.defineAliases:
-  DeviceAddressCaptureReplay as DeviceAddressCaptureReplayBitKhr
+  deviceAddressCaptureReplay as deviceAddressCaptureReplayKhr
 
 proc loadVK_KHR_buffer_device_address*(instance: Instance) =
   instance.defineLoader(`<<`)

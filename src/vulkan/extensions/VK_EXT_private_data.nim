@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_EXT_private_data
 # =================================
 
@@ -24,8 +24,8 @@ type
     pNext*: pointer
     flags*: PrivateDataSlotCreateFlagsEXT
   PrivateDataSlotEXT* = distinct NonDispatchableHandle
-  PrivateDataSlotCreateFlagsEXT* = distinct Flags
-  PrivateDataSlotCreateFlagBitsEXT* = UnusedEnum
+  PrivateDataSlotCreateFlagsEXT* = Flags[PrivateDataSlotCreateFlagBitsEXT]
+  PrivateDataSlotCreateFlagBitsEXT* = distinct UnusedEnum
 
 var # commands
   createPrivateDataSlotEXTCage: proc(device: Device; pCreateInfo: ptr PrivateDataSlotCreateInfoEXT; pAllocator: ptr AllocationCallbacks; pPrivateDataSlot: ptr PrivateDataSlotEXT;): Result {.cdecl.}

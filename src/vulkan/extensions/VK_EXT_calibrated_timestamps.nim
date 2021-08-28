@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_EXT_calibrated_timestamps
 # =================================
 
@@ -12,10 +12,10 @@ const
 
 type
   TimeDomainEXT* {.size: sizeof(int32), pure.} = enum
-    DeviceExt = 0
-    ClockMonotonicExt = 1
-    ClockMonotonicRawExt = 2
-    QueryPerformanceCounterExt = 3
+    deviceExt = 0
+    clockMonotonicExt = 1
+    clockMonotonicRawExt = 2
+    queryPerformanceCounterExt = 3
   CalibratedTimestampInfoEXT* = object
     sType*: StructureType
     pNext*: pointer

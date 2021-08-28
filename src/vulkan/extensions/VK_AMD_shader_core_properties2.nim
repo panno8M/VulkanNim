@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_AMD_shader_core_properties2
 # =================================
 
@@ -17,7 +17,8 @@ type
     pNext*: pointer
     shaderCoreFeatures*: ShaderCorePropertiesFlagsAMD
     activeComputeUnitCount*: uint32
-  ShaderCorePropertiesFlagBitsAMD* = UnusedEnum
-  ShaderCorePropertiesFlagsAMD* = distinct Flags
+  ShaderCorePropertiesFlagBitsAMD* = distinct UnusedEnum
+  ShaderCorePropertiesFlagsAMD* = Flags[ShaderCorePropertiesFlagBitsAMD]
+
 
 

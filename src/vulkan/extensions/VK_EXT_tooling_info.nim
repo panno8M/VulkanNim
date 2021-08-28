@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_EXT_tooling_info
 # =================================
 
@@ -14,20 +14,20 @@ const
 
 type
   ToolPurposeFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
-    ValidationBitExt = 0x00000001
-    ProfilingBitExt = 0x00000002
-    TracingBitExt = 0x00000004
-    AdditionalFeaturesBitExt = 0x00000008
-    ModifyingFeaturesBitExt = 0x00000010
+    validationExt = 0x00000001
+    profilingExt = 0x00000002
+    tracingExt = 0x00000004
+    additionalFeaturesExt = 0x00000008
+    modifyingFeaturesExt = 0x00000010
     # Provided by VK_EXT_tooling_info
-    DebugReportingBitExt = 0x00000020
+    debugReportingExt = 0x00000020
     # Provided by VK_EXT_tooling_info
-    DebugReportingBitExt = 0x00000020
+    debugReportingExt = 0x00000020
     # Provided by VK_EXT_tooling_info
-    DebugMarkersBitExt = 0x00000040
+    debugMarkersExt = 0x00000040
     # Provided by VK_EXT_tooling_info
-    DebugMarkersBitExt = 0x00000040
-  ToolPurposeFlagsEXT* = distinct Flags
+    debugMarkersExt = 0x00000040
+  ToolPurposeFlagsEXT* = Flags[ToolPurposeFlagBitsEXT]
   PhysicalDeviceToolPropertiesEXT* = object
     sType*: StructureType
     pNext*: pointer

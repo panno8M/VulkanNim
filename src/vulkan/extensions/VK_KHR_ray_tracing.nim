@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_ray_tracing
 # Explicit sort order to require processing after VK_NV_ray_tracing
 # =================================================================
@@ -20,8 +20,8 @@ const
 
 type
   AccelerationStructureTypeKHR* {.size: sizeof(int32), pure.} = enum
-    TopLevelKhr = 0
-    BottomLevelKhr = 1
+    topLevelKhr = 0
+    bottomLevelKhr = 1
   DeviceOrHostAddressKHR* {.union.} = object
     deviceAddress*: DeviceAddress
     hostAddress*: pointer
@@ -43,9 +43,9 @@ type
     intersectionShader*: uint32
     pShaderGroupCaptureReplayHandle*: pointer
   RayTracingShaderGroupTypeKHR* {.size: sizeof(int32), pure.} = enum
-    GeneralKhr = 0
-    TrianglesHitGroupKhr = 1
-    ProceduralHitGroupKhr = 2
+    generalKhr = 0
+    trianglesHitGroupKhr = 1
+    proceduralHitGroupKhr = 2
   RayTracingPipelineCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -91,9 +91,9 @@ type
     ppGeometries*: ptr ptr AccelerationStructureGeometryKHR
     scratchData*: DeviceOrHostAddressKHR
   AccelerationStructureBuildTypeKHR* {.size: sizeof(int32), pure.} = enum
-    HostKhr = 0
-    DeviceKhr = 1
-    HostOrDeviceKhr = 2
+    hostKhr = 0
+    deviceKhr = 1
+    hostOrDeviceKhr = 2
   AccelerationStructureGeometryAabbsDataKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -121,16 +121,16 @@ type
     geometryType*: GeometryTypeKHR
     geometry*: AccelerationStructureGeometryDataKHR
     flags*: GeometryFlagsKHR
-  GeometryFlagsKHR* = distinct Flags
-  GeometryInstanceFlagsKHR* = distinct Flags
+  GeometryFlagsKHR* = Flags[GeometryFlagBitsKHR]
+  GeometryInstanceFlagsKHR* = Flags[GeometryInstanceFlagBitsKHR]
   GeometryFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    OpaqueBitKhr = 0x00000001
-    NoDuplicateAnyHitInvocationBitKhr = 0x00000002
+    opaqueKhr = 0x00000001
+    noDuplicateAnyHitInvocationKhr = 0x00000002
   GeometryInstanceFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    TriangleFacingCullDisableBitKhr = 0x00000001
-    TriangleFrontCounterclockwiseBitKhr = 0x00000002
-    ForceOpaqueBitKhr = 0x00000004
-    ForceNoOpaqueBitKhr = 0x00000008
+    triangleFacingCullDisableKhr = 0x00000001
+    triangleFrontCounterclockwiseKhr = 0x00000002
+    forceOpaqueKhr = 0x00000004
+    forceNoOpaqueKhr = 0x00000008
   AccelerationStructureCreateGeometryTypeInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -151,22 +151,22 @@ type
     deviceAddress*: DeviceAddress
   AccelerationStructureKHR* = distinct NonDispatchableHandle
   BuildAccelerationStructureFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    AllowUpdateBitKhr = 0x00000001
-    AllowCompactionBitKhr = 0x00000002
-    PreferFastTraceBitKhr = 0x00000004
-    PreferFastBuildBitKhr = 0x00000008
-    LowMemoryBitKhr = 0x00000010
-  BuildAccelerationStructureFlagsKHR* = distinct Flags
+    allowUpdateKhr = 0x00000001
+    allowCompactionKhr = 0x00000002
+    preferFastTraceKhr = 0x00000004
+    preferFastBuildKhr = 0x00000008
+    lowMemoryKhr = 0x00000010
+  BuildAccelerationStructureFlagsKHR* = Flags[BuildAccelerationStructureFlagBitsKHR]
   CopyAccelerationStructureModeKHR* {.size: sizeof(int32), pure.} = enum
-    CloneKhr = 0
-    CompactKhr = 1
-    SerializeKhr = 2
-    DeserializeKhr = 3
+    cloneKhr = 0
+    compactKhr = 1
+    serializeKhr = 2
+    deserializeKhr = 3
   GeometryTypeKHR* {.size: sizeof(int32), pure.} = enum
-    TrianglesKhr = 0
-    AabbsKhr = 1
+    trianglesKhr = 0
+    aabbsKhr = 1
     # Provided by VK_KHR_ray_tracing
-    InstancesKhr = 100001500000
+    instancesKhr = 100001500000
   BindAccelerationStructureMemoryInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -211,9 +211,9 @@ type
     maxDescriptorSetAccelerationStructures*: uint32
     shaderGroupHandleCaptureReplaySize*: uint32
   AccelerationStructureMemoryRequirementsTypeKHR* {.size: sizeof(int32), pure.} = enum
-    ObjectKhr = 0
-    BuildScratchKhr = 1
-    UpdateScratchKhr = 2
+    objectKhr = 0
+    buildScratchKhr = 1
+    updateScratchKhr = 2
   AccelerationStructureDeviceAddressInfoKHR* = object
     sType*: StructureType
     pNext*: pointer

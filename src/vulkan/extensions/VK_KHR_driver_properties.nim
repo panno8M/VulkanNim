@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_KHR_driver_properties
 # =================================
 
@@ -14,24 +14,25 @@ const
   MaxDriverInfoSizeKhr* = MaxDriverInfoSize
 
 type
-  DriverIdKHR* = UnusedEnum
+  DriverIdKHR* = distinct UnusedEnum
   ConformanceVersionKHR* = object
   PhysicalDeviceDriverPropertiesKHR* = object
 
 DriverId.defineAliases:
-  AmdProprietary as AmdProprietaryKhr
-  AmdOpenSource as AmdOpenSourceKhr
-  MesaRadv as MesaRadvKhr
-  NvidiaProprietary as NvidiaProprietaryKhr
-  IntelProprietaryWindows as IntelProprietaryWindowsKhr
-  IntelOpenSourceMesa as IntelOpenSourceMesaKhr
-  ImaginationProprietary as ImaginationProprietaryKhr
-  QualcommProprietary as QualcommProprietaryKhr
-  ArmProprietary as ArmProprietaryKhr
-  GoogleSwiftshader as GoogleSwiftshaderKhr
-  GgpProprietary as GgpProprietaryKhr
-  BroadcomProprietary as BroadcomProprietaryKhr
+  amdProprietary as amdProprietaryKhr
+  amdOpenSource as amdOpenSourceKhr
+  mesaRadv as mesaRadvKhr
+  nvidiaProprietary as nvidiaProprietaryKhr
+  intelProprietaryWindows as intelProprietaryWindowsKhr
+  intelOpenSourceMesa as intelOpenSourceMesaKhr
+  imaginationProprietary as imaginationProprietaryKhr
+  qualcommProprietary as qualcommProprietaryKhr
+  armProprietary as armProprietaryKhr
+  googleSwiftshader as googleSwiftshaderKhr
+  ggpProprietary as ggpProprietaryKhr
+  broadcomProprietary as broadcomProprietaryKhr
 
 StructureType.defineAliases:
-  PhysicalDeviceDriverProperties as PhysicalDeviceDriverPropertiesKhr
+  physicalDeviceDriverProperties as physicalDeviceDriverPropertiesKhr
+
 

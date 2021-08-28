@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_EXT_pipeline_creation_feedback
 # =================================
 
@@ -12,10 +12,10 @@ const
 
 type
   PipelineCreationFeedbackFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
-    ValidBitExt = 0x00000001
-    ApplicationPipelineCacheHitBitExt = 0x00000002
-    BasePipelineAccelerationBitExt = 0x00000004
-  PipelineCreationFeedbackFlagsEXT* = distinct Flags
+    validExt = 0x00000001
+    applicationPipelineCacheHitExt = 0x00000002
+    basePipelineAccelerationExt = 0x00000004
+  PipelineCreationFeedbackFlagsEXT* = Flags[PipelineCreationFeedbackFlagBitsEXT]
   PipelineCreationFeedbackCreateInfoEXT* = object
     sType*: StructureType
     pNext*: pointer
@@ -25,5 +25,6 @@ type
   PipelineCreationFeedbackEXT* = object
     flags*: PipelineCreationFeedbackFlagsEXT
     duration*: uint64
+
 
 

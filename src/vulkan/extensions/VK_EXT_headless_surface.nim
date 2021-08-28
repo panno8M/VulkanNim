@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_EXT_headless_surface
 # =================================
 
@@ -12,7 +12,7 @@ const
   ExtHeadlessSurfaceExtensionName* = "VK_EXT_headless_surface"
 
 type
-  HeadlessSurfaceCreateFlagsEXT* = distinct Flags
+  HeadlessSurfaceCreateFlagsEXT* = Flags[distinct UnusedEnum]
   HeadlessSurfaceCreateInfoEXT* = object
     sType*: StructureType
     pNext*: pointer

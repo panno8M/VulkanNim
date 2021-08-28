@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_swapchain
 # =================================
 
@@ -16,14 +16,14 @@ const
 type
   SwapchainCreateFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
     # Provided by VK_KHR_swapchain
-    SplitInstanceBindRegionsBitKhr = 0x00000001 # Allow images with VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT
+    splitInstanceBindRegionsKhr = 0x00000001 # Allow images with VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT
     # Provided by VK_KHR_device_group
-    SplitInstanceBindRegionsBitKhr = 0x00000001 # Allow images with VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT
+    splitInstanceBindRegionsKhr = 0x00000001 # Allow images with VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT
     # Provided by VK_KHR_swapchain
-    ProtectedBitKhr = 0x00000002 # Swapchain is protected
+    protectedKhr = 0x00000002 # Swapchain is protected
     # Provided by VK_KHR_swapchain_mutable_format
-    MutableFormatBitKhr = 0x00000004
-  SwapchainCreateFlagsKHR* = distinct Flags
+    mutableFormatKhr = 0x00000004
+  SwapchainCreateFlagsKHR* = Flags[SwapchainCreateFlagBitsKHR]
   SwapchainCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -72,11 +72,11 @@ type
     fence*: Fence
     deviceMask*: uint32
   DeviceGroupPresentModeFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    LocalBitKhr = 0x00000001 # Present from local memory
-    RemoteBitKhr = 0x00000002 # Present from remote memory
-    SumBitKhr = 0x00000004 # Present sum of local and/or remote memory
-    LocalMultiDeviceBitKhr = 0x00000008 # Each physical device presents from local memory
-  DeviceGroupPresentModeFlagsKHR* = distinct Flags
+    localKhr = 0x00000001 # Present from local memory
+    remoteKhr = 0x00000002 # Present from remote memory
+    sumKhr = 0x00000004 # Present sum of local and/or remote memory
+    localMultiDeviceKhr = 0x00000008 # Each physical device presents from local memory
+  DeviceGroupPresentModeFlagsKHR* = Flags[DeviceGroupPresentModeFlagBitsKHR]
   DeviceGroupPresentCapabilitiesKHR* = object
     sType*: StructureType
     pNext*: pointer

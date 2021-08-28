@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_NV_representative_fragment_test
 # ==================================
 
@@ -19,5 +19,6 @@ type
     sType*: StructureType
     pNext*: pointer
     representativeFragmentTestEnable*: Bool32
+
 
 

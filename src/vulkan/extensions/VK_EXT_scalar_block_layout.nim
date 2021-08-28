@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_EXT_scalar_block_layout
 # =================================
 
@@ -15,5 +15,6 @@ type
   PhysicalDeviceScalarBlockLayoutFeaturesEXT* = object
 
 StructureType.defineAliases:
-  PhysicalDeviceScalarBlockLayoutFeatures as PhysicalDeviceScalarBlockLayoutFeaturesExt
+  physicalDeviceScalarBlockLayoutFeatures as physicalDeviceScalarBlockLayoutFeaturesExt
+
 

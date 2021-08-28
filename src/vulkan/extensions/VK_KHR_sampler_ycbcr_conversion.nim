@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_sampler_ycbcr_conversion
 # =================================
 
@@ -22,9 +22,9 @@ type
   PhysicalDeviceSamplerYcbcrConversionFeaturesKHR* = object
   SamplerYcbcrConversionImageFormatPropertiesKHR* = object
   SamplerYcbcrConversionKHR* = SamplerYcbcrConversion
-  SamplerYcbcrModelConversionKHR* = UnusedEnum
-  SamplerYcbcrRangeKHR* = UnusedEnum
-  ChromaLocationKHR* = UnusedEnum
+  SamplerYcbcrModelConversionKHR* = distinct UnusedEnum
+  SamplerYcbcrRangeKHR* = distinct UnusedEnum
+  ChromaLocationKHR* = distinct UnusedEnum
 
 var # commands
   
@@ -32,86 +32,86 @@ var # commands
 const createSamplerYcbcrConversionKHR* = createSamplerYcbcrConversion
 const destroySamplerYcbcrConversionKHR* = destroySamplerYcbcrConversion
 DebugReportObjectTypeEXT.defineAliases:
-  SamplerYcbcrConversionExt as SamplerYcbcrConversionKhrExt
+  samplerYcbcrConversionExt as samplerYcbcrConversionKhrExt
 
 ObjectType.defineAliases:
-  SamplerYcbcrConversion as SamplerYcbcrConversionKhr
+  samplerYcbcrConversion as samplerYcbcrConversionKhr
 
 SamplerYcbcrModelConversion.defineAliases:
-  RgbIdentity as RgbIdentityKhr
-  YcbcrIdentity as YcbcrIdentityKhr
-  Ycbcr709 as Ycbcr709Khr
-  Ycbcr601 as Ycbcr601Khr
-  Ycbcr2020 as Ycbcr2020Khr
+  rgbIdentity as rgbIdentityKhr
+  ycbcrIdentity as ycbcrIdentityKhr
+  ycbcr709 as ycbcr709Khr
+  ycbcr601 as ycbcr601Khr
+  ycbcr2020 as ycbcr2020Khr
 
 Format.defineAliases:
-  G8b8g8r8422Unorm as G8b8g8r8422UnormKhr
-  B8g8r8g8422Unorm as B8g8r8g8422UnormKhr
-  G8B8R83plane420Unorm as G8B8R83plane420UnormKhr
-  G8B8r82plane420Unorm as G8B8r82plane420UnormKhr
-  G8B8R83plane422Unorm as G8B8R83plane422UnormKhr
-  G8B8r82plane422Unorm as G8B8r82plane422UnormKhr
-  G8B8R83plane444Unorm as G8B8R83plane444UnormKhr
-  R10x6UnormPack16 as R10x6UnormPack16Khr
-  R10x6g10x6Unorm2pack16 as R10x6g10x6Unorm2pack16Khr
-  R10x6g10x6b10x6a10x6Unorm4pack16 as R10x6g10x6b10x6a10x6Unorm4pack16Khr
-  G10x6b10x6g10x6r10x6422Unorm4pack16 as G10x6b10x6g10x6r10x6422Unorm4pack16Khr
-  B10x6g10x6r10x6g10x6422Unorm4pack16 as B10x6g10x6r10x6g10x6422Unorm4pack16Khr
-  G10x6B10x6R10x63plane420Unorm3pack16 as G10x6B10x6R10x63plane420Unorm3pack16Khr
-  G10x6B10x6r10x62plane420Unorm3pack16 as G10x6B10x6r10x62plane420Unorm3pack16Khr
-  G10x6B10x6R10x63plane422Unorm3pack16 as G10x6B10x6R10x63plane422Unorm3pack16Khr
-  G10x6B10x6r10x62plane422Unorm3pack16 as G10x6B10x6r10x62plane422Unorm3pack16Khr
-  G10x6B10x6R10x63plane444Unorm3pack16 as G10x6B10x6R10x63plane444Unorm3pack16Khr
-  R12x4UnormPack16 as R12x4UnormPack16Khr
-  R12x4g12x4Unorm2pack16 as R12x4g12x4Unorm2pack16Khr
-  R12x4g12x4b12x4a12x4Unorm4pack16 as R12x4g12x4b12x4a12x4Unorm4pack16Khr
-  G12x4b12x4g12x4r12x4422Unorm4pack16 as G12x4b12x4g12x4r12x4422Unorm4pack16Khr
-  B12x4g12x4r12x4g12x4422Unorm4pack16 as B12x4g12x4r12x4g12x4422Unorm4pack16Khr
-  G12x4B12x4R12x43plane420Unorm3pack16 as G12x4B12x4R12x43plane420Unorm3pack16Khr
-  G12x4B12x4r12x42plane420Unorm3pack16 as G12x4B12x4r12x42plane420Unorm3pack16Khr
-  G12x4B12x4R12x43plane422Unorm3pack16 as G12x4B12x4R12x43plane422Unorm3pack16Khr
-  G12x4B12x4r12x42plane422Unorm3pack16 as G12x4B12x4r12x42plane422Unorm3pack16Khr
-  G12x4B12x4R12x43plane444Unorm3pack16 as G12x4B12x4R12x43plane444Unorm3pack16Khr
-  G16b16g16r16422Unorm as G16b16g16r16422UnormKhr
-  B16g16r16g16422Unorm as B16g16r16g16422UnormKhr
-  G16B16R163plane420Unorm as G16B16R163plane420UnormKhr
-  G16B16r162plane420Unorm as G16B16r162plane420UnormKhr
-  G16B16R163plane422Unorm as G16B16R163plane422UnormKhr
-  G16B16r162plane422Unorm as G16B16r162plane422UnormKhr
-  G16B16R163plane444Unorm as G16B16R163plane444UnormKhr
+  g8b8g8r8422Unorm as g8b8g8r8422UnormKhr
+  b8g8r8g8422Unorm as b8g8r8g8422UnormKhr
+  g8B8R83plane420Unorm as g8B8R83plane420UnormKhr
+  g8B8r82plane420Unorm as g8B8r82plane420UnormKhr
+  g8B8R83plane422Unorm as g8B8R83plane422UnormKhr
+  g8B8r82plane422Unorm as g8B8r82plane422UnormKhr
+  g8B8R83plane444Unorm as g8B8R83plane444UnormKhr
+  r10x6UnormPack16 as r10x6UnormPack16Khr
+  r10x6g10x6Unorm2pack16 as r10x6g10x6Unorm2pack16Khr
+  r10x6g10x6b10x6a10x6Unorm4pack16 as r10x6g10x6b10x6a10x6Unorm4pack16Khr
+  g10x6b10x6g10x6r10x6422Unorm4pack16 as g10x6b10x6g10x6r10x6422Unorm4pack16Khr
+  b10x6g10x6r10x6g10x6422Unorm4pack16 as b10x6g10x6r10x6g10x6422Unorm4pack16Khr
+  g10x6B10x6R10x63plane420Unorm3pack16 as g10x6B10x6R10x63plane420Unorm3pack16Khr
+  g10x6B10x6r10x62plane420Unorm3pack16 as g10x6B10x6r10x62plane420Unorm3pack16Khr
+  g10x6B10x6R10x63plane422Unorm3pack16 as g10x6B10x6R10x63plane422Unorm3pack16Khr
+  g10x6B10x6r10x62plane422Unorm3pack16 as g10x6B10x6r10x62plane422Unorm3pack16Khr
+  g10x6B10x6R10x63plane444Unorm3pack16 as g10x6B10x6R10x63plane444Unorm3pack16Khr
+  r12x4UnormPack16 as r12x4UnormPack16Khr
+  r12x4g12x4Unorm2pack16 as r12x4g12x4Unorm2pack16Khr
+  r12x4g12x4b12x4a12x4Unorm4pack16 as r12x4g12x4b12x4a12x4Unorm4pack16Khr
+  g12x4b12x4g12x4r12x4422Unorm4pack16 as g12x4b12x4g12x4r12x4422Unorm4pack16Khr
+  b12x4g12x4r12x4g12x4422Unorm4pack16 as b12x4g12x4r12x4g12x4422Unorm4pack16Khr
+  g12x4B12x4R12x43plane420Unorm3pack16 as g12x4B12x4R12x43plane420Unorm3pack16Khr
+  g12x4B12x4r12x42plane420Unorm3pack16 as g12x4B12x4r12x42plane420Unorm3pack16Khr
+  g12x4B12x4R12x43plane422Unorm3pack16 as g12x4B12x4R12x43plane422Unorm3pack16Khr
+  g12x4B12x4r12x42plane422Unorm3pack16 as g12x4B12x4r12x42plane422Unorm3pack16Khr
+  g12x4B12x4R12x43plane444Unorm3pack16 as g12x4B12x4R12x43plane444Unorm3pack16Khr
+  g16b16g16r16422Unorm as g16b16g16r16422UnormKhr
+  b16g16r16g16422Unorm as b16g16r16g16422UnormKhr
+  g16B16R163plane420Unorm as g16B16R163plane420UnormKhr
+  g16B16r162plane420Unorm as g16B16r162plane420UnormKhr
+  g16B16R163plane422Unorm as g16B16R163plane422UnormKhr
+  g16B16r162plane422Unorm as g16B16r162plane422UnormKhr
+  g16B16R163plane444Unorm as g16B16R163plane444UnormKhr
 
 FormatFeatureFlagBits.defineAliases:
-  MidpointChromaSamples as MidpointChromaSamplesBitKhr
-  SampledImageYcbcrConversionLinearFilter as SampledImageYcbcrConversionLinearFilterBitKhr
-  SampledImageYcbcrConversionSeparateReconstructionFilter as SampledImageYcbcrConversionSeparateReconstructionFilterBitKhr
-  SampledImageYcbcrConversionChromaReconstructionExplicit as SampledImageYcbcrConversionChromaReconstructionExplicitBitKhr
-  SampledImageYcbcrConversionChromaReconstructionExplicitForceable as SampledImageYcbcrConversionChromaReconstructionExplicitForceableBitKhr
-  Disjoint as DisjointBitKhr
-  CositedChromaSamples as CositedChromaSamplesBitKhr
+  midpointChromaSamples as midpointChromaSamplesKhr
+  sampledImageYcbcrConversionLinearFilter as sampledImageYcbcrConversionLinearFilterKhr
+  sampledImageYcbcrConversionSeparateReconstructionFilter as sampledImageYcbcrConversionSeparateReconstructionFilterKhr
+  sampledImageYcbcrConversionChromaReconstructionExplicit as sampledImageYcbcrConversionChromaReconstructionExplicitKhr
+  sampledImageYcbcrConversionChromaReconstructionExplicitForceable as sampledImageYcbcrConversionChromaReconstructionExplicitForceableKhr
+  disjoint as disjointKhr
+  cositedChromaSamples as cositedChromaSamplesKhr
 
 StructureType.defineAliases:
-  SamplerYcbcrConversionCreateInfo as SamplerYcbcrConversionCreateInfoKhr
-  SamplerYcbcrConversionInfo as SamplerYcbcrConversionInfoKhr
-  BindImagePlaneMemoryInfo as BindImagePlaneMemoryInfoKhr
-  ImagePlaneMemoryRequirementsInfo as ImagePlaneMemoryRequirementsInfoKhr
-  PhysicalDeviceSamplerYcbcrConversionFeatures as PhysicalDeviceSamplerYcbcrConversionFeaturesKhr
-  SamplerYcbcrConversionImageFormatProperties as SamplerYcbcrConversionImageFormatPropertiesKhr
+  samplerYcbcrConversionCreateInfo as samplerYcbcrConversionCreateInfoKhr
+  samplerYcbcrConversionInfo as samplerYcbcrConversionInfoKhr
+  bindImagePlaneMemoryInfo as bindImagePlaneMemoryInfoKhr
+  imagePlaneMemoryRequirementsInfo as imagePlaneMemoryRequirementsInfoKhr
+  physicalDeviceSamplerYcbcrConversionFeatures as physicalDeviceSamplerYcbcrConversionFeaturesKhr
+  samplerYcbcrConversionImageFormatProperties as samplerYcbcrConversionImageFormatPropertiesKhr
 
 ChromaLocation.defineAliases:
-  CositedEven as CositedEvenKhr
-  Midpoint as MidpointKhr
+  cositedEven as cositedEvenKhr
+  midpoint as midpointKhr
 
 ImageCreateFlagBits.defineAliases:
-  Disjoint as DisjointBitKhr
+  disjoint as disjointKhr
 
 SamplerYcbcrRange.defineAliases:
-  ItuFull as ItuFullKhr
-  ItuNarrow as ItuNarrowKhr
+  ituFull as ituFullKhr
+  ituNarrow as ituNarrowKhr
 
 ImageAspectFlagBits.defineAliases:
-  Plane0 as Plane0BitKhr
-  Plane1 as Plane1BitKhr
-  Plane2 as Plane2BitKhr
+  plane0 as plane0Khr
+  plane1 as plane1Khr
+  plane2 as plane2Khr
 
 proc loadVK_KHR_sampler_ycbcr_conversion*(instance: Instance) =
   instance.defineLoader(`<<`)

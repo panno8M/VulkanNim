@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_KHR_8bit_storage
 # =================================
 
@@ -16,5 +16,6 @@ type
   PhysicalDevice8BitStorageFeaturesKHR* = object
 
 StructureType.defineAliases:
-  PhysicalDevice8bitStorageFeatures as PhysicalDevice8bitStorageFeaturesKhr
+  physicalDevice8bitStorageFeatures as physicalDevice8bitStorageFeaturesKhr
+
 

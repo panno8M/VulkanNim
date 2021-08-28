@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_KHR_shader_subgroup_extended_types
 # =====================================
 
@@ -14,5 +14,6 @@ type
   PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR* = object
 
 StructureType.defineAliases:
-  PhysicalDeviceShaderSubgroupExtendedTypesFeatures as PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKhr
+  physicalDeviceShaderSubgroupExtendedTypesFeatures as physicalDeviceShaderSubgroupExtendedTypesFeaturesKhr
+
 

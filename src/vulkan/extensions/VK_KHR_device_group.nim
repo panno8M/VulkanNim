@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_device_group
 # =================================
 
@@ -15,9 +15,9 @@ const
 
 type
   {name}* = {Alias}
-  PeerMemoryFeatureFlagBitsKHR* = UnusedEnum
+  PeerMemoryFeatureFlagBitsKHR* = distinct UnusedEnum
   {name}* = {Alias}
-  MemoryAllocateFlagBitsKHR* = UnusedEnum
+  MemoryAllocateFlagBitsKHR* = distinct UnusedEnum
   MemoryAllocateFlagsInfoKHR* = object
   DeviceGroupRenderPassBeginInfoKHR* = object
   DeviceGroupCommandBufferBeginInfoKHR* = object
@@ -28,11 +28,11 @@ type
   BindImageMemoryDeviceGroupInfoKHR* = object
 
   DeviceGroupPresentModeFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    LocalBitKhr = 0x00000001 # Present from local memory
-    RemoteBitKhr = 0x00000002 # Present from remote memory
-    SumBitKhr = 0x00000004 # Present sum of local and/or remote memory
-    LocalMultiDeviceBitKhr = 0x00000008 # Each physical device presents from local memory
-  DeviceGroupPresentModeFlagsKHR* = distinct Flags
+    localKhr = 0x00000001 # Present from local memory
+    remoteKhr = 0x00000002 # Present from remote memory
+    sumKhr = 0x00000004 # Present sum of local and/or remote memory
+    localMultiDeviceKhr = 0x00000008 # Each physical device presents from local memory
+  DeviceGroupPresentModeFlagsKHR* = Flags[DeviceGroupPresentModeFlagBitsKHR]
   DeviceGroupPresentCapabilitiesKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -75,36 +75,36 @@ const getDeviceGroupPeerMemoryFeaturesKHR* = getDeviceGroupPeerMemoryFeatures
 const cmdSetDeviceMaskKHR* = cmdSetDeviceMask
 const cmdDispatchBaseKHR* = cmdDispatchBase
 DependencyFlagBits.defineAliases:
-  DeviceGroup as DeviceGroupBitKhr
+  deviceGroup as deviceGroupKhr
 
 MemoryAllocateFlagBits.defineAliases:
-  DeviceMask as DeviceMaskBitKhr
+  deviceMask as deviceMaskKhr
 
 StructureType.defineAliases:
-  MemoryAllocateFlagsInfo as MemoryAllocateFlagsInfoKhr
-  DeviceGroupRenderPassBeginInfo as DeviceGroupRenderPassBeginInfoKhr
-  DeviceGroupCommandBufferBeginInfo as DeviceGroupCommandBufferBeginInfoKhr
-  DeviceGroupSubmitInfo as DeviceGroupSubmitInfoKhr
-  DeviceGroupBindSparseInfo as DeviceGroupBindSparseInfoKhr
+  memoryAllocateFlagsInfo as memoryAllocateFlagsInfoKhr
+  deviceGroupRenderPassBeginInfo as deviceGroupRenderPassBeginInfoKhr
+  deviceGroupCommandBufferBeginInfo as deviceGroupCommandBufferBeginInfoKhr
+  deviceGroupSubmitInfo as deviceGroupSubmitInfoKhr
+  deviceGroupBindSparseInfo as deviceGroupBindSparseInfoKhr
 
 PeerMemoryFeatureFlagBits.defineAliases:
-  CopySrc as CopySrcBitKhr
-  CopyDst as CopyDstBitKhr
-  GenericSrc as GenericSrcBitKhr
-  GenericDst as GenericDstBitKhr
+  copySrc as copySrcKhr
+  copyDst as copyDstKhr
+  genericSrc as genericSrcKhr
+  genericDst as genericDstKhr
 
 PipelineCreateFlagBits.defineAliases:
-  ViewIndexFromDeviceIndex as ViewIndexFromDeviceIndexBitKhr
-  DispatchBase as DispatchBaseKhr
+  viewIndexFromDeviceIndex as viewIndexFromDeviceIndexKhr
+  dispatchBase as dispatchBaseKhr
 
 
 
 StructureType.defineAliases:
-  BindBufferMemoryDeviceGroupInfo as BindBufferMemoryDeviceGroupInfoKhr
-  BindImageMemoryDeviceGroupInfo as BindImageMemoryDeviceGroupInfoKhr
+  bindBufferMemoryDeviceGroupInfo as bindBufferMemoryDeviceGroupInfoKhr
+  bindImageMemoryDeviceGroupInfo as bindImageMemoryDeviceGroupInfoKhr
 
 ImageCreateFlagBits.defineAliases:
-  SplitInstanceBindRegions as SplitInstanceBindRegionsBitKhr
+  splitInstanceBindRegions as splitInstanceBindRegionsKhr
 
 
 

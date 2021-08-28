@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_EXT_display_control
 # =================================
 
@@ -14,13 +14,13 @@ const
 
 type
   DisplayPowerStateEXT* {.size: sizeof(int32), pure.} = enum
-    OffExt = 0
-    SuspendExt = 1
-    OnExt = 2
+    offExt = 0
+    suspendExt = 1
+    onExt = 2
   DeviceEventTypeEXT* {.size: sizeof(int32), pure.} = enum
-    DisplayHotplugExt = 0
+    displayHotplugExt = 0
   DisplayEventTypeEXT* {.size: sizeof(int32), pure.} = enum
-    FirstPixelOutExt = 0
+    firstPixelOutExt = 0
   DisplayPowerInfoEXT* = object
     sType*: StructureType
     pNext*: pointer

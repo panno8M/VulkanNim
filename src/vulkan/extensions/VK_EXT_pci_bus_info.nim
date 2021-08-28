@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_EXT_pci_bus_info
 # =================================
 
@@ -19,5 +19,6 @@ type
     pciBus*: uint32
     pciDevice*: uint32
     pciFunction*: uint32
+
 
 

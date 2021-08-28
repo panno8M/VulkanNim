@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_KHR_separate_depth_stencil_layouts
 # =====================================
 
@@ -18,13 +18,14 @@ type
   AttachmentDescriptionStencilLayoutKHR* = object
 
 StructureType.defineAliases:
-  PhysicalDeviceSeparateDepthStencilLayoutsFeatures as PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKhr
-  AttachmentReferenceStencilLayout as AttachmentReferenceStencilLayoutKhr
-  AttachmentDescriptionStencilLayout as AttachmentDescriptionStencilLayoutKhr
+  physicalDeviceSeparateDepthStencilLayoutsFeatures as physicalDeviceSeparateDepthStencilLayoutsFeaturesKhr
+  attachmentReferenceStencilLayout as attachmentReferenceStencilLayoutKhr
+  attachmentDescriptionStencilLayout as attachmentDescriptionStencilLayoutKhr
 
 ImageLayout.defineAliases:
-  DepthAttachmentOptimal as DepthAttachmentOptimalKhr
-  DepthReadOnlyOptimal as DepthReadOnlyOptimalKhr
-  StencilAttachmentOptimal as StencilAttachmentOptimalKhr
-  StencilReadOnlyOptimal as StencilReadOnlyOptimalKhr
+  depthAttachmentOptimal as depthAttachmentOptimalKhr
+  depthReadOnlyOptimal as depthReadOnlyOptimalKhr
+  stencilAttachmentOptimal as stencilAttachmentOptimalKhr
+  stencilReadOnlyOptimal as stencilReadOnlyOptimalKhr
+
 

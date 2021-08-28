@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_create_renderpass2
 # =================================
 
@@ -31,13 +31,13 @@ const cmdBeginRenderPass2KHR* = cmdBeginRenderPass2
 const cmdNextSubpass2KHR* = cmdNextSubpass2
 const cmdEndRenderPass2KHR* = cmdEndRenderPass2
 StructureType.defineAliases:
-  AttachmentDescription2 as AttachmentDescription2Khr
-  AttachmentReference2 as AttachmentReference2Khr
-  SubpassDescription2 as SubpassDescription2Khr
-  SubpassDependency2 as SubpassDependency2Khr
-  RenderPassCreateInfo2 as RenderPassCreateInfo2Khr
-  SubpassBeginInfo as SubpassBeginInfoKhr
-  SubpassEndInfo as SubpassEndInfoKhr
+  attachmentDescription2 as attachmentDescription2Khr
+  attachmentReference2 as attachmentReference2Khr
+  subpassDescription2 as subpassDescription2Khr
+  subpassDependency2 as subpassDependency2Khr
+  renderPassCreateInfo2 as renderPassCreateInfo2Khr
+  subpassBeginInfo as subpassBeginInfoKhr
+  subpassEndInfo as subpassEndInfoKhr
 
 proc loadVK_KHR_create_renderpass2*(instance: Instance) =
   instance.defineLoader(`<<`)

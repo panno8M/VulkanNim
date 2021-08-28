@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_NV_device_diagnostics_config
 # =================================
 
@@ -20,10 +20,11 @@ type
     sType*: StructureType
     pNext*: pointer
     flags*: DeviceDiagnosticsConfigFlagsNV
-  DeviceDiagnosticsConfigFlagsNV* = distinct Flags
+  DeviceDiagnosticsConfigFlagsNV* = Flags[DeviceDiagnosticsConfigFlagBitsNV]
   DeviceDiagnosticsConfigFlagBitsNV* {.size: sizeof(int32), pure.} = enum
-    EnableShaderDebugInfoBitNv = 0x00000001
-    EnableResourceTrackingBitNv = 0x00000002
-    EnableAutomaticCheckpointsBitNv = 0x00000004
+    enableShaderDebugInfoNv = 0x00000001
+    enableResourceTrackingNv = 0x00000002
+    enableAutomaticCheckpointsNv = 0x00000004
+
 
 

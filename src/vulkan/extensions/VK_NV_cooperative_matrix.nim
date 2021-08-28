@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_NV_cooperative_matrix
 # =================================
 
@@ -24,22 +24,22 @@ type
     DType*: ComponentTypeNV
     scope*: ScopeNV
   ScopeNV* {.size: sizeof(int32), pure.} = enum
-    DeviceNv = 1
-    WorkgroupNv = 2
-    SubgroupNv = 3
-    QueueFamilyNv = 5
+    deviceNv = 1
+    workgroupNv = 2
+    subgroupNv = 3
+    queueFamilyNv = 5
   ComponentTypeNV* {.size: sizeof(int32), pure.} = enum
-    Float16Nv = 0
-    Float32Nv = 1
-    Float64Nv = 2
-    Sint8Nv = 3
-    Sint16Nv = 4
-    Sint32Nv = 5
-    Sint64Nv = 6
-    Uint8Nv = 7
-    Uint16Nv = 8
-    Uint32Nv = 9
-    Uint64Nv = 10
+    float16Nv = 0
+    float32Nv = 1
+    float64Nv = 2
+    sint8Nv = 3
+    sint16Nv = 4
+    sint32Nv = 5
+    sint64Nv = 6
+    uint8Nv = 7
+    uint16Nv = 8
+    uint32Nv = 9
+    uint64Nv = 10
   PhysicalDeviceCooperativeMatrixFeaturesNV* = object
     sType*: StructureType
     pNext*: pointer

@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_EXT_discard_rectangles
 # =================================
 
@@ -23,10 +23,10 @@ type
     discardRectangleMode*: DiscardRectangleModeEXT
     discardRectangleCount*: uint32
     pDiscardRectangles*: ptr Rect2D
-  PipelineDiscardRectangleStateCreateFlagsEXT* = distinct Flags
+  PipelineDiscardRectangleStateCreateFlagsEXT* = Flags[distinct UnusedEnum]
   DiscardRectangleModeEXT* {.size: sizeof(int32), pure.} = enum
-    InclusiveExt = 0
-    ExclusiveExt = 1
+    inclusiveExt = 0
+    exclusiveExt = 1
 
 var # commands
   cmdSetDiscardRectangleEXTCage: proc(commandBuffer: CommandBuffer; firstDiscardRectangle: uint32; discardRectangleCount: uint32; pDiscardRectangles: ptr Rect2D;): void {.cdecl.}

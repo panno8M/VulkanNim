@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_NV_coverage_reduction_mode
 # =================================
 
@@ -21,10 +21,10 @@ type
     pNext*: pointer
     flags*: PipelineCoverageReductionStateCreateFlagsNV
     coverageReductionMode*: CoverageReductionModeNV
-  PipelineCoverageReductionStateCreateFlagsNV* = distinct Flags
+  PipelineCoverageReductionStateCreateFlagsNV* = Flags[distinct UnusedEnum]
   CoverageReductionModeNV* {.size: sizeof(int32), pure.} = enum
-    MergeNv = 0
-    TruncateNv = 1
+    mergeNv = 0
+    truncateNv = 1
   FramebufferMixedSamplesCombinationNV* = object
     sType*: StructureType
     pNext*: pointer

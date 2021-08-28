@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_multiview
 # =================================
 
@@ -17,10 +17,11 @@ type
   PhysicalDeviceMultiviewPropertiesKHR* = object
 
 DependencyFlagBits.defineAliases:
-  ViewLocal as ViewLocalBitKhr
+  viewLocal as viewLocalKhr
 
 StructureType.defineAliases:
-  RenderPassMultiviewCreateInfo as RenderPassMultiviewCreateInfoKhr
-  PhysicalDeviceMultiviewFeatures as PhysicalDeviceMultiviewFeaturesKhr
-  PhysicalDeviceMultiviewProperties as PhysicalDeviceMultiviewPropertiesKhr
+  renderPassMultiviewCreateInfo as renderPassMultiviewCreateInfoKhr
+  physicalDeviceMultiviewFeatures as physicalDeviceMultiviewFeaturesKhr
+  physicalDeviceMultiviewProperties as physicalDeviceMultiviewPropertiesKhr
+
 

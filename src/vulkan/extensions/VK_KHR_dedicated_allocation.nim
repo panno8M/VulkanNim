@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_dedicated_allocation
 # =================================
 
@@ -16,6 +16,7 @@ type
   MemoryDedicatedAllocateInfoKHR* = object
 
 StructureType.defineAliases:
-  MemoryDedicatedRequirements as MemoryDedicatedRequirementsKhr
-  MemoryDedicatedAllocateInfo as MemoryDedicatedAllocateInfoKhr
+  memoryDedicatedRequirements as memoryDedicatedRequirementsKhr
+  memoryDedicatedAllocateInfo as memoryDedicatedAllocateInfoKhr
+
 

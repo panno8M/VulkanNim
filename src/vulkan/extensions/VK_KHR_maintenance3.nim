@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_KHR_maintenance3
 # =================================
 
@@ -19,8 +19,8 @@ var # commands
   
 const getDescriptorSetLayoutSupportKHR* = getDescriptorSetLayoutSupport
 StructureType.defineAliases:
-  PhysicalDeviceMaintenance3Properties as PhysicalDeviceMaintenance3PropertiesKhr
-  DescriptorSetLayoutSupport as DescriptorSetLayoutSupportKhr
+  physicalDeviceMaintenance3Properties as physicalDeviceMaintenance3PropertiesKhr
+  descriptorSetLayoutSupport as descriptorSetLayoutSupportKhr
 
 proc loadVK_KHR_maintenance3*(instance: Instance) =
   instance.defineLoader(`<<`)

@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_maintenance1
 # =================================
 
@@ -17,14 +17,14 @@ var # commands
   
 const trimCommandPoolKHR* = trimCommandPool
 Result.defineAliases:
-  ErrorOutOfPoolMemory as ErrorOutOfPoolMemoryKhr
+  errorOutOfPoolMemory as errorOutOfPoolMemoryKhr
 
 FormatFeatureFlagBits.defineAliases:
-  TransferSrc as TransferSrcBitKhr
-  TransferDst as TransferDstBitKhr
+  transferSrc as transferSrcKhr
+  transferDst as transferDstKhr
 
 ImageCreateFlagBits.defineAliases:
-  Vk2dArrayCompatible as Vk2dArrayCompatibleBitKhr
+  vk2dArrayCompatible as vk2dArrayCompatibleKhr
 
 proc loadVK_KHR_maintenance1*(instance: Instance) =
   instance.defineLoader(`<<`)

@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_FUCHSIA_imagepipe_surface
 # =================================
 
@@ -12,7 +12,7 @@ const
   FuchsiaImagepipeSurfaceExtensionName* = "VK_FUCHSIA_imagepipe_surface"
 
 type
-  ImagePipeSurfaceCreateFlagsFUCHSIA* = distinct Flags
+  ImagePipeSurfaceCreateFlagsFUCHSIA* = Flags[distinct UnusedEnum]
   ImagePipeSurfaceCreateInfoFUCHSIA* = object
     sType*: StructureType
     pNext*: pointer

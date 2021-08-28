@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_INTEL_performance_query
 # =================================
 
@@ -12,21 +12,21 @@ const
 
 type
   PerformanceConfigurationTypeINTEL* {.size: sizeof(int32), pure.} = enum
-    CommandQueueMetricsDiscoveryActivatedIntel = 0
+    commandQueueMetricsDiscoveryActivatedIntel = 0
   QueryPoolSamplingModeINTEL* {.size: sizeof(int32), pure.} = enum
-    ManualIntel = 0
+    manualIntel = 0
   PerformanceOverrideTypeINTEL* {.size: sizeof(int32), pure.} = enum
-    NullHardwareIntel = 0
-    FlushGpuCachesIntel = 1
+    nullHardwareIntel = 0
+    flushGpuCachesIntel = 1
   PerformanceParameterTypeINTEL* {.size: sizeof(int32), pure.} = enum
-    HwCountersSupportedIntel = 0
-    StreamMarkerValidBitsIntel = 1
+    hwCountersSupportedIntel = 0
+    streamMarkerValidsIntel = 1
   PerformanceValueTypeINTEL* {.size: sizeof(int32), pure.} = enum
-    Uint32Intel = 0
-    Uint64Intel = 1
-    FloatIntel = 2
-    BoolIntel = 3
-    StringIntel = 4
+    uint32Intel = 0
+    uint64Intel = 1
+    floatIntel = 2
+    boolIntel = 3
+    stringIntel = 4
   PerformanceValueDataINTEL* {.union.} = object
     value32*: uint32
     value64*: uint64
@@ -122,7 +122,7 @@ proc getPerformanceParameterINTEL*(
     ): Result {.cdecl, discardable.} =
   getPerformanceParameterINTELCage(device,parameter,pValue)
 StructureType.defineAliases:
-  QueryPoolPerformanceQueryCreateInfoIntel as QueryPoolCreateInfoIntel
+  queryPoolPerformanceQueryCreateInfoIntel as queryPoolCreateInfoIntel
 
 proc loadVK_INTEL_performance_query*(instance: Instance) =
   instance.defineLoader(`<<`)

@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T04:06:29Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_EXT_metal_surface
 # =================================
 
@@ -15,7 +15,7 @@ const
   ExtMetalSurfaceExtensionName* = "VK_EXT_metal_surface"
 
 type
-  MetalSurfaceCreateFlagsEXT* = distinct Flags
+  MetalSurfaceCreateFlagsEXT* = Flags[distinct UnusedEnum]
   MetalSurfaceCreateInfoEXT* = object
     sType*: StructureType
     pNext*: pointer

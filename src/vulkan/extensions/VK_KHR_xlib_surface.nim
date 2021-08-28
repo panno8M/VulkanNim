@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_xlib_surface
 # =================================
 
@@ -12,7 +12,7 @@ const
   KhrXlibSurfaceExtensionName* = "VK_KHR_xlib_surface"
 
 type
-  XlibSurfaceCreateFlagsKHR* = distinct Flags
+  XlibSurfaceCreateFlagsKHR* = Flags[distinct UnusedEnum]
   XlibSurfaceCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer

@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_xcb_surface
 # =================================
 
@@ -12,7 +12,7 @@ const
   KhrXcbSurfaceExtensionName* = "VK_KHR_xcb_surface"
 
 type
-  XcbSurfaceCreateFlagsKHR* = distinct Flags
+  XcbSurfaceCreateFlagsKHR* = Flags[distinct UnusedEnum]
   XcbSurfaceCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer

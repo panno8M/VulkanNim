@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_external_fence_capabilities
 # ==================================
 
@@ -14,9 +14,9 @@ const
 
 type
   {name}* = {Alias}
-  ExternalFenceHandleTypeFlagBitsKHR* = UnusedEnum
+  ExternalFenceHandleTypeFlagBitsKHR* = distinct UnusedEnum
   {name}* = {Alias}
-  ExternalFenceFeatureFlagBitsKHR* = UnusedEnum
+  ExternalFenceFeatureFlagBitsKHR* = distinct UnusedEnum
   PhysicalDeviceExternalFenceInfoKHR* = object
   ExternalFencePropertiesKHR* = object
   PhysicalDeviceIDPropertiesKHR* = object
@@ -25,19 +25,19 @@ var # commands
   
 const getPhysicalDeviceExternalFencePropertiesKHR* = getPhysicalDeviceExternalFenceProperties
 StructureType.defineAliases:
-  PhysicalDeviceExternalFenceInfo as PhysicalDeviceExternalFenceInfoKhr
-  ExternalFenceProperties as ExternalFencePropertiesKhr
-  PhysicalDeviceIdProperties as PhysicalDeviceIdPropertiesKhr
+  physicalDeviceExternalFenceInfo as physicalDeviceExternalFenceInfoKhr
+  externalFenceProperties as externalFencePropertiesKhr
+  physicalDeviceIdProperties as physicalDeviceIdPropertiesKhr
 
 ExternalFenceHandleTypeFlagBits.defineAliases:
-  OpaqueFd as OpaqueFdBitKhr
-  OpaqueWin32 as OpaqueWin32BitKhr
-  OpaqueWin32Kmt as OpaqueWin32KmtBitKhr
-  SyncFd as SyncFdBitKhr
+  opaqueFd as opaqueFdKhr
+  opaqueWin32 as opaqueWin32Khr
+  opaqueWin32Kmt as opaqueWin32KmtKhr
+  syncFd as syncFdKhr
 
 ExternalFenceFeatureFlagBits.defineAliases:
-  Exportable as ExportableBitKhr
-  Importable as ImportableBitKhr
+  exportable as exportableKhr
+  importable as importableKhr
 
 proc loadVK_KHR_external_fence_capabilities*(instance: Instance) =
   instance.defineLoader(`<<`)

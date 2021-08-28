@@ -7,7 +7,6 @@ import tables
 import logging
 import times
 import options
-import streams
 
 import ./utils
 import ./nodedefs
@@ -50,6 +49,8 @@ proc generate*() =
           fileName: fileName[name],
           dependencies: dependencies[name]
         )
+    if libFile.fileName == "vk10":
+      libFile.fileFooter = "src/vulkan/generator/bitmaskOperations.nim".readFile
 
     headerComment &= "Generated at {now().utc()}\n".fmt
     headerComment &= "{api} {number}".fmt

@@ -26,6 +26,7 @@ type
 
   LibFile* = ref object
     fileHeader*: string
+    fileFooter*: string
     fileName*: string
     dependencies*: seq[tuple[fileName: string; exportIt: bool]]
     requires*: seq[NodeRequire]

@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_EXT_custom_border_color
 # =================================
 
@@ -25,5 +25,6 @@ type
     pNext*: pointer
     customBorderColors*: Bool32
     customBorderColorWithoutFormat*: Bool32
+
 
 

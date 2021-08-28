@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T23:50:22Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_EXT_debug_utils
 # =================================
 
@@ -23,16 +23,16 @@ type
     pLabelName*: cstring
     color*: array[4, float32]
   DebugUtilsMessageSeverityFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
-    VerboseBitExt = 0x00000001
-    InfoBitExt = 0x00000010
-    WarningBitExt = 0x00000100
-    ErrorBitExt = 0x00001000
-  DebugUtilsMessageSeverityFlagsEXT* = distinct Flags
+    verboseExt = 0x00000001
+    infoExt = 0x00000010
+    warningExt = 0x00000100
+    errorExt = 0x00001000
+  DebugUtilsMessageSeverityFlagsEXT* = Flags[DebugUtilsMessageSeverityFlagBitsEXT]
   DebugUtilsMessageTypeFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
-    GeneralBitExt = 0x00000001
-    ValidationBitExt = 0x00000002
-    PerformanceBitExt = 0x00000004
-  DebugUtilsMessageTypeFlagsEXT* = distinct Flags
+    generalExt = 0x00000001
+    validationExt = 0x00000002
+    performanceExt = 0x00000004
+  DebugUtilsMessageTypeFlagsEXT* = Flags[DebugUtilsMessageTypeFlagBitsEXT]
   DebugUtilsMessengerCallbackDataEXT* = object
     sType*: StructureType
     pNext*: pointer
@@ -46,8 +46,8 @@ type
     pCmdBufLabels*: ptr DebugUtilsLabelEXT
     objectCount*: uint32
     pObjects*: ptr DebugUtilsObjectNameInfoEXT
-  DebugUtilsMessengerCallbackDataFlagsEXT* = distinct Flags
-  DebugUtilsMessengerCreateFlagsEXT* = distinct Flags
+  DebugUtilsMessengerCallbackDataFlagsEXT* = Flags[distinct UnusedEnum]
+  DebugUtilsMessengerCreateFlagsEXT* = Flags[distinct UnusedEnum]
   DebugUtilsMessengerCreateInfoEXT* = object
     sType*: StructureType
     pNext*: pointer

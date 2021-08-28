@@ -205,7 +205,14 @@ proc parseEnumValue*(str: string; enumsName: string; vendorTags: VendorTags): st
       result = &"Vk{result}"
   except: return
 
-  result.removeSuffix("Bit")
+  result = result.toLowerInitial.replace("Bit", "")
+
+  return case result
+  of "object": "`object`"
+  of "and": "`and`"
+  of "xor": "`xor`"
+  of "or": "`or`"
+  else: result
 
 proc replaceBasicTypes*(str: string): string =
   str

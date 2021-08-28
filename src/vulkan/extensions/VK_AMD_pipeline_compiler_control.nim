@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_AMD_pipeline_compiler_control
 # =================================
 
@@ -11,11 +11,12 @@ const
   AmdPipelineCompilerControlExtensionName* = "VK_AMD_pipeline_compiler_control"
 
 type
-  PipelineCompilerControlFlagBitsAMD* = UnusedEnum
-  PipelineCompilerControlFlagsAMD* = distinct Flags
+  PipelineCompilerControlFlagBitsAMD* = distinct UnusedEnum
+  PipelineCompilerControlFlagsAMD* = Flags[PipelineCompilerControlFlagBitsAMD]
   PipelineCompilerControlCreateInfoAMD* = object
     sType*: StructureType
     pNext*: pointer
     compilerControlFlags*: PipelineCompilerControlFlagsAMD
+
 
 

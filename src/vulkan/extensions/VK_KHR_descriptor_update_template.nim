@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_descriptor_update_template
 # =================================
 
@@ -15,7 +15,7 @@ const
 type
   DescriptorUpdateTemplateKHR* = DescriptorUpdateTemplate
   {name}* = {Alias}
-  DescriptorUpdateTemplateTypeKHR* = UnusedEnum
+  DescriptorUpdateTemplateTypeKHR* = distinct UnusedEnum
   DescriptorUpdateTemplateEntryKHR* = object
   DescriptorUpdateTemplateCreateInfoKHR* = object
 
@@ -27,13 +27,13 @@ const createDescriptorUpdateTemplateKHR* = createDescriptorUpdateTemplate
 const destroyDescriptorUpdateTemplateKHR* = destroyDescriptorUpdateTemplate
 const updateDescriptorSetWithTemplateKHR* = updateDescriptorSetWithTemplate
 ObjectType.defineAliases:
-  DescriptorUpdateTemplate as DescriptorUpdateTemplateKhr
+  descriptorUpdateTemplate as descriptorUpdateTemplateKhr
 
 StructureType.defineAliases:
-  DescriptorUpdateTemplateCreateInfo as DescriptorUpdateTemplateCreateInfoKhr
+  descriptorUpdateTemplateCreateInfo as descriptorUpdateTemplateCreateInfoKhr
 
 DescriptorUpdateTemplateType.defineAliases:
-  DescriptorSet as DescriptorSetKhr
+  descriptorSet as descriptorSetKhr
 
 
 
@@ -50,7 +50,7 @@ proc cmdPushDescriptorSetWithTemplateKHR*(
 
 
 DebugReportObjectTypeEXT.defineAliases:
-  DescriptorUpdateTemplateExt as DescriptorUpdateTemplateKhrExt
+  descriptorUpdateTemplateExt as descriptorUpdateTemplateKhrExt
 
 proc loadVK_KHR_descriptor_update_template*(instance: Instance) =
   instance.defineLoader(`<<`)

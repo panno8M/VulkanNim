@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_KHR_pipeline_executable_properties
 # =====================================
 
@@ -34,10 +34,10 @@ type
     pipeline*: Pipeline
     executableIndex*: uint32
   PipelineExecutableStatisticFormatKHR* {.size: sizeof(int32), pure.} = enum
-    Bool32Khr = 0
-    Int64Khr = 1
-    Uint64Khr = 2
-    Float64Khr = 3
+    bool32Khr = 0
+    int64Khr = 1
+    uint64Khr = 2
+    float64Khr = 3
   PipelineExecutableStatisticValueKHR* {.union.} = object
     b32*: Bool32
     i64*: int64

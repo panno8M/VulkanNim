@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_EXT_debug_marker
 # =================================
 
@@ -13,44 +13,44 @@ const
 
 type
   DebugReportObjectTypeEXT* {.size: sizeof(int32), pure.} = enum
-    UnknownExt = 0
-    InstanceExt = 1
-    PhysicalDeviceExt = 2
-    DeviceExt = 3
-    QueueExt = 4
-    SemaphoreExt = 5
-    CommandBufferExt = 6
-    FenceExt = 7
-    DeviceMemoryExt = 8
-    BufferExt = 9
-    ImageExt = 10
-    EventExt = 11
-    QueryPoolExt = 12
-    BufferViewExt = 13
-    ImageViewExt = 14
-    ShaderModuleExt = 15
-    PipelineCacheExt = 16
-    PipelineLayoutExt = 17
-    RenderPassExt = 18
-    PipelineExt = 19
-    DescriptorSetLayoutExt = 20
-    SamplerExt = 21
-    DescriptorPoolExt = 22
-    DescriptorSetExt = 23
-    FramebufferExt = 24
-    CommandPoolExt = 25
-    SurfaceKhrExt = 26
-    SwapchainKhrExt = 27
-    DebugReportCallbackExtExt = 28
-    DisplayKhrExt = 29
-    DisplayModeKhrExt = 30
-    ValidationCacheExtExt = 33
+    unknownExt = 0
+    instanceExt = 1
+    physicalDeviceExt = 2
+    deviceExt = 3
+    queueExt = 4
+    semaphoreExt = 5
+    commandBufferExt = 6
+    fenceExt = 7
+    deviceMemoryExt = 8
+    bufferExt = 9
+    imageExt = 10
+    eventExt = 11
+    queryPoolExt = 12
+    bufferViewExt = 13
+    imageViewExt = 14
+    shaderModuleExt = 15
+    pipelineCacheExt = 16
+    pipelineLayoutExt = 17
+    renderPassExt = 18
+    pipelineExt = 19
+    descriptorSetLayoutExt = 20
+    samplerExt = 21
+    descriptorPoolExt = 22
+    descriptorSetExt = 23
+    framebufferExt = 24
+    commandPoolExt = 25
+    surfaceKhrExt = 26
+    swapchainKhrExt = 27
+    debugReportCallbackExtExt = 28
+    displayKhrExt = 29
+    displayModeKhrExt = 30
+    validationCacheExtExt = 33
     # Provided by VK_EXT_debug_report
-    DescriptorUpdateTemplateExt = 100000850000
+    descriptorUpdateTemplateExt = 100000850000
     # Provided by VK_EXT_debug_report
-    SamplerYcbcrConversionExt = 100001560000
+    samplerYcbcrConversionExt = 100001560000
     # Provided by VK_KHR_ray_tracing
-    AccelerationStructureKhrExt = 100001650000
+    accelerationStructureKhrExt = 100001650000
   DebugMarkerObjectNameInfoEXT* = object
     sType*: StructureType
     pNext*: pointer
@@ -72,8 +72,8 @@ type
     color*: array[4, float32]
 
 DebugReportObjectTypeEXT.defineAliases:
-  DebugReportCallbackExtExt as DebugReportExt # Backwards-compatible alias containing a typo
-  ValidationCacheExtExt as ValidationCacheExt # Backwards-compatible alias containing a typo
+  debugReportCallbackExtExt as debugReportExt # Backwards-compatible alias containing a typo
+  validationCacheExtExt as validationCacheExt # Backwards-compatible alias containing a typo
 
 var # commands
   debugMarkerSetObjectTagEXTCage: proc(device: Device; pTagInfo: ptr DebugMarkerObjectTagInfoEXT;): Result {.cdecl.}

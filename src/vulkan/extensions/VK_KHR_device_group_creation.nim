@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_KHR_device_group_creation
 # =================================
 
@@ -19,11 +19,11 @@ var # commands
   
 const enumeratePhysicalDeviceGroupsKHR* = enumeratePhysicalDeviceGroups
 StructureType.defineAliases:
-  PhysicalDeviceGroupProperties as PhysicalDeviceGroupPropertiesKhr
-  DeviceGroupDeviceCreateInfo as DeviceGroupDeviceCreateInfoKhr
+  physicalDeviceGroupProperties as physicalDeviceGroupPropertiesKhr
+  deviceGroupDeviceCreateInfo as deviceGroupDeviceCreateInfoKhr
 
 MemoryHeapFlagBits.defineAliases:
-  MultiInstance as MultiInstanceBitKhr
+  multiInstance as multiInstanceKhr
 
 proc loadVK_KHR_device_group_creation*(instance: Instance) =
   instance.defineLoader(`<<`)

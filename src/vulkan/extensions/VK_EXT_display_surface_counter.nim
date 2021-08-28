@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T00:52:26Z
+# Generated at 2021-08-28T12:28:00Z
 # VK_EXT_display_surface_counter
 # =================================
 
@@ -12,9 +12,9 @@ const
   ExtDisplaySurfaceCounterExtensionName* = "VK_EXT_display_surface_counter"
 
 type
-  SurfaceCounterFlagsEXT* = distinct Flags
+  SurfaceCounterFlagsEXT* = Flags[SurfaceCounterFlagBitsEXT]
   SurfaceCounterFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
-    VblankExt = 0x00000001
+    vblankExt = 0x00000001
   SurfaceCapabilities2EXT* = object
     sType*: StructureType
     pNext*: pointer
@@ -39,7 +39,7 @@ proc getPhysicalDeviceSurfaceCapabilities2EXT*(
     ): Result {.cdecl, discardable.} =
   getPhysicalDeviceSurfaceCapabilities2EXTCage(physicalDevice,surface,pSurfaceCapabilities)
 StructureType.defineAliases:
-  SurfaceCapabilities2Ext as SurfaceCapabilities2Ext
+  surfaceCapabilities2Ext as surfaceCapabilities2Ext
 
 proc loadVK_EXT_display_surface_counter*(instance: Instance) =
   instance.defineLoader(`<<`)

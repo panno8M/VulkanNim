@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T12:28:01Z
 # VK_KHR_spirv_1_4
 # =================================
 
@@ -10,5 +10,6 @@ import VK_KHR_shader_float_controls
 const
   KhrSpirv14SpecVersion* = 1
   KhrSpirv14ExtensionName* = "VK_KHR_spirv_1_4"
+
 
 
