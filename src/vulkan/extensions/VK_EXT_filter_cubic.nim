@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_EXT_filter_cubic
 # =================================
 
@@ -21,4 +21,9 @@ type
     filterCubic*: Bool32
     filterCubicMinmax*: Bool32
 
+FormatFeatureFlagBits.defineAliases:
+  SampledImageFilterCubicBitImg as SampledImageFilterCubicBitExt
+
+Filter.defineAliases:
+  CubicImg as CubicExt
 

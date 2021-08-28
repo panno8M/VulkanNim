@@ -383,6 +383,26 @@ proc render*(libFile: LibFile; resources: Resources): string =
               reqDefs[^1].add resources.commands[reqCommand.name].renderAccessor
               renderedNodes.add reqCommand.name
 
+      let reqEnumExts = require.targets.filter(x => x.kind == nkrEnumExtendAlias)
+      let enumAliases = newTable[string, NodeEnumAliases]()
+      for reqEnumExt in reqEnumExts:
+        if enumAliases.hasKey(reqEnumExt.extends):
+          enumAliases[reqEnumExt.extends].aliases.add NodeEnumAlias(
+            name: reqEnumExt.name,
+            alias: reqEnumExt.enumAlias,
+          )
+        else:
+          enumAliases[reqEnumExt.extends] = NodeEnumAliases(
+            name: reqEnumExt.extends,
+            aliases: @[NodeEnumAlias(
+              name: reqEnumExt.name,
+              alias: reqEnumExt.enumAlias,
+            )]
+          )
+      for key, val in enumAliases:
+        reqDefs[^1].add val.render(resources.vendorTags)
+
+
     result &= reqDefs.mapIt(it.join("\n")).filterIt(it.len != 0).join("\n\n\n")
     result.LF
 
@@ -730,7 +750,6 @@ proc extractAllNodeEnumExtensions*(rootXml: XmlNode; resources: var Resources) {
       let bitpos =
         try: some theEnum{"bitpos"}.parseInt
         except: none int
-      let alias = ?theEnum{"alias"}
       if (extnumber.isSome and offset.isSome) or value.isSome or bitpos.isSome:
         var nodeEnumVal = NodeEnumVal(
           name: theEnum.name,
@@ -760,18 +779,6 @@ proc extractAllNodeEnumExtensions*(rootXml: XmlNode; resources: var Resources) {
             resources.enums[nodeEnumVal.extends].enumVals.add nodeEnumVal
           except KeyError:
             xmlError title"@enum extends Extraction >": $theEnum
-      elif alias.isSome:
-        let enumName = theEnum{"extends"}
-        var enumAlias = NodeEnumAlias(
-          name: theEnum.name,
-          alias: theEnum.alias,
-          comment: ?theEnum.comment,
-          isExtended: true,
-          providedBy: enumsRoot.name)
-        try:
-          resources.enumAliases[enumName].aliases.add enumAlias
-        except KeyError:
-          resources.enumAliases[enumName] = NodeEnumAliases(name: enumName, aliases: @[enumAlias])
       else: continue
 
 #!SECTION
@@ -791,7 +798,8 @@ func extractNodeRequire*(typeDef: XmlNode): NodeRequire {.raises: [UnexpectedXml
         of "type":                       nkrType
         of "command":                    nkrCommand
         of "enum":
-          if (?child{"extends"}).isSome: nkrEnumExtend
+          if (?child{"extends"}).isSome and
+             (?child{"alias"}).isSome:   nkrEnumExtendAlias
           elif (?child{"value"}).isSome: nkrConst
           elif (?child{"alias"}).isSome: nkrConstAlias
           else:                          nkrApiConst
@@ -802,6 +810,9 @@ func extractNodeRequire*(typeDef: XmlNode): NodeRequire {.raises: [UnexpectedXml
       result.lastTarget.value = child{"value"}
     of nkrConstAlias:
       result.lastTarget.alias = child{"alias"}
+    of nkrEnumExtendAlias:
+      result.lastTarget.enumAlias = child{"alias"}
+      result.lastTarget.extends = child{"extends"}
     else: discard
 
 proc extractResources*(rootXml: XmlNode): Resources {.raises: [LoggingFailure, Exception].}=

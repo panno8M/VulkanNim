@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_KHR_shader_float_controls
 # =================================
 
@@ -15,4 +15,11 @@ type
   PhysicalDeviceFloatControlsPropertiesKHR* = object
   ShaderFloatControlsIndependenceKHR* = UnusedEnum
 
+StructureType.defineAliases:
+  PhysicalDeviceFloatControlsProperties as PhysicalDeviceFloatControlsPropertiesKhr
+
+ShaderFloatControlsIndependence.defineAliases:
+  Vk32BitOnly as Vk32BitOnlyKhr
+  All as AllKhr
+  None as NoneKhr
 

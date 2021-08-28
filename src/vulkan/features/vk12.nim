@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T05:59:50Z
+# Generated at 2021-08-28T00:52:26Z
 # vulkan 1.2
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -8,10 +8,17 @@ import vk11
 export vk11
 
 const
+  StructureTypePhysicalDeviceVulkan11Features* = 49
+  StructureTypePhysicalDeviceVulkan11Properties* = 50
+  StructureTypePhysicalDeviceVulkan12Features* = 51
+  StructureTypePhysicalDeviceVulkan12Properties* = 52
   UuidSize* = 16
   LuidSize* = 8
   MaxDriverNameSize* = 256
   MaxDriverInfoSize* = 256
+
+  # Promoted from VK_KHR_sampler_mirror_clamp_to_edge (extension 15)
+  SamplerAddressModeMirrorClampToEdge* = 4
 
 type
   PhysicalDeviceVulkan11Features* = object
@@ -649,32 +656,6 @@ proc cmdEndRenderPass2*(
 
 # Promoted from VK_KHR_driver_properties (extension 197)
 # ------------------------------------------------------
-DriverId.defineAliases:
-  # Provided by VK_KHR_driver_properties
-  AmdProprietary as AmdProprietaryKhr
-  # Provided by VK_KHR_driver_properties
-  AmdOpenSource as AmdOpenSourceKhr
-  # Provided by VK_KHR_driver_properties
-  MesaRadv as MesaRadvKhr
-  # Provided by VK_KHR_driver_properties
-  NvidiaProprietary as NvidiaProprietaryKhr
-  # Provided by VK_KHR_driver_properties
-  IntelProprietaryWindows as IntelProprietaryWindowsKhr
-  # Provided by VK_KHR_driver_properties
-  IntelOpenSourceMesa as IntelOpenSourceMesaKhr
-  # Provided by VK_KHR_driver_properties
-  ImaginationProprietary as ImaginationProprietaryKhr
-  # Provided by VK_KHR_driver_properties
-  QualcommProprietary as QualcommProprietaryKhr
-  # Provided by VK_KHR_driver_properties
-  ArmProprietary as ArmProprietaryKhr
-  # Provided by VK_KHR_driver_properties
-  GoogleSwiftshader as GoogleSwiftshaderKhr
-  # Provided by VK_KHR_driver_properties
-  GgpProprietary as GgpProprietaryKhr
-  # Provided by VK_KHR_driver_properties
-  BroadcomProprietary as BroadcomProprietaryKhr
-
 
 
 # Promoted from VK_KHR_shader_atomic_int64 (extension 181)
@@ -687,44 +668,14 @@ DriverId.defineAliases:
 
 # Promoted from VK_KHR_shader_float_controls (extension 198)
 # ----------------------------------------------------------
-ShaderFloatControlsIndependence.defineAliases:
-  # Provided by VK_KHR_shader_float_controls
-  Vk32BitOnly as Vk32BitOnlyKhr
-  # Provided by VK_KHR_shader_float_controls
-  All as AllKhr
-  # Provided by VK_KHR_shader_float_controls
-  None as NoneKhr
-
 
 
 # Promoted from VK_EXT_descriptor_indexing (extension 162)
 # --------------------------------------------------------
-DescriptorBindingFlagBits.defineAliases:
-  # Provided by VK_EXT_descriptor_indexing
-  UpdateAfterBind as UpdateAfterBindBitExt
-  # Provided by VK_EXT_descriptor_indexing
-  UpdateUnusedWhilePending as UpdateUnusedWhilePendingBitExt
-  # Provided by VK_EXT_descriptor_indexing
-  PartiallyBound as PartiallyBoundBitExt
-  # Provided by VK_EXT_descriptor_indexing
-  VariableDescriptorCount as VariableDescriptorCountBitExt
-
 
 
 # Promoted from VK_KHR_depth_stencil_resolve (extension 200)
 # ----------------------------------------------------------
-ResolveModeFlagBits.defineAliases:
-  # Provided by VK_KHR_depth_stencil_resolve
-  None as NoneKhr
-  # Provided by VK_KHR_depth_stencil_resolve
-  SampleZero as SampleZeroBitKhr
-  # Provided by VK_KHR_depth_stencil_resolve
-  Average as AverageBitKhr
-  # Provided by VK_KHR_depth_stencil_resolve
-  Min as MinBitKhr
-  # Provided by VK_KHR_depth_stencil_resolve
-  Max as MaxBitKhr
-
 
 
 # Promoted from VK_EXT_scalar_block_layout (extension 222))
@@ -741,14 +692,6 @@ ResolveModeFlagBits.defineAliases:
 
 # Promoted from VK_EXT_sampler_filter_minmax (extension 131)
 # ----------------------------------------------------------
-SamplerReductionMode.defineAliases:
-  # Provided by VK_EXT_sampler_filter_minmax
-  WeightedAverage as WeightedAverageExt
-  # Provided by VK_EXT_sampler_filter_minmax
-  Min as MinExt
-  # Provided by VK_EXT_sampler_filter_minmax
-  Max as MaxExt
-
 
 
 # Promoted from VK_KHR_vulkan_memory_model (extension 212)
@@ -790,16 +733,6 @@ proc resetQueryPool*(
 
 # Promoted from VK_KHR_timeline_semaphore (extension 208)
 # -------------------------------------------------------
-SemaphoreType.defineAliases:
-  # Provided by VK_KHR_timeline_semaphore
-  Binary as BinaryKhr
-  # Provided by VK_KHR_timeline_semaphore
-  Timeline as TimelineKhr
-
-SemaphoreWaitFlagBits.defineAliases:
-  # Provided by VK_KHR_timeline_semaphore
-  Any as AnyBitKhr
-
 var # commands
   getSemaphoreCounterValueCage: proc(device: Device; semaphore: Semaphore; pValue: ptr uint64;): Result {.cdecl.}
   waitSemaphoresCage: proc(device: Device; pWaitInfo: ptr SemaphoreWaitInfo; timeout: uint64;): Result {.cdecl.}

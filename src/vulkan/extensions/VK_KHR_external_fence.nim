@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_KHR_external_fence
 # =================================
 
@@ -16,4 +16,9 @@ type
   FenceImportFlagBitsKHR* = UnusedEnum
   ExportFenceCreateInfoKHR* = object
 
+StructureType.defineAliases:
+  ExportFenceCreateInfo as ExportFenceCreateInfoKhr
+
+FenceImportFlagBits.defineAliases:
+  Temporary as TemporaryBitKhr
 

@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_EXT_descriptor_indexing
 # =================================
 
@@ -21,4 +21,25 @@ type
   DescriptorBindingFlagBitsEXT* = UnusedEnum
   {name}* = {Alias}
 
+DescriptorPoolCreateFlagBits.defineAliases:
+  UpdateAfterBind as UpdateAfterBindBitExt
+
+Result.defineAliases:
+  ErrorFragmentation as ErrorFragmentationExt
+
+StructureType.defineAliases:
+  DescriptorSetLayoutBindingFlagsCreateInfo as DescriptorSetLayoutBindingFlagsCreateInfoExt
+  PhysicalDeviceDescriptorIndexingFeatures as PhysicalDeviceDescriptorIndexingFeaturesExt
+  PhysicalDeviceDescriptorIndexingProperties as PhysicalDeviceDescriptorIndexingPropertiesExt
+  DescriptorSetVariableDescriptorCountAllocateInfo as DescriptorSetVariableDescriptorCountAllocateInfoExt
+  DescriptorSetVariableDescriptorCountLayoutSupport as DescriptorSetVariableDescriptorCountLayoutSupportExt
+
+DescriptorBindingFlagBits.defineAliases:
+  UpdateAfterBind as UpdateAfterBindBitExt
+  UpdateUnusedWhilePending as UpdateUnusedWhilePendingBitExt
+  PartiallyBound as PartiallyBoundBitExt
+  VariableDescriptorCount as VariableDescriptorCountBitExt
+
+DescriptorSetLayoutCreateFlagBits.defineAliases:
+  UpdateAfterBindPool as UpdateAfterBindPoolBitExt
 

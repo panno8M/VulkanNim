@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_KHR_surface
 # =================================
 
@@ -86,8 +86,6 @@ type
 
 ColorSpaceKHR.defineAliases:
   SrgbNonlinearKhr as ColorspaceSrgbNonlinearKhr # Backwards-compatible alias containing a typo
-  # Provided by VK_EXT_swapchain_colorspace
-  DisplayP3LinearExt as DciP3LinearExt # Deprecated name for backwards compatibility
 
 var # commands
   destroySurfaceKHRCage: proc(instance: Instance; surface: SurfaceKHR; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}

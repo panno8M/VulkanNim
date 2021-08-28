@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_INTEL_performance_query
 # =================================
 
@@ -121,6 +121,9 @@ proc getPerformanceParameterINTEL*(
       pValue: ptr PerformanceValueINTEL;
     ): Result {.cdecl, discardable.} =
   getPerformanceParameterINTELCage(device,parameter,pValue)
+StructureType.defineAliases:
+  QueryPoolPerformanceQueryCreateInfoIntel as QueryPoolCreateInfoIntel
+
 proc loadVK_INTEL_performance_query*(instance: Instance) =
   instance.defineLoader(`<<`)
 

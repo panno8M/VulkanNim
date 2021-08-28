@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_KHR_depth_stencil_resolve
 # =================================
 
@@ -17,4 +17,14 @@ type
   ResolveModeFlagBitsKHR* = UnusedEnum
   {name}* = {Alias}
 
+ResolveModeFlagBits.defineAliases:
+  None as NoneKhr
+  SampleZero as SampleZeroBitKhr
+  Average as AverageBitKhr
+  Min as MinBitKhr
+  Max as MaxBitKhr
+
+StructureType.defineAliases:
+  PhysicalDeviceDepthStencilResolveProperties as PhysicalDeviceDepthStencilResolvePropertiesKhr
+  SubpassDescriptionDepthStencilResolve as SubpassDescriptionDepthStencilResolveKhr
 

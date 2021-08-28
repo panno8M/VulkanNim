@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_EXT_display_surface_counter
 # =================================
 
@@ -38,6 +38,9 @@ proc getPhysicalDeviceSurfaceCapabilities2EXT*(
       pSurfaceCapabilities: ptr SurfaceCapabilities2EXT;
     ): Result {.cdecl, discardable.} =
   getPhysicalDeviceSurfaceCapabilities2EXTCage(physicalDevice,surface,pSurfaceCapabilities)
+StructureType.defineAliases:
+  SurfaceCapabilities2Ext as SurfaceCapabilities2Ext
+
 proc loadVK_EXT_display_surface_counter*(instance: Instance) =
   instance.defineLoader(`<<`)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_EXT_pipeline_creation_cache_control
 # ======================================
 
@@ -16,4 +16,6 @@ type
     pNext*: pointer
     pipelineCreationCacheControl*: Bool32
 
+Result.defineAliases:
+  PipelineCompileRequiredExt as ErrorPipelineCompileRequiredExt
 

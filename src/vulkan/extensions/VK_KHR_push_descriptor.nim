@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_KHR_push_descriptor
 # =================================
 
@@ -10,6 +10,8 @@ import VK_KHR_get_physical_device_properties2
 const
   KhrPushDescriptorSpecVersion* = 2
   KhrPushDescriptorExtensionName* = "VK_KHR_push_descriptor"
+
+  DescriptorUpdateTemplateTypePushDescriptorsKhr* = 1
 
 type
   PhysicalDevicePushDescriptorPropertiesKHR* = object

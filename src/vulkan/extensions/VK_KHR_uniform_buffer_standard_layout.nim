@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_KHR_uniform_buffer_standard_layout
 # =====================================
 
@@ -14,4 +14,6 @@ const
 type
   PhysicalDeviceUniformBufferStandardLayoutFeaturesKHR* = object
 
+StructureType.defineAliases:
+  PhysicalDeviceUniformBufferStandardLayoutFeatures as PhysicalDeviceUniformBufferStandardLayoutFeaturesKhr
 

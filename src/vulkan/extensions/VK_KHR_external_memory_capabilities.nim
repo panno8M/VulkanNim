@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_KHR_external_memory_capabilities
 # ===================================
 
@@ -27,6 +27,27 @@ type
 var # commands
   
 const getPhysicalDeviceExternalBufferPropertiesKHR* = getPhysicalDeviceExternalBufferProperties
+ExternalMemoryFeatureFlagBits.defineAliases:
+  DedicatedOnly as DedicatedOnlyBitKhr
+  Exportable as ExportableBitKhr
+  Importable as ImportableBitKhr
+
+StructureType.defineAliases:
+  PhysicalDeviceExternalImageFormatInfo as PhysicalDeviceExternalImageFormatInfoKhr
+  ExternalImageFormatProperties as ExternalImageFormatPropertiesKhr
+  PhysicalDeviceExternalBufferInfo as PhysicalDeviceExternalBufferInfoKhr
+  ExternalBufferProperties as ExternalBufferPropertiesKhr
+  PhysicalDeviceIdProperties as PhysicalDeviceIdPropertiesKhr
+
+ExternalMemoryHandleTypeFlagBits.defineAliases:
+  OpaqueFd as OpaqueFdBitKhr
+  OpaqueWin32 as OpaqueWin32BitKhr
+  OpaqueWin32Kmt as OpaqueWin32KmtBitKhr
+  D3d11Texture as D3d11TextureBitKhr
+  D3d11TextureKmt as D3d11TextureKmtBitKhr
+  D3d12Heap as D3d12HeapBitKhr
+  D3d12Resource as D3d12ResourceBitKhr
+
 proc loadVK_KHR_external_memory_capabilities*(instance: Instance) =
   instance.defineLoader(`<<`)
 

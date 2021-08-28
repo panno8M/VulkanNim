@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T23:50:21Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_EXT_debug_report
 # =================================
 
@@ -78,12 +78,6 @@ type
 DebugReportObjectTypeEXT.defineAliases:
   DebugReportCallbackExtExt as DebugReportExt # Backwards-compatible alias containing a typo
   ValidationCacheExtExt as ValidationCacheExt # Backwards-compatible alias containing a typo
-  # Provided by VK_KHR_descriptor_update_template
-  DescriptorUpdateTemplateExt as DescriptorUpdateTemplateKhrExt
-  # Provided by VK_KHR_sampler_ycbcr_conversion
-  SamplerYcbcrConversionExt as SamplerYcbcrConversionKhrExt
-  # Provided by VK_NV_ray_tracing
-  AccelerationStructureKhrExt as AccelerationStructureNvExt
 
 var # commands
   createDebugReportCallbackEXTCage: proc(instance: Instance; pCreateInfo: ptr DebugReportCallbackCreateInfoEXT; pAllocator: ptr AllocationCallbacks; pCallback: ptr DebugReportCallbackEXT;): Result {.cdecl.}
@@ -113,6 +107,9 @@ proc debugReportMessageEXT*(
       pMessage: cstring;
     ): void {.cdecl.} =
   debugReportMessageEXTCage(instance,flags,objectType,object,location,messageCode,pLayerPrefix,pMessage)
+StructureType.defineAliases:
+  DebugReportCallbackCreateInfoExt as DebugReportCreateInfoExt
+
 proc loadVK_EXT_debug_report*(instance: Instance) =
   instance.defineLoader(`<<`)
 

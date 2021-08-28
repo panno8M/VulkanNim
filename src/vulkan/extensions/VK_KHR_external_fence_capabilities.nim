@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_KHR_external_fence_capabilities
 # ==================================
 
@@ -24,6 +24,21 @@ type
 var # commands
   
 const getPhysicalDeviceExternalFencePropertiesKHR* = getPhysicalDeviceExternalFenceProperties
+StructureType.defineAliases:
+  PhysicalDeviceExternalFenceInfo as PhysicalDeviceExternalFenceInfoKhr
+  ExternalFenceProperties as ExternalFencePropertiesKhr
+  PhysicalDeviceIdProperties as PhysicalDeviceIdPropertiesKhr
+
+ExternalFenceHandleTypeFlagBits.defineAliases:
+  OpaqueFd as OpaqueFdBitKhr
+  OpaqueWin32 as OpaqueWin32BitKhr
+  OpaqueWin32Kmt as OpaqueWin32KmtBitKhr
+  SyncFd as SyncFdBitKhr
+
+ExternalFenceFeatureFlagBits.defineAliases:
+  Exportable as ExportableBitKhr
+  Importable as ImportableBitKhr
+
 proc loadVK_KHR_external_fence_capabilities*(instance: Instance) =
   instance.defineLoader(`<<`)
 

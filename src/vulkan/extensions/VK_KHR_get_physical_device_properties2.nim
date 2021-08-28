@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_KHR_get_physical_device_properties2
 # ======================================
 
@@ -36,6 +36,17 @@ const getPhysicalDeviceImageFormatProperties2KHR* = getPhysicalDeviceImageFormat
 const getPhysicalDeviceQueueFamilyProperties2KHR* = getPhysicalDeviceQueueFamilyProperties2
 const getPhysicalDeviceMemoryProperties2KHR* = getPhysicalDeviceMemoryProperties2
 const getPhysicalDeviceSparseImageFormatProperties2KHR* = getPhysicalDeviceSparseImageFormatProperties2
+StructureType.defineAliases:
+  PhysicalDeviceFeatures2 as PhysicalDeviceFeatures2Khr
+  PhysicalDeviceProperties2 as PhysicalDeviceProperties2Khr
+  FormatProperties2 as FormatProperties2Khr
+  ImageFormatProperties2 as ImageFormatProperties2Khr
+  PhysicalDeviceImageFormatInfo2 as PhysicalDeviceImageFormatInfo2Khr
+  QueueFamilyProperties2 as QueueFamilyProperties2Khr
+  PhysicalDeviceMemoryProperties2 as PhysicalDeviceMemoryProperties2Khr
+  SparseImageFormatProperties2 as SparseImageFormatProperties2Khr
+  PhysicalDeviceSparseImageFormatInfo2 as PhysicalDeviceSparseImageFormatInfo2Khr
+
 proc loadVK_KHR_get_physical_device_properties2*(instance: Instance) =
   instance.defineLoader(`<<`)
 

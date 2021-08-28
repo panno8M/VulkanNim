@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_KHR_ray_tracing
 # Explicit sort order to require processing after VK_NV_ray_tracing
 # =================================================================
@@ -255,68 +255,6 @@ type
     maxPayloadSize*: uint32
     maxAttributeSize*: uint32
     maxCallableSize*: uint32
-
-AccelerationStructureTypeKHR.defineAliases:
-  # Provided by VK_NV_ray_tracing
-  TopLevelKhr as TopLevelNv
-  # Provided by VK_NV_ray_tracing
-  BottomLevelKhr as BottomLevelNv
-
-RayTracingShaderGroupTypeKHR.defineAliases:
-  # Provided by VK_NV_ray_tracing
-  GeneralKhr as GeneralNv
-  # Provided by VK_NV_ray_tracing
-  TrianglesHitGroupKhr as TrianglesHitGroupNv
-  # Provided by VK_NV_ray_tracing
-  ProceduralHitGroupKhr as ProceduralHitGroupNv
-
-GeometryFlagBitsKHR.defineAliases:
-  # Provided by VK_NV_ray_tracing
-  OpaqueBitKhr as OpaqueBitNv
-  # Provided by VK_NV_ray_tracing
-  NoDuplicateAnyHitInvocationBitKhr as NoDuplicateAnyHitInvocationBitNv
-
-GeometryInstanceFlagBitsKHR.defineAliases:
-  # Provided by VK_NV_ray_tracing
-  TriangleFacingCullDisableBitKhr as TriangleCullDisableBitNv
-  # Provided by VK_NV_ray_tracing
-  TriangleFrontCounterclockwiseBitKhr as TriangleFrontCounterclockwiseBitNv
-  # Provided by VK_NV_ray_tracing
-  ForceOpaqueBitKhr as ForceOpaqueBitNv
-  # Provided by VK_NV_ray_tracing
-  ForceNoOpaqueBitKhr as ForceNoOpaqueBitNv
-
-BuildAccelerationStructureFlagBitsKHR.defineAliases:
-  # Provided by VK_NV_ray_tracing
-  AllowUpdateBitKhr as AllowUpdateBitNv
-  # Provided by VK_NV_ray_tracing
-  AllowCompactionBitKhr as AllowCompactionBitNv
-  # Provided by VK_NV_ray_tracing
-  PreferFastTraceBitKhr as PreferFastTraceBitNv
-  # Provided by VK_NV_ray_tracing
-  PreferFastBuildBitKhr as PreferFastBuildBitNv
-  # Provided by VK_NV_ray_tracing
-  LowMemoryBitKhr as LowMemoryBitNv
-
-CopyAccelerationStructureModeKHR.defineAliases:
-  # Provided by VK_NV_ray_tracing
-  CloneKhr as CloneNv
-  # Provided by VK_NV_ray_tracing
-  CompactKhr as CompactNv
-
-GeometryTypeKHR.defineAliases:
-  # Provided by VK_NV_ray_tracing
-  TrianglesKhr as TrianglesNv
-  # Provided by VK_NV_ray_tracing
-  AabbsKhr as AabbsNv
-
-AccelerationStructureMemoryRequirementsTypeKHR.defineAliases:
-  # Provided by VK_NV_ray_tracing
-  ObjectKhr as ObjectNv
-  # Provided by VK_NV_ray_tracing
-  BuildScratchKhr as BuildScratchNv
-  # Provided by VK_NV_ray_tracing
-  UpdateScratchKhr as UpdateScratchNv
 
 var # commands
   createAccelerationStructureKHRCage: proc(device: Device; pCreateInfo: ptr AccelerationStructureCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pAccelerationStructure: ptr AccelerationStructureKHR;): Result {.cdecl.}

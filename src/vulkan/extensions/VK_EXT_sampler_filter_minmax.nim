@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_EXT_sampler_filter_minmax
 # =================================
 
@@ -16,4 +16,15 @@ type
   SamplerReductionModeCreateInfoEXT* = object
   PhysicalDeviceSamplerFilterMinmaxPropertiesEXT* = object
 
+FormatFeatureFlagBits.defineAliases:
+  SampledImageFilterMinmax as SampledImageFilterMinmaxBitExt
+
+StructureType.defineAliases:
+  PhysicalDeviceSamplerFilterMinmaxProperties as PhysicalDeviceSamplerFilterMinmaxPropertiesExt
+  SamplerReductionModeCreateInfo as SamplerReductionModeCreateInfoExt
+
+SamplerReductionMode.defineAliases:
+  WeightedAverage as WeightedAverageExt
+  Min as MinExt
+  Max as MaxExt
 

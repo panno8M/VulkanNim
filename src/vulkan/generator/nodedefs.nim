@@ -139,7 +139,7 @@ type
     nkrApiConst
     nkrConst
     nkrConstAlias
-    nkrEnumExtend
+    nkrEnumExtendAlias
     nkrType
   NodeRequireVal* = object
     name*: string
@@ -148,4 +148,7 @@ type
       value*: string
     of nkrConstAlias:
       alias*: string
+    of nkrEnumExtendAlias:
+      enumAlias*: string
+      extends*: string
     else: discard

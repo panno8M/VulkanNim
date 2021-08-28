@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_KHR_bind_memory2
 # =================================
 
@@ -19,6 +19,13 @@ var # commands
   
 const bindBufferMemory2KHR* = bindBufferMemory2
 const bindImageMemory2KHR* = bindImageMemory2
+StructureType.defineAliases:
+  BindBufferMemoryInfo as BindBufferMemoryInfoKhr
+  BindImageMemoryInfo as BindImageMemoryInfoKhr
+
+ImageCreateFlagBits.defineAliases:
+  Alias as AliasBitKhr
+
 proc loadVK_KHR_bind_memory2*(instance: Instance) =
   instance.defineLoader(`<<`)
 

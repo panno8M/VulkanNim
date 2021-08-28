@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_EXT_debug_marker
 # =================================
 
@@ -74,12 +74,6 @@ type
 DebugReportObjectTypeEXT.defineAliases:
   DebugReportCallbackExtExt as DebugReportExt # Backwards-compatible alias containing a typo
   ValidationCacheExtExt as ValidationCacheExt # Backwards-compatible alias containing a typo
-  # Provided by VK_KHR_descriptor_update_template
-  DescriptorUpdateTemplateExt as DescriptorUpdateTemplateKhrExt
-  # Provided by VK_KHR_sampler_ycbcr_conversion
-  SamplerYcbcrConversionExt as SamplerYcbcrConversionKhrExt
-  # Provided by VK_NV_ray_tracing
-  AccelerationStructureKhrExt as AccelerationStructureNvExt
 
 var # commands
   debugMarkerSetObjectTagEXTCage: proc(device: Device; pTagInfo: ptr DebugMarkerObjectTagInfoEXT;): Result {.cdecl.}

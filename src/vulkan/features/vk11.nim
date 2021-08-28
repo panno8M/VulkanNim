@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T05:59:50Z
+# Generated at 2021-08-28T00:52:26Z
 # vulkan 1.1
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -595,24 +595,6 @@ proc bindImageMemory2*(
 
 # Promoted from VK_KHR_device_group
 # ---------------------------------
-PeerMemoryFeatureFlagBits.defineAliases:
-  # Provided by VK_KHR_device_group
-  CopySrc as CopySrcBitKhr
-  # Provided by VK_KHR_device_group
-  CopyDst as CopyDstBitKhr
-  # Provided by VK_KHR_device_group
-  GenericSrc as GenericSrcBitKhr
-  # Provided by VK_KHR_device_group
-  GenericDst as GenericDstBitKhr
-
-MemoryAllocateFlagBits.defineAliases:
-  # Provided by VK_KHR_device_group
-  DeviceMask as DeviceMaskBitKhr
-  # Provided by VK_KHR_buffer_device_address
-  DeviceAddress as DeviceAddressBitKhr
-  # Provided by VK_KHR_buffer_device_address
-  DeviceAddressCaptureReplay as DeviceAddressCaptureReplayBitKhr
-
 var # commands
   getDeviceGroupPeerMemoryFeaturesCage: proc(device: Device; heapIndex: uint32; localDeviceIndex: uint32; remoteDeviceIndex: uint32; pPeerMemoryFeatures: ptr PeerMemoryFeatureFlags;): void {.cdecl.}
   cmdSetDeviceMaskCage: proc(commandBuffer: CommandBuffer; deviceMask: uint32;): void {.cdecl.}
@@ -640,6 +622,9 @@ proc cmdDispatchBase*(
       groupCountZ: uint32;
     ): void {.cdecl.} =
   cmdDispatchBaseCage(commandBuffer,baseGroupX,baseGroupY,baseGroupZ,groupCountX,groupCountY,groupCountZ)
+PipelineCreateFlagBits.defineAliases:
+  DispatchBase as DispatchBase
+
 
 
 # Promoted from VK_KHR_device_group + VK_KHR_bind_memory2
@@ -751,18 +736,6 @@ proc trimCommandPool*(
 
 # Promoted from VK_KHR_maintenance2
 # ---------------------------------
-PointClippingBehavior.defineAliases:
-  # Provided by VK_KHR_maintenance2
-  AllClipPlanes as AllClipPlanesKhr
-  # Provided by VK_KHR_maintenance2
-  UserClipPlanesOnly as UserClipPlanesOnlyKhr
-
-TessellationDomainOrigin.defineAliases:
-  # Provided by VK_KHR_maintenance2
-  UpperLeft as UpperLeftKhr
-  # Provided by VK_KHR_maintenance2
-  LowerLeft as LowerLeftKhr
-
 
 
 # Promoted from VK_KHR_multiview
@@ -771,6 +744,9 @@ TessellationDomainOrigin.defineAliases:
 
 # Promoted from VK_KHR_variable_pointers
 # --------------------------------------
+StructureType.defineAliases:
+  PhysicalDeviceVariablePointersFeatures as PhysicalDeviceVariablePointerFeatures
+
 
 
 # Originally based on VK_KHR_protected_memory (extension 146), which was never published; thus the mystifying large value= numbers below. These are not aliased since they weren't actually promoted from an extension.
@@ -787,30 +763,6 @@ proc getDeviceQueue2*(
 
 # Promoted from VK_KHR_sampler_ycbcr_conversion
 # ---------------------------------------------
-SamplerYcbcrModelConversion.defineAliases:
-  # Provided by VK_KHR_sampler_ycbcr_conversion
-  RgbIdentity as RgbIdentityKhr
-  # Provided by VK_KHR_sampler_ycbcr_conversion
-  YcbcrIdentity as YcbcrIdentityKhr
-  # Provided by VK_KHR_sampler_ycbcr_conversion
-  Ycbcr709 as Ycbcr709Khr
-  # Provided by VK_KHR_sampler_ycbcr_conversion
-  Ycbcr601 as Ycbcr601Khr
-  # Provided by VK_KHR_sampler_ycbcr_conversion
-  Ycbcr2020 as Ycbcr2020Khr
-
-SamplerYcbcrRange.defineAliases:
-  # Provided by VK_KHR_sampler_ycbcr_conversion
-  ItuFull as ItuFullKhr
-  # Provided by VK_KHR_sampler_ycbcr_conversion
-  ItuNarrow as ItuNarrowKhr
-
-ChromaLocation.defineAliases:
-  # Provided by VK_KHR_sampler_ycbcr_conversion
-  CositedEven as CositedEvenKhr
-  # Provided by VK_KHR_sampler_ycbcr_conversion
-  Midpoint as MidpointKhr
-
 var # commands
   createSamplerYcbcrConversionCage: proc(device: Device; pCreateInfo: ptr SamplerYcbcrConversionCreateInfo; pAllocator: ptr AllocationCallbacks; pYcbcrConversion: ptr SamplerYcbcrConversion;): Result {.cdecl.}
   destroySamplerYcbcrConversionCage: proc(device: Device; ycbcrConversion: SamplerYcbcrConversion; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
@@ -831,10 +783,6 @@ proc destroySamplerYcbcrConversion*(
 
 # Promoted from VK_KHR_descriptor_update_template
 # -----------------------------------------------
-DescriptorUpdateTemplateType.defineAliases:
-  # Provided by VK_KHR_descriptor_update_template
-  DescriptorSet as DescriptorSetKhr
-
 var # commands
   createDescriptorUpdateTemplateCage: proc(device: Device; pCreateInfo: ptr DescriptorUpdateTemplateCreateInfo; pAllocator: ptr AllocationCallbacks; pDescriptorUpdateTemplate: ptr DescriptorUpdateTemplate;): Result {.cdecl.}
   destroyDescriptorUpdateTemplateCage: proc(device: Device; descriptorUpdateTemplate: DescriptorUpdateTemplate; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
@@ -863,30 +811,6 @@ proc updateDescriptorSetWithTemplate*(
 
 # Promoted from VK_KHR_external_memory_capabilities
 # -------------------------------------------------
-ExternalMemoryHandleTypeFlagBits.defineAliases:
-  # Provided by VK_KHR_external_memory_capabilities
-  OpaqueFd as OpaqueFdBitKhr
-  # Provided by VK_KHR_external_memory_capabilities
-  OpaqueWin32 as OpaqueWin32BitKhr
-  # Provided by VK_KHR_external_memory_capabilities
-  OpaqueWin32Kmt as OpaqueWin32KmtBitKhr
-  # Provided by VK_KHR_external_memory_capabilities
-  D3d11Texture as D3d11TextureBitKhr
-  # Provided by VK_KHR_external_memory_capabilities
-  D3d11TextureKmt as D3d11TextureKmtBitKhr
-  # Provided by VK_KHR_external_memory_capabilities
-  D3d12Heap as D3d12HeapBitKhr
-  # Provided by VK_KHR_external_memory_capabilities
-  D3d12Resource as D3d12ResourceBitKhr
-
-ExternalMemoryFeatureFlagBits.defineAliases:
-  # Provided by VK_KHR_external_memory_capabilities
-  DedicatedOnly as DedicatedOnlyBitKhr
-  # Provided by VK_KHR_external_memory_capabilities
-  Exportable as ExportableBitKhr
-  # Provided by VK_KHR_external_memory_capabilities
-  Importable as ImportableBitKhr
-
 var # commands
   getPhysicalDeviceExternalBufferPropertiesCage: proc(physicalDevice: PhysicalDevice; pExternalBufferInfo: ptr PhysicalDeviceExternalBufferInfo; pExternalBufferProperties: ptr ExternalBufferProperties;): void {.cdecl.}
 proc getPhysicalDeviceExternalBufferProperties*(
@@ -903,22 +827,6 @@ proc getPhysicalDeviceExternalBufferProperties*(
 
 # Promoted from VK_KHR_external_fence_capabilities
 # ------------------------------------------------
-ExternalFenceHandleTypeFlagBits.defineAliases:
-  # Provided by VK_KHR_external_fence_capabilities
-  OpaqueFd as OpaqueFdBitKhr
-  # Provided by VK_KHR_external_fence_capabilities
-  OpaqueWin32 as OpaqueWin32BitKhr
-  # Provided by VK_KHR_external_fence_capabilities
-  OpaqueWin32Kmt as OpaqueWin32KmtBitKhr
-  # Provided by VK_KHR_external_fence_capabilities
-  SyncFd as SyncFdBitKhr
-
-ExternalFenceFeatureFlagBits.defineAliases:
-  # Provided by VK_KHR_external_fence_capabilities
-  Exportable as ExportableBitKhr
-  # Provided by VK_KHR_external_fence_capabilities
-  Importable as ImportableBitKhr
-
 var # commands
   getPhysicalDeviceExternalFencePropertiesCage: proc(physicalDevice: PhysicalDevice; pExternalFenceInfo: ptr PhysicalDeviceExternalFenceInfo; pExternalFenceProperties: ptr ExternalFenceProperties;): void {.cdecl.}
 proc getPhysicalDeviceExternalFenceProperties*(
@@ -931,40 +839,16 @@ proc getPhysicalDeviceExternalFenceProperties*(
 
 # Promoted from VK_KHR_external_fence
 # -----------------------------------
-FenceImportFlagBits.defineAliases:
-  # Provided by VK_KHR_external_fence
-  Temporary as TemporaryBitKhr
-
 
 
 # Promoted from VK_KHR_external_semaphore
 # ---------------------------------------
-SemaphoreImportFlagBits.defineAliases:
-  # Provided by VK_KHR_external_semaphore
-  Temporary as TemporaryBitKhr
-
 
 
 # Promoted from VK_KHR_external_semaphore_capabilities
 # ----------------------------------------------------
 ExternalSemaphoreHandleTypeFlagBits.defineAliases:
   D3d12Fence as D3d11Fence
-  # Provided by VK_KHR_external_semaphore_capabilities
-  OpaqueFd as OpaqueFdBitKhr
-  # Provided by VK_KHR_external_semaphore_capabilities
-  OpaqueWin32 as OpaqueWin32BitKhr
-  # Provided by VK_KHR_external_semaphore_capabilities
-  OpaqueWin32Kmt as OpaqueWin32KmtBitKhr
-  # Provided by VK_KHR_external_semaphore_capabilities
-  D3d12Fence as D3d12FenceBitKhr
-  # Provided by VK_KHR_external_semaphore_capabilities
-  SyncFd as SyncFdBitKhr
-
-ExternalSemaphoreFeatureFlagBits.defineAliases:
-  # Provided by VK_KHR_external_semaphore_capabilities
-  Exportable as ExportableBitKhr
-  # Provided by VK_KHR_external_semaphore_capabilities
-  Importable as ImportableBitKhr
 
 var # commands
   getPhysicalDeviceExternalSemaphorePropertiesCage: proc(physicalDevice: PhysicalDevice; pExternalSemaphoreInfo: ptr PhysicalDeviceExternalSemaphoreInfo; pExternalSemaphoreProperties: ptr ExternalSemaphoreProperties;): void {.cdecl.}
@@ -990,6 +874,9 @@ proc getDescriptorSetLayoutSupport*(
 
 # Promoted from VK_KHR_shader_draw_parameters, with a feature support query added
 # -------------------------------------------------------------------------------
+StructureType.defineAliases:
+  PhysicalDeviceShaderDrawParametersFeatures as PhysicalDeviceShaderDrawParameterFeatures
+
 proc loadInstanceProcs*() =
   vk10.loadInstanceProcs()
   nil.defineLoader(`<<`)

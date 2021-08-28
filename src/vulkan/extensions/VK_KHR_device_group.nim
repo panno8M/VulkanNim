@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_KHR_device_group
 # =================================
 
@@ -74,6 +74,38 @@ var # commands
 const getDeviceGroupPeerMemoryFeaturesKHR* = getDeviceGroupPeerMemoryFeatures
 const cmdSetDeviceMaskKHR* = cmdSetDeviceMask
 const cmdDispatchBaseKHR* = cmdDispatchBase
+DependencyFlagBits.defineAliases:
+  DeviceGroup as DeviceGroupBitKhr
+
+MemoryAllocateFlagBits.defineAliases:
+  DeviceMask as DeviceMaskBitKhr
+
+StructureType.defineAliases:
+  MemoryAllocateFlagsInfo as MemoryAllocateFlagsInfoKhr
+  DeviceGroupRenderPassBeginInfo as DeviceGroupRenderPassBeginInfoKhr
+  DeviceGroupCommandBufferBeginInfo as DeviceGroupCommandBufferBeginInfoKhr
+  DeviceGroupSubmitInfo as DeviceGroupSubmitInfoKhr
+  DeviceGroupBindSparseInfo as DeviceGroupBindSparseInfoKhr
+
+PeerMemoryFeatureFlagBits.defineAliases:
+  CopySrc as CopySrcBitKhr
+  CopyDst as CopyDstBitKhr
+  GenericSrc as GenericSrcBitKhr
+  GenericDst as GenericDstBitKhr
+
+PipelineCreateFlagBits.defineAliases:
+  ViewIndexFromDeviceIndex as ViewIndexFromDeviceIndexBitKhr
+  DispatchBase as DispatchBaseKhr
+
+
+
+StructureType.defineAliases:
+  BindBufferMemoryDeviceGroupInfo as BindBufferMemoryDeviceGroupInfoKhr
+  BindImageMemoryDeviceGroupInfo as BindImageMemoryDeviceGroupInfoKhr
+
+ImageCreateFlagBits.defineAliases:
+  SplitInstanceBindRegions as SplitInstanceBindRegionsBitKhr
+
 
 
 var # commands

@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_KHR_timeline_semaphore
 # =================================
 
@@ -29,6 +29,21 @@ var # commands
 const getSemaphoreCounterValueKHR* = getSemaphoreCounterValue
 const waitSemaphoresKHR* = waitSemaphores
 const signalSemaphoreKHR* = signalSemaphore
+SemaphoreType.defineAliases:
+  Binary as BinaryKhr
+  Timeline as TimelineKhr
+
+StructureType.defineAliases:
+  PhysicalDeviceTimelineSemaphoreFeatures as PhysicalDeviceTimelineSemaphoreFeaturesKhr
+  PhysicalDeviceTimelineSemaphoreProperties as PhysicalDeviceTimelineSemaphorePropertiesKhr
+  SemaphoreTypeCreateInfo as SemaphoreTypeCreateInfoKhr
+  TimelineSemaphoreSubmitInfo as TimelineSemaphoreSubmitInfoKhr
+  SemaphoreWaitInfo as SemaphoreWaitInfoKhr
+  SemaphoreSignalInfo as SemaphoreSignalInfoKhr
+
+SemaphoreWaitFlagBits.defineAliases:
+  Any as AnyBitKhr
+
 proc loadVK_KHR_timeline_semaphore*(instance: Instance) =
   instance.defineLoader(`<<`)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_EXT_swapchain_colorspace
 # =================================
 
@@ -11,4 +11,6 @@ const
   ExtSwapchainColorSpaceSpecVersion* = 4
   ExtSwapchainColorSpaceExtensionName* = "VK_EXT_swapchain_colorspace"
 
+ColorSpaceKHR.defineAliases:
+  DisplayP3LinearExt as DciP3LinearExt
 

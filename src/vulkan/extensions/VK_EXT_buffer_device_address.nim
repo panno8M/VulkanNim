@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_EXT_buffer_device_address
 # =================================
 
@@ -28,6 +28,19 @@ type
 var # commands
   
 const getBufferDeviceAddressEXT* = getBufferDeviceAddress
+BufferUsageFlagBits.defineAliases:
+  ShaderDeviceAddress as ShaderDeviceAddressBitExt
+
+Result.defineAliases:
+  ErrorInvalidOpaqueCaptureAddress as ErrorInvalidDeviceAddressExt
+
+StructureType.defineAliases:
+  PhysicalDeviceBufferDeviceAddressFeaturesExt as PhysicalDeviceBufferAddressFeaturesExt
+  BufferDeviceAddressInfo as BufferDeviceAddressInfoExt
+
+BufferCreateFlagBits.defineAliases:
+  DeviceAddressCaptureReplay as DeviceAddressCaptureReplayBitExt
+
 proc loadVK_EXT_buffer_device_address*(instance: Instance) =
   instance.defineLoader(`<<`)
 

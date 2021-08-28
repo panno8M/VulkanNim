@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:02Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_KHR_descriptor_update_template
 # =================================
 
@@ -9,6 +9,8 @@ import ../features/vk10
 const
   KhrDescriptorUpdateTemplateSpecVersion* = 1
   KhrDescriptorUpdateTemplateExtensionName* = "VK_KHR_descriptor_update_template"
+
+  DescriptorUpdateTemplateTypePushDescriptorsKhr* = 1
 
 type
   DescriptorUpdateTemplateKHR* = DescriptorUpdateTemplate
@@ -24,6 +26,15 @@ var # commands
 const createDescriptorUpdateTemplateKHR* = createDescriptorUpdateTemplate
 const destroyDescriptorUpdateTemplateKHR* = destroyDescriptorUpdateTemplate
 const updateDescriptorSetWithTemplateKHR* = updateDescriptorSetWithTemplate
+ObjectType.defineAliases:
+  DescriptorUpdateTemplate as DescriptorUpdateTemplateKhr
+
+StructureType.defineAliases:
+  DescriptorUpdateTemplateCreateInfo as DescriptorUpdateTemplateCreateInfoKhr
+
+DescriptorUpdateTemplateType.defineAliases:
+  DescriptorSet as DescriptorSetKhr
+
 
 
 var # commands
@@ -36,6 +47,11 @@ proc cmdPushDescriptorSetWithTemplateKHR*(
       pData: pointer;
     ): void {.cdecl.} =
   cmdPushDescriptorSetWithTemplateKHRCage(commandBuffer,descriptorUpdateTemplate,layout,set,pData)
+
+
+DebugReportObjectTypeEXT.defineAliases:
+  DescriptorUpdateTemplateExt as DescriptorUpdateTemplateKhrExt
+
 proc loadVK_KHR_descriptor_update_template*(instance: Instance) =
   instance.defineLoader(`<<`)
 

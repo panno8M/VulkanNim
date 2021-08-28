@@ -1,4 +1,4 @@
-# Generated at 2021-08-27T06:01:03Z
+# Generated at 2021-08-28T00:52:26Z
 # VK_NV_ray_tracing
 # =================================
 
@@ -201,6 +201,86 @@ proc compileDeferredNV*(
       shader: uint32;
     ): Result {.cdecl, discardable.} =
   compileDeferredNVCage(device,pipeline,shader)
+PipelineStageFlagBits.defineAliases:
+  RayTracingShaderBitKhr as RayTracingShaderBitNv
+  AccelerationStructureBuildBitKhr as AccelerationStructureBuildBitNv
+
+ShaderStageFlagBits.defineAliases:
+  RaygenBitKhr as RaygenBitNv
+  AnyHitBitKhr as AnyHitBitNv
+  ClosestHitBitKhr as ClosestHitBitNv
+  MissBitKhr as MissBitNv
+  IntersectionBitKhr as IntersectionBitNv
+  CallableBitKhr as CallableBitNv
+
+BufferUsageFlagBits.defineAliases:
+  RayTracingBitKhr as RayTracingBitNv
+
+DebugReportObjectTypeEXT.defineAliases:
+  AccelerationStructureKhrExt as AccelerationStructureNvExt
+
+RayTracingShaderGroupTypeKHR.defineAliases:
+  GeneralKhr as GeneralNv
+  TrianglesHitGroupKhr as TrianglesHitGroupNv
+  ProceduralHitGroupKhr as ProceduralHitGroupNv
+
+CopyAccelerationStructureModeKHR.defineAliases:
+  CloneKhr as CloneNv
+  CompactKhr as CompactNv
+
+AccessFlagBits.defineAliases:
+  AccelerationStructureReadBitKhr as AccelerationStructureReadBitNv
+  AccelerationStructureWriteBitKhr as AccelerationStructureWriteBitNv
+
+ObjectType.defineAliases:
+  AccelerationStructureKhr as AccelerationStructureNv
+
+GeometryFlagBitsKHR.defineAliases:
+  OpaqueBitKhr as OpaqueBitNv
+  NoDuplicateAnyHitInvocationBitKhr as NoDuplicateAnyHitInvocationBitNv
+
+AccelerationStructureTypeKHR.defineAliases:
+  TopLevelKhr as TopLevelNv
+  BottomLevelKhr as BottomLevelNv
+
+GeometryInstanceFlagBitsKHR.defineAliases:
+  TriangleFacingCullDisableBitKhr as TriangleCullDisableBitNv
+  TriangleFrontCounterclockwiseBitKhr as TriangleFrontCounterclockwiseBitNv
+  ForceOpaqueBitKhr as ForceOpaqueBitNv
+  ForceNoOpaqueBitKhr as ForceNoOpaqueBitNv
+
+DescriptorType.defineAliases:
+  AccelerationStructureKhr as AccelerationStructureNv
+
+StructureType.defineAliases:
+  BindAccelerationStructureMemoryInfoKhr as BindAccelerationStructureMemoryInfoNv
+  WriteDescriptorSetAccelerationStructureKhr as WriteDescriptorSetAccelerationStructureNv
+
+PipelineBindPoint.defineAliases:
+  RayTracingKhr as RayTracingNv
+
+QueryType.defineAliases:
+  AccelerationStructureCompactedSizeKhr as AccelerationStructureCompactedSizeNv
+
+AccelerationStructureMemoryRequirementsTypeKHR.defineAliases:
+  ObjectKhr as ObjectNv
+  BuildScratchKhr as BuildScratchNv
+  UpdateScratchKhr as UpdateScratchNv
+
+BuildAccelerationStructureFlagBitsKHR.defineAliases:
+  AllowUpdateBitKhr as AllowUpdateBitNv
+  AllowCompactionBitKhr as AllowCompactionBitNv
+  PreferFastTraceBitKhr as PreferFastTraceBitNv
+  PreferFastBuildBitKhr as PreferFastBuildBitNv
+  LowMemoryBitKhr as LowMemoryBitNv
+
+GeometryTypeKHR.defineAliases:
+  TrianglesKhr as TrianglesNv
+  AabbsKhr as AabbsNv
+
+IndexType.defineAliases:
+  NoneKhr as NoneNv
+
 proc loadVK_NV_ray_tracing*(instance: Instance) =
   instance.defineLoader(`<<`)
 
