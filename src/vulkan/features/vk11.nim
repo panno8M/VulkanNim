@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T12:28:00Z
+# Generated at 2021-08-29T01:12:09Z
 # vulkan 1.1
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -16,7 +16,7 @@ const
   UuidSize* = 16
 
   # Promoted from VK_KHR_external_memory
-  QueueFamilyExternal* = (uint.high-1)
+  QueueFamilyExternal* = (uint32.high-1)
 
 type
   # Originally based on VK_KHR_subgroup (extension 94), but the actual enum block used was, incorrectly, that of extension 95

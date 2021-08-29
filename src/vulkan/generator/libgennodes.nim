@@ -543,8 +543,8 @@ func extractNodeApiConstVal*(typeDef: XmlNode): (Option[NodeConst], Option[NodeC
       some NodeConst(
         name: typeDef.name,
         value: typeDef.value
-          .replace("~0ULL", "uint.high")
-          .replace("~0U", "uint.high"),
+          .replace("~0ULL", "uint64.high")
+          .replace("~0U", "uint32.high"),
         comment: ?typeDef.comment),
       none NodeConstAlias
     )

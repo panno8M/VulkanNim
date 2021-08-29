@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T12:28:00Z
+# Generated at 2021-08-29T01:12:09Z
 # VK_KHR_ray_tracing
 # Explicit sort order to require processing after VK_NV_ray_tracing
 # =================================================================
@@ -16,7 +16,7 @@ import VK_KHR_pipeline_library
 const
   KhrRayTracingSpecVersion* = 8
   KhrRayTracingExtensionName* = "VK_KHR_ray_tracing"
-  ShaderUnusedKhr* = (uint.high)
+  ShaderUnusedKhr* = (uint32.high)
 
 type
   AccelerationStructureTypeKHR* {.size: sizeof(int32), pure.} = enum

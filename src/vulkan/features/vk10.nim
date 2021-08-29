@@ -1,4 +1,4 @@
-# Generated at 2021-08-29T00:12:15Z
+# Generated at 2021-08-29T01:12:08Z
 # vulkan 1.0
 # Vulkan core API interface definitions
 # =====================================
@@ -18,15 +18,15 @@ type # basetypes
 
 const
   # API constants
-  AttachmentUnused* = (uint.high)
+  AttachmentUnused* = (uint32.high)
   False* = Bool32(0)
   LodClampNone* = 1000.0f
-  QueueFamilyIgnored* = (uint.high)
-  RemainingArrayLayers* = (uint.high)
-  RemainingMipLevels* = (uint.high)
-  SubpassExternal* = (uint.high)
+  QueueFamilyIgnored* = (uint32.high)
+  RemainingArrayLayers* = (uint32.high)
+  RemainingMipLevels* = (uint32.high)
+  SubpassExternal* = (uint32.high)
   True* = Bool32(1)
-  WholeSize* = (uint.high)
+  WholeSize* = (uint64.high)
 
   # Device initialization
   MaxMemoryTypes* = 32
