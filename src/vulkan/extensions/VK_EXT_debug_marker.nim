@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T12:28:00Z
+# Generated at 2021-08-29T04:29:38Z
 # VK_EXT_debug_marker
 # =================================
 
@@ -46,11 +46,11 @@ type
     displayModeKhrExt = 30
     validationCacheExtExt = 33
     # Provided by VK_EXT_debug_report
-    descriptorUpdateTemplateExt = 100000850000
+    descriptorUpdateTemplateExt = 1000085000
     # Provided by VK_EXT_debug_report
-    samplerYcbcrConversionExt = 100001560000
+    samplerYcbcrConversionExt = 1000156000
     # Provided by VK_KHR_ray_tracing
-    accelerationStructureKhrExt = 100001650000
+    accelerationStructureKhrExt = 1000165000
   DebugMarkerObjectNameInfoEXT* = object
     sType*: StructureType
     pNext*: pointer

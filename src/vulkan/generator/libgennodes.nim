@@ -801,7 +801,7 @@ proc extractAllNodeEnumExtensions*(rootXml: XmlNode; resources: var Resources) {
           try:
             nodeEnumVal.value =
               if value.isSome: value.get
-              else: "1000{extnumber.get-1:04}{offset.get:04}".fmt.parseInt
+              else: "1000{extnumber.get-1:03}{offset.get:03}".fmt.parseInt
             if resources.enums[nodeEnumVal.extends].enumVals.findIt(it.value == nodeEnumVal.value) == nil:
               resources.enums[nodeEnumVal.extends].enumVals.add nodeEnumVal
           except ValueError:

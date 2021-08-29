@@ -1,4 +1,4 @@
-# Generated at 2021-08-29T01:12:09Z
+# Generated at 2021-08-29T04:29:39Z
 # VK_KHR_ray_tracing
 # Explicit sort order to require processing after VK_NV_ray_tracing
 # =================================================================
@@ -166,7 +166,7 @@ type
     trianglesKhr = 0
     aabbsKhr = 1
     # Provided by VK_KHR_ray_tracing
-    instancesKhr = 100001500000
+    instancesKhr = 1000150000
   BindAccelerationStructureMemoryInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
