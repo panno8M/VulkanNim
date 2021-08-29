@@ -1,4 +1,4 @@
-# Generated at 2021-08-29T04:29:38Z
+# Generated at 2021-08-29T06:49:42Z
 # vulkan 1.0
 # Vulkan core API interface definitions
 # =====================================
@@ -4846,3 +4846,26 @@ proc toString*[Flagbits: enum](flags: Flags[Flagbits]): string =
   $flags.toFlagSets
 proc `$`*[Flagbits: enum](flags: Flags[Flagbits]): string =
   flags.toString
+
+import tables
+var flagbitsCache = newTable[string, uint32]()
+
+proc `carefulAll`*[Flagbits: enum](Type: typedesc[Flags[Flagbits]]): Flags[Flagbits] =
+  ## Mainly used for flags with non-contiguous bits, such as the DebugUtilsMessageSeverity flag.
+  try:
+    return Flags[Flagbits](flagbitsCache[$Type])
+  except KeyError:
+    var x = Flagbits.low.ord
+    while x <= Flagbits.high.ord:
+      let bit = Flagbits(x)
+      if not ($bit)[0].isDigit:
+        result = result or bit
+      x = x shl 1
+    flagbitsCache[$Type] = result.uint32
+
+proc `carefulNot`*[Flagbits: enum](flags: Flags[Flagbits]): Flags[Flagbits] =
+  ## Mainly used for flags with non-contiguous bits, such as the DebugUtilsMessageSeverity flag.
+  Flags[Flagbits](flags.typeof.carefulAll.uint32 and not flags.uint32)
+proc `carefulNot`*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
+  ## Mainly used for flags with non-contiguous bits, such as the DebugUtilsMessageSeverity flag.
+  carefulNot flagbits.toFlags
