@@ -1,4 +1,4 @@
-# Generated at 2021-08-29T00:03:32Z
+# Generated at 2021-08-29T00:12:15Z
 # vulkan 1.0
 # Vulkan core API interface definitions
 # =====================================
@@ -4778,7 +4778,7 @@ template `<+>`*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
   flagbits.toFlags
 
 proc `all`*[Flagbits: enum](Type: typedesc[Flags[Flagbits]]): Flags[Flagbits] =
-  Flags[Flagbits]((Flagbits.high.ord-1) shl 1)
+  Flags[Flagbits]((Flagbits.high.ord-1).shl(1)+1)
 template `all`*[Flagbits: enum](flags: Flags[Flagbits]): Flags[Flagbits] =
   flags.typeof.all
 

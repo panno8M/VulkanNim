@@ -44,7 +44,7 @@ template `<+>`*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
   flagbits.toFlags
 
 proc `all`*[Flagbits: enum](Type: typedesc[Flags[Flagbits]]): Flags[Flagbits] =
-  Flags[Flagbits]((Flagbits.high.ord-1) shl 1)
+  Flags[Flagbits]((Flagbits.high.ord-1).shl(1)+1)
 template `all`*[Flagbits: enum](flags: Flags[Flagbits]): Flags[Flagbits] =
   flags.typeof.all
 
