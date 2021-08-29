@@ -44,7 +44,7 @@ proc `<+>`*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
   flagbits.toFlags
 
 proc `all`*[Flagbits: enum](Type: typedesc[Flags[Flagbits]]): Flags[Flagbits] =
-  Flags[Flagbits]((Flagbits.high.ord-1).shl(1) or 1)
+  Flags[Flagbits](Flagbits.high.ord.shl(1) - 1)
 proc `all`*[Flagbits: enum](flags: Flags[Flagbits]): Flags[Flagbits] = flags.typeof.all
 proc `all`*[Flagbits: enum](Type: typedesc[HashSet[Flagbits]]): HashSet[Flagbits] = Flags[Flagbits].all.toFlagSets
 proc `all`*[Flagbits: enum](flagsets: HashSet[Flagbits]): HashSet[Flagbits] = flagsets.typeof.all
@@ -77,7 +77,7 @@ proc `xor`*[Flagbits: enum](a: Flagbits; b: Flags[Flagbits]): Flags[Flagbits] = 
 proc `xor`*[Flagbits: enum](a, b: Flagbits):                  Flags[Flagbits] = <+>a xor <+>b
 
 proc `not`*[Flagbits: enum](flags: Flags[Flagbits]): Flags[Flagbits] =
-  flags xor flags.all
+  Flags[Flagbits](flags.all.uint32 and not flags.uint32)
 
 proc `not`*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
   not flagbits.toFlags
