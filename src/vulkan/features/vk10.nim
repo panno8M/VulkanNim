@@ -1,4 +1,4 @@
-# Generated at 2021-08-29T01:12:08Z
+# Generated at 2021-08-29T03:06:24Z
 # vulkan 1.0
 # Vulkan core API interface definitions
 # =====================================
@@ -4778,48 +4778,40 @@ template `<+>`*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
   flagbits.toFlags
 
 proc `all`*[Flagbits: enum](Type: typedesc[Flags[Flagbits]]): Flags[Flagbits] =
-  Flags[Flagbits]((Flagbits.high.ord-1).shl(1)+1)
+  Flags[Flagbits]((Flagbits.high.ord-1).shl(1) or 1)
 template `all`*[Flagbits: enum](flags: Flags[Flagbits]): Flags[Flagbits] =
   flags.typeof.all
-
-proc `all`*[Flagbits: enum](Type: typedesc[HashSet[Flagbits]]): HashSet[Flagbits] =
+template `all`*[Flagbits: enum](Type: typedesc[HashSet[Flagbits]]): HashSet[Flagbits] =
   Flags[Flagbits].all.toFlagSets
 template `all`*[Flagbits: enum](flagsets: HashSet[Flagbits]): HashSet[Flagbits] =
   flagsets.typeof.all
 
 proc `none`*[Flagbits: enum](Type: typedesc[HashSet[Flagbits]]): HashSet[Flagbits] = return
-template `none`*[Flagbits: enum](flagsets: HashSet[Flagbits]): HashSet[Flagbits] =
-  flagsets.typeof.none
+template `none`*[Flagbits: enum](flagsets: HashSet[Flagbits]): HashSet[Flagbits] = flagsets.typeof.none
 proc `none`*[Flagbits: enum](Type: typedesc[Flags[Flagbits]]): Flags[Flagbits] = return
-template `none`*[Flagbits: enum](flags: Flags[Flagbits]): Flags[Flagbits] =
-  flags.typeof.none
+template `none`*[Flagbits: enum](flags: Flags[Flagbits]): Flags[Flagbits] = flags.typeof.none
 
 proc `and`*[Flagbits: enum](a, b: Flagbits): Flags[Flagbits] =
-  Flags[Flagbits](a.uint32 and b.uint32)
-proc `and`*[Flagbits: enum](a: Flags[Flagbits]; b: Flagbits): Flags[Flagbits] =
-  Flags[Flagbits](a.uint32 and b.uint32)
-template `and`*[Flagbits: enum](a: Flagbits; b: Flags[Flagbits]): Flags[Flagbits] =
-  b and a
-proc `and`*[Flagbits: enum](a, b: Flags[Flagbits]): Flags[Flagbits] =
-  Flags[Flagbits](a.uint32 and b.uint32)
+  Flags[Flagbits]((a.uint32 and b.uint32) and Flagbits.all)
+template `and`*[Flagbits: enum](a: Flags[Flagbits]; b: Flagbits): Flags[Flagbits] = <+>a and b
+template `and`*[Flagbits: enum](a: Flagbits; b: Flags[Flagbits]): Flags[Flagbits] = b and a
+template `and`*[Flagbits: enum](a, b: Flags[Flagbits]):           Flags[Flagbits] = <+>a and <+>b
 
 proc `or`*[Flagbits: enum](a, b: Flagbits): Flags[Flagbits] =
-  Flags[Flagbits](a.uint32 or b.uint32)
-proc `or`*[Flagbits: enum](a: Flags[Flagbits]; b: Flagbits): Flags[Flagbits] =
-  Flags[Flagbits](a.uint32 or b.uint32)
-template `or`*[Flagbits: enum](a: Flagbits; b: Flags[Flagbits]): Flags[Flagbits] =
-  b or a
-proc `or`*[Flagbits: enum](a, b: Flags[Flagbits]): Flags[Flagbits] =
-  Flags[Flagbits](a.uint32 or b.uint32)
+  Flags[Flagbits]((a.uint32 or b.uint32) and Flagbits.all)
+template `or`*[Flagbits: enum](a: Flags[Flagbits]; b: Flagbits): Flags[Flagbits] = <+>a or b
+template `or`*[Flagbits: enum](a: Flagbits; b: Flags[Flagbits]): Flags[Flagbits] = b or a
+template `or`*[Flagbits: enum](a, b: Flags[Flagbits]):           Flags[Flagbits] = <+>a or <+>b
 
 proc `xor`*[Flagbits: enum](a, b: Flagbits): Flags[Flagbits] =
-  Flags[Flagbits](a.uint32 xor b.uint32)
-proc `xor`*[Flagbits: enum](a: Flags[Flagbits]; b: Flagbits): Flags[Flagbits] =
-  Flags[Flagbits](a.uint32 xor b.uint32)
-template `xor`*[Flagbits: enum](a: Flagbits; b: Flags[Flagbits]): Flags[Flagbits] =
-  b xor a
-proc `xor`*[Flagbits: enum](a, b: Flags[Flagbits]): Flags[Flagbits] =
-  Flags[Flagbits](a.uint32 xor b.uint32)
+  # if Flags.all is 00011111:
+  # 00011100 xor 00011000 = 00000100
+  # 00011100 xor 10000000 = 00011100
+  #              ^ overflowed value must be ignored.
+  not (a and b) and (a or b)
+template `xor`*[Flagbits: enum](a: Flags[Flagbits]; b: Flagbits): Flags[Flagbits] = <+>a xor b
+template `xor`*[Flagbits: enum](a: Flagbits; b: Flags[Flagbits]): Flags[Flagbits] = b xor a
+template `xor`*[Flagbits: enum](a, b: Flags[Flagbits]):           Flags[Flagbits] = <+>a xor <+>b
 
 proc `not`*[Flagbits: enum](flags: Flags[Flagbits]): Flags[Flagbits] =
   flags xor flags.all
@@ -4830,7 +4822,30 @@ template `not`*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
 template `not`*[Flagbits: enum](flagsets: HashSet[Flagbits]): HashSet[Flagbits] =
   (not flagsets.toFlags).toFlagSets
 
-proc `toString`*[Flagbits: enum](flags: Flags[Flagbits]): string =
+template `*`*[Flagbits: enum](a, b: Flagbits):                  Flags[Flagbits] = a and b
+template `*`*[Flagbits: enum](a: Flags[Flagbits]; b: Flagbits): Flags[Flagbits] = a and b
+template `*`*[Flagbits: enum](a: Flagbits; b: Flags[Flagbits]): Flags[Flagbits] = a and b
+template `*`*[Flagbits: enum](a, b: Flags[Flagbits]):           Flags[Flagbits] = a and b
+
+template `+`*[Flagbits: enum](a, b: Flagbits):                  Flags[Flagbits] = a or b
+template `+`*[Flagbits: enum](a: Flags[Flagbits]; b: Flagbits): Flags[Flagbits] = a or b
+template `+`*[Flagbits: enum](a: Flagbits; b: Flags[Flagbits]): Flags[Flagbits] = a or b
+template `+`*[Flagbits: enum](a, b: Flags[Flagbits]):           Flags[Flagbits] = a or b
+
+template `-+-`*[Flagbits: enum](a, b: Flagbits):                  Flags[Flagbits] = a xor b
+template `-+-`*[Flagbits: enum](a: Flags[Flagbits]; b: Flagbits): Flags[Flagbits] = a xor b
+template `-+-`*[Flagbits: enum](a: Flagbits; b: Flags[Flagbits]): Flags[Flagbits] = a xor b
+template `-+-`*[Flagbits: enum](a, b: Flags[Flagbits]):           Flags[Flagbits] = a xor b
+
+template `-`*[Flagbits: enum](a, b: Flagbits):                  Flags[Flagbits] = a and not b
+template `-`*[Flagbits: enum](a: Flags[Flagbits]; b: Flagbits): Flags[Flagbits] = a and not b
+template `-`*[Flagbits: enum](a: Flagbits; b: Flags[Flagbits]): Flags[Flagbits] = a and not b
+template `-`*[Flagbits: enum](a, b: Flags[Flagbits]):           Flags[Flagbits] = a and not b
+
+proc contains*[Flagbits: enum](flags: Flags[Flagbits]; flagbits: Flagbits): bool =
+  (flags and flagbits) != flags.none
+
+proc toString*[Flagbits: enum](flags: Flags[Flagbits]): string =
   $flags.toFlagSets
 proc `$`*[Flagbits: enum](flags: Flags[Flagbits]): string =
   flags.toString
