@@ -32,7 +32,8 @@ proc generate*() =
     ("platform", LibFile(fileName: "platform", fileHeader: "src/vulkan/generator/platform.nim".readFile))
   ].newTable
   let fileGroup = [
-    ("extensions/VK_KHR_surface", @["extensions/VK_KHR_display", #["extensions/VK_KHR_swapchain"]#])
+    ("extensions/VK_KHR_surface", @["extensions/VK_KHR_display", #["extensions/VK_KHR_swapchain"]#]),
+    ("extensions/VK_KHR_draw_indirect_count", @["extensions/VK_AMD_draw_indirect_count",]),
   ].newTable
   # let fileGroup = newTable[string, seq[string]]()
   let

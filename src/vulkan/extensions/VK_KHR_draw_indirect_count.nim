@@ -1,5 +1,6 @@
-# Generated at 2021-08-30T23:05:46Z
+# Generated at 2021-08-30T23:31:14Z
 # VK_KHR_draw_indirect_count
+# VK_AMD_draw_indirect_count
 
 
 import ../platform
@@ -10,5 +11,12 @@ const
   KhrDrawIndirectCountSpecVersion* = 1
   KhrDrawIndirectCountExtensionName* = "VK_KHR_draw_indirect_count"
 
+  AmdDrawIndirectCountSpecVersion* = 2
+  AmdDrawIndirectCountExtensionName* = "VK_AMD_draw_indirect_count"
+
 const cmdDrawIndirectCountKHR* = cmdDrawIndirectCount
 const cmdDrawIndexedIndirectCountKHR* = cmdDrawIndexedIndirectCount
+
+
+const cmdDrawIndirectCountAMD* = cmdDrawIndirectCount
+const cmdDrawIndexedIndirectCountAMD* = cmdDrawIndexedIndirectCount
