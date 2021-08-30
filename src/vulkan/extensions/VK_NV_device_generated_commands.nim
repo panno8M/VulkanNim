@@ -1,10 +1,9 @@
-# Generated at 2021-08-30T01:26:11Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_NV_device_generated_commands
-# =================================
+
 
 import ../platform
 import ../features/vk10
-
 
 const
   NvDeviceGeneratedCommandsSpecVersion* = 3

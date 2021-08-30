@@ -7,6 +7,7 @@ import tables
 import logging
 import times
 import options
+import os
 
 import ./utils
 import ./nodedefs
@@ -18,20 +19,27 @@ import ./liblogger
 let logger = newMyLogger(open("log", fmWrite), fmtStr="[$time] - $levelname ".fmt)
 addHandler(logger)
 
-const featureFilePath = "src/vulkan/features"
+const libRoot = "src/vulkan"
 let fileName = newTable [
-    ("VK_VERSION_1_0", "vk10"),
-    ("VK_VERSION_1_1", "vk11"),
-    ("VK_VERSION_1_2", "vk12"),
+    ("VK_VERSION_1_0", "features/vk10"),
+    ("VK_VERSION_1_1", "features/vk11"),
+    ("VK_VERSION_1_2", "features/vk12"),
   ]
 let dependencies = newTable [
-  ("VK_VERSION_1_0", @[("../platform", false), ]),
-  ("VK_VERSION_1_1", @[("../platform", false), ("vk10", true)]),
-  ("VK_VERSION_1_2", @[("../platform", false), ("vk11", true)]),
+  ("VK_VERSION_1_0", @[("platform", false), ]),
+  ("VK_VERSION_1_1", @[("platform", false), ("features/vk10", true)]),
+  ("VK_VERSION_1_2", @[("platform", false), ("features/vk11", true)]),
 ]
 
 proc generate*() =
   var updatedFiles: seq[string]
+  var library = [
+    ("platform", LibFile(fileName: "platform", fileHeader: "src/vulkan/generator/platform.nim".readFile))
+  ].newTable
+  let fileGroup = [
+    ("extensions/VK_KHR_surface", @["extensions/VK_KHR_display", #["extensions/VK_KHR_swapchain"]#])
+  ].newTable
+  # let fileGroup = newTable[string, seq[string]]()
   let
     xml = getVulkanXML()
     resources = xml.extractResources
@@ -39,80 +47,62 @@ proc generate*() =
   for feature in xml.findAll("feature"):
 
     let
-      api = feature{"api"}
-      number = feature{"number"}
       comment = feature{"comment"}
       name = feature{"name"}
     var
-      headerComment: string
       libFile = LibFile(requires: newSeq[NodeRequire](),
           fileName: fileName[name],
-          dependencies: dependencies[name]
+          deps: dependencies[name]
         )
-    if libFile.fileName == "vk10":
+    if libFile.fileName == "features/vk10":
       libFile.fileFooter = "src/vulkan/generator/additionalOperations.nim".readFile
 
-    headerComment &= "Generated at {now().utc()}\n".fmt
-    headerComment &= "{api} {number}".fmt
-    if (?comment).isSome: headerComment &= "\n" & comment
-    libFile.fileHeader &= headerComment.underline('=').commentify.LF
+    if (?comment).isSome:
+      libFile.fileHeader &= comment.underline('=').commentify
 
     for require in feature.findAll("require"):
       libFile.requires.add require.extractNodeRequire
 
-    block:
-      let
-        filePath = "{featureFilePath}/{fileName[name]}.nim".fmt
-        res = libFile.render(resources)
-        resStart = res.skipUntil('\n')
-        store = filePath.readFile
-        storeStart = store.skipUntil('\n')
-      if res[resStart..^1] != store[storeStart..^1]:
-        filePath.writeFile res
-        updatedFiles.add filePath
+    library[libFile.fileName] = libFile
 
-  let dependenciesBasic = @[("../platform", false), ("../features/vk10", false)]
+  let dependenciesBasic = @[("platform", false), ("features/vk10", false)]
   for extension in xml["extensions"].findAll("extension"):
     let name = extension{"name"}
     block Invalid_Extension_Test:
       let words = name.parseWords({'_'})
-      if words.len == 4 and
-        words[2] == "extension":
-          try:
-            discard words[3].parseInt
-            continue
-          except: break Invalid_Extension_Test
-    let requires = extension{"requires"}.parseWords({','})
+      if words.len == 4 and words[2] == "extension":
+        try: discard words[3].parseInt; continue
+        except: break Invalid_Extension_Test
+    let requires = extension{"requires"}.parseWords({','}).mapIt(("extensions"/it, false))
     var
-      headerComment: string
-      libFile = LibFile(requires: newSeq[NodeRequire](),
-          fileName: name,
-          dependencies: dependenciesBasic.concat(requires.mapIt((it, false)))
-        )
-    headerComment &= "Generated at {now().utc()}\n{name}".fmt
-    if (?extension.comment).isSome: headerComment &= '\n' & extension.comment
-    libFile.fileHeader &= headerComment.underline('=').commentify.LF
+      libFile = LibFile(
+        requires: newSeq[NodeRequire](),
+        fileName: "extensions"/name,
+        deps: dependenciesBasic.concat(requires)
+      )
+    if (?extension.comment).isSome:
+      libFile.fileHeader &= extension.comment.underline('=').commentify
 
     for require in extension.findAll("require"):
-      try:
-        libFile.requires.add require.extractNodeRequire
-      except:
-        echo getCurrentExceptionMsg()
-        echo "extract error @" & name
+      libFile.requires.add require.extractNodeRequire
 
-    if libFile.requires.len == 0: continue
+    if libFile.requires.len != 0:
+      library[libFile.fileName] = libFile
 
-    block:
-      let
-        filePath = "src/vulkan/extensions/{name}.nim".fmt
-        res = libFile.render(resources)
-        resStart = res.skipUntil('\n')
-        store = filePath.readFile
-        storeStart = store.skipUntil('\n')
-      if res[resStart..^1] != store[storeStart..^1]:
-        filePath.writeFile res
-        updatedFiles.add filePath
+  for fileName, mergeMaterials in fileGroup:
+    library.merge(fileName, mergeMaterials)
 
+  for fileName, libFile in library:
+    if libFile.isNil: continue
+    let
+      filePath = libRoot/libFile.fileName & ".nim"
+      res = libFile.render(library, resources)
+      resStart = res.skipUntil('\n')
+      store = filePath.readFile
+      storeStart = store.skipUntil('\n')
+    if res[resStart..^1] != store[storeStart..^1]:
+      filePath.writeFile res
+      updatedFiles.add filePath
 
   if updatedFiles.len == 0:
     notice title"Generate Complate! No API files have been updated."

@@ -1,11 +1,10 @@
-# Generated at 2021-08-29T04:29:38Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_EXT_debug_marker
-# =================================
+
 
 import ../platform
 import ../features/vk10
-import VK_EXT_debug_report
-
+import ./VK_EXT_debug_report
 
 const
   ExtDebugMarkerSpecVersion* = 4

@@ -1,10 +1,9 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_EXT_global_priority
-# =================================
+
 
 import ../platform
 import ../features/vk10
-
 
 const
   ExtGlobalPrioritySpecVersion* = 2
@@ -20,6 +19,5 @@ type
     mediumExt = 256
     highExt = 512
     realtimeExt = 1024
-
 
 

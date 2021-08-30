@@ -1,10 +1,9 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_KHR_bind_memory2
-# =================================
+
 
 import ../platform
 import ../features/vk10
-
 
 const
   KhrBindMemory2SpecVersion* = 1

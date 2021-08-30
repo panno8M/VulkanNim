@@ -1,11 +1,10 @@
-# Generated at 2021-08-28T12:28:00Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_KHR_external_memory
-# =================================
+
 
 import ../platform
 import ../features/vk10
-import VK_KHR_external_memory_capabilities
-
+import ./VK_KHR_external_memory_capabilities
 
 const
   KhrExternalMemorySpecVersion* = 1
@@ -24,5 +23,4 @@ StructureType.defineAliases:
   externalMemoryBufferCreateInfo as externalMemoryBufferCreateInfoKhr
   externalMemoryImageCreateInfo as externalMemoryImageCreateInfoKhr
   exportMemoryAllocateInfo as exportMemoryAllocateInfoKhr
-
 

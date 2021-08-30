@@ -1,10 +1,9 @@
-# Generated at 2021-08-28T12:28:00Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_NV_framebuffer_mixed_samples
-# =================================
+
 
 import ../platform
 import ../features/vk10
-
 
 const
   NvFramebufferMixedSamplesSpecVersion* = 1
@@ -25,6 +24,5 @@ type
     rgbNv = 1
     alphaNv = 2
     rgbaNv = 3
-
 
 

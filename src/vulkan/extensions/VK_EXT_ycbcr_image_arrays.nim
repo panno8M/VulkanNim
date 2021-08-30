@@ -1,11 +1,10 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_EXT_ycbcr_image_arrays
-# =================================
+
 
 import ../platform
 import ../features/vk10
-import VK_KHR_sampler_ycbcr_conversion
-
+import ./VK_KHR_sampler_ycbcr_conversion
 
 const
   ExtYcbcrImageArraysSpecVersion* = 1
@@ -16,6 +15,5 @@ type
     sType*: StructureType
     pNext*: pointer
     ycbcrImageArrays*: Bool32
-
 
 

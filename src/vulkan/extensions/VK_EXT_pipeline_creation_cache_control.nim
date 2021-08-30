@@ -1,10 +1,9 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_EXT_pipeline_creation_cache_control
-# ======================================
+
 
 import ../platform
 import ../features/vk10
-
 
 const
   ExtPipelineCreationCacheControlSpecVersion* = 3
@@ -18,5 +17,4 @@ type
 
 Result.defineAliases:
   pipelineCompileRequiredExt as errorPipelineCompileRequiredExt
-
 

@@ -1,11 +1,10 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_EXT_shader_atomic_float
-# =================================
+
 
 import ../platform
 import ../features/vk10
-import VK_KHR_get_physical_device_properties2
-
+import ./VK_KHR_get_physical_device_properties2
 
 const
   ExtShaderAtomicFloatSpecVersion* = 1
@@ -27,6 +26,5 @@ type
     shaderImageFloat32AtomicAdd*: Bool32
     sparseImageFloat32Atomics*: Bool32
     sparseImageFloat32AtomicAdd*: Bool32
-
 
 

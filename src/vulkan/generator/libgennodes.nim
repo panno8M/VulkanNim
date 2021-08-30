@@ -10,6 +10,7 @@ import algorithm
 import xmltree
 import tables
 import logging
+import times
 
 import ./utils
 import ./nodedefs
@@ -229,14 +230,14 @@ proc renderCommandLoader*(libFile: LibFile; resources: Resources): string =
 
   return if commandLoaderDefs.len == 0: ""
   else:
-    "proc load{libFile.fileName.capitalizeAscii}*(instance: Instance) =\n".fmt &
+    "proc load{libFile.fileName.splitFile.name.capitalizeAscii}*(instance: Instance) =\n".fmt &
     "  instance.defineLoader(`<<`)\n\n" &
     commandLoaderDefs.mapIt(it.indent(2)).join("\n\n")
 
 func renderInstanceCommandLoader*(fileName: string): string =
-  assert fileName in ["vk10", "vk11"]
+  assert fileName in ["features/vk10", "features/vk11"]
   case fileName
-  of "vk10":
+  of "features/vk10":
     result =
       "proc loadInstanceProcs*() =\n" &
       "  nil.defineLoader(`<<`)\n" &
@@ -244,33 +245,52 @@ func renderInstanceCommandLoader*(fileName: string): string =
       "  enumerateInstanceExtensionPropertiesCage << \"vkEnumerateInstanceExtensionProperties\"\n" &
       "  enumerateInstanceLayerPropertiesCage << \"vkEnumerateInstanceLayerProperties\"\n" &
       "  createInstanceCage << \"vkCreateInstance\""
-  of "vk11":
+  of "features/vk11":
     result =
       "proc loadInstanceProcs*() =\n" &
       "  vk10.loadInstanceProcs()\n" &
       "  nil.defineLoader(`<<`)\n" &
       "  enumerateInstanceVersionCage << \"vkEnumerateInstanceVersion\""
 
-proc render*(libFile: LibFile; resources: Resources): string =
+proc render*(libFile: LibFile; library: Library; resources: Resources): string =
   var renderedNodes: seq[string]
   var enumAliasesRequired: seq[NodeEnumAliases]
-  result &= libFile.fileHeader
+  result &= "# Generated at {now().utc()}\n".fmt
+  result &= libFile.fileName.splitFile.name.commentify
   result.LF
-  result &= libFile
-    .dependencies
-    .mapIt("import {it.fileName}".fmt)
-    .join("\n").LF
-  result &= libFile
-    .dependencies
-    .filterIt(it.exportIt)
+  if libFile.mergedFileNames.len != 0:
+    result &= libFile.mergedFileNames.mapIt(it.splitFile.name).join("\n").commentify
+    result.LF
+  if not libFile.fileHeader.isEmptyOrWhitespace:
+    result &= libFile.fileHeader
+    result.LF
+
+  result.LF
+  result.LF
+
+  let dependencies = libFile
+    .deps
     .mapIt( block:
-      if it.fileName in ["vk10"]:
-        "export {it.fileName.splitFile.name} except loadInstanceProcs".fmt
-      else:
-        "export {it.fileName.splitFile.name}".fmt
-    )
-    .join("\n").LF
-  result.LF
+      let (idir, iname, iext) = library[it.fileName].fileName.splitFile
+      let (ldir, lname, lext) = libFile.fileName.splitFile
+      if idir == ldir: (fileName: "."/iname, exportit: it.exportit)
+      else: (fileName: ".."/idir/iname, exportit: it.exportit))
+    .deduplicate
+  if dependencies.len != 0:
+    result &= dependencies
+      .mapIt("import {it.fileName}".fmt)
+      .join("\n").LF
+    if dependencies.filterIt(it.exportit).len != 0:
+      result &= dependencies
+        .filterIt(it.exportIt)
+        .mapIt( block:
+          if it.fileName == "./vk10":
+            "export {it.fileName.splitFile.name} except loadInstanceProcs".fmt
+          else:
+            "export {it.fileName.splitFile.name}".fmt
+        )
+        .join("\n").LF
+    result.LF
 
   block Solve_basetypes:
     var typeDefs: seq[seq[string]]
@@ -337,13 +357,13 @@ proc render*(libFile: LibFile; resources: Resources): string =
         reqDefs.add case require.comment.isSome
           of true: concat(@[require.comment.get.commentify], reqDef)
           of false: reqDef
-
-    result.add "const\n"
-    result.add reqDefs
-      .mapIt(it.map(s => s.indent(2)).join("\n"))
-      .join("\n\n")
-    result.LF
-    result.LF
+    if reqDefs.len != 0:
+      result.add "const\n"
+      result.add reqDefs
+        .mapIt(it.map(s => s.indent(2)).join("\n"))
+        .join("\n\n")
+      result.LF
+      result.LF
 
   block Solve_types:
     var typeDefs: seq[seq[string]]
@@ -434,18 +454,19 @@ proc render*(libFile: LibFile; resources: Resources): string =
       for key, val in enumAliases:
         reqDefs[^1].add val.render(resources.vendorTags)
 
+    if reqDefs.len != 0:
+      result &= reqDefs.mapIt(it.join("\n")).filterIt(it.len != 0).join("\n\n\n")
+      result.LF
 
-    result &= reqDefs.mapIt(it.join("\n")).filterIt(it.len != 0).join("\n\n\n")
-    result.LF
-
-  if libFile.fileName in ["vk10", "vk11"]: # Insert_basic_loader:
+  if libFile.fileName in ["features/vk10", "features/vk11"]: # Insert_basic_loader:
     result &= libFile.fileName.renderInstanceCommandLoader
     result.LF
     result.LF
 
   result &= libFile.renderCommandLoader(resources)
-  result.LF
-  result &= libFile.fileFooter
+  if not libFile.fileFooter.isEmptyOrWhitespace:
+    result.LF
+    result &= libFile.fileFooter
 
 #!SECTION
 
@@ -805,7 +826,7 @@ proc extractAllNodeEnumExtensions*(rootXml: XmlNode; resources: var Resources) {
             nodeEnumVal.value =
               if value.isSome: value.get
               else: "1000{extnumber.get-1:03}{offset.get:03}".fmt.parseInt
-            if resources.enums[nodeEnumVal.extends].enumVals.findIt(it.value == nodeEnumVal.value) == nil:
+            if resources.enums[nodeEnumVal.extends].enumVals.findIt(it.kind == nkeValue and it.value == nodeEnumVal.value) == nil:
               resources.enums[nodeEnumVal.extends].enumVals.add nodeEnumVal
           except ValueError:
             xmlError title"@enum extends Extraction > cannot parse the value": $theEnum
@@ -814,7 +835,8 @@ proc extractAllNodeEnumExtensions*(rootXml: XmlNode; resources: var Resources) {
         of nkeBitpos:
           try:
             nodeEnumVal.bitpos = bitpos.get
-            resources.enums[nodeEnumVal.extends].enumVals.add nodeEnumVal
+            if resources.enums[nodeEnumVal.extends].enumVals.findIt(it.kind == nkeBitpos and it.bitpos == nodeEnumVal.bitpos) == nil:
+              resources.enums[nodeEnumVal.extends].enumVals.add nodeEnumVal
           except KeyError:
             xmlError title"@enum extends Extraction >": $theEnum
       else: continue
@@ -950,3 +972,23 @@ proc extractResources*(rootXml: XmlNode): Resources {.raises: [LoggingFailure, E
     .filterByCategory("handle")
     .mapIt(it.extractNodehandle)
     .zipTable
+
+proc merge*(library: var Library; base: string; materials: varargs[string]) =
+  if not library.hasKey(base) or
+     materials.anyIt(not library.hasKey(it)):
+    return
+
+  var result: LibFile = library[base]
+  for material in materials:
+    let lib = library[material]
+    library[material] = result
+    result.requires.add lib.requires
+    result.deps.add lib.deps
+    result.mergedFileNames.add lib.fileName
+
+  result.requires = result.requires.deduplicate
+  for i in countdown(result.deps.high, result.deps.low):
+    if result.deps[i].filename in materials or
+       result.deps[i].filename == result.fileName:
+      result.deps.delete(i)
+

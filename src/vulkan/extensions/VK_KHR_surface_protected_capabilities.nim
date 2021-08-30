@@ -1,11 +1,10 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_KHR_surface_protected_capabilities
-# =====================================
+
 
 import ../platform
 import ../features/vk10
-import VK_KHR_get_surface_capabilities2
-
+import ./VK_KHR_get_surface_capabilities2
 
 const
   KhrSurfaceProtectedCapabilitiesSpecVersion* = 1
@@ -16,6 +15,5 @@ type
     sType*: StructureType
     pNext*: pointer
     supportsProtected*: Bool32
-
 
 

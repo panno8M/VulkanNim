@@ -1,10 +1,9 @@
-# Generated at 2021-08-28T12:28:00Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_KHR_sampler_mirror_clamp_to_edge
-# ===================================
+
 
 import ../platform
 import ../features/vk10
-
 
 const
   KhrSamplerMirrorClampToEdgeSpecVersion* = 3
@@ -13,5 +12,4 @@ const
 
 SamplerAddressMode.defineAliases:
   mirrorClampToEdge as mirrorClampToEdgeKhr
-
 

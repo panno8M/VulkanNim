@@ -1,12 +1,11 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_KHR_separate_depth_stencil_layouts
-# =====================================
+
 
 import ../platform
 import ../features/vk10
-import VK_KHR_get_physical_device_properties2
-import VK_KHR_create_renderpass2
-
+import ./VK_KHR_get_physical_device_properties2
+import ./VK_KHR_create_renderpass2
 
 const
   KhrSeparateDepthStencilLayoutsSpecVersion* = 1
@@ -27,5 +26,4 @@ ImageLayout.defineAliases:
   depthReadOnlyOptimal as depthReadOnlyOptimalKhr
   stencilAttachmentOptimal as stencilAttachmentOptimalKhr
   stencilReadOnlyOptimal as stencilReadOnlyOptimalKhr
-
 

@@ -1,11 +1,10 @@
-# Generated at 2021-08-28T12:28:00Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_EXT_texture_compression_astc_hdr
-# ===================================
+
 
 import ../platform
 import ../features/vk10
-import VK_KHR_get_physical_device_properties2
-
+import ./VK_KHR_get_physical_device_properties2
 
 const
   ExtTextureCompressionAstcHdrSpecVersion* = 1
@@ -16,6 +15,5 @@ type
     sType*: StructureType
     pNext*: pointer
     textureCompressionASTC_HDR*: Bool32
-
 
 

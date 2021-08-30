@@ -24,11 +24,13 @@ type
     comment*: Option[string]
     targets*: seq[NodeRequireVal]
 
+  Library* = TableRef[string, LibFile]
   LibFile* = ref object
+    deps*: seq[tuple[fileName: string; exportit: bool]]
     fileHeader*: string
     fileFooter*: string
     fileName*: string
-    dependencies*: seq[tuple[fileName: string; exportIt: bool]]
+    mergedFileNames*: seq[string]
     requires*: seq[NodeRequire]
 
   NodeKindEnum* = enum

@@ -1,10 +1,9 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_EXT_subgroup_size_control
-# =================================
+
 
 import ../platform
 import ../features/vk10
-
 
 const
   ExtSubgroupSizeControlSpecVersion* = 2
@@ -27,6 +26,5 @@ type
     sType*: StructureType
     pNext*: pointer
     requiredSubgroupSize*: uint32
-
 
 

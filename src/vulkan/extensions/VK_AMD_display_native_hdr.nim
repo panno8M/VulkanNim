@@ -1,13 +1,12 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_AMD_display_native_hdr
-# =================================
+
 
 import ../platform
 import ../features/vk10
-import VK_KHR_get_physical_device_properties2
-import VK_KHR_get_surface_capabilities2
-import VK_KHR_swapchain
-
+import ./VK_KHR_get_physical_device_properties2
+import ./VK_KHR_get_surface_capabilities2
+import ./VK_KHR_swapchain
 
 const
   AmdDisplayNativeHdrSpecVersion* = 1

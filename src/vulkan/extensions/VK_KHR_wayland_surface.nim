@@ -1,11 +1,10 @@
-# Generated at 2021-08-28T12:28:00Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_KHR_wayland_surface
-# =================================
+
 
 import ../platform
 import ../features/vk10
-import VK_KHR_surface
-
+import ./VK_KHR_surface
 
 const
   KhrWaylandSurfaceSpecVersion* = 6

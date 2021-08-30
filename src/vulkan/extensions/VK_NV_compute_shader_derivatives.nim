@@ -1,11 +1,10 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_NV_compute_shader_derivatives
-# =================================
+
 
 import ../platform
 import ../features/vk10
-import VK_KHR_get_physical_device_properties2
-
+import ./VK_KHR_get_physical_device_properties2
 
 const
   NvComputeShaderDerivativesSpecVersion* = 1
@@ -17,6 +16,5 @@ type
     pNext*: pointer
     computeDerivativeGroupQuads*: Bool32
     computeDerivativeGroupLinear*: Bool32
-
 
 

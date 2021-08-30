@@ -1,11 +1,10 @@
-# Generated at 2021-08-28T12:28:00Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_NV_win32_keyed_mutex
-# =================================
+
 
 import ../platform
 import ../features/vk10
-import VK_NV_external_memory_win32
-
+import ./VK_NV_external_memory_win32
 
 const
   NvWin32KeyedMutexSpecVersion* = 2
@@ -22,6 +21,5 @@ type
     releaseCount*: uint32
     pReleaseSyncs*: ptr DeviceMemory
     pReleaseKeys*: ptr uint64
-
 
 

@@ -1,10 +1,11 @@
-# Generated at 2021-08-30T01:26:11Z
-# vulkan 1.1
+# Generated at 2021-08-30T14:34:11Z
+# vk11
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
 
+
 import ../platform
-import vk10
+import ./vk10
 export vk10 except loadInstanceProcs
 
 const

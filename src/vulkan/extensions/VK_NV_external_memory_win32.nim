@@ -1,11 +1,10 @@
-# Generated at 2021-08-28T12:28:00Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_NV_external_memory_win32
-# =================================
+
 
 import ../platform
 import ../features/vk10
-import VK_NV_external_memory
-
+import ./VK_NV_external_memory
 
 const
   NvExternalMemoryWin32SpecVersion* = 1

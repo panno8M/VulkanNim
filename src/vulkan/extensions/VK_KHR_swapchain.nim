@@ -1,11 +1,10 @@
-# Generated at 2021-08-30T01:26:11Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_KHR_swapchain
-# =================================
+
 
 import ../platform
 import ../features/vk10
-import VK_KHR_surface
-
+import ./VK_KHR_surface
 
 const
   KhrSwapchainSpecVersion* = 70
@@ -16,8 +15,6 @@ const
 type
   SwapchainCreateFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
     # Provided by VK_KHR_swapchain
-    splitInstanceBindRegionsKhr = 0x00000001 # Allow images with VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT
-    # Provided by VK_KHR_device_group
     splitInstanceBindRegionsKhr = 0x00000001 # Allow images with VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT
     # Provided by VK_KHR_swapchain
     protectedKhr = 0x00000002 # Swapchain is protected

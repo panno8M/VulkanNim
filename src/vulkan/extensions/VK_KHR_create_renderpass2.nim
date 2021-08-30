@@ -1,12 +1,11 @@
-# Generated at 2021-08-28T12:28:00Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_KHR_create_renderpass2
-# =================================
+
 
 import ../platform
 import ../features/vk10
-import VK_KHR_multiview
-import VK_KHR_maintenance2
-
+import ./VK_KHR_multiview
+import ./VK_KHR_maintenance2
 
 const
   KhrCreateRenderpass2SpecVersion* = 1

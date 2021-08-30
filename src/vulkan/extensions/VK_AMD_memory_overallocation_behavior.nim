@@ -1,10 +1,9 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_AMD_memory_overallocation_behavior
-# =====================================
+
 
 import ../platform
 import ../features/vk10
-
 
 const
   AmdMemoryOverallocationBehaviorSpecVersion* = 1
@@ -19,6 +18,5 @@ type
     sType*: StructureType
     pNext*: pointer
     overallocationBehavior*: MemoryOverallocationBehaviorAMD
-
 
 

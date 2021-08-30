@@ -1,10 +1,9 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_EXT_validation_features
-# =================================
+
 
 import ../platform
 import ../features/vk10
-
 
 const
   ExtValidationFeaturesSpecVersion* = 4
@@ -32,6 +31,5 @@ type
     objectLifetimesExt = 4
     coreChecksExt = 5
     uniqueHandlesExt = 6
-
 
 

@@ -1,12 +1,11 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_GGP_frame_token
-# =================================
+
 
 import ../platform
 import ../features/vk10
-import VK_KHR_swapchain
-import VK_GGP_stream_descriptor_surface
-
+import ./VK_KHR_swapchain
+import ./VK_GGP_stream_descriptor_surface
 
 const
   GgpFrameTokenSpecVersion* = 1
@@ -17,6 +16,5 @@ type
     sType*: StructureType
     pNext*: pointer
     frameToken*: GgpFrameToken
-
 
 

@@ -1,10 +1,9 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_KHR_shader_subgroup_extended_types
-# =====================================
+
 
 import ../platform
 import ../features/vk10
-
 
 const
   KhrShaderSubgroupExtendedTypesSpecVersion* = 1
@@ -15,5 +14,4 @@ type
 
 StructureType.defineAliases:
   physicalDeviceShaderSubgroupExtendedTypesFeatures as physicalDeviceShaderSubgroupExtendedTypesFeaturesKhr
-
 

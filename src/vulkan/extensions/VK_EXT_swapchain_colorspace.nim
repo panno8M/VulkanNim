@@ -1,11 +1,10 @@
-# Generated at 2021-08-28T12:28:00Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_EXT_swapchain_colorspace
-# =================================
+
 
 import ../platform
 import ../features/vk10
-import VK_KHR_surface
-
+import ./VK_KHR_surface
 
 const
   ExtSwapchainColorSpaceSpecVersion* = 4
@@ -13,5 +12,4 @@ const
 
 ColorSpaceKHR.defineAliases:
   displayP3LinearExt as dciP3LinearExt
-
 

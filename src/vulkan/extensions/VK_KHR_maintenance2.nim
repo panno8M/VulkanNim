@@ -1,10 +1,9 @@
-# Generated at 2021-08-28T12:28:00Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_KHR_maintenance2
-# =================================
+
 
 import ../platform
 import ../features/vk10
-
 
 const
   KhrMaintenance2SpecVersion* = 1
@@ -40,5 +39,4 @@ ImageCreateFlagBits.defineAliases:
 ImageLayout.defineAliases:
   depthReadOnlyStencilAttachmentOptimal as depthReadOnlyStencilAttachmentOptimalKhr
   depthAttachmentStencilReadOnlyOptimal as depthAttachmentStencilReadOnlyOptimalKhr
-
 

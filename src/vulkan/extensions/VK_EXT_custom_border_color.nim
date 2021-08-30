@@ -1,10 +1,9 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_EXT_custom_border_color
-# =================================
+
 
 import ../platform
 import ../features/vk10
-
 
 const
   ExtCustomBorderColorSpecVersion* = 12
@@ -25,6 +24,5 @@ type
     pNext*: pointer
     customBorderColors*: Bool32
     customBorderColorWithoutFormat*: Bool32
-
 
 

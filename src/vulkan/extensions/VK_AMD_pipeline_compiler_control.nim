@@ -1,10 +1,9 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_AMD_pipeline_compiler_control
-# =================================
+
 
 import ../platform
 import ../features/vk10
-
 
 const
   AmdPipelineCompilerControlSpecVersion* = 1
@@ -17,6 +16,5 @@ type
     sType*: StructureType
     pNext*: pointer
     compilerControlFlags*: PipelineCompilerControlFlagsAMD
-
 
 

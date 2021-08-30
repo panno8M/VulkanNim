@@ -1,10 +1,9 @@
-# Generated at 2021-08-28T12:28:00Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_NV_viewport_swizzle
-# =================================
+
 
 import ../platform
 import ../features/vk10
-
 
 const
   NvViewportSwizzleSpecVersion* = 1
@@ -32,6 +31,5 @@ type
     viewportCount*: uint32
     pViewportSwizzles*: ptr ViewportSwizzleNV
   PipelineViewportSwizzleStateCreateFlagsNV* = Flags[distinct UnusedEnum]
-
 
 

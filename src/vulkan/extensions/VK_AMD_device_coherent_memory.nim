@@ -1,10 +1,9 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_AMD_device_coherent_memory
-# =================================
+
 
 import ../platform
 import ../features/vk10
-
 
 const
   AmdDeviceCoherentMemorySpecVersion* = 1
@@ -15,6 +14,5 @@ type
     sType*: StructureType
     pNext*: pointer
     deviceCoherentMemory*: Bool32
-
 
 

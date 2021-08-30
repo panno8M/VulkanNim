@@ -1,10 +1,10 @@
-# Generated at 2021-08-30T09:35:51Z
-# vulkan 1.0
+# Generated at 2021-08-30T14:31:10Z
+# vk10
 # Vulkan core API interface definitions
 # =====================================
 
-import ../platform
 
+import ../platform
 
 type # basetypes
   # Fundamental types used by many commands and structures

@@ -1,12 +1,11 @@
-# Generated at 2021-08-28T12:28:00Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_EXT_display_control
-# =================================
+
 
 import ../platform
 import ../features/vk10
-import VK_EXT_display_surface_counter
-import VK_KHR_swapchain
-
+import ./VK_EXT_display_surface_counter
+import ./VK_KHR_swapchain
 
 const
   ExtDisplayControlSpecVersion* = 1

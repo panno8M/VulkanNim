@@ -1,11 +1,10 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_EXT_fragment_density_map2
-# =================================
+
 
 import ../platform
 import ../features/vk10
-import VK_EXT_fragment_density_map
-
+import ./VK_EXT_fragment_density_map
 
 const
   ExtFragmentDensityMap2SpecVersion* = 1
@@ -23,6 +22,5 @@ type
     subsampledCoarseReconstructionEarlyAccess*: Bool32
     maxSubsampledArrayLayers*: uint32
     maxDescriptorSetSubsampledSamplers*: uint32
-
 
 

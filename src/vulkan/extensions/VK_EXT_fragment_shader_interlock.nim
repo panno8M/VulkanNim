@@ -1,11 +1,10 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_EXT_fragment_shader_interlock
-# =================================
+
 
 import ../platform
 import ../features/vk10
-import VK_KHR_get_physical_device_properties2
-
+import ./VK_KHR_get_physical_device_properties2
 
 const
   ExtFragmentShaderInterlockSpecVersion* = 1
@@ -18,6 +17,5 @@ type
     fragmentShaderSampleInterlock*: Bool32
     fragmentShaderPixelInterlock*: Bool32
     fragmentShaderShadingRateInterlock*: Bool32
-
 
 

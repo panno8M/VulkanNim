@@ -1,12 +1,11 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_NV_ray_tracing
-# =================================
+
 
 import ../platform
 import ../features/vk10
-import VK_KHR_get_physical_device_properties2
-import VK_KHR_get_memory_requirements2
-
+import ./VK_KHR_get_physical_device_properties2
+import ./VK_KHR_get_memory_requirements2
 
 const
   NvRayTracingSpecVersion* = 3

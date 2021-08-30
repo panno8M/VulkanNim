@@ -1,11 +1,10 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_NV_coverage_reduction_mode
-# =================================
+
 
 import ../platform
 import ../features/vk10
-import VK_NV_framebuffer_mixed_samples
-
+import ./VK_NV_framebuffer_mixed_samples
 
 const
   NvCoverageReductionModeSpecVersion* = 1

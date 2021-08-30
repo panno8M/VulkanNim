@@ -1,10 +1,9 @@
-# Generated at 2021-08-28T12:28:00Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_EXT_validation_flags
-# =================================
+
 
 import ../platform
 import ../features/vk10
-
 
 const
   ExtValidationFlagsSpecVersion* = 2
@@ -19,6 +18,5 @@ type
   ValidationCheckEXT* {.size: sizeof(int32), pure.} = enum
     allExt = 0
     shadersExt = 1
-
 
 

@@ -1,11 +1,10 @@
-# Generated at 2021-08-28T12:28:00Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_KHR_external_semaphore
-# =================================
+
 
 import ../platform
 import ../features/vk10
-import VK_KHR_external_semaphore_capabilities
-
+import ./VK_KHR_external_semaphore_capabilities
 
 const
   KhrExternalSemaphoreSpecVersion* = 1
@@ -21,5 +20,4 @@ StructureType.defineAliases:
 
 SemaphoreImportFlagBits.defineAliases:
   temporary as temporaryKhr
-
 

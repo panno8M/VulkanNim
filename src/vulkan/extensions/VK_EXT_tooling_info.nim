@@ -1,10 +1,9 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_EXT_tooling_info
-# =================================
+
 
 import ../platform
 import ../features/vk10
-
 
 const
   ExtToolingInfoSpecVersion* = 1
@@ -21,10 +20,6 @@ type
     modifyingFeaturesExt = 0x00000010
     # Provided by VK_EXT_tooling_info
     debugReportingExt = 0x00000020
-    # Provided by VK_EXT_tooling_info
-    debugReportingExt = 0x00000020
-    # Provided by VK_EXT_tooling_info
-    debugMarkersExt = 0x00000040
     # Provided by VK_EXT_tooling_info
     debugMarkersExt = 0x00000040
   ToolPurposeFlagsEXT* = Flags[ToolPurposeFlagBitsEXT]

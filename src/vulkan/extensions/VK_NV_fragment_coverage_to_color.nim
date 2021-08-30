@@ -1,10 +1,9 @@
-# Generated at 2021-08-28T12:28:00Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_NV_fragment_coverage_to_color
-# =================================
+
 
 import ../platform
 import ../features/vk10
-
 
 const
   NvFragmentCoverageToColorSpecVersion* = 1
@@ -18,6 +17,5 @@ type
     flags*: PipelineCoverageToColorStateCreateFlagsNV
     coverageToColorEnable*: Bool32
     coverageToColorLocation*: uint32
-
 
 

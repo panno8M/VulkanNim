@@ -1,10 +1,9 @@
-# Generated at 2021-08-28T12:28:00Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_NV_shader_sm_builtins
-# =================================
+
 
 import ../platform
 import ../features/vk10
-
 
 const
   NvShaderSmBuiltinsSpecVersion* = 1
@@ -20,6 +19,5 @@ type
     sType*: StructureType
     pNext*: pointer
     shaderSMBuiltins*: Bool32
-
 
 

@@ -1,17 +1,17 @@
-# Generated at 2021-08-30T01:26:11Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_KHR_ray_tracing
 # Explicit sort order to require processing after VK_NV_ray_tracing
 # =================================================================
 
+
 import ../platform
 import ../features/vk10
-import VK_KHR_get_physical_device_properties2
-import VK_KHR_get_memory_requirements2
-import VK_EXT_descriptor_indexing
-import VK_KHR_buffer_device_address
-import VK_KHR_deferred_host_operations
-import VK_KHR_pipeline_library
-
+import ./VK_KHR_get_physical_device_properties2
+import ./VK_KHR_get_memory_requirements2
+import ./VK_EXT_descriptor_indexing
+import ./VK_KHR_buffer_device_address
+import ./VK_KHR_deferred_host_operations
+import ./VK_KHR_pipeline_library
 
 const
   KhrRayTracingSpecVersion* = 8

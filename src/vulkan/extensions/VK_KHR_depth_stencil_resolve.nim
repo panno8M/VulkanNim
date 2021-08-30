@@ -1,11 +1,10 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_KHR_depth_stencil_resolve
-# =================================
+
 
 import ../platform
 import ../features/vk10
-import VK_KHR_create_renderpass2
-
+import ./VK_KHR_create_renderpass2
 
 const
   KhrDepthStencilResolveSpecVersion* = 1
@@ -27,5 +26,4 @@ ResolveModeFlagBits.defineAliases:
 StructureType.defineAliases:
   physicalDeviceDepthStencilResolveProperties as physicalDeviceDepthStencilResolvePropertiesKhr
   subpassDescriptionDepthStencilResolve as subpassDescriptionDepthStencilResolveKhr
-
 

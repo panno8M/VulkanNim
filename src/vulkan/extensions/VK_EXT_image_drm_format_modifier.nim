@@ -1,14 +1,13 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-30T14:31:10Z
 # VK_EXT_image_drm_format_modifier
-# =================================
+
 
 import ../platform
 import ../features/vk10
-import VK_KHR_bind_memory2
-import VK_KHR_get_physical_device_properties2
-import VK_KHR_image_format_list
-import VK_KHR_sampler_ycbcr_conversion
-
+import ./VK_KHR_bind_memory2
+import ./VK_KHR_get_physical_device_properties2
+import ./VK_KHR_image_format_list
+import ./VK_KHR_sampler_ycbcr_conversion
 
 const
   ExtImageDrmFormatModifierSpecVersion* = 1
