@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:41:37Z
 # VK_KHR_sampler_ycbcr_conversion
 
 
@@ -25,9 +25,6 @@ type
   SamplerYcbcrRangeKHR* = distinct UnusedEnum
   ChromaLocationKHR* = distinct UnusedEnum
 
-var # commands
-  
-  
 const createSamplerYcbcrConversionKHR* = createSamplerYcbcrConversion
 const destroySamplerYcbcrConversionKHR* = destroySamplerYcbcrConversion
 DebugReportObjectTypeEXT.defineAliases:

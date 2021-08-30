@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:41:37Z
 # VK_EXT_buffer_device_address
 
 
@@ -24,8 +24,6 @@ type
     pNext*: pointer
     deviceAddress*: DeviceAddress
 
-var # commands
-  
 const getBufferDeviceAddressEXT* = getBufferDeviceAddress
 BufferUsageFlagBits.defineAliases:
   shaderDeviceAddress as shaderDeviceAddressExt

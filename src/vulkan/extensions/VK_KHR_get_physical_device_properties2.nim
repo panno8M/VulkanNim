@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:41:37Z
 # VK_KHR_get_physical_device_properties2
 
 
@@ -20,14 +20,6 @@ type
   SparseImageFormatProperties2KHR* = object
   PhysicalDeviceSparseImageFormatInfo2KHR* = object
 
-var # commands
-  
-  
-  
-  
-  
-  
-  
 const getPhysicalDeviceFeatures2KHR* = getPhysicalDeviceFeatures2
 const getPhysicalDeviceProperties2KHR* = getPhysicalDeviceProperties2
 const getPhysicalDeviceFormatProperties2KHR* = getPhysicalDeviceFormatProperties2

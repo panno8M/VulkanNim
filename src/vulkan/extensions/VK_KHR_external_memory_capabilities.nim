@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:41:37Z
 # VK_KHR_external_memory_capabilities
 
 
@@ -23,8 +23,6 @@ type
   ExternalBufferPropertiesKHR* = object
   PhysicalDeviceIDPropertiesKHR* = object
 
-var # commands
-  
 const getPhysicalDeviceExternalBufferPropertiesKHR* = getPhysicalDeviceExternalBufferProperties
 ExternalMemoryFeatureFlagBits.defineAliases:
   dedicatedOnly as dedicatedOnlyKhr

@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:41:37Z
 # VK_EXT_full_screen_exclusive
 
 
@@ -64,9 +64,6 @@ proc getDeviceGroupSurfacePresentModes2EXT*(
       pModes: ptr DeviceGroupPresentModeFlagsKHR;
     ): Result {.cdecl, discardable.} =
   getDeviceGroupSurfacePresentModes2EXTCage(device,pSurfaceInfo,pModes)
-
-
-var # commands
 proc loadVK_EXT_full_screen_exclusive*(instance: Instance) =
   instance.defineLoader(`<<`)
 

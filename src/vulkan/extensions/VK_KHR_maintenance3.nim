@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:41:37Z
 # VK_KHR_maintenance3
 
 
@@ -14,8 +14,6 @@ type
   PhysicalDeviceMaintenance3PropertiesKHR* = object
   DescriptorSetLayoutSupportKHR* = object
 
-var # commands
-  
 const getDescriptorSetLayoutSupportKHR* = getDescriptorSetLayoutSupport
 StructureType.defineAliases:
   physicalDeviceMaintenance3Properties as physicalDeviceMaintenance3PropertiesKhr

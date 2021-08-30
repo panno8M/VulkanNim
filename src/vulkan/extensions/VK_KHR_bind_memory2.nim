@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:41:37Z
 # VK_KHR_bind_memory2
 
 
@@ -13,9 +13,6 @@ type
   BindBufferMemoryInfoKHR* = object
   BindImageMemoryInfoKHR* = object
 
-var # commands
-  
-  
 const bindBufferMemory2KHR* = bindBufferMemory2
 const bindImageMemory2KHR* = bindImageMemory2
 StructureType.defineAliases:

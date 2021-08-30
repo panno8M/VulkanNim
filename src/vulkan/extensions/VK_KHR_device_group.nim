@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:41:37Z
 # VK_KHR_device_group
 
 
@@ -66,10 +66,6 @@ type
     pNext*: pointer
     modes*: DeviceGroupPresentModeFlagsKHR
 
-var # commands
-  
-  
-  
 const getDeviceGroupPeerMemoryFeaturesKHR* = getDeviceGroupPeerMemoryFeatures
 const cmdSetDeviceMaskKHR* = cmdSetDeviceMask
 const cmdDispatchBaseKHR* = cmdDispatchBase

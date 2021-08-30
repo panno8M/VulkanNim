@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:41:37Z
 # VK_KHR_buffer_device_address
 
 
@@ -17,10 +17,6 @@ type
   MemoryOpaqueCaptureAddressAllocateInfoKHR* = object
   DeviceMemoryOpaqueCaptureAddressInfoKHR* = object
 
-var # commands
-  
-  
-  
 const getBufferDeviceAddressKHR* = getBufferDeviceAddress
 const getBufferOpaqueCaptureAddressKHR* = getBufferOpaqueCaptureAddress
 const getDeviceMemoryOpaqueCaptureAddressKHR* = getDeviceMemoryOpaqueCaptureAddress

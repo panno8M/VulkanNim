@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:41:37Z
 # VK_KHR_maintenance1
 
 
@@ -12,8 +12,6 @@ const
 type
   {name}* = {Alias}
 
-var # commands
-  
 const trimCommandPoolKHR* = trimCommandPool
 Result.defineAliases:
   errorOutOfPoolMemory as errorOutOfPoolMemoryKhr

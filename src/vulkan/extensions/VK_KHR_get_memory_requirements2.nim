@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:41:37Z
 # VK_KHR_get_memory_requirements2
 
 
@@ -16,10 +16,6 @@ type
   MemoryRequirements2KHR* = object
   SparseImageMemoryRequirements2KHR* = object
 
-var # commands
-  
-  
-  
 const getImageMemoryRequirements2KHR* = getImageMemoryRequirements2
 const getBufferMemoryRequirements2KHR* = getBufferMemoryRequirements2
 const getImageSparseMemoryRequirements2KHR* = getImageSparseMemoryRequirements2

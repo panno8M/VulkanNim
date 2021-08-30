@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:41:37Z
 # VK_KHR_timeline_semaphore
 
 
@@ -21,10 +21,6 @@ type
   SemaphoreWaitInfoKHR* = object
   SemaphoreSignalInfoKHR* = object
 
-var # commands
-  
-  
-  
 const getSemaphoreCounterValueKHR* = getSemaphoreCounterValue
 const waitSemaphoresKHR* = waitSemaphores
 const signalSemaphoreKHR* = signalSemaphore

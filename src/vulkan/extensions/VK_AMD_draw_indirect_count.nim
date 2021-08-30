@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:41:37Z
 # VK_AMD_draw_indirect_count
 
 
@@ -9,9 +9,6 @@ const
   AmdDrawIndirectCountSpecVersion* = 2
   AmdDrawIndirectCountExtensionName* = "VK_AMD_draw_indirect_count"
 
-var # commands
-  
-  
 const cmdDrawIndirectCountAMD* = cmdDrawIndirectCount
 const cmdDrawIndexedIndirectCountAMD* = cmdDrawIndexedIndirectCount
 proc loadVK_AMD_draw_indirect_count*(instance: Instance) =

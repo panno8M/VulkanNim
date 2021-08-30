@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:41:37Z
 # VK_KHR_device_group_creation
 
 
@@ -14,8 +14,6 @@ type
   PhysicalDeviceGroupPropertiesKHR* = object
   DeviceGroupDeviceCreateInfoKHR* = object
 
-var # commands
-  
 const enumeratePhysicalDeviceGroupsKHR* = enumeratePhysicalDeviceGroups
 StructureType.defineAliases:
   physicalDeviceGroupProperties as physicalDeviceGroupPropertiesKhr

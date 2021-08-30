@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:41:37Z
 # VK_KHR_create_renderpass2
 
 
@@ -20,11 +20,6 @@ type
   SubpassBeginInfoKHR* = object
   SubpassEndInfoKHR* = object
 
-var # commands
-  
-  
-  
-  
 const createRenderPass2KHR* = createRenderPass2
 const cmdBeginRenderPass2KHR* = cmdBeginRenderPass2
 const cmdNextSubpass2KHR* = cmdNextSubpass2

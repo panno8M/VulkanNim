@@ -424,16 +424,21 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
 
       let reqCommands = require.targets.filter(x => x.kind == nkrCommand)
       if reqCommands.len != 0:
-        reqDefs[^1].add "var # commands"
+        var commandDef: seq[string]
         for reqCommand in reqCommands:
-          if reqCommand.name notin renderedNodes:
-            if resources.commands.hasKey(reqCommand.name):
-              reqDefs[^1].add resources.commands[reqCommand.name].renderCage.indent(2)
+          if reqCommand.name in renderedNodes: continue
+          if resources.commands.hasKey(reqCommand.name):
+            if resources.commands[reqCommand.name].kind == nkbrAlias: continue
+            commandDef.add resources.commands[reqCommand.name].renderCage.indent(2)
+        if commandDef.len != 0:
+          reqDefs[^1].add "var # command cages"
+          reqDefs[^1].add commandDef
+
         for reqCommand in reqCommands:
-          if reqCommand.name notin renderedNodes:
-            if resources.commands.hasKey(reqCommand.name):
-              reqDefs[^1].add resources.commands[reqCommand.name].renderAccessor
-              renderedNodes.add reqCommand.name
+          if reqCommand.name in renderedNodes: continue
+          if resources.commands.hasKey(reqCommand.name):
+            reqDefs[^1].add resources.commands[reqCommand.name].renderAccessor
+            renderedNodes.add reqCommand.name
 
       let reqEnumExts = require.targets.filter(x => x.kind == nkrEnumExtendAlias)
       let enumAliases = newTable[string, NodeEnumAliases]()
