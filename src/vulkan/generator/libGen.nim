@@ -20,11 +20,6 @@ let logger = newMyLogger(open("log", fmWrite), fmtStr="[$time] - $levelname ".fm
 addHandler(logger)
 
 const libRoot = "src/vulkan"
-let fileName = newTable [
-    ("VK_VERSION_1_0", "features/vk10"),
-    ("VK_VERSION_1_1", "features/vk11"),
-    ("VK_VERSION_1_2", "features/vk12"),
-  ]
 let dependencies = newTable [
   ("VK_VERSION_1_0", @[("platform", false), ]),
   ("VK_VERSION_1_1", @[("platform", false), ("features/vk10", true)]),
@@ -51,7 +46,7 @@ proc generate*() =
       name = feature{"name"}
     var
       libFile = LibFile(requires: newSeq[NodeRequire](),
-          fileName: fileName[name],
+          fileName: name.parseFileName,
           deps: dependencies[name]
         )
     if libFile.fileName == "features/vk10":
@@ -73,12 +68,21 @@ proc generate*() =
       if words.len == 4 and words[2] == "extension":
         try: discard words[3].parseInt; continue
         except: break Invalid_Extension_Test
-    let requires = extension{"requires"}.parseWords({','}).mapIt(("extensions"/it, false))
+    let requires = extension{"requires"}.parseWords({','}).mapIt((it.parseFileName, false))
+    let promotedto =
+      if (?extension{"promotedto"}).isSome:
+        some (extension{"promotedto"}.parseFileName, false)
+      else: none (string, bool)
+
     var
       libFile = LibFile(
         requires: newSeq[NodeRequire](),
-        fileName: "extensions"/name,
-        deps: dependenciesBasic.concat(requires)
+        fileName: name.parseFileName,
+        deps:
+          if promotedto.isSome:
+            dependenciesBasic.concat(requires, @[promotedto.get])
+          else:
+            dependenciesBasic.concat(requires)
       )
     if (?extension.comment).isSome:
       libFile.fileHeader &= extension.comment.underline('=').commentify

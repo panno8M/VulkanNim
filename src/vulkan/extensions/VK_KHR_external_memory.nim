@@ -1,10 +1,11 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T23:05:46Z
 # VK_KHR_external_memory
 
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_external_memory_capabilities
+import ../features/vk11
 
 const
   KhrExternalMemorySpecVersion* = 1

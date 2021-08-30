@@ -1,9 +1,10 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-30T23:05:46Z
 # VK_KHR_maintenance1
 
 
 import ../platform
 import ../features/vk10
+import ../features/vk11
 
 const
   KhrMaintenance1SpecVersion* = 2

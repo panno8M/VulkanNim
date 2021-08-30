@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T23:05:46Z
 # VK_KHR_imageless_framebuffer
 
 
@@ -6,6 +6,7 @@ import ../platform
 import ../features/vk10
 import ./VK_KHR_maintenance2
 import ./VK_KHR_image_format_list
+import ../features/vk12
 
 const
   KhrImagelessFramebufferSpecVersion* = 1

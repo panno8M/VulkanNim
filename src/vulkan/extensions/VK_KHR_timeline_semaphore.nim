@@ -1,10 +1,11 @@
-# Generated at 2021-08-30T22:51:47Z
+# Generated at 2021-08-30T23:05:46Z
 # VK_KHR_timeline_semaphore
 
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
+import ../features/vk12
 
 const
   KhrTimelineSemaphoreSpecVersion* = 2

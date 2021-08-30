@@ -263,6 +263,13 @@ proc parseTypeName*(str: string; ptrLv: Natural = 0; arrayLen: seq[NodeArrayLeng
       .concat(@[x])
       .foldr("array[{a}, {b}]".fmt))
 
+proc parseFileName*(str: string): string =
+  case str
+  of "VK_VERSION_1_0": "features/vk10"
+  of "VK_VERSION_1_1": "features/vk11"
+  of "VK_VERSION_1_2": "features/vk12"
+  else: "extensions"/str
+
 proc filterInvalidArgParams*[T](s: openArray[T]): seq[T] =
   s.filterIt(it notin ["const", "unsigned", "signed", "struct", "typedef", "VKAPI_PTR"])
 
