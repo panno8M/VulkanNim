@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:34:11Z
+# Generated at 2021-08-30T22:51:47Z
 # vk11
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -549,7 +549,7 @@ template apiVersion11*(): untyped = makeVersion(1, 1, 0)
 
 # Device Initialization
 # ---------------------
-var # commands
+var # command cages
   enumerateInstanceVersionCage: proc(pApiVersion: ptr uint32;): Result {.cdecl.}
 proc enumerateInstanceVersion*(
       pApiVersion: ptr uint32;
@@ -571,7 +571,7 @@ proc enumerateInstanceVersion*(
 
 # Promoted from VK_KHR_bind_memory2
 # ---------------------------------
-var # commands
+var # command cages
   bindBufferMemory2Cage: proc(device: Device; bindInfoCount: uint32; pBindInfos: ptr BindBufferMemoryInfo;): Result {.cdecl.}
   bindImageMemory2Cage: proc(device: Device; bindInfoCount: uint32; pBindInfos: ptr BindImageMemoryInfo;): Result {.cdecl.}
 proc bindBufferMemory2*(
@@ -598,7 +598,7 @@ proc bindImageMemory2*(
 
 # Promoted from VK_KHR_device_group
 # ---------------------------------
-var # commands
+var # command cages
   getDeviceGroupPeerMemoryFeaturesCage: proc(device: Device; heapIndex: uint32; localDeviceIndex: uint32; remoteDeviceIndex: uint32; pPeerMemoryFeatures: ptr PeerMemoryFeatureFlags;): void {.cdecl.}
   cmdSetDeviceMaskCage: proc(commandBuffer: CommandBuffer; deviceMask: uint32;): void {.cdecl.}
   cmdDispatchBaseCage: proc(commandBuffer: CommandBuffer; baseGroupX: uint32; baseGroupY: uint32; baseGroupZ: uint32; groupCountX: uint32; groupCountY: uint32; groupCountZ: uint32;): void {.cdecl.}
@@ -636,7 +636,7 @@ PipelineCreateFlagBits.defineAliases:
 
 # Promoted from VK_KHR_device_group_creation
 # ------------------------------------------
-var # commands
+var # command cages
   enumeratePhysicalDeviceGroupsCage: proc(instance: Instance; pPhysicalDeviceGroupCount: ptr uint32; pPhysicalDeviceGroupProperties: ptr PhysicalDeviceGroupProperties;): Result {.cdecl.}
 proc enumeratePhysicalDeviceGroups*(
       instance: Instance;
@@ -648,7 +648,7 @@ proc enumeratePhysicalDeviceGroups*(
 
 # Promoted from VK_KHR_get_memory_requirements2
 # ---------------------------------------------
-var # commands
+var # command cages
   getImageMemoryRequirements2Cage: proc(device: Device; pInfo: ptr ImageMemoryRequirementsInfo2; pMemoryRequirements: ptr MemoryRequirements2;): void {.cdecl.}
   getBufferMemoryRequirements2Cage: proc(device: Device; pInfo: ptr BufferMemoryRequirementsInfo2; pMemoryRequirements: ptr MemoryRequirements2;): void {.cdecl.}
   getImageSparseMemoryRequirements2Cage: proc(device: Device; pInfo: ptr ImageSparseMemoryRequirementsInfo2; pSparseMemoryRequirementCount: ptr uint32; pSparseMemoryRequirements: ptr SparseImageMemoryRequirements2;): void {.cdecl.}
@@ -675,7 +675,7 @@ proc getImageSparseMemoryRequirements2*(
 
 # Promoted from VK_KHR_get_physical_device_properties2
 # ----------------------------------------------------
-var # commands
+var # command cages
   getPhysicalDeviceFeatures2Cage: proc(physicalDevice: PhysicalDevice; pFeatures: ptr PhysicalDeviceFeatures2;): void {.cdecl.}
   getPhysicalDeviceProperties2Cage: proc(physicalDevice: PhysicalDevice; pProperties: ptr PhysicalDeviceProperties2;): void {.cdecl.}
   getPhysicalDeviceFormatProperties2Cage: proc(physicalDevice: PhysicalDevice; format: Format; pFormatProperties: ptr FormatProperties2;): void {.cdecl.}
@@ -727,7 +727,7 @@ proc getPhysicalDeviceSparseImageFormatProperties2*(
 
 # Promoted from VK_KHR_maintenance1
 # ---------------------------------
-var # commands
+var # command cages
   trimCommandPoolCage: proc(device: Device; commandPool: CommandPool; flags: CommandPoolTrimFlags;): void {.cdecl.}
 proc trimCommandPool*(
       device: Device;
@@ -754,7 +754,7 @@ StructureType.defineAliases:
 
 # Originally based on VK_KHR_protected_memory (extension 146), which was never published; thus the mystifying large value= numbers below. These are not aliased since they weren't actually promoted from an extension.
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-var # commands
+var # command cages
   getDeviceQueue2Cage: proc(device: Device; pQueueInfo: ptr DeviceQueueInfo2; pQueue: ptr Queue;): void {.cdecl.}
 proc getDeviceQueue2*(
       device: Device;
@@ -766,7 +766,7 @@ proc getDeviceQueue2*(
 
 # Promoted from VK_KHR_sampler_ycbcr_conversion
 # ---------------------------------------------
-var # commands
+var # command cages
   createSamplerYcbcrConversionCage: proc(device: Device; pCreateInfo: ptr SamplerYcbcrConversionCreateInfo; pAllocator: ptr AllocationCallbacks; pYcbcrConversion: ptr SamplerYcbcrConversion;): Result {.cdecl.}
   destroySamplerYcbcrConversionCage: proc(device: Device; ycbcrConversion: SamplerYcbcrConversion; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
 proc createSamplerYcbcrConversion*(
@@ -786,7 +786,7 @@ proc destroySamplerYcbcrConversion*(
 
 # Promoted from VK_KHR_descriptor_update_template
 # -----------------------------------------------
-var # commands
+var # command cages
   createDescriptorUpdateTemplateCage: proc(device: Device; pCreateInfo: ptr DescriptorUpdateTemplateCreateInfo; pAllocator: ptr AllocationCallbacks; pDescriptorUpdateTemplate: ptr DescriptorUpdateTemplate;): Result {.cdecl.}
   destroyDescriptorUpdateTemplateCage: proc(device: Device; descriptorUpdateTemplate: DescriptorUpdateTemplate; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
   updateDescriptorSetWithTemplateCage: proc(device: Device; descriptorSet: DescriptorSet; descriptorUpdateTemplate: DescriptorUpdateTemplate; pData: pointer;): void {.cdecl.}
@@ -814,7 +814,7 @@ proc updateDescriptorSetWithTemplate*(
 
 # Promoted from VK_KHR_external_memory_capabilities
 # -------------------------------------------------
-var # commands
+var # command cages
   getPhysicalDeviceExternalBufferPropertiesCage: proc(physicalDevice: PhysicalDevice; pExternalBufferInfo: ptr PhysicalDeviceExternalBufferInfo; pExternalBufferProperties: ptr ExternalBufferProperties;): void {.cdecl.}
 proc getPhysicalDeviceExternalBufferProperties*(
       physicalDevice: PhysicalDevice;
@@ -830,7 +830,7 @@ proc getPhysicalDeviceExternalBufferProperties*(
 
 # Promoted from VK_KHR_external_fence_capabilities
 # ------------------------------------------------
-var # commands
+var # command cages
   getPhysicalDeviceExternalFencePropertiesCage: proc(physicalDevice: PhysicalDevice; pExternalFenceInfo: ptr PhysicalDeviceExternalFenceInfo; pExternalFenceProperties: ptr ExternalFenceProperties;): void {.cdecl.}
 proc getPhysicalDeviceExternalFenceProperties*(
       physicalDevice: PhysicalDevice;
@@ -853,7 +853,7 @@ proc getPhysicalDeviceExternalFenceProperties*(
 ExternalSemaphoreHandleTypeFlagBits.defineAliases:
   d3d12Fence as d3d11Fence
 
-var # commands
+var # command cages
   getPhysicalDeviceExternalSemaphorePropertiesCage: proc(physicalDevice: PhysicalDevice; pExternalSemaphoreInfo: ptr PhysicalDeviceExternalSemaphoreInfo; pExternalSemaphoreProperties: ptr ExternalSemaphoreProperties;): void {.cdecl.}
 proc getPhysicalDeviceExternalSemaphoreProperties*(
       physicalDevice: PhysicalDevice;
@@ -865,7 +865,7 @@ proc getPhysicalDeviceExternalSemaphoreProperties*(
 
 # Promoted from VK_KHR_maintenance3
 # ---------------------------------
-var # commands
+var # command cages
   getDescriptorSetLayoutSupportCage: proc(device: Device; pCreateInfo: ptr DescriptorSetLayoutCreateInfo; pSupport: ptr DescriptorSetLayoutSupport;): void {.cdecl.}
 proc getDescriptorSetLayoutSupport*(
       device: Device;

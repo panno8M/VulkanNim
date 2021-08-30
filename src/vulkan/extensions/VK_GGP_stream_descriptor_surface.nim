@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_GGP_stream_descriptor_surface
 
 
@@ -18,7 +18,7 @@ type
     flags*: StreamDescriptorSurfaceCreateFlagsGGP
     streamDescriptor*: GgpStreamDescriptor
 
-var # commands
+var # command cages
   createStreamDescriptorSurfaceGGPCage: proc(instance: Instance; pCreateInfo: ptr StreamDescriptorSurfaceCreateInfoGGP; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
 proc createStreamDescriptorSurfaceGGP*(
       instance: Instance;

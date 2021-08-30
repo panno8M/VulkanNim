@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_deferred_host_operations
 
 
@@ -17,7 +17,7 @@ type
     pNext*: pointer
     operationHandle*: DeferredOperationKHR
 
-var # commands
+var # command cages
   createDeferredOperationKHRCage: proc(device: Device; pAllocator: ptr AllocationCallbacks; pDeferredOperation: ptr DeferredOperationKHR;): Result {.cdecl.}
   destroyDeferredOperationKHRCage: proc(device: Device; operation: DeferredOperationKHR; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
   getDeferredOperationMaxConcurrencyKHRCage: proc(device: Device; operation: DeferredOperationKHR;): uint32 {.cdecl.}

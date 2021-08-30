@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_external_memory_win32
 
 
@@ -33,7 +33,7 @@ type
     memory*: DeviceMemory
     handleType*: ExternalMemoryHandleTypeFlagBits
 
-var # commands
+var # command cages
   getMemoryWin32HandleKHRCage: proc(device: Device; pGetWin32HandleInfo: ptr MemoryGetWin32HandleInfoKHR; pHandle: ptr HANDLE;): Result {.cdecl.}
   getMemoryWin32HandlePropertiesKHRCage: proc(device: Device; handleType: ExternalMemoryHandleTypeFlagBits; handle: HANDLE; pMemoryWin32HandleProperties: ptr MemoryWin32HandlePropertiesKHR;): Result {.cdecl.}
 proc getMemoryWin32HandleKHR*(

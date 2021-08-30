@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_EXT_discard_rectangles
 
 
@@ -27,7 +27,7 @@ type
     inclusiveExt = 0
     exclusiveExt = 1
 
-var # commands
+var # command cages
   cmdSetDiscardRectangleEXTCage: proc(commandBuffer: CommandBuffer; firstDiscardRectangle: uint32; discardRectangleCount: uint32; pDiscardRectangles: ptr Rect2D;): void {.cdecl.}
 proc cmdSetDiscardRectangleEXT*(
       commandBuffer: CommandBuffer;

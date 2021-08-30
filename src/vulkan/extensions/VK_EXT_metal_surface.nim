@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_EXT_metal_surface
 
 
@@ -21,7 +21,7 @@ type
     flags*: MetalSurfaceCreateFlagsEXT
     pLayer*: ptr CAMetalLayer
 
-var # commands
+var # command cages
   createMetalSurfaceEXTCage: proc(instance: Instance; pCreateInfo: ptr MetalSurfaceCreateInfoEXT; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
 proc createMetalSurfaceEXT*(
       instance: Instance;

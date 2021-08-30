@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:41:37Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_bind_memory2
 
 
@@ -22,8 +22,3 @@ StructureType.defineAliases:
 ImageCreateFlagBits.defineAliases:
   alias as aliasKhr
 
-proc loadVK_KHR_bind_memory2*(instance: Instance) =
-  instance.defineLoader(`<<`)
-
-  bindBufferMemory2KHRCage << "vkBindBufferMemory2KHR"
-  bindImageMemory2KHRCage << "vkBindImageMemory2KHR"

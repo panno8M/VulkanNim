@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:47Z
 # VK_EXT_validation_cache
 
 
@@ -26,7 +26,7 @@ type
     oneExt = 1
   ValidationCacheCreateFlagsEXT* = Flags[distinct UnusedEnum]
 
-var # commands
+var # command cages
   createValidationCacheEXTCage: proc(device: Device; pCreateInfo: ptr ValidationCacheCreateInfoEXT; pAllocator: ptr AllocationCallbacks; pValidationCache: ptr ValidationCacheEXT;): Result {.cdecl.}
   destroyValidationCacheEXTCage: proc(device: Device; validationCache: ValidationCacheEXT; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
   mergeValidationCachesEXTCage: proc(device: Device; dstCache: ValidationCacheEXT; srcCacheCount: uint32; pSrcCaches: ptr ValidationCacheEXT;): Result {.cdecl.}

@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_NN_vi_surface
 
 
@@ -18,7 +18,7 @@ type
     flags*: ViSurfaceCreateFlagsNN
     window*: pointer
 
-var # commands
+var # command cages
   createViSurfaceNNCage: proc(instance: Instance; pCreateInfo: ptr ViSurfaceCreateInfoNN; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
 proc createViSurfaceNN*(
       instance: Instance;

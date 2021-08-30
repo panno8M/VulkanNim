@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:41:37Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_get_memory_requirements2
 
 
@@ -26,9 +26,3 @@ StructureType.defineAliases:
   memoryRequirements2 as memoryRequirements2Khr
   sparseImageMemoryRequirements2 as sparseImageMemoryRequirements2Khr
 
-proc loadVK_KHR_get_memory_requirements2*(instance: Instance) =
-  instance.defineLoader(`<<`)
-
-  getImageMemoryRequirements2KHRCage << "vkGetImageMemoryRequirements2KHR"
-  getBufferMemoryRequirements2KHRCage << "vkGetBufferMemoryRequirements2KHR"
-  getImageSparseMemoryRequirements2KHRCage << "vkGetImageSparseMemoryRequirements2KHR"

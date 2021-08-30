@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_ANDROID_external_memory_android_hardware_buffer
 
 
@@ -50,7 +50,7 @@ type
     pNext*: pointer
     externalFormat*: uint64
 
-var # commands
+var # command cages
   getAndroidHardwareBufferPropertiesANDROIDCage: proc(device: Device; buffer: ptr AHardwareBuffer; pProperties: ptr AndroidHardwareBufferPropertiesANDROID;): Result {.cdecl.}
   getMemoryAndroidHardwareBufferANDROIDCage: proc(device: Device; pInfo: ptr MemoryGetAndroidHardwareBufferInfoANDROID; pBuffer: ptr ptr AHardwareBuffer;): Result {.cdecl.}
 proc getAndroidHardwareBufferPropertiesANDROID*(

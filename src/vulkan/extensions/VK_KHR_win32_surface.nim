@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_win32_surface
 
 
@@ -19,7 +19,7 @@ type
     hinstance*: HINSTANCE
     hwnd*: HWND
 
-var # commands
+var # command cages
   createWin32SurfaceKHRCage: proc(instance: Instance; pCreateInfo: ptr Win32SurfaceCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
   getPhysicalDeviceWin32PresentationSupportKHRCage: proc(physicalDevice: PhysicalDevice; queueFamilyIndex: uint32;): Bool32 {.cdecl.}
 proc createWin32SurfaceKHR*(

@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_EXT_external_memory_host
 
 
@@ -25,7 +25,7 @@ type
     pNext*: pointer
     minImportedHostPointerAlignment*: DeviceSize
 
-var # commands
+var # command cages
   getMemoryHostPointerPropertiesEXTCage: proc(device: Device; handleType: ExternalMemoryHandleTypeFlagBits; pHostPointer: pointer; pMemoryHostPointerProperties: ptr MemoryHostPointerPropertiesEXT;): Result {.cdecl.}
 proc getMemoryHostPointerPropertiesEXT*(
       device: Device;

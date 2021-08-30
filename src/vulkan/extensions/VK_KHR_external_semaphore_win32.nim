@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_external_semaphore_win32
 
 
@@ -38,7 +38,7 @@ type
     semaphore*: Semaphore
     handleType*: ExternalSemaphoreHandleTypeFlagBits
 
-var # commands
+var # command cages
   importSemaphoreWin32HandleKHRCage: proc(device: Device; pImportSemaphoreWin32HandleInfo: ptr ImportSemaphoreWin32HandleInfoKHR;): Result {.cdecl.}
   getSemaphoreWin32HandleKHRCage: proc(device: Device; pGetWin32HandleInfo: ptr SemaphoreGetWin32HandleInfoKHR; pHandle: ptr HANDLE;): Result {.cdecl.}
 proc importSemaphoreWin32HandleKHR*(

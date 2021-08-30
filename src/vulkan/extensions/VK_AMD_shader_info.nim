@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_AMD_shader_info
 
 
@@ -29,7 +29,7 @@ type
     numAvailableSgprs*: uint32
     computeWorkGroupSize*: array[3, uint32]
 
-var # commands
+var # command cages
   getShaderInfoAMDCage: proc(device: Device; pipeline: Pipeline; shaderStage: ShaderStageFlagBits; infoType: ShaderInfoTypeAMD; pInfoSize: ptr uint; pInfo: pointer;): Result {.cdecl.}
 proc getShaderInfoAMD*(
       device: Device;

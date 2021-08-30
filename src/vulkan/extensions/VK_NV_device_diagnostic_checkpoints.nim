@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_NV_device_diagnostic_checkpoints
 
 
@@ -21,7 +21,7 @@ type
     stage*: PipelineStageFlagBits
     pCheckpointMarker*: pointer
 
-var # commands
+var # command cages
   cmdSetCheckpointNVCage: proc(commandBuffer: CommandBuffer; pCheckpointMarker: pointer;): void {.cdecl.}
   getQueueCheckpointDataNVCage: proc(queue: Queue; pCheckpointDataCount: ptr uint32; pCheckpointData: ptr CheckpointDataNV;): void {.cdecl.}
 proc cmdSetCheckpointNV*(

@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_wayland_surface
 
 
@@ -19,7 +19,7 @@ type
     display*: ptr wl_display
     surface*: ptr wl_surface
 
-var # commands
+var # command cages
   createWaylandSurfaceKHRCage: proc(instance: Instance; pCreateInfo: ptr WaylandSurfaceCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
   getPhysicalDeviceWaylandPresentationSupportKHRCage: proc(physicalDevice: PhysicalDevice; queueFamilyIndex: uint32; display: ptr wl_display;): Bool32 {.cdecl.}
 proc createWaylandSurfaceKHR*(

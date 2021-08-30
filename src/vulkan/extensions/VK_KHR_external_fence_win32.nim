@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:47Z
 # VK_KHR_external_fence_win32
 
 
@@ -31,7 +31,7 @@ type
     fence*: Fence
     handleType*: ExternalFenceHandleTypeFlagBits
 
-var # commands
+var # command cages
   importFenceWin32HandleKHRCage: proc(device: Device; pImportFenceWin32HandleInfo: ptr ImportFenceWin32HandleInfoKHR;): Result {.cdecl.}
   getFenceWin32HandleKHRCage: proc(device: Device; pGetWin32HandleInfo: ptr FenceGetWin32HandleInfoKHR; pHandle: ptr HANDLE;): Result {.cdecl.}
 proc importFenceWin32HandleKHR*(

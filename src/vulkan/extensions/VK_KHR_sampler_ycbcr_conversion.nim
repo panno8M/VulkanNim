@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:41:37Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_sampler_ycbcr_conversion
 
 
@@ -109,8 +109,3 @@ ImageAspectFlagBits.defineAliases:
   plane1 as plane1Khr
   plane2 as plane2Khr
 
-proc loadVK_KHR_sampler_ycbcr_conversion*(instance: Instance) =
-  instance.defineLoader(`<<`)
-
-  createSamplerYcbcrConversionKHRCage << "vkCreateSamplerYcbcrConversionKHR"
-  destroySamplerYcbcrConversionKHRCage << "vkDestroySamplerYcbcrConversionKHR"

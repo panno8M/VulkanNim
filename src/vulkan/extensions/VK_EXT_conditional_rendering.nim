@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_EXT_conditional_rendering
 
 
@@ -29,7 +29,7 @@ type
     pNext*: pointer
     conditionalRenderingEnable*: Bool32
 
-var # commands
+var # command cages
   cmdBeginConditionalRenderingEXTCage: proc(commandBuffer: CommandBuffer; pConditionalRenderingBegin: ptr ConditionalRenderingBeginInfoEXT;): void {.cdecl.}
   cmdEndConditionalRenderingEXTCage: proc(commandBuffer: CommandBuffer;): void {.cdecl.}
 proc cmdBeginConditionalRenderingEXT*(

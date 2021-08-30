@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # vk12
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -593,7 +593,7 @@ template apiVersion12*(): untyped = makeVersion(1, 2, 0)
 
 # Promoted from VK_KHR_draw_indirect_count (extension 170)
 # --------------------------------------------------------
-var # commands
+var # command cages
   cmdDrawIndirectCountCage: proc(commandBuffer: CommandBuffer; buffer: Buffer; offset: DeviceSize; countBuffer: Buffer; countBufferOffset: DeviceSize; maxDrawCount: uint32; stride: uint32;): void {.cdecl.}
   cmdDrawIndexedIndirectCountCage: proc(commandBuffer: CommandBuffer; buffer: Buffer; offset: DeviceSize; countBuffer: Buffer; countBufferOffset: DeviceSize; maxDrawCount: uint32; stride: uint32;): void {.cdecl.}
 proc cmdDrawIndirectCount*(
@@ -620,7 +620,7 @@ proc cmdDrawIndexedIndirectCount*(
 
 # Promoted from VK_KHR_create_renderpass2 (extension 110)
 # -------------------------------------------------------
-var # commands
+var # command cages
   createRenderPass2Cage: proc(device: Device; pCreateInfo: ptr RenderPassCreateInfo2; pAllocator: ptr AllocationCallbacks; pRenderPass: ptr RenderPass;): Result {.cdecl.}
   cmdBeginRenderPass2Cage: proc(commandBuffer: CommandBuffer; pRenderPassBegin: ptr RenderPassBeginInfo; pSubpassBeginInfo: ptr SubpassBeginInfo;): void {.cdecl.}
   cmdNextSubpass2Cage: proc(commandBuffer: CommandBuffer; pSubpassBeginInfo: ptr SubpassBeginInfo; pSubpassEndInfo: ptr SubpassEndInfo;): void {.cdecl.}
@@ -721,7 +721,7 @@ proc cmdEndRenderPass2*(
 
 # Promoted from VK_EXT_host_query_reset (extension 262)
 # -----------------------------------------------------
-var # commands
+var # command cages
   resetQueryPoolCage: proc(device: Device; queryPool: QueryPool; firstQuery: uint32; queryCount: uint32;): void {.cdecl.}
 proc resetQueryPool*(
       device: Device;
@@ -734,7 +734,7 @@ proc resetQueryPool*(
 
 # Promoted from VK_KHR_timeline_semaphore (extension 208)
 # -------------------------------------------------------
-var # commands
+var # command cages
   getSemaphoreCounterValueCage: proc(device: Device; semaphore: Semaphore; pValue: ptr uint64;): Result {.cdecl.}
   waitSemaphoresCage: proc(device: Device; pWaitInfo: ptr SemaphoreWaitInfo; timeout: uint64;): Result {.cdecl.}
   signalSemaphoreCage: proc(device: Device; pSignalInfo: ptr SemaphoreSignalInfo;): Result {.cdecl.}
@@ -759,7 +759,7 @@ proc signalSemaphore*(
 
 # Promoted from VK_KHR_buffer_device_address (extension 258)
 # ----------------------------------------------------------
-var # commands
+var # command cages
   getBufferDeviceAddressCage: proc(device: Device; pInfo: ptr BufferDeviceAddressInfo;): DeviceAddress {.cdecl.}
   getBufferOpaqueCaptureAddressCage: proc(device: Device; pInfo: ptr BufferDeviceAddressInfo;): uint64 {.cdecl.}
   getDeviceMemoryOpaqueCaptureAddressCage: proc(device: Device; pInfo: ptr DeviceMemoryOpaqueCaptureAddressInfo;): uint64 {.cdecl.}

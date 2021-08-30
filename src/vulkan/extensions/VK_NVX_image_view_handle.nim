@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_NVX_image_view_handle
 
 
@@ -22,7 +22,7 @@ type
     deviceAddress*: DeviceAddress
     size*: DeviceSize
 
-var # commands
+var # command cages
   getImageViewHandleNVXCage: proc(device: Device; pInfo: ptr ImageViewHandleInfoNVX;): uint32 {.cdecl.}
   getImageViewAddressNVXCage: proc(device: Device; imageView: ImageView; pProperties: ptr ImageViewAddressPropertiesNVX;): Result {.cdecl.}
 proc getImageViewHandleNVX*(

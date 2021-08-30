@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:47Z
 # VK_EXT_hdr_metadata
 
 
@@ -27,7 +27,7 @@ type
     x*: float32
     y*: float32
 
-var # commands
+var # command cages
   setHdrMetadataEXTCage: proc(device: Device; swapchainCount: uint32; pSwapchains: ptr SwapchainKHR; pMetadata: ptr HdrMetadataEXT;): void {.cdecl.}
 proc setHdrMetadataEXT*(
       device: Device;

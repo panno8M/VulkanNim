@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_get_display_properties2
 
 
@@ -33,7 +33,7 @@ type
     pNext*: pointer
     capabilities*: DisplayPlaneCapabilitiesKHR
 
-var # commands
+var # command cages
   getPhysicalDeviceDisplayProperties2KHRCage: proc(physicalDevice: PhysicalDevice; pPropertyCount: ptr uint32; pProperties: ptr DisplayProperties2KHR;): Result {.cdecl.}
   getPhysicalDeviceDisplayPlaneProperties2KHRCage: proc(physicalDevice: PhysicalDevice; pPropertyCount: ptr uint32; pProperties: ptr DisplayPlaneProperties2KHR;): Result {.cdecl.}
   getDisplayModeProperties2KHRCage: proc(physicalDevice: PhysicalDevice; display: DisplayKHR; pPropertyCount: ptr uint32; pProperties: ptr DisplayModeProperties2KHR;): Result {.cdecl.}

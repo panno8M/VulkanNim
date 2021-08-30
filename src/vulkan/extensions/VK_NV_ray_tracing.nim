@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:39:26Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_NV_ray_tracing
 
 
@@ -111,7 +111,7 @@ type
   AabbPositionsNV* = object
   AccelerationStructureInstanceNV* = object
 
-var # commands
+var # command cages
   createAccelerationStructureNVCage: proc(device: Device; pCreateInfo: ptr AccelerationStructureCreateInfoNV; pAllocator: ptr AllocationCallbacks; pAccelerationStructure: ptr AccelerationStructureNV;): Result {.cdecl.}
   getAccelerationStructureMemoryRequirementsNVCage: proc(device: Device; pInfo: ptr AccelerationStructureMemoryRequirementsInfoNV; pMemoryRequirements: ptr MemoryRequirements2KHR;): void {.cdecl.}
   cmdBuildAccelerationStructureNVCage: proc(commandBuffer: CommandBuffer; pInfo: ptr AccelerationStructureInfoNV; instanceData: Buffer; instanceOffset: DeviceSize; update: Bool32; dst: AccelerationStructureKHR; src: AccelerationStructureKHR; scratch: Buffer; scratchOffset: DeviceSize;): void {.cdecl.}
@@ -280,14 +280,10 @@ proc loadVK_NV_ray_tracing*(instance: Instance) =
   instance.defineLoader(`<<`)
 
   createAccelerationStructureNVCage << "vkCreateAccelerationStructureNV"
-  destroyAccelerationStructureNVCage << "vkDestroyAccelerationStructureNV"
   getAccelerationStructureMemoryRequirementsNVCage << "vkGetAccelerationStructureMemoryRequirementsNV"
-  bindAccelerationStructureMemoryNVCage << "vkBindAccelerationStructureMemoryNV"
   cmdBuildAccelerationStructureNVCage << "vkCmdBuildAccelerationStructureNV"
   cmdCopyAccelerationStructureNVCage << "vkCmdCopyAccelerationStructureNV"
   cmdTraceRaysNVCage << "vkCmdTraceRaysNV"
   createRayTracingPipelinesNVCage << "vkCreateRayTracingPipelinesNV"
-  getRayTracingShaderGroupHandlesNVCage << "vkGetRayTracingShaderGroupHandlesNV"
   getAccelerationStructureHandleNVCage << "vkGetAccelerationStructureHandleNV"
-  cmdWriteAccelerationStructuresPropertiesNVCage << "vkCmdWriteAccelerationStructuresPropertiesNV"
   compileDeferredNVCage << "vkCompileDeferredNV"

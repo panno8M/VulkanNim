@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_EXT_private_data
 
 
@@ -27,7 +27,7 @@ type
   PrivateDataSlotCreateFlagsEXT* = Flags[PrivateDataSlotCreateFlagBitsEXT]
   PrivateDataSlotCreateFlagBitsEXT* = distinct UnusedEnum
 
-var # commands
+var # command cages
   createPrivateDataSlotEXTCage: proc(device: Device; pCreateInfo: ptr PrivateDataSlotCreateInfoEXT; pAllocator: ptr AllocationCallbacks; pPrivateDataSlot: ptr PrivateDataSlotEXT;): Result {.cdecl.}
   destroyPrivateDataSlotEXTCage: proc(device: Device; privateDataSlot: PrivateDataSlotEXT; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
   setPrivateDataEXTCage: proc(device: Device; objectType: ObjectType; objectHandle: uint64; privateDataSlot: PrivateDataSlotEXT; data: uint64;): Result {.cdecl.}

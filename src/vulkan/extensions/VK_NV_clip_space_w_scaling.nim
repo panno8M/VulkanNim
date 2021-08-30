@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_NV_clip_space_w_scaling
 
 
@@ -20,7 +20,7 @@ type
     viewportCount*: uint32
     pViewportWScalings*: ptr ViewportWScalingNV
 
-var # commands
+var # command cages
   cmdSetViewportWScalingNVCage: proc(commandBuffer: CommandBuffer; firstViewport: uint32; viewportCount: uint32; pViewportWScalings: ptr ViewportWScalingNV;): void {.cdecl.}
 proc cmdSetViewportWScalingNV*(
       commandBuffer: CommandBuffer;

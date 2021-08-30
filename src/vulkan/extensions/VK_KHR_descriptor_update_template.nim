@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:41:37Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_descriptor_update_template
 
 
@@ -32,7 +32,7 @@ DescriptorUpdateTemplateType.defineAliases:
 
 
 
-var # commands
+var # command cages
   cmdPushDescriptorSetWithTemplateKHRCage: proc(commandBuffer: CommandBuffer; descriptorUpdateTemplate: DescriptorUpdateTemplate; layout: PipelineLayout; set: uint32; pData: pointer;): void {.cdecl.}
 proc cmdPushDescriptorSetWithTemplateKHR*(
       commandBuffer: CommandBuffer;
@@ -49,9 +49,5 @@ DebugReportObjectTypeEXT.defineAliases:
 
 proc loadVK_KHR_descriptor_update_template*(instance: Instance) =
   instance.defineLoader(`<<`)
-
-  createDescriptorUpdateTemplateKHRCage << "vkCreateDescriptorUpdateTemplateKHR"
-  destroyDescriptorUpdateTemplateKHRCage << "vkDestroyDescriptorUpdateTemplateKHR"
-  updateDescriptorSetWithTemplateKHRCage << "vkUpdateDescriptorSetWithTemplateKHR"
 
   cmdPushDescriptorSetWithTemplateKHRCage << "vkCmdPushDescriptorSetWithTemplateKHR"

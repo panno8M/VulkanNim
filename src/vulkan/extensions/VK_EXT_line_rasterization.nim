@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_EXT_line_rasterization
 
 
@@ -37,7 +37,7 @@ type
     bresenhamExt = 2
     rectangularSmoothExt = 3
 
-var # commands
+var # command cages
   cmdSetLineStippleEXTCage: proc(commandBuffer: CommandBuffer; lineStippleFactor: uint32; lineStipplePattern: uint16;): void {.cdecl.}
 proc cmdSetLineStippleEXT*(
       commandBuffer: CommandBuffer;

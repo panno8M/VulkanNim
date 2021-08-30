@@ -216,6 +216,8 @@ proc renderCommandLoaderComponent*(require: NodeRequire; resources: Resources): 
   if require.comment.isSome:
     commandLoaderDef.add require.comment.get.commentify
   for req in require.targets.filter(x => x.kind == nkrCommand):
+    if not resources.commands.hasKey(req.name) or
+       resources.commands[req.name].kind == nkbrAlias: continue
     commandLoaderDef.add "{req.name.parseCommandName}Cage << \"{req.name}\"".fmt
 
   return commandLoaderDef.join("\n")

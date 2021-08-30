@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_pipeline_executable_properties
 
 
@@ -58,7 +58,7 @@ type
     dataSize*: uint
     pData*: pointer
 
-var # commands
+var # command cages
   getPipelineExecutablePropertiesKHRCage: proc(device: Device; pPipelineInfo: ptr PipelineInfoKHR; pExecutableCount: ptr uint32; pProperties: ptr PipelineExecutablePropertiesKHR;): Result {.cdecl.}
   getPipelineExecutableStatisticsKHRCage: proc(device: Device; pExecutableInfo: ptr PipelineExecutableInfoKHR; pStatisticCount: ptr uint32; pStatistics: ptr PipelineExecutableStatisticKHR;): Result {.cdecl.}
   getPipelineExecutableInternalRepresentationsKHRCage: proc(device: Device; pExecutableInfo: ptr PipelineExecutableInfoKHR; pInternalRepresentationCount: ptr uint32; pInternalRepresentations: ptr PipelineExecutableInternalRepresentationKHR;): Result {.cdecl.}

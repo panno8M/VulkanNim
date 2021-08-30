@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_swapchain
 
 
@@ -91,7 +91,7 @@ type
     pNext*: pointer
     modes*: DeviceGroupPresentModeFlagsKHR
 
-var # commands
+var # command cages
   createSwapchainKHRCage: proc(device: Device; pCreateInfo: ptr SwapchainCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pSwapchain: ptr SwapchainKHR;): Result {.cdecl.}
   destroySwapchainKHRCage: proc(device: Device; swapchain: SwapchainKHR; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
   getSwapchainImagesKHRCage: proc(device: Device; swapchain: SwapchainKHR; pSwapchainImageCount: ptr uint32; pSwapchainImages: ptr Image;): Result {.cdecl.}
@@ -133,7 +133,7 @@ proc queuePresentKHR*(
   queuePresentKHRCage(queue,pPresentInfo)
 
 
-var # commands
+var # command cages
   getDeviceGroupPresentCapabilitiesKHRCage: proc(device: Device; pDeviceGroupPresentCapabilities: ptr DeviceGroupPresentCapabilitiesKHR;): Result {.cdecl.}
   getDeviceGroupSurfacePresentModesKHRCage: proc(device: Device; surface: SurfaceKHR; pModes: ptr DeviceGroupPresentModeFlagsKHR;): Result {.cdecl.}
   getPhysicalDevicePresentRectanglesKHRCage: proc(physicalDevice: PhysicalDevice; surface: SurfaceKHR; pRectCount: ptr uint32; pRects: ptr Rect2D;): Result {.cdecl.}

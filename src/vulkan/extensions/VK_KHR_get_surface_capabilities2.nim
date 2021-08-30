@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:47Z
 # VK_KHR_get_surface_capabilities2
 
 
@@ -24,7 +24,7 @@ type
     pNext*: pointer
     surfaceFormat*: SurfaceFormatKHR
 
-var # commands
+var # command cages
   getPhysicalDeviceSurfaceCapabilities2KHRCage: proc(physicalDevice: PhysicalDevice; pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR; pSurfaceCapabilities: ptr SurfaceCapabilities2KHR;): Result {.cdecl.}
   getPhysicalDeviceSurfaceFormats2KHRCage: proc(physicalDevice: PhysicalDevice; pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR; pSurfaceFormatCount: ptr uint32; pSurfaceFormats: ptr SurfaceFormat2KHR;): Result {.cdecl.}
 proc getPhysicalDeviceSurfaceCapabilities2KHR*(

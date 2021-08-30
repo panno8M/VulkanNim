@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:41:37Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_device_group
 
 
@@ -103,7 +103,7 @@ ImageCreateFlagBits.defineAliases:
 
 
 
-var # commands
+var # command cages
   getDeviceGroupPresentCapabilitiesKHRCage: proc(device: Device; pDeviceGroupPresentCapabilities: ptr DeviceGroupPresentCapabilitiesKHR;): Result {.cdecl.}
   getDeviceGroupSurfacePresentModesKHRCage: proc(device: Device; surface: SurfaceKHR; pModes: ptr DeviceGroupPresentModeFlagsKHR;): Result {.cdecl.}
   getPhysicalDevicePresentRectanglesKHRCage: proc(physicalDevice: PhysicalDevice; surface: SurfaceKHR; pRectCount: ptr uint32; pRects: ptr Rect2D;): Result {.cdecl.}
@@ -127,7 +127,7 @@ proc getPhysicalDevicePresentRectanglesKHR*(
   getPhysicalDevicePresentRectanglesKHRCage(physicalDevice,surface,pRectCount,pRects)
 
 
-var # commands
+var # command cages
   acquireNextImage2KHRCage: proc(device: Device; pAcquireInfo: ptr AcquireNextImageInfoKHR; pImageIndex: ptr uint32;): Result {.cdecl.}
 proc acquireNextImage2KHR*(
       device: Device;
@@ -137,10 +137,6 @@ proc acquireNextImage2KHR*(
   acquireNextImage2KHRCage(device,pAcquireInfo,pImageIndex)
 proc loadVK_KHR_device_group*(instance: Instance) =
   instance.defineLoader(`<<`)
-
-  getDeviceGroupPeerMemoryFeaturesKHRCage << "vkGetDeviceGroupPeerMemoryFeaturesKHR"
-  cmdSetDeviceMaskKHRCage << "vkCmdSetDeviceMaskKHR"
-  cmdDispatchBaseKHRCage << "vkCmdDispatchBaseKHR"
 
   getDeviceGroupPresentCapabilitiesKHRCage << "vkGetDeviceGroupPresentCapabilitiesKHR"
   getDeviceGroupSurfacePresentModesKHRCage << "vkGetDeviceGroupSurfacePresentModesKHR"

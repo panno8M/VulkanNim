@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_INTEL_performance_query
 
 
@@ -65,7 +65,7 @@ type
   HtPerformanceConfigurationINTEL = object of HandleType
   PerformanceConfigurationINTEL* = NonDispatchableHandle[HtPerformanceConfigurationINTEL]
 
-var # commands
+var # command cages
   initializePerformanceApiINTELCage: proc(device: Device; pInitializeInfo: ptr InitializePerformanceApiInfoINTEL;): Result {.cdecl.}
   uninitializePerformanceApiINTELCage: proc(device: Device;): void {.cdecl.}
   cmdSetPerformanceMarkerINTELCage: proc(commandBuffer: CommandBuffer; pMarkerInfo: ptr PerformanceMarkerInfoINTEL;): Result {.cdecl.}

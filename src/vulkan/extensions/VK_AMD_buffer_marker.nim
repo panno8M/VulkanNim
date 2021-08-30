@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_AMD_buffer_marker
 
 
@@ -9,7 +9,7 @@ const
   AmdBufferMarkerSpecVersion* = 1
   AmdBufferMarkerExtensionName* = "VK_AMD_buffer_marker"
 
-var # commands
+var # command cages
   cmdWriteBufferMarkerAMDCage: proc(commandBuffer: CommandBuffer; pipelineStage: PipelineStageFlagBits; dstBuffer: Buffer; dstOffset: DeviceSize; marker: uint32;): void {.cdecl.}
 proc cmdWriteBufferMarkerAMD*(
       commandBuffer: CommandBuffer;

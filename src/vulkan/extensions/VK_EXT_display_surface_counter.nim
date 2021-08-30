@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_EXT_display_surface_counter
 
 
@@ -29,7 +29,7 @@ type
     supportedUsageFlags*: ImageUsageFlags
     supportedSurfaceCounters*: SurfaceCounterFlagsEXT
 
-var # commands
+var # command cages
   getPhysicalDeviceSurfaceCapabilities2EXTCage: proc(physicalDevice: PhysicalDevice; surface: SurfaceKHR; pSurfaceCapabilities: ptr SurfaceCapabilities2EXT;): Result {.cdecl.}
 proc getPhysicalDeviceSurfaceCapabilities2EXT*(
       physicalDevice: PhysicalDevice;

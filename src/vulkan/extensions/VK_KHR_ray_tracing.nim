@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_ray_tracing
 # Explicit sort order to require processing after VK_NV_ray_tracing
 # =================================================================
@@ -257,7 +257,7 @@ type
     maxAttributeSize*: uint32
     maxCallableSize*: uint32
 
-var # commands
+var # command cages
   createAccelerationStructureKHRCage: proc(device: Device; pCreateInfo: ptr AccelerationStructureCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pAccelerationStructure: ptr AccelerationStructureKHR;): Result {.cdecl.}
   destroyAccelerationStructureKHRCage: proc(device: Device; accelerationStructure: AccelerationStructureKHR; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
   getAccelerationStructureMemoryRequirementsKHRCage: proc(device: Device; pInfo: ptr AccelerationStructureMemoryRequirementsInfoKHR; pMemoryRequirements: ptr MemoryRequirements2;): void {.cdecl.}

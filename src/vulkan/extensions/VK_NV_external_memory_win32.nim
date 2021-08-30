@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_NV_external_memory_win32
 
 
@@ -22,7 +22,7 @@ type
     pAttributes*: ptr SECURITY_ATTRIBUTES
     dwAccess*: DWORD
 
-var # commands
+var # command cages
   getMemoryWin32HandleNVCage: proc(device: Device; memory: DeviceMemory; handleType: ExternalMemoryHandleTypeFlagsNV; pHandle: ptr HANDLE;): Result {.cdecl.}
 proc getMemoryWin32HandleNV*(
       device: Device;

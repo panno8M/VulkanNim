@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:41:37Z
+# Generated at 2021-08-30T22:51:47Z
 # VK_KHR_timeline_semaphore
 
 
@@ -39,9 +39,3 @@ StructureType.defineAliases:
 SemaphoreWaitFlagBits.defineAliases:
   any as anyKhr
 
-proc loadVK_KHR_timeline_semaphore*(instance: Instance) =
-  instance.defineLoader(`<<`)
-
-  getSemaphoreCounterValueKHRCage << "vkGetSemaphoreCounterValueKHR"
-  waitSemaphoresKHRCage << "vkWaitSemaphoresKHR"
-  signalSemaphoreKHRCage << "vkSignalSemaphoreKHR"

@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_EXT_headless_surface
 
 
@@ -17,7 +17,7 @@ type
     pNext*: pointer
     flags*: HeadlessSurfaceCreateFlagsEXT
 
-var # commands
+var # command cages
   createHeadlessSurfaceEXTCage: proc(instance: Instance; pCreateInfo: ptr HeadlessSurfaceCreateInfoEXT; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
 proc createHeadlessSurfaceEXT*(
       instance: Instance;

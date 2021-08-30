@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_MVK_ios_surface
 
 
@@ -18,7 +18,7 @@ type
     flags*: IOSSurfaceCreateFlagsMVK
     pView*: pointer
 
-var # commands
+var # command cages
   createIOSSurfaceMVKCage: proc(instance: Instance; pCreateInfo: ptr IOSSurfaceCreateInfoMVK; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
 proc createIOSSurfaceMVK*(
       instance: Instance;

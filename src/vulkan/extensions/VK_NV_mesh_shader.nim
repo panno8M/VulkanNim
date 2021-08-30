@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_NV_mesh_shader
 
 
@@ -36,7 +36,7 @@ type
     taskCount*: uint32
     firstTask*: uint32
 
-var # commands
+var # command cages
   cmdDrawMeshTasksNVCage: proc(commandBuffer: CommandBuffer; taskCount: uint32; firstTask: uint32;): void {.cdecl.}
   cmdDrawMeshTasksIndirectNVCage: proc(commandBuffer: CommandBuffer; buffer: Buffer; offset: DeviceSize; drawCount: uint32; stride: uint32;): void {.cdecl.}
   cmdDrawMeshTasksIndirectCountNVCage: proc(commandBuffer: CommandBuffer; buffer: Buffer; offset: DeviceSize; countBuffer: Buffer; countBufferOffset: DeviceSize; maxDrawCount: uint32; stride: uint32;): void {.cdecl.}

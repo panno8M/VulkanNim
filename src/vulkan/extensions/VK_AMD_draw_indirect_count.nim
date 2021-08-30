@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:41:37Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_AMD_draw_indirect_count
 
 
@@ -11,8 +11,3 @@ const
 
 const cmdDrawIndirectCountAMD* = cmdDrawIndirectCount
 const cmdDrawIndexedIndirectCountAMD* = cmdDrawIndexedIndirectCount
-proc loadVK_AMD_draw_indirect_count*(instance: Instance) =
-  instance.defineLoader(`<<`)
-
-  cmdDrawIndirectCountAMDCage << "vkCmdDrawIndirectCountAMD"
-  cmdDrawIndexedIndirectCountAMDCage << "vkCmdDrawIndexedIndirectCountAMD"

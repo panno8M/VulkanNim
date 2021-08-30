@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:41:37Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_create_renderpass2
 
 
@@ -33,10 +33,3 @@ StructureType.defineAliases:
   subpassBeginInfo as subpassBeginInfoKhr
   subpassEndInfo as subpassEndInfoKhr
 
-proc loadVK_KHR_create_renderpass2*(instance: Instance) =
-  instance.defineLoader(`<<`)
-
-  createRenderPass2KHRCage << "vkCreateRenderPass2KHR"
-  cmdBeginRenderPass2KHRCage << "vkCmdBeginRenderPass2KHR"
-  cmdNextSubpass2KHRCage << "vkCmdNextSubpass2KHR"
-  cmdEndRenderPass2KHRCage << "vkCmdEndRenderPass2KHR"

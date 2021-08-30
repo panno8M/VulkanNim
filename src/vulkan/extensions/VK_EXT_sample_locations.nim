@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:47Z
 # VK_EXT_sample_locations
 
 
@@ -52,7 +52,7 @@ type
     pNext*: pointer
     maxSampleLocationGridSize*: Extent2D
 
-var # commands
+var # command cages
   cmdSetSampleLocationsEXTCage: proc(commandBuffer: CommandBuffer; pSampleLocationsInfo: ptr SampleLocationsInfoEXT;): void {.cdecl.}
   getPhysicalDeviceMultisamplePropertiesEXTCage: proc(physicalDevice: PhysicalDevice; samples: SampleCountFlagBits; pMultisampleProperties: ptr MultisamplePropertiesEXT;): void {.cdecl.}
 proc cmdSetSampleLocationsEXT*(

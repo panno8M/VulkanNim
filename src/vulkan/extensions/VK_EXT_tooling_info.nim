@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_EXT_tooling_info
 
 
@@ -32,7 +32,7 @@ type
     description*: array[MaxDescriptionSize, char]
     layer*: array[MaxExtensionNameSize, char]
 
-var # commands
+var # command cages
   getPhysicalDeviceToolPropertiesEXTCage: proc(physicalDevice: PhysicalDevice; pToolCount: ptr uint32; pToolProperties: ptr PhysicalDeviceToolPropertiesEXT;): Result {.cdecl.}
 proc getPhysicalDeviceToolPropertiesEXT*(
       physicalDevice: PhysicalDevice;

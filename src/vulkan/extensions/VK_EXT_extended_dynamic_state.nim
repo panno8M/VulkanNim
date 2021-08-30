@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_EXT_extended_dynamic_state
 
 
@@ -16,7 +16,7 @@ type
     pNext*: pointer
     extendedDynamicState*: Bool32
 
-var # commands
+var # command cages
   cmdSetCullModeEXTCage: proc(commandBuffer: CommandBuffer; cullMode: CullModeFlags;): void {.cdecl.}
   cmdSetFrontFaceEXTCage: proc(commandBuffer: CommandBuffer; frontFace: FrontFace;): void {.cdecl.}
   cmdSetPrimitiveTopologyEXTCage: proc(commandBuffer: CommandBuffer; primitiveTopology: PrimitiveTopology;): void {.cdecl.}

@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_external_memory_fd
 
 
@@ -26,7 +26,7 @@ type
     memory*: DeviceMemory
     handleType*: ExternalMemoryHandleTypeFlagBits
 
-var # commands
+var # command cages
   getMemoryFdKHRCage: proc(device: Device; pGetFdInfo: ptr MemoryGetFdInfoKHR; pFd: ptr int;): Result {.cdecl.}
   getMemoryFdPropertiesKHRCage: proc(device: Device; handleType: ExternalMemoryHandleTypeFlagBits; fd: int; pMemoryFdProperties: ptr MemoryFdPropertiesKHR;): Result {.cdecl.}
 proc getMemoryFdKHR*(

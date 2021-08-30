@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_xlib_surface
 
 
@@ -19,7 +19,7 @@ type
     dpy*: ptr Display
     window*: Window
 
-var # commands
+var # command cages
   createXlibSurfaceKHRCage: proc(instance: Instance; pCreateInfo: ptr XlibSurfaceCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
   getPhysicalDeviceXlibPresentationSupportKHRCage: proc(physicalDevice: PhysicalDevice; queueFamilyIndex: uint32; dpy: ptr Display; visualID: VisualID;): Bool32 {.cdecl.}
 proc createXlibSurfaceKHR*(

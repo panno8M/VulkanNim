@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_EXT_debug_marker
 
 
@@ -74,7 +74,7 @@ DebugReportObjectTypeEXT.defineAliases:
   debugReportCallbackExtExt as debugReportExt # Backwards-compatible alias containing a typo
   validationCacheExtExt as validationCacheExt # Backwards-compatible alias containing a typo
 
-var # commands
+var # command cages
   debugMarkerSetObjectTagEXTCage: proc(device: Device; pTagInfo: ptr DebugMarkerObjectTagInfoEXT;): Result {.cdecl.}
   debugMarkerSetObjectNameEXTCage: proc(device: Device; pNameInfo: ptr DebugMarkerObjectNameInfoEXT;): Result {.cdecl.}
   cmdDebugMarkerBeginEXTCage: proc(commandBuffer: CommandBuffer; pMarkerInfo: ptr DebugMarkerMarkerInfoEXT;): void {.cdecl.}

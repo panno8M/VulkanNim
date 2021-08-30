@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_external_semaphore_fd
 
 
@@ -24,7 +24,7 @@ type
     semaphore*: Semaphore
     handleType*: ExternalSemaphoreHandleTypeFlagBits
 
-var # commands
+var # command cages
   importSemaphoreFdKHRCage: proc(device: Device; pImportSemaphoreFdInfo: ptr ImportSemaphoreFdInfoKHR;): Result {.cdecl.}
   getSemaphoreFdKHRCage: proc(device: Device; pGetFdInfo: ptr SemaphoreGetFdInfoKHR; pFd: ptr int;): Result {.cdecl.}
 proc importSemaphoreFdKHR*(

@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_EXT_image_drm_format_modifier
 
 
@@ -46,7 +46,7 @@ type
     pNext*: pointer
     drmFormatModifier*: uint64
 
-var # commands
+var # command cages
   getImageDrmFormatModifierPropertiesEXTCage: proc(device: Device; image: Image; pProperties: ptr ImageDrmFormatModifierPropertiesEXT;): Result {.cdecl.}
 proc getImageDrmFormatModifierPropertiesEXT*(
       device: Device;

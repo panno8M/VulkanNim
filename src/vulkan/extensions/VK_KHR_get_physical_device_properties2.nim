@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:41:37Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_get_physical_device_properties2
 
 
@@ -38,13 +38,3 @@ StructureType.defineAliases:
   sparseImageFormatProperties2 as sparseImageFormatProperties2Khr
   physicalDeviceSparseImageFormatInfo2 as physicalDeviceSparseImageFormatInfo2Khr
 
-proc loadVK_KHR_get_physical_device_properties2*(instance: Instance) =
-  instance.defineLoader(`<<`)
-
-  getPhysicalDeviceFeatures2KHRCage << "vkGetPhysicalDeviceFeatures2KHR"
-  getPhysicalDeviceProperties2KHRCage << "vkGetPhysicalDeviceProperties2KHR"
-  getPhysicalDeviceFormatProperties2KHRCage << "vkGetPhysicalDeviceFormatProperties2KHR"
-  getPhysicalDeviceImageFormatProperties2KHRCage << "vkGetPhysicalDeviceImageFormatProperties2KHR"
-  getPhysicalDeviceQueueFamilyProperties2KHRCage << "vkGetPhysicalDeviceQueueFamilyProperties2KHR"
-  getPhysicalDeviceMemoryProperties2KHRCage << "vkGetPhysicalDeviceMemoryProperties2KHR"
-  getPhysicalDeviceSparseImageFormatProperties2KHRCage << "vkGetPhysicalDeviceSparseImageFormatProperties2KHR"

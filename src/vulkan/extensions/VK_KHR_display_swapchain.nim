@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_display_swapchain
 
 
@@ -19,7 +19,7 @@ type
     dstRect*: Rect2D
     persistent*: Bool32
 
-var # commands
+var # command cages
   createSharedSwapchainsKHRCage: proc(device: Device; swapchainCount: uint32; pCreateInfos: ptr SwapchainCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pSwapchains: ptr SwapchainKHR;): Result {.cdecl.}
 proc createSharedSwapchainsKHR*(
       device: Device;

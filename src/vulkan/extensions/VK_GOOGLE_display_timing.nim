@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_GOOGLE_display_timing
 
 
@@ -28,7 +28,7 @@ type
     presentID*: uint32
     desiredPresentTime*: uint64
 
-var # commands
+var # command cages
   getRefreshCycleDurationGOOGLECage: proc(device: Device; swapchain: SwapchainKHR; pDisplayTimingProperties: ptr RefreshCycleDurationGOOGLE;): Result {.cdecl.}
   getPastPresentationTimingGOOGLECage: proc(device: Device; swapchain: SwapchainKHR; pPresentationTimingCount: ptr uint32; pPresentationTimings: ptr PastPresentationTimingGOOGLE;): Result {.cdecl.}
 proc getRefreshCycleDurationGOOGLE*(

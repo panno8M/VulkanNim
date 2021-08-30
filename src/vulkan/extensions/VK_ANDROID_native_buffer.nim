@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_ANDROID_native_buffer
 
 
@@ -35,7 +35,7 @@ type
     sharedAndroid = 0x00000001
   SwapchainImageUsageFlagsANDROID* = Flags[SwapchainImageUsageFlagBitsANDROID]
 
-var # commands
+var # command cages
   getSwapchainGrallocUsageANDROIDCage: proc(device: Device; format: Format; imageUsage: ImageUsageFlags; grallocUsage: ptr int;): Result {.cdecl.}
   acquireImageANDROIDCage: proc(device: Device; image: Image; nativeFenceFd: int; semaphore: Semaphore; fence: Fence;): Result {.cdecl.}
   queueSignalReleaseImageANDROIDCage: proc(queue: Queue; waitSemaphoreCount: uint32; pWaitSemaphores: ptr Semaphore; image: Image; pNativeFenceFd: ptr int;): Result {.cdecl.}

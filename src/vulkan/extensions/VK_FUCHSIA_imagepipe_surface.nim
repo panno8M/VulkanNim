@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_FUCHSIA_imagepipe_surface
 
 
@@ -18,7 +18,7 @@ type
     flags*: ImagePipeSurfaceCreateFlagsFUCHSIA
     imagePipeHandle*: zx_handle_t
 
-var # commands
+var # command cages
   createImagePipeSurfaceFUCHSIACage: proc(instance: Instance; pCreateInfo: ptr ImagePipeSurfaceCreateInfoFUCHSIA; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
 proc createImagePipeSurfaceFUCHSIA*(
       instance: Instance;

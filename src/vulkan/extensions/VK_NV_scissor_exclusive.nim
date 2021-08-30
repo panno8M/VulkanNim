@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:47Z
 # VK_NV_scissor_exclusive
 
 
@@ -21,7 +21,7 @@ type
     pNext*: pointer
     exclusiveScissor*: Bool32
 
-var # commands
+var # command cages
   cmdSetExclusiveScissorNVCage: proc(commandBuffer: CommandBuffer; firstExclusiveScissor: uint32; exclusiveScissorCount: uint32; pExclusiveScissors: ptr Rect2D;): void {.cdecl.}
 proc cmdSetExclusiveScissorNV*(
       commandBuffer: CommandBuffer;

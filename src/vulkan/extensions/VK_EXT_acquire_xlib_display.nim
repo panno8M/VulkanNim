@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_EXT_acquire_xlib_display
 
 
@@ -10,7 +10,7 @@ const
   ExtAcquireXlibDisplaySpecVersion* = 1
   ExtAcquireXlibDisplayExtensionName* = "VK_EXT_acquire_xlib_display"
 
-var # commands
+var # command cages
   acquireXlibDisplayEXTCage: proc(physicalDevice: PhysicalDevice; dpy: ptr Display; display: DisplayKHR;): Result {.cdecl.}
   getRandROutputDisplayEXTCage: proc(physicalDevice: PhysicalDevice; dpy: ptr Display; rrOutput: RROutput; pDisplay: ptr DisplayKHR;): Result {.cdecl.}
 proc acquireXlibDisplayEXT*(

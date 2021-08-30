@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_AMD_display_native_hdr
 
 
@@ -22,7 +22,7 @@ type
     pNext*: pointer
     localDimmingEnable*: Bool32
 
-var # commands
+var # command cages
   setLocalDimmingAMDCage: proc(device: Device; swapChain: SwapchainKHR; localDimmingEnable: Bool32;): void {.cdecl.}
 proc setLocalDimmingAMD*(
       device: Device;

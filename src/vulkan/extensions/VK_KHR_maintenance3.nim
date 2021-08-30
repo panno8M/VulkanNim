@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:41:37Z
+# Generated at 2021-08-30T22:51:47Z
 # VK_KHR_maintenance3
 
 
@@ -19,7 +19,3 @@ StructureType.defineAliases:
   physicalDeviceMaintenance3Properties as physicalDeviceMaintenance3PropertiesKhr
   descriptorSetLayoutSupport as descriptorSetLayoutSupportKhr
 
-proc loadVK_KHR_maintenance3*(instance: Instance) =
-  instance.defineLoader(`<<`)
-
-  getDescriptorSetLayoutSupportKHRCage << "vkGetDescriptorSetLayoutSupportKHR"

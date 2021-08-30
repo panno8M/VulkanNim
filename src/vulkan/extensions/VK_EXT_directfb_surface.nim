@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_EXT_directfb_surface
 
 
@@ -19,7 +19,7 @@ type
     dfb*: ptr IDirectFB
     surface*: ptr IDirectFBSurface
 
-var # commands
+var # command cages
   createDirectFBSurfaceEXTCage: proc(instance: Instance; pCreateInfo: ptr DirectFBSurfaceCreateInfoEXT; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
   getPhysicalDeviceDirectFBPresentationSupportEXTCage: proc(physicalDevice: PhysicalDevice; queueFamilyIndex: uint32; dfb: ptr IDirectFB;): Bool32 {.cdecl.}
 proc createDirectFBSurfaceEXT*(

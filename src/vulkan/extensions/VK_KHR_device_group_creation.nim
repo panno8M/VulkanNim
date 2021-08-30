@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:41:37Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_device_group_creation
 
 
@@ -22,7 +22,3 @@ StructureType.defineAliases:
 MemoryHeapFlagBits.defineAliases:
   multiInstance as multiInstanceKhr
 
-proc loadVK_KHR_device_group_creation*(instance: Instance) =
-  instance.defineLoader(`<<`)
-
-  enumeratePhysicalDeviceGroupsKHRCage << "vkEnumeratePhysicalDeviceGroupsKHR"

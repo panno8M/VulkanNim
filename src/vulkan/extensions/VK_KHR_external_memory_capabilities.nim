@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:41:37Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_external_memory_capabilities
 
 
@@ -45,7 +45,3 @@ ExternalMemoryHandleTypeFlagBits.defineAliases:
   d3d12Heap as d3d12HeapKhr
   d3d12Resource as d3d12ResourceKhr
 
-proc loadVK_KHR_external_memory_capabilities*(instance: Instance) =
-  instance.defineLoader(`<<`)
-
-  getPhysicalDeviceExternalBufferPropertiesKHRCage << "vkGetPhysicalDeviceExternalBufferPropertiesKHR"

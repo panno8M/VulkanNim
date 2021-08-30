@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:41:37Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_buffer_device_address
 
 
@@ -40,9 +40,3 @@ StructureType.defineAliases:
 BufferCreateFlagBits.defineAliases:
   deviceAddressCaptureReplay as deviceAddressCaptureReplayKhr
 
-proc loadVK_KHR_buffer_device_address*(instance: Instance) =
-  instance.defineLoader(`<<`)
-
-  getBufferDeviceAddressKHRCage << "vkGetBufferDeviceAddressKHR"
-  getBufferOpaqueCaptureAddressKHRCage << "vkGetBufferOpaqueCaptureAddressKHR"
-  getDeviceMemoryOpaqueCaptureAddressKHRCage << "vkGetDeviceMemoryOpaqueCaptureAddressKHR"

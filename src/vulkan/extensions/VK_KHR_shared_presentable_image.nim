@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_shared_presentable_image
 
 
@@ -18,7 +18,7 @@ type
     pNext*: pointer
     sharedPresentSupportedUsageFlags*: ImageUsageFlags
 
-var # commands
+var # command cages
   getSwapchainStatusKHRCage: proc(device: Device; swapchain: SwapchainKHR;): Result {.cdecl.}
 proc getSwapchainStatusKHR*(
       device: Device;

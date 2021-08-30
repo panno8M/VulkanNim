@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:41:37Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_KHR_draw_indirect_count
 
 
@@ -11,8 +11,3 @@ const
 
 const cmdDrawIndirectCountKHR* = cmdDrawIndirectCount
 const cmdDrawIndexedIndirectCountKHR* = cmdDrawIndexedIndirectCount
-proc loadVK_KHR_draw_indirect_count*(instance: Instance) =
-  instance.defineLoader(`<<`)
-
-  cmdDrawIndirectCountKHRCage << "vkCmdDrawIndirectCountKHR"
-  cmdDrawIndexedIndirectCountKHRCage << "vkCmdDrawIndexedIndirectCountKHR"

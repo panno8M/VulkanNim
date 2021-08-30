@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:41:37Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_EXT_buffer_device_address
 
 
@@ -38,7 +38,3 @@ StructureType.defineAliases:
 BufferCreateFlagBits.defineAliases:
   deviceAddressCaptureReplay as deviceAddressCaptureReplayExt
 
-proc loadVK_EXT_buffer_device_address*(instance: Instance) =
-  instance.defineLoader(`<<`)
-
-  getBufferDeviceAddressEXTCage << "vkGetBufferDeviceAddressEXT"

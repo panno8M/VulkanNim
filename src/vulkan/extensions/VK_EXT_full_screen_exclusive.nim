@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:41:37Z
+# Generated at 2021-08-30T22:51:48Z
 # VK_EXT_full_screen_exclusive
 
 
@@ -33,7 +33,7 @@ type
     pNext*: pointer
     hmonitor*: HMONITOR
 
-var # commands
+var # command cages
   getPhysicalDeviceSurfacePresentModes2EXTCage: proc(physicalDevice: PhysicalDevice; pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR; pPresentModeCount: ptr uint32; pPresentModes: ptr PresentModeKHR;): Result {.cdecl.}
   acquireFullScreenExclusiveModeEXTCage: proc(device: Device; swapchain: SwapchainKHR;): Result {.cdecl.}
   releaseFullScreenExclusiveModeEXTCage: proc(device: Device; swapchain: SwapchainKHR;): Result {.cdecl.}
@@ -56,7 +56,7 @@ proc releaseFullScreenExclusiveModeEXT*(
   releaseFullScreenExclusiveModeEXTCage(device,swapchain)
 
 
-var # commands
+var # command cages
   getDeviceGroupSurfacePresentModes2EXTCage: proc(device: Device; pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR; pModes: ptr DeviceGroupPresentModeFlagsKHR;): Result {.cdecl.}
 proc getDeviceGroupSurfacePresentModes2EXT*(
       device: Device;
