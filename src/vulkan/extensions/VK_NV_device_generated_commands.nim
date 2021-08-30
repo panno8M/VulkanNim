@@ -1,4 +1,4 @@
-# Generated at 2021-08-29T23:53:05Z
+# Generated at 2021-08-30T01:26:11Z
 # VK_NV_device_generated_commands
 # =================================
 
@@ -56,7 +56,8 @@ type
   IndirectStateFlagBitsNV* {.size: sizeof(int32), pure.} = enum
     flagFrontfaceNv = 0x00000001
   IndirectStateFlagsNV* = Flags[IndirectStateFlagBitsNV]
-  IndirectCommandsLayoutNV* = object of NonDispatchableHandle
+  HtIndirectCommandsLayoutNV = object of HandleType
+  IndirectCommandsLayoutNV* = NonDispatchableHandle[HtIndirectCommandsLayoutNV]
   IndirectCommandsTokenTypeNV* {.size: sizeof(int32), pure.} = enum
     shaderGroupNv = 0
     stateFlagsNv = 1

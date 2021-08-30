@@ -50,7 +50,7 @@ proc generate*() =
           dependencies: dependencies[name]
         )
     if libFile.fileName == "vk10":
-      libFile.fileFooter = "src/vulkan/generator/bitmaskOperations.nim".readFile
+      libFile.fileFooter = "src/vulkan/generator/additionalOperations.nim".readFile
 
     headerComment &= "Generated at {now().utc()}\n".fmt
     headerComment &= "{api} {number}".fmt

@@ -1,4 +1,4 @@
-# Generated at 2021-08-29T23:53:04Z
+# Generated at 2021-08-30T01:26:11Z
 # VK_KHR_surface
 # =================================
 
@@ -11,7 +11,8 @@ const
   KhrSurfaceExtensionName* = "VK_KHR_surface"
 
 type
-  SurfaceKHR* = object of NonDispatchableHandle
+  HtSurfaceKHR = object of HandleType
+  SurfaceKHR* = NonDispatchableHandle[HtSurfaceKHR]
   SurfaceTransformFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
     identityKhr = 0x00000001
     rotate90Khr = 0x00000002

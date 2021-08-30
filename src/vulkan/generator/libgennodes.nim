@@ -150,9 +150,11 @@ proc render*(handle: NodeHandle): string =
   of nkbrNormal:
     case handle.handleKind
     of HandleKind.Handle:
-      "{name}* = object of Handle".fmt
+      "Ht{name} = object of HandleType\n".fmt &
+      "{name}* = Handle[Ht{name}]".fmt
     of HandleKind.NonDispatchableHandle:
-      "{name}* = object of NonDispatchableHandle".fmt
+      "Ht{name} = object of HandleType\n".fmt &
+      "{name}* = NonDispatchableHandle[Ht{name}]".fmt
   of nkbrAlias:
     let alias = handle.alias.replaceBasicTypes
     "{name}* = {alias}".fmt
@@ -237,7 +239,7 @@ func renderInstanceCommandLoader*(fileName: string): string =
   of "vk10":
     result =
       "proc loadInstanceProcs*() =\n" &
-      "  Handle().defineLoader(`<<`)\n" &
+      "  nil.defineLoader(`<<`)\n" &
       "  getInstanceProcAddrCage << \"vkGetInstanceAddr\"\n" &
       "  enumerateInstanceExtensionPropertiesCage << \"vkEnumerateInstanceExtensionProperties\"\n" &
       "  enumerateInstanceLayerPropertiesCage << \"vkEnumerateInstanceLayerProperties\"\n" &
@@ -246,7 +248,7 @@ func renderInstanceCommandLoader*(fileName: string): string =
     result =
       "proc loadInstanceProcs*() =\n" &
       "  vk10.loadInstanceProcs()\n" &
-      "  Handle().defineLoader(`<<`)\n" &
+      "  nil.defineLoader(`<<`)\n" &
       "  enumerateInstanceVersionCage << \"vkEnumerateInstanceVersion\""
 
 proc render*(libFile: LibFile; resources: Resources): string =

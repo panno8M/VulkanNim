@@ -1,4 +1,4 @@
-# Generated at 2021-08-29T23:53:04Z
+# Generated at 2021-08-30T01:26:11Z
 # VK_EXT_debug_report
 # =================================
 
@@ -11,7 +11,8 @@ const
   ExtDebugReportExtensionName* = "VK_EXT_debug_report"
 
 type
-  DebugReportCallbackEXT* = object of NonDispatchableHandle
+  HtDebugReportCallbackEXT = object of HandleType
+  DebugReportCallbackEXT* = NonDispatchableHandle[HtDebugReportCallbackEXT]
   DebugReportCallbackEXT* = proc(
       flags: DebugReportFlagsEXT;
       objectType: DebugReportObjectTypeEXT;

@@ -1,4 +1,4 @@
-# Generated at 2021-08-29T23:53:04Z
+# Generated at 2021-08-30T01:26:11Z
 # VK_KHR_swapchain
 # =================================
 
@@ -43,7 +43,8 @@ type
     presentMode*: PresentModeKHR
     clipped*: Bool32
     oldSwapchain*: SwapchainKHR
-  SwapchainKHR* = object of NonDispatchableHandle
+  HtSwapchainKHR = object of HandleType
+  SwapchainKHR* = NonDispatchableHandle[HtSwapchainKHR]
   PresentInfoKHR* = object
     sType*: StructureType
     pNext*: pointer

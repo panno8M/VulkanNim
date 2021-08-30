@@ -1,4 +1,4 @@
-# Generated at 2021-08-29T23:53:04Z
+# Generated at 2021-08-30T04:05:59Z
 # vulkan 1.0
 # Vulkan core API interface definitions
 # =====================================
@@ -1623,7 +1623,8 @@ type
     # Provided by VK_QCOM_extension_173
     reserved17Qcom = 0x00020000
   ImageUsageFlags* = Flags[ImageUsageFlagBits]
-  Instance* = object of Handle
+  HtInstance = object of HandleType
+  Instance* = Handle[HtInstance]
   InstanceCreateFlags* = Flags[distinct UnusedEnum]
   InstanceCreateInfo* = object
     sType*: StructureType
@@ -1662,7 +1663,8 @@ type
   MemoryType* = object
     propertyFlags*: MemoryPropertyFlags
     heapIndex*: uint32
-  PhysicalDevice* = object of Handle
+  HtPhysicalDevice = object of HandleType
+  PhysicalDevice* = Handle[HtPhysicalDevice]
   PhysicalDeviceFeatures* = object
     robustBufferAccess*: Bool32
     fullDrawIndexUint32*: Bool32
@@ -1888,7 +1890,8 @@ type
 
   # Device commands
   # ---------------
-  Device* = object of Handle
+  HtDevice = object of HandleType
+  Device* = Handle[HtDevice]
   DeviceCreateFlags* = Flags[distinct UnusedEnum]
   DeviceCreateInfo* = object
     sType*: StructureType
@@ -1970,7 +1973,8 @@ type
     # Provided by VK_AMD_extension_24
     reserved27Khr = 0x08000000
   PipelineStageFlags* = Flags[PipelineStageFlagBits]
-  Queue* = object of Handle
+  HtQueue = object of HandleType
+  Queue* = Handle[HtQueue]
   SubmitInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -1999,7 +2003,8 @@ type
 
   # Memory management API commands
   # ------------------------------
-  DeviceMemory* = object of NonDispatchableHandle
+  HtDeviceMemory = object of HandleType
+  DeviceMemory* = NonDispatchableHandle[HtDeviceMemory]
   MemoryRequirements* = object
     size*: DeviceSize
     alignment*: DeviceSize
@@ -2090,7 +2095,8 @@ type
 
   # Fence commands
   # --------------
-  Fence* = object of NonDispatchableHandle
+  HtFence = object of HandleType
+  Fence* = NonDispatchableHandle[HtFence]
   FenceCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     signaled = 0x00000001
   FenceCreateFlags* = Flags[FenceCreateFlagBits]
@@ -2101,7 +2107,8 @@ type
 
   # Queue semaphore commands
   # ------------------------
-  Semaphore* = object of NonDispatchableHandle
+  HtSemaphore = object of HandleType
+  Semaphore* = NonDispatchableHandle[HtSemaphore]
   SemaphoreCreateFlags* = Flags[distinct UnusedEnum]
   SemaphoreCreateInfo* = object
     sType*: StructureType
@@ -2110,7 +2117,8 @@ type
 
   # Event commands
   # --------------
-  Event* = object of NonDispatchableHandle
+  HtEvent = object of HandleType
+  Event* = NonDispatchableHandle[HtEvent]
   EventCreateFlags* = Flags[distinct UnusedEnum]
   EventCreateInfo* = object
     sType*: StructureType
@@ -2132,7 +2140,8 @@ type
     tessellationEvaluationShaderInvocations = 0x00000200 # Optional
     computeShaderInvocations = 0x00000400 # Optional
   QueryPipelineStatisticFlags* = Flags[QueryPipelineStatisticFlagBits]
-  QueryPool* = object of NonDispatchableHandle
+  HtQueryPool = object of HandleType
+  QueryPool* = NonDispatchableHandle[HtQueryPool]
   QueryPoolCreateFlags* = Flags[distinct UnusedEnum]
   QueryPoolCreateInfo* = object
     sType*: StructureType
@@ -2168,7 +2177,8 @@ type
 
   # Buffer commands
   # ---------------
-  Buffer* = object of NonDispatchableHandle
+  HtBuffer = object of HandleType
+  Buffer* = NonDispatchableHandle[HtBuffer]
   BufferCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     sparseBinding = 0x00000001 # Buffer should support sparse backing
     sparseResidency = 0x00000002 # Buffer should support sparse backing with partial residency
@@ -2228,7 +2238,8 @@ type
 
   # Buffer view commands
   # --------------------
-  BufferView* = object of NonDispatchableHandle
+  HtBufferView = object of HandleType
+  BufferView* = NonDispatchableHandle[HtBufferView]
   BufferViewCreateFlags* = Flags[distinct UnusedEnum]
   BufferViewCreateInfo* = object
     sType*: StructureType
@@ -2241,7 +2252,8 @@ type
 
   # Image commands
   # --------------
-  Image* = object of NonDispatchableHandle
+  HtImage = object of HandleType
+  Image* = NonDispatchableHandle[HtImage]
   ImageCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2316,7 +2328,8 @@ type
     levelCount*: uint32
     baseArrayLayer*: uint32
     layerCount*: uint32
-  ImageView* = object of NonDispatchableHandle
+  HtImageView = object of HandleType
+  ImageView* = NonDispatchableHandle[HtImageView]
   ImageViewCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     # Provided by VK_EXT_fragment_density_map
     fragmentDensityMapDynamicExt = 0x00000001
@@ -2343,7 +2356,8 @@ type
 
   # Shader commands
   # ---------------
-  ShaderModule* = object of NonDispatchableHandle
+  HtShaderModule = object of HandleType
+  ShaderModule* = NonDispatchableHandle[HtShaderModule]
   ShaderModuleCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     # Provided by VK_NV_extension_52
     reserved0Nv = 0x00000001
@@ -2357,7 +2371,8 @@ type
 
   # Pipeline Cache commands
   # -----------------------
-  PipelineCache* = object of NonDispatchableHandle
+  HtPipelineCache = object of HandleType
+  PipelineCache* = NonDispatchableHandle[HtPipelineCache]
   PipelineCacheCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     # Provided by VK_EXT_pipeline_creation_cache_control
     externallySynchronizedExt = 0x00000001
@@ -2608,7 +2623,8 @@ type
     orInverted = 13
     nand = 14
     set = 15
-  Pipeline* = object of NonDispatchableHandle
+  HtPipeline = object of HandleType
+  Pipeline* = NonDispatchableHandle[HtPipeline]
   PipelineColorBlendAttachmentState* = object
     blendEnable*: Bool32
     srcColorBlendFactor*: BlendFactor
@@ -2854,7 +2870,8 @@ type
 
   # Pipeline layout commands
   # ------------------------
-  PipelineLayout* = object of NonDispatchableHandle
+  HtPipelineLayout = object of HandleType
+  PipelineLayout* = NonDispatchableHandle[HtPipelineLayout]
   PipelineLayoutCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2886,7 +2903,8 @@ type
     linear = 1
     # Provided by VK_IMG_filter_cubic
     cubicImg = 1000015000
-  Sampler* = object of NonDispatchableHandle
+  HtSampler = object of HandleType
+  Sampler* = NonDispatchableHandle[HtSampler]
   SamplerAddressMode* {.size: sizeof(int32), pure.} = enum
     repeat = 0
     mirroredRepeat = 1
@@ -2943,7 +2961,8 @@ type
     sampler*: Sampler
     imageView*: ImageView
     imageLayout*: ImageLayout
-  DescriptorPool* = object of NonDispatchableHandle
+  HtDescriptorPool = object of HandleType
+  DescriptorPool* = NonDispatchableHandle[HtDescriptorPool]
   DescriptorPoolCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     freeDescriptorSet = 0x00000001 # Descriptor sets may be freed individually
     # Provided by VK_VERSION_1_2
@@ -2960,14 +2979,16 @@ type
   DescriptorPoolSize* = object
     theType*: DescriptorType
     descriptorCount*: uint32
-  DescriptorSet* = object of NonDispatchableHandle
+  HtDescriptorSet = object of HandleType
+  DescriptorSet* = NonDispatchableHandle[HtDescriptorSet]
   DescriptorSetAllocateInfo* = object
     sType*: StructureType
     pNext*: pointer
     descriptorPool*: DescriptorPool
     descriptorSetCount*: uint32
     pSetLayouts*: ptr DescriptorSetLayout
-  DescriptorSetLayout* = object of NonDispatchableHandle
+  HtDescriptorSetLayout = object of HandleType
+  DescriptorSetLayout* = NonDispatchableHandle[HtDescriptorSetLayout]
   DescriptorSetLayoutBinding* = object
     binding*: uint32
     descriptorType*: DescriptorType
@@ -3095,7 +3116,8 @@ type
     # Provided by VK_VERSION_1_1
     deviceGroup = 0x00000004 # Dependency is across devices
   DependencyFlags* = Flags[DependencyFlagBits]
-  Framebuffer* = object of NonDispatchableHandle
+  HtFramebuffer = object of HandleType
+  Framebuffer* = NonDispatchableHandle[HtFramebuffer]
   FramebufferCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     # Provided by VK_VERSION_1_2
     imageless = 0x00000001
@@ -3115,7 +3137,8 @@ type
     compute = 1
     # Provided by VK_KHR_ray_tracing
     rayTracingKhr = 1000165000
-  RenderPass* = object of NonDispatchableHandle
+  HtRenderPass = object of HandleType
+  RenderPass* = NonDispatchableHandle[HtRenderPass]
   RenderPassCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     # Provided by VK_KHR_extension_221
     reserved0Khr = 0x00000001
@@ -3164,7 +3187,8 @@ type
 
   # Command pool commands
   # ---------------------
-  CommandPool* = object of NonDispatchableHandle
+  HtCommandPool = object of HandleType
+  CommandPool* = NonDispatchableHandle[HtCommandPool]
   CommandPoolCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     transient = 0x00000001 # Command buffers have a short lifetime
     resetCommandBuffer = 0x00000002 # Command buffers may release their memory individually
@@ -3182,7 +3206,8 @@ type
 
   # Command buffer commands
   # -----------------------
-  CommandBuffer* = object of Handle
+  HtCommandBuffer = object of HandleType
+  CommandBuffer* = Handle[HtCommandBuffer]
   CommandBufferAllocateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -3329,7 +3354,7 @@ template versionPatch*(patch: uint32): untyped = ( patch )
 
 # API constants
 # -------------
-template nullHandle*(): untyped = ( cast[pointer](0) )
+template nullHandle*(): untyped = ( cast[Handle[HandleType]](0) )
 
 
 # Device initialization
@@ -4535,7 +4560,7 @@ proc cmdExecuteCommands*(
     ): void {.cdecl.} =
   cmdExecuteCommandsCage(commandBuffer,commandBufferCount,pCommandBuffers)
 proc loadInstanceProcs*() =
-  Handle().defineLoader(`<<`)
+  nil.defineLoader(`<<`)
   getInstanceProcAddrCage << "vkGetInstanceAddr"
   enumerateInstanceExtensionPropertiesCage << "vkEnumerateInstanceExtensionProperties"
   enumerateInstanceLayerPropertiesCage << "vkEnumerateInstanceLayerProperties"
@@ -4869,3 +4894,19 @@ proc `carefulNot`*[Flagbits: enum](flags: Flags[Flagbits]): Flags[Flagbits] =
 proc `carefulNot`*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
   ## Mainly used for flags with non-contiguous bits, such as the DebugUtilsMessageSeverity flag.
   carefulNot flagbits.toFlags
+
+
+
+# Handle operations
+# Utility for handle operation added independently
+# ================================================
+
+proc `==`*[T](a: Handle[T]; b: Handle[T]): bool = a.pointer == b.pointer
+proc `==`*[T](a: Handle[T]; b: Handle[HandleType]): bool = a.pointer == b.pointer
+template `==`*[T](a: Handle[HandleType]; b: Handle[T]): bool = b == a
+proc `==`*[T](a: Handle[HandleType]; b: Handle[HandleType]): bool = a.pointer == b.pointer
+
+proc `==`*[T](a: NonDispatchableHandle[T]; b: NonDispatchableHandle[T]): bool = a.pointer == b.pointer
+proc `==`*[T](a: NonDispatchableHandle[T]; b: NonDispatchableHandle[HandleType]): bool = a.pointer == b.pointer
+template `==`*[T](a: NonDispatchableHandle[HandleType]; b: NonDispatchableHandle[T]): bool = b == a
+proc `==`*[T](a: NonDispatchableHandle[HandleType]; b: NonDispatchableHandle[HandleType]): bool = a.pointer == b.pointer

@@ -57,7 +57,7 @@ const
   genVersionPatch* =
     "template versionPatch*(patch: uint32): untyped = ( patch )"
   genNullHandle* =
-    "template nullHandle*(): untyped = ( cast[pointer](0) )"
+    "template nullHandle*(): untyped = ( cast[Handle[HandleType]](0) )"
 
 func define*(id: string; typeDef: XmlNode): Option[string] {.raises: [].} =
   case id

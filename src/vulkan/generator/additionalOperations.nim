@@ -135,3 +135,19 @@ proc `carefulNot`*[Flagbits: enum](flags: Flags[Flagbits]): Flags[Flagbits] =
 proc `carefulNot`*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
   ## Mainly used for flags with non-contiguous bits, such as the DebugUtilsMessageSeverity flag.
   carefulNot flagbits.toFlags
+
+
+
+# Handle operations
+# Utility for handle operation added independently
+# ================================================
+
+proc `==`*[T](a: Handle[T]; b: Handle[T]): bool = a.pointer == b.pointer
+proc `==`*[T](a: Handle[T]; b: Handle[HandleType]): bool = a.pointer == b.pointer
+template `==`*[T](a: Handle[HandleType]; b: Handle[T]): bool = b == a
+proc `==`*[T](a: Handle[HandleType]; b: Handle[HandleType]): bool = a.pointer == b.pointer
+
+proc `==`*[T](a: NonDispatchableHandle[T]; b: NonDispatchableHandle[T]): bool = a.pointer == b.pointer
+proc `==`*[T](a: NonDispatchableHandle[T]; b: NonDispatchableHandle[HandleType]): bool = a.pointer == b.pointer
+template `==`*[T](a: NonDispatchableHandle[HandleType]; b: NonDispatchableHandle[T]): bool = b == a
+proc `==`*[T](a: NonDispatchableHandle[HandleType]; b: NonDispatchableHandle[HandleType]): bool = a.pointer == b.pointer

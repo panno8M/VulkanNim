@@ -1,4 +1,4 @@
-# Generated at 2021-08-29T23:58:16Z
+# Generated at 2021-08-30T01:26:11Z
 # vulkan 1.1
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -343,7 +343,8 @@ type
     sType*: StructureType
     pNext*: pointer
     combinedImageSamplerDescriptorCount*: uint32
-  SamplerYcbcrConversion* = object of NonDispatchableHandle
+  HtSamplerYcbcrConversion = object of HandleType
+  SamplerYcbcrConversion* = NonDispatchableHandle[HtSamplerYcbcrConversion]
   SamplerYcbcrModelConversion* {.size: sizeof(int32), pure.} = enum
     rgbIdentity = 0
     ycbcrIdentity = 1 # just range expansion
@@ -359,7 +360,8 @@ type
 
   # Promoted from VK_KHR_descriptor_update_template
   # -----------------------------------------------
-  DescriptorUpdateTemplate* = object of NonDispatchableHandle
+  HtDescriptorUpdateTemplate = object of HandleType
+  DescriptorUpdateTemplate* = NonDispatchableHandle[HtDescriptorUpdateTemplate]
   DescriptorUpdateTemplateCreateFlags* = Flags[distinct UnusedEnum]
   DescriptorUpdateTemplateType* {.size: sizeof(int32), pure.} = enum
     descriptorSet = 0 # Create descriptor update template for descriptor set updates
@@ -879,7 +881,7 @@ StructureType.defineAliases:
 
 proc loadInstanceProcs*() =
   vk10.loadInstanceProcs()
-  Handle().defineLoader(`<<`)
+  nil.defineLoader(`<<`)
   enumerateInstanceVersionCage << "vkEnumerateInstanceVersion"
 
 proc loadVk11*(instance: Instance) =
