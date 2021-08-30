@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T04:05:59Z
+# Generated at 2021-08-30T09:35:51Z
 # vulkan 1.0
 # Vulkan core API interface definitions
 # =====================================
@@ -4812,6 +4812,12 @@ proc `none`*[Flagbits: enum](Type: typedesc[HashSet[Flagbits]]): HashSet[Flagbit
 proc `none`*[Flagbits: enum](flagsets: HashSet[Flagbits]): HashSet[Flagbits] = flagsets.typeof.none
 proc `none`*[Flagbits: enum](Type: typedesc[Flags[Flagbits]]): Flags[Flagbits] = return
 proc `none`*[Flagbits: enum](flags: Flags[Flagbits]): Flags[Flagbits] = flags.typeof.none
+
+proc isSome*[Flagbits: enum](flags: Flags[Flagbits]): bool = flags != Flags[Flagbits].none
+proc isSome*[Flagbits: enum](flagsets: HashSet[Flagbits]): bool = flagsets.len != 0
+
+proc isNone*[Flagbits: enum](flags: Flags[Flagbits]): bool = flags == Flags[Flagbits].none
+proc isNone*[Flagbits: enum](flagsets: HashSet[Flagbits]): bool = flagsets.len == 0
 
 proc `and`*[Flagbits: enum](a, b: Flags[Flagbits]): Flags[Flagbits] =
   Flags[Flagbits]((a.uint32 and b.uint32) and Flags[Flagbits].all.uint32)
