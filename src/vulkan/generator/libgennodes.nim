@@ -148,14 +148,11 @@ proc render*(handle: NodeHandle): string =
   let name = handle.name.replaceBasicTypes
   case handle.kind
   of nkbrNormal:
-    let handleType = handle.handleType
-    case handleType
-    of "VK_DEFINE_HANDLE":
-      "{name}* = distinct Handle".fmt
-    of "VK_DEFINE_NON_DISPATCHABLE_HANDLE":
-      "{name}* = distinct NonDispatchableHandle".fmt
-    else:
-      "FIXME: [Unsupported HANDLE]\n{repr handle}".fmt.commentify
+    case handle.handleKind
+    of HandleKind.Handle:
+      "{name}* = object of Handle".fmt
+    of HandleKind.NonDispatchableHandle:
+      "{name}* = object of NonDispatchableHandle".fmt
   of nkbrAlias:
     let alias = handle.alias.replaceBasicTypes
     "{name}* = {alias}".fmt
@@ -240,7 +237,7 @@ func renderInstanceCommandLoader*(fileName: string): string =
   of "vk10":
     result =
       "proc loadInstanceProcs*() =\n" &
-      "  nil.defineLoader(`<<`)\n" &
+      "  Handle().defineLoader(`<<`)\n" &
       "  getInstanceProcAddrCage << \"vkGetInstanceAddr\"\n" &
       "  enumerateInstanceExtensionPropertiesCage << \"vkEnumerateInstanceExtensionProperties\"\n" &
       "  enumerateInstanceLayerPropertiesCage << \"vkEnumerateInstanceLayerProperties\"\n" &
@@ -249,7 +246,7 @@ func renderInstanceCommandLoader*(fileName: string): string =
     result =
       "proc loadInstanceProcs*() =\n" &
       "  vk10.loadInstanceProcs()\n" &
-      "  nil.defineLoader(`<<`)\n" &
+      "  Handle().defineLoader(`<<`)\n" &
       "  enumerateInstanceVersionCage << \"vkEnumerateInstanceVersion\""
 
 proc render*(libFile: LibFile; resources: Resources): string =
@@ -713,7 +710,11 @@ func extractNodeHandle*(typeDef: XmlNode): NodeHandle {.raises: [UnexpectedXmlSt
     NodeHandle(
       kind: nkbrNormal,
       name: typeDef["name"].innerText.parseWords[0],
-      handleType: typeDef["type"].innerText.parseWords[0],
+      handleKind: case typeDef["type"].innerText.parseWords[0]
+        of "VK_DEFINE_HANDLE": HandleKind.Handle
+        of "VK_DEFINE_NON_DISPATCHABLE_HANDLE": HandleKind.NonDispatchableHandle
+        else: xmlError title"@handle Extraction > Unknowun handle": $typeDef
+      ,
       parent: ?typeDef{"parent"})
 
 func extractNodeCommand*(typeDef: XmlNode): NodeCommand {.raises: [UnexpectedXmlStructureError].} =

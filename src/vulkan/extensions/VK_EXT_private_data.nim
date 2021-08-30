@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-29T23:53:05Z
 # VK_EXT_private_data
 # =================================
 
@@ -23,7 +23,7 @@ type
     sType*: StructureType
     pNext*: pointer
     flags*: PrivateDataSlotCreateFlagsEXT
-  PrivateDataSlotEXT* = distinct NonDispatchableHandle
+  PrivateDataSlotEXT* = object of NonDispatchableHandle
   PrivateDataSlotCreateFlagsEXT* = Flags[PrivateDataSlotCreateFlagBitsEXT]
   PrivateDataSlotCreateFlagBitsEXT* = distinct UnusedEnum
 

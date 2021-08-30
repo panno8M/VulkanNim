@@ -1,4 +1,4 @@
-# Generated at 2021-08-29T04:29:39Z
+# Generated at 2021-08-29T23:53:04Z
 # VK_KHR_ray_tracing
 # Explicit sort order to require processing after VK_NV_ray_tracing
 # =================================================================
@@ -149,7 +149,7 @@ type
     maxGeometryCount*: uint32
     pGeometryInfos*: ptr AccelerationStructureCreateGeometryTypeInfoKHR
     deviceAddress*: DeviceAddress
-  AccelerationStructureKHR* = distinct NonDispatchableHandle
+  AccelerationStructureKHR* = object of NonDispatchableHandle
   BuildAccelerationStructureFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
     allowUpdateKhr = 0x00000001
     allowCompactionKhr = 0x00000002

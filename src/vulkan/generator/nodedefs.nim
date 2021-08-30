@@ -109,11 +109,13 @@ type
       flagbitsReq*: Option[string]
     of nkbrAlias:
       alias*: string
+  HandleKind* = enum
+    Handle, NonDispatchableHandle
   NodeHandle* = ref object
     name*: string
     case kind*: NodeKindBasicResource
     of nkbrNormal:
-      handleType*: string
+      handleKind*: HandleKind
       parent*: Option[string]
     of nkbrAlias:
       alias*: string

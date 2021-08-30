@@ -1,4 +1,4 @@
-# Generated at 2021-08-29T06:49:42Z
+# Generated at 2021-08-29T23:53:04Z
 # vulkan 1.0
 # Vulkan core API interface definitions
 # =====================================
@@ -1623,7 +1623,7 @@ type
     # Provided by VK_QCOM_extension_173
     reserved17Qcom = 0x00020000
   ImageUsageFlags* = Flags[ImageUsageFlagBits]
-  Instance* = distinct Handle
+  Instance* = object of Handle
   InstanceCreateFlags* = Flags[distinct UnusedEnum]
   InstanceCreateInfo* = object
     sType*: StructureType
@@ -1662,7 +1662,7 @@ type
   MemoryType* = object
     propertyFlags*: MemoryPropertyFlags
     heapIndex*: uint32
-  PhysicalDevice* = distinct Handle
+  PhysicalDevice* = object of Handle
   PhysicalDeviceFeatures* = object
     robustBufferAccess*: Bool32
     fullDrawIndexUint32*: Bool32
@@ -1888,7 +1888,7 @@ type
 
   # Device commands
   # ---------------
-  Device* = distinct Handle
+  Device* = object of Handle
   DeviceCreateFlags* = Flags[distinct UnusedEnum]
   DeviceCreateInfo* = object
     sType*: StructureType
@@ -1970,7 +1970,7 @@ type
     # Provided by VK_AMD_extension_24
     reserved27Khr = 0x08000000
   PipelineStageFlags* = Flags[PipelineStageFlagBits]
-  Queue* = distinct Handle
+  Queue* = object of Handle
   SubmitInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -1999,7 +1999,7 @@ type
 
   # Memory management API commands
   # ------------------------------
-  DeviceMemory* = distinct NonDispatchableHandle
+  DeviceMemory* = object of NonDispatchableHandle
   MemoryRequirements* = object
     size*: DeviceSize
     alignment*: DeviceSize
@@ -2090,7 +2090,7 @@ type
 
   # Fence commands
   # --------------
-  Fence* = distinct NonDispatchableHandle
+  Fence* = object of NonDispatchableHandle
   FenceCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     signaled = 0x00000001
   FenceCreateFlags* = Flags[FenceCreateFlagBits]
@@ -2101,7 +2101,7 @@ type
 
   # Queue semaphore commands
   # ------------------------
-  Semaphore* = distinct NonDispatchableHandle
+  Semaphore* = object of NonDispatchableHandle
   SemaphoreCreateFlags* = Flags[distinct UnusedEnum]
   SemaphoreCreateInfo* = object
     sType*: StructureType
@@ -2110,7 +2110,7 @@ type
 
   # Event commands
   # --------------
-  Event* = distinct NonDispatchableHandle
+  Event* = object of NonDispatchableHandle
   EventCreateFlags* = Flags[distinct UnusedEnum]
   EventCreateInfo* = object
     sType*: StructureType
@@ -2132,7 +2132,7 @@ type
     tessellationEvaluationShaderInvocations = 0x00000200 # Optional
     computeShaderInvocations = 0x00000400 # Optional
   QueryPipelineStatisticFlags* = Flags[QueryPipelineStatisticFlagBits]
-  QueryPool* = distinct NonDispatchableHandle
+  QueryPool* = object of NonDispatchableHandle
   QueryPoolCreateFlags* = Flags[distinct UnusedEnum]
   QueryPoolCreateInfo* = object
     sType*: StructureType
@@ -2168,7 +2168,7 @@ type
 
   # Buffer commands
   # ---------------
-  Buffer* = distinct NonDispatchableHandle
+  Buffer* = object of NonDispatchableHandle
   BufferCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     sparseBinding = 0x00000001 # Buffer should support sparse backing
     sparseResidency = 0x00000002 # Buffer should support sparse backing with partial residency
@@ -2228,7 +2228,7 @@ type
 
   # Buffer view commands
   # --------------------
-  BufferView* = distinct NonDispatchableHandle
+  BufferView* = object of NonDispatchableHandle
   BufferViewCreateFlags* = Flags[distinct UnusedEnum]
   BufferViewCreateInfo* = object
     sType*: StructureType
@@ -2241,7 +2241,7 @@ type
 
   # Image commands
   # --------------
-  Image* = distinct NonDispatchableHandle
+  Image* = object of NonDispatchableHandle
   ImageCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2316,7 +2316,7 @@ type
     levelCount*: uint32
     baseArrayLayer*: uint32
     layerCount*: uint32
-  ImageView* = distinct NonDispatchableHandle
+  ImageView* = object of NonDispatchableHandle
   ImageViewCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     # Provided by VK_EXT_fragment_density_map
     fragmentDensityMapDynamicExt = 0x00000001
@@ -2343,7 +2343,7 @@ type
 
   # Shader commands
   # ---------------
-  ShaderModule* = distinct NonDispatchableHandle
+  ShaderModule* = object of NonDispatchableHandle
   ShaderModuleCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     # Provided by VK_NV_extension_52
     reserved0Nv = 0x00000001
@@ -2357,7 +2357,7 @@ type
 
   # Pipeline Cache commands
   # -----------------------
-  PipelineCache* = distinct NonDispatchableHandle
+  PipelineCache* = object of NonDispatchableHandle
   PipelineCacheCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     # Provided by VK_EXT_pipeline_creation_cache_control
     externallySynchronizedExt = 0x00000001
@@ -2608,7 +2608,7 @@ type
     orInverted = 13
     nand = 14
     set = 15
-  Pipeline* = distinct NonDispatchableHandle
+  Pipeline* = object of NonDispatchableHandle
   PipelineColorBlendAttachmentState* = object
     blendEnable*: Bool32
     srcColorBlendFactor*: BlendFactor
@@ -2854,7 +2854,7 @@ type
 
   # Pipeline layout commands
   # ------------------------
-  PipelineLayout* = distinct NonDispatchableHandle
+  PipelineLayout* = object of NonDispatchableHandle
   PipelineLayoutCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2886,7 +2886,7 @@ type
     linear = 1
     # Provided by VK_IMG_filter_cubic
     cubicImg = 1000015000
-  Sampler* = distinct NonDispatchableHandle
+  Sampler* = object of NonDispatchableHandle
   SamplerAddressMode* {.size: sizeof(int32), pure.} = enum
     repeat = 0
     mirroredRepeat = 1
@@ -2943,7 +2943,7 @@ type
     sampler*: Sampler
     imageView*: ImageView
     imageLayout*: ImageLayout
-  DescriptorPool* = distinct NonDispatchableHandle
+  DescriptorPool* = object of NonDispatchableHandle
   DescriptorPoolCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     freeDescriptorSet = 0x00000001 # Descriptor sets may be freed individually
     # Provided by VK_VERSION_1_2
@@ -2960,14 +2960,14 @@ type
   DescriptorPoolSize* = object
     theType*: DescriptorType
     descriptorCount*: uint32
-  DescriptorSet* = distinct NonDispatchableHandle
+  DescriptorSet* = object of NonDispatchableHandle
   DescriptorSetAllocateInfo* = object
     sType*: StructureType
     pNext*: pointer
     descriptorPool*: DescriptorPool
     descriptorSetCount*: uint32
     pSetLayouts*: ptr DescriptorSetLayout
-  DescriptorSetLayout* = distinct NonDispatchableHandle
+  DescriptorSetLayout* = object of NonDispatchableHandle
   DescriptorSetLayoutBinding* = object
     binding*: uint32
     descriptorType*: DescriptorType
@@ -3095,7 +3095,7 @@ type
     # Provided by VK_VERSION_1_1
     deviceGroup = 0x00000004 # Dependency is across devices
   DependencyFlags* = Flags[DependencyFlagBits]
-  Framebuffer* = distinct NonDispatchableHandle
+  Framebuffer* = object of NonDispatchableHandle
   FramebufferCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     # Provided by VK_VERSION_1_2
     imageless = 0x00000001
@@ -3115,7 +3115,7 @@ type
     compute = 1
     # Provided by VK_KHR_ray_tracing
     rayTracingKhr = 1000165000
-  RenderPass* = distinct NonDispatchableHandle
+  RenderPass* = object of NonDispatchableHandle
   RenderPassCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     # Provided by VK_KHR_extension_221
     reserved0Khr = 0x00000001
@@ -3164,7 +3164,7 @@ type
 
   # Command pool commands
   # ---------------------
-  CommandPool* = distinct NonDispatchableHandle
+  CommandPool* = object of NonDispatchableHandle
   CommandPoolCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     transient = 0x00000001 # Command buffers have a short lifetime
     resetCommandBuffer = 0x00000002 # Command buffers may release their memory individually
@@ -3182,7 +3182,7 @@ type
 
   # Command buffer commands
   # -----------------------
-  CommandBuffer* = distinct Handle
+  CommandBuffer* = object of Handle
   CommandBufferAllocateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -4535,7 +4535,7 @@ proc cmdExecuteCommands*(
     ): void {.cdecl.} =
   cmdExecuteCommandsCage(commandBuffer,commandBufferCount,pCommandBuffers)
 proc loadInstanceProcs*() =
-  nil.defineLoader(`<<`)
+  Handle().defineLoader(`<<`)
   getInstanceProcAddrCage << "vkGetInstanceAddr"
   enumerateInstanceExtensionPropertiesCage << "vkEnumerateInstanceExtensionProperties"
   enumerateInstanceLayerPropertiesCage << "vkEnumerateInstanceLayerProperties"

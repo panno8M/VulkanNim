@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-29T23:53:04Z
 # VK_INTEL_performance_query
 # =================================
 
@@ -63,7 +63,7 @@ type
     sType*: StructureType
     pNext*: pointer
     theType*: PerformanceConfigurationTypeINTEL
-  PerformanceConfigurationINTEL* = distinct NonDispatchableHandle
+  PerformanceConfigurationINTEL* = object of NonDispatchableHandle
 
 var # commands
   initializePerformanceApiINTELCage: proc(device: Device; pInitializeInfo: ptr InitializePerformanceApiInfoINTEL;): Result {.cdecl.}

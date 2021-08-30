@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T12:28:00Z
+# Generated at 2021-08-29T23:53:04Z
 # VK_KHR_display
 # =================================
 
@@ -12,14 +12,14 @@ const
   KhrDisplayExtensionName* = "VK_KHR_display"
 
 type
-  DisplayKHR* = distinct NonDispatchableHandle
+  DisplayKHR* = object of NonDispatchableHandle
   DisplayModeCreateFlagsKHR* = Flags[distinct UnusedEnum]
   DisplayModeCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
     flags*: DisplayModeCreateFlagsKHR
     parameters*: DisplayModeParametersKHR
-  DisplayModeKHR* = distinct NonDispatchableHandle
+  DisplayModeKHR* = object of NonDispatchableHandle
   DisplayModeParametersKHR* = object
     visibleRegion*: Extent2D
     refreshRate*: uint32

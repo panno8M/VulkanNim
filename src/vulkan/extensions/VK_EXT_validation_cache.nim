@@ -1,4 +1,4 @@
-# Generated at 2021-08-28T12:28:01Z
+# Generated at 2021-08-29T23:53:04Z
 # VK_EXT_validation_cache
 # =================================
 
@@ -11,7 +11,7 @@ const
   ExtValidationCacheExtensionName* = "VK_EXT_validation_cache"
 
 type
-  ValidationCacheEXT* = distinct NonDispatchableHandle
+  ValidationCacheEXT* = object of NonDispatchableHandle
   ValidationCacheCreateInfoEXT* = object
     sType*: StructureType
     pNext*: pointer

@@ -14,7 +14,15 @@ let vkDll = vkDllPath.loadLib
 if vkDll.isNil:
   quit("Could not load: {vkDllPath}".fmt)
 
-let getInstanceProcAddrPlatform* = cast[proc(inst: pointer, s: cstring): pointer {.cdecl.}](vkDll.symAddr("vkGetInstanceProcAddr"))
+
+type
+  UnusedEnum* = object ## Reserved for future use
+  Handle* = object of RootObj
+    # p: pointer
+  NonDispatchableHandle* = object of RootObj
+    # p: pointer
+
+let getInstanceProcAddrPlatform* = cast[proc(inst: Handle, s: cstring): pointer {.cdecl.}](vkDll.symAddr("vkGetInstanceProcAddr"))
 if getInstanceProcAddrPlatform == nil:
   quit("failed to load `vkGetInstanceProcAddr` from " & vkDllPath)
 
@@ -23,9 +31,9 @@ template loadProc*(instance, target: untyped; loadFrom: string): untyped =
 template loadProc*(target: untyped, loadFrom: string): untyped =
   target = cast[typeof(target)](getInstanceProcAddrPlatform(nil, loadFrom))
 
-template defineLoader*(instance: untyped; procName: untyped): untyped =
+template defineLoader*(instance: Handle; procName: untyped): untyped =
   template procName(target: untyped; loadFrom: string): untyped =
-    target = cast[typeof(target)](getInstanceProcAddrPlatform(instance.pointer, loadFrom))
+    target = cast[typeof(target)](getInstanceProcAddrPlatform(instance, loadFrom))
 
 template defineAlias*(TEnum: typedesc; original, alias: untyped): untyped =
   template alias*(tEnum: typedesc[TEnum]): TEnum =
@@ -49,11 +57,3 @@ macro defineAliases*(TEnum: typedesc; body: untyped): untyped =
     result = newStmtList()
     for alias in aliases:
       result.add "defineAlias({repr TEnum}, {alias.original}, {alias.alias})".fmt.parseStmt
-
-
-
-
-type
-  UnusedEnum* = object ## Reserved for future use
-  Handle* = pointer
-  NonDispatchableHandle* = pointer
