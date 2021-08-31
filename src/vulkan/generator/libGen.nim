@@ -47,7 +47,8 @@ proc generate*() =
       comment = feature{"comment"}
       name = feature{"name"}
     var
-      libFile = LibFile(requires: newSeq[NodeRequire](),
+      libFile = LibFile(
+          requires: @[],
           fileName: name.parseFileName,
           deps: dependencies[name]
         )
@@ -58,7 +59,7 @@ proc generate*() =
       libFile.fileHeader &= comment.underline('=').commentify
 
     for require in feature.findAll("require"):
-      libFile.requires.add require.extractNodeRequire
+      libFile.requires[^1].add require.extractNodeRequire
 
     library[libFile.fileName] = libFile
 
@@ -89,7 +90,7 @@ proc generate*() =
 
     var
       libFile = LibFile(
-        requires: newSeq[NodeRequire](),
+        requires: @[],
         fileName: name.parseFileName,
         deps: dependenciesBasic
       )
@@ -106,7 +107,7 @@ proc generate*() =
     for require in extension.findAll("require"):
       if (?require{"extension"}).isSome:
         libFile.deps.add (require{"extension"}.parseFileName, true)
-      libFile.requires.add require.extractNodeRequire
+      libFile.requires[^1].add require.extractNodeRequire
 
     if libFile.requires.len != 0:
       library[libFile.fileName] = libFile
