@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:19:02Z
 # VK_EXT_acquire_xlib_display
 
 
@@ -27,6 +27,7 @@ proc getRandROutputDisplayEXT*(
       pDisplay: ptr DisplayKHR;
     ): Result {.cdecl, discardable.} =
   getRandROutputDisplayEXTCage(physicalDevice,dpy,rrOutput,pDisplay)
+
 proc loadVK_EXT_acquire_xlib_display*(instance: Instance) =
   instance.defineLoader(`<<`)
 

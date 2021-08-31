@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:18:46Z
 # VK_AMD_shader_core_properties
 
 
@@ -29,5 +29,6 @@ type
     minVgprAllocation*: uint32
     maxVgprAllocation*: uint32
     vgprAllocationGranularity*: uint32
+
 
 

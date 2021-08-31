@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:02Z
 # VK_KHR_pipeline_executable_properties
 
 
@@ -86,6 +86,7 @@ proc getPipelineExecutableInternalRepresentationsKHR*(
       pInternalRepresentations: ptr PipelineExecutableInternalRepresentationKHR;
     ): Result {.cdecl, discardable.} =
   getPipelineExecutableInternalRepresentationsKHRCage(device,pExecutableInfo,pInternalRepresentationCount,pInternalRepresentations)
+
 proc loadVK_KHR_pipeline_executable_properties*(instance: Instance) =
   instance.defineLoader(`<<`)
 

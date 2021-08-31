@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:22:53Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_KHR_buffer_device_address
 
 
@@ -41,4 +41,5 @@ StructureType.defineAliases:
 
 BufferCreateFlagBits.defineAliases:
   deviceAddressCaptureReplay as deviceAddressCaptureReplayKhr
+
 

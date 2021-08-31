@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:02Z
 # VK_EXT_private_data
 
 
@@ -63,6 +63,7 @@ proc getPrivateDataEXT*(
       pData: ptr uint64;
     ): void {.cdecl.} =
   getPrivateDataEXTCage(device,objectType,objectHandle,privateDataSlot,pData)
+
 proc loadVK_EXT_private_data*(instance: Instance) =
   instance.defineLoader(`<<`)
 

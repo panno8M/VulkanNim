@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_KHR_win32_surface
 
 
@@ -37,6 +37,7 @@ proc getPhysicalDeviceWin32PresentationSupportKHR*(
       queueFamilyIndex: uint32;
     ): Bool32 {.cdecl.} =
   getPhysicalDeviceWin32PresentationSupportKHRCage(physicalDevice,queueFamilyIndex)
+
 proc loadVK_KHR_win32_surface*(instance: Instance) =
   instance.defineLoader(`<<`)
 

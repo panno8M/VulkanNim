@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T02:25:37Z
+# Generated at 2021-08-31T05:18:45Z
 # platform
 import strformat
 import macros
@@ -79,6 +79,7 @@ macro defineAliases*(TEnum: typedesc; body: untyped): untyped =
     result = newStmtList()
     for alias in aliases:
       result.add "defineAlias({repr TEnum}, {alias.original}, {alias.alias})".fmt.parseStmt
+
 
 
 

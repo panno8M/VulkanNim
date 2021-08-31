@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:02Z
 # VK_EXT_validation_cache
 
 
@@ -60,6 +60,7 @@ proc getValidationCacheDataEXT*(
       pData: pointer;
     ): Result {.cdecl, discardable.} =
   getValidationCacheDataEXTCage(device,validationCache,pDataSize,pData)
+
 proc loadVK_EXT_validation_cache*(instance: Instance) =
   instance.defineLoader(`<<`)
 

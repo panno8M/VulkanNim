@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_AMD_display_native_hdr
 
 
@@ -33,6 +33,7 @@ proc setLocalDimmingAMD*(
       localDimmingEnable: Bool32;
     ): void {.cdecl.} =
   setLocalDimmingAMDCage(device,swapChain,localDimmingEnable)
+
 proc loadVK_AMD_display_native_hdr*(instance: Instance) =
   instance.defineLoader(`<<`)
 

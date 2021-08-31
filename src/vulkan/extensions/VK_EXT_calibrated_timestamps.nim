@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:02Z
 # VK_EXT_calibrated_timestamps
 
 
@@ -39,6 +39,7 @@ proc getCalibratedTimestampsEXT*(
       pMaxDeviation: ptr uint64;
     ): Result {.cdecl, discardable.} =
   getCalibratedTimestampsEXTCage(device,timestampCount,pTimestampInfos,pTimestamps,pMaxDeviation)
+
 proc loadVK_EXT_calibrated_timestamps*(instance: Instance) =
   instance.defineLoader(`<<`)
 

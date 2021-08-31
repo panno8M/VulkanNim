@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_EXT_vertex_attribute_divisor
 
 
@@ -29,5 +29,6 @@ type
     pNext*: pointer
     vertexAttributeInstanceRateDivisor*: Bool32
     vertexAttributeInstanceRateZeroDivisor*: Bool32
+
 
 

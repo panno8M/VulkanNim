@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_AMD_memory_overallocation_behavior
 
 
@@ -20,5 +20,6 @@ type
     sType*: StructureType
     pNext*: pointer
     overallocationBehavior*: MemoryOverallocationBehaviorAMD
+
 
 

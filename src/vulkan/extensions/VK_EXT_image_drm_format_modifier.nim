@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:19:02Z
 # VK_EXT_image_drm_format_modifier
 
 
@@ -58,6 +58,7 @@ proc getImageDrmFormatModifierPropertiesEXT*(
       pProperties: ptr ImageDrmFormatModifierPropertiesEXT;
     ): Result {.cdecl, discardable.} =
   getImageDrmFormatModifierPropertiesEXTCage(device,image,pProperties)
+
 proc loadVK_EXT_image_drm_format_modifier*(instance: Instance) =
   instance.defineLoader(`<<`)
 

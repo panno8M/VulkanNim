@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T02:11:29Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_KHR_push_descriptor
 
 
@@ -44,6 +44,7 @@ proc cmdPushDescriptorSetWithTemplateKHR*(
       pData: pointer;
     ): void {.cdecl.} =
   cmdPushDescriptorSetWithTemplateKHRCage(commandBuffer,descriptorUpdateTemplate,layout,set,pData)
+
 proc loadVK_KHR_push_descriptor*(instance: Instance) =
   instance.defineLoader(`<<`)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:22:53Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_KHR_external_memory
 
 
@@ -25,4 +25,5 @@ StructureType.defineAliases:
   externalMemoryBufferCreateInfo as externalMemoryBufferCreateInfoKhr
   externalMemoryImageCreateInfo as externalMemoryImageCreateInfoKhr
   exportMemoryAllocateInfo as exportMemoryAllocateInfoKhr
+
 

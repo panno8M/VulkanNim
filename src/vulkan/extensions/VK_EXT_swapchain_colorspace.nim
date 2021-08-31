@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:18:46Z
 # VK_EXT_swapchain_colorspace
 
 
@@ -13,4 +13,5 @@ const
 
 ColorSpaceKHR.defineAliases:
   displayP3LinearExt as dciP3LinearExt
+
 

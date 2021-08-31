@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:27:15Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_EXT_external_memory_host
 
 
@@ -35,6 +35,7 @@ proc getMemoryHostPointerPropertiesEXT*(
       pMemoryHostPointerProperties: ptr MemoryHostPointerPropertiesEXT;
     ): Result {.cdecl, discardable.} =
   getMemoryHostPointerPropertiesEXTCage(device,handleType,pHostPointer,pMemoryHostPointerProperties)
+
 proc loadVK_EXT_external_memory_host*(instance: Instance) =
   instance.defineLoader(`<<`)
 

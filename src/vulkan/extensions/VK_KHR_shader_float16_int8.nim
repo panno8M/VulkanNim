@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:22:53Z
+# Generated at 2021-08-31T05:18:46Z
 # VK_KHR_shader_float16_int8
 
 
@@ -19,4 +19,5 @@ type
 StructureType.defineAliases:
   physicalDeviceShaderFloat16Int8Features as physicalDeviceShaderFloat16Int8FeaturesKhr
   physicalDeviceShaderFloat16Int8Features as physicalDeviceFloat16Int8FeaturesKhr
+
 

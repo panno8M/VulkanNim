@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:02Z
 # VK_KHR_xlib_surface
 
 
@@ -39,6 +39,7 @@ proc getPhysicalDeviceXlibPresentationSupportKHR*(
       visualID: VisualID;
     ): Bool32 {.cdecl.} =
   getPhysicalDeviceXlibPresentationSupportKHRCage(physicalDevice,queueFamilyIndex,dpy,visualID)
+
 proc loadVK_KHR_xlib_surface*(instance: Instance) =
   instance.defineLoader(`<<`)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_EXT_shader_atomic_float
 
 
@@ -27,5 +27,6 @@ type
     shaderImageFloat32AtomicAdd*: Bool32
     sparseImageFloat32Atomics*: Bool32
     sparseImageFloat32AtomicAdd*: Bool32
+
 
 

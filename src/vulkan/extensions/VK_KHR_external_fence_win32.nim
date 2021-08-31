@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T02:18:45Z
+# Generated at 2021-08-31T05:19:02Z
 # VK_KHR_external_fence_win32
 
 
@@ -46,6 +46,7 @@ proc getFenceWin32HandleKHR*(
       pHandle: ptr Win32Handle;
     ): Result {.cdecl, discardable.} =
   getFenceWin32HandleKHRCage(device,pGetWin32HandleInfo,pHandle)
+
 proc loadVK_KHR_external_fence_win32*(instance: Instance) =
   instance.defineLoader(`<<`)
 

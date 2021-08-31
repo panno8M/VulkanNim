@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_EXT_display_control
 
 
@@ -74,6 +74,7 @@ proc getSwapchainCounterEXT*(
       pCounterValue: ptr uint64;
     ): Result {.cdecl, discardable.} =
   getSwapchainCounterEXTCage(device,swapchain,counter,pCounterValue)
+
 proc loadVK_EXT_display_control*(instance: Instance) =
   instance.defineLoader(`<<`)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_AMD_shader_info
 
 
@@ -42,6 +42,7 @@ proc getShaderInfoAMD*(
       pInfo: pointer;
     ): Result {.cdecl, discardable.} =
   getShaderInfoAMDCage(device,pipeline,shaderStage,infoType,pInfoSize,pInfo)
+
 proc loadVK_AMD_shader_info*(instance: Instance) =
   instance.defineLoader(`<<`)
 

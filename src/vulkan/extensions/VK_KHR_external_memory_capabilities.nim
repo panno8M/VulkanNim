@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:21:03Z
+# Generated at 2021-08-31T05:18:46Z
 # VK_KHR_external_memory_capabilities
 
 
@@ -48,4 +48,5 @@ ExternalMemoryHandleTypeFlagBits.defineAliases:
   d3d11TextureKmt as d3d11TextureKmtKhr
   d3d12Heap as d3d12HeapKhr
   d3d12Resource as d3d12ResourceKhr
+
 

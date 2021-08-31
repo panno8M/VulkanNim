@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:21:02Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_EXT_descriptor_indexing
 
 
@@ -46,4 +46,5 @@ DescriptorBindingFlagBits.defineAliases:
 
 DescriptorSetLayoutCreateFlagBits.defineAliases:
   updateAfterBindPool as updateAfterBindPoolExt
+
 

@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:18:46Z
 # VK_NV_framebuffer_mixed_samples
 
 
@@ -26,5 +26,6 @@ type
     coverageModulationTableEnable*: Bool32
     coverageModulationTableCount*: uint32
     pCoverageModulationTable*: ptr float32
+
 
 

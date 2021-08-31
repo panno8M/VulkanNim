@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:20:48Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_ANDROID_external_memory_android_hardware_buffer
 
 
@@ -69,6 +69,7 @@ proc getMemoryAndroidHardwareBufferANDROID*(
       pBuffer: ptr ptr AHardwareBuffer;
     ): Result {.cdecl, discardable.} =
   getMemoryAndroidHardwareBufferANDROIDCage(device,pInfo,pBuffer)
+
 proc loadVK_ANDROID_external_memory_android_hardware_buffer*(instance: Instance) =
   instance.defineLoader(`<<`)
 

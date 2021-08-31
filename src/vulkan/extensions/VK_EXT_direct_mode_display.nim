@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_EXT_direct_mode_display
 
 
@@ -18,6 +18,7 @@ proc releaseDisplayEXT*(
       display: DisplayKHR;
     ): Result {.cdecl, discardable.} =
   releaseDisplayEXTCage(physicalDevice,display)
+
 proc loadVK_EXT_direct_mode_display*(instance: Instance) =
   instance.defineLoader(`<<`)
 

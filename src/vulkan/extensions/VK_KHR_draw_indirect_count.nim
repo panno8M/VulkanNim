@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:22:53Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_KHR_draw_indirect_count
 # VK_AMD_draw_indirect_count
 
@@ -20,3 +20,6 @@ const cmdDrawIndexedIndirectCountKHR* = cmdDrawIndexedIndirectCount
 
 const cmdDrawIndirectCountAMD* = cmdDrawIndirectCount
 const cmdDrawIndexedIndirectCountAMD* = cmdDrawIndexedIndirectCount
+
+
+

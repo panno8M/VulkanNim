@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T02:22:12Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_KHR_external_semaphore_fd
 
 
@@ -39,6 +39,7 @@ proc getSemaphoreFdKHR*(
       pFd: ptr int;
     ): Result {.cdecl, discardable.} =
   getSemaphoreFdKHRCage(device,pGetFdInfo,pFd)
+
 proc loadVK_KHR_external_semaphore_fd*(instance: Instance) =
   instance.defineLoader(`<<`)
 

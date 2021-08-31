@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-31T05:18:46Z
 # VK_NV_shader_sm_builtins
 
 
@@ -19,5 +19,6 @@ type
     sType*: StructureType
     pNext*: pointer
     shaderSMBuiltins*: Bool32
+
 
 

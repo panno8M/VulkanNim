@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:19:02Z
 # VK_NV_scissor_exclusive
 
 
@@ -31,6 +31,7 @@ proc cmdSetExclusiveScissorNV*(
       pExclusiveScissors: ptr Rect2D;
     ): void {.cdecl.} =
   cmdSetExclusiveScissorNVCage(commandBuffer,firstExclusiveScissor,exclusiveScissorCount,pExclusiveScissors)
+
 proc loadVK_NV_scissor_exclusive*(instance: Instance) =
   instance.defineLoader(`<<`)
 

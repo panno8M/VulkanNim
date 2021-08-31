@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:02Z
 # VK_KHR_xcb_surface
 
 
@@ -39,6 +39,7 @@ proc getPhysicalDeviceXcbPresentationSupportKHR*(
       visual_id: xcb_visualid_t;
     ): Bool32 {.cdecl.} =
   getPhysicalDeviceXcbPresentationSupportKHRCage(physicalDevice,queueFamilyIndex,connection,visual_id)
+
 proc loadVK_KHR_xcb_surface*(instance: Instance) =
   instance.defineLoader(`<<`)
 

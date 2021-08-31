@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_EXT_pipeline_creation_feedback
 
 
@@ -26,5 +26,6 @@ type
   PipelineCreationFeedbackEXT* = object
     flags*: PipelineCreationFeedbackFlagsEXT
     duration*: uint64
+
 
 

@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_AMD_buffer_marker
 
 
@@ -19,6 +19,7 @@ proc cmdWriteBufferMarkerAMD*(
       marker: uint32;
     ): void {.cdecl.} =
   cmdWriteBufferMarkerAMDCage(commandBuffer,pipelineStage,dstBuffer,dstOffset,marker)
+
 proc loadVK_AMD_buffer_marker*(instance: Instance) =
   instance.defineLoader(`<<`)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_KHR_get_display_properties2
 
 
@@ -64,6 +64,7 @@ proc getDisplayPlaneCapabilities2KHR*(
       pCapabilities: ptr DisplayPlaneCapabilities2KHR;
     ): Result {.cdecl, discardable.} =
   getDisplayPlaneCapabilities2KHRCage(physicalDevice,pDisplayPlaneInfo,pCapabilities)
+
 proc loadVK_KHR_get_display_properties2*(instance: Instance) =
   instance.defineLoader(`<<`)
 

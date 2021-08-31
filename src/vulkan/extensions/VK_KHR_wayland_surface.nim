@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_KHR_wayland_surface
 
 
@@ -38,6 +38,7 @@ proc getPhysicalDeviceWaylandPresentationSupportKHR*(
       display: ptr wl_display;
     ): Bool32 {.cdecl.} =
   getPhysicalDeviceWaylandPresentationSupportKHRCage(physicalDevice,queueFamilyIndex,display)
+
 proc loadVK_KHR_wayland_surface*(instance: Instance) =
   instance.defineLoader(`<<`)
 

@@ -226,19 +226,22 @@ proc renderCommandLoaderComponent*(require: NodeRequire; resources: Resources): 
   return commandLoaderDef.join("\n")
 
 proc renderCommandLoader*(libFile: LibFile; resources: Resources): string =
-  var commandLoaderDefs = newSeq[string]()
+  var resultDefs: seq[string]
 
-  for fileRequire in libFile.requires:
+  for i, fileRequire in libFile.requires:
+    let loaderName = @[libFile.fileName].concat(libFile.mergedFileNames)[i].splitFile.name.capitalizeAscii
+    var commandLoaderDefs = newSeq[string]()
     for require in fileRequire:
       let def = require.renderCommandLoaderComponent(resources)
       if not def.isEmptyOrWhitespace:
         commandLoaderDefs.add def
 
-  return if commandLoaderDefs.len == 0: ""
-  else:
-    "proc load{libFile.fileName.splitFile.name.capitalizeAscii}*(instance: Instance) =\n".fmt &
-    "  instance.defineLoader(`<<`)\n\n" &
-    commandLoaderDefs.mapIt(it.indent(2)).join("\n\n")
+    resultDefs.add if commandLoaderDefs.len == 0: ""
+    else:
+      "proc load{loaderName}*(instance: Instance) =\n".fmt &
+      "  instance.defineLoader(`<<`)\n\n" &
+      commandLoaderDefs.mapIt(it.indent(2)).join("\n\n")
+  resultDefs.join("\n\n")
 
 func renderInstanceCommandLoader*(fileName: string): string =
   assert fileName in ["features/vk10", "features/vk11"]
@@ -495,9 +498,10 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
   if libFile.fileName in ["features/vk10", "features/vk11"]: # Insert_basic_loader:
     result &= libFile.fileName.renderInstanceCommandLoader
     result.LF
-    result.LF
 
+  result.LF
   result &= libFile.renderCommandLoader(resources)
+
   if not libFile.fileFooter.isEmptyOrWhitespace:
     result.LF
     result &= libFile.fileFooter
@@ -1035,6 +1039,7 @@ proc merge*(library: var Library; base: string; materials: varargs[string]) =
     result.mergedFileNames.add lib.fileName
 
   result.requires = result.requires.deduplicate
+
   for i in countdown(result.deps.high, result.deps.low):
     if result.deps[i].filename in materials or
        result.deps[i].filename == result.fileName:

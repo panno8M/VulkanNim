@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:21:27Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_EXT_buffer_device_address
 
 
@@ -38,4 +38,5 @@ StructureType.defineAliases:
 
 BufferCreateFlagBits.defineAliases:
   deviceAddressCaptureReplay as deviceAddressCaptureReplayExt
+
 

@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_KHR_deferred_host_operations
 
 
@@ -50,6 +50,7 @@ proc deferredOperationJoinKHR*(
       operation: DeferredOperationKHR;
     ): Result {.cdecl, discardable.} =
   deferredOperationJoinKHRCage(device,operation)
+
 proc loadVK_KHR_deferred_host_operations*(instance: Instance) =
   instance.defineLoader(`<<`)
 

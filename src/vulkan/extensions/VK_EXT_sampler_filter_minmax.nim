@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:18:46Z
 # VK_EXT_sampler_filter_minmax
 
 
@@ -30,4 +30,5 @@ SamplerReductionMode.defineAliases:
   weightedAverage as weightedAverageExt
   min as minExt
   max as maxExt
+
 

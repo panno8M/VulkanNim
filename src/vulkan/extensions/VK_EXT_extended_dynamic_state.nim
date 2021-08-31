@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_EXT_extended_dynamic_state
 
 
@@ -101,6 +101,7 @@ proc cmdSetStencilOpEXT*(
       compareOp: CompareOp;
     ): void {.cdecl.} =
   cmdSetStencilOpEXTCage(commandBuffer,faceMask,failOp,passOp,depthFailOp,compareOp)
+
 proc loadVK_EXT_extended_dynamic_state*(instance: Instance) =
   instance.defineLoader(`<<`)
 

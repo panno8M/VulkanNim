@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:22:53Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_KHR_imageless_framebuffer
 
 
@@ -28,4 +28,5 @@ StructureType.defineAliases:
 
 FramebufferCreateFlagBits.defineAliases:
   imageless as imagelessKhr
+
 

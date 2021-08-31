@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:02Z
 # VK_EXT_headless_surface
 
 
@@ -29,6 +29,7 @@ proc createHeadlessSurfaceEXT*(
       pSurface: ptr SurfaceKHR;
     ): Result {.cdecl, discardable.} =
   createHeadlessSurfaceEXTCage(instance,pCreateInfo,pAllocator,pSurface)
+
 proc loadVK_EXT_headless_surface*(instance: Instance) =
   instance.defineLoader(`<<`)
 

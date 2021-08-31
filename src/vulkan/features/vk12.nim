@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:03Z
 # vk12
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -791,6 +791,7 @@ proc getDeviceMemoryOpaqueCaptureAddress*(
       pInfo: ptr DeviceMemoryOpaqueCaptureAddressInfo;
     ): uint64 {.cdecl.} =
   getDeviceMemoryOpaqueCaptureAddressCage(device,pInfo)
+
 proc loadVk12*(instance: Instance) =
   instance.defineLoader(`<<`)
 

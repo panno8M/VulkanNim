@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T02:26:40Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_NV_device_generated_commands
 
 
@@ -169,6 +169,7 @@ proc destroyIndirectCommandsLayoutNV*(
       pAllocator: ptr AllocationCallbacks;
     ): void {.cdecl.} =
   destroyIndirectCommandsLayoutNVCage(device,indirectCommandsLayout,pAllocator)
+
 proc loadVK_NV_device_generated_commands*(instance: Instance) =
   instance.defineLoader(`<<`)
 

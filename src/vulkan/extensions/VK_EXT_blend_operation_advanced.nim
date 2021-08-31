@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:18:46Z
 # VK_EXT_blend_operation_advanced
 
 
@@ -35,5 +35,6 @@ type
     srcPremultiplied*: Bool32
     dstPremultiplied*: Bool32
     blendOverlap*: BlendOverlapEXT
+
 
 

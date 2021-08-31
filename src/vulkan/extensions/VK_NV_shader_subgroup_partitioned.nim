@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_NV_shader_subgroup_partitioned
 
 
@@ -8,5 +8,6 @@ import ../features/vk10
 const
   NvShaderSubgroupPartitionedSpecVersion* = 1
   NvShaderSubgroupPartitionedExtensionName* = "VK_NV_shader_subgroup_partitioned"
+
 
 

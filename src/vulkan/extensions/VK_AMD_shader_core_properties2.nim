@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:18:46Z
 # VK_AMD_shader_core_properties2
 
 
@@ -21,5 +21,6 @@ type
     pNext*: pointer
     shaderCoreFeatures*: ShaderCorePropertiesFlagsAMD
     activeComputeUnitCount*: uint32
+
 
 

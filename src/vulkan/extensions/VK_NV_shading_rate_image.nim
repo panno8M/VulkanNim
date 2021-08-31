@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_NV_shading_rate_image
 
 
@@ -92,6 +92,7 @@ proc cmdSetCoarseSampleOrderNV*(
       pCustomSampleOrders: ptr CoarseSampleOrderCustomNV;
     ): void {.cdecl.} =
   cmdSetCoarseSampleOrderNVCage(commandBuffer,sampleOrderType,customSampleOrderCount,pCustomSampleOrders)
+
 proc loadVK_NV_shading_rate_image*(instance: Instance) =
   instance.defineLoader(`<<`)
 

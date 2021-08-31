@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:22:53Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_KHR_sampler_mirror_clamp_to_edge
 
 
@@ -13,4 +13,5 @@ const
 
 SamplerAddressMode.defineAliases:
   mirrorClampToEdge as mirrorClampToEdgeKhr
+
 

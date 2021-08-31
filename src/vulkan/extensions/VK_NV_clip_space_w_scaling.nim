@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_NV_clip_space_w_scaling
 
 
@@ -29,6 +29,7 @@ proc cmdSetViewportWScalingNV*(
       pViewportWScalings: ptr ViewportWScalingNV;
     ): void {.cdecl.} =
   cmdSetViewportWScalingNVCage(commandBuffer,firstViewport,viewportCount,pViewportWScalings)
+
 proc loadVK_NV_clip_space_w_scaling*(instance: Instance) =
   instance.defineLoader(`<<`)
 

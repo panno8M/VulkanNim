@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:02Z
 # VK_EXT_transform_feedback
 
 
@@ -96,6 +96,7 @@ proc cmdDrawIndirectByteCountEXT*(
       vertexStride: uint32;
     ): void {.cdecl.} =
   cmdDrawIndirectByteCountEXTCage(commandBuffer,instanceCount,firstInstance,counterBuffer,counterBufferOffset,counterOffset,vertexStride)
+
 proc loadVK_EXT_transform_feedback*(instance: Instance) =
   instance.defineLoader(`<<`)
 

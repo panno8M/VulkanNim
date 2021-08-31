@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T02:22:37Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_KHR_external_semaphore_win32
 
 
@@ -53,6 +53,7 @@ proc getSemaphoreWin32HandleKHR*(
       pHandle: ptr Win32Handle;
     ): Result {.cdecl, discardable.} =
   getSemaphoreWin32HandleKHRCage(device,pGetWin32HandleInfo,pHandle)
+
 proc loadVK_KHR_external_semaphore_win32*(instance: Instance) =
   instance.defineLoader(`<<`)
 

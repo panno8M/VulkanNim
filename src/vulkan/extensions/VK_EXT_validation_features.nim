@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_EXT_validation_features
 
 
@@ -33,5 +33,6 @@ type
     pEnabledValidationFeatures*: ptr ValidationFeatureEnableEXT
     disabledValidationFeatureCount*: uint32
     pDisabledValidationFeatures*: ptr ValidationFeatureDisableEXT
+
 
 

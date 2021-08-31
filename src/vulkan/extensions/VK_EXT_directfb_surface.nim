@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_EXT_directfb_surface
 
 
@@ -38,6 +38,7 @@ proc getPhysicalDeviceDirectFBPresentationSupportEXT*(
       dfb: ptr IDirectFB;
     ): Bool32 {.cdecl.} =
   getPhysicalDeviceDirectFBPresentationSupportEXTCage(physicalDevice,queueFamilyIndex,dfb)
+
 proc loadVK_EXT_directfb_surface*(instance: Instance) =
   instance.defineLoader(`<<`)
 

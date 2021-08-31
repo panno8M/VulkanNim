@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_NV_cooperative_matrix
 
 
@@ -60,6 +60,7 @@ proc getPhysicalDeviceCooperativeMatrixPropertiesNV*(
       pProperties: ptr CooperativeMatrixPropertiesNV;
     ): Result {.cdecl, discardable.} =
   getPhysicalDeviceCooperativeMatrixPropertiesNVCage(physicalDevice,pPropertyCount,pProperties)
+
 proc loadVK_NV_cooperative_matrix*(instance: Instance) =
   instance.defineLoader(`<<`)
 

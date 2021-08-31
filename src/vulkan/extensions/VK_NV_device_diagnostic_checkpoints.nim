@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_NV_device_diagnostic_checkpoints
 
 
@@ -36,6 +36,7 @@ proc getQueueCheckpointDataNV*(
       pCheckpointData: ptr CheckpointDataNV;
     ): void {.cdecl.} =
   getQueueCheckpointDataNVCage(queue,pCheckpointDataCount,pCheckpointData)
+
 proc loadVK_NV_device_diagnostic_checkpoints*(instance: Instance) =
   instance.defineLoader(`<<`)
 

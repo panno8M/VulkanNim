@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:33:47Z
+# Generated at 2021-08-31T05:18:46Z
 # VK_KHR_sampler_ycbcr_conversion
 
 
@@ -117,4 +117,5 @@ ImageAspectFlagBits.defineAliases:
   plane0 as plane0Khr
   plane1 as plane1Khr
   plane2 as plane2Khr
+
 

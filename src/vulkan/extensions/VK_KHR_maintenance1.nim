@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:21:03Z
+# Generated at 2021-08-31T05:18:46Z
 # VK_KHR_maintenance1
 
 
@@ -23,4 +23,5 @@ FormatFeatureFlagBits.defineAliases:
 
 ImageCreateFlagBits.defineAliases:
   vk2dArrayCompatible as vk2dArrayCompatibleKhr
+
 

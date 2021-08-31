@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_NN_vi_surface
 
 
@@ -30,6 +30,7 @@ proc createViSurfaceNN*(
       pSurface: ptr SurfaceKHR;
     ): Result {.cdecl, discardable.} =
   createViSurfaceNNCage(instance,pCreateInfo,pAllocator,pSurface)
+
 proc loadVK_NN_vi_surface*(instance: Instance) =
   instance.defineLoader(`<<`)
 

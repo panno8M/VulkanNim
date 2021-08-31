@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_INTEL_performance_query
 
 
@@ -125,6 +125,7 @@ proc getPerformanceParameterINTEL*(
   getPerformanceParameterINTELCage(device,parameter,pValue)
 StructureType.defineAliases:
   queryPoolPerformanceQueryCreateInfoIntel as queryPoolCreateInfoIntel
+
 
 proc loadVK_INTEL_performance_query*(instance: Instance) =
   instance.defineLoader(`<<`)

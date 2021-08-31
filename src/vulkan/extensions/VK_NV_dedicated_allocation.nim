@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_NV_dedicated_allocation
 
 
@@ -23,5 +23,6 @@ type
     pNext*: pointer
     image*: Image
     buffer*: Buffer
+
 
 

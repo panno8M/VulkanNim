@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:02Z
 # VK_ANDROID_native_buffer
 
 
@@ -74,6 +74,7 @@ proc getSwapchainGrallocUsage2ANDROID*(
       grallocProducerUsage: ptr uint64;
     ): Result {.cdecl, discardable.} =
   getSwapchainGrallocUsage2ANDROIDCage(device,format,imageUsage,swapchainImageUsage,grallocConsumerUsage,grallocProducerUsage)
+
 proc loadVK_ANDROID_native_buffer*(instance: Instance) =
   instance.defineLoader(`<<`)
 

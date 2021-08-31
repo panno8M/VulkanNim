@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_NV_external_memory_capabilities
 
 
@@ -42,6 +42,7 @@ proc getPhysicalDeviceExternalImageFormatPropertiesNV*(
       pExternalImageFormatProperties: ptr ExternalImageFormatPropertiesNV;
     ): Result {.cdecl, discardable.} =
   getPhysicalDeviceExternalImageFormatPropertiesNVCage(physicalDevice,format,theType,tiling,usage,flags,externalHandleType,pExternalImageFormatProperties)
+
 proc loadVK_NV_external_memory_capabilities*(instance: Instance) =
   instance.defineLoader(`<<`)
 

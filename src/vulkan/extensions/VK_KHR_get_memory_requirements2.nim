@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:22:53Z
+# Generated at 2021-08-31T05:18:46Z
 # VK_KHR_get_memory_requirements2
 
 
@@ -26,4 +26,5 @@ StructureType.defineAliases:
   imageSparseMemoryRequirementsInfo2 as imageSparseMemoryRequirementsInfo2Khr
   memoryRequirements2 as memoryRequirements2Khr
   sparseImageMemoryRequirements2 as sparseImageMemoryRequirements2Khr
+
 

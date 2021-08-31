@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:19:02Z
 # VK_KHR_get_surface_capabilities2
 
 
@@ -41,6 +41,7 @@ proc getPhysicalDeviceSurfaceFormats2KHR*(
       pSurfaceFormats: ptr SurfaceFormat2KHR;
     ): Result {.cdecl, discardable.} =
   getPhysicalDeviceSurfaceFormats2KHRCage(physicalDevice,pSurfaceInfo,pSurfaceFormatCount,pSurfaceFormats)
+
 proc loadVK_KHR_get_surface_capabilities2*(instance: Instance) =
   instance.defineLoader(`<<`)
 

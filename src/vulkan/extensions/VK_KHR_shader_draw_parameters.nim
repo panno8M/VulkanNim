@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:22:53Z
+# Generated at 2021-08-31T05:18:46Z
 # VK_KHR_shader_draw_parameters
 
 
@@ -9,5 +9,6 @@ import ../features/vk11
 const
   KhrShaderDrawParametersSpecVersion* = 1
   KhrShaderDrawParametersExtensionName* = "VK_KHR_shader_draw_parameters"
+
 
 

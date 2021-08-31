@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:02Z
 # VK_KHR_surface
 # VK_KHR_display
 
@@ -248,6 +248,7 @@ proc createDisplayPlaneSurfaceKHR*(
       pSurface: ptr SurfaceKHR;
     ): Result {.cdecl, discardable.} =
   createDisplayPlaneSurfaceKHRCage(instance,pCreateInfo,pAllocator,pSurface)
+
 proc loadVK_KHR_surface*(instance: Instance) =
   instance.defineLoader(`<<`)
 
@@ -256,6 +257,9 @@ proc loadVK_KHR_surface*(instance: Instance) =
   getPhysicalDeviceSurfaceCapabilitiesKHRCage << "vkGetPhysicalDeviceSurfaceCapabilitiesKHR"
   getPhysicalDeviceSurfaceFormatsKHRCage << "vkGetPhysicalDeviceSurfaceFormatsKHR"
   getPhysicalDeviceSurfacePresentModesKHRCage << "vkGetPhysicalDeviceSurfacePresentModesKHR"
+
+proc loadVK_KHR_display*(instance: Instance) =
+  instance.defineLoader(`<<`)
 
   getPhysicalDeviceDisplayPropertiesKHRCage << "vkGetPhysicalDeviceDisplayPropertiesKHR"
   getPhysicalDeviceDisplayPlanePropertiesKHRCage << "vkGetPhysicalDeviceDisplayPlanePropertiesKHR"

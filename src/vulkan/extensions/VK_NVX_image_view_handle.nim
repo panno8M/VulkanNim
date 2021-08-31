@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_NVX_image_view_handle
 
 
@@ -36,6 +36,7 @@ proc getImageViewAddressNVX*(
       pProperties: ptr ImageViewAddressPropertiesNVX;
     ): Result {.cdecl, discardable.} =
   getImageViewAddressNVXCage(device,imageView,pProperties)
+
 proc loadVK_NVX_image_view_handle*(instance: Instance) =
   instance.defineLoader(`<<`)
 

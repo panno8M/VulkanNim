@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:19:02Z
 # VK_EXT_hdr_metadata
 
 
@@ -37,6 +37,7 @@ proc setHdrMetadataEXT*(
       pMetadata: ptr HdrMetadataEXT;
     ): void {.cdecl.} =
   setHdrMetadataEXTCage(device,swapchainCount,pSwapchains,pMetadata)
+
 proc loadVK_EXT_hdr_metadata*(instance: Instance) =
   instance.defineLoader(`<<`)
 

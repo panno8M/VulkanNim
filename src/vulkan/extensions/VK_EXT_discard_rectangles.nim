@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_EXT_discard_rectangles
 
 
@@ -39,6 +39,7 @@ proc cmdSetDiscardRectangleEXT*(
       pDiscardRectangles: ptr Rect2D;
     ): void {.cdecl.} =
   cmdSetDiscardRectangleEXTCage(commandBuffer,firstDiscardRectangle,discardRectangleCount,pDiscardRectangles)
+
 proc loadVK_EXT_discard_rectangles*(instance: Instance) =
   instance.defineLoader(`<<`)
 

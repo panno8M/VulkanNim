@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_KHR_shared_presentable_image
 
 
@@ -28,6 +28,7 @@ proc getSwapchainStatusKHR*(
       swapchain: SwapchainKHR;
     ): Result {.cdecl, discardable.} =
   getSwapchainStatusKHRCage(device,swapchain)
+
 proc loadVK_KHR_shared_presentable_image*(instance: Instance) =
   instance.defineLoader(`<<`)
 

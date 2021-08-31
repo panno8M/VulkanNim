@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:18:46Z
 # VK_AMD_texture_gather_bias_lod
 
 
@@ -16,5 +16,6 @@ type
     sType*: StructureType
     pNext*: pointer
     supportsTextureGatherLODBiasAMD*: Bool32
+
 
 

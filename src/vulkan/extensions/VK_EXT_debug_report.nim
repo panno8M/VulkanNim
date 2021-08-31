@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_EXT_debug_report
 
 
@@ -111,6 +111,7 @@ proc debugReportMessageEXT*(
   debugReportMessageEXTCage(instance,flags,objectType,`object`,location,messageCode,pLayerPrefix,pMessage)
 StructureType.defineAliases:
   debugReportCallbackCreateInfoExt as debugReportCreateInfoExt
+
 
 proc loadVK_EXT_debug_report*(instance: Instance) =
   instance.defineLoader(`<<`)

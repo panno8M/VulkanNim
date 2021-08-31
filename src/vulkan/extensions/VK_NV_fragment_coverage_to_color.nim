@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_NV_fragment_coverage_to_color
 
 
@@ -19,5 +19,6 @@ type
     flags*: PipelineCoverageToColorStateCreateFlagsNV
     coverageToColorEnable*: Bool32
     coverageToColorLocation*: uint32
+
 
 

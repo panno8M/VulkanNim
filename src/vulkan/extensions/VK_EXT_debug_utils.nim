@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:02Z
 # VK_EXT_debug_utils
 
 
@@ -144,6 +144,7 @@ proc submitDebugUtilsMessageEXT*(
       pCallbackData: ptr DebugUtilsMessengerCallbackDataEXT;
     ): void {.cdecl.} =
   submitDebugUtilsMessageEXTCage(instance,messageSeverity,messageTypes,pCallbackData)
+
 proc loadVK_EXT_debug_utils*(instance: Instance) =
   instance.defineLoader(`<<`)
 

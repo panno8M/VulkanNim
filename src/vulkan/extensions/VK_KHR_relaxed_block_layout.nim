@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:22:52Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_KHR_relaxed_block_layout
 
 
@@ -9,5 +9,6 @@ import ../features/vk11
 const
   KhrRelaxedBlockLayoutSpecVersion* = 1
   KhrRelaxedBlockLayoutExtensionName* = "VK_KHR_relaxed_block_layout"
+
 
 

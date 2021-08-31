@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_AMD_pipeline_compiler_control
 
 
@@ -18,5 +18,6 @@ type
     sType*: StructureType
     pNext*: pointer
     compilerControlFlags*: PipelineCompilerControlFlagsAMD
+
 
 

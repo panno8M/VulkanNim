@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_EXT_debug_marker
 
 
@@ -109,6 +109,7 @@ proc cmdDebugMarkerInsertEXT*(
       pMarkerInfo: ptr DebugMarkerMarkerInfoEXT;
     ): void {.cdecl.} =
   cmdDebugMarkerInsertEXTCage(commandBuffer,pMarkerInfo)
+
 proc loadVK_EXT_debug_marker*(instance: Instance) =
   instance.defineLoader(`<<`)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_QCOM_render_pass_transform
 
 
@@ -23,5 +23,6 @@ type
     pNext*: pointer
     transform*: SurfaceTransformFlagBitsKHR
     renderArea*: Rect2D
+
 
 

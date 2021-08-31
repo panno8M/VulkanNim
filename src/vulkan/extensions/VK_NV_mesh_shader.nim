@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:19:02Z
 # VK_NV_mesh_shader
 
 
@@ -65,6 +65,7 @@ proc cmdDrawMeshTasksIndirectCountNV*(
       stride: uint32;
     ): void {.cdecl.} =
   cmdDrawMeshTasksIndirectCountNVCage(commandBuffer,buffer,offset,countBuffer,countBufferOffset,maxDrawCount,stride)
+
 proc loadVK_NV_mesh_shader*(instance: Instance) =
   instance.defineLoader(`<<`)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_GOOGLE_display_timing
 
 
@@ -45,6 +45,7 @@ proc getPastPresentationTimingGOOGLE*(
       pPresentationTimings: ptr PastPresentationTimingGOOGLE;
     ): Result {.cdecl, discardable.} =
   getPastPresentationTimingGOOGLECage(device,swapchain,pPresentationTimingCount,pPresentationTimings)
+
 proc loadVK_GOOGLE_display_timing*(instance: Instance) =
   instance.defineLoader(`<<`)
 

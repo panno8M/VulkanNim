@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-31T05:18:46Z
 # VK_KHR_pipeline_library
 
 
@@ -15,5 +15,6 @@ type
     pNext*: pointer
     libraryCount*: uint32
     pLibraries*: ptr Pipeline
+
 
 

@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T02:19:55Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_KHR_external_memory_win32
 
 
@@ -50,6 +50,7 @@ proc getMemoryWin32HandlePropertiesKHR*(
       pMemoryWin32HandleProperties: ptr MemoryWin32HandlePropertiesKHR;
     ): Result {.cdecl, discardable.} =
   getMemoryWin32HandlePropertiesKHRCage(device,handleType,handle,pMemoryWin32HandleProperties)
+
 proc loadVK_KHR_external_memory_win32*(instance: Instance) =
   instance.defineLoader(`<<`)
 

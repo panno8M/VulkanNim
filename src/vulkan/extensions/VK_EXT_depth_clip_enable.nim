@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:18:46Z
 # VK_EXT_depth_clip_enable
 
 
@@ -22,5 +22,6 @@ type
     pNext*: pointer
     flags*: PipelineRasterizationDepthClipStateCreateFlagsEXT
     depthClipEnable*: Bool32
+
 
 

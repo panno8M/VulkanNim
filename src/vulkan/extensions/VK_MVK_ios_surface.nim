@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_MVK_ios_surface
 
 
@@ -30,6 +30,7 @@ proc createIOSSurfaceMVK*(
       pSurface: ptr SurfaceKHR;
     ): Result {.cdecl, discardable.} =
   createIOSSurfaceMVKCage(instance,pCreateInfo,pAllocator,pSurface)
+
 proc loadVK_MVK_ios_surface*(instance: Instance) =
   instance.defineLoader(`<<`)
 

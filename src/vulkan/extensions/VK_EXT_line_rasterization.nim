@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:02Z
 # VK_EXT_line_rasterization
 
 
@@ -48,6 +48,7 @@ proc cmdSetLineStippleEXT*(
       lineStipplePattern: uint16;
     ): void {.cdecl.} =
   cmdSetLineStippleEXTCage(commandBuffer,lineStippleFactor,lineStipplePattern)
+
 proc loadVK_EXT_line_rasterization*(instance: Instance) =
   instance.defineLoader(`<<`)
 

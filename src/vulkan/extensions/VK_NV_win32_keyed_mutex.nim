@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:22:52Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_NV_win32_keyed_mutex
 
 
@@ -24,5 +24,6 @@ type
     releaseCount*: uint32
     pReleaseSyncs*: ptr DeviceMemory
     pReleaseKeys*: ptr uint64
+
 
 

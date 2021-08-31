@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_EXT_metal_surface
 
 
@@ -33,6 +33,7 @@ proc createMetalSurfaceEXT*(
       pSurface: ptr SurfaceKHR;
     ): Result {.cdecl, discardable.} =
   createMetalSurfaceEXTCage(instance,pCreateInfo,pAllocator,pSurface)
+
 proc loadVK_EXT_metal_surface*(instance: Instance) =
   instance.defineLoader(`<<`)
 

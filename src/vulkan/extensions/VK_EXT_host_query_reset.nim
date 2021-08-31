@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:22:53Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_EXT_host_query_reset
 
 
@@ -18,4 +18,5 @@ type
 const resetQueryPoolEXT* = resetQueryPool
 StructureType.defineAliases:
   physicalDeviceHostQueryResetFeatures as physicalDeviceHostQueryResetFeaturesExt
+
 

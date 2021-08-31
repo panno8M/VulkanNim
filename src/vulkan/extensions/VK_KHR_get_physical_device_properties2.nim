@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:22:53Z
+# Generated at 2021-08-31T05:18:46Z
 # VK_KHR_get_physical_device_properties2
 
 
@@ -38,4 +38,5 @@ StructureType.defineAliases:
   physicalDeviceMemoryProperties2 as physicalDeviceMemoryProperties2Khr
   sparseImageFormatProperties2 as sparseImageFormatProperties2Khr
   physicalDeviceSparseImageFormatInfo2 as physicalDeviceSparseImageFormatInfo2Khr
+
 

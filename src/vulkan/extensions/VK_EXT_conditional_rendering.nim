@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_EXT_conditional_rendering
 
 
@@ -43,6 +43,7 @@ proc cmdEndConditionalRenderingEXT*(
       commandBuffer: CommandBuffer;
     ): void {.cdecl.} =
   cmdEndConditionalRenderingEXTCage(commandBuffer)
+
 proc loadVK_EXT_conditional_rendering*(instance: Instance) =
   instance.defineLoader(`<<`)
 

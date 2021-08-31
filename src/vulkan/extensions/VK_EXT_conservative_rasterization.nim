@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_EXT_conservative_rasterization
 
 
@@ -37,5 +37,6 @@ type
     flags*: PipelineRasterizationConservativeStateCreateFlagsEXT
     conservativeRasterizationMode*: ConservativeRasterizationModeEXT
     extraPrimitiveOverestimationSize*: float32
+
 
 

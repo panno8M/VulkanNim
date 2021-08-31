@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:03:35Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_FUCHSIA_imagepipe_surface
 
 
@@ -30,6 +30,7 @@ proc createImagePipeSurfaceFUCHSIA*(
       pSurface: ptr SurfaceKHR;
     ): Result {.cdecl, discardable.} =
   createImagePipeSurfaceFUCHSIACage(instance,pCreateInfo,pAllocator,pSurface)
+
 proc loadVK_FUCHSIA_imagepipe_surface*(instance: Instance) =
   instance.defineLoader(`<<`)
 

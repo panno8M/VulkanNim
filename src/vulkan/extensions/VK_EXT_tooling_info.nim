@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:33:47Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_EXT_tooling_info
 
 
@@ -48,6 +48,7 @@ proc getPhysicalDeviceToolPropertiesEXT*(
       pToolProperties: ptr PhysicalDeviceToolPropertiesEXT;
     ): Result {.cdecl, discardable.} =
   getPhysicalDeviceToolPropertiesEXTCage(physicalDevice,pToolCount,pToolProperties)
+
 proc loadVK_EXT_tooling_info*(instance: Instance) =
   instance.defineLoader(`<<`)
 

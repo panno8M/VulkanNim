@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_KHR_display_swapchain
 
 
@@ -31,6 +31,7 @@ proc createSharedSwapchainsKHR*(
       pSwapchains: ptr SwapchainKHR;
     ): Result {.cdecl, discardable.} =
   createSharedSwapchainsKHRCage(device,swapchainCount,pCreateInfos,pAllocator,pSwapchains)
+
 proc loadVK_KHR_display_swapchain*(instance: Instance) =
   instance.defineLoader(`<<`)
 

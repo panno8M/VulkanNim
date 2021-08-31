@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:19:02Z
 # VK_EXT_sample_locations
 
 
@@ -67,6 +67,7 @@ proc getPhysicalDeviceMultisamplePropertiesEXT*(
       pMultisampleProperties: ptr MultisamplePropertiesEXT;
     ): void {.cdecl.} =
   getPhysicalDeviceMultisamplePropertiesEXTCage(physicalDevice,samples,pMultisampleProperties)
+
 proc loadVK_EXT_sample_locations*(instance: Instance) =
   instance.defineLoader(`<<`)
 

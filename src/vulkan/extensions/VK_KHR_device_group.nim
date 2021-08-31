@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T01:33:47Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_KHR_device_group
 
 
@@ -146,6 +146,7 @@ proc acquireNextImage2KHR*(
       pImageIndex: ptr uint32;
     ): Result {.cdecl, discardable.} =
   acquireNextImage2KHRCage(device,pAcquireInfo,pImageIndex)
+
 proc loadVK_KHR_device_group*(instance: Instance) =
   instance.defineLoader(`<<`)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T02:18:45Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_NV_external_memory_win32
 
 
@@ -32,6 +32,7 @@ proc getMemoryWin32HandleNV*(
       pHandle: ptr Win32Handle;
     ): Result {.cdecl, discardable.} =
   getMemoryWin32HandleNVCage(device,memory,handleType,pHandle)
+
 proc loadVK_NV_external_memory_win32*(instance: Instance) =
   instance.defineLoader(`<<`)
 

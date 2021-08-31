@@ -48,7 +48,7 @@ proc generate*() =
       name = feature{"name"}
     var
       libFile = LibFile(
-          requires: @[],
+          requires: @[newSeq[NodeRequire]()],
           fileName: name.parseFileName,
           deps: dependencies[name]
         )
@@ -75,6 +75,9 @@ proc generate*() =
     ("extensions/VK_NV_device_generated_commands", "features/vk11"),
     ("extensions/VK_EXT_buffer_device_address", "features/vk12"),
   ].newTable
+  let customExtensions = [
+    ("extensions/VK_KHR_ray_tracing", @["extensions/VK_EXT_debug_report"])
+  ].newTable
   for extension in xml["extensions"].findAll("extension"):
     let name = extension{"name"}
     block Invalid_Extension_Test:
@@ -82,6 +85,10 @@ proc generate*() =
       if words.len == 4 and words[2] == "extension":
         try: discard words[3].parseInt; continue
         except: break Invalid_Extension_Test
+      if words[0] == "RESERVED" and
+         words[1] == "DO"       and
+         words[2] == "NOT"      and
+         words[3] == "USE": continue
     let requires = extension{"requires"}.parseWords({','}).mapIt((it.parseFileName, it.parseFileName.splitFile.dir == "extensions"))
     let promotedto =
       if (?extension{"promotedto"}).isSome:
@@ -90,13 +97,15 @@ proc generate*() =
 
     var
       libFile = LibFile(
-        requires: @[],
+        requires: @[newSeq[NodeRequire]()],
         fileName: name.parseFileName,
         deps: dependenciesBasic
       )
     if customFeature.hasKey(libFile.fileName):
       libFile.deps.add (customFeature[libFile.fileName], false)
     else: libFile.deps.add ("features/vk10", false)
+    if customExtensions.hasKey(libFile.fileName):
+      libFile.deps.add customExtensions[libFile.fileName].mapIt((it, false))
     libFile.deps.add requires
     if promotedto.isSome:
       libFile.deps.add promotedto.get

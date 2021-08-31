@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:18:46Z
 # VK_KHR_shader_clock
 
 
@@ -17,5 +17,6 @@ type
     pNext*: pointer
     shaderSubgroupClock*: Bool32
     shaderDeviceClock*: Bool32
+
 
 

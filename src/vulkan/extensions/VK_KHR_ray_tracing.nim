@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T03:33:27Z
+# Generated at 2021-08-31T05:19:03Z
 # VK_KHR_ray_tracing
 # VK_NV_ray_tracing
 # Explicit sort order to require processing after VK_NV_ray_tracing
@@ -7,6 +7,7 @@
 
 import ../platform
 import ../features/vk11
+import ./VK_EXT_debug_report
 import ./VK_KHR_get_physical_device_properties2
 import ./VK_KHR_get_memory_requirements2
 import ./VK_EXT_descriptor_indexing
@@ -714,6 +715,7 @@ GeometryTypeKHR.defineAliases:
 IndexType.defineAliases:
   noneKhr as noneNv
 
+
 proc loadVK_KHR_ray_tracing*(instance: Instance) =
   instance.defineLoader(`<<`)
 
@@ -739,6 +741,9 @@ proc loadVK_KHR_ray_tracing*(instance: Instance) =
   cmdWriteAccelerationStructuresPropertiesKHRCage << "vkCmdWriteAccelerationStructuresPropertiesKHR"
   cmdTraceRaysIndirectKHRCage << "vkCmdTraceRaysIndirectKHR"
   getDeviceAccelerationStructureCompatibilityKHRCage << "vkGetDeviceAccelerationStructureCompatibilityKHR"
+
+proc loadVK_NV_ray_tracing*(instance: Instance) =
+  instance.defineLoader(`<<`)
 
   createAccelerationStructureNVCage << "vkCreateAccelerationStructureNV"
   getAccelerationStructureMemoryRequirementsNVCage << "vkGetAccelerationStructureMemoryRequirementsNV"

@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:22:53Z
+# Generated at 2021-08-31T05:18:45Z
 # VK_KHR_16bit_storage
 
 
@@ -19,4 +19,5 @@ type
 
 StructureType.defineAliases:
   physicalDevice16bitStorageFeatures as physicalDevice16bitStorageFeaturesKhr
+
 

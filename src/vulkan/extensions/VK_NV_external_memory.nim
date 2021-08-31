@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T00:07:47Z
+# Generated at 2021-08-31T05:18:46Z
 # VK_NV_external_memory
 
 
@@ -20,5 +20,6 @@ type
     sType*: StructureType
     pNext*: pointer
     handleTypes*: ExternalMemoryHandleTypeFlagsNV
+
 
 
