@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_ANDROID_native_buffer
 
 
@@ -10,6 +10,11 @@ const
   AndroidNativeBufferNumber* = 11
   AndroidNativeBufferName* = "VK_ANDROID_native_buffer"
   AndroidNativeBufferExtensionName* = AndroidNativeBufferName
+
+type # enums and bitmasks
+  SwapchainImageUsageFlagBitsANDROID* {.size: sizeof(int32), pure.} = enum
+    sharedAndroid = 0x00000001
+  SwapchainImageUsageFlagsANDROID* = Flags[SwapchainImageUsageFlagBitsANDROID]
 
 type
   NativeBufferANDROID* = object
@@ -31,9 +36,6 @@ type
   NativeBufferUsage2ANDROID* = object
     consumer*: uint64
     producer*: uint64
-  SwapchainImageUsageFlagBitsANDROID* {.size: sizeof(int32), pure.} = enum
-    sharedAndroid = 0x00000001
-  SwapchainImageUsageFlagsANDROID* = Flags[SwapchainImageUsageFlagBitsANDROID]
 
 var # command cages
   getSwapchainGrallocUsageANDROIDCage: proc(device: Device; format: Format; imageUsage: ImageUsageFlags; grallocUsage: ptr int;): Result {.cdecl.}

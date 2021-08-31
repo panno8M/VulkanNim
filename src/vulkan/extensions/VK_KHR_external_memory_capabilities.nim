@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T23:05:46Z
+# Generated at 2021-08-31T01:21:03Z
 # VK_KHR_external_memory_capabilities
 
 
@@ -6,17 +6,20 @@ import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
 import ../features/vk11
+export VK_KHR_get_physical_device_properties2
 
 const
   KhrExternalMemoryCapabilitiesSpecVersion* = 1
   KhrExternalMemoryCapabilitiesExtensionName* = "VK_KHR_external_memory_capabilities"
   LuidSizeKhr* = LuidSize
 
-type
-  {name}* = {Alias}
+type # enums and bitmasks
+  ExternalMemoryHandleTypeFlagsKHR* = ExternalMemoryHandleTypeFlags
   ExternalMemoryHandleTypeFlagBitsKHR* = distinct UnusedEnum
-  {name}* = {Alias}
+  ExternalMemoryFeatureFlagsKHR* = ExternalMemoryFeatureFlags
   ExternalMemoryFeatureFlagBitsKHR* = distinct UnusedEnum
+
+type
   ExternalMemoryPropertiesKHR* = object
   PhysicalDeviceExternalImageFormatInfoKHR* = object
   ExternalImageFormatPropertiesKHR* = object

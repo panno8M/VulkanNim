@@ -1,14 +1,18 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_EXT_transform_feedback
 
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
+export VK_KHR_get_physical_device_properties2
 
 const
   ExtTransformFeedbackSpecVersion* = 1
   ExtTransformFeedbackExtensionName* = "VK_EXT_transform_feedback"
+
+type # enums and bitmasks
+  PipelineRasterizationStateStreamCreateFlagsEXT* = Flags[distinct UnusedEnum]
 
 type
   PhysicalDeviceTransformFeedbackFeaturesEXT* = object
@@ -34,7 +38,6 @@ type
     pNext*: pointer
     flags*: PipelineRasterizationStateStreamCreateFlagsEXT
     rasterizationStream*: uint32
-  PipelineRasterizationStateStreamCreateFlagsEXT* = Flags[distinct UnusedEnum]
 
 var # command cages
   cmdBindTransformFeedbackBuffersEXTCage: proc(commandBuffer: CommandBuffer; firstBinding: uint32; bindingCount: uint32; pBuffers: ptr Buffer; pOffsets: ptr DeviceSize; pSizes: ptr DeviceSize;): void {.cdecl.}

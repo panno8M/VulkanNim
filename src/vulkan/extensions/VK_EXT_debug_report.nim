@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_EXT_debug_report
 
 
@@ -9,19 +9,7 @@ const
   ExtDebugReportSpecVersion* = 9
   ExtDebugReportExtensionName* = "VK_EXT_debug_report"
 
-type
-  HtDebugReportCallbackEXT = object of HandleType
-  DebugReportCallbackEXT* = NonDispatchableHandle[HtDebugReportCallbackEXT]
-  DebugReportCallbackEXT* = proc(
-      flags: DebugReportFlagsEXT;
-      objectType: DebugReportObjectTypeEXT;
-      object: uint64;
-      location: uint;
-      messageCode: int32;
-      pLayerPrefix: cstring;
-      pMessage: cstring;
-      pUserData: pointer;
-    ): Bool32 {.cdecl.}
+type # enums and bitmasks
   DebugReportFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
     informationExt = 0x00000001
     warningExt = 0x00000002
@@ -68,11 +56,25 @@ type
     samplerYcbcrConversionExt = 1000156000
     # Provided by VK_KHR_ray_tracing
     accelerationStructureKhrExt = 1000165000
+
+type
+  HtDebugReportCallbackEXT = object of HandleType
+  DebugReportCallbackEXT* = NonDispatchableHandle[HtDebugReportCallbackEXT]
+  PFN_DebugReportCallbackEXT* = proc(
+      flags: DebugReportFlagsEXT;
+      objectType: DebugReportObjectTypeEXT;
+      `object`: uint64;
+      location: uint;
+      messageCode: int32;
+      pLayerPrefix: cstring;
+      pMessage: cstring;
+      pUserData: pointer;
+    ): Bool32 {.cdecl.}
   DebugReportCallbackCreateInfoEXT* = object
     sType*: StructureType
     pNext*: pointer
     flags*: DebugReportFlagsEXT
-    pfnCallback*: DebugReportCallbackEXT
+    pfnCallback*: PFN_DebugReportCallbackEXT
     pUserData*: pointer
 
 DebugReportObjectTypeEXT.defineAliases:
@@ -82,7 +84,7 @@ DebugReportObjectTypeEXT.defineAliases:
 var # command cages
   createDebugReportCallbackEXTCage: proc(instance: Instance; pCreateInfo: ptr DebugReportCallbackCreateInfoEXT; pAllocator: ptr AllocationCallbacks; pCallback: ptr DebugReportCallbackEXT;): Result {.cdecl.}
   destroyDebugReportCallbackEXTCage: proc(instance: Instance; callback: DebugReportCallbackEXT; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  debugReportMessageEXTCage: proc(instance: Instance; flags: DebugReportFlagsEXT; objectType: DebugReportObjectTypeEXT; object: uint64; location: uint; messageCode: int32; pLayerPrefix: cstring; pMessage: cstring;): void {.cdecl.}
+  debugReportMessageEXTCage: proc(instance: Instance; flags: DebugReportFlagsEXT; objectType: DebugReportObjectTypeEXT; `object`: uint64; location: uint; messageCode: int32; pLayerPrefix: cstring; pMessage: cstring;): void {.cdecl.}
 proc createDebugReportCallbackEXT*(
       instance: Instance;
       pCreateInfo: ptr DebugReportCallbackCreateInfoEXT;
@@ -100,13 +102,13 @@ proc debugReportMessageEXT*(
       instance: Instance;
       flags: DebugReportFlagsEXT;
       objectType: DebugReportObjectTypeEXT;
-      object: uint64;
+      `object`: uint64;
       location: uint;
       messageCode: int32;
       pLayerPrefix: cstring;
       pMessage: cstring;
     ): void {.cdecl.} =
-  debugReportMessageEXTCage(instance,flags,objectType,object,location,messageCode,pLayerPrefix,pMessage)
+  debugReportMessageEXTCage(instance,flags,objectType,`object`,location,messageCode,pLayerPrefix,pMessage)
 StructureType.defineAliases:
   debugReportCallbackCreateInfoExt as debugReportCreateInfoExt
 

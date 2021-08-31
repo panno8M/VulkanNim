@@ -1,10 +1,11 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T00:21:27Z
 # VK_EXT_buffer_device_address
 
 
 import ../platform
-import ../features/vk10
+import ../features/vk12
 import ./VK_KHR_get_physical_device_properties2
+export VK_KHR_get_physical_device_properties2
 
 const
   ExtBufferDeviceAddressSpecVersion* = 2

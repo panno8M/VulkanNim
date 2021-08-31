@@ -1,10 +1,11 @@
-# Generated at 2021-08-30T22:51:47Z
+# Generated at 2021-08-31T00:07:47Z
 # VK_EXT_hdr_metadata
 
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_swapchain
+export VK_KHR_swapchain
 
 const
   ExtHdrMetadataSpecVersion* = 2

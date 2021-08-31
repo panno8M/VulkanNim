@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T23:05:46Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_EXT_sampler_filter_minmax
 
 
@@ -6,13 +6,16 @@ import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
 import ../features/vk12
+export VK_KHR_get_physical_device_properties2
 
 const
   ExtSamplerFilterMinmaxSpecVersion* = 2
   ExtSamplerFilterMinmaxExtensionName* = "VK_EXT_sampler_filter_minmax"
 
-type
+type # enums and bitmasks
   SamplerReductionModeEXT* = distinct UnusedEnum
+
+type
   SamplerReductionModeCreateInfoEXT* = object
   PhysicalDeviceSamplerFilterMinmaxPropertiesEXT* = object
 

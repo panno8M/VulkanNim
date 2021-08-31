@@ -1,27 +1,92 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T03:33:27Z
 # VK_KHR_ray_tracing
+# VK_NV_ray_tracing
 # Explicit sort order to require processing after VK_NV_ray_tracing
 # =================================================================
 
 
 import ../platform
-import ../features/vk10
+import ../features/vk11
 import ./VK_KHR_get_physical_device_properties2
 import ./VK_KHR_get_memory_requirements2
 import ./VK_EXT_descriptor_indexing
 import ./VK_KHR_buffer_device_address
 import ./VK_KHR_deferred_host_operations
 import ./VK_KHR_pipeline_library
+import ../features/vk10
+export VK_KHR_get_physical_device_properties2
+export VK_KHR_get_memory_requirements2
+export VK_EXT_descriptor_indexing
+export VK_KHR_buffer_device_address
+export VK_KHR_deferred_host_operations
+export VK_KHR_pipeline_library
 
 const
   KhrRayTracingSpecVersion* = 8
   KhrRayTracingExtensionName* = "VK_KHR_ray_tracing"
   ShaderUnusedKhr* = (uint32.high)
 
-type
+  NvRayTracingSpecVersion* = 3
+  NvRayTracingExtensionName* = "VK_NV_ray_tracing"
+  ShaderUnusedNv* = ShaderUnusedKhr
+
+type # enums and bitmasks
   AccelerationStructureTypeKHR* {.size: sizeof(int32), pure.} = enum
     topLevelKhr = 0
     bottomLevelKhr = 1
+  RayTracingShaderGroupTypeKHR* {.size: sizeof(int32), pure.} = enum
+    generalKhr = 0
+    trianglesHitGroupKhr = 1
+    proceduralHitGroupKhr = 2
+  AccelerationStructureBuildTypeKHR* {.size: sizeof(int32), pure.} = enum
+    hostKhr = 0
+    deviceKhr = 1
+    hostOrDeviceKhr = 2
+  GeometryFlagsKHR* = Flags[GeometryFlagBitsKHR]
+  GeometryInstanceFlagsKHR* = Flags[GeometryInstanceFlagBitsKHR]
+  GeometryFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+    opaqueKhr = 0x00000001
+    noDuplicateAnyHitInvocationKhr = 0x00000002
+  GeometryInstanceFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+    triangleFacingCullDisableKhr = 0x00000001
+    triangleFrontCounterclockwiseKhr = 0x00000002
+    forceOpaqueKhr = 0x00000004
+    forceNoOpaqueKhr = 0x00000008
+  BuildAccelerationStructureFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+    allowUpdateKhr = 0x00000001
+    allowCompactionKhr = 0x00000002
+    preferFastTraceKhr = 0x00000004
+    preferFastBuildKhr = 0x00000008
+    lowMemoryKhr = 0x00000010
+  BuildAccelerationStructureFlagsKHR* = Flags[BuildAccelerationStructureFlagBitsKHR]
+  CopyAccelerationStructureModeKHR* {.size: sizeof(int32), pure.} = enum
+    cloneKhr = 0
+    compactKhr = 1
+    serializeKhr = 2
+    deserializeKhr = 3
+  GeometryTypeKHR* {.size: sizeof(int32), pure.} = enum
+    trianglesKhr = 0
+    aabbsKhr = 1
+    # Provided by VK_KHR_ray_tracing
+    instancesKhr = 1000150000
+  AccelerationStructureMemoryRequirementsTypeKHR* {.size: sizeof(int32), pure.} = enum
+    objectKhr = 0
+    buildScratchKhr = 1
+    updateScratchKhr = 2
+
+  RayTracingShaderGroupTypeNV* = distinct UnusedEnum
+  GeometryTypeNV* = distinct UnusedEnum
+  AccelerationStructureTypeNV* = distinct UnusedEnum
+  GeometryFlagsNV* = GeometryFlagsKHR
+  GeometryFlagBitsNV* = distinct UnusedEnum
+  GeometryInstanceFlagsNV* = GeometryInstanceFlagsKHR
+  GeometryInstanceFlagBitsNV* = distinct UnusedEnum
+  BuildAccelerationStructureFlagBitsNV* = distinct UnusedEnum
+  BuildAccelerationStructureFlagsNV* = BuildAccelerationStructureFlagsKHR
+  CopyAccelerationStructureModeNV* = distinct UnusedEnum
+  AccelerationStructureMemoryRequirementsTypeNV* = distinct UnusedEnum
+
+type
   DeviceOrHostAddressKHR* {.union.} = object
     deviceAddress*: DeviceAddress
     hostAddress*: pointer
@@ -42,10 +107,6 @@ type
     anyHitShader*: uint32
     intersectionShader*: uint32
     pShaderGroupCaptureReplayHandle*: pointer
-  RayTracingShaderGroupTypeKHR* {.size: sizeof(int32), pure.} = enum
-    generalKhr = 0
-    trianglesHitGroupKhr = 1
-    proceduralHitGroupKhr = 2
   RayTracingPipelineCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -90,10 +151,6 @@ type
     geometryCount*: uint32
     ppGeometries*: ptr ptr AccelerationStructureGeometryKHR
     scratchData*: DeviceOrHostAddressKHR
-  AccelerationStructureBuildTypeKHR* {.size: sizeof(int32), pure.} = enum
-    hostKhr = 0
-    deviceKhr = 1
-    hostOrDeviceKhr = 2
   AccelerationStructureGeometryAabbsDataKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -121,16 +178,6 @@ type
     geometryType*: GeometryTypeKHR
     geometry*: AccelerationStructureGeometryDataKHR
     flags*: GeometryFlagsKHR
-  GeometryFlagsKHR* = Flags[GeometryFlagBitsKHR]
-  GeometryInstanceFlagsKHR* = Flags[GeometryInstanceFlagBitsKHR]
-  GeometryFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    opaqueKhr = 0x00000001
-    noDuplicateAnyHitInvocationKhr = 0x00000002
-  GeometryInstanceFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    triangleFacingCullDisableKhr = 0x00000001
-    triangleFrontCounterclockwiseKhr = 0x00000002
-    forceOpaqueKhr = 0x00000004
-    forceNoOpaqueKhr = 0x00000008
   AccelerationStructureCreateGeometryTypeInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -151,23 +198,6 @@ type
     deviceAddress*: DeviceAddress
   HtAccelerationStructureKHR = object of HandleType
   AccelerationStructureKHR* = NonDispatchableHandle[HtAccelerationStructureKHR]
-  BuildAccelerationStructureFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    allowUpdateKhr = 0x00000001
-    allowCompactionKhr = 0x00000002
-    preferFastTraceKhr = 0x00000004
-    preferFastBuildKhr = 0x00000008
-    lowMemoryKhr = 0x00000010
-  BuildAccelerationStructureFlagsKHR* = Flags[BuildAccelerationStructureFlagBitsKHR]
-  CopyAccelerationStructureModeKHR* {.size: sizeof(int32), pure.} = enum
-    cloneKhr = 0
-    compactKhr = 1
-    serializeKhr = 2
-    deserializeKhr = 3
-  GeometryTypeKHR* {.size: sizeof(int32), pure.} = enum
-    trianglesKhr = 0
-    aabbsKhr = 1
-    # Provided by VK_KHR_ray_tracing
-    instancesKhr = 1000150000
   BindAccelerationStructureMemoryInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -211,10 +241,6 @@ type
     maxPrimitiveCount*: uint64
     maxDescriptorSetAccelerationStructures*: uint32
     shaderGroupHandleCaptureReplaySize*: uint32
-  AccelerationStructureMemoryRequirementsTypeKHR* {.size: sizeof(int32), pure.} = enum
-    objectKhr = 0
-    buildScratchKhr = 1
-    updateScratchKhr = 2
   AccelerationStructureDeviceAddressInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -256,6 +282,93 @@ type
     maxPayloadSize*: uint32
     maxAttributeSize*: uint32
     maxCallableSize*: uint32
+
+  RayTracingShaderGroupCreateInfoNV* = object
+    sType*: StructureType
+    pNext*: pointer
+    theType*: RayTracingShaderGroupTypeKHR
+    generalShader*: uint32
+    closestHitShader*: uint32
+    anyHitShader*: uint32
+    intersectionShader*: uint32
+  RayTracingPipelineCreateInfoNV* = object
+    sType*: StructureType
+    pNext*: pointer
+    flags*: PipelineCreateFlags
+    stageCount*: uint32
+    pStages*: ptr PipelineShaderStageCreateInfo
+    groupCount*: uint32
+    pGroups*: ptr RayTracingShaderGroupCreateInfoNV
+    maxRecursionDepth*: uint32
+    layout*: PipelineLayout
+    basePipelineHandle*: Pipeline
+    basePipelineIndex*: int32
+  GeometryTrianglesNV* = object
+    sType*: StructureType
+    pNext*: pointer
+    vertexData*: Buffer
+    vertexOffset*: DeviceSize
+    vertexCount*: uint32
+    vertexStride*: DeviceSize
+    vertexFormat*: Format
+    indexData*: Buffer
+    indexOffset*: DeviceSize
+    indexCount*: uint32
+    indexType*: IndexType
+    transformData*: Buffer
+    transformOffset*: DeviceSize
+  GeometryAABBNV* = object
+    sType*: StructureType
+    pNext*: pointer
+    aabbData*: Buffer
+    numAABBs*: uint32
+    stride*: uint32
+    offset*: DeviceSize
+  GeometryDataNV* = object
+    triangles*: GeometryTrianglesNV
+    aabbs*: GeometryAABBNV
+  GeometryNV* = object
+    sType*: StructureType
+    pNext*: pointer
+    geometryType*: GeometryTypeKHR
+    geometry*: GeometryDataNV
+    flags*: GeometryFlagsKHR
+  AccelerationStructureInfoNV* = object
+    sType*: StructureType
+    pNext*: pointer
+    theType*: AccelerationStructureTypeNV
+    flags*: BuildAccelerationStructureFlagsNV
+    instanceCount*: uint32
+    geometryCount*: uint32
+    pGeometries*: ptr GeometryNV
+  AccelerationStructureCreateInfoNV* = object
+    sType*: StructureType
+    pNext*: pointer
+    compactedSize*: DeviceSize
+    info*: AccelerationStructureInfoNV
+  AccelerationStructureNV* = AccelerationStructureKHR
+  BindAccelerationStructureMemoryInfoNV* = object
+  WriteDescriptorSetAccelerationStructureNV* = object
+  AccelerationStructureMemoryRequirementsInfoNV* = object
+    sType*: StructureType
+    pNext*: pointer
+    theType*: AccelerationStructureMemoryRequirementsTypeNV
+    accelerationStructure*: AccelerationStructureNV
+  PhysicalDeviceRayTracingPropertiesNV* = object
+    sType*: StructureType
+    pNext*: pointer
+    shaderGroupHandleSize*: uint32
+    maxRecursionDepth*: uint32
+    maxShaderGroupStride*: uint32
+    shaderGroupBaseAlignment*: uint32
+    maxGeometryCount*: uint64
+    maxInstanceCount*: uint64
+    maxTriangleCount*: uint64
+    maxDescriptorSetAccelerationStructures*: uint32
+  MemoryRequirements2KHR* = object
+  TransformMatrixNV* = object
+  AabbPositionsNV* = object
+  AccelerationStructureInstanceNV* = object
 
 var # command cages
   createAccelerationStructureKHRCage: proc(device: Device; pCreateInfo: ptr AccelerationStructureCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pAccelerationStructure: ptr AccelerationStructureKHR;): Result {.cdecl.}
@@ -434,6 +547,173 @@ proc getDeviceAccelerationStructureCompatibilityKHR*(
       version: ptr AccelerationStructureVersionKHR;
     ): Result {.cdecl, discardable.} =
   getDeviceAccelerationStructureCompatibilityKHRCage(device,version)
+
+
+var # command cages
+  createAccelerationStructureNVCage: proc(device: Device; pCreateInfo: ptr AccelerationStructureCreateInfoNV; pAllocator: ptr AllocationCallbacks; pAccelerationStructure: ptr AccelerationStructureNV;): Result {.cdecl.}
+  getAccelerationStructureMemoryRequirementsNVCage: proc(device: Device; pInfo: ptr AccelerationStructureMemoryRequirementsInfoNV; pMemoryRequirements: ptr MemoryRequirements2KHR;): void {.cdecl.}
+  cmdBuildAccelerationStructureNVCage: proc(commandBuffer: CommandBuffer; pInfo: ptr AccelerationStructureInfoNV; instanceData: Buffer; instanceOffset: DeviceSize; update: Bool32; dst: AccelerationStructureKHR; src: AccelerationStructureKHR; scratch: Buffer; scratchOffset: DeviceSize;): void {.cdecl.}
+  cmdCopyAccelerationStructureNVCage: proc(commandBuffer: CommandBuffer; dst: AccelerationStructureKHR; src: AccelerationStructureKHR; mode: CopyAccelerationStructureModeKHR;): void {.cdecl.}
+  cmdTraceRaysNVCage: proc(commandBuffer: CommandBuffer; raygenShaderBindingTableBuffer: Buffer; raygenShaderBindingOffset: DeviceSize; missShaderBindingTableBuffer: Buffer; missShaderBindingOffset: DeviceSize; missShaderBindingStride: DeviceSize; hitShaderBindingTableBuffer: Buffer; hitShaderBindingOffset: DeviceSize; hitShaderBindingStride: DeviceSize; callableShaderBindingTableBuffer: Buffer; callableShaderBindingOffset: DeviceSize; callableShaderBindingStride: DeviceSize; width: uint32; height: uint32; depth: uint32;): void {.cdecl.}
+  createRayTracingPipelinesNVCage: proc(device: Device; pipelineCache: PipelineCache; createInfoCount: uint32; pCreateInfos: ptr RayTracingPipelineCreateInfoNV; pAllocator: ptr AllocationCallbacks; pPipelines: ptr Pipeline;): Result {.cdecl.}
+  getAccelerationStructureHandleNVCage: proc(device: Device; accelerationStructure: AccelerationStructureKHR; dataSize: uint; pData: pointer;): Result {.cdecl.}
+  compileDeferredNVCage: proc(device: Device; pipeline: Pipeline; shader: uint32;): Result {.cdecl.}
+proc createAccelerationStructureNV*(
+      device: Device;
+      pCreateInfo: ptr AccelerationStructureCreateInfoNV;
+      pAllocator: ptr AllocationCallbacks;
+      pAccelerationStructure: ptr AccelerationStructureNV;
+    ): Result {.cdecl, discardable.} =
+  createAccelerationStructureNVCage(device,pCreateInfo,pAllocator,pAccelerationStructure)
+const destroyAccelerationStructureNV* = destroyAccelerationStructureKHR
+proc getAccelerationStructureMemoryRequirementsNV*(
+      device: Device;
+      pInfo: ptr AccelerationStructureMemoryRequirementsInfoNV;
+      pMemoryRequirements: ptr MemoryRequirements2KHR;
+    ): void {.cdecl.} =
+  getAccelerationStructureMemoryRequirementsNVCage(device,pInfo,pMemoryRequirements)
+const bindAccelerationStructureMemoryNV* = bindAccelerationStructureMemoryKHR
+proc cmdBuildAccelerationStructureNV*(
+      commandBuffer: CommandBuffer;
+      pInfo: ptr AccelerationStructureInfoNV;
+      instanceData: Buffer;
+      instanceOffset: DeviceSize;
+      update: Bool32;
+      dst: AccelerationStructureKHR;
+      src: AccelerationStructureKHR;
+      scratch: Buffer;
+      scratchOffset: DeviceSize;
+    ): void {.cdecl.} =
+  cmdBuildAccelerationStructureNVCage(commandBuffer,pInfo,instanceData,instanceOffset,update,dst,src,scratch,scratchOffset)
+proc cmdCopyAccelerationStructureNV*(
+      commandBuffer: CommandBuffer;
+      dst: AccelerationStructureKHR;
+      src: AccelerationStructureKHR;
+      mode: CopyAccelerationStructureModeKHR;
+    ): void {.cdecl.} =
+  cmdCopyAccelerationStructureNVCage(commandBuffer,dst,src,mode)
+proc cmdTraceRaysNV*(
+      commandBuffer: CommandBuffer;
+      raygenShaderBindingTableBuffer: Buffer;
+      raygenShaderBindingOffset: DeviceSize;
+      missShaderBindingTableBuffer: Buffer;
+      missShaderBindingOffset: DeviceSize;
+      missShaderBindingStride: DeviceSize;
+      hitShaderBindingTableBuffer: Buffer;
+      hitShaderBindingOffset: DeviceSize;
+      hitShaderBindingStride: DeviceSize;
+      callableShaderBindingTableBuffer: Buffer;
+      callableShaderBindingOffset: DeviceSize;
+      callableShaderBindingStride: DeviceSize;
+      width: uint32;
+      height: uint32;
+      depth: uint32;
+    ): void {.cdecl.} =
+  cmdTraceRaysNVCage(commandBuffer,raygenShaderBindingTableBuffer,raygenShaderBindingOffset,missShaderBindingTableBuffer,missShaderBindingOffset,missShaderBindingStride,hitShaderBindingTableBuffer,hitShaderBindingOffset,hitShaderBindingStride,callableShaderBindingTableBuffer,callableShaderBindingOffset,callableShaderBindingStride,width,height,depth)
+proc createRayTracingPipelinesNV*(
+      device: Device;
+      pipelineCache: PipelineCache;
+      createInfoCount: uint32;
+      pCreateInfos: ptr RayTracingPipelineCreateInfoNV;
+      pAllocator: ptr AllocationCallbacks;
+      pPipelines: ptr Pipeline;
+    ): Result {.cdecl, discardable.} =
+  createRayTracingPipelinesNVCage(device,pipelineCache,createInfoCount,pCreateInfos,pAllocator,pPipelines)
+const getRayTracingShaderGroupHandlesNV* = getRayTracingShaderGroupHandlesKHR
+proc getAccelerationStructureHandleNV*(
+      device: Device;
+      accelerationStructure: AccelerationStructureKHR;
+      dataSize: uint;
+      pData: pointer;
+    ): Result {.cdecl, discardable.} =
+  getAccelerationStructureHandleNVCage(device,accelerationStructure,dataSize,pData)
+const cmdWriteAccelerationStructuresPropertiesNV* = cmdWriteAccelerationStructuresPropertiesKHR
+proc compileDeferredNV*(
+      device: Device;
+      pipeline: Pipeline;
+      shader: uint32;
+    ): Result {.cdecl, discardable.} =
+  compileDeferredNVCage(device,pipeline,shader)
+PipelineStageFlagBits.defineAliases:
+  rayTracingShaderKhr as rayTracingShaderNv
+  accelerationStructureBuildKhr as accelerationStructureBuildNv
+
+ShaderStageFlagBits.defineAliases:
+  raygenKhr as raygenNv
+  anyHitKhr as anyHitNv
+  closestHitKhr as closestHitNv
+  missKhr as missNv
+  intersectionKhr as intersectionNv
+  callableKhr as callableNv
+
+BufferUsageFlagBits.defineAliases:
+  rayTracingKhr as rayTracingNv
+
+DebugReportObjectTypeEXT.defineAliases:
+  accelerationStructureKhrExt as accelerationStructureNvExt
+
+RayTracingShaderGroupTypeKHR.defineAliases:
+  generalKhr as generalNv
+  trianglesHitGroupKhr as trianglesHitGroupNv
+  proceduralHitGroupKhr as proceduralHitGroupNv
+
+CopyAccelerationStructureModeKHR.defineAliases:
+  cloneKhr as cloneNv
+  compactKhr as compactNv
+
+AccessFlagBits.defineAliases:
+  accelerationStructureReadKhr as accelerationStructureReadNv
+  accelerationStructureWriteKhr as accelerationStructureWriteNv
+
+ObjectType.defineAliases:
+  accelerationStructureKhr as accelerationStructureNv
+
+GeometryFlagBitsKHR.defineAliases:
+  opaqueKhr as opaqueNv
+  noDuplicateAnyHitInvocationKhr as noDuplicateAnyHitInvocationNv
+
+AccelerationStructureTypeKHR.defineAliases:
+  topLevelKhr as topLevelNv
+  bottomLevelKhr as bottomLevelNv
+
+GeometryInstanceFlagBitsKHR.defineAliases:
+  triangleFacingCullDisableKhr as triangleCullDisableNv
+  triangleFrontCounterclockwiseKhr as triangleFrontCounterclockwiseNv
+  forceOpaqueKhr as forceOpaqueNv
+  forceNoOpaqueKhr as forceNoOpaqueNv
+
+DescriptorType.defineAliases:
+  accelerationStructureKhr as accelerationStructureNv
+
+StructureType.defineAliases:
+  bindAccelerationStructureMemoryInfoKhr as bindAccelerationStructureMemoryInfoNv
+  writeDescriptorSetAccelerationStructureKhr as writeDescriptorSetAccelerationStructureNv
+
+PipelineBindPoint.defineAliases:
+  rayTracingKhr as rayTracingNv
+
+QueryType.defineAliases:
+  accelerationStructureCompactedSizeKhr as accelerationStructureCompactedSizeNv
+
+AccelerationStructureMemoryRequirementsTypeKHR.defineAliases:
+  objectKhr as objectNv
+  buildScratchKhr as buildScratchNv
+  updateScratchKhr as updateScratchNv
+
+BuildAccelerationStructureFlagBitsKHR.defineAliases:
+  allowUpdateKhr as allowUpdateNv
+  allowCompactionKhr as allowCompactionNv
+  preferFastTraceKhr as preferFastTraceNv
+  preferFastBuildKhr as preferFastBuildNv
+  lowMemoryKhr as lowMemoryNv
+
+GeometryTypeKHR.defineAliases:
+  trianglesKhr as trianglesNv
+  aabbsKhr as aabbsNv
+
+IndexType.defineAliases:
+  noneKhr as noneNv
+
 proc loadVK_KHR_ray_tracing*(instance: Instance) =
   instance.defineLoader(`<<`)
 
@@ -459,3 +739,12 @@ proc loadVK_KHR_ray_tracing*(instance: Instance) =
   cmdWriteAccelerationStructuresPropertiesKHRCage << "vkCmdWriteAccelerationStructuresPropertiesKHR"
   cmdTraceRaysIndirectKHRCage << "vkCmdTraceRaysIndirectKHR"
   getDeviceAccelerationStructureCompatibilityKHRCage << "vkGetDeviceAccelerationStructureCompatibilityKHR"
+
+  createAccelerationStructureNVCage << "vkCreateAccelerationStructureNV"
+  getAccelerationStructureMemoryRequirementsNVCage << "vkGetAccelerationStructureMemoryRequirementsNV"
+  cmdBuildAccelerationStructureNVCage << "vkCmdBuildAccelerationStructureNV"
+  cmdCopyAccelerationStructureNVCage << "vkCmdCopyAccelerationStructureNV"
+  cmdTraceRaysNVCage << "vkCmdTraceRaysNV"
+  createRayTracingPipelinesNVCage << "vkCreateRayTracingPipelinesNV"
+  getAccelerationStructureHandleNVCage << "vkGetAccelerationStructureHandleNV"
+  compileDeferredNVCage << "vkCompileDeferredNV"

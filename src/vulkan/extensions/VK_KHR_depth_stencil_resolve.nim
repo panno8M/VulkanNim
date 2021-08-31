@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T23:05:46Z
+# Generated at 2021-08-31T01:21:03Z
 # VK_KHR_depth_stencil_resolve
 
 
@@ -6,16 +6,19 @@ import ../platform
 import ../features/vk10
 import ./VK_KHR_create_renderpass2
 import ../features/vk12
+export VK_KHR_create_renderpass2
 
 const
   KhrDepthStencilResolveSpecVersion* = 1
   KhrDepthStencilResolveExtensionName* = "VK_KHR_depth_stencil_resolve"
 
+type # enums and bitmasks
+  ResolveModeFlagBitsKHR* = distinct UnusedEnum
+  ResolveModeFlagsKHR* = ResolveModeFlags
+
 type
   SubpassDescriptionDepthStencilResolveKHR* = object
   PhysicalDeviceDepthStencilResolvePropertiesKHR* = object
-  ResolveModeFlagBitsKHR* = distinct UnusedEnum
-  {name}* = {Alias}
 
 ResolveModeFlagBits.defineAliases:
   none as noneKhr

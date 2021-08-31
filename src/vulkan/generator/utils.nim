@@ -218,7 +218,7 @@ proc replaceBasicTypes*(str: string): string =
   str
     .replace("Vk", "")
     .replace("vk", "")
-    .replace("PFN_", "")
+    .replace("HANDLE", "Win32Handle")
     .replace("int64_t", "int64")
     .replace("int32_t", "int32")
     .replace("int16_t", "int16")
@@ -250,7 +250,9 @@ proc parseVariableNameFromSnake*(str: string): string =
   str.removeVkPrefix.toUpperCamel
 
 proc parseParamName*(str: string): string =
-  if str == "type": "theType"
+  case str
+  of "type": "theType"
+  of "object": "`object`"
   else: str
 
 proc parseTypeName*(str: string; ptrLv: Natural = 0; arrayLen: seq[NodeArrayLength] = @[]): string =

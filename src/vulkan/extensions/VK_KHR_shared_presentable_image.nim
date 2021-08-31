@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T00:07:47Z
 # VK_KHR_shared_presentable_image
 
 
@@ -7,6 +7,9 @@ import ../features/vk10
 import ./VK_KHR_swapchain
 import ./VK_KHR_get_physical_device_properties2
 import ./VK_KHR_get_surface_capabilities2
+export VK_KHR_swapchain
+export VK_KHR_get_physical_device_properties2
+export VK_KHR_get_surface_capabilities2
 
 const
   KhrSharedPresentableImageSpecVersion* = 1

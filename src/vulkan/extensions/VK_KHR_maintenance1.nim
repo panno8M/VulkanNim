@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T23:05:46Z
+# Generated at 2021-08-31T01:21:03Z
 # VK_KHR_maintenance1
 
 
@@ -10,8 +10,8 @@ const
   KhrMaintenance1SpecVersion* = 2
   KhrMaintenance1ExtensionName* = "VK_KHR_maintenance1"
 
-type
-  {name}* = {Alias}
+type # enums and bitmasks
+  CommandPoolTrimFlagsKHR* = CommandPoolTrimFlags
 
 const trimCommandPoolKHR* = trimCommandPool
 Result.defineAliases:

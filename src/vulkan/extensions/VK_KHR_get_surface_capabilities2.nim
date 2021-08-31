@@ -1,10 +1,11 @@
-# Generated at 2021-08-30T22:51:47Z
+# Generated at 2021-08-31T00:07:47Z
 # VK_KHR_get_surface_capabilities2
 
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
+export VK_KHR_surface
 
 const
   KhrGetSurfaceCapabilities2SpecVersion* = 1

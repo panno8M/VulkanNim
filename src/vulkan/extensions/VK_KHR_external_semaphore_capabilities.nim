@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T23:05:46Z
+# Generated at 2021-08-31T01:21:03Z
 # VK_KHR_external_semaphore_capabilities
 
 
@@ -6,17 +6,20 @@ import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
 import ../features/vk11
+export VK_KHR_get_physical_device_properties2
 
 const
   KhrExternalSemaphoreCapabilitiesSpecVersion* = 1
   KhrExternalSemaphoreCapabilitiesExtensionName* = "VK_KHR_external_semaphore_capabilities"
   LuidSizeKhr* = LuidSize
 
-type
-  {name}* = {Alias}
+type # enums and bitmasks
+  ExternalSemaphoreHandleTypeFlagsKHR* = ExternalSemaphoreHandleTypeFlags
   ExternalSemaphoreHandleTypeFlagBitsKHR* = distinct UnusedEnum
-  {name}* = {Alias}
+  ExternalSemaphoreFeatureFlagsKHR* = ExternalSemaphoreFeatureFlags
   ExternalSemaphoreFeatureFlagBitsKHR* = distinct UnusedEnum
+
+type
   PhysicalDeviceExternalSemaphoreInfoKHR* = object
   ExternalSemaphorePropertiesKHR* = object
   PhysicalDeviceIDPropertiesKHR* = object

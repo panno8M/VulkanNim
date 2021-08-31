@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T23:05:46Z
+# Generated at 2021-08-31T01:33:47Z
 # VK_KHR_device_group
 
 
@@ -6,6 +6,13 @@ import ../platform
 import ../features/vk10
 import ./VK_KHR_device_group_creation
 import ../features/vk11
+import ./VK_KHR_bind_memory2
+import ./VK_KHR_surface
+import ./VK_KHR_swapchain
+export VK_KHR_device_group_creation
+export VK_KHR_bind_memory2
+export VK_KHR_surface
+export VK_KHR_swapchain
 
 const
   KhrDeviceGroupSpecVersion* = 4
@@ -13,11 +20,20 @@ const
 
   MaxDeviceGroupSize* = 32
 
-type
-  {name}* = {Alias}
+type # enums and bitmasks
+  PeerMemoryFeatureFlagsKHR* = PeerMemoryFeatureFlags
   PeerMemoryFeatureFlagBitsKHR* = distinct UnusedEnum
-  {name}* = {Alias}
+  MemoryAllocateFlagsKHR* = MemoryAllocateFlags
   MemoryAllocateFlagBitsKHR* = distinct UnusedEnum
+
+  DeviceGroupPresentModeFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+    localKhr = 0x00000001 # Present from local memory
+    remoteKhr = 0x00000002 # Present from remote memory
+    sumKhr = 0x00000004 # Present sum of local and/or remote memory
+    localMultiDeviceKhr = 0x00000008 # Each physical device presents from local memory
+  DeviceGroupPresentModeFlagsKHR* = Flags[DeviceGroupPresentModeFlagBitsKHR]
+
+type
   MemoryAllocateFlagsInfoKHR* = object
   DeviceGroupRenderPassBeginInfoKHR* = object
   DeviceGroupCommandBufferBeginInfoKHR* = object
@@ -27,12 +43,6 @@ type
   BindBufferMemoryDeviceGroupInfoKHR* = object
   BindImageMemoryDeviceGroupInfoKHR* = object
 
-  DeviceGroupPresentModeFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    localKhr = 0x00000001 # Present from local memory
-    remoteKhr = 0x00000002 # Present from remote memory
-    sumKhr = 0x00000004 # Present sum of local and/or remote memory
-    localMultiDeviceKhr = 0x00000008 # Each physical device presents from local memory
-  DeviceGroupPresentModeFlagsKHR* = Flags[DeviceGroupPresentModeFlagBitsKHR]
   DeviceGroupPresentCapabilitiesKHR* = object
     sType*: StructureType
     pNext*: pointer

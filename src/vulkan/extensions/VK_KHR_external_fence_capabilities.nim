@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T23:05:46Z
+# Generated at 2021-08-31T01:21:03Z
 # VK_KHR_external_fence_capabilities
 
 
@@ -6,17 +6,20 @@ import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
 import ../features/vk11
+export VK_KHR_get_physical_device_properties2
 
 const
   KhrExternalFenceCapabilitiesSpecVersion* = 1
   KhrExternalFenceCapabilitiesExtensionName* = "VK_KHR_external_fence_capabilities"
   LuidSizeKhr* = LuidSize
 
-type
-  {name}* = {Alias}
+type # enums and bitmasks
+  ExternalFenceHandleTypeFlagsKHR* = ExternalFenceHandleTypeFlags
   ExternalFenceHandleTypeFlagBitsKHR* = distinct UnusedEnum
-  {name}* = {Alias}
+  ExternalFenceFeatureFlagsKHR* = ExternalFenceFeatureFlags
   ExternalFenceFeatureFlagBitsKHR* = distinct UnusedEnum
+
+type
   PhysicalDeviceExternalFenceInfoKHR* = object
   ExternalFencePropertiesKHR* = object
   PhysicalDeviceIDPropertiesKHR* = object

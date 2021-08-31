@@ -1,17 +1,20 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_FUCHSIA_imagepipe_surface
 
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
+export VK_KHR_surface
 
 const
   FuchsiaImagepipeSurfaceSpecVersion* = 1
   FuchsiaImagepipeSurfaceExtensionName* = "VK_FUCHSIA_imagepipe_surface"
 
-type
+type # enums and bitmasks
   ImagePipeSurfaceCreateFlagsFUCHSIA* = Flags[distinct UnusedEnum]
+
+type
   ImagePipeSurfaceCreateInfoFUCHSIA* = object
     sType*: StructureType
     pNext*: pointer

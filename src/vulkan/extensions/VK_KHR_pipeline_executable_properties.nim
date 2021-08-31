@@ -1,15 +1,23 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_KHR_pipeline_executable_properties
 
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
+export VK_KHR_get_physical_device_properties2
 
 const
   KhrPipelineExecutablePropertiesSpecVersion* = 1
   KhrPipelineExecutablePropertiesExtensionName* = "VK_KHR_pipeline_executable_properties"
   MaxDescriptionSize* = 256
+
+type # enums and bitmasks
+  PipelineExecutableStatisticFormatKHR* {.size: sizeof(int32), pure.} = enum
+    bool32Khr = 0
+    int64Khr = 1
+    uint64Khr = 2
+    float64Khr = 3
 
 type
   PhysicalDevicePipelineExecutablePropertiesFeaturesKHR* = object
@@ -32,11 +40,6 @@ type
     pNext*: pointer
     pipeline*: Pipeline
     executableIndex*: uint32
-  PipelineExecutableStatisticFormatKHR* {.size: sizeof(int32), pure.} = enum
-    bool32Khr = 0
-    int64Khr = 1
-    uint64Khr = 2
-    float64Khr = 3
   PipelineExecutableStatisticValueKHR* {.union.} = object
     b32*: Bool32
     i64*: int64

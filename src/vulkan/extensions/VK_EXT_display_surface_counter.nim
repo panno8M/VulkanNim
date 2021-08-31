@@ -1,19 +1,22 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_EXT_display_surface_counter
 
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
+export VK_KHR_surface
 
 const
   ExtDisplaySurfaceCounterSpecVersion* = 1
   ExtDisplaySurfaceCounterExtensionName* = "VK_EXT_display_surface_counter"
 
-type
+type # enums and bitmasks
   SurfaceCounterFlagsEXT* = Flags[SurfaceCounterFlagBitsEXT]
   SurfaceCounterFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
     vblankExt = 0x00000001
+
+type
   SurfaceCapabilities2EXT* = object
     sType*: StructureType
     pNext*: pointer

@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_EXT_global_priority
 
 
@@ -9,15 +9,17 @@ const
   ExtGlobalPrioritySpecVersion* = 2
   ExtGlobalPriorityExtensionName* = "VK_EXT_global_priority"
 
-type
-  DeviceQueueGlobalPriorityCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
-    globalPriority*: QueueGlobalPriorityEXT
+type # enums and bitmasks
   QueueGlobalPriorityEXT* {.size: sizeof(int32), pure.} = enum
     lowExt = 128
     mediumExt = 256
     highExt = 512
     realtimeExt = 1024
+
+type
+  DeviceQueueGlobalPriorityCreateInfoEXT* = object
+    sType*: StructureType
+    pNext*: pointer
+    globalPriority*: QueueGlobalPriorityEXT
 
 

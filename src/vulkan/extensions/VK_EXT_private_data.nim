@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_EXT_private_data
 
 
@@ -8,6 +8,10 @@ import ../features/vk10
 const
   ExtPrivateDataSpecVersion* = 1
   ExtPrivateDataExtensionName* = "VK_EXT_private_data"
+
+type # enums and bitmasks
+  PrivateDataSlotCreateFlagsEXT* = Flags[PrivateDataSlotCreateFlagBitsEXT]
+  PrivateDataSlotCreateFlagBitsEXT* = distinct UnusedEnum
 
 type
   PhysicalDevicePrivateDataFeaturesEXT* = object
@@ -24,8 +28,6 @@ type
     flags*: PrivateDataSlotCreateFlagsEXT
   HtPrivateDataSlotEXT = object of HandleType
   PrivateDataSlotEXT* = NonDispatchableHandle[HtPrivateDataSlotEXT]
-  PrivateDataSlotCreateFlagsEXT* = Flags[PrivateDataSlotCreateFlagBitsEXT]
-  PrivateDataSlotCreateFlagBitsEXT* = distinct UnusedEnum
 
 var # command cages
   createPrivateDataSlotEXTCage: proc(device: Device; pCreateInfo: ptr PrivateDataSlotCreateInfoEXT; pAllocator: ptr AllocationCallbacks; pPrivateDataSlot: ptr PrivateDataSlotEXT;): Result {.cdecl.}

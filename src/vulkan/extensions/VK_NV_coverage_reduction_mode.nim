@@ -1,14 +1,21 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_NV_coverage_reduction_mode
 
 
 import ../platform
 import ../features/vk10
 import ./VK_NV_framebuffer_mixed_samples
+export VK_NV_framebuffer_mixed_samples
 
 const
   NvCoverageReductionModeSpecVersion* = 1
   NvCoverageReductionModeExtensionName* = "VK_NV_coverage_reduction_mode"
+
+type # enums and bitmasks
+  PipelineCoverageReductionStateCreateFlagsNV* = Flags[distinct UnusedEnum]
+  CoverageReductionModeNV* {.size: sizeof(int32), pure.} = enum
+    mergeNv = 0
+    truncateNv = 1
 
 type
   PhysicalDeviceCoverageReductionModeFeaturesNV* = object
@@ -20,10 +27,6 @@ type
     pNext*: pointer
     flags*: PipelineCoverageReductionStateCreateFlagsNV
     coverageReductionMode*: CoverageReductionModeNV
-  PipelineCoverageReductionStateCreateFlagsNV* = Flags[distinct UnusedEnum]
-  CoverageReductionModeNV* {.size: sizeof(int32), pure.} = enum
-    mergeNv = 0
-    truncateNv = 1
   FramebufferMixedSamplesCombinationNV* = object
     sType*: StructureType
     pNext*: pointer

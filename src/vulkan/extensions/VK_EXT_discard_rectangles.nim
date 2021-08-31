@@ -1,14 +1,21 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_EXT_discard_rectangles
 
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
+export VK_KHR_get_physical_device_properties2
 
 const
   ExtDiscardRectanglesSpecVersion* = 1
   ExtDiscardRectanglesExtensionName* = "VK_EXT_discard_rectangles"
+
+type # enums and bitmasks
+  PipelineDiscardRectangleStateCreateFlagsEXT* = Flags[distinct UnusedEnum]
+  DiscardRectangleModeEXT* {.size: sizeof(int32), pure.} = enum
+    inclusiveExt = 0
+    exclusiveExt = 1
 
 type
   PhysicalDeviceDiscardRectanglePropertiesEXT* = object
@@ -22,10 +29,6 @@ type
     discardRectangleMode*: DiscardRectangleModeEXT
     discardRectangleCount*: uint32
     pDiscardRectangles*: ptr Rect2D
-  PipelineDiscardRectangleStateCreateFlagsEXT* = Flags[distinct UnusedEnum]
-  DiscardRectangleModeEXT* {.size: sizeof(int32), pure.} = enum
-    inclusiveExt = 0
-    exclusiveExt = 1
 
 var # command cages
   cmdSetDiscardRectangleEXTCage: proc(commandBuffer: CommandBuffer; firstDiscardRectangle: uint32; discardRectangleCount: uint32; pDiscardRectangles: ptr Rect2D;): void {.cdecl.}

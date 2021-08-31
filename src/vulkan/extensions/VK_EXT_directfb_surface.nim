@@ -1,17 +1,20 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_EXT_directfb_surface
 
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
+export VK_KHR_surface
 
 const
   ExtDirectfbSurfaceSpecVersion* = 1
   ExtDirectfbSurfaceExtensionName* = "VK_EXT_directfb_surface"
 
-type
+type # enums and bitmasks
   DirectFBSurfaceCreateFlagsEXT* = Flags[distinct UnusedEnum]
+
+type
   DirectFBSurfaceCreateInfoEXT* = object
     sType*: StructureType
     pNext*: pointer

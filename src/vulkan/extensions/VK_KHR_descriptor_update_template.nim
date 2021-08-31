@@ -1,10 +1,14 @@
-# Generated at 2021-08-30T23:05:46Z
+# Generated at 2021-08-31T01:33:47Z
 # VK_KHR_descriptor_update_template
 
 
 import ../platform
 import ../features/vk10
 import ../features/vk11
+import ./VK_KHR_push_descriptor
+import ./VK_EXT_debug_report
+export VK_KHR_push_descriptor
+export VK_EXT_debug_report
 
 const
   KhrDescriptorUpdateTemplateSpecVersion* = 1
@@ -12,10 +16,12 @@ const
 
   DescriptorUpdateTemplateTypePushDescriptorsKhr* = 1
 
+type # enums and bitmasks
+  DescriptorUpdateTemplateCreateFlagsKHR* = DescriptorUpdateTemplateCreateFlags
+  DescriptorUpdateTemplateTypeKHR* = distinct UnusedEnum
+
 type
   DescriptorUpdateTemplateKHR* = DescriptorUpdateTemplate
-  {name}* = {Alias}
-  DescriptorUpdateTemplateTypeKHR* = distinct UnusedEnum
   DescriptorUpdateTemplateEntryKHR* = object
   DescriptorUpdateTemplateCreateInfoKHR* = object
 

@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_EXT_display_control
 
 
@@ -6,12 +6,14 @@ import ../platform
 import ../features/vk10
 import ./VK_EXT_display_surface_counter
 import ./VK_KHR_swapchain
+export VK_EXT_display_surface_counter
+export VK_KHR_swapchain
 
 const
   ExtDisplayControlSpecVersion* = 1
   ExtDisplayControlExtensionName* = "VK_EXT_display_control"
 
-type
+type # enums and bitmasks
   DisplayPowerStateEXT* {.size: sizeof(int32), pure.} = enum
     offExt = 0
     suspendExt = 1
@@ -20,6 +22,8 @@ type
     displayHotplugExt = 0
   DisplayEventTypeEXT* {.size: sizeof(int32), pure.} = enum
     firstPixelOutExt = 0
+
+type
   DisplayPowerInfoEXT* = object
     sType*: StructureType
     pNext*: pointer

@@ -1,10 +1,11 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_KHR_android_surface
 
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
+export VK_KHR_surface
 
 type # basetypes
   ANativeWindow* = distinct object
@@ -13,8 +14,10 @@ const
   KhrAndroidSurfaceSpecVersion* = 6
   KhrAndroidSurfaceExtensionName* = "VK_KHR_android_surface"
 
-type
+type # enums and bitmasks
   AndroidSurfaceCreateFlagsKHR* = Flags[distinct UnusedEnum]
+
+type
   AndroidSurfaceCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer

@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:51:47Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_KHR_surface
 # VK_KHR_display
 
@@ -13,9 +13,7 @@ const
   KhrDisplaySpecVersion* = 23
   KhrDisplayExtensionName* = "VK_KHR_display"
 
-type
-  HtSurfaceKHR = object of HandleType
-  SurfaceKHR* = NonDispatchableHandle[HtSurfaceKHR]
+type # enums and bitmasks
   SurfaceTransformFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
     identityKhr = 0x00000001
     rotate90Khr = 0x00000002
@@ -73,6 +71,20 @@ type
     postMultipliedKhr = 0x00000004
     inheritKhr = 0x00000008
   CompositeAlphaFlagsKHR* = Flags[CompositeAlphaFlagBitsKHR]
+
+  DisplayModeCreateFlagsKHR* = Flags[distinct UnusedEnum]
+  DisplayPlaneAlphaFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+    opaqueKhr = 0x00000001
+    globalKhr = 0x00000002
+    perPixelKhr = 0x00000004
+    perPixelPremultipliedKhr = 0x00000008
+  DisplayPlaneAlphaFlagsKHR* = Flags[DisplayPlaneAlphaFlagBitsKHR]
+  DisplaySurfaceCreateFlagsKHR* = Flags[distinct UnusedEnum]
+  SurfaceTransformFlagsKHR* = Flags[SurfaceTransformFlagBitsKHR]
+
+type
+  HtSurfaceKHR = object of HandleType
+  SurfaceKHR* = NonDispatchableHandle[HtSurfaceKHR]
   SurfaceCapabilitiesKHR* = object
     minImageCount*: uint32
     maxImageCount*: uint32
@@ -90,7 +102,6 @@ type
 
   HtDisplayKHR = object of HandleType
   DisplayKHR* = NonDispatchableHandle[HtDisplayKHR]
-  DisplayModeCreateFlagsKHR* = Flags[distinct UnusedEnum]
   DisplayModeCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -104,12 +115,6 @@ type
   DisplayModePropertiesKHR* = object
     displayMode*: DisplayModeKHR
     parameters*: DisplayModeParametersKHR
-  DisplayPlaneAlphaFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    opaqueKhr = 0x00000001
-    globalKhr = 0x00000002
-    perPixelKhr = 0x00000004
-    perPixelPremultipliedKhr = 0x00000008
-  DisplayPlaneAlphaFlagsKHR* = Flags[DisplayPlaneAlphaFlagBitsKHR]
   DisplayPlaneCapabilitiesKHR* = object
     supportedAlpha*: DisplayPlaneAlphaFlagsKHR
     minSrcPosition*: Offset2D
@@ -131,7 +136,6 @@ type
     supportedTransforms*: SurfaceTransformFlagsKHR
     planeReorderPossible*: Bool32
     persistentContent*: Bool32
-  DisplaySurfaceCreateFlagsKHR* = Flags[distinct UnusedEnum]
   DisplaySurfaceCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -143,7 +147,6 @@ type
     globalAlpha*: float32
     alphaMode*: DisplayPlaneAlphaFlagBitsKHR
     imageExtent*: Extent2D
-  SurfaceTransformFlagsKHR* = Flags[SurfaceTransformFlagBitsKHR]
 
 ColorSpaceKHR.defineAliases:
   srgbNonlinearKhr as colorspaceSrgbNonlinearKhr # Backwards-compatible alias containing a typo

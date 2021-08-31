@@ -1,17 +1,20 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_KHR_win32_surface
 
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
+export VK_KHR_surface
 
 const
   KhrWin32SurfaceSpecVersion* = 6
   KhrWin32SurfaceExtensionName* = "VK_KHR_win32_surface"
 
-type
+type # enums and bitmasks
   Win32SurfaceCreateFlagsKHR* = Flags[distinct UnusedEnum]
+
+type
   Win32SurfaceCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer

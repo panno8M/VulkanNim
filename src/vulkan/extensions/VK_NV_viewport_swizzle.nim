@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_NV_viewport_swizzle
 
 
@@ -9,12 +9,7 @@ const
   NvViewportSwizzleSpecVersion* = 1
   NvViewportSwizzleExtensionName* = "VK_NV_viewport_swizzle"
 
-type
-  ViewportSwizzleNV* = object
-    x*: ViewportCoordinateSwizzleNV
-    y*: ViewportCoordinateSwizzleNV
-    z*: ViewportCoordinateSwizzleNV
-    w*: ViewportCoordinateSwizzleNV
+type # enums and bitmasks
   ViewportCoordinateSwizzleNV* {.size: sizeof(int32), pure.} = enum
     positiveXNv = 0
     negativeXNv = 1
@@ -24,12 +19,19 @@ type
     negativeZNv = 5
     positiveWNv = 6
     negativeWNv = 7
+  PipelineViewportSwizzleStateCreateFlagsNV* = Flags[distinct UnusedEnum]
+
+type
+  ViewportSwizzleNV* = object
+    x*: ViewportCoordinateSwizzleNV
+    y*: ViewportCoordinateSwizzleNV
+    z*: ViewportCoordinateSwizzleNV
+    w*: ViewportCoordinateSwizzleNV
   PipelineViewportSwizzleStateCreateInfoNV* = object
     sType*: StructureType
     pNext*: pointer
     flags*: PipelineViewportSwizzleStateCreateFlagsNV
     viewportCount*: uint32
     pViewportSwizzles*: ptr ViewportSwizzleNV
-  PipelineViewportSwizzleStateCreateFlagsNV* = Flags[distinct UnusedEnum]
 
 

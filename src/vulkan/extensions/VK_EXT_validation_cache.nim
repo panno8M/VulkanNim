@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:51:47Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_EXT_validation_cache
 
 
@@ -8,6 +8,11 @@ import ../features/vk10
 const
   ExtValidationCacheSpecVersion* = 1
   ExtValidationCacheExtensionName* = "VK_EXT_validation_cache"
+
+type # enums and bitmasks
+  ValidationCacheHeaderVersionEXT* {.size: sizeof(int32), pure.} = enum
+    oneExt = 1
+  ValidationCacheCreateFlagsEXT* = Flags[distinct UnusedEnum]
 
 type
   HtValidationCacheEXT = object of HandleType
@@ -22,9 +27,6 @@ type
     sType*: StructureType
     pNext*: pointer
     validationCache*: ValidationCacheEXT
-  ValidationCacheHeaderVersionEXT* {.size: sizeof(int32), pure.} = enum
-    oneExt = 1
-  ValidationCacheCreateFlagsEXT* = Flags[distinct UnusedEnum]
 
 var # command cages
   createValidationCacheEXTCage: proc(device: Device; pCreateInfo: ptr ValidationCacheCreateInfoEXT; pAllocator: ptr AllocationCallbacks; pValidationCache: ptr ValidationCacheEXT;): Result {.cdecl.}

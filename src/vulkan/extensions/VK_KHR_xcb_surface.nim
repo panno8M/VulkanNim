@@ -1,17 +1,20 @@
-# Generated at 2021-08-30T22:51:47Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_KHR_xcb_surface
 
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
+export VK_KHR_surface
 
 const
   KhrXcbSurfaceSpecVersion* = 6
   KhrXcbSurfaceExtensionName* = "VK_KHR_xcb_surface"
 
-type
+type # enums and bitmasks
   XcbSurfaceCreateFlagsKHR* = Flags[distinct UnusedEnum]
+
+type
   XcbSurfaceCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer

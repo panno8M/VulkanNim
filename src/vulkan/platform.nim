@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-31T02:25:37Z
 # platform
 import strformat
 import macros
@@ -20,8 +20,29 @@ if vkDll.isNil:
 type
   UnusedEnum* = object ## Reserved for future use
   HandleType* = object of RootObj
-  Handle*[T] = distinct pointer
-  NonDispatchableHandle*[T] = distinct pointer
+  Handle*[T] = ptr object
+  NonDispatchableHandle*[T] = ptr object
+  Display* = ptr object
+  RRoutput* = ptr object
+  IDirectFB* = ptr object
+  IDirectFBSurface* = ptr object
+  HMONITOR* = ptr object
+  zx_handle_t* = ptr object
+  GgpFrameToken* = ptr object
+  GgpStreamDescriptor* = ptr object
+  wl_display* = ptr object
+  wl_surface* = ptr object
+  Win32Handle* = ptr object # replace HANDLE of windows.h
+  LPCWSTR* = ptr object
+  SECURITY_ATTRIBUTES* = ptr object
+  DWORD* = ptr object
+  HINSTANCE* = ptr object
+  HWND* = ptr object
+  xcb_connection_t* = ptr object
+  xcb_window_t* = ptr object
+  xcb_visualid_t* = ptr object
+  Window* = ptr object
+  VisualID* = ptr object
 
 let getInstanceProcAddrPlatform* = cast[proc(inst: pointer, s: cstring): pointer {.cdecl.}](vkDll.symAddr("vkGetInstanceProcAddr"))
 if getInstanceProcAddrPlatform == nil:

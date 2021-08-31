@@ -1,17 +1,20 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_EXT_headless_surface
 
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
+export VK_KHR_surface
 
 const
   ExtHeadlessSurfaceSpecVersion* = 1
   ExtHeadlessSurfaceExtensionName* = "VK_EXT_headless_surface"
 
-type
+type # enums and bitmasks
   HeadlessSurfaceCreateFlagsEXT* = Flags[distinct UnusedEnum]
+
+type
   HeadlessSurfaceCreateInfoEXT* = object
     sType*: StructureType
     pNext*: pointer

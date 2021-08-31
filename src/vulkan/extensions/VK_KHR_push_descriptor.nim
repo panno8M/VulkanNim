@@ -1,10 +1,13 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T02:11:29Z
 # VK_KHR_push_descriptor
 
 
 import ../platform
-import ../features/vk10
+import ../features/vk11
 import ./VK_KHR_get_physical_device_properties2
+import ./VK_KHR_descriptor_update_template
+export VK_KHR_get_physical_device_properties2
+export VK_KHR_descriptor_update_template
 
 const
   KhrPushDescriptorSpecVersion* = 2

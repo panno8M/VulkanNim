@@ -1,27 +1,17 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_NV_cooperative_matrix
 
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
+export VK_KHR_get_physical_device_properties2
 
 const
   NvCooperativeMatrixSpecVersion* = 1
   NvCooperativeMatrixExtensionName* = "VK_NV_cooperative_matrix"
 
-type
-  CooperativeMatrixPropertiesNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    MSize*: uint32
-    NSize*: uint32
-    KSize*: uint32
-    AType*: ComponentTypeNV
-    BType*: ComponentTypeNV
-    CType*: ComponentTypeNV
-    DType*: ComponentTypeNV
-    scope*: ScopeNV
+type # enums and bitmasks
   ScopeNV* {.size: sizeof(int32), pure.} = enum
     deviceNv = 1
     workgroupNv = 2
@@ -39,6 +29,19 @@ type
     uint16Nv = 8
     uint32Nv = 9
     uint64Nv = 10
+
+type
+  CooperativeMatrixPropertiesNV* = object
+    sType*: StructureType
+    pNext*: pointer
+    MSize*: uint32
+    NSize*: uint32
+    KSize*: uint32
+    AType*: ComponentTypeNV
+    BType*: ComponentTypeNV
+    CType*: ComponentTypeNV
+    DType*: ComponentTypeNV
+    scope*: ScopeNV
   PhysicalDeviceCooperativeMatrixFeaturesNV* = object
     sType*: StructureType
     pNext*: pointer

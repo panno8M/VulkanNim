@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_EXT_depth_clip_enable
 
 
@@ -8,6 +8,9 @@ import ../features/vk10
 const
   ExtDepthClipEnableSpecVersion* = 1
   ExtDepthClipEnableExtensionName* = "VK_EXT_depth_clip_enable"
+
+type # enums and bitmasks
+  PipelineRasterizationDepthClipStateCreateFlagsEXT* = Flags[distinct UnusedEnum]
 
 type
   PhysicalDeviceDepthClipEnableFeaturesEXT* = object
@@ -19,6 +22,5 @@ type
     pNext*: pointer
     flags*: PipelineRasterizationDepthClipStateCreateFlagsEXT
     depthClipEnable*: Bool32
-  PipelineRasterizationDepthClipStateCreateFlagsEXT* = Flags[distinct UnusedEnum]
 
 

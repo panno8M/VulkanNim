@@ -1,10 +1,11 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T02:18:45Z
 # VK_NV_external_memory_win32
 
 
 import ../platform
 import ../features/vk10
 import ./VK_NV_external_memory
+export VK_NV_external_memory
 
 const
   NvExternalMemoryWin32SpecVersion* = 1
@@ -15,7 +16,7 @@ type
     sType*: StructureType
     pNext*: pointer
     handleType*: ExternalMemoryHandleTypeFlagsNV
-    handle*: HANDLE
+    handle*: Win32Handle
   ExportMemoryWin32HandleInfoNV* = object
     sType*: StructureType
     pNext*: pointer
@@ -23,12 +24,12 @@ type
     dwAccess*: DWORD
 
 var # command cages
-  getMemoryWin32HandleNVCage: proc(device: Device; memory: DeviceMemory; handleType: ExternalMemoryHandleTypeFlagsNV; pHandle: ptr HANDLE;): Result {.cdecl.}
+  getMemoryWin32HandleNVCage: proc(device: Device; memory: DeviceMemory; handleType: ExternalMemoryHandleTypeFlagsNV; pHandle: ptr Win32Handle;): Result {.cdecl.}
 proc getMemoryWin32HandleNV*(
       device: Device;
       memory: DeviceMemory;
       handleType: ExternalMemoryHandleTypeFlagsNV;
-      pHandle: ptr HANDLE;
+      pHandle: ptr Win32Handle;
     ): Result {.cdecl, discardable.} =
   getMemoryWin32HandleNVCage(device,memory,handleType,pHandle)
 proc loadVK_NV_external_memory_win32*(instance: Instance) =

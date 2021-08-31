@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T23:05:46Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_KHR_maintenance2
 
 
@@ -10,13 +10,15 @@ const
   KhrMaintenance2SpecVersion* = 1
   KhrMaintenance2ExtensionName* = "VK_KHR_maintenance2"
 
+type # enums and bitmasks
+  PointClippingBehaviorKHR* = distinct UnusedEnum
+  TessellationDomainOriginKHR* = distinct UnusedEnum
+
 type
   PhysicalDevicePointClippingPropertiesKHR* = object
-  PointClippingBehaviorKHR* = distinct UnusedEnum
   RenderPassInputAttachmentAspectCreateInfoKHR* = object
   InputAttachmentAspectReferenceKHR* = object
   ImageViewUsageCreateInfoKHR* = object
-  TessellationDomainOriginKHR* = distinct UnusedEnum
   PipelineTessellationDomainOriginStateCreateInfoKHR* = object
 
 PointClippingBehavior.defineAliases:

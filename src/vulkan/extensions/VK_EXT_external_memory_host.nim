@@ -1,10 +1,11 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:27:15Z
 # VK_EXT_external_memory_host
 
 
 import ../platform
-import ../features/vk10
+import ../features/vk11
 import ./VK_KHR_external_memory
+export VK_KHR_external_memory
 
 const
   ExtExternalMemoryHostSpecVersion* = 1

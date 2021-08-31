@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_NV_framebuffer_mixed_samples
 
 
@@ -9,6 +9,14 @@ const
   NvFramebufferMixedSamplesSpecVersion* = 1
   NvFramebufferMixedSamplesExtensionName* = "VK_NV_framebuffer_mixed_samples"
 
+type # enums and bitmasks
+  PipelineCoverageModulationStateCreateFlagsNV* = Flags[distinct UnusedEnum]
+  CoverageModulationModeNV* {.size: sizeof(int32), pure.} = enum
+    noneNv = 0
+    rgbNv = 1
+    alphaNv = 2
+    rgbaNv = 3
+
 type
   PipelineCoverageModulationStateCreateInfoNV* = object
     sType*: StructureType
@@ -18,11 +26,5 @@ type
     coverageModulationTableEnable*: Bool32
     coverageModulationTableCount*: uint32
     pCoverageModulationTable*: ptr float32
-  PipelineCoverageModulationStateCreateFlagsNV* = Flags[distinct UnusedEnum]
-  CoverageModulationModeNV* {.size: sizeof(int32), pure.} = enum
-    noneNv = 0
-    rgbNv = 1
-    alphaNv = 2
-    rgbaNv = 3
 
 

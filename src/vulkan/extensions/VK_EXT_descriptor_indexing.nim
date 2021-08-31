@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T23:05:46Z
+# Generated at 2021-08-31T01:21:02Z
 # VK_EXT_descriptor_indexing
 
 
@@ -7,10 +7,16 @@ import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
 import ./VK_KHR_maintenance3
 import ../features/vk12
+export VK_KHR_get_physical_device_properties2
+export VK_KHR_maintenance3
 
 const
   ExtDescriptorIndexingSpecVersion* = 2
   ExtDescriptorIndexingExtensionName* = "VK_EXT_descriptor_indexing"
+
+type # enums and bitmasks
+  DescriptorBindingFlagBitsEXT* = distinct UnusedEnum
+  DescriptorBindingFlagsEXT* = DescriptorBindingFlags
 
 type
   DescriptorSetLayoutBindingFlagsCreateInfoEXT* = object
@@ -18,8 +24,6 @@ type
   PhysicalDeviceDescriptorIndexingPropertiesEXT* = object
   DescriptorSetVariableDescriptorCountAllocateInfoEXT* = object
   DescriptorSetVariableDescriptorCountLayoutSupportEXT* = object
-  DescriptorBindingFlagBitsEXT* = distinct UnusedEnum
-  {name}* = {Alias}
 
 DescriptorPoolCreateFlagBits.defineAliases:
   updateAfterBind as updateAfterBindExt

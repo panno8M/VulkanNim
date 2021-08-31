@@ -1,13 +1,32 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T02:26:40Z
 # VK_NV_device_generated_commands
 
 
 import ../platform
-import ../features/vk10
+import ../features/vk11
 
 const
   NvDeviceGeneratedCommandsSpecVersion* = 3
   NvDeviceGeneratedCommandsExtensionName* = "VK_NV_device_generated_commands"
+
+type # enums and bitmasks
+  IndirectStateFlagBitsNV* {.size: sizeof(int32), pure.} = enum
+    flagFrontfaceNv = 0x00000001
+  IndirectStateFlagsNV* = Flags[IndirectStateFlagBitsNV]
+  IndirectCommandsTokenTypeNV* {.size: sizeof(int32), pure.} = enum
+    shaderGroupNv = 0
+    stateFlagsNv = 1
+    indexBufferNv = 2
+    vertexBufferNv = 3
+    pushConstantNv = 4
+    drawIndexedNv = 5
+    drawNv = 6
+    drawTasksNv = 7
+  IndirectCommandsLayoutUsageFlagBitsNV* {.size: sizeof(int32), pure.} = enum
+    explicitPreprocessNv = 0x00000001
+    indexedSequencesNv = 0x00000002
+    unorderedSequencesNv = 0x00000004
+  IndirectCommandsLayoutUsageFlagsNV* = Flags[IndirectCommandsLayoutUsageFlagBitsNV]
 
 type
   PhysicalDeviceDeviceGeneratedCommandsPropertiesNV* = object
@@ -52,25 +71,8 @@ type
     stride*: uint32
   SetStateFlagsIndirectCommandNV* = object
     data*: uint32
-  IndirectStateFlagBitsNV* {.size: sizeof(int32), pure.} = enum
-    flagFrontfaceNv = 0x00000001
-  IndirectStateFlagsNV* = Flags[IndirectStateFlagBitsNV]
   HtIndirectCommandsLayoutNV = object of HandleType
   IndirectCommandsLayoutNV* = NonDispatchableHandle[HtIndirectCommandsLayoutNV]
-  IndirectCommandsTokenTypeNV* {.size: sizeof(int32), pure.} = enum
-    shaderGroupNv = 0
-    stateFlagsNv = 1
-    indexBufferNv = 2
-    vertexBufferNv = 3
-    pushConstantNv = 4
-    drawIndexedNv = 5
-    drawNv = 6
-    drawTasksNv = 7
-  IndirectCommandsLayoutUsageFlagBitsNV* {.size: sizeof(int32), pure.} = enum
-    explicitPreprocessNv = 0x00000001
-    indexedSequencesNv = 0x00000002
-    unorderedSequencesNv = 0x00000004
-  IndirectCommandsLayoutUsageFlagsNV* = Flags[IndirectCommandsLayoutUsageFlagBitsNV]
   IndirectCommandsStreamNV* = object
     buffer*: Buffer
     offset*: DeviceSize

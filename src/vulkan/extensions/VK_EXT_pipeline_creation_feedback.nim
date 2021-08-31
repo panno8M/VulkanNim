@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_EXT_pipeline_creation_feedback
 
 
@@ -9,12 +9,14 @@ const
   ExtPipelineCreationFeedbackSpecVersion* = 1
   ExtPipelineCreationFeedbackExtensionName* = "VK_EXT_pipeline_creation_feedback"
 
-type
+type # enums and bitmasks
   PipelineCreationFeedbackFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
     validExt = 0x00000001
     applicationPipelineCacheHitExt = 0x00000002
     basePipelineAccelerationExt = 0x00000004
   PipelineCreationFeedbackFlagsEXT* = Flags[PipelineCreationFeedbackFlagBitsEXT]
+
+type
   PipelineCreationFeedbackCreateInfoEXT* = object
     sType*: StructureType
     pNext*: pointer

@@ -1,10 +1,11 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T02:22:37Z
 # VK_KHR_external_semaphore_win32
 
 
 import ../platform
-import ../features/vk10
+import ../features/vk11
 import ./VK_KHR_external_semaphore
+export VK_KHR_external_semaphore
 
 const
   KhrExternalSemaphoreWin32SpecVersion* = 1
@@ -17,7 +18,7 @@ type
     semaphore*: Semaphore
     flags*: SemaphoreImportFlags
     handleType*: ExternalSemaphoreHandleTypeFlagBits
-    handle*: HANDLE
+    handle*: Win32Handle
     name*: LPCWSTR
   ExportSemaphoreWin32HandleInfoKHR* = object
     sType*: StructureType
@@ -40,7 +41,7 @@ type
 
 var # command cages
   importSemaphoreWin32HandleKHRCage: proc(device: Device; pImportSemaphoreWin32HandleInfo: ptr ImportSemaphoreWin32HandleInfoKHR;): Result {.cdecl.}
-  getSemaphoreWin32HandleKHRCage: proc(device: Device; pGetWin32HandleInfo: ptr SemaphoreGetWin32HandleInfoKHR; pHandle: ptr HANDLE;): Result {.cdecl.}
+  getSemaphoreWin32HandleKHRCage: proc(device: Device; pGetWin32HandleInfo: ptr SemaphoreGetWin32HandleInfoKHR; pHandle: ptr Win32Handle;): Result {.cdecl.}
 proc importSemaphoreWin32HandleKHR*(
       device: Device;
       pImportSemaphoreWin32HandleInfo: ptr ImportSemaphoreWin32HandleInfoKHR;
@@ -49,7 +50,7 @@ proc importSemaphoreWin32HandleKHR*(
 proc getSemaphoreWin32HandleKHR*(
       device: Device;
       pGetWin32HandleInfo: ptr SemaphoreGetWin32HandleInfoKHR;
-      pHandle: ptr HANDLE;
+      pHandle: ptr Win32Handle;
     ): Result {.cdecl, discardable.} =
   getSemaphoreWin32HandleKHRCage(device,pGetWin32HandleInfo,pHandle)
 proc loadVK_KHR_external_semaphore_win32*(instance: Instance) =

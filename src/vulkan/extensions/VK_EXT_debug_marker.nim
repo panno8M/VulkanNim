@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T23:05:46Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_EXT_debug_marker
 
 
@@ -6,12 +6,14 @@ import ../platform
 import ../features/vk10
 import ./VK_EXT_debug_report
 import ./VK_EXT_debug_utils
+export VK_EXT_debug_report
+export VK_EXT_debug_utils
 
 const
   ExtDebugMarkerSpecVersion* = 4
   ExtDebugMarkerExtensionName* = "VK_EXT_debug_marker"
 
-type
+type # enums and bitmasks
   DebugReportObjectTypeEXT* {.size: sizeof(int32), pure.} = enum
     unknownExt = 0
     instanceExt = 1
@@ -51,17 +53,19 @@ type
     samplerYcbcrConversionExt = 1000156000
     # Provided by VK_KHR_ray_tracing
     accelerationStructureKhrExt = 1000165000
+
+type
   DebugMarkerObjectNameInfoEXT* = object
     sType*: StructureType
     pNext*: pointer
     objectType*: DebugReportObjectTypeEXT
-    object*: uint64
+    `object`*: uint64
     pObjectName*: cstring
   DebugMarkerObjectTagInfoEXT* = object
     sType*: StructureType
     pNext*: pointer
     objectType*: DebugReportObjectTypeEXT
-    object*: uint64
+    `object`*: uint64
     tagName*: uint64
     tagSize*: uint
     pTag*: pointer

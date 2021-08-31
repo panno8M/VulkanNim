@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # vk10
 # Vulkan core API interface definitions
 # =====================================
@@ -40,26 +40,8 @@ const
   # Layer discovery commands
   MaxDescriptionSize* = 256
 
-type
+type # enums and bitmasks
   # Fundamental types used by many commands and structures
-  # ------------------------------------------------------
-  Extent2D* = object
-    width*: uint32
-    height*: uint32
-  Extent3D* = object
-    width*: uint32
-    height*: uint32
-    depth*: uint32
-  Offset2D* = object
-    x*: int32
-    y*: int32
-  Offset3D* = object
-    x*: int32
-    y*: int32
-    z*: int32
-  Rect2D* = object
-    offset*: Offset2D
-    extent*: Extent2D
   # API result codes
   Result* {.size: sizeof(int32), pure.} = enum
     errorUnknown = -13 # An unknown error has occurred, due to an implementation or application bug
@@ -970,54 +952,6 @@ type
     directfbSurfaceCreateInfoExt = 1000346000
 
   # These types are part of the API, though not directly used in API commands or data structures
-  # --------------------------------------------------------------------------------------------
-  BaseInStructure* = object
-    sType*: StructureType
-    pNext*: ptr BaseInStructure
-  BaseOutStructure* = object
-    sType*: StructureType
-    pNext*: ptr BaseOutStructure
-  BufferMemoryBarrier* = object
-    sType*: StructureType
-    pNext*: pointer
-    srcAccessMask*: AccessFlags
-    dstAccessMask*: AccessFlags
-    srcQueueFamilyIndex*: uint32
-    dstQueueFamilyIndex*: uint32
-    buffer*: Buffer
-    offset*: DeviceSize
-    size*: DeviceSize
-  DispatchIndirectCommand* = object
-    x*: uint32
-    y*: uint32
-    z*: uint32
-  DrawIndexedIndirectCommand* = object
-    indexCount*: uint32
-    instanceCount*: uint32
-    firstIndex*: uint32
-    vertexOffset*: int32
-    firstInstance*: uint32
-  DrawIndirectCommand* = object
-    vertexCount*: uint32
-    instanceCount*: uint32
-    firstVertex*: uint32
-    firstInstance*: uint32
-  ImageMemoryBarrier* = object
-    sType*: StructureType
-    pNext*: pointer
-    srcAccessMask*: AccessFlags
-    dstAccessMask*: AccessFlags
-    oldLayout*: ImageLayout
-    newLayout*: ImageLayout
-    srcQueueFamilyIndex*: uint32
-    dstQueueFamilyIndex*: uint32
-    image*: Image
-    subresourceRange*: ImageSubresourceRange
-  MemoryBarrier* = object
-    sType*: StructureType
-    pNext*: pointer
-    srcAccessMask*: AccessFlags
-    dstAccessMask*: AccessFlags
   # Enums to track objects of various types
   ObjectType* {.size: sizeof(int32), pure.} = enum
     unknown = 0
@@ -1082,57 +1016,10 @@ type
     mesa = 0x00010005 # Mesa vendor ID
 
   # API constants
-  # -------------
   PipelineCacheHeaderVersion* {.size: sizeof(int32), pure.} = enum
     one = 1
 
   # Device initialization
-  # ---------------------
-  AllocationFunction* = proc(
-      pUserData: pointer;
-      size: uint;
-      alignment: uint;
-      allocationScope: SystemAllocationScope;
-    ): pointer {.cdecl.}
-  FreeFunction* = proc(
-      pUserData: pointer;
-      pMemory: pointer;
-    ): void {.cdecl.}
-  InternalAllocationNotification* = proc(
-      pUserData: pointer;
-      size: uint;
-      allocationType: InternalAllocationType;
-      allocationScope: SystemAllocationScope;
-    ): void {.cdecl.}
-  InternalFreeNotification* = proc(
-      pUserData: pointer;
-      size: uint;
-      allocationType: InternalAllocationType;
-      allocationScope: SystemAllocationScope;
-    ): void {.cdecl.}
-  ReallocationFunction* = proc(
-      pUserData: pointer;
-      pOriginal: pointer;
-      size: uint;
-      alignment: uint;
-      allocationScope: SystemAllocationScope;
-    ): pointer {.cdecl.}
-  VoidFunction* = proc(): void {.cdecl.}
-  AllocationCallbacks* = object
-    pUserData*: pointer
-    pfnAllocation*: AllocationFunction
-    pfnReallocation*: ReallocationFunction
-    pfnFree*: FreeFunction
-    pfnInternalAllocation*: InternalAllocationNotification
-    pfnInternalFree*: InternalFreeNotification
-  ApplicationInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    pApplicationName*: cstring
-    applicationVersion*: uint32
-    pEngineName*: cstring
-    engineVersion*: uint32
-    apiVersion*: uint32
   # Vulkan format definitions
   Format* {.size: sizeof(int32), pure.} = enum
     undefined = 0
@@ -1547,10 +1434,6 @@ type
     # Provided by VK_AMD_extension_227
     amdReserved30 = 0x40000000
   FormatFeatureFlags* = Flags[FormatFeatureFlagBits]
-  FormatProperties* = object
-    linearTilingFeatures*: FormatFeatureFlags
-    optimalTilingFeatures*: FormatFeatureFlags
-    bufferFeatures*: FormatFeatureFlags
   ImageCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     sparseBinding = 0x00000001 # Image should support sparse backing
     sparseResidency = 0x00000002 # Image should support sparse backing with partial residency
@@ -1578,12 +1461,6 @@ type
     # Provided by VK_EXT_fragment_density_map
     subsampledExt = 0x00004000
   ImageCreateFlags* = Flags[ImageCreateFlagBits]
-  ImageFormatProperties* = object
-    maxExtent*: Extent3D
-    maxMipLevels*: uint32
-    maxArrayLayers*: uint32
-    sampleCounts*: SampleCountFlags
-    maxResourceSize*: DeviceSize
   ImageTiling* {.size: sizeof(int32), pure.} = enum
     optimal = 0
     linear = 1
@@ -1623,23 +1500,9 @@ type
     # Provided by VK_QCOM_extension_173
     reserved17Qcom = 0x00020000
   ImageUsageFlags* = Flags[ImageUsageFlagBits]
-  HtInstance = object of HandleType
-  Instance* = Handle[HtInstance]
   InstanceCreateFlags* = Flags[distinct UnusedEnum]
-  InstanceCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: InstanceCreateFlags
-    pApplicationInfo*: ptr ApplicationInfo
-    enabledLayerCount*: uint32
-    ppEnabledLayerNames*: cstringArray
-    enabledExtensionCount*: uint32
-    ppEnabledExtensionNames*: cstringArray
   InternalAllocationType* {.size: sizeof(int32), pure.} = enum
     executable = 0
-  MemoryHeap* = object
-    size*: DeviceSize
-    flags*: MemoryHeapFlags
   MemoryHeapFlagBits* {.size: sizeof(int32), pure.} = enum
     deviceLocal = 0x00000001 # If set, heap represents device memory
     # Provided by VK_VERSION_1_1
@@ -1660,6 +1523,961 @@ type
     # Provided by VK_AMD_device_coherent_memory
     deviceUncachedAmd = 0x00000080
   MemoryPropertyFlags* = Flags[MemoryPropertyFlagBits]
+  PhysicalDeviceType* {.size: sizeof(int32), pure.} = enum
+    other = 0
+    integratedGpu = 1
+    discreteGpu = 2
+    virtualGpu = 3
+    cpu = 4
+  QueueFlagBits* {.size: sizeof(int32), pure.} = enum
+    graphics = 0x00000001 # Queue supports graphics operations
+    compute = 0x00000002 # Queue supports compute operations
+    transfer = 0x00000004 # Queue supports transfer operations
+    sparseBinding = 0x00000008 # Queue supports sparse resource memory management operations
+    # Provided by VK_VERSION_1_1
+    protected = 0x00000010 # Queues may support protected operations
+    # Provided by VK_AMD_extension_25
+    reserved5Khr = 0x00000020
+    # Provided by VK_AMD_extension_24
+    reserved6Khr = 0x00000040
+  QueueFlags* = Flags[QueueFlagBits]
+  SampleCountFlagBits* {.size: sizeof(int32), pure.} = enum
+    vk1 = 0x00000001 # Sample count 1 supported
+    vk2 = 0x00000002 # Sample count 2 supported
+    vk4 = 0x00000004 # Sample count 4 supported
+    vk8 = 0x00000008 # Sample count 8 supported
+    vk16 = 0x00000010 # Sample count 16 supported
+    vk32 = 0x00000020 # Sample count 32 supported
+    vk64 = 0x00000040 # Sample count 64 supported
+  SampleCountFlags* = Flags[SampleCountFlagBits]
+  SystemAllocationScope* {.size: sizeof(int32), pure.} = enum
+    command = 0
+    `object` = 1
+    cache = 2
+    device = 3
+    instance = 4
+
+  # Device commands
+  DeviceCreateFlags* = Flags[distinct UnusedEnum]
+  DeviceQueueCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+    # Provided by VK_VERSION_1_1
+    protected = 0x00000001 # Queue is a protected-capable device queue
+  DeviceQueueCreateFlags* = Flags[DeviceQueueCreateFlagBits]
+
+  # Queue commands
+  PipelineStageFlagBits* {.size: sizeof(int32), pure.} = enum
+    topOfPipe = 0x00000001 # Before subsequent commands are processed
+    drawIndirect = 0x00000002 # Draw/DispatchIndirect command fetch
+    vertexInput = 0x00000004 # Vertex/index fetch
+    vertexShader = 0x00000008 # Vertex shading
+    tessellationControlShader = 0x00000010 # Tessellation control shading
+    tessellationEvaluationShader = 0x00000020 # Tessellation evaluation shading
+    geometryShader = 0x00000040 # Geometry shading
+    fragmentShader = 0x00000080 # Fragment shading
+    earlyFragmentTests = 0x00000100 # Early fragment (depth and stencil) tests
+    lateFragmentTests = 0x00000200 # Late fragment (depth and stencil) tests
+    colorAttachmentOutput = 0x00000400 # Color attachment writes
+    computeShader = 0x00000800 # Compute shading
+    transfer = 0x00001000 # Transfer/copy operations
+    bottomOfPipe = 0x00002000 # After previous commands have completed
+    host = 0x00004000 # Indicates host (CPU) is a source/sink of the dependency
+    allGraphics = 0x00008000 # All stages of the graphics pipeline
+    allCommands = 0x00010000 # All stages supported on the queue
+    # Provided by VK_NV_device_generated_commands
+    commandPreprocessNv = 0x00020000
+    # Provided by VK_EXT_conditional_rendering
+    conditionalRenderingExt = 0x00040000 # A pipeline stage for conditional rendering predicate fetch
+    # Provided by VK_NV_mesh_shader
+    taskShaderNv = 0x00080000
+    # Provided by VK_NV_mesh_shader
+    meshShaderNv = 0x00100000
+    # Provided by VK_KHR_ray_tracing
+    rayTracingShaderKhr = 0x00200000
+    # Provided by VK_NV_shading_rate_image
+    shadingRateImageNv = 0x00400000
+    # Provided by VK_EXT_fragment_density_map
+    fragmentDensityProcessExt = 0x00800000
+    # Provided by VK_EXT_transform_feedback
+    transformFeedbackExt = 0x01000000
+    # Provided by VK_KHR_ray_tracing
+    accelerationStructureBuildKhr = 0x02000000
+    # Provided by VK_AMD_extension_25
+    reserved26Khr = 0x04000000
+    # Provided by VK_AMD_extension_24
+    reserved27Khr = 0x08000000
+  PipelineStageFlags* = Flags[PipelineStageFlagBits]
+
+  # Memory commands
+  MemoryMapFlags* = Flags[distinct UnusedEnum]
+
+  # Sparse resource memory management API commands
+  ImageAspectFlagBits* {.size: sizeof(int32), pure.} = enum
+    color = 0x00000001
+    depth = 0x00000002
+    stencil = 0x00000004
+    metadata = 0x00000008
+    # Provided by VK_VERSION_1_1
+    plane0 = 0x00000010
+    # Provided by VK_VERSION_1_1
+    plane1 = 0x00000020
+    # Provided by VK_VERSION_1_1
+    plane2 = 0x00000040
+    # Provided by VK_EXT_image_drm_format_modifier
+    memoryPlane0Ext = 0x00000080
+    # Provided by VK_EXT_image_drm_format_modifier
+    memoryPlane1Ext = 0x00000100
+    # Provided by VK_EXT_image_drm_format_modifier
+    memoryPlane2Ext = 0x00000200
+    # Provided by VK_EXT_image_drm_format_modifier
+    memoryPlane3Ext = 0x00000400
+  ImageAspectFlags* = Flags[ImageAspectFlagBits]
+  SparseImageFormatFlagBits* {.size: sizeof(int32), pure.} = enum
+    singleMiptail = 0x00000001 # Image uses a single mip tail region for all array layers
+    alignedMipSize = 0x00000002 # Image requires mip level dimensions to be an integer multiple of the sparse image block dimensions for non-tail mip levels.
+    nonstandardBlockSize = 0x00000004 # Image uses a non-standard sparse image block dimensions
+  SparseImageFormatFlags* = Flags[SparseImageFormatFlagBits]
+  SparseMemoryBindFlagBits* {.size: sizeof(int32), pure.} = enum
+    metadata = 0x00000001 # Operation binds resource metadata to memory
+  SparseMemoryBindFlags* = Flags[SparseMemoryBindFlagBits]
+
+  # Fence commands
+  FenceCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+    signaled = 0x00000001
+  FenceCreateFlags* = Flags[FenceCreateFlagBits]
+
+  # Queue semaphore commands
+  SemaphoreCreateFlags* = Flags[distinct UnusedEnum]
+
+  # Event commands
+  EventCreateFlags* = Flags[distinct UnusedEnum]
+
+  # Query commands
+  QueryPipelineStatisticFlagBits* {.size: sizeof(int32), pure.} = enum
+    inputAssemblyVertices = 0x00000001 # Optional
+    inputAssemblyPrimitives = 0x00000002 # Optional
+    vertexShaderInvocations = 0x00000004 # Optional
+    geometryShaderInvocations = 0x00000008 # Optional
+    geometryShaderPrimitives = 0x00000010 # Optional
+    clippingInvocations = 0x00000020 # Optional
+    clippingPrimitives = 0x00000040 # Optional
+    fragmentShaderInvocations = 0x00000080 # Optional
+    tessellationControlShaderPatches = 0x00000100 # Optional
+    tessellationEvaluationShaderInvocations = 0x00000200 # Optional
+    computeShaderInvocations = 0x00000400 # Optional
+  QueryPipelineStatisticFlags* = Flags[QueryPipelineStatisticFlagBits]
+  QueryPoolCreateFlags* = Flags[distinct UnusedEnum]
+  QueryResultFlagBits* {.size: sizeof(int32), pure.} = enum
+    vk64 = 0x00000001 # Results of the queries are written to the destination buffer as 64-bit values
+    wait = 0x00000002 # Results of the queries are waited on before proceeding with the result copy
+    withAvailability = 0x00000004 # Besides the results of the query, the availability of the results is also written
+    partial = 0x00000008 # Copy the partial results of the query even if the final results are not available
+  QueryResultFlags* = Flags[QueryResultFlagBits]
+  QueryType* {.size: sizeof(int32), pure.} = enum
+    occlusion = 0
+    pipelineStatistics = 1 # Optional
+    timestamp = 2
+    # Provided by VK_AMD_extension_24
+    reserved8 = 1000023008
+    # Provided by VK_AMD_extension_25
+    reserved4 = 1000024004
+    # Provided by VK_EXT_transform_feedback
+    transformFeedbackStreamExt = 1000028004
+    # Provided by VK_KHR_performance_query
+    performanceQueryKhr = 1000116000
+    # Provided by VK_KHR_ray_tracing
+    accelerationStructureSerializationSizeKhr = 1000150000
+    # Provided by VK_KHR_ray_tracing
+    accelerationStructureCompactedSizeKhr = 1000165000
+    # Provided by VK_INTEL_performance_query
+    performanceQueryIntel = 1000210000
+
+  # Buffer commands
+  BufferCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+    sparseBinding = 0x00000001 # Buffer should support sparse backing
+    sparseResidency = 0x00000002 # Buffer should support sparse backing with partial residency
+    sparseAliased = 0x00000004 # Buffer should support constent data access to physical memory ranges mapped into multiple locations of sparse buffers
+    # Provided by VK_VERSION_1_1
+    protected = 0x00000008 # Buffer requires protected memory
+    # Provided by VK_VERSION_1_2
+    deviceAddressCaptureReplay = 0x00000010
+  BufferCreateFlags* = Flags[BufferCreateFlagBits]
+  BufferUsageFlagBits* {.size: sizeof(int32), pure.} = enum
+    transferSrc = 0x00000001 # Can be used as a source of transfer operations
+    transferDst = 0x00000002 # Can be used as a destination of transfer operations
+    uniformTexelBuffer = 0x00000004 # Can be used as TBO
+    storageTexelBuffer = 0x00000008 # Can be used as IBO
+    uniformBuffer = 0x00000010 # Can be used as UBO
+    storageBuffer = 0x00000020 # Can be used as SSBO
+    indexBuffer = 0x00000040 # Can be used as source of fixed-function index fetch (index buffer)
+    vertexBuffer = 0x00000080 # Can be used as source of fixed-function vertex fetch (VBO)
+    indirectBuffer = 0x00000100 # Can be the source of indirect parameters (e.g. indirect buffer, parameter buffer)
+    # Provided by VK_EXT_conditional_rendering
+    conditionalRenderingExt = 0x00000200 # Specifies the buffer can be used as predicate in conditional rendering
+    # Provided by VK_KHR_ray_tracing
+    rayTracingKhr = 0x00000400
+    # Provided by VK_EXT_transform_feedback
+    transformFeedbackBufferExt = 0x00000800
+    # Provided by VK_EXT_transform_feedback
+    transformFeedbackCounterBufferExt = 0x00001000
+    # Provided by VK_AMD_extension_25
+    reserved13Khr = 0x00002000
+    # Provided by VK_AMD_extension_25
+    reserved14Khr = 0x00004000
+    # Provided by VK_AMD_extension_24
+    reserved15Khr = 0x00008000
+    # Provided by VK_AMD_extension_24
+    reserved16Khr = 0x00010000
+    # Provided by VK_VERSION_1_2
+    shaderDeviceAddress = 0x00020000
+    # Provided by VK_QCOM_extension_173
+    reserved18Qcom = 0x00040000
+    # Provided by VK_NV_extension_168
+    reserved19Khr = 0x00080000
+    # Provided by VK_NV_extension_168
+    reserved20Khr = 0x00100000
+  BufferUsageFlags* = Flags[BufferUsageFlagBits]
+  SharingMode* {.size: sizeof(int32), pure.} = enum
+    exclusive = 0
+    concurrent = 1
+
+  # Buffer view commands
+  BufferViewCreateFlags* = Flags[distinct UnusedEnum]
+
+  # Image commands
+  ImageLayout* {.size: sizeof(int32), pure.} = enum
+    undefined = 0 # Implicit layout an image is when its contents are undefined due to various reasons (e.g. right after creation)
+    general = 1 # General layout when image can be used for any kind of access
+    colorAttachmentOptimal = 2 # Optimal layout when image is only used for color attachment read/write
+    depthStencilAttachmentOptimal = 3 # Optimal layout when image is only used for depth/stencil attachment read/write
+    depthStencilReadOnlyOptimal = 4 # Optimal layout when image is used for read only depth/stencil attachment and shader access
+    shaderReadOnlyOptimal = 5 # Optimal layout when image is used for read only shader access
+    transferSrcOptimal = 6 # Optimal layout when image is used only as source of transfer operations
+    transferDstOptimal = 7 # Optimal layout when image is used only as destination of transfer operations
+    preinitialized = 8 # Initial layout used when the data is populated by the CPU
+    # Provided by VK_KHR_swapchain
+    presentSrcKhr = 1000001002
+    # Provided by VK_KHR_shared_presentable_image
+    sharedPresentKhr = 1000111000
+    # Provided by VK_VERSION_1_1
+    depthReadOnlyStencilAttachmentOptimal = 1000117000
+    # Provided by VK_VERSION_1_1
+    depthAttachmentStencilReadOnlyOptimal = 1000117001
+    # Provided by VK_NV_shading_rate_image
+    shadingRateOptimalNv = 1000164003
+    # Provided by VK_EXT_fragment_density_map
+    fragmentDensityMapOptimalExt = 1000218000
+    # Provided by VK_VERSION_1_2
+    depthAttachmentOptimal = 1000241000
+    # Provided by VK_VERSION_1_2
+    depthReadOnlyOptimal = 1000241001
+    # Provided by VK_VERSION_1_2
+    stencilAttachmentOptimal = 1000241002
+    # Provided by VK_VERSION_1_2
+    stencilReadOnlyOptimal = 1000241003
+
+  # Image view commands
+  ComponentSwizzle* {.size: sizeof(int32), pure.} = enum
+    identity = 0
+    zero = 1
+    one = 2
+    r = 3
+    g = 4
+    b = 5
+    a = 6
+  ImageViewCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+    # Provided by VK_EXT_fragment_density_map
+    fragmentDensityMapDynamicExt = 0x00000001
+    # Provided by VK_EXT_fragment_density_map2
+    fragmentDensityMapDeferredExt = 0x00000002
+  ImageViewCreateFlags* = Flags[ImageViewCreateFlagBits]
+  ImageViewType* {.size: sizeof(int32), pure.} = enum
+    vk1d = 0
+    vk2d = 1
+    vk3d = 2
+    cube = 3
+    vk1dArray = 4
+    vk2dArray = 5
+    cubeArray = 6
+
+  # Shader commands
+  ShaderModuleCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+    # Provided by VK_NV_extension_52
+    reserved0Nv = 0x00000001
+  ShaderModuleCreateFlags* = Flags[ShaderModuleCreateFlagBits]
+
+  # Pipeline Cache commands
+  PipelineCacheCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+    # Provided by VK_EXT_pipeline_creation_cache_control
+    externallySynchronizedExt = 0x00000001
+    # Provided by VK_GOOGLE_extension_196
+    reserved1Ext = 0x00000002
+  PipelineCacheCreateFlags* = Flags[PipelineCacheCreateFlagBits]
+
+  # Pipeline commands
+  BlendFactor* {.size: sizeof(int32), pure.} = enum
+    zero = 0
+    one = 1
+    srcColor = 2
+    oneMinusSrcColor = 3
+    dstColor = 4
+    oneMinusDstColor = 5
+    srcAlpha = 6
+    oneMinusSrcAlpha = 7
+    dstAlpha = 8
+    oneMinusDstAlpha = 9
+    constantColor = 10
+    oneMinusConstantColor = 11
+    constantAlpha = 12
+    oneMinusConstantAlpha = 13
+    srcAlphaSaturate = 14
+    src1Color = 15
+    oneMinusSrc1Color = 16
+    src1Alpha = 17
+    oneMinusSrc1Alpha = 18
+  BlendOp* {.size: sizeof(int32), pure.} = enum
+    add = 0
+    subtract = 1
+    reverseSubtract = 2
+    min = 3
+    max = 4
+    # Provided by VK_EXT_blend_operation_advanced
+    zeroExt = 1000148000
+    # Provided by VK_EXT_blend_operation_advanced
+    srcExt = 1000148001
+    # Provided by VK_EXT_blend_operation_advanced
+    dstExt = 1000148002
+    # Provided by VK_EXT_blend_operation_advanced
+    srcOverExt = 1000148003
+    # Provided by VK_EXT_blend_operation_advanced
+    dstOverExt = 1000148004
+    # Provided by VK_EXT_blend_operation_advanced
+    srcInExt = 1000148005
+    # Provided by VK_EXT_blend_operation_advanced
+    dstInExt = 1000148006
+    # Provided by VK_EXT_blend_operation_advanced
+    srcOutExt = 1000148007
+    # Provided by VK_EXT_blend_operation_advanced
+    dstOutExt = 1000148008
+    # Provided by VK_EXT_blend_operation_advanced
+    srcAtopExt = 1000148009
+    # Provided by VK_EXT_blend_operation_advanced
+    dstAtopExt = 1000148010
+    # Provided by VK_EXT_blend_operation_advanced
+    xorExt = 1000148011
+    # Provided by VK_EXT_blend_operation_advanced
+    multiplyExt = 1000148012
+    # Provided by VK_EXT_blend_operation_advanced
+    screenExt = 1000148013
+    # Provided by VK_EXT_blend_operation_advanced
+    overlayExt = 1000148014
+    # Provided by VK_EXT_blend_operation_advanced
+    darkenExt = 1000148015
+    # Provided by VK_EXT_blend_operation_advanced
+    lightenExt = 1000148016
+    # Provided by VK_EXT_blend_operation_advanced
+    colordodgeExt = 1000148017
+    # Provided by VK_EXT_blend_operation_advanced
+    colorburnExt = 1000148018
+    # Provided by VK_EXT_blend_operation_advanced
+    hardlightExt = 1000148019
+    # Provided by VK_EXT_blend_operation_advanced
+    softlightExt = 1000148020
+    # Provided by VK_EXT_blend_operation_advanced
+    differenceExt = 1000148021
+    # Provided by VK_EXT_blend_operation_advanced
+    exclusionExt = 1000148022
+    # Provided by VK_EXT_blend_operation_advanced
+    invertExt = 1000148023
+    # Provided by VK_EXT_blend_operation_advanced
+    invertRgbExt = 1000148024
+    # Provided by VK_EXT_blend_operation_advanced
+    lineardodgeExt = 1000148025
+    # Provided by VK_EXT_blend_operation_advanced
+    linearburnExt = 1000148026
+    # Provided by VK_EXT_blend_operation_advanced
+    vividlightExt = 1000148027
+    # Provided by VK_EXT_blend_operation_advanced
+    linearlightExt = 1000148028
+    # Provided by VK_EXT_blend_operation_advanced
+    pinlightExt = 1000148029
+    # Provided by VK_EXT_blend_operation_advanced
+    hardmixExt = 1000148030
+    # Provided by VK_EXT_blend_operation_advanced
+    hslHueExt = 1000148031
+    # Provided by VK_EXT_blend_operation_advanced
+    hslSaturationExt = 1000148032
+    # Provided by VK_EXT_blend_operation_advanced
+    hslColorExt = 1000148033
+    # Provided by VK_EXT_blend_operation_advanced
+    hslLuminosityExt = 1000148034
+    # Provided by VK_EXT_blend_operation_advanced
+    plusExt = 1000148035
+    # Provided by VK_EXT_blend_operation_advanced
+    plusClampedExt = 1000148036
+    # Provided by VK_EXT_blend_operation_advanced
+    plusClampedAlphaExt = 1000148037
+    # Provided by VK_EXT_blend_operation_advanced
+    plusDarkerExt = 1000148038
+    # Provided by VK_EXT_blend_operation_advanced
+    minusExt = 1000148039
+    # Provided by VK_EXT_blend_operation_advanced
+    minusClampedExt = 1000148040
+    # Provided by VK_EXT_blend_operation_advanced
+    contrastExt = 1000148041
+    # Provided by VK_EXT_blend_operation_advanced
+    invertOvgExt = 1000148042
+    # Provided by VK_EXT_blend_operation_advanced
+    redExt = 1000148043
+    # Provided by VK_EXT_blend_operation_advanced
+    greenExt = 1000148044
+    # Provided by VK_EXT_blend_operation_advanced
+    blueExt = 1000148045
+  ColorComponentFlagBits* {.size: sizeof(int32), pure.} = enum
+    r = 0x00000001
+    g = 0x00000002
+    b = 0x00000004
+    a = 0x00000008
+  ColorComponentFlags* = Flags[ColorComponentFlagBits]
+  CompareOp* {.size: sizeof(int32), pure.} = enum
+    never = 0
+    less = 1
+    equal = 2
+    lessOrEqual = 3
+    greater = 4
+    notEqual = 5
+    greaterOrEqual = 6
+    always = 7
+  CullModeFlagBits* {.size: sizeof(int32), pure.} = enum
+    none = 0
+    front = 0x00000001
+    back = 0x00000002
+    frontAndBack = 0x00000003
+  CullModeFlags* = Flags[CullModeFlagBits]
+  DynamicState* {.size: sizeof(int32), pure.} = enum
+    viewport = 0
+    scissor = 1
+    lineWidth = 2
+    depthBias = 3
+    blendConstants = 4
+    depthBounds = 5
+    stencilCompareMask = 6
+    stencilWriteMask = 7
+    stencilReference = 8
+    # Provided by VK_NV_clip_space_w_scaling
+    viewportWScalingNv = 1000087000
+    # Provided by VK_EXT_discard_rectangles
+    discardRectangleExt = 1000099000
+    # Provided by VK_EXT_sample_locations
+    sampleLocationsExt = 1000143000
+    # Provided by VK_NV_shading_rate_image
+    viewportShadingRatePaletteNv = 1000164004
+    # Provided by VK_NV_shading_rate_image
+    viewportCoarseSampleOrderNv = 1000164006
+    # Provided by VK_NV_scissor_exclusive
+    exclusiveScissorNv = 1000205001
+    # Provided by VK_EXT_line_rasterization
+    lineStippleExt = 1000259000
+    # Provided by VK_EXT_extended_dynamic_state
+    cullModeExt = 1000267000
+    # Provided by VK_EXT_extended_dynamic_state
+    frontFaceExt = 1000267001
+    # Provided by VK_EXT_extended_dynamic_state
+    primitiveTopologyExt = 1000267002
+    # Provided by VK_EXT_extended_dynamic_state
+    viewportWithCountExt = 1000267003
+    # Provided by VK_EXT_extended_dynamic_state
+    scissorWithCountExt = 1000267004
+    # Provided by VK_EXT_extended_dynamic_state
+    vertexInputBindingStrideExt = 1000267005
+    # Provided by VK_EXT_extended_dynamic_state
+    depthTestEnableExt = 1000267006
+    # Provided by VK_EXT_extended_dynamic_state
+    depthWriteEnableExt = 1000267007
+    # Provided by VK_EXT_extended_dynamic_state
+    depthCompareOpExt = 1000267008
+    # Provided by VK_EXT_extended_dynamic_state
+    depthBoundsTestEnableExt = 1000267009
+    # Provided by VK_EXT_extended_dynamic_state
+    stencilTestEnableExt = 1000267010
+    # Provided by VK_EXT_extended_dynamic_state
+    stencilOpExt = 1000267011
+  FrontFace* {.size: sizeof(int32), pure.} = enum
+    counterClockwise = 0
+    clockwise = 1
+  LogicOp* {.size: sizeof(int32), pure.} = enum
+    clear = 0
+    `and` = 1
+    andReverse = 2
+    copy = 3
+    andInverted = 4
+    noOp = 5
+    `xor` = 6
+    `or` = 7
+    nor = 8
+    equivalent = 9
+    invert = 10
+    orReverse = 11
+    copyInverted = 12
+    orInverted = 13
+    nand = 14
+    set = 15
+  PipelineColorBlendStateCreateFlags* = Flags[distinct UnusedEnum]
+  PipelineCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+    disableOptimization = 0x00000001
+    allowDerivatives = 0x00000002
+    derivative = 0x00000004
+    # Provided by VK_VERSION_1_1
+    viewIndexFromDeviceIndex = 0x00000008
+    # Provided by VK_VERSION_1_1
+    dispatchBase = 0x00000010
+    # Provided by VK_NV_ray_tracing
+    deferCompileNv = 0x00000020
+    # Provided by VK_KHR_pipeline_executable_properties
+    captureStatisticsKhr = 0x00000040
+    # Provided by VK_KHR_pipeline_executable_properties
+    captureInternalRepresentationsKhr = 0x00000080
+    # Provided by VK_EXT_pipeline_creation_cache_control
+    failOnPipelineCompileRequiredExt = 0x00000100
+    # Provided by VK_EXT_pipeline_creation_cache_control
+    earlyReturnOnFailureExt = 0x00000200
+    # Provided by VK_KHR_pipeline_library
+    libraryKhr = 0x00000800
+    # Provided by VK_KHR_ray_tracing
+    rayTracingSkipTrianglesKhr = 0x00001000
+    # Provided by VK_KHR_ray_tracing
+    rayTracingSkipAabbsKhr = 0x00002000
+    # Provided by VK_KHR_ray_tracing
+    rayTracingNoNullAnyHitShadersKhr = 0x00004000
+    # Provided by VK_KHR_ray_tracing
+    rayTracingNoNullClosestHitShadersKhr = 0x00008000
+    # Provided by VK_KHR_ray_tracing
+    rayTracingNoNullMissShadersKhr = 0x00010000
+    # Provided by VK_KHR_ray_tracing
+    rayTracingNoNullIntersectionShadersKhr = 0x00020000
+    # Provided by VK_NV_device_generated_commands
+    indirectBindableNv = 0x00040000
+    # Provided by VK_NV_extension_168
+    reserved19Khr = 0x00080000
+  PipelineCreateFlags* = Flags[PipelineCreateFlagBits]
+  PipelineDepthStencilStateCreateFlags* = Flags[distinct UnusedEnum]
+  PipelineDynamicStateCreateFlags* = Flags[distinct UnusedEnum]
+  PipelineInputAssemblyStateCreateFlags* = Flags[distinct UnusedEnum]
+  PipelineLayoutCreateFlags* = Flags[distinct UnusedEnum]
+  PipelineMultisampleStateCreateFlags* = Flags[distinct UnusedEnum]
+  PipelineRasterizationStateCreateFlags* = Flags[distinct UnusedEnum]
+  PipelineShaderStageCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+    # Provided by VK_EXT_subgroup_size_control
+    allowVaryingSubgroupSizeExt = 0x00000001
+    # Provided by VK_EXT_subgroup_size_control
+    requireFullSubgroupsExt = 0x00000002
+    # Provided by VK_NV_extension_52
+    reserved2Nv = 0x00000004
+    # Provided by VK_KHR_extension_297
+    reserved3Khr = 0x00000008
+  PipelineShaderStageCreateFlags* = Flags[PipelineShaderStageCreateFlagBits]
+  PipelineTessellationStateCreateFlags* = Flags[distinct UnusedEnum]
+  PipelineVertexInputStateCreateFlags* = Flags[distinct UnusedEnum]
+  PipelineViewportStateCreateFlags* = Flags[distinct UnusedEnum]
+  PolygonMode* {.size: sizeof(int32), pure.} = enum
+    fill = 0
+    line = 1
+    point = 2
+    # Provided by VK_NV_fill_rectangle
+    fillRectangleNv = 1000153000
+  PrimitiveTopology* {.size: sizeof(int32), pure.} = enum
+    pointList = 0
+    lineList = 1
+    lineStrip = 2
+    triangleList = 3
+    triangleStrip = 4
+    triangleFan = 5
+    lineListWithAdjacency = 6
+    lineStripWithAdjacency = 7
+    triangleListWithAdjacency = 8
+    triangleStripWithAdjacency = 9
+    patchList = 10
+  ShaderStageFlagBits* {.size: sizeof(int32), pure.} = enum
+    vertex = 0x00000001
+    tessellationControl = 0x00000002
+    tessellationEvaluation = 0x00000004
+    geometry = 0x00000008
+    fragment = 0x00000010
+    allGraphics = 0x0000001F
+    compute = 0x00000020
+    # Provided by VK_NV_mesh_shader
+    taskNv = 0x00000040
+    # Provided by VK_NV_mesh_shader
+    meshNv = 0x00000080
+    # Provided by VK_KHR_ray_tracing
+    raygenKhr = 0x00000100
+    # Provided by VK_KHR_ray_tracing
+    anyHitKhr = 0x00000200
+    # Provided by VK_KHR_ray_tracing
+    closestHitKhr = 0x00000400
+    # Provided by VK_KHR_ray_tracing
+    missKhr = 0x00000800
+    # Provided by VK_KHR_ray_tracing
+    intersectionKhr = 0x00001000
+    # Provided by VK_KHR_ray_tracing
+    callableKhr = 0x00002000
+    all = 0x7FFFFFFF
+  ShaderStageFlags* = Flags[ShaderStageFlagBits]
+  StencilOp* {.size: sizeof(int32), pure.} = enum
+    keep = 0
+    zero = 1
+    replace = 2
+    incrementAndClamp = 3
+    decrementAndClamp = 4
+    invert = 5
+    incrementAndWrap = 6
+    decrementAndWrap = 7
+  VertexInputRate* {.size: sizeof(int32), pure.} = enum
+    vertex = 0
+    instance = 1
+
+  # Sampler commands
+  BorderColor* {.size: sizeof(int32), pure.} = enum
+    floatTransparentBlack = 0
+    intTransparentBlack = 1
+    floatOpaqueBlack = 2
+    intOpaqueBlack = 3
+    floatOpaqueWhite = 4
+    intOpaqueWhite = 5
+    # Provided by VK_EXT_custom_border_color
+    floatCustomExt = 1000287003
+    # Provided by VK_EXT_custom_border_color
+    intCustomExt = 1000287004
+  Filter* {.size: sizeof(int32), pure.} = enum
+    nearest = 0
+    linear = 1
+    # Provided by VK_IMG_filter_cubic
+    cubicImg = 1000015000
+  SamplerAddressMode* {.size: sizeof(int32), pure.} = enum
+    repeat = 0
+    mirroredRepeat = 1
+    clampToEdge = 2
+    clampToBorder = 3
+    # Provided by VK_VERSION_1_2
+    mirrorClampToEdge = 4 # No need to add an extnumber attribute, since this uses a core enum value
+  SamplerCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+    # Provided by VK_EXT_fragment_density_map
+    subsampledExt = 0x00000001
+    # Provided by VK_EXT_fragment_density_map
+    subsampledCoarseReconstructionExt = 0x00000002
+  SamplerCreateFlags* = Flags[SamplerCreateFlagBits]
+  SamplerMipmapMode* {.size: sizeof(int32), pure.} = enum
+    nearest = 0 # Choose nearest mip level
+    linear = 1 # Linear filter between mip levels
+
+  # Descriptor set commands
+  DescriptorPoolCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+    freeDescriptorSet = 0x00000001 # Descriptor sets may be freed individually
+    # Provided by VK_VERSION_1_2
+    updateAfterBind = 0x00000002
+  DescriptorPoolCreateFlags* = Flags[DescriptorPoolCreateFlagBits]
+  DescriptorPoolResetFlags* = Flags[distinct UnusedEnum]
+  DescriptorSetLayoutCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+    # Provided by VK_KHR_push_descriptor
+    pushDescriptorKhr = 0x00000001 # Descriptors are pushed via flink:vkCmdPushDescriptorSetKHR
+    # Provided by VK_VERSION_1_2
+    updateAfterBindPool = 0x00000002
+  DescriptorSetLayoutCreateFlags* = Flags[DescriptorSetLayoutCreateFlagBits]
+  DescriptorType* {.size: sizeof(int32), pure.} = enum
+    sampler = 0
+    combinedImageSampler = 1
+    sampledImage = 2
+    storageImage = 3
+    uniformTexelBuffer = 4
+    storageTexelBuffer = 5
+    uniformBuffer = 6
+    storageBuffer = 7
+    uniformBufferDynamic = 8
+    storageBufferDynamic = 9
+    inputAttachment = 10
+    # Provided by VK_EXT_inline_uniform_block
+    inlineUniformBlockExt = 1000138000
+    # Provided by VK_KHR_ray_tracing
+    accelerationStructureKhr = 1000165000
+
+  # Pass commands
+  AccessFlagBits* {.size: sizeof(int32), pure.} = enum
+    indirectCommandRead = 0x00000001 # Controls coherency of indirect command reads
+    indexRead = 0x00000002 # Controls coherency of index reads
+    vertexAttributeRead = 0x00000004 # Controls coherency of vertex attribute reads
+    uniformRead = 0x00000008 # Controls coherency of uniform buffer reads
+    inputAttachmentRead = 0x00000010 # Controls coherency of input attachment reads
+    shaderRead = 0x00000020 # Controls coherency of shader reads
+    shaderWrite = 0x00000040 # Controls coherency of shader writes
+    colorAttachmentRead = 0x00000080 # Controls coherency of color attachment reads
+    colorAttachmentWrite = 0x00000100 # Controls coherency of color attachment writes
+    depthStencilAttachmentRead = 0x00000200 # Controls coherency of depth/stencil attachment reads
+    depthStencilAttachmentWrite = 0x00000400 # Controls coherency of depth/stencil attachment writes
+    transferRead = 0x00000800 # Controls coherency of transfer reads
+    transferWrite = 0x00001000 # Controls coherency of transfer writes
+    hostRead = 0x00002000 # Controls coherency of host reads
+    hostWrite = 0x00004000 # Controls coherency of host writes
+    memoryRead = 0x00008000 # Controls coherency of memory reads
+    memoryWrite = 0x00010000 # Controls coherency of memory writes
+    # Provided by VK_NV_device_generated_commands
+    commandPreprocessReadNv = 0x00020000
+    # Provided by VK_NV_device_generated_commands
+    commandPreprocessWriteNv = 0x00040000
+    # Provided by VK_EXT_blend_operation_advanced
+    colorAttachmentReadNoncoherentExt = 0x00080000
+    # Provided by VK_EXT_conditional_rendering
+    conditionalRenderingReadExt = 0x00100000 # read access flag for reading conditional rendering predicate
+    # Provided by VK_KHR_ray_tracing
+    accelerationStructureReadKhr = 0x00200000
+    # Provided by VK_KHR_ray_tracing
+    accelerationStructureWriteKhr = 0x00400000
+    # Provided by VK_NV_shading_rate_image
+    shadingRateImageReadNv = 0x00800000
+    # Provided by VK_EXT_fragment_density_map
+    fragmentDensityMapReadExt = 0x01000000
+    # Provided by VK_EXT_transform_feedback
+    transformFeedbackWriteExt = 0x02000000
+    # Provided by VK_EXT_transform_feedback
+    transformFeedbackCounterReadExt = 0x04000000
+    # Provided by VK_EXT_transform_feedback
+    transformFeedbackCounterWriteExt = 0x08000000
+    # Provided by VK_AMD_extension_25
+    reserved28Khr = 0x10000000
+    # Provided by VK_AMD_extension_25
+    reserved29Khr = 0x20000000
+    # Provided by VK_AMD_extension_24
+    reserved30Khr = 0x40000000
+  AccessFlags* = Flags[AccessFlagBits]
+  AttachmentDescriptionFlagBits* {.size: sizeof(int32), pure.} = enum
+    mayAlias = 0x00000001 # The attachment may alias physical memory of another attachment in the same render pass
+  AttachmentDescriptionFlags* = Flags[AttachmentDescriptionFlagBits]
+  AttachmentLoadOp* {.size: sizeof(int32), pure.} = enum
+    load = 0
+    clear = 1
+    dontCare = 2
+  AttachmentStoreOp* {.size: sizeof(int32), pure.} = enum
+    store = 0
+    dontCare = 1
+    # Provided by VK_QCOM_render_pass_store_ops
+    noneQcom = 1000301000
+  DependencyFlagBits* {.size: sizeof(int32), pure.} = enum
+    byRegion = 0x00000001 # Dependency is per pixel region
+    # Provided by VK_VERSION_1_1
+    viewLocal = 0x00000002
+    # Provided by VK_VERSION_1_1
+    deviceGroup = 0x00000004 # Dependency is across devices
+  DependencyFlags* = Flags[DependencyFlagBits]
+  FramebufferCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+    # Provided by VK_VERSION_1_2
+    imageless = 0x00000001
+  FramebufferCreateFlags* = Flags[FramebufferCreateFlagBits]
+  PipelineBindPoint* {.size: sizeof(int32), pure.} = enum
+    graphics = 0
+    compute = 1
+    # Provided by VK_KHR_ray_tracing
+    rayTracingKhr = 1000165000
+  RenderPassCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+    # Provided by VK_KHR_extension_221
+    reserved0Khr = 0x00000001
+    # Provided by VK_QCOM_render_pass_transform
+    transformQcom = 0x00000002
+  RenderPassCreateFlags* = Flags[RenderPassCreateFlagBits]
+  SubpassDescriptionFlagBits* {.size: sizeof(int32), pure.} = enum
+    # Provided by VK_NVX_multiview_per_view_attributes
+    perViewAttributesNvx = 0x00000001
+    # Provided by VK_NVX_multiview_per_view_attributes
+    perViewPositionXOnlyNvx = 0x00000002
+    # Provided by VK_QCOM_render_pass_shader_resolve
+    fragmentRegionQcom = 0x00000004
+    # Provided by VK_QCOM_render_pass_shader_resolve
+    shaderResolveQcom = 0x00000008
+  SubpassDescriptionFlags* = Flags[SubpassDescriptionFlagBits]
+
+  # Command pool commands
+  CommandPoolCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+    transient = 0x00000001 # Command buffers have a short lifetime
+    resetCommandBuffer = 0x00000002 # Command buffers may release their memory individually
+    # Provided by VK_VERSION_1_1
+    protected = 0x00000004 # Command buffers allocated from pool are protected command buffers
+  CommandPoolCreateFlags* = Flags[CommandPoolCreateFlagBits]
+  CommandPoolResetFlagBits* {.size: sizeof(int32), pure.} = enum
+    releaseResources = 0x00000001 # Release resources owned by the pool
+  CommandPoolResetFlags* = Flags[CommandPoolResetFlagBits]
+
+  # Command buffer commands
+  CommandBufferLevel* {.size: sizeof(int32), pure.} = enum
+    primary = 0
+    secondary = 1
+  CommandBufferResetFlagBits* {.size: sizeof(int32), pure.} = enum
+    releaseResources = 0x00000001 # Release resources owned by the buffer
+  CommandBufferResetFlags* = Flags[CommandBufferResetFlagBits]
+  CommandBufferUsageFlagBits* {.size: sizeof(int32), pure.} = enum
+    oneTimeSubmit = 0x00000001
+    renderPassContinue = 0x00000002
+    simultaneousUse = 0x00000004 # Command buffer may be submitted/executed more than once simultaneously
+  CommandBufferUsageFlags* = Flags[CommandBufferUsageFlagBits]
+  QueryControlFlagBits* {.size: sizeof(int32), pure.} = enum
+    precise = 0x00000001 # Require precise results to be collected by the query
+  QueryControlFlags* = Flags[QueryControlFlagBits]
+
+  # Command buffer building commands
+  IndexType* {.size: sizeof(int32), pure.} = enum
+    uint16 = 0
+    uint32 = 1
+    # Provided by VK_KHR_ray_tracing
+    noneKhr = 1000165000
+    # Provided by VK_EXT_index_type_uint8
+    uint8Ext = 1000265000
+  StencilFaceFlagBits* {.size: sizeof(int32), pure.} = enum
+    front = 0x00000001 # Front face
+    back = 0x00000002 # Back face
+    frontAndBack = 0x00000003 # Front and back faces
+  StencilFaceFlags* = Flags[StencilFaceFlagBits]
+  SubpassContents* {.size: sizeof(int32), pure.} = enum
+    inline = 0
+    secondaryCommandBuffers = 1
+
+type
+  # Fundamental types used by many commands and structures
+  # ------------------------------------------------------
+  Extent2D* = object
+    width*: uint32
+    height*: uint32
+  Extent3D* = object
+    width*: uint32
+    height*: uint32
+    depth*: uint32
+  Offset2D* = object
+    x*: int32
+    y*: int32
+  Offset3D* = object
+    x*: int32
+    y*: int32
+    z*: int32
+  Rect2D* = object
+    offset*: Offset2D
+    extent*: Extent2D
+
+  # These types are part of the API, though not directly used in API commands or data structures
+  # --------------------------------------------------------------------------------------------
+  BaseInStructure* = object
+    sType*: StructureType
+    pNext*: ptr BaseInStructure
+  BaseOutStructure* = object
+    sType*: StructureType
+    pNext*: ptr BaseOutStructure
+  BufferMemoryBarrier* = object
+    sType*: StructureType
+    pNext*: pointer
+    srcAccessMask*: AccessFlags
+    dstAccessMask*: AccessFlags
+    srcQueueFamilyIndex*: uint32
+    dstQueueFamilyIndex*: uint32
+    buffer*: Buffer
+    offset*: DeviceSize
+    size*: DeviceSize
+  DispatchIndirectCommand* = object
+    x*: uint32
+    y*: uint32
+    z*: uint32
+  DrawIndexedIndirectCommand* = object
+    indexCount*: uint32
+    instanceCount*: uint32
+    firstIndex*: uint32
+    vertexOffset*: int32
+    firstInstance*: uint32
+  DrawIndirectCommand* = object
+    vertexCount*: uint32
+    instanceCount*: uint32
+    firstVertex*: uint32
+    firstInstance*: uint32
+  ImageMemoryBarrier* = object
+    sType*: StructureType
+    pNext*: pointer
+    srcAccessMask*: AccessFlags
+    dstAccessMask*: AccessFlags
+    oldLayout*: ImageLayout
+    newLayout*: ImageLayout
+    srcQueueFamilyIndex*: uint32
+    dstQueueFamilyIndex*: uint32
+    image*: Image
+    subresourceRange*: ImageSubresourceRange
+  MemoryBarrier* = object
+    sType*: StructureType
+    pNext*: pointer
+    srcAccessMask*: AccessFlags
+    dstAccessMask*: AccessFlags
+
+  # Device initialization
+  # ---------------------
+  PFN_AllocationFunction* = proc(
+      pUserData: pointer;
+      size: uint;
+      alignment: uint;
+      allocationScope: SystemAllocationScope;
+    ): pointer {.cdecl.}
+  PFN_FreeFunction* = proc(
+      pUserData: pointer;
+      pMemory: pointer;
+    ): void {.cdecl.}
+  PFN_InternalAllocationNotification* = proc(
+      pUserData: pointer;
+      size: uint;
+      allocationType: InternalAllocationType;
+      allocationScope: SystemAllocationScope;
+    ): void {.cdecl.}
+  PFN_InternalFreeNotification* = proc(
+      pUserData: pointer;
+      size: uint;
+      allocationType: InternalAllocationType;
+      allocationScope: SystemAllocationScope;
+    ): void {.cdecl.}
+  PFN_ReallocationFunction* = proc(
+      pUserData: pointer;
+      pOriginal: pointer;
+      size: uint;
+      alignment: uint;
+      allocationScope: SystemAllocationScope;
+    ): pointer {.cdecl.}
+  PFN_VoidFunction* = proc(): void {.cdecl.}
+  AllocationCallbacks* = object
+    pUserData*: pointer
+    pfnAllocation*: PFN_AllocationFunction
+    pfnReallocation*: PFN_ReallocationFunction
+    pfnFree*: PFN_FreeFunction
+    pfnInternalAllocation*: PFN_InternalAllocationNotification
+    pfnInternalFree*: PFN_InternalFreeNotification
+  ApplicationInfo* = object
+    sType*: StructureType
+    pNext*: pointer
+    pApplicationName*: cstring
+    applicationVersion*: uint32
+    pEngineName*: cstring
+    engineVersion*: uint32
+    apiVersion*: uint32
+  FormatProperties* = object
+    linearTilingFeatures*: FormatFeatureFlags
+    optimalTilingFeatures*: FormatFeatureFlags
+    bufferFeatures*: FormatFeatureFlags
+  ImageFormatProperties* = object
+    maxExtent*: Extent3D
+    maxMipLevels*: uint32
+    maxArrayLayers*: uint32
+    sampleCounts*: SampleCountFlags
+    maxResourceSize*: DeviceSize
+  HtInstance = object of HandleType
+  Instance* = Handle[HtInstance]
+  InstanceCreateInfo* = object
+    sType*: StructureType
+    pNext*: pointer
+    flags*: InstanceCreateFlags
+    pApplicationInfo*: ptr ApplicationInfo
+    enabledLayerCount*: uint32
+    ppEnabledLayerNames*: cstringArray
+    enabledExtensionCount*: uint32
+    ppEnabledExtensionNames*: cstringArray
+  MemoryHeap* = object
+    size*: DeviceSize
+    flags*: MemoryHeapFlags
   MemoryType* = object
     propertyFlags*: MemoryPropertyFlags
     heapIndex*: uint32
@@ -1849,50 +2667,16 @@ type
     residencyStandard3DBlockShape*: Bool32
     residencyAlignedMipSize*: Bool32
     residencyNonResidentStrict*: Bool32
-  PhysicalDeviceType* {.size: sizeof(int32), pure.} = enum
-    other = 0
-    integratedGpu = 1
-    discreteGpu = 2
-    virtualGpu = 3
-    cpu = 4
   QueueFamilyProperties* = object
     queueFlags*: QueueFlags
     queueCount*: uint32
     timestampValidBits*: uint32
     minImageTransferGranularity*: Extent3D
-  QueueFlagBits* {.size: sizeof(int32), pure.} = enum
-    graphics = 0x00000001 # Queue supports graphics operations
-    compute = 0x00000002 # Queue supports compute operations
-    transfer = 0x00000004 # Queue supports transfer operations
-    sparseBinding = 0x00000008 # Queue supports sparse resource memory management operations
-    # Provided by VK_VERSION_1_1
-    protected = 0x00000010 # Queues may support protected operations
-    # Provided by VK_AMD_extension_25
-    reserved5Khr = 0x00000020
-    # Provided by VK_AMD_extension_24
-    reserved6Khr = 0x00000040
-  QueueFlags* = Flags[QueueFlagBits]
-  SampleCountFlagBits* {.size: sizeof(int32), pure.} = enum
-    vk1 = 0x00000001 # Sample count 1 supported
-    vk2 = 0x00000002 # Sample count 2 supported
-    vk4 = 0x00000004 # Sample count 4 supported
-    vk8 = 0x00000008 # Sample count 8 supported
-    vk16 = 0x00000010 # Sample count 16 supported
-    vk32 = 0x00000020 # Sample count 32 supported
-    vk64 = 0x00000040 # Sample count 64 supported
-  SampleCountFlags* = Flags[SampleCountFlagBits]
-  SystemAllocationScope* {.size: sizeof(int32), pure.} = enum
-    command = 0
-    `object` = 1
-    cache = 2
-    device = 3
-    instance = 4
 
   # Device commands
   # ---------------
   HtDevice = object of HandleType
   Device* = Handle[HtDevice]
-  DeviceCreateFlags* = Flags[distinct UnusedEnum]
   DeviceCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -1904,10 +2688,6 @@ type
     enabledExtensionCount*: uint32
     ppEnabledExtensionNames*: cstringArray
     pEnabledFeatures*: ptr PhysicalDeviceFeatures
-  DeviceQueueCreateFlagBits* {.size: sizeof(int32), pure.} = enum
-    # Provided by VK_VERSION_1_1
-    protected = 0x00000001 # Queue is a protected-capable device queue
-  DeviceQueueCreateFlags* = Flags[DeviceQueueCreateFlagBits]
   DeviceQueueCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -1932,47 +2712,6 @@ type
 
   # Queue commands
   # --------------
-  PipelineStageFlagBits* {.size: sizeof(int32), pure.} = enum
-    topOfPipe = 0x00000001 # Before subsequent commands are processed
-    drawIndirect = 0x00000002 # Draw/DispatchIndirect command fetch
-    vertexInput = 0x00000004 # Vertex/index fetch
-    vertexShader = 0x00000008 # Vertex shading
-    tessellationControlShader = 0x00000010 # Tessellation control shading
-    tessellationEvaluationShader = 0x00000020 # Tessellation evaluation shading
-    geometryShader = 0x00000040 # Geometry shading
-    fragmentShader = 0x00000080 # Fragment shading
-    earlyFragmentTests = 0x00000100 # Early fragment (depth and stencil) tests
-    lateFragmentTests = 0x00000200 # Late fragment (depth and stencil) tests
-    colorAttachmentOutput = 0x00000400 # Color attachment writes
-    computeShader = 0x00000800 # Compute shading
-    transfer = 0x00001000 # Transfer/copy operations
-    bottomOfPipe = 0x00002000 # After previous commands have completed
-    host = 0x00004000 # Indicates host (CPU) is a source/sink of the dependency
-    allGraphics = 0x00008000 # All stages of the graphics pipeline
-    allCommands = 0x00010000 # All stages supported on the queue
-    # Provided by VK_NV_device_generated_commands
-    commandPreprocessNv = 0x00020000
-    # Provided by VK_EXT_conditional_rendering
-    conditionalRenderingExt = 0x00040000 # A pipeline stage for conditional rendering predicate fetch
-    # Provided by VK_NV_mesh_shader
-    taskShaderNv = 0x00080000
-    # Provided by VK_NV_mesh_shader
-    meshShaderNv = 0x00100000
-    # Provided by VK_KHR_ray_tracing
-    rayTracingShaderKhr = 0x00200000
-    # Provided by VK_NV_shading_rate_image
-    shadingRateImageNv = 0x00400000
-    # Provided by VK_EXT_fragment_density_map
-    fragmentDensityProcessExt = 0x00800000
-    # Provided by VK_EXT_transform_feedback
-    transformFeedbackExt = 0x01000000
-    # Provided by VK_KHR_ray_tracing
-    accelerationStructureBuildKhr = 0x02000000
-    # Provided by VK_AMD_extension_25
-    reserved26Khr = 0x04000000
-    # Provided by VK_AMD_extension_24
-    reserved27Khr = 0x08000000
-  PipelineStageFlags* = Flags[PipelineStageFlagBits]
   HtQueue = object of HandleType
   Queue* = Handle[HtQueue]
   SubmitInfo* = object
@@ -1999,7 +2738,6 @@ type
     pNext*: pointer
     allocationSize*: DeviceSize
     memoryTypeIndex*: uint32
-  MemoryMapFlags* = Flags[distinct UnusedEnum]
 
   # Memory management API commands
   # ------------------------------
@@ -2025,26 +2763,6 @@ type
     pImageBinds*: ptr SparseImageMemoryBindInfo
     signalSemaphoreCount*: uint32
     pSignalSemaphores*: ptr Semaphore
-  ImageAspectFlagBits* {.size: sizeof(int32), pure.} = enum
-    color = 0x00000001
-    depth = 0x00000002
-    stencil = 0x00000004
-    metadata = 0x00000008
-    # Provided by VK_VERSION_1_1
-    plane0 = 0x00000010
-    # Provided by VK_VERSION_1_1
-    plane1 = 0x00000020
-    # Provided by VK_VERSION_1_1
-    plane2 = 0x00000040
-    # Provided by VK_EXT_image_drm_format_modifier
-    memoryPlane0Ext = 0x00000080
-    # Provided by VK_EXT_image_drm_format_modifier
-    memoryPlane1Ext = 0x00000100
-    # Provided by VK_EXT_image_drm_format_modifier
-    memoryPlane2Ext = 0x00000200
-    # Provided by VK_EXT_image_drm_format_modifier
-    memoryPlane3Ext = 0x00000400
-  ImageAspectFlags* = Flags[ImageAspectFlagBits]
   ImageSubresource* = object
     aspectMask*: ImageAspectFlags
     mipLevel*: uint32
@@ -2053,11 +2771,6 @@ type
     buffer*: Buffer
     bindCount*: uint32
     pBinds*: ptr SparseMemoryBind
-  SparseImageFormatFlagBits* {.size: sizeof(int32), pure.} = enum
-    singleMiptail = 0x00000001 # Image uses a single mip tail region for all array layers
-    alignedMipSize = 0x00000002 # Image requires mip level dimensions to be an integer multiple of the sparse image block dimensions for non-tail mip levels.
-    nonstandardBlockSize = 0x00000004 # Image uses a non-standard sparse image block dimensions
-  SparseImageFormatFlags* = Flags[SparseImageFormatFlagBits]
   SparseImageFormatProperties* = object
     aspectMask*: ImageAspectFlags
     imageGranularity*: Extent3D
@@ -2089,17 +2802,11 @@ type
     memory*: DeviceMemory
     memoryOffset*: DeviceSize
     flags*: SparseMemoryBindFlags
-  SparseMemoryBindFlagBits* {.size: sizeof(int32), pure.} = enum
-    metadata = 0x00000001 # Operation binds resource metadata to memory
-  SparseMemoryBindFlags* = Flags[SparseMemoryBindFlagBits]
 
   # Fence commands
   # --------------
   HtFence = object of HandleType
   Fence* = NonDispatchableHandle[HtFence]
-  FenceCreateFlagBits* {.size: sizeof(int32), pure.} = enum
-    signaled = 0x00000001
-  FenceCreateFlags* = Flags[FenceCreateFlagBits]
   FenceCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2109,7 +2816,6 @@ type
   # ------------------------
   HtSemaphore = object of HandleType
   Semaphore* = NonDispatchableHandle[HtSemaphore]
-  SemaphoreCreateFlags* = Flags[distinct UnusedEnum]
   SemaphoreCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2119,7 +2825,6 @@ type
   # --------------
   HtEvent = object of HandleType
   Event* = NonDispatchableHandle[HtEvent]
-  EventCreateFlags* = Flags[distinct UnusedEnum]
   EventCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2127,22 +2832,8 @@ type
 
   # Query commands
   # --------------
-  QueryPipelineStatisticFlagBits* {.size: sizeof(int32), pure.} = enum
-    inputAssemblyVertices = 0x00000001 # Optional
-    inputAssemblyPrimitives = 0x00000002 # Optional
-    vertexShaderInvocations = 0x00000004 # Optional
-    geometryShaderInvocations = 0x00000008 # Optional
-    geometryShaderPrimitives = 0x00000010 # Optional
-    clippingInvocations = 0x00000020 # Optional
-    clippingPrimitives = 0x00000040 # Optional
-    fragmentShaderInvocations = 0x00000080 # Optional
-    tessellationControlShaderPatches = 0x00000100 # Optional
-    tessellationEvaluationShaderInvocations = 0x00000200 # Optional
-    computeShaderInvocations = 0x00000400 # Optional
-  QueryPipelineStatisticFlags* = Flags[QueryPipelineStatisticFlagBits]
   HtQueryPool = object of HandleType
   QueryPool* = NonDispatchableHandle[HtQueryPool]
-  QueryPoolCreateFlags* = Flags[distinct UnusedEnum]
   QueryPoolCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2150,44 +2841,11 @@ type
     queryType*: QueryType
     queryCount*: uint32
     pipelineStatistics*: QueryPipelineStatisticFlags
-  QueryResultFlagBits* {.size: sizeof(int32), pure.} = enum
-    vk64 = 0x00000001 # Results of the queries are written to the destination buffer as 64-bit values
-    wait = 0x00000002 # Results of the queries are waited on before proceeding with the result copy
-    withAvailability = 0x00000004 # Besides the results of the query, the availability of the results is also written
-    partial = 0x00000008 # Copy the partial results of the query even if the final results are not available
-  QueryResultFlags* = Flags[QueryResultFlagBits]
-  QueryType* {.size: sizeof(int32), pure.} = enum
-    occlusion = 0
-    pipelineStatistics = 1 # Optional
-    timestamp = 2
-    # Provided by VK_AMD_extension_24
-    reserved8 = 1000023008
-    # Provided by VK_AMD_extension_25
-    reserved4 = 1000024004
-    # Provided by VK_EXT_transform_feedback
-    transformFeedbackStreamExt = 1000028004
-    # Provided by VK_KHR_performance_query
-    performanceQueryKhr = 1000116000
-    # Provided by VK_KHR_ray_tracing
-    accelerationStructureSerializationSizeKhr = 1000150000
-    # Provided by VK_KHR_ray_tracing
-    accelerationStructureCompactedSizeKhr = 1000165000
-    # Provided by VK_INTEL_performance_query
-    performanceQueryIntel = 1000210000
 
   # Buffer commands
   # ---------------
   HtBuffer = object of HandleType
   Buffer* = NonDispatchableHandle[HtBuffer]
-  BufferCreateFlagBits* {.size: sizeof(int32), pure.} = enum
-    sparseBinding = 0x00000001 # Buffer should support sparse backing
-    sparseResidency = 0x00000002 # Buffer should support sparse backing with partial residency
-    sparseAliased = 0x00000004 # Buffer should support constent data access to physical memory ranges mapped into multiple locations of sparse buffers
-    # Provided by VK_VERSION_1_1
-    protected = 0x00000008 # Buffer requires protected memory
-    # Provided by VK_VERSION_1_2
-    deviceAddressCaptureReplay = 0x00000010
-  BufferCreateFlags* = Flags[BufferCreateFlagBits]
   BufferCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2197,50 +2855,11 @@ type
     sharingMode*: SharingMode
     queueFamilyIndexCount*: uint32
     pQueueFamilyIndices*: ptr uint32
-  BufferUsageFlagBits* {.size: sizeof(int32), pure.} = enum
-    transferSrc = 0x00000001 # Can be used as a source of transfer operations
-    transferDst = 0x00000002 # Can be used as a destination of transfer operations
-    uniformTexelBuffer = 0x00000004 # Can be used as TBO
-    storageTexelBuffer = 0x00000008 # Can be used as IBO
-    uniformBuffer = 0x00000010 # Can be used as UBO
-    storageBuffer = 0x00000020 # Can be used as SSBO
-    indexBuffer = 0x00000040 # Can be used as source of fixed-function index fetch (index buffer)
-    vertexBuffer = 0x00000080 # Can be used as source of fixed-function vertex fetch (VBO)
-    indirectBuffer = 0x00000100 # Can be the source of indirect parameters (e.g. indirect buffer, parameter buffer)
-    # Provided by VK_EXT_conditional_rendering
-    conditionalRenderingExt = 0x00000200 # Specifies the buffer can be used as predicate in conditional rendering
-    # Provided by VK_KHR_ray_tracing
-    rayTracingKhr = 0x00000400
-    # Provided by VK_EXT_transform_feedback
-    transformFeedbackBufferExt = 0x00000800
-    # Provided by VK_EXT_transform_feedback
-    transformFeedbackCounterBufferExt = 0x00001000
-    # Provided by VK_AMD_extension_25
-    reserved13Khr = 0x00002000
-    # Provided by VK_AMD_extension_25
-    reserved14Khr = 0x00004000
-    # Provided by VK_AMD_extension_24
-    reserved15Khr = 0x00008000
-    # Provided by VK_AMD_extension_24
-    reserved16Khr = 0x00010000
-    # Provided by VK_VERSION_1_2
-    shaderDeviceAddress = 0x00020000
-    # Provided by VK_QCOM_extension_173
-    reserved18Qcom = 0x00040000
-    # Provided by VK_NV_extension_168
-    reserved19Khr = 0x00080000
-    # Provided by VK_NV_extension_168
-    reserved20Khr = 0x00100000
-  BufferUsageFlags* = Flags[BufferUsageFlagBits]
-  SharingMode* {.size: sizeof(int32), pure.} = enum
-    exclusive = 0
-    concurrent = 1
 
   # Buffer view commands
   # --------------------
   HtBufferView = object of HandleType
   BufferView* = NonDispatchableHandle[HtBufferView]
-  BufferViewCreateFlags* = Flags[distinct UnusedEnum]
   BufferViewCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2270,36 +2889,6 @@ type
     queueFamilyIndexCount*: uint32
     pQueueFamilyIndices*: ptr uint32
     initialLayout*: ImageLayout
-  ImageLayout* {.size: sizeof(int32), pure.} = enum
-    undefined = 0 # Implicit layout an image is when its contents are undefined due to various reasons (e.g. right after creation)
-    general = 1 # General layout when image can be used for any kind of access
-    colorAttachmentOptimal = 2 # Optimal layout when image is only used for color attachment read/write
-    depthStencilAttachmentOptimal = 3 # Optimal layout when image is only used for depth/stencil attachment read/write
-    depthStencilReadOnlyOptimal = 4 # Optimal layout when image is used for read only depth/stencil attachment and shader access
-    shaderReadOnlyOptimal = 5 # Optimal layout when image is used for read only shader access
-    transferSrcOptimal = 6 # Optimal layout when image is used only as source of transfer operations
-    transferDstOptimal = 7 # Optimal layout when image is used only as destination of transfer operations
-    preinitialized = 8 # Initial layout used when the data is populated by the CPU
-    # Provided by VK_KHR_swapchain
-    presentSrcKhr = 1000001002
-    # Provided by VK_KHR_shared_presentable_image
-    sharedPresentKhr = 1000111000
-    # Provided by VK_VERSION_1_1
-    depthReadOnlyStencilAttachmentOptimal = 1000117000
-    # Provided by VK_VERSION_1_1
-    depthAttachmentStencilReadOnlyOptimal = 1000117001
-    # Provided by VK_NV_shading_rate_image
-    shadingRateOptimalNv = 1000164003
-    # Provided by VK_EXT_fragment_density_map
-    fragmentDensityMapOptimalExt = 1000218000
-    # Provided by VK_VERSION_1_2
-    depthAttachmentOptimal = 1000241000
-    # Provided by VK_VERSION_1_2
-    depthReadOnlyOptimal = 1000241001
-    # Provided by VK_VERSION_1_2
-    stencilAttachmentOptimal = 1000241002
-    # Provided by VK_VERSION_1_2
-    stencilReadOnlyOptimal = 1000241003
   SubresourceLayout* = object
     offset*: DeviceSize
     size*: DeviceSize
@@ -2314,14 +2903,6 @@ type
     g*: ComponentSwizzle
     b*: ComponentSwizzle
     a*: ComponentSwizzle
-  ComponentSwizzle* {.size: sizeof(int32), pure.} = enum
-    identity = 0
-    zero = 1
-    one = 2
-    r = 3
-    g = 4
-    b = 5
-    a = 6
   ImageSubresourceRange* = object
     aspectMask*: ImageAspectFlags
     baseMipLevel*: uint32
@@ -2330,12 +2911,6 @@ type
     layerCount*: uint32
   HtImageView = object of HandleType
   ImageView* = NonDispatchableHandle[HtImageView]
-  ImageViewCreateFlagBits* {.size: sizeof(int32), pure.} = enum
-    # Provided by VK_EXT_fragment_density_map
-    fragmentDensityMapDynamicExt = 0x00000001
-    # Provided by VK_EXT_fragment_density_map2
-    fragmentDensityMapDeferredExt = 0x00000002
-  ImageViewCreateFlags* = Flags[ImageViewCreateFlagBits]
   ImageViewCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2345,23 +2920,11 @@ type
     format*: Format
     components*: ComponentMapping
     subresourceRange*: ImageSubresourceRange
-  ImageViewType* {.size: sizeof(int32), pure.} = enum
-    vk1d = 0
-    vk2d = 1
-    vk3d = 2
-    cube = 3
-    vk1dArray = 4
-    vk2dArray = 5
-    cubeArray = 6
 
   # Shader commands
   # ---------------
   HtShaderModule = object of HandleType
   ShaderModule* = NonDispatchableHandle[HtShaderModule]
-  ShaderModuleCreateFlagBits* {.size: sizeof(int32), pure.} = enum
-    # Provided by VK_NV_extension_52
-    reserved0Nv = 0x00000001
-  ShaderModuleCreateFlags* = Flags[ShaderModuleCreateFlagBits]
   ShaderModuleCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2373,12 +2936,6 @@ type
   # -----------------------
   HtPipelineCache = object of HandleType
   PipelineCache* = NonDispatchableHandle[HtPipelineCache]
-  PipelineCacheCreateFlagBits* {.size: sizeof(int32), pure.} = enum
-    # Provided by VK_EXT_pipeline_creation_cache_control
-    externallySynchronizedExt = 0x00000001
-    # Provided by VK_GOOGLE_extension_196
-    reserved1Ext = 0x00000002
-  PipelineCacheCreateFlags* = Flags[PipelineCacheCreateFlagBits]
   PipelineCacheCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2388,139 +2945,6 @@ type
 
   # Pipeline commands
   # -----------------
-  BlendFactor* {.size: sizeof(int32), pure.} = enum
-    zero = 0
-    one = 1
-    srcColor = 2
-    oneMinusSrcColor = 3
-    dstColor = 4
-    oneMinusDstColor = 5
-    srcAlpha = 6
-    oneMinusSrcAlpha = 7
-    dstAlpha = 8
-    oneMinusDstAlpha = 9
-    constantColor = 10
-    oneMinusConstantColor = 11
-    constantAlpha = 12
-    oneMinusConstantAlpha = 13
-    srcAlphaSaturate = 14
-    src1Color = 15
-    oneMinusSrc1Color = 16
-    src1Alpha = 17
-    oneMinusSrc1Alpha = 18
-  BlendOp* {.size: sizeof(int32), pure.} = enum
-    add = 0
-    subtract = 1
-    reverseSubtract = 2
-    min = 3
-    max = 4
-    # Provided by VK_EXT_blend_operation_advanced
-    zeroExt = 1000148000
-    # Provided by VK_EXT_blend_operation_advanced
-    srcExt = 1000148001
-    # Provided by VK_EXT_blend_operation_advanced
-    dstExt = 1000148002
-    # Provided by VK_EXT_blend_operation_advanced
-    srcOverExt = 1000148003
-    # Provided by VK_EXT_blend_operation_advanced
-    dstOverExt = 1000148004
-    # Provided by VK_EXT_blend_operation_advanced
-    srcInExt = 1000148005
-    # Provided by VK_EXT_blend_operation_advanced
-    dstInExt = 1000148006
-    # Provided by VK_EXT_blend_operation_advanced
-    srcOutExt = 1000148007
-    # Provided by VK_EXT_blend_operation_advanced
-    dstOutExt = 1000148008
-    # Provided by VK_EXT_blend_operation_advanced
-    srcAtopExt = 1000148009
-    # Provided by VK_EXT_blend_operation_advanced
-    dstAtopExt = 1000148010
-    # Provided by VK_EXT_blend_operation_advanced
-    xorExt = 1000148011
-    # Provided by VK_EXT_blend_operation_advanced
-    multiplyExt = 1000148012
-    # Provided by VK_EXT_blend_operation_advanced
-    screenExt = 1000148013
-    # Provided by VK_EXT_blend_operation_advanced
-    overlayExt = 1000148014
-    # Provided by VK_EXT_blend_operation_advanced
-    darkenExt = 1000148015
-    # Provided by VK_EXT_blend_operation_advanced
-    lightenExt = 1000148016
-    # Provided by VK_EXT_blend_operation_advanced
-    colordodgeExt = 1000148017
-    # Provided by VK_EXT_blend_operation_advanced
-    colorburnExt = 1000148018
-    # Provided by VK_EXT_blend_operation_advanced
-    hardlightExt = 1000148019
-    # Provided by VK_EXT_blend_operation_advanced
-    softlightExt = 1000148020
-    # Provided by VK_EXT_blend_operation_advanced
-    differenceExt = 1000148021
-    # Provided by VK_EXT_blend_operation_advanced
-    exclusionExt = 1000148022
-    # Provided by VK_EXT_blend_operation_advanced
-    invertExt = 1000148023
-    # Provided by VK_EXT_blend_operation_advanced
-    invertRgbExt = 1000148024
-    # Provided by VK_EXT_blend_operation_advanced
-    lineardodgeExt = 1000148025
-    # Provided by VK_EXT_blend_operation_advanced
-    linearburnExt = 1000148026
-    # Provided by VK_EXT_blend_operation_advanced
-    vividlightExt = 1000148027
-    # Provided by VK_EXT_blend_operation_advanced
-    linearlightExt = 1000148028
-    # Provided by VK_EXT_blend_operation_advanced
-    pinlightExt = 1000148029
-    # Provided by VK_EXT_blend_operation_advanced
-    hardmixExt = 1000148030
-    # Provided by VK_EXT_blend_operation_advanced
-    hslHueExt = 1000148031
-    # Provided by VK_EXT_blend_operation_advanced
-    hslSaturationExt = 1000148032
-    # Provided by VK_EXT_blend_operation_advanced
-    hslColorExt = 1000148033
-    # Provided by VK_EXT_blend_operation_advanced
-    hslLuminosityExt = 1000148034
-    # Provided by VK_EXT_blend_operation_advanced
-    plusExt = 1000148035
-    # Provided by VK_EXT_blend_operation_advanced
-    plusClampedExt = 1000148036
-    # Provided by VK_EXT_blend_operation_advanced
-    plusClampedAlphaExt = 1000148037
-    # Provided by VK_EXT_blend_operation_advanced
-    plusDarkerExt = 1000148038
-    # Provided by VK_EXT_blend_operation_advanced
-    minusExt = 1000148039
-    # Provided by VK_EXT_blend_operation_advanced
-    minusClampedExt = 1000148040
-    # Provided by VK_EXT_blend_operation_advanced
-    contrastExt = 1000148041
-    # Provided by VK_EXT_blend_operation_advanced
-    invertOvgExt = 1000148042
-    # Provided by VK_EXT_blend_operation_advanced
-    redExt = 1000148043
-    # Provided by VK_EXT_blend_operation_advanced
-    greenExt = 1000148044
-    # Provided by VK_EXT_blend_operation_advanced
-    blueExt = 1000148045
-  ColorComponentFlagBits* {.size: sizeof(int32), pure.} = enum
-    r = 0x00000001
-    g = 0x00000002
-    b = 0x00000004
-    a = 0x00000008
-  ColorComponentFlags* = Flags[ColorComponentFlagBits]
-  CompareOp* {.size: sizeof(int32), pure.} = enum
-    never = 0
-    less = 1
-    equal = 2
-    lessOrEqual = 3
-    greater = 4
-    notEqual = 5
-    greaterOrEqual = 6
-    always = 7
   ComputePipelineCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2529,63 +2953,6 @@ type
     layout*: PipelineLayout
     basePipelineHandle*: Pipeline
     basePipelineIndex*: int32
-  CullModeFlagBits* {.size: sizeof(int32), pure.} = enum
-    none = 0
-    front = 0x00000001
-    back = 0x00000002
-    frontAndBack = 0x00000003
-  CullModeFlags* = Flags[CullModeFlagBits]
-  DynamicState* {.size: sizeof(int32), pure.} = enum
-    viewport = 0
-    scissor = 1
-    lineWidth = 2
-    depthBias = 3
-    blendConstants = 4
-    depthBounds = 5
-    stencilCompareMask = 6
-    stencilWriteMask = 7
-    stencilReference = 8
-    # Provided by VK_NV_clip_space_w_scaling
-    viewportWScalingNv = 1000087000
-    # Provided by VK_EXT_discard_rectangles
-    discardRectangleExt = 1000099000
-    # Provided by VK_EXT_sample_locations
-    sampleLocationsExt = 1000143000
-    # Provided by VK_NV_shading_rate_image
-    viewportShadingRatePaletteNv = 1000164004
-    # Provided by VK_NV_shading_rate_image
-    viewportCoarseSampleOrderNv = 1000164006
-    # Provided by VK_NV_scissor_exclusive
-    exclusiveScissorNv = 1000205001
-    # Provided by VK_EXT_line_rasterization
-    lineStippleExt = 1000259000
-    # Provided by VK_EXT_extended_dynamic_state
-    cullModeExt = 1000267000
-    # Provided by VK_EXT_extended_dynamic_state
-    frontFaceExt = 1000267001
-    # Provided by VK_EXT_extended_dynamic_state
-    primitiveTopologyExt = 1000267002
-    # Provided by VK_EXT_extended_dynamic_state
-    viewportWithCountExt = 1000267003
-    # Provided by VK_EXT_extended_dynamic_state
-    scissorWithCountExt = 1000267004
-    # Provided by VK_EXT_extended_dynamic_state
-    vertexInputBindingStrideExt = 1000267005
-    # Provided by VK_EXT_extended_dynamic_state
-    depthTestEnableExt = 1000267006
-    # Provided by VK_EXT_extended_dynamic_state
-    depthWriteEnableExt = 1000267007
-    # Provided by VK_EXT_extended_dynamic_state
-    depthCompareOpExt = 1000267008
-    # Provided by VK_EXT_extended_dynamic_state
-    depthBoundsTestEnableExt = 1000267009
-    # Provided by VK_EXT_extended_dynamic_state
-    stencilTestEnableExt = 1000267010
-    # Provided by VK_EXT_extended_dynamic_state
-    stencilOpExt = 1000267011
-  FrontFace* {.size: sizeof(int32), pure.} = enum
-    counterClockwise = 0
-    clockwise = 1
   GraphicsPipelineCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2606,23 +2973,6 @@ type
     subpass*: uint32
     basePipelineHandle*: Pipeline
     basePipelineIndex*: int32
-  LogicOp* {.size: sizeof(int32), pure.} = enum
-    clear = 0
-    `and` = 1
-    andReverse = 2
-    copy = 3
-    andInverted = 4
-    noOp = 5
-    `xor` = 6
-    `or` = 7
-    nor = 8
-    equivalent = 9
-    invert = 10
-    orReverse = 11
-    copyInverted = 12
-    orInverted = 13
-    nand = 14
-    set = 15
   HtPipeline = object of HandleType
   Pipeline* = NonDispatchableHandle[HtPipeline]
   PipelineColorBlendAttachmentState* = object
@@ -2634,7 +2984,6 @@ type
     dstAlphaBlendFactor*: BlendFactor
     alphaBlendOp*: BlendOp
     colorWriteMask*: ColorComponentFlags
-  PipelineColorBlendStateCreateFlags* = Flags[distinct UnusedEnum]
   PipelineColorBlendStateCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2644,44 +2993,6 @@ type
     attachmentCount*: uint32
     pAttachments*: ptr PipelineColorBlendAttachmentState
     blendConstants*: array[4, float32]
-  PipelineCreateFlagBits* {.size: sizeof(int32), pure.} = enum
-    disableOptimization = 0x00000001
-    allowDerivatives = 0x00000002
-    derivative = 0x00000004
-    # Provided by VK_VERSION_1_1
-    viewIndexFromDeviceIndex = 0x00000008
-    # Provided by VK_VERSION_1_1
-    dispatchBase = 0x00000010
-    # Provided by VK_NV_ray_tracing
-    deferCompileNv = 0x00000020
-    # Provided by VK_KHR_pipeline_executable_properties
-    captureStatisticsKhr = 0x00000040
-    # Provided by VK_KHR_pipeline_executable_properties
-    captureInternalRepresentationsKhr = 0x00000080
-    # Provided by VK_EXT_pipeline_creation_cache_control
-    failOnPipelineCompileRequiredExt = 0x00000100
-    # Provided by VK_EXT_pipeline_creation_cache_control
-    earlyReturnOnFailureExt = 0x00000200
-    # Provided by VK_KHR_pipeline_library
-    libraryKhr = 0x00000800
-    # Provided by VK_KHR_ray_tracing
-    rayTracingSkipTrianglesKhr = 0x00001000
-    # Provided by VK_KHR_ray_tracing
-    rayTracingSkipAabbsKhr = 0x00002000
-    # Provided by VK_KHR_ray_tracing
-    rayTracingNoNullAnyHitShadersKhr = 0x00004000
-    # Provided by VK_KHR_ray_tracing
-    rayTracingNoNullClosestHitShadersKhr = 0x00008000
-    # Provided by VK_KHR_ray_tracing
-    rayTracingNoNullMissShadersKhr = 0x00010000
-    # Provided by VK_KHR_ray_tracing
-    rayTracingNoNullIntersectionShadersKhr = 0x00020000
-    # Provided by VK_NV_device_generated_commands
-    indirectBindableNv = 0x00040000
-    # Provided by VK_NV_extension_168
-    reserved19Khr = 0x00080000
-  PipelineCreateFlags* = Flags[PipelineCreateFlagBits]
-  PipelineDepthStencilStateCreateFlags* = Flags[distinct UnusedEnum]
   PipelineDepthStencilStateCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2695,22 +3006,18 @@ type
     back*: StencilOpState
     minDepthBounds*: float32
     maxDepthBounds*: float32
-  PipelineDynamicStateCreateFlags* = Flags[distinct UnusedEnum]
   PipelineDynamicStateCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
     flags*: PipelineDynamicStateCreateFlags
     dynamicStateCount*: uint32
     pDynamicStates*: ptr DynamicState
-  PipelineInputAssemblyStateCreateFlags* = Flags[distinct UnusedEnum]
   PipelineInputAssemblyStateCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
     flags*: PipelineInputAssemblyStateCreateFlags
     topology*: PrimitiveTopology
     primitiveRestartEnable*: Bool32
-  PipelineLayoutCreateFlags* = Flags[distinct UnusedEnum]
-  PipelineMultisampleStateCreateFlags* = Flags[distinct UnusedEnum]
   PipelineMultisampleStateCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2721,7 +3028,6 @@ type
     pSampleMask*: ptr SampleMask
     alphaToCoverageEnable*: Bool32
     alphaToOneEnable*: Bool32
-  PipelineRasterizationStateCreateFlags* = Flags[distinct UnusedEnum]
   PipelineRasterizationStateCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2736,16 +3042,6 @@ type
     depthBiasClamp*: float32
     depthBiasSlopeFactor*: float32
     lineWidth*: float32
-  PipelineShaderStageCreateFlagBits* {.size: sizeof(int32), pure.} = enum
-    # Provided by VK_EXT_subgroup_size_control
-    allowVaryingSubgroupSizeExt = 0x00000001
-    # Provided by VK_EXT_subgroup_size_control
-    requireFullSubgroupsExt = 0x00000002
-    # Provided by VK_NV_extension_52
-    reserved2Nv = 0x00000004
-    # Provided by VK_KHR_extension_297
-    reserved3Khr = 0x00000008
-  PipelineShaderStageCreateFlags* = Flags[PipelineShaderStageCreateFlagBits]
   PipelineShaderStageCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2754,13 +3050,11 @@ type
     module*: ShaderModule
     pName*: cstring
     pSpecializationInfo*: ptr SpecializationInfo
-  PipelineTessellationStateCreateFlags* = Flags[distinct UnusedEnum]
   PipelineTessellationStateCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
     flags*: PipelineTessellationStateCreateFlags
     patchControlPoints*: uint32
-  PipelineVertexInputStateCreateFlags* = Flags[distinct UnusedEnum]
   PipelineVertexInputStateCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2769,7 +3063,6 @@ type
     pVertexBindingDescriptions*: ptr VertexInputBindingDescription
     vertexAttributeDescriptionCount*: uint32
     pVertexAttributeDescriptions*: ptr VertexInputAttributeDescription
-  PipelineViewportStateCreateFlags* = Flags[distinct UnusedEnum]
   PipelineViewportStateCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2778,50 +3071,6 @@ type
     pViewports*: ptr Viewport
     scissorCount*: uint32
     pScissors*: ptr Rect2D
-  PolygonMode* {.size: sizeof(int32), pure.} = enum
-    fill = 0
-    line = 1
-    point = 2
-    # Provided by VK_NV_fill_rectangle
-    fillRectangleNv = 1000153000
-  PrimitiveTopology* {.size: sizeof(int32), pure.} = enum
-    pointList = 0
-    lineList = 1
-    lineStrip = 2
-    triangleList = 3
-    triangleStrip = 4
-    triangleFan = 5
-    lineListWithAdjacency = 6
-    lineStripWithAdjacency = 7
-    triangleListWithAdjacency = 8
-    triangleStripWithAdjacency = 9
-    patchList = 10
-  ShaderStageFlagBits* {.size: sizeof(int32), pure.} = enum
-    vertex = 0x00000001
-    tessellationControl = 0x00000002
-    tessellationEvaluation = 0x00000004
-    geometry = 0x00000008
-    fragment = 0x00000010
-    allGraphics = 0x0000001F
-    compute = 0x00000020
-    # Provided by VK_NV_mesh_shader
-    taskNv = 0x00000040
-    # Provided by VK_NV_mesh_shader
-    meshNv = 0x00000080
-    # Provided by VK_KHR_ray_tracing
-    raygenKhr = 0x00000100
-    # Provided by VK_KHR_ray_tracing
-    anyHitKhr = 0x00000200
-    # Provided by VK_KHR_ray_tracing
-    closestHitKhr = 0x00000400
-    # Provided by VK_KHR_ray_tracing
-    missKhr = 0x00000800
-    # Provided by VK_KHR_ray_tracing
-    intersectionKhr = 0x00001000
-    # Provided by VK_KHR_ray_tracing
-    callableKhr = 0x00002000
-    all = 0x7FFFFFFF
-  ShaderStageFlags* = Flags[ShaderStageFlagBits]
   SpecializationInfo* = object
     mapEntryCount*: uint32
     pMapEntries*: ptr SpecializationMapEntry
@@ -2831,15 +3080,6 @@ type
     constantID*: uint32
     offset*: uint32
     size*: uint
-  StencilOp* {.size: sizeof(int32), pure.} = enum
-    keep = 0
-    zero = 1
-    replace = 2
-    incrementAndClamp = 3
-    decrementAndClamp = 4
-    invert = 5
-    incrementAndWrap = 6
-    decrementAndWrap = 7
   StencilOpState* = object
     failOp*: StencilOp
     passOp*: StencilOp
@@ -2857,9 +3097,6 @@ type
     binding*: uint32
     stride*: uint32
     inputRate*: VertexInputRate
-  VertexInputRate* {.size: sizeof(int32), pure.} = enum
-    vertex = 0
-    instance = 1
   Viewport* = object
     x*: float32
     y*: float32
@@ -2887,37 +3124,8 @@ type
 
   # Sampler commands
   # ----------------
-  BorderColor* {.size: sizeof(int32), pure.} = enum
-    floatTransparentBlack = 0
-    intTransparentBlack = 1
-    floatOpaqueBlack = 2
-    intOpaqueBlack = 3
-    floatOpaqueWhite = 4
-    intOpaqueWhite = 5
-    # Provided by VK_EXT_custom_border_color
-    floatCustomExt = 1000287003
-    # Provided by VK_EXT_custom_border_color
-    intCustomExt = 1000287004
-  Filter* {.size: sizeof(int32), pure.} = enum
-    nearest = 0
-    linear = 1
-    # Provided by VK_IMG_filter_cubic
-    cubicImg = 1000015000
   HtSampler = object of HandleType
   Sampler* = NonDispatchableHandle[HtSampler]
-  SamplerAddressMode* {.size: sizeof(int32), pure.} = enum
-    repeat = 0
-    mirroredRepeat = 1
-    clampToEdge = 2
-    clampToBorder = 3
-    # Provided by VK_VERSION_1_2
-    mirrorClampToEdge = 4 # No need to add an extnumber attribute, since this uses a core enum value
-  SamplerCreateFlagBits* {.size: sizeof(int32), pure.} = enum
-    # Provided by VK_EXT_fragment_density_map
-    subsampledExt = 0x00000001
-    # Provided by VK_EXT_fragment_density_map
-    subsampledCoarseReconstructionExt = 0x00000002
-  SamplerCreateFlags* = Flags[SamplerCreateFlagBits]
   SamplerCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2937,9 +3145,6 @@ type
     maxLod*: float32
     borderColor*: BorderColor
     unnormalizedCoordinates*: Bool32
-  SamplerMipmapMode* {.size: sizeof(int32), pure.} = enum
-    nearest = 0 # Choose nearest mip level
-    linear = 1 # Linear filter between mip levels
 
   # Descriptor set commands
   # -----------------------
@@ -2963,11 +3168,6 @@ type
     imageLayout*: ImageLayout
   HtDescriptorPool = object of HandleType
   DescriptorPool* = NonDispatchableHandle[HtDescriptorPool]
-  DescriptorPoolCreateFlagBits* {.size: sizeof(int32), pure.} = enum
-    freeDescriptorSet = 0x00000001 # Descriptor sets may be freed individually
-    # Provided by VK_VERSION_1_2
-    updateAfterBind = 0x00000002
-  DescriptorPoolCreateFlags* = Flags[DescriptorPoolCreateFlagBits]
   DescriptorPoolCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -2975,7 +3175,6 @@ type
     maxSets*: uint32
     poolSizeCount*: uint32
     pPoolSizes*: ptr DescriptorPoolSize
-  DescriptorPoolResetFlags* = Flags[distinct UnusedEnum]
   DescriptorPoolSize* = object
     theType*: DescriptorType
     descriptorCount*: uint32
@@ -2995,34 +3194,12 @@ type
     descriptorCount*: uint32
     stageFlags*: ShaderStageFlags
     pImmutableSamplers*: ptr Sampler
-  DescriptorSetLayoutCreateFlagBits* {.size: sizeof(int32), pure.} = enum
-    # Provided by VK_KHR_push_descriptor
-    pushDescriptorKhr = 0x00000001 # Descriptors are pushed via flink:vkCmdPushDescriptorSetKHR
-    # Provided by VK_VERSION_1_2
-    updateAfterBindPool = 0x00000002
-  DescriptorSetLayoutCreateFlags* = Flags[DescriptorSetLayoutCreateFlagBits]
   DescriptorSetLayoutCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
     flags*: DescriptorSetLayoutCreateFlags
     bindingCount*: uint32
     pBindings*: ptr DescriptorSetLayoutBinding
-  DescriptorType* {.size: sizeof(int32), pure.} = enum
-    sampler = 0
-    combinedImageSampler = 1
-    sampledImage = 2
-    storageImage = 3
-    uniformTexelBuffer = 4
-    storageTexelBuffer = 5
-    uniformBuffer = 6
-    storageBuffer = 7
-    uniformBufferDynamic = 8
-    storageBufferDynamic = 9
-    inputAttachment = 10
-    # Provided by VK_EXT_inline_uniform_block
-    inlineUniformBlockExt = 1000138000
-    # Provided by VK_KHR_ray_tracing
-    accelerationStructureKhr = 1000165000
   WriteDescriptorSet* = object
     sType*: StructureType
     pNext*: pointer
@@ -3037,53 +3214,6 @@ type
 
   # Pass commands
   # -------------
-  AccessFlagBits* {.size: sizeof(int32), pure.} = enum
-    indirectCommandRead = 0x00000001 # Controls coherency of indirect command reads
-    indexRead = 0x00000002 # Controls coherency of index reads
-    vertexAttributeRead = 0x00000004 # Controls coherency of vertex attribute reads
-    uniformRead = 0x00000008 # Controls coherency of uniform buffer reads
-    inputAttachmentRead = 0x00000010 # Controls coherency of input attachment reads
-    shaderRead = 0x00000020 # Controls coherency of shader reads
-    shaderWrite = 0x00000040 # Controls coherency of shader writes
-    colorAttachmentRead = 0x00000080 # Controls coherency of color attachment reads
-    colorAttachmentWrite = 0x00000100 # Controls coherency of color attachment writes
-    depthStencilAttachmentRead = 0x00000200 # Controls coherency of depth/stencil attachment reads
-    depthStencilAttachmentWrite = 0x00000400 # Controls coherency of depth/stencil attachment writes
-    transferRead = 0x00000800 # Controls coherency of transfer reads
-    transferWrite = 0x00001000 # Controls coherency of transfer writes
-    hostRead = 0x00002000 # Controls coherency of host reads
-    hostWrite = 0x00004000 # Controls coherency of host writes
-    memoryRead = 0x00008000 # Controls coherency of memory reads
-    memoryWrite = 0x00010000 # Controls coherency of memory writes
-    # Provided by VK_NV_device_generated_commands
-    commandPreprocessReadNv = 0x00020000
-    # Provided by VK_NV_device_generated_commands
-    commandPreprocessWriteNv = 0x00040000
-    # Provided by VK_EXT_blend_operation_advanced
-    colorAttachmentReadNoncoherentExt = 0x00080000
-    # Provided by VK_EXT_conditional_rendering
-    conditionalRenderingReadExt = 0x00100000 # read access flag for reading conditional rendering predicate
-    # Provided by VK_KHR_ray_tracing
-    accelerationStructureReadKhr = 0x00200000
-    # Provided by VK_KHR_ray_tracing
-    accelerationStructureWriteKhr = 0x00400000
-    # Provided by VK_NV_shading_rate_image
-    shadingRateImageReadNv = 0x00800000
-    # Provided by VK_EXT_fragment_density_map
-    fragmentDensityMapReadExt = 0x01000000
-    # Provided by VK_EXT_transform_feedback
-    transformFeedbackWriteExt = 0x02000000
-    # Provided by VK_EXT_transform_feedback
-    transformFeedbackCounterReadExt = 0x04000000
-    # Provided by VK_EXT_transform_feedback
-    transformFeedbackCounterWriteExt = 0x08000000
-    # Provided by VK_AMD_extension_25
-    reserved28Khr = 0x10000000
-    # Provided by VK_AMD_extension_25
-    reserved29Khr = 0x20000000
-    # Provided by VK_AMD_extension_24
-    reserved30Khr = 0x40000000
-  AccessFlags* = Flags[AccessFlagBits]
   AttachmentDescription* = object
     flags*: AttachmentDescriptionFlags
     format*: Format
@@ -3094,34 +3224,11 @@ type
     stencilStoreOp*: AttachmentStoreOp
     initialLayout*: ImageLayout
     finalLayout*: ImageLayout
-  AttachmentDescriptionFlagBits* {.size: sizeof(int32), pure.} = enum
-    mayAlias = 0x00000001 # The attachment may alias physical memory of another attachment in the same render pass
-  AttachmentDescriptionFlags* = Flags[AttachmentDescriptionFlagBits]
-  AttachmentLoadOp* {.size: sizeof(int32), pure.} = enum
-    load = 0
-    clear = 1
-    dontCare = 2
   AttachmentReference* = object
     attachment*: uint32
     layout*: ImageLayout
-  AttachmentStoreOp* {.size: sizeof(int32), pure.} = enum
-    store = 0
-    dontCare = 1
-    # Provided by VK_QCOM_render_pass_store_ops
-    noneQcom = 1000301000
-  DependencyFlagBits* {.size: sizeof(int32), pure.} = enum
-    byRegion = 0x00000001 # Dependency is per pixel region
-    # Provided by VK_VERSION_1_1
-    viewLocal = 0x00000002
-    # Provided by VK_VERSION_1_1
-    deviceGroup = 0x00000004 # Dependency is across devices
-  DependencyFlags* = Flags[DependencyFlagBits]
   HtFramebuffer = object of HandleType
   Framebuffer* = NonDispatchableHandle[HtFramebuffer]
-  FramebufferCreateFlagBits* {.size: sizeof(int32), pure.} = enum
-    # Provided by VK_VERSION_1_2
-    imageless = 0x00000001
-  FramebufferCreateFlags* = Flags[FramebufferCreateFlagBits]
   FramebufferCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -3132,19 +3239,8 @@ type
     width*: uint32
     height*: uint32
     layers*: uint32
-  PipelineBindPoint* {.size: sizeof(int32), pure.} = enum
-    graphics = 0
-    compute = 1
-    # Provided by VK_KHR_ray_tracing
-    rayTracingKhr = 1000165000
   HtRenderPass = object of HandleType
   RenderPass* = NonDispatchableHandle[HtRenderPass]
-  RenderPassCreateFlagBits* {.size: sizeof(int32), pure.} = enum
-    # Provided by VK_KHR_extension_221
-    reserved0Khr = 0x00000001
-    # Provided by VK_QCOM_render_pass_transform
-    transformQcom = 0x00000002
-  RenderPassCreateFlags* = Flags[RenderPassCreateFlagBits]
   RenderPassCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -3174,35 +3270,16 @@ type
     pDepthStencilAttachment*: ptr AttachmentReference
     preserveAttachmentCount*: uint32
     pPreserveAttachments*: ptr uint32
-  SubpassDescriptionFlagBits* {.size: sizeof(int32), pure.} = enum
-    # Provided by VK_NVX_multiview_per_view_attributes
-    perViewAttributesNvx = 0x00000001
-    # Provided by VK_NVX_multiview_per_view_attributes
-    perViewPositionXOnlyNvx = 0x00000002
-    # Provided by VK_QCOM_render_pass_shader_resolve
-    fragmentRegionQcom = 0x00000004
-    # Provided by VK_QCOM_render_pass_shader_resolve
-    shaderResolveQcom = 0x00000008
-  SubpassDescriptionFlags* = Flags[SubpassDescriptionFlagBits]
 
   # Command pool commands
   # ---------------------
   HtCommandPool = object of HandleType
   CommandPool* = NonDispatchableHandle[HtCommandPool]
-  CommandPoolCreateFlagBits* {.size: sizeof(int32), pure.} = enum
-    transient = 0x00000001 # Command buffers have a short lifetime
-    resetCommandBuffer = 0x00000002 # Command buffers may release their memory individually
-    # Provided by VK_VERSION_1_1
-    protected = 0x00000004 # Command buffers allocated from pool are protected command buffers
-  CommandPoolCreateFlags* = Flags[CommandPoolCreateFlagBits]
   CommandPoolCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
     flags*: CommandPoolCreateFlags
     queueFamilyIndex*: uint32
-  CommandPoolResetFlagBits* {.size: sizeof(int32), pure.} = enum
-    releaseResources = 0x00000001 # Release resources owned by the pool
-  CommandPoolResetFlags* = Flags[CommandPoolResetFlagBits]
 
   # Command buffer commands
   # -----------------------
@@ -3228,20 +3305,6 @@ type
     occlusionQueryEnable*: Bool32
     queryFlags*: QueryControlFlags
     pipelineStatistics*: QueryPipelineStatisticFlags
-  CommandBufferLevel* {.size: sizeof(int32), pure.} = enum
-    primary = 0
-    secondary = 1
-  CommandBufferResetFlagBits* {.size: sizeof(int32), pure.} = enum
-    releaseResources = 0x00000001 # Release resources owned by the buffer
-  CommandBufferResetFlags* = Flags[CommandBufferResetFlagBits]
-  CommandBufferUsageFlagBits* {.size: sizeof(int32), pure.} = enum
-    oneTimeSubmit = 0x00000001
-    renderPassContinue = 0x00000002
-    simultaneousUse = 0x00000004 # Command buffer may be submitted/executed more than once simultaneously
-  CommandBufferUsageFlags* = Flags[CommandBufferUsageFlagBits]
-  QueryControlFlagBits* {.size: sizeof(int32), pure.} = enum
-    precise = 0x00000001 # Require precise results to be collected by the query
-  QueryControlFlags* = Flags[QueryControlFlagBits]
 
   # Command buffer building commands
   # --------------------------------
@@ -3298,13 +3361,6 @@ type
     mipLevel*: uint32
     baseArrayLayer*: uint32
     layerCount*: uint32
-  IndexType* {.size: sizeof(int32), pure.} = enum
-    uint16 = 0
-    uint32 = 1
-    # Provided by VK_KHR_ray_tracing
-    noneKhr = 1000165000
-    # Provided by VK_EXT_index_type_uint8
-    uint8Ext = 1000265000
   RenderPassBeginInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -3313,14 +3369,6 @@ type
     renderArea*: Rect2D
     clearValueCount*: uint32
     pClearValues*: ptr ClearValue
-  StencilFaceFlagBits* {.size: sizeof(int32), pure.} = enum
-    front = 0x00000001 # Front face
-    back = 0x00000002 # Back face
-    frontAndBack = 0x00000003 # Front and back faces
-  StencilFaceFlags* = Flags[StencilFaceFlagBits]
-  SubpassContents* {.size: sizeof(int32), pure.} = enum
-    inline = 0
-    secondaryCommandBuffers = 1
 
 # Header boilerplate
 # ------------------
@@ -3369,8 +3417,8 @@ var # command cages
   getPhysicalDevicePropertiesCage: proc(physicalDevice: PhysicalDevice; pProperties: ptr PhysicalDeviceProperties;): void {.cdecl.}
   getPhysicalDeviceQueueFamilyPropertiesCage: proc(physicalDevice: PhysicalDevice; pQueueFamilyPropertyCount: ptr uint32; pQueueFamilyProperties: ptr QueueFamilyProperties;): void {.cdecl.}
   getPhysicalDeviceMemoryPropertiesCage: proc(physicalDevice: PhysicalDevice; pMemoryProperties: ptr PhysicalDeviceMemoryProperties;): void {.cdecl.}
-  getInstanceProcAddrCage: proc(instance: Instance; pName: cstring;): VoidFunction {.cdecl.}
-  getDeviceProcAddrCage: proc(device: Device; pName: cstring;): VoidFunction {.cdecl.}
+  getInstanceProcAddrCage: proc(instance: Instance; pName: cstring;): PFN_VoidFunction {.cdecl.}
+  getDeviceProcAddrCage: proc(device: Device; pName: cstring;): PFN_VoidFunction {.cdecl.}
 proc createInstance*(
       pCreateInfo: ptr InstanceCreateInfo;
       pAllocator: ptr AllocationCallbacks;
@@ -3428,12 +3476,12 @@ proc getPhysicalDeviceMemoryProperties*(
 proc getInstanceProcAddr*(
       instance: Instance;
       pName: cstring;
-    ): VoidFunction {.cdecl.} =
+    ): PFN_VoidFunction {.cdecl.} =
   getInstanceProcAddrCage(instance,pName)
 proc getDeviceProcAddr*(
       device: Device;
       pName: cstring;
-    ): VoidFunction {.cdecl.} =
+    ): PFN_VoidFunction {.cdecl.} =
   getDeviceProcAddrCage(device,pName)
 
 

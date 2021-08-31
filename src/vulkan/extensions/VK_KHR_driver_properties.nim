@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T23:05:46Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_KHR_driver_properties
 
 
@@ -6,6 +6,7 @@ import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
 import ../features/vk12
+export VK_KHR_get_physical_device_properties2
 
 const
   KhrDriverPropertiesSpecVersion* = 1
@@ -13,8 +14,10 @@ const
   MaxDriverNameSizeKhr* = MaxDriverNameSize
   MaxDriverInfoSizeKhr* = MaxDriverInfoSize
 
-type
+type # enums and bitmasks
   DriverIdKHR* = distinct UnusedEnum
+
+type
   ConformanceVersionKHR* = object
   PhysicalDeviceDriverPropertiesKHR* = object
 

@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T23:05:46Z
+# Generated at 2021-08-31T00:22:52Z
 # VK_KHR_spirv_1_4
 
 
@@ -6,6 +6,7 @@ import ../platform
 import ../features/vk10
 import ./VK_KHR_shader_float_controls
 import ../features/vk12
+export VK_KHR_shader_float_controls
 
 const
   KhrSpirv14SpecVersion* = 1

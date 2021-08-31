@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:33:47Z
 # VK_EXT_full_screen_exclusive
 
 
@@ -8,17 +8,27 @@ import ./VK_KHR_get_physical_device_properties2
 import ./VK_KHR_surface
 import ./VK_KHR_get_surface_capabilities2
 import ./VK_KHR_swapchain
+import ./VK_KHR_win32_surface
+import ./VK_KHR_device_group
+export VK_KHR_get_physical_device_properties2
+export VK_KHR_surface
+export VK_KHR_get_surface_capabilities2
+export VK_KHR_swapchain
+export VK_KHR_win32_surface
+export VK_KHR_device_group
 
 const
   ExtFullScreenExclusiveSpecVersion* = 4
   ExtFullScreenExclusiveExtensionName* = "VK_EXT_full_screen_exclusive"
 
-type
+type # enums and bitmasks
   FullScreenExclusiveEXT* {.size: sizeof(int32), pure.} = enum
     defaultExt = 0
     allowedExt = 1
     disallowedExt = 2
     applicationControlledExt = 3
+
+type
   SurfaceFullScreenExclusiveInfoEXT* = object
     sType*: StructureType
     pNext*: pointer

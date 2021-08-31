@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T23:05:46Z
+# Generated at 2021-08-31T01:21:02Z
 # VK_KHR_timeline_semaphore
 
 
@@ -6,19 +6,22 @@ import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
 import ../features/vk12
+export VK_KHR_get_physical_device_properties2
 
 const
   KhrTimelineSemaphoreSpecVersion* = 2
   KhrTimelineSemaphoreExtensionName* = "VK_KHR_timeline_semaphore"
 
-type
+type # enums and bitmasks
   SemaphoreTypeKHR* = distinct UnusedEnum
+  SemaphoreWaitFlagBitsKHR* = distinct UnusedEnum
+  SemaphoreWaitFlagsKHR* = SemaphoreWaitFlags
+
+type
   PhysicalDeviceTimelineSemaphoreFeaturesKHR* = object
   PhysicalDeviceTimelineSemaphorePropertiesKHR* = object
   SemaphoreTypeCreateInfoKHR* = object
   TimelineSemaphoreSubmitInfoKHR* = object
-  SemaphoreWaitFlagBitsKHR* = distinct UnusedEnum
-  {name}* = {Alias}
   SemaphoreWaitInfoKHR* = object
   SemaphoreSignalInfoKHR* = object
 

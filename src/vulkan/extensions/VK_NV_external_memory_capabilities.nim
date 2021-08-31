@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_NV_external_memory_capabilities
 
 
@@ -9,7 +9,7 @@ const
   NvExternalMemoryCapabilitiesSpecVersion* = 1
   NvExternalMemoryCapabilitiesExtensionName* = "VK_NV_external_memory_capabilities"
 
-type
+type # enums and bitmasks
   ExternalMemoryHandleTypeFlagsNV* = Flags[ExternalMemoryHandleTypeFlagBitsNV]
   ExternalMemoryHandleTypeFlagBitsNV* {.size: sizeof(int32), pure.} = enum
     opaqueWin32Nv = 0x00000001
@@ -21,6 +21,8 @@ type
     dedicatedOnlyNv = 0x00000001
     exportableNv = 0x00000002
     importableNv = 0x00000004
+
+type
   ExternalImageFormatPropertiesNV* = object
     imageFormatProperties*: ImageFormatProperties
     externalMemoryFeatures*: ExternalMemoryFeatureFlagsNV

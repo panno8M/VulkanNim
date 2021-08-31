@@ -1,10 +1,11 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T02:22:12Z
 # VK_KHR_external_semaphore_fd
 
 
 import ../platform
-import ../features/vk10
+import ../features/vk11
 import ./VK_KHR_external_semaphore
+export VK_KHR_external_semaphore
 
 const
   KhrExternalSemaphoreFdSpecVersion* = 1

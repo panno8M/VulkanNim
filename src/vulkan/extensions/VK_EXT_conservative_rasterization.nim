@@ -1,14 +1,22 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_EXT_conservative_rasterization
 
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
+export VK_KHR_get_physical_device_properties2
 
 const
   ExtConservativeRasterizationSpecVersion* = 1
   ExtConservativeRasterizationExtensionName* = "VK_EXT_conservative_rasterization"
+
+type # enums and bitmasks
+  PipelineRasterizationConservativeStateCreateFlagsEXT* = Flags[distinct UnusedEnum]
+  ConservativeRasterizationModeEXT* {.size: sizeof(int32), pure.} = enum
+    disabledExt = 0
+    overestimateExt = 1
+    underestimateExt = 2
 
 type
   PhysicalDeviceConservativeRasterizationPropertiesEXT* = object
@@ -29,10 +37,5 @@ type
     flags*: PipelineRasterizationConservativeStateCreateFlagsEXT
     conservativeRasterizationMode*: ConservativeRasterizationModeEXT
     extraPrimitiveOverestimationSize*: float32
-  PipelineRasterizationConservativeStateCreateFlagsEXT* = Flags[distinct UnusedEnum]
-  ConservativeRasterizationModeEXT* {.size: sizeof(int32), pure.} = enum
-    disabledExt = 0
-    overestimateExt = 1
-    underestimateExt = 2
 
 

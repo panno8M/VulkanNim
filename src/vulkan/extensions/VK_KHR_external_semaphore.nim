@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T23:05:46Z
+# Generated at 2021-08-31T01:21:03Z
 # VK_KHR_external_semaphore
 
 
@@ -6,14 +6,17 @@ import ../platform
 import ../features/vk10
 import ./VK_KHR_external_semaphore_capabilities
 import ../features/vk11
+export VK_KHR_external_semaphore_capabilities
 
 const
   KhrExternalSemaphoreSpecVersion* = 1
   KhrExternalSemaphoreExtensionName* = "VK_KHR_external_semaphore"
 
-type
-  {name}* = {Alias}
+type # enums and bitmasks
+  SemaphoreImportFlagsKHR* = SemaphoreImportFlags
   SemaphoreImportFlagBitsKHR* = distinct UnusedEnum
+
+type
   ExportSemaphoreCreateInfoKHR* = object
 
 StructureType.defineAliases:

@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T23:05:46Z
+# Generated at 2021-08-31T00:22:52Z
 # VK_KHR_dedicated_allocation
 
 
@@ -6,6 +6,7 @@ import ../platform
 import ../features/vk10
 import ./VK_KHR_get_memory_requirements2
 import ../features/vk11
+export VK_KHR_get_memory_requirements2
 
 const
   KhrDedicatedAllocationSpecVersion* = 3

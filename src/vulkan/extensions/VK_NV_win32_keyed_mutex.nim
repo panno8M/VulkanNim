@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T23:05:46Z
+# Generated at 2021-08-31T00:22:52Z
 # VK_NV_win32_keyed_mutex
 
 
@@ -6,6 +6,8 @@ import ../platform
 import ../features/vk10
 import ./VK_NV_external_memory_win32
 import ./VK_KHR_win32_keyed_mutex
+export VK_NV_external_memory_win32
+export VK_KHR_win32_keyed_mutex
 
 const
   NvWin32KeyedMutexSpecVersion* = 2

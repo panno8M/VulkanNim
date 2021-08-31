@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_INTEL_performance_query
 
 
@@ -9,7 +9,7 @@ const
   IntelPerformanceQuerySpecVersion* = 2
   IntelPerformanceQueryExtensionName* = "VK_INTEL_performance_query"
 
-type
+type # enums and bitmasks
   PerformanceConfigurationTypeINTEL* {.size: sizeof(int32), pure.} = enum
     commandQueueMetricsDiscoveryActivatedIntel = 0
   QueryPoolSamplingModeINTEL* {.size: sizeof(int32), pure.} = enum
@@ -26,6 +26,8 @@ type
     floatIntel = 2
     boolIntel = 3
     stringIntel = 4
+
+type
   PerformanceValueDataINTEL* {.union.} = object
     value32*: uint32
     value64*: uint64

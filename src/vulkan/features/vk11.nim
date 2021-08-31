@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:51:47Z
+# Generated at 2021-08-31T01:03:35Z
 # vk11
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -19,16 +19,8 @@ const
   # Promoted from VK_KHR_external_memory
   QueueFamilyExternal* = (uint32.high-1)
 
-type
+type # enums and bitmasks
   # Originally based on VK_KHR_subgroup (extension 94), but the actual enum block used was, incorrectly, that of extension 95
-  # -------------------------------------------------------------------------------------------------------------------------
-  PhysicalDeviceSubgroupProperties* = object
-    sType*: StructureType
-    pNext*: pointer
-    subgroupSize*: uint32
-    supportedStages*: ShaderStageFlags
-    supportedOperations*: SubgroupFeatureFlags
-    quadOperationsInAllStages*: Bool32
   SubgroupFeatureFlags* = Flags[SubgroupFeatureFlagBits]
   SubgroupFeatureFlagBits* {.size: sizeof(int32), pure.} = enum
     basic = 0x00000001 # Basic subgroup operations
@@ -41,6 +33,123 @@ type
     quad = 0x00000080 # Quad subgroup operations
     # Provided by VK_NV_shader_subgroup_partitioned
     partitionedNv = 0x00000100
+
+  # Promoted from VK_KHR_device_group
+  PeerMemoryFeatureFlags* = Flags[PeerMemoryFeatureFlagBits]
+  PeerMemoryFeatureFlagBits* {.size: sizeof(int32), pure.} = enum
+    copySrc = 0x00000001 # Can read with vkCmdCopy commands
+    copyDst = 0x00000002 # Can write with vkCmdCopy commands
+    genericSrc = 0x00000004 # Can read with any access type/command
+    genericDst = 0x00000008 # Can write with and access type/command
+  MemoryAllocateFlags* = Flags[MemoryAllocateFlagBits]
+  MemoryAllocateFlagBits* {.size: sizeof(int32), pure.} = enum
+    deviceMask = 0x00000001 # Force allocation on specific devices
+    # Provided by VK_VERSION_1_2
+    deviceAddress = 0x00000002
+    # Provided by VK_VERSION_1_2
+    deviceAddressCaptureReplay = 0x00000004
+
+  # Promoted from VK_KHR_maintenance1
+  CommandPoolTrimFlags* = Flags[distinct UnusedEnum]
+
+  # Promoted from VK_KHR_maintenance2
+  PointClippingBehavior* {.size: sizeof(int32), pure.} = enum
+    allClipPlanes = 0
+    userClipPlanesOnly = 1
+  TessellationDomainOrigin* {.size: sizeof(int32), pure.} = enum
+    upperLeft = 0
+    lowerLeft = 1
+
+  # Promoted from VK_KHR_sampler_ycbcr_conversion
+  SamplerYcbcrModelConversion* {.size: sizeof(int32), pure.} = enum
+    rgbIdentity = 0
+    ycbcrIdentity = 1 # just range expansion
+    ycbcr709 = 2 # aka HD YUV
+    ycbcr601 = 3 # aka SD YUV
+    ycbcr2020 = 4 # aka UHD YUV
+  SamplerYcbcrRange* {.size: sizeof(int32), pure.} = enum
+    ituFull = 0 # Luma 0..1 maps to 0..255, chroma -0.5..0.5 to 1..255 (clamped)
+    ituNarrow = 1 # Luma 0..1 maps to 16..235, chroma -0.5..0.5 to 16..240
+  ChromaLocation* {.size: sizeof(int32), pure.} = enum
+    cositedEven = 0
+    midpoint = 1
+
+  # Promoted from VK_KHR_descriptor_update_template
+  DescriptorUpdateTemplateCreateFlags* = Flags[distinct UnusedEnum]
+  DescriptorUpdateTemplateType* {.size: sizeof(int32), pure.} = enum
+    descriptorSet = 0 # Create descriptor update template for descriptor set updates
+    # Provided by VK_KHR_push_descriptor
+    pushDescriptorsKhr = 1 # Create descriptor update template for pushed descriptor updates
+
+  # Promoted from VK_KHR_external_memory_capabilities
+  ExternalMemoryHandleTypeFlags* = Flags[ExternalMemoryHandleTypeFlagBits]
+  ExternalMemoryHandleTypeFlagBits* {.size: sizeof(int32), pure.} = enum
+    opaqueFd = 0x00000001
+    opaqueWin32 = 0x00000002
+    opaqueWin32Kmt = 0x00000004
+    d3d11Texture = 0x00000008
+    d3d11TextureKmt = 0x00000010
+    d3d12Heap = 0x00000020
+    d3d12Resource = 0x00000040
+    # Provided by VK_EXT_external_memory_host
+    hostAllocationExt = 0x00000080
+    # Provided by VK_EXT_external_memory_host
+    hostMappedForeignMemoryExt = 0x00000100
+    # Provided by VK_EXT_external_memory_dma_buf
+    dmaBufExt = 0x00000200
+    # Provided by VK_ANDROID_external_memory_android_hardware_buffer
+    androidHardwareBufferAndroid = 0x00000400
+  ExternalMemoryFeatureFlags* = Flags[ExternalMemoryFeatureFlagBits]
+  ExternalMemoryFeatureFlagBits* {.size: sizeof(int32), pure.} = enum
+    dedicatedOnly = 0x00000001
+    exportable = 0x00000002
+    importable = 0x00000004
+
+  # Promoted from VK_KHR_external_fence_capabilities
+  ExternalFenceHandleTypeFlags* = Flags[ExternalFenceHandleTypeFlagBits]
+  ExternalFenceHandleTypeFlagBits* {.size: sizeof(int32), pure.} = enum
+    opaqueFd = 0x00000001
+    opaqueWin32 = 0x00000002
+    opaqueWin32Kmt = 0x00000004
+    syncFd = 0x00000008
+  ExternalFenceFeatureFlags* = Flags[ExternalFenceFeatureFlagBits]
+  ExternalFenceFeatureFlagBits* {.size: sizeof(int32), pure.} = enum
+    exportable = 0x00000001
+    importable = 0x00000002
+
+  # Promoted from VK_KHR_external_fence
+  FenceImportFlags* = Flags[FenceImportFlagBits]
+  FenceImportFlagBits* {.size: sizeof(int32), pure.} = enum
+    temporary = 0x00000001
+
+  # Promoted from VK_KHR_external_semaphore
+  SemaphoreImportFlags* = Flags[SemaphoreImportFlagBits]
+  SemaphoreImportFlagBits* {.size: sizeof(int32), pure.} = enum
+    temporary = 0x00000001
+
+  # Promoted from VK_KHR_external_semaphore_capabilities
+  ExternalSemaphoreHandleTypeFlags* = Flags[ExternalSemaphoreHandleTypeFlagBits]
+  ExternalSemaphoreHandleTypeFlagBits* {.size: sizeof(int32), pure.} = enum
+    opaqueFd = 0x00000001
+    opaqueWin32 = 0x00000002
+    opaqueWin32Kmt = 0x00000004
+    d3d12Fence = 0x00000008
+    syncFd = 0x00000010
+  ExternalSemaphoreFeatureFlags* = Flags[ExternalSemaphoreFeatureFlagBits]
+  ExternalSemaphoreFeatureFlagBits* {.size: sizeof(int32), pure.} = enum
+    exportable = 0x00000001
+    importable = 0x00000002
+
+type
+  # Originally based on VK_KHR_subgroup (extension 94), but the actual enum block used was, incorrectly, that of extension 95
+  # -------------------------------------------------------------------------------------------------------------------------
+  PhysicalDeviceSubgroupProperties* = object
+    sType*: StructureType
+    pNext*: pointer
+    subgroupSize*: uint32
+    supportedStages*: ShaderStageFlags
+    supportedOperations*: SubgroupFeatureFlags
+    quadOperationsInAllStages*: Bool32
 
   # Promoted from VK_KHR_bind_memory2
   # ---------------------------------
@@ -82,19 +191,6 @@ type
 
   # Promoted from VK_KHR_device_group
   # ---------------------------------
-  PeerMemoryFeatureFlags* = Flags[PeerMemoryFeatureFlagBits]
-  PeerMemoryFeatureFlagBits* {.size: sizeof(int32), pure.} = enum
-    copySrc = 0x00000001 # Can read with vkCmdCopy commands
-    copyDst = 0x00000002 # Can write with vkCmdCopy commands
-    genericSrc = 0x00000004 # Can read with any access type/command
-    genericDst = 0x00000008 # Can write with and access type/command
-  MemoryAllocateFlags* = Flags[MemoryAllocateFlagBits]
-  MemoryAllocateFlagBits* {.size: sizeof(int32), pure.} = enum
-    deviceMask = 0x00000001 # Force allocation on specific devices
-    # Provided by VK_VERSION_1_2
-    deviceAddress = 0x00000002
-    # Provided by VK_VERSION_1_2
-    deviceAddressCaptureReplay = 0x00000004
   MemoryAllocateFlagsInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -224,19 +320,12 @@ type
     usage*: ImageUsageFlags
     tiling*: ImageTiling
 
-  # Promoted from VK_KHR_maintenance1
-  # ---------------------------------
-  CommandPoolTrimFlags* = Flags[distinct UnusedEnum]
-
   # Promoted from VK_KHR_maintenance2
   # ---------------------------------
   PhysicalDevicePointClippingProperties* = object
     sType*: StructureType
     pNext*: pointer
     pointClippingBehavior*: PointClippingBehavior
-  PointClippingBehavior* {.size: sizeof(int32), pure.} = enum
-    allClipPlanes = 0
-    userClipPlanesOnly = 1
   RenderPassInputAttachmentAspectCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -250,9 +339,6 @@ type
     sType*: StructureType
     pNext*: pointer
     usage*: ImageUsageFlags
-  TessellationDomainOrigin* {.size: sizeof(int32), pure.} = enum
-    upperLeft = 0
-    lowerLeft = 1
   PipelineTessellationDomainOriginStateCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -346,28 +432,11 @@ type
     combinedImageSamplerDescriptorCount*: uint32
   HtSamplerYcbcrConversion = object of HandleType
   SamplerYcbcrConversion* = NonDispatchableHandle[HtSamplerYcbcrConversion]
-  SamplerYcbcrModelConversion* {.size: sizeof(int32), pure.} = enum
-    rgbIdentity = 0
-    ycbcrIdentity = 1 # just range expansion
-    ycbcr709 = 2 # aka HD YUV
-    ycbcr601 = 3 # aka SD YUV
-    ycbcr2020 = 4 # aka UHD YUV
-  SamplerYcbcrRange* {.size: sizeof(int32), pure.} = enum
-    ituFull = 0 # Luma 0..1 maps to 0..255, chroma -0.5..0.5 to 1..255 (clamped)
-    ituNarrow = 1 # Luma 0..1 maps to 16..235, chroma -0.5..0.5 to 16..240
-  ChromaLocation* {.size: sizeof(int32), pure.} = enum
-    cositedEven = 0
-    midpoint = 1
 
   # Promoted from VK_KHR_descriptor_update_template
   # -----------------------------------------------
   HtDescriptorUpdateTemplate = object of HandleType
   DescriptorUpdateTemplate* = NonDispatchableHandle[HtDescriptorUpdateTemplate]
-  DescriptorUpdateTemplateCreateFlags* = Flags[distinct UnusedEnum]
-  DescriptorUpdateTemplateType* {.size: sizeof(int32), pure.} = enum
-    descriptorSet = 0 # Create descriptor update template for descriptor set updates
-    # Provided by VK_KHR_push_descriptor
-    pushDescriptorsKhr = 1 # Create descriptor update template for pushed descriptor updates
   DescriptorUpdateTemplateEntry* = object
     dstBinding*: uint32
     dstArrayElement*: uint32
@@ -389,28 +458,6 @@ type
 
   # Promoted from VK_KHR_external_memory_capabilities
   # -------------------------------------------------
-  ExternalMemoryHandleTypeFlags* = Flags[ExternalMemoryHandleTypeFlagBits]
-  ExternalMemoryHandleTypeFlagBits* {.size: sizeof(int32), pure.} = enum
-    opaqueFd = 0x00000001
-    opaqueWin32 = 0x00000002
-    opaqueWin32Kmt = 0x00000004
-    d3d11Texture = 0x00000008
-    d3d11TextureKmt = 0x00000010
-    d3d12Heap = 0x00000020
-    d3d12Resource = 0x00000040
-    # Provided by VK_EXT_external_memory_host
-    hostAllocationExt = 0x00000080
-    # Provided by VK_EXT_external_memory_host
-    hostMappedForeignMemoryExt = 0x00000100
-    # Provided by VK_EXT_external_memory_dma_buf
-    dmaBufExt = 0x00000200
-    # Provided by VK_ANDROID_external_memory_android_hardware_buffer
-    androidHardwareBufferAndroid = 0x00000400
-  ExternalMemoryFeatureFlags* = Flags[ExternalMemoryFeatureFlagBits]
-  ExternalMemoryFeatureFlagBits* {.size: sizeof(int32), pure.} = enum
-    dedicatedOnly = 0x00000001
-    exportable = 0x00000002
-    importable = 0x00000004
   ExternalMemoryProperties* = object
     externalMemoryFeatures*: ExternalMemoryFeatureFlags
     exportFromImportedHandleTypes*: ExternalMemoryHandleTypeFlags
@@ -459,16 +506,6 @@ type
 
   # Promoted from VK_KHR_external_fence_capabilities
   # ------------------------------------------------
-  ExternalFenceHandleTypeFlags* = Flags[ExternalFenceHandleTypeFlagBits]
-  ExternalFenceHandleTypeFlagBits* {.size: sizeof(int32), pure.} = enum
-    opaqueFd = 0x00000001
-    opaqueWin32 = 0x00000002
-    opaqueWin32Kmt = 0x00000004
-    syncFd = 0x00000008
-  ExternalFenceFeatureFlags* = Flags[ExternalFenceFeatureFlagBits]
-  ExternalFenceFeatureFlagBits* {.size: sizeof(int32), pure.} = enum
-    exportable = 0x00000001
-    importable = 0x00000002
   PhysicalDeviceExternalFenceInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -482,9 +519,6 @@ type
 
   # Promoted from VK_KHR_external_fence
   # -----------------------------------
-  FenceImportFlags* = Flags[FenceImportFlagBits]
-  FenceImportFlagBits* {.size: sizeof(int32), pure.} = enum
-    temporary = 0x00000001
   ExportFenceCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -492,9 +526,6 @@ type
 
   # Promoted from VK_KHR_external_semaphore
   # ---------------------------------------
-  SemaphoreImportFlags* = Flags[SemaphoreImportFlagBits]
-  SemaphoreImportFlagBits* {.size: sizeof(int32), pure.} = enum
-    temporary = 0x00000001
   ExportSemaphoreCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -502,17 +533,6 @@ type
 
   # Promoted from VK_KHR_external_semaphore_capabilities
   # ----------------------------------------------------
-  ExternalSemaphoreHandleTypeFlags* = Flags[ExternalSemaphoreHandleTypeFlagBits]
-  ExternalSemaphoreHandleTypeFlagBits* {.size: sizeof(int32), pure.} = enum
-    opaqueFd = 0x00000001
-    opaqueWin32 = 0x00000002
-    opaqueWin32Kmt = 0x00000004
-    d3d12Fence = 0x00000008
-    syncFd = 0x00000010
-  ExternalSemaphoreFeatureFlags* = Flags[ExternalSemaphoreFeatureFlagBits]
-  ExternalSemaphoreFeatureFlagBits* {.size: sizeof(int32), pure.} = enum
-    exportable = 0x00000001
-    importable = 0x00000002
   PhysicalDeviceExternalSemaphoreInfo* = object
     sType*: StructureType
     pNext*: pointer

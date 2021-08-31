@@ -19,7 +19,6 @@ type
     constAliases*: TableRef[string, NodeConstAlias]
     defines*: TableRef[string, NodeDefine]
 
-
   NodeRequire* = ref object
     comment*: Option[string]
     targets*: seq[NodeRequireVal]
@@ -31,7 +30,7 @@ type
     fileFooter*: string
     fileName*: string
     mergedFileNames*: seq[string]
-    requires*: seq[NodeRequire]
+    requires*: seq[seq[NodeRequire]]
 
   NodeKindEnum* = enum
     nkeValue
@@ -135,9 +134,15 @@ type
       params*: seq[NodeCommandParam]
     of nkbrAlias:
       alias*: string
+  NodeKindBasetype* = enum
+    nkbNormal, nkbExternal
   NodeBasetype* = ref object
     name*: string
-    theType*: string
+    case kind*: NodeKindBasetype
+    of nkbNormal:
+      theType*: string
+    of nkbExternal:
+      path*: string
 
   NodeKindRequire* = enum
     nkrCommand

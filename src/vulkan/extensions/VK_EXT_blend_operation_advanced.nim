@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_EXT_blend_operation_advanced
 
 
@@ -8,6 +8,12 @@ import ../features/vk10
 const
   ExtBlendOperationAdvancedSpecVersion* = 2
   ExtBlendOperationAdvancedExtensionName* = "VK_EXT_blend_operation_advanced"
+
+type # enums and bitmasks
+  BlendOverlapEXT* {.size: sizeof(int32), pure.} = enum
+    uncorrelatedExt = 0
+    disjointExt = 1
+    conjointExt = 2
 
 type
   PhysicalDeviceBlendOperationAdvancedFeaturesEXT* = object
@@ -29,9 +35,5 @@ type
     srcPremultiplied*: Bool32
     dstPremultiplied*: Bool32
     blendOverlap*: BlendOverlapEXT
-  BlendOverlapEXT* {.size: sizeof(int32), pure.} = enum
-    uncorrelatedExt = 0
-    disjointExt = 1
-    conjointExt = 2
 
 

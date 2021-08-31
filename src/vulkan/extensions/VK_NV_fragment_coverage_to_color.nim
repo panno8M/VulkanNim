@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_NV_fragment_coverage_to_color
 
 
@@ -9,8 +9,10 @@ const
   NvFragmentCoverageToColorSpecVersion* = 1
   NvFragmentCoverageToColorExtensionName* = "VK_NV_fragment_coverage_to_color"
 
-type
+type # enums and bitmasks
   PipelineCoverageToColorStateCreateFlagsNV* = Flags[distinct UnusedEnum]
+
+type
   PipelineCoverageToColorStateCreateInfoNV* = object
     sType*: StructureType
     pNext*: pointer

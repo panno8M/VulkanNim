@@ -1,13 +1,17 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T00:20:48Z
 # VK_ANDROID_external_memory_android_hardware_buffer
 
 
 import ../platform
-import ../features/vk10
+import ../features/vk11
 import ./VK_KHR_sampler_ycbcr_conversion
 import ./VK_KHR_external_memory
 import ./VK_EXT_queue_family_foreign
 import ./VK_KHR_dedicated_allocation
+export VK_KHR_sampler_ycbcr_conversion
+export VK_KHR_external_memory
+export VK_EXT_queue_family_foreign
+export VK_KHR_dedicated_allocation
 
 type # basetypes
   AHardwareBuffer* = distinct object

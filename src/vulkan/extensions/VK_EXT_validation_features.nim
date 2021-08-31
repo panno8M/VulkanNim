@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_EXT_validation_features
 
 
@@ -9,14 +9,7 @@ const
   ExtValidationFeaturesSpecVersion* = 4
   ExtValidationFeaturesExtensionName* = "VK_EXT_validation_features"
 
-type
-  ValidationFeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
-    enabledValidationFeatureCount*: uint32
-    pEnabledValidationFeatures*: ptr ValidationFeatureEnableEXT
-    disabledValidationFeatureCount*: uint32
-    pDisabledValidationFeatures*: ptr ValidationFeatureDisableEXT
+type # enums and bitmasks
   ValidationFeatureEnableEXT* {.size: sizeof(int32), pure.} = enum
     gpuAssistedExt = 0
     gpuAssistedReserveBindingSlotExt = 1
@@ -31,5 +24,14 @@ type
     objectLifetimesExt = 4
     coreChecksExt = 5
     uniqueHandlesExt = 6
+
+type
+  ValidationFeaturesEXT* = object
+    sType*: StructureType
+    pNext*: pointer
+    enabledValidationFeatureCount*: uint32
+    pEnabledValidationFeatures*: ptr ValidationFeatureEnableEXT
+    disabledValidationFeatureCount*: uint32
+    pDisabledValidationFeatures*: ptr ValidationFeatureDisableEXT
 
 

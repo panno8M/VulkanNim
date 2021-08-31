@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T23:05:46Z
+# Generated at 2021-08-31T01:33:47Z
 # VK_KHR_sampler_ycbcr_conversion
 
 
@@ -9,10 +9,21 @@ import ./VK_KHR_bind_memory2
 import ./VK_KHR_get_memory_requirements2
 import ./VK_KHR_get_physical_device_properties2
 import ../features/vk11
+import ./VK_EXT_debug_report
+export VK_KHR_maintenance1
+export VK_KHR_bind_memory2
+export VK_KHR_get_memory_requirements2
+export VK_KHR_get_physical_device_properties2
+export VK_EXT_debug_report
 
 const
   KhrSamplerYcbcrConversionSpecVersion* = 14
   KhrSamplerYcbcrConversionExtensionName* = "VK_KHR_sampler_ycbcr_conversion"
+
+type # enums and bitmasks
+  SamplerYcbcrModelConversionKHR* = distinct UnusedEnum
+  SamplerYcbcrRangeKHR* = distinct UnusedEnum
+  ChromaLocationKHR* = distinct UnusedEnum
 
 type
   SamplerYcbcrConversionCreateInfoKHR* = object
@@ -22,9 +33,6 @@ type
   PhysicalDeviceSamplerYcbcrConversionFeaturesKHR* = object
   SamplerYcbcrConversionImageFormatPropertiesKHR* = object
   SamplerYcbcrConversionKHR* = SamplerYcbcrConversion
-  SamplerYcbcrModelConversionKHR* = distinct UnusedEnum
-  SamplerYcbcrRangeKHR* = distinct UnusedEnum
-  ChromaLocationKHR* = distinct UnusedEnum
 
 const createSamplerYcbcrConversionKHR* = createSamplerYcbcrConversion
 const destroySamplerYcbcrConversionKHR* = destroySamplerYcbcrConversion

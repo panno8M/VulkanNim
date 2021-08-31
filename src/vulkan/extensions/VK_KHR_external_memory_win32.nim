@@ -1,10 +1,11 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T02:19:55Z
 # VK_KHR_external_memory_win32
 
 
 import ../platform
-import ../features/vk10
+import ../features/vk11
 import ./VK_KHR_external_memory
+export VK_KHR_external_memory
 
 const
   KhrExternalMemoryWin32SpecVersion* = 1
@@ -15,7 +16,7 @@ type
     sType*: StructureType
     pNext*: pointer
     handleType*: ExternalMemoryHandleTypeFlagBits
-    handle*: HANDLE
+    handle*: Win32Handle
     name*: LPCWSTR
   ExportMemoryWin32HandleInfoKHR* = object
     sType*: StructureType
@@ -34,18 +35,18 @@ type
     handleType*: ExternalMemoryHandleTypeFlagBits
 
 var # command cages
-  getMemoryWin32HandleKHRCage: proc(device: Device; pGetWin32HandleInfo: ptr MemoryGetWin32HandleInfoKHR; pHandle: ptr HANDLE;): Result {.cdecl.}
-  getMemoryWin32HandlePropertiesKHRCage: proc(device: Device; handleType: ExternalMemoryHandleTypeFlagBits; handle: HANDLE; pMemoryWin32HandleProperties: ptr MemoryWin32HandlePropertiesKHR;): Result {.cdecl.}
+  getMemoryWin32HandleKHRCage: proc(device: Device; pGetWin32HandleInfo: ptr MemoryGetWin32HandleInfoKHR; pHandle: ptr Win32Handle;): Result {.cdecl.}
+  getMemoryWin32HandlePropertiesKHRCage: proc(device: Device; handleType: ExternalMemoryHandleTypeFlagBits; handle: Win32Handle; pMemoryWin32HandleProperties: ptr MemoryWin32HandlePropertiesKHR;): Result {.cdecl.}
 proc getMemoryWin32HandleKHR*(
       device: Device;
       pGetWin32HandleInfo: ptr MemoryGetWin32HandleInfoKHR;
-      pHandle: ptr HANDLE;
+      pHandle: ptr Win32Handle;
     ): Result {.cdecl, discardable.} =
   getMemoryWin32HandleKHRCage(device,pGetWin32HandleInfo,pHandle)
 proc getMemoryWin32HandlePropertiesKHR*(
       device: Device;
       handleType: ExternalMemoryHandleTypeFlagBits;
-      handle: HANDLE;
+      handle: Win32Handle;
       pMemoryWin32HandleProperties: ptr MemoryWin32HandlePropertiesKHR;
     ): Result {.cdecl, discardable.} =
   getMemoryWin32HandlePropertiesKHRCage(device,handleType,handle,pMemoryWin32HandleProperties)

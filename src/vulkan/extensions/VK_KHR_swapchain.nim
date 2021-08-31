@@ -1,10 +1,11 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_KHR_swapchain
 
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
+export VK_KHR_surface
 
 const
   KhrSwapchainSpecVersion* = 70
@@ -12,7 +13,7 @@ const
 
   MaxDeviceGroupSize* = 32
 
-type
+type # enums and bitmasks
   SwapchainCreateFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
     # Provided by VK_KHR_swapchain
     splitInstanceBindRegionsKhr = 0x00000001 # Allow images with VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT
@@ -21,6 +22,15 @@ type
     # Provided by VK_KHR_swapchain_mutable_format
     mutableFormatKhr = 0x00000004
   SwapchainCreateFlagsKHR* = Flags[SwapchainCreateFlagBitsKHR]
+
+  DeviceGroupPresentModeFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+    localKhr = 0x00000001 # Present from local memory
+    remoteKhr = 0x00000002 # Present from remote memory
+    sumKhr = 0x00000004 # Present sum of local and/or remote memory
+    localMultiDeviceKhr = 0x00000008 # Each physical device presents from local memory
+  DeviceGroupPresentModeFlagsKHR* = Flags[DeviceGroupPresentModeFlagBitsKHR]
+
+type
   SwapchainCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
@@ -69,12 +79,6 @@ type
     semaphore*: Semaphore
     fence*: Fence
     deviceMask*: uint32
-  DeviceGroupPresentModeFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    localKhr = 0x00000001 # Present from local memory
-    remoteKhr = 0x00000002 # Present from remote memory
-    sumKhr = 0x00000004 # Present sum of local and/or remote memory
-    localMultiDeviceKhr = 0x00000008 # Each physical device presents from local memory
-  DeviceGroupPresentModeFlagsKHR* = Flags[DeviceGroupPresentModeFlagBitsKHR]
   DeviceGroupPresentCapabilitiesKHR* = object
     sType*: StructureType
     pNext*: pointer

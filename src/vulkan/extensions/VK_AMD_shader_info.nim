@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_AMD_shader_info
 
 
@@ -9,11 +9,13 @@ const
   AmdShaderInfoSpecVersion* = 1
   AmdShaderInfoExtensionName* = "VK_AMD_shader_info"
 
-type
+type # enums and bitmasks
   ShaderInfoTypeAMD* {.size: sizeof(int32), pure.} = enum
     statisticsAmd = 0
     binaryAmd = 1
     disassemblyAmd = 2
+
+type
   ShaderResourceUsageAMD* = object
     numUsedVgprs*: uint32
     numUsedSgprs*: uint32

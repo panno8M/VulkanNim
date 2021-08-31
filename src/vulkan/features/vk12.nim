@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # vk12
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -20,6 +20,61 @@ const
 
   # Promoted from VK_KHR_sampler_mirror_clamp_to_edge (extension 15)
   SamplerAddressModeMirrorClampToEdge* = 4
+
+type # enums and bitmasks
+  # Promoted from VK_KHR_driver_properties (extension 197)
+  DriverId* {.size: sizeof(int32), pure.} = enum
+    amdProprietary = 1 # Advanced Micro Devices, Inc.
+    amdOpenSource = 2 # Advanced Micro Devices, Inc.
+    mesaRadv = 3 # Mesa open source project
+    nvidiaProprietary = 4 # NVIDIA Corporation
+    intelProprietaryWindows = 5 # Intel Corporation
+    intelOpenSourceMesa = 6 # Intel Corporation
+    imaginationProprietary = 7 # Imagination Technologies
+    qualcommProprietary = 8 # Qualcomm Technologies, Inc.
+    armProprietary = 9 # Arm Limited
+    googleSwiftshader = 10 # Google LLC
+    ggpProprietary = 11 # Google LLC
+    broadcomProprietary = 12 # Broadcom Inc.
+    mesaLlvmpipe = 13 # Mesa
+    molten = 14 # MoltenVK
+
+  # Promoted from VK_KHR_shader_float_controls (extension 198)
+  ShaderFloatControlsIndependence* {.size: sizeof(int32), pure.} = enum
+    vk32Only = 0
+    all = 1
+    none = 2
+
+  # Promoted from VK_EXT_descriptor_indexing (extension 162)
+  DescriptorBindingFlagBits* {.size: sizeof(int32), pure.} = enum
+    updateAfterBind = 0x00000001
+    updateUnusedWhilePending = 0x00000002
+    partiallyBound = 0x00000004
+    variableDescriptorCount = 0x00000008
+  DescriptorBindingFlags* = Flags[DescriptorBindingFlagBits]
+
+  # Promoted from VK_KHR_depth_stencil_resolve (extension 200)
+  ResolveModeFlagBits* {.size: sizeof(int32), pure.} = enum
+    none = 0
+    sampleZero = 0x00000001
+    average = 0x00000002
+    min = 0x00000004
+    max = 0x00000008
+  ResolveModeFlags* = Flags[ResolveModeFlagBits]
+
+  # Promoted from VK_EXT_sampler_filter_minmax (extension 131)
+  SamplerReductionMode* {.size: sizeof(int32), pure.} = enum
+    weightedAverage = 0
+    min = 1
+    max = 2
+
+  # Promoted from VK_KHR_timeline_semaphore (extension 208)
+  SemaphoreType* {.size: sizeof(int32), pure.} = enum
+    binary = 0
+    timeline = 1
+  SemaphoreWaitFlagBits* {.size: sizeof(int32), pure.} = enum
+    any = 0x00000001
+  SemaphoreWaitFlags* = Flags[SemaphoreWaitFlagBits]
 
 type
   PhysicalDeviceVulkan11Features* = object
@@ -245,21 +300,6 @@ type
 
   # Promoted from VK_KHR_driver_properties (extension 197)
   # ------------------------------------------------------
-  DriverId* {.size: sizeof(int32), pure.} = enum
-    amdProprietary = 1 # Advanced Micro Devices, Inc.
-    amdOpenSource = 2 # Advanced Micro Devices, Inc.
-    mesaRadv = 3 # Mesa open source project
-    nvidiaProprietary = 4 # NVIDIA Corporation
-    intelProprietaryWindows = 5 # Intel Corporation
-    intelOpenSourceMesa = 6 # Intel Corporation
-    imaginationProprietary = 7 # Imagination Technologies
-    qualcommProprietary = 8 # Qualcomm Technologies, Inc.
-    armProprietary = 9 # Arm Limited
-    googleSwiftshader = 10 # Google LLC
-    ggpProprietary = 11 # Google LLC
-    broadcomProprietary = 12 # Broadcom Inc.
-    mesaLlvmpipe = 13 # Mesa
-    molten = 14 # MoltenVK
   ConformanceVersion* = object
     major*: uint8
     minor*: uint8
@@ -311,10 +351,6 @@ type
     shaderRoundingModeRTZFloat16*: Bool32
     shaderRoundingModeRTZFloat32*: Bool32
     shaderRoundingModeRTZFloat64*: Bool32
-  ShaderFloatControlsIndependence* {.size: sizeof(int32), pure.} = enum
-    vk32Only = 0
-    all = 1
-    none = 2
 
   # Promoted from VK_EXT_descriptor_indexing (extension 162)
   # --------------------------------------------------------
@@ -381,12 +417,6 @@ type
     sType*: StructureType
     pNext*: pointer
     maxVariableDescriptorCount*: uint32
-  DescriptorBindingFlagBits* {.size: sizeof(int32), pure.} = enum
-    updateAfterBind = 0x00000001
-    updateUnusedWhilePending = 0x00000002
-    partiallyBound = 0x00000004
-    variableDescriptorCount = 0x00000008
-  DescriptorBindingFlags* = Flags[DescriptorBindingFlagBits]
 
   # Promoted from VK_KHR_depth_stencil_resolve (extension 200)
   # ----------------------------------------------------------
@@ -403,13 +433,6 @@ type
     supportedStencilResolveModes*: ResolveModeFlags
     independentResolveNone*: Bool32
     independentResolve*: Bool32
-  ResolveModeFlagBits* {.size: sizeof(int32), pure.} = enum
-    none = 0
-    sampleZero = 0x00000001
-    average = 0x00000002
-    min = 0x00000004
-    max = 0x00000008
-  ResolveModeFlags* = Flags[ResolveModeFlagBits]
 
   # Promoted from VK_EXT_scalar_block_layout (extension 222))
   # ---------------------------------------------------------
@@ -427,10 +450,6 @@ type
 
   # Promoted from VK_EXT_sampler_filter_minmax (extension 131)
   # ----------------------------------------------------------
-  SamplerReductionMode* {.size: sizeof(int32), pure.} = enum
-    weightedAverage = 0
-    min = 1
-    max = 2
   SamplerReductionModeCreateInfo* = object
     sType*: StructureType
     pNext*: pointer
@@ -516,9 +535,6 @@ type
 
   # Promoted from VK_KHR_timeline_semaphore (extension 208)
   # -------------------------------------------------------
-  SemaphoreType* {.size: sizeof(int32), pure.} = enum
-    binary = 0
-    timeline = 1
   PhysicalDeviceTimelineSemaphoreFeatures* = object
     sType*: StructureType
     pNext*: pointer
@@ -539,9 +555,6 @@ type
     pWaitSemaphoreValues*: ptr uint64
     signalSemaphoreValueCount*: uint32
     pSignalSemaphoreValues*: ptr uint64
-  SemaphoreWaitFlagBits* {.size: sizeof(int32), pure.} = enum
-    any = 0x00000001
-  SemaphoreWaitFlags* = Flags[SemaphoreWaitFlagBits]
   SemaphoreWaitInfo* = object
     sType*: StructureType
     pNext*: pointer

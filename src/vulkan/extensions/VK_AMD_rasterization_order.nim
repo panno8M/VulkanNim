@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_AMD_rasterization_order
 
 
@@ -9,10 +9,12 @@ const
   AmdRasterizationOrderSpecVersion* = 1
   AmdRasterizationOrderExtensionName* = "VK_AMD_rasterization_order"
 
-type
+type # enums and bitmasks
   RasterizationOrderAMD* {.size: sizeof(int32), pure.} = enum
     strictAmd = 0
     relaxedAmd = 1
+
+type
   PipelineRasterizationStateRasterizationOrderAMD* = object
     sType*: StructureType
     pNext*: pointer

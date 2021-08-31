@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_AMD_memory_overallocation_behavior
 
 
@@ -9,11 +9,13 @@ const
   AmdMemoryOverallocationBehaviorSpecVersion* = 1
   AmdMemoryOverallocationBehaviorExtensionName* = "VK_AMD_memory_overallocation_behavior"
 
-type
+type # enums and bitmasks
   MemoryOverallocationBehaviorAMD* {.size: sizeof(int32), pure.} = enum
     defaultAmd = 0
     allowedAmd = 1
     disallowedAmd = 2
+
+type
   DeviceMemoryOverallocationCreateInfoAMD* = object
     sType*: StructureType
     pNext*: pointer

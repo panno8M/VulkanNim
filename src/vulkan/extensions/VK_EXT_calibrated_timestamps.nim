@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_EXT_calibrated_timestamps
 
 
@@ -9,12 +9,14 @@ const
   ExtCalibratedTimestampsSpecVersion* = 1
   ExtCalibratedTimestampsExtensionName* = "VK_EXT_calibrated_timestamps"
 
-type
+type # enums and bitmasks
   TimeDomainEXT* {.size: sizeof(int32), pure.} = enum
     deviceExt = 0
     clockMonotonicExt = 1
     clockMonotonicRawExt = 2
     queryPerformanceCounterExt = 3
+
+type
   CalibratedTimestampInfoEXT* = object
     sType*: StructureType
     pNext*: pointer

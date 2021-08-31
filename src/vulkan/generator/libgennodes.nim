@@ -103,7 +103,7 @@ proc render*(funcPtr: NodeFuncPtr): string =
   result &= "{name}* = proc(".fmt
   let args = funcPtr.args
     .map( proc(arg: tuple[name, theType: string, ptrLv: Natural]): string =
-      result = arg.name & ": "
+      result = arg.name.parseParamName & ": "
       let theType = arg.theType.replaceBasicTypes
       result.add ("ptr ".repeat(arg.ptrLv) & theType).replacePtrTypes
       result &= ";"
@@ -142,7 +142,8 @@ proc render*(bitmask: NodeBitmask): string =
     else:
       "{name}* = Flags[distinct UnusedEnum]".fmt
   of nkbrAlias:
-    "{name}* = {Alias}"
+    let alias = bitmask.alias.replaceBasicTypes
+    "{name}* = {alias}".fmt
 
 
 proc render*(handle: NodeHandle): string =
@@ -201,13 +202,15 @@ proc renderAccessor*(command: NodeCommand): string =
     return "const {name}* = {alias}".fmt
 
 proc render*(basetype: NodeBasetype): string =
-  let
-    name = basetype.name.removeVkPrefix
-    theType = basetype.theType.replaceBasicTypes
-  case name
-  of "Flags": "{name}*[Flagbits] = distinct {theType}".fmt
-  else:
-    "{name}* = distinct {theType}".fmt
+  let name = basetype.name.removeVkPrefix
+  case basetype.kind
+  of nkbNormal:
+    let theType = basetype.theType.replaceBasicTypes
+    case name
+    of "Flags": "{name}*[Flagbits] = distinct {theType}".fmt
+    else: "{name}* = distinct {theType}".fmt
+  of nkbExternal:
+    "{name}* = ptr object # defined at {basetype.path}".fmt
 
 proc renderCommandLoaderComponent*(require: NodeRequire; resources: Resources): string =
   if require.targets.filterIt(it.kind == nkrCommand).len == 0: return
@@ -225,10 +228,11 @@ proc renderCommandLoaderComponent*(require: NodeRequire; resources: Resources): 
 proc renderCommandLoader*(libFile: LibFile; resources: Resources): string =
   var commandLoaderDefs = newSeq[string]()
 
-  for require in libFile.requires:
-    let def = require.renderCommandLoaderComponent(resources)
-    if not def.isEmptyOrWhitespace:
-      commandLoaderDefs.add def
+  for fileRequire in libFile.requires:
+    for require in fileRequire:
+      let def = require.renderCommandLoaderComponent(resources)
+      if not def.isEmptyOrWhitespace:
+        commandLoaderDefs.add def
 
   return if commandLoaderDefs.len == 0: ""
   else:
@@ -296,23 +300,24 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
 
   block Solve_basetypes:
     var typeDefs: seq[seq[string]]
-    for require in libFile.requires:
-      let typeTargets = require.targets.filterIt(it.kind in {nkrType})
-      if typeTargets.len == 0: continue
+    for fileRequire in libFile.requires:
+      for require in fileRequire:
+        let typeTargets = require.targets.filterIt(it.kind in {nkrType})
+        if typeTargets.len == 0: continue
 
-      var typeDef: seq[string]
+        var typeDef: seq[string]
 
-      for req in typeTargets:
-        if req.name in renderedNodes: continue
+        for req in typeTargets:
+          if req.name in renderedNodes: continue
 
-        if resources.basetypes.hasKey(req.name):
-          typeDef.add resources.basetypes[req.name].render
-          renderedNodes.add req.name
+          if resources.basetypes.hasKey(req.name):
+            typeDef.add resources.basetypes[req.name].render
+            renderedNodes.add req.name
 
-      if typeDef.len != 0:
-        typeDefs.add case require.comment.isSome
-          of true: concat(@[require.comment.get.commentify], typeDef)
-          of false: typeDef
+        if typeDef.len != 0:
+          typeDefs.add case require.comment.isSome
+            of true: concat(@[require.comment.get.commentify], typeDef)
+            of false: typeDef
 
     if typeDefs.len != 0:
       result.add "type # basetypes\n"
@@ -320,45 +325,46 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
 
   block Solve_consts:
     var reqDefs: seq[seq[string]]
-    for require in libFile.requires:
-      var reqDef: seq[string]
+    for fileRequire in libFile.requires:
+      for require in fileRequire:
+        var reqDef: seq[string]
 
-      for req in require.targets.filter(x => x.kind in {nkrApiConst, nkrConst, nkrConstAlias, nkrType}):
-        if req.name in renderedNodes: continue
+        for req in require.targets.filter(x => x.kind in {nkrApiConst, nkrConst, nkrConstAlias, nkrType}):
+          if req.name in renderedNodes: continue
 
-        case req.kind
-        of nkrConst:
-          reqDef.add NodeConst(name: req.name, value: req.value).render
-          renderedNodes.add req.name
-
-        of nkrConstAlias:
-          reqDef.add NodeConstAlias(name: req.name, alias: req.alias).render
-          renderedNodes.add req.name
-
-        of nkrApiConst:
-          if resources.consts.hasKey(req.name):
-            reqDef.add resources.consts[req.name].render
+          case req.kind
+          of nkrConst:
+            reqDef.add NodeConst(name: req.name, value: req.value).render
             renderedNodes.add req.name
 
-          elif resources.constAliases.hasKey(req.name):
-            reqDef.add resources.constAliases[req.name].render
+          of nkrConstAlias:
+            reqDef.add NodeConstAlias(name: req.name, alias: req.alias).render
             renderedNodes.add req.name
 
-        of nkrType:
-          if resources.structs.hasKey(req.name):
-            let struct = resources.structs[req.name]
-            if struct.requiredConstNames.len == 0: continue
-            for reqConst in struct.requiredConstNames:
-              if reqConst in renderedNodes: continue
-              if resources.consts.hasKey(reqConst):
-                reqDef.add resources.consts[reqConst].render
-                renderedNodes.add reqConst
+          of nkrApiConst:
+            if resources.consts.hasKey(req.name):
+              reqDef.add resources.consts[req.name].render
+              renderedNodes.add req.name
 
-        else: discard
-      if reqDef.len != 0:
-        reqDefs.add case require.comment.isSome
-          of true: concat(@[require.comment.get.commentify], reqDef)
-          of false: reqDef
+            elif resources.constAliases.hasKey(req.name):
+              reqDef.add resources.constAliases[req.name].render
+              renderedNodes.add req.name
+
+          of nkrType:
+            if resources.structs.hasKey(req.name):
+              let struct = resources.structs[req.name]
+              if struct.requiredConstNames.len == 0: continue
+              for reqConst in struct.requiredConstNames:
+                if reqConst in renderedNodes: continue
+                if resources.consts.hasKey(reqConst):
+                  reqDef.add resources.consts[reqConst].render
+                  renderedNodes.add reqConst
+
+          else: discard
+        if reqDef.len != 0:
+          reqDefs.add case require.comment.isSome
+            of true: concat(@[require.comment.get.commentify], reqDef)
+            of false: reqDef
     if reqDefs.len != 0:
       result.add "const\n"
       result.add reqDefs
@@ -367,42 +373,62 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
       result.LF
       result.LF
 
+  block Solve_enums:
+    var typeDefs: seq[seq[string]]
+    for fileRequire in libFile.requires:
+      for require in fileRequire:
+        let typeTargets = require.targets.filterIt(it.kind in {nkrType})
+        if typeTargets.len == 0: continue
+
+        var typeDef: seq[string]
+
+        for req in typeTargets:
+          if req.name in renderedNodes: continue
+
+          if resources.bitmasks.hasKey(req.name):
+            typeDef.add resources.bitmasks[req.name].render
+            renderedNodes.add req.name
+          elif resources.enums.hasKey(req.name):
+            typeDef.add resources.enums[req.name].render(resources.vendorTags)
+            if resources.enumAliases.hasKey(req.name):
+              enumAliasesRequired.add resources.enumAliases[req.name]
+            renderedNodes.add req.name
+
+        if typeDef.len != 0:
+          typeDefs.add case require.comment.isSome
+            of true: concat(@[require.comment.get.commentify], typeDef)
+            of false: typeDef
+
+    if typeDefs.len != 0:
+      result.add "type # enums and bitmasks\n"
+      result &= typeDefs.mapIt(it.join("\n").indent(2)).join("\n\n").LF.LF
+
   block Solve_types:
     var typeDefs: seq[seq[string]]
-    for require in libFile.requires:
-      let typeTargets = require.targets.filterIt(it.kind in {nkrType})
-      if typeTargets.len == 0: continue
+    for fileRequire in libFile.requires:
+      for require in fileRequire:
+        let typeTargets = require.targets.filterIt(it.kind in {nkrType})
+        if typeTargets.len == 0: continue
 
-      var typeDef: seq[string]
+        var typeDef: seq[string]
 
-      for req in typeTargets:
-        if req.name in renderedNodes: continue
+        for req in typeTargets:
+          if req.name in renderedNodes: continue
 
-        # if resources.basetypes.hasKey(req.name):
-        #   typeDef.add resources.basetypes[req.name].render
-        #   renderedNodes.add req.name
-        if resources.bitmasks.hasKey(req.name):
-          typeDef.add resources.bitmasks[req.name].render
-          renderedNodes.add req.name
-        elif resources.structs.hasKey(req.name):
-          typeDef.add resources.structs[req.name].render
-          renderedNodes.add req.name
-        elif resources.funcPtrs.hasKey(req.name):
-          typeDef.add resources.funcPtrs[req.name].render
-          renderedNodes.add req.name
-        elif resources.handles.hasKey(req.name):
-          typeDef.add resources.handles[req.name].render
-          renderedNodes.add req.name
-        elif resources.enums.hasKey(req.name):
-          typeDef.add resources.enums[req.name].render(resources.vendorTags)
-          if resources.enumAliases.hasKey(req.name):
-            enumAliasesRequired.add resources.enumAliases[req.name]
-          renderedNodes.add req.name
+          if resources.structs.hasKey(req.name):
+            typeDef.add resources.structs[req.name].render
+            renderedNodes.add req.name
+          elif resources.funcPtrs.hasKey(req.name):
+            typeDef.add resources.funcPtrs[req.name].render
+            renderedNodes.add req.name
+          elif resources.handles.hasKey(req.name):
+            typeDef.add resources.handles[req.name].render
+            renderedNodes.add req.name
 
-      if typeDef.len != 0:
-        typeDefs.add case require.comment.isSome
-          of true: concat(@[require.comment.get.underline('-').commentify], typeDef)
-          of false: typeDef
+        if typeDef.len != 0:
+          typeDefs.add case require.comment.isSome
+            of true: concat(@[require.comment.get.underline('-').commentify], typeDef)
+            of false: typeDef
 
     if typeDefs.len != 0:
       result.add "type".LF
@@ -410,56 +436,57 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
 
   block Solve_others:
     var reqDefs: seq[seq[string]]
-    for require in libFile.requires:
-      reqDefs.add @[]
-      # result &= require.render.LF
-      if require.comment.isSome:
-        reqDefs[^1].add require.comment.get.underline('-').commentify
+    for fileRequire in libFile.requires:
+      for require in fileRequire:
+        reqDefs.add @[]
+        # result &= require.render.LF
+        if require.comment.isSome:
+          reqDefs[^1].add require.comment.get.underline('-').commentify
 
-      for req in require.targets.filter(x => x.kind == nkrType):
-        if req.name notin renderedNodes:
-          if resources.defines.hasKey(req.name):
-            reqDefs[^1].add resources.defines[req.name].render
-            renderedNodes.add req.name
-        if resources.enumAliases.hasKey(req.name):
-          reqDefs[^1].add resources.enumAliases[req.name].render(resources.vendorTags)
+        for req in require.targets.filter(x => x.kind == nkrType):
+          if req.name notin renderedNodes:
+            if resources.defines.hasKey(req.name):
+              reqDefs[^1].add resources.defines[req.name].render
+              renderedNodes.add req.name
+          if resources.enumAliases.hasKey(req.name):
+            reqDefs[^1].add resources.enumAliases[req.name].render(resources.vendorTags)
 
-      let reqCommands = require.targets.filter(x => x.kind == nkrCommand)
-      if reqCommands.len != 0:
-        var commandDef: seq[string]
-        for reqCommand in reqCommands:
-          if reqCommand.name in renderedNodes: continue
-          if resources.commands.hasKey(reqCommand.name):
-            if resources.commands[reqCommand.name].kind == nkbrAlias: continue
-            commandDef.add resources.commands[reqCommand.name].renderCage.indent(2)
-        if commandDef.len != 0:
-          reqDefs[^1].add "var # command cages"
-          reqDefs[^1].add commandDef
+        let reqCommands = require.targets.filter(x => x.kind == nkrCommand)
+        if reqCommands.len != 0:
+          var commandDef: seq[string]
+          for reqCommand in reqCommands:
+            if reqCommand.name in renderedNodes: continue
+            if resources.commands.hasKey(reqCommand.name):
+              if resources.commands[reqCommand.name].kind == nkbrAlias: continue
+              commandDef.add resources.commands[reqCommand.name].renderCage.indent(2)
+          if commandDef.len != 0:
+            reqDefs[^1].add "var # command cages"
+            reqDefs[^1].add commandDef
 
-        for reqCommand in reqCommands:
-          if reqCommand.name in renderedNodes: continue
-          if resources.commands.hasKey(reqCommand.name):
-            reqDefs[^1].add resources.commands[reqCommand.name].renderAccessor
-            renderedNodes.add reqCommand.name
+          for reqCommand in reqCommands:
+            if reqCommand.name in renderedNodes: continue
+            if resources.commands.hasKey(reqCommand.name):
+              reqDefs[^1].add resources.commands[reqCommand.name].renderAccessor
+              renderedNodes.add reqCommand.name
 
-      let reqEnumExts = require.targets.filter(x => x.kind == nkrEnumExtendAlias)
-      let enumAliases = newTable[string, NodeEnumAliases]()
-      for reqEnumExt in reqEnumExts:
-        if enumAliases.hasKey(reqEnumExt.extends):
-          enumAliases[reqEnumExt.extends].aliases.add NodeEnumAlias(
-            name: reqEnumExt.name,
-            alias: reqEnumExt.enumAlias,
-          )
-        else:
-          enumAliases[reqEnumExt.extends] = NodeEnumAliases(
-            name: reqEnumExt.extends,
-            aliases: @[NodeEnumAlias(
+        let reqEnumExts = require.targets.filter(x => x.kind == nkrEnumExtendAlias)
+        let enumAliases = newTable[string, NodeEnumAliases]()
+        for reqEnumExt in reqEnumExts:
+          if enumAliases.hasKey(reqEnumExt.extends):
+            enumAliases[reqEnumExt.extends].aliases.add NodeEnumAlias(
               name: reqEnumExt.name,
               alias: reqEnumExt.enumAlias,
-            )]
-          )
-      for key, val in enumAliases:
-        reqDefs[^1].add val.render(resources.vendorTags)
+            )
+          else:
+            enumAliases[reqEnumExt.extends] = NodeEnumAliases(
+              name: reqEnumExt.extends,
+              aliases: @[NodeEnumAlias(
+                name: reqEnumExt.name,
+                alias: reqEnumExt.enumAlias,
+              )]
+            )
+        for key, val in enumAliases:
+          reqDefs[^1].add val.render(resources.vendorTags)
 
     if reqDefs.len != 0:
       result &= reqDefs.mapIt(it.join("\n")).filterIt(it.len != 0).join("\n\n\n")
@@ -787,11 +814,22 @@ func extractNodeBasetype*(typeDef: XmlNode): NodeBasetype {.raises: [UnexpectedX
      typeDef.category != "basetype":
     xmlError invalidStructure("basetype Extraction"): $typeDef
   NodeBasetype(
+    kind: nkbNormal,
     name: typeDef["name"].innerText.parseWords[0],
     theType: block:
       let ctype = typeDef["type"]
       if ctype != nil: ctype.innerText.parseWords[0]
       else: "object"
+  )
+func extractNodeExternalReq*(typeDef: XmlNode): NodeBasetype {.raises: [UnexpectedXmlStructureError].} =
+  if typeDef.kind != xnElement or
+     typeDef.tag != "type" or
+     (?typeDef{"requires"}).isNone:
+    xmlError invalidStructure("external requires Extraction"): $typeDef
+  NodeBasetype(
+    kind: nkbExternal,
+    name: typeDef.name,
+    path: typeDef{"requires"},
   )
 
 proc extractAllNodeEnumExtensions*(rootXml: XmlNode; resources: var Resources) {.raises: [UnexpectedXmlStructureError].} =
@@ -971,10 +1009,13 @@ proc extractResources*(rootXml: XmlNode): Resources {.raises: [LoggingFailure, E
         error getCurrentExceptionMsg(); nil)
     .filterIt(not it.isNil)
     .zipTable
-  result.basetypes = typeXmlSeq
-    .filterByCategory("basetype")
-    .mapIt(it.extractNodeBasetype)
-    .zipTable
+  result.basetypes = concat(
+    typeXmlSeq
+      .filterByCategory("basetype")
+      .mapIt(it.extractNodeBasetype),
+    typeXmlSeq.filterIt((?it{"requires"}).isSome)
+      .mapIt(it.extractNodeExternalReq),
+    ).zipTable
   result.handles = typeXmlSeq
     .filterByCategory("handle")
     .mapIt(it.extractNodehandle)

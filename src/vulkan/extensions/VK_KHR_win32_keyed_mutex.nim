@@ -1,10 +1,11 @@
-# Generated at 2021-08-30T14:31:10Z
+# Generated at 2021-08-31T00:07:47Z
 # VK_KHR_win32_keyed_mutex
 
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_external_memory_win32
+export VK_KHR_external_memory_win32
 
 const
   KhrWin32KeyedMutexSpecVersion* = 1

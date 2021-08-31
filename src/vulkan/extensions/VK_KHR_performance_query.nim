@@ -1,16 +1,48 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_KHR_performance_query
 
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
+export VK_KHR_get_physical_device_properties2
 
 const
   KhrPerformanceQuerySpecVersion* = 1
   KhrPerformanceQueryExtensionName* = "VK_KHR_performance_query"
   UuidSize* = 16
   MaxDescriptionSize* = 256
+
+type # enums and bitmasks
+  PerformanceCounterDescriptionFlagsKHR* = Flags[PerformanceCounterDescriptionFlagBitsKHR]
+  PerformanceCounterDescriptionFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+    performanceImpactingKhr = 0x00000001
+    concurrentlyImpactedKhr = 0x00000002
+  PerformanceCounterScopeKHR* {.size: sizeof(int32), pure.} = enum
+    commandBufferKhr = 0
+    renderPassKhr = 1
+    commandKhr = 2
+  PerformanceCounterStorageKHR* {.size: sizeof(int32), pure.} = enum
+    int32Khr = 0
+    int64Khr = 1
+    uint32Khr = 2
+    uint64Khr = 3
+    float32Khr = 4
+    float64Khr = 5
+  PerformanceCounterUnitKHR* {.size: sizeof(int32), pure.} = enum
+    genericKhr = 0
+    percentageKhr = 1
+    nanosecondsKhr = 2
+    bytesKhr = 3
+    bytesPerSecondKhr = 4
+    kelvinKhr = 5
+    wattsKhr = 6
+    voltsKhr = 7
+    ampsKhr = 8
+    hertzKhr = 9
+    cyclesKhr = 10
+  AcquireProfilingLockFlagsKHR* = Flags[AcquireProfilingLockFlagBitsKHR]
+  AcquireProfilingLockFlagBitsKHR* = distinct UnusedEnum
 
 type
   PhysicalDevicePerformanceQueryFeaturesKHR* = object
@@ -36,39 +68,12 @@ type
     name*: array[MaxDescriptionSize, char]
     category*: array[MaxDescriptionSize, char]
     description*: array[MaxDescriptionSize, char]
-  PerformanceCounterDescriptionFlagsKHR* = Flags[PerformanceCounterDescriptionFlagBitsKHR]
-  PerformanceCounterDescriptionFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
-    performanceImpactingKhr = 0x00000001
-    concurrentlyImpactedKhr = 0x00000002
   QueryPoolPerformanceCreateInfoKHR* = object
     sType*: StructureType
     pNext*: pointer
     queueFamilyIndex*: uint32
     counterIndexCount*: uint32
     pCounterIndices*: ptr uint32
-  PerformanceCounterScopeKHR* {.size: sizeof(int32), pure.} = enum
-    commandBufferKhr = 0
-    renderPassKhr = 1
-    commandKhr = 2
-  PerformanceCounterStorageKHR* {.size: sizeof(int32), pure.} = enum
-    int32Khr = 0
-    int64Khr = 1
-    uint32Khr = 2
-    uint64Khr = 3
-    float32Khr = 4
-    float64Khr = 5
-  PerformanceCounterUnitKHR* {.size: sizeof(int32), pure.} = enum
-    genericKhr = 0
-    percentageKhr = 1
-    nanosecondsKhr = 2
-    bytesKhr = 3
-    bytesPerSecondKhr = 4
-    kelvinKhr = 5
-    wattsKhr = 6
-    voltsKhr = 7
-    ampsKhr = 8
-    hertzKhr = 9
-    cyclesKhr = 10
   # Union of all the possible return types a counter result could return
   PerformanceCounterResultKHR* {.union.} = object
     int32*: int32
@@ -82,8 +87,6 @@ type
     pNext*: pointer
     flags*: AcquireProfilingLockFlagsKHR
     timeout*: uint64
-  AcquireProfilingLockFlagsKHR* = Flags[AcquireProfilingLockFlagBitsKHR]
-  AcquireProfilingLockFlagBitsKHR* = distinct UnusedEnum
   PerformanceQuerySubmitInfoKHR* = object
     sType*: StructureType
     pNext*: pointer

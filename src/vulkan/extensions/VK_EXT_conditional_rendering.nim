@@ -1,4 +1,4 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_EXT_conditional_rendering
 
 
@@ -9,10 +9,12 @@ const
   ExtConditionalRenderingSpecVersion* = 2
   ExtConditionalRenderingExtensionName* = "VK_EXT_conditional_rendering"
 
-type
+type # enums and bitmasks
   ConditionalRenderingFlagsEXT* = Flags[ConditionalRenderingFlagBitsEXT]
   ConditionalRenderingFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
     invertedExt = 0x00000001
+
+type
   ConditionalRenderingBeginInfoEXT* = object
     sType*: StructureType
     pNext*: pointer

@@ -1,16 +1,17 @@
-# Generated at 2021-08-30T22:51:48Z
+# Generated at 2021-08-31T01:03:35Z
 # VK_NV_shading_rate_image
 
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
+export VK_KHR_get_physical_device_properties2
 
 const
   NvShadingRateImageSpecVersion* = 3
   NvShadingRateImageExtensionName* = "VK_NV_shading_rate_image"
 
-type
+type # enums and bitmasks
   ShadingRatePaletteEntryNV* {.size: sizeof(int32), pure.} = enum
     noInvocationsNv = 0
     vk16InvocationsPerPixelNv = 1
@@ -24,6 +25,13 @@ type
     vk1InvocationPer4x2PixelsNv = 9
     vk1InvocationPer2x4PixelsNv = 10
     vk1InvocationPer4x4PixelsNv = 11
+  CoarseSampleOrderTypeNV* {.size: sizeof(int32), pure.} = enum
+    defaultNv = 0
+    customNv = 1
+    pixelMajorNv = 2
+    sampleMajorNv = 3
+
+type
   ShadingRatePaletteNV* = object
     shadingRatePaletteEntryCount*: uint32
     pShadingRatePaletteEntries*: ptr ShadingRatePaletteEntryNV
@@ -59,11 +67,6 @@ type
     sampleOrderType*: CoarseSampleOrderTypeNV
     customSampleOrderCount*: uint32
     pCustomSampleOrders*: ptr CoarseSampleOrderCustomNV
-  CoarseSampleOrderTypeNV* {.size: sizeof(int32), pure.} = enum
-    defaultNv = 0
-    customNv = 1
-    pixelMajorNv = 2
-    sampleMajorNv = 3
 
 var # command cages
   cmdBindShadingRateImageNVCage: proc(commandBuffer: CommandBuffer; imageView: ImageView; imageLayout: ImageLayout;): void {.cdecl.}
