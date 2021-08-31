@@ -35,10 +35,12 @@ func genVkHeaderVersionComplete*(typeDef: XmlNode): Option[string] {.raises: [].
 const
   genDefineHandle* =
     "template defineHandle*(ObjectName: untyped) =\n" &
-    "  type ObjectName* = distinct Handle"
+    "  type HtObjectName* = object of HandleType\n" &
+    "  type ObjectName* = Handle[Ht`ObjectName`]"
   genDefineNonDispatchableHandle* =
     "template defineNonDispatchableHandle*(ObjectName: untyped) =\n" &
-    "  type ObjectName* = distinct NonDispatchableHandle"
+    "  type HtObjectName* = object of HandleType\n" &
+    "  type ObjectName* = NonDispatchableHandle[Ht`ObjectName`]"
   genApiVersion* =
     "template apiVersion*(): untyped = makeVersion(1, 0, 0)"
   genApiVersion10* =
@@ -57,7 +59,7 @@ const
   genVersionPatch* =
     "template versionPatch*(patch: uint32): untyped = ( patch )"
   genNullHandle* =
-    "template nullHandle*(): untyped = ( cast[Handle[HandleType]](0) )"
+    "template nullHandle*(): untyped = ( cast[NullHandle](0) )"
 
 func define*(id: string; typeDef: XmlNode): Option[string] {.raises: [].} =
   case id

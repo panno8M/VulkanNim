@@ -18,8 +18,9 @@ if vkDll.isNil:
 type
   UnusedEnum* = object ## Reserved for future use
   HandleType* = object of RootObj
-  Handle*[T] = ptr object
-  NonDispatchableHandle*[T] = ptr object
+  NullHandle* = Handle[HandleType]
+  Handle*[T] = distinct ptr object
+  NonDispatchableHandle*[T] = distinct ptr object
   Display* = ptr object
   RRoutput* = ptr object
   IDirectFB* = ptr object

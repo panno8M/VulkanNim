@@ -22,23 +22,23 @@ macro `toFlagSets`*[Flagbits: enum](Type: typedesc[Flagbits]; bits: varargs[unty
 template `{}`*[Flagbits: enum](Type: typedesc[Flagbits]; bits: varargs[untyped]): HashSet[Flagbits] =
   Type.toFlagSets(bits)
 
-proc `toFlagSets`*[Flagbits: enum](flags: Flags[Flagbits]): HashSet[Flagbits] =
+converter toFlagSets*[Flagbits: enum](flags: Flags[Flagbits]): HashSet[Flagbits] =
   var val = 1.uint32
   let flags = flags.uint32
   while val <= flags:
     if (val and flags) != 0:
       result.incl Flagbits(val)
     val = val shl 1
-template `{}`*[Flagbits: enum](flags: Flags[Flagbits]): HashSet[Flagbits] =
+proc `{}`*[Flagbits: enum](flags: Flags[Flagbits]): HashSet[Flagbits] =
   flags.toFlagSets
 
-proc `toFlags`*[Flagbits: enum](flagsets: HashSet[Flagbits]): Flags[Flagbits] =
+converter toFlags*[Flagbits: enum](flagsets: HashSet[Flagbits]): Flags[Flagbits] =
   for flagset in flagsets:
     result = result or flagset
 proc `<+>`*[Flagbits: enum](flagsets: HashSet[Flagbits]): Flags[Flagbits] =
   flagsets.toFlags
 
-proc `toFlags`*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
+converter toFlags*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
   Flags[Flagbits](flagbits)
 proc `<+>`*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
   flagbits.toFlags
@@ -114,7 +114,7 @@ proc `-`*[Flagbits: enum](a, b: Flags[Flagbits]):           Flags[Flagbits] = a 
 proc contains*[Flagbits: enum](flags: Flags[Flagbits]; flagbits: Flagbits): bool =
   (flags and flagbits) != flags.none
 
-proc toString*[Flagbits: enum](flags: Flags[Flagbits]): string =
+converter toString*[Flagbits: enum](flags: Flags[Flagbits]): string =
   $flags.toFlagSets
 proc `$`*[Flagbits: enum](flags: Flags[Flagbits]): string =
   flags.toString
@@ -143,17 +143,26 @@ proc `carefulNot`*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
   carefulNot flagbits.toFlags
 
 
-
 # Handle operations
 # Utility for handle operation added independently
 # ================================================
 
-proc `==`*[T](a: Handle[T]; b: Handle[T]): bool = a.pointer == b.pointer
+proc `==`*[T](a, b: Handle[T]): bool = a.pointer == b.pointer
 proc `==`*[T](a: Handle[T]; b: Handle[HandleType]): bool = a.pointer == b.pointer
 template `==`*[T](a: Handle[HandleType]; b: Handle[T]): bool = b == a
-proc `==`*[T](a: Handle[HandleType]; b: Handle[HandleType]): bool = a.pointer == b.pointer
+proc `==`*(a, b: Handle[HandleType]): bool = a.pointer == b.pointer
 
-proc `==`*[T](a: NonDispatchableHandle[T]; b: NonDispatchableHandle[T]): bool = a.pointer == b.pointer
+proc `==`*[T](a, b: NonDispatchableHandle[T]): bool = a.pointer == b.pointer
 proc `==`*[T](a: NonDispatchableHandle[T]; b: NonDispatchableHandle[HandleType]): bool = a.pointer == b.pointer
 template `==`*[T](a: NonDispatchableHandle[HandleType]; b: NonDispatchableHandle[T]): bool = b == a
-proc `==`*[T](a: NonDispatchableHandle[HandleType]; b: NonDispatchableHandle[HandleType]): bool = a.pointer == b.pointer
+proc `==`*(a, b: NonDispatchableHandle[HandleType]): bool = a.pointer == b.pointer
+
+
+# Bool32 operations
+# =================
+
+converter toString*(b: Bool32): string = (if b.uint32 == 1: "VkTrue" else: "VkFalse")
+proc `$`*(b: Bool32): string = b.toString
+
+converter toBool*(b: Bool32): bool = bool(b)
+converter toBool32*(b: bool): Bool32 = Bool32(b)
