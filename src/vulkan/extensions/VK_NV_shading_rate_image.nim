@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-01T23:32:32Z
 # VK_NV_shading_rate_image
 
 
@@ -14,17 +14,17 @@ const
 type # enums and bitmasks
   ShadingRatePaletteEntryNV* {.size: sizeof(int32), pure.} = enum
     noInvocationsNv = 0
-    vk16InvocationsPerPixelNv = 1
-    vk8InvocationsPerPixelNv = 2
-    vk4InvocationsPerPixelNv = 3
-    vk2InvocationsPerPixelNv = 4
-    vk1InvocationPerPixelNv = 5
-    vk1InvocationPer2x1PixelsNv = 6
-    vk1InvocationPer1x2PixelsNv = 7
-    vk1InvocationPer2x2PixelsNv = 8
-    vk1InvocationPer4x2PixelsNv = 9
-    vk1InvocationPer2x4PixelsNv = 10
-    vk1InvocationPer4x4PixelsNv = 11
+    e16InvocationsPerPixelNv = 1
+    e8InvocationsPerPixelNv = 2
+    e4InvocationsPerPixelNv = 3
+    e2InvocationsPerPixelNv = 4
+    e1InvocationPerPixelNv = 5
+    e1InvocationPer2x1PixelsNv = 6
+    e1InvocationPer1x2PixelsNv = 7
+    e1InvocationPer2x2PixelsNv = 8
+    e1InvocationPer4x2PixelsNv = 9
+    e1InvocationPer2x4PixelsNv = 10
+    e1InvocationPer4x4PixelsNv = 11
   CoarseSampleOrderTypeNV* {.size: sizeof(int32), pure.} = enum
     defaultNv = 0
     customNv = 1

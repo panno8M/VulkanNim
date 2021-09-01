@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-01T23:32:32Z
 # vk12
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -41,7 +41,7 @@ type # enums and bitmasks
 
   # Promoted from VK_KHR_shader_float_controls (extension 198)
   ShaderFloatControlsIndependence* {.size: sizeof(int32), pure.} = enum
-    vk32Only = 0
+    e32Only = 0
     all = 1
     none = 2
 

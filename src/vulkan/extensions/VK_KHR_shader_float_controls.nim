@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:18:46Z
+# Generated at 2021-09-01T23:32:32Z
 # VK_KHR_shader_float_controls
 
 
@@ -22,7 +22,7 @@ StructureType.defineAliases:
   physicalDeviceFloatControlsProperties as physicalDeviceFloatControlsPropertiesKhr
 
 ShaderFloatControlsIndependence.defineAliases:
-  vk32Only as vk32OnlyKhr
+  e32Only as e32OnlyKhr
   all as allKhr
   none as noneKhr
 

@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T10:25:35Z
+# Generated at 2021-09-01T23:32:32Z
 # vk10
 # Vulkan core API interface definitions
 # =====================================
@@ -1441,7 +1441,7 @@ type # enums and bitmasks
     mutableFormat = 0x00000008 # Allows image views to have different format than the base image
     cubeCompatible = 0x00000010 # Allows creating image views with cube type from the created image
     # Provided by VK_VERSION_1_1
-    vk2dArrayCompatible = 0x00000020 # The 3D image can be viewed as a 2D or 2D array image
+    e2dArrayCompatible = 0x00000020 # The 3D image can be viewed as a 2D or 2D array image
     # Provided by VK_VERSION_1_1
     splitInstanceBindRegions = 0x00000040 # Allows using VkBindImageMemoryDeviceGroupInfo::pSplitInstanceBindRegions when binding memory to the image
     # Provided by VK_VERSION_1_1
@@ -1467,9 +1467,9 @@ type # enums and bitmasks
     # Provided by VK_EXT_image_drm_format_modifier
     drmFormatModifierExt = 1000158000
   ImageType* {.size: sizeof(int32), pure.} = enum
-    vk1d = 0
-    vk2d = 1
-    vk3d = 2
+    e1d = 0
+    e2d = 1
+    e3d = 2
   ImageUsageFlagBits* {.size: sizeof(int32), pure.} = enum
     transferSrc = 0x00000001 # Can be used as a source of transfer operations
     transferDst = 0x00000002 # Can be used as a destination of transfer operations
@@ -1542,13 +1542,13 @@ type # enums and bitmasks
     reserved6Khr = 0x00000040
   QueueFlags* = Flags[QueueFlagBits]
   SampleCountFlagBits* {.size: sizeof(int32), pure.} = enum
-    vk1 = 0x00000001 # Sample count 1 supported
-    vk2 = 0x00000002 # Sample count 2 supported
-    vk4 = 0x00000004 # Sample count 4 supported
-    vk8 = 0x00000008 # Sample count 8 supported
-    vk16 = 0x00000010 # Sample count 16 supported
-    vk32 = 0x00000020 # Sample count 32 supported
-    vk64 = 0x00000040 # Sample count 64 supported
+    e1 = 0x00000001 # Sample count 1 supported
+    e2 = 0x00000002 # Sample count 2 supported
+    e4 = 0x00000004 # Sample count 4 supported
+    e8 = 0x00000008 # Sample count 8 supported
+    e16 = 0x00000010 # Sample count 16 supported
+    e32 = 0x00000020 # Sample count 32 supported
+    e64 = 0x00000040 # Sample count 64 supported
   SampleCountFlags* = Flags[SampleCountFlagBits]
   SystemAllocationScope* {.size: sizeof(int32), pure.} = enum
     command = 0
@@ -1667,7 +1667,7 @@ type # enums and bitmasks
   QueryPipelineStatisticFlags* = Flags[QueryPipelineStatisticFlagBits]
   QueryPoolCreateFlags* = Flags[distinct UnusedEnum]
   QueryResultFlagBits* {.size: sizeof(int32), pure.} = enum
-    vk64 = 0x00000001 # Results of the queries are written to the destination buffer as 64-bit values
+    e64 = 0x00000001 # Results of the queries are written to the destination buffer as 64-bit values
     wait = 0x00000002 # Results of the queries are waited on before proceeding with the result copy
     withAvailability = 0x00000004 # Besides the results of the query, the availability of the results is also written
     partial = 0x00000008 # Copy the partial results of the query even if the final results are not available
@@ -1791,12 +1791,12 @@ type # enums and bitmasks
     fragmentDensityMapDeferredExt = 0x00000002
   ImageViewCreateFlags* = Flags[ImageViewCreateFlagBits]
   ImageViewType* {.size: sizeof(int32), pure.} = enum
-    vk1d = 0
-    vk2d = 1
-    vk3d = 2
+    e1d = 0
+    e2d = 1
+    e3d = 2
     cube = 3
-    vk1dArray = 4
-    vk2dArray = 5
+    e1dArray = 4
+    e2dArray = 5
     cubeArray = 6
 
   # Shader commands

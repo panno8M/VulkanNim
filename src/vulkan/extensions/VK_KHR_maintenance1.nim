@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:18:46Z
+# Generated at 2021-09-01T23:32:32Z
 # VK_KHR_maintenance1
 
 
@@ -22,6 +22,6 @@ FormatFeatureFlagBits.defineAliases:
   transferDst as transferDstKhr
 
 ImageCreateFlagBits.defineAliases:
-  vk2dArrayCompatible as vk2dArrayCompatibleKhr
+  e2dArrayCompatible as e2dArrayCompatibleKhr
 
 

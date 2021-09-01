@@ -202,7 +202,7 @@ proc parseEnumValue*(str: string; enumsName: string; vendorTags: VendorTags): st
     result = result[(pos+removablePrefix.len)..^1]
   try:
     if result[0].isDigit:
-      result = &"Vk{result}"
+      result = &"e{result}"
   except: return
 
   result = result.toLowerInitial.replace("Bit", "")
