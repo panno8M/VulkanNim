@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_AMD_buffer_marker
 
 
@@ -9,18 +9,17 @@ const
   AmdBufferMarkerSpecVersion* = 1
   AmdBufferMarkerExtensionName* = "VK_AMD_buffer_marker"
 
-var # command cages
-  cmdWriteBufferMarkerAMDCage: proc(commandBuffer: CommandBuffer; pipelineStage: PipelineStageFlagBits; dstBuffer: Buffer; dstOffset: DeviceSize; marker: uint32;): void {.cdecl.}
 proc cmdWriteBufferMarkerAMD*(
       commandBuffer: CommandBuffer;
       pipelineStage: PipelineStageFlagBits;
       dstBuffer: Buffer;
       dstOffset: DeviceSize;
       marker: uint32;
-    ): void {.cdecl.} =
-  cmdWriteBufferMarkerAMDCage(commandBuffer,pipelineStage,dstBuffer,dstOffset,marker)
+    ): void {.cdecl, lazyload("vkCmdWriteBufferMarkerAMD", DeviceLevel).}
 
-proc loadVK_AMD_buffer_marker*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_AMD_buffer_marker*(instance: Instance) =
+  cmdWriteBufferMarkerAMD.smartLoad(instance)
 
-  cmdWriteBufferMarkerAMDCage << "vkCmdWriteBufferMarkerAMD"
+proc loadVK_AMD_buffer_marker*(device: Device) =
+  cmdWriteBufferMarkerAMD.smartLoad(device)
+

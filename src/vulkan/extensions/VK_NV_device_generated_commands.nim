@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_NV_device_generated_commands
 
 
@@ -125,57 +125,51 @@ type
     indirectCommandsLayout*: IndirectCommandsLayoutNV
     maxSequencesCount*: uint32
 
-var # command cages
-  getGeneratedCommandsMemoryRequirementsNVCage: proc(device: Device; pInfo: ptr GeneratedCommandsMemoryRequirementsInfoNV; pMemoryRequirements: ptr MemoryRequirements2;): void {.cdecl.}
-  cmdPreprocessGeneratedCommandsNVCage: proc(commandBuffer: CommandBuffer; pGeneratedCommandsInfo: ptr GeneratedCommandsInfoNV;): void {.cdecl.}
-  cmdExecuteGeneratedCommandsNVCage: proc(commandBuffer: CommandBuffer; isPreprocessed: Bool32; pGeneratedCommandsInfo: ptr GeneratedCommandsInfoNV;): void {.cdecl.}
-  cmdBindPipelineShaderGroupNVCage: proc(commandBuffer: CommandBuffer; pipelineBindPoint: PipelineBindPoint; pipeline: Pipeline; groupIndex: uint32;): void {.cdecl.}
-  createIndirectCommandsLayoutNVCage: proc(device: Device; pCreateInfo: ptr IndirectCommandsLayoutCreateInfoNV; pAllocator: ptr AllocationCallbacks; pIndirectCommandsLayout: ptr IndirectCommandsLayoutNV;): Result {.cdecl.}
-  destroyIndirectCommandsLayoutNVCage: proc(device: Device; indirectCommandsLayout: IndirectCommandsLayoutNV; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
 proc getGeneratedCommandsMemoryRequirementsNV*(
       device: Device;
       pInfo: ptr GeneratedCommandsMemoryRequirementsInfoNV;
       pMemoryRequirements: ptr MemoryRequirements2;
-    ): void {.cdecl.} =
-  getGeneratedCommandsMemoryRequirementsNVCage(device,pInfo,pMemoryRequirements)
+    ): void {.cdecl, lazyload("vkGetGeneratedCommandsMemoryRequirementsNV", DeviceLevel).}
 proc cmdPreprocessGeneratedCommandsNV*(
       commandBuffer: CommandBuffer;
       pGeneratedCommandsInfo: ptr GeneratedCommandsInfoNV;
-    ): void {.cdecl.} =
-  cmdPreprocessGeneratedCommandsNVCage(commandBuffer,pGeneratedCommandsInfo)
+    ): void {.cdecl, lazyload("vkCmdPreprocessGeneratedCommandsNV", DeviceLevel).}
 proc cmdExecuteGeneratedCommandsNV*(
       commandBuffer: CommandBuffer;
       isPreprocessed: Bool32;
       pGeneratedCommandsInfo: ptr GeneratedCommandsInfoNV;
-    ): void {.cdecl.} =
-  cmdExecuteGeneratedCommandsNVCage(commandBuffer,isPreprocessed,pGeneratedCommandsInfo)
+    ): void {.cdecl, lazyload("vkCmdExecuteGeneratedCommandsNV", DeviceLevel).}
 proc cmdBindPipelineShaderGroupNV*(
       commandBuffer: CommandBuffer;
       pipelineBindPoint: PipelineBindPoint;
       pipeline: Pipeline;
       groupIndex: uint32;
-    ): void {.cdecl.} =
-  cmdBindPipelineShaderGroupNVCage(commandBuffer,pipelineBindPoint,pipeline,groupIndex)
+    ): void {.cdecl, lazyload("vkCmdBindPipelineShaderGroupNV", DeviceLevel).}
 proc createIndirectCommandsLayoutNV*(
       device: Device;
       pCreateInfo: ptr IndirectCommandsLayoutCreateInfoNV;
       pAllocator: ptr AllocationCallbacks;
       pIndirectCommandsLayout: ptr IndirectCommandsLayoutNV;
-    ): Result {.cdecl, discardable.} =
-  createIndirectCommandsLayoutNVCage(device,pCreateInfo,pAllocator,pIndirectCommandsLayout)
+    ): Result {.cdecl, lazyload("vkCreateIndirectCommandsLayoutNV", DeviceLevel).}
 proc destroyIndirectCommandsLayoutNV*(
       device: Device;
       indirectCommandsLayout: IndirectCommandsLayoutNV;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyIndirectCommandsLayoutNVCage(device,indirectCommandsLayout,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyIndirectCommandsLayoutNV", DeviceLevel).}
 
-proc loadVK_NV_device_generated_commands*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_NV_device_generated_commands*(instance: Instance) =
+  getGeneratedCommandsMemoryRequirementsNV.smartLoad(instance)
+  cmdPreprocessGeneratedCommandsNV.smartLoad(instance)
+  cmdExecuteGeneratedCommandsNV.smartLoad(instance)
+  cmdBindPipelineShaderGroupNV.smartLoad(instance)
+  createIndirectCommandsLayoutNV.smartLoad(instance)
+  destroyIndirectCommandsLayoutNV.smartLoad(instance)
 
-  getGeneratedCommandsMemoryRequirementsNVCage << "vkGetGeneratedCommandsMemoryRequirementsNV"
-  cmdPreprocessGeneratedCommandsNVCage << "vkCmdPreprocessGeneratedCommandsNV"
-  cmdExecuteGeneratedCommandsNVCage << "vkCmdExecuteGeneratedCommandsNV"
-  cmdBindPipelineShaderGroupNVCage << "vkCmdBindPipelineShaderGroupNV"
-  createIndirectCommandsLayoutNVCage << "vkCreateIndirectCommandsLayoutNV"
-  destroyIndirectCommandsLayoutNVCage << "vkDestroyIndirectCommandsLayoutNV"
+proc loadVK_NV_device_generated_commands*(device: Device) =
+  getGeneratedCommandsMemoryRequirementsNV.smartLoad(device)
+  cmdPreprocessGeneratedCommandsNV.smartLoad(device)
+  cmdExecuteGeneratedCommandsNV.smartLoad(device)
+  cmdBindPipelineShaderGroupNV.smartLoad(device)
+  createIndirectCommandsLayoutNV.smartLoad(device)
+  destroyIndirectCommandsLayoutNV.smartLoad(device)
+

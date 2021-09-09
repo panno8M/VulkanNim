@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_EXT_metal_surface
 
 
@@ -24,17 +24,16 @@ type
     flags*: MetalSurfaceCreateFlagsEXT
     pLayer*: ptr CAMetalLayer
 
-var # command cages
-  createMetalSurfaceEXTCage: proc(instance: Instance; pCreateInfo: ptr MetalSurfaceCreateInfoEXT; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
 proc createMetalSurfaceEXT*(
       instance: Instance;
       pCreateInfo: ptr MetalSurfaceCreateInfoEXT;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl, discardable.} =
-  createMetalSurfaceEXTCage(instance,pCreateInfo,pAllocator,pSurface)
+    ): Result {.cdecl, lazyload("vkCreateMetalSurfaceEXT", InstanceLevel).}
+
+proc loadAllVK_EXT_metal_surface*(instance: Instance) =
+  createMetalSurfaceEXT.smartLoad(instance)
 
 proc loadVK_EXT_metal_surface*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  createMetalSurfaceEXT.smartLoad(instance)
 
-  createMetalSurfaceEXTCage << "vkCreateMetalSurfaceEXT"

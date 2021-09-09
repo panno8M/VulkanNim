@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:02Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_external_fence_win32
 
 
@@ -32,23 +32,21 @@ type
     fence*: Fence
     handleType*: ExternalFenceHandleTypeFlagBits
 
-var # command cages
-  importFenceWin32HandleKHRCage: proc(device: Device; pImportFenceWin32HandleInfo: ptr ImportFenceWin32HandleInfoKHR;): Result {.cdecl.}
-  getFenceWin32HandleKHRCage: proc(device: Device; pGetWin32HandleInfo: ptr FenceGetWin32HandleInfoKHR; pHandle: ptr Win32Handle;): Result {.cdecl.}
 proc importFenceWin32HandleKHR*(
       device: Device;
       pImportFenceWin32HandleInfo: ptr ImportFenceWin32HandleInfoKHR;
-    ): Result {.cdecl, discardable.} =
-  importFenceWin32HandleKHRCage(device,pImportFenceWin32HandleInfo)
+    ): Result {.cdecl, lazyload("vkImportFenceWin32HandleKHR", DeviceLevel).}
 proc getFenceWin32HandleKHR*(
       device: Device;
       pGetWin32HandleInfo: ptr FenceGetWin32HandleInfoKHR;
       pHandle: ptr Win32Handle;
-    ): Result {.cdecl, discardable.} =
-  getFenceWin32HandleKHRCage(device,pGetWin32HandleInfo,pHandle)
+    ): Result {.cdecl, lazyload("vkGetFenceWin32HandleKHR", DeviceLevel).}
 
-proc loadVK_KHR_external_fence_win32*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_KHR_external_fence_win32*(instance: Instance) =
+  importFenceWin32HandleKHR.smartLoad(instance)
+  getFenceWin32HandleKHR.smartLoad(instance)
 
-  importFenceWin32HandleKHRCage << "vkImportFenceWin32HandleKHR"
-  getFenceWin32HandleKHRCage << "vkGetFenceWin32HandleKHR"
+proc loadVK_KHR_external_fence_win32*(device: Device) =
+  importFenceWin32HandleKHR.smartLoad(device)
+  getFenceWin32HandleKHR.smartLoad(device)
+

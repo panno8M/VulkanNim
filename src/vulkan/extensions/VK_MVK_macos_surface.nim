@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_MVK_macos_surface
 
 
@@ -21,17 +21,16 @@ type
     flags*: MacOSSurfaceCreateFlagsMVK
     pView*: pointer
 
-var # command cages
-  createMacOSSurfaceMVKCage: proc(instance: Instance; pCreateInfo: ptr MacOSSurfaceCreateInfoMVK; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
 proc createMacOSSurfaceMVK*(
       instance: Instance;
       pCreateInfo: ptr MacOSSurfaceCreateInfoMVK;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl, discardable.} =
-  createMacOSSurfaceMVKCage(instance,pCreateInfo,pAllocator,pSurface)
+    ): Result {.cdecl, lazyload("vkCreateMacOSSurfaceMVK", InstanceLevel).}
+
+proc loadAllVK_MVK_macos_surface*(instance: Instance) =
+  createMacOSSurfaceMVK.smartLoad(instance)
 
 proc loadVK_MVK_macos_surface*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  createMacOSSurfaceMVK.smartLoad(instance)
 
-  createMacOSSurfaceMVKCage << "vkCreateMacOSSurfaceMVK"

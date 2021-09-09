@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_device_group
 
 
@@ -114,44 +114,42 @@ ImageCreateFlagBits.defineAliases:
 
 
 
-var # command cages
-  getDeviceGroupPresentCapabilitiesKHRCage: proc(device: Device; pDeviceGroupPresentCapabilities: ptr DeviceGroupPresentCapabilitiesKHR;): Result {.cdecl.}
-  getDeviceGroupSurfacePresentModesKHRCage: proc(device: Device; surface: SurfaceKHR; pModes: ptr DeviceGroupPresentModeFlagsKHR;): Result {.cdecl.}
-  getPhysicalDevicePresentRectanglesKHRCage: proc(physicalDevice: PhysicalDevice; surface: SurfaceKHR; pRectCount: ptr uint32; pRects: ptr Rect2D;): Result {.cdecl.}
 proc getDeviceGroupPresentCapabilitiesKHR*(
       device: Device;
       pDeviceGroupPresentCapabilities: ptr DeviceGroupPresentCapabilitiesKHR;
-    ): Result {.cdecl, discardable.} =
-  getDeviceGroupPresentCapabilitiesKHRCage(device,pDeviceGroupPresentCapabilities)
+    ): Result {.cdecl, lazyload("vkGetDeviceGroupPresentCapabilitiesKHR", DeviceLevel).}
 proc getDeviceGroupSurfacePresentModesKHR*(
       device: Device;
       surface: SurfaceKHR;
       pModes: ptr DeviceGroupPresentModeFlagsKHR;
-    ): Result {.cdecl, discardable.} =
-  getDeviceGroupSurfacePresentModesKHRCage(device,surface,pModes)
+    ): Result {.cdecl, lazyload("vkGetDeviceGroupSurfacePresentModesKHR", DeviceLevel).}
 proc getPhysicalDevicePresentRectanglesKHR*(
       physicalDevice: PhysicalDevice;
       surface: SurfaceKHR;
       pRectCount: ptr uint32;
       pRects: ptr Rect2D;
-    ): Result {.cdecl, discardable.} =
-  getPhysicalDevicePresentRectanglesKHRCage(physicalDevice,surface,pRectCount,pRects)
+    ): Result {.cdecl, lazyload("vkGetPhysicalDevicePresentRectanglesKHR", InstanceLevel).}
 
 
-var # command cages
-  acquireNextImage2KHRCage: proc(device: Device; pAcquireInfo: ptr AcquireNextImageInfoKHR; pImageIndex: ptr uint32;): Result {.cdecl.}
 proc acquireNextImage2KHR*(
       device: Device;
       pAcquireInfo: ptr AcquireNextImageInfoKHR;
       pImageIndex: ptr uint32;
-    ): Result {.cdecl, discardable.} =
-  acquireNextImage2KHRCage(device,pAcquireInfo,pImageIndex)
+    ): Result {.cdecl, lazyload("vkAcquireNextImage2KHR", DeviceLevel).}
+
+proc loadAllVK_KHR_device_group*(instance: Instance) =
+  getDeviceGroupPresentCapabilitiesKHR.smartLoad(instance)
+  getDeviceGroupSurfacePresentModesKHR.smartLoad(instance)
+  getPhysicalDevicePresentRectanglesKHR.smartLoad(instance)
+
+  acquireNextImage2KHR.smartLoad(instance)
 
 proc loadVK_KHR_device_group*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  getPhysicalDevicePresentRectanglesKHR.smartLoad(instance)
 
-  getDeviceGroupPresentCapabilitiesKHRCage << "vkGetDeviceGroupPresentCapabilitiesKHR"
-  getDeviceGroupSurfacePresentModesKHRCage << "vkGetDeviceGroupSurfacePresentModesKHR"
-  getPhysicalDevicePresentRectanglesKHRCage << "vkGetPhysicalDevicePresentRectanglesKHR"
+proc loadVK_KHR_device_group*(device: Device) =
+  getDeviceGroupPresentCapabilitiesKHR.smartLoad(device)
+  getDeviceGroupSurfacePresentModesKHR.smartLoad(device)
 
-  acquireNextImage2KHRCage << "vkAcquireNextImage2KHR"
+  acquireNextImage2KHR.smartLoad(device)
+

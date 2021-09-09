@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_deferred_host_operations
 
 
@@ -17,45 +17,40 @@ type
     pNext*: pointer
     operationHandle*: DeferredOperationKHR
 
-var # command cages
-  createDeferredOperationKHRCage: proc(device: Device; pAllocator: ptr AllocationCallbacks; pDeferredOperation: ptr DeferredOperationKHR;): Result {.cdecl.}
-  destroyDeferredOperationKHRCage: proc(device: Device; operation: DeferredOperationKHR; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  getDeferredOperationMaxConcurrencyKHRCage: proc(device: Device; operation: DeferredOperationKHR;): uint32 {.cdecl.}
-  getDeferredOperationResultKHRCage: proc(device: Device; operation: DeferredOperationKHR;): Result {.cdecl.}
-  deferredOperationJoinKHRCage: proc(device: Device; operation: DeferredOperationKHR;): Result {.cdecl.}
 proc createDeferredOperationKHR*(
       device: Device;
       pAllocator: ptr AllocationCallbacks;
       pDeferredOperation: ptr DeferredOperationKHR;
-    ): Result {.cdecl, discardable.} =
-  createDeferredOperationKHRCage(device,pAllocator,pDeferredOperation)
+    ): Result {.cdecl, lazyload("vkCreateDeferredOperationKHR", DeviceLevel).}
 proc destroyDeferredOperationKHR*(
       device: Device;
       operation: DeferredOperationKHR;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyDeferredOperationKHRCage(device,operation,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyDeferredOperationKHR", DeviceLevel).}
 proc getDeferredOperationMaxConcurrencyKHR*(
       device: Device;
       operation: DeferredOperationKHR;
-    ): uint32 {.cdecl.} =
-  getDeferredOperationMaxConcurrencyKHRCage(device,operation)
+    ): uint32 {.cdecl, lazyload("vkGetDeferredOperationMaxConcurrencyKHR", DeviceLevel).}
 proc getDeferredOperationResultKHR*(
       device: Device;
       operation: DeferredOperationKHR;
-    ): Result {.cdecl, discardable.} =
-  getDeferredOperationResultKHRCage(device,operation)
+    ): Result {.cdecl, lazyload("vkGetDeferredOperationResultKHR", DeviceLevel).}
 proc deferredOperationJoinKHR*(
       device: Device;
       operation: DeferredOperationKHR;
-    ): Result {.cdecl, discardable.} =
-  deferredOperationJoinKHRCage(device,operation)
+    ): Result {.cdecl, lazyload("vkDeferredOperationJoinKHR", DeviceLevel).}
 
-proc loadVK_KHR_deferred_host_operations*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_KHR_deferred_host_operations*(instance: Instance) =
+  createDeferredOperationKHR.smartLoad(instance)
+  destroyDeferredOperationKHR.smartLoad(instance)
+  getDeferredOperationMaxConcurrencyKHR.smartLoad(instance)
+  getDeferredOperationResultKHR.smartLoad(instance)
+  deferredOperationJoinKHR.smartLoad(instance)
 
-  createDeferredOperationKHRCage << "vkCreateDeferredOperationKHR"
-  destroyDeferredOperationKHRCage << "vkDestroyDeferredOperationKHR"
-  getDeferredOperationMaxConcurrencyKHRCage << "vkGetDeferredOperationMaxConcurrencyKHR"
-  getDeferredOperationResultKHRCage << "vkGetDeferredOperationResultKHR"
-  deferredOperationJoinKHRCage << "vkDeferredOperationJoinKHR"
+proc loadVK_KHR_deferred_host_operations*(device: Device) =
+  createDeferredOperationKHR.smartLoad(device)
+  destroyDeferredOperationKHR.smartLoad(device)
+  getDeferredOperationMaxConcurrencyKHR.smartLoad(device)
+  getDeferredOperationResultKHR.smartLoad(device)
+  deferredOperationJoinKHR.smartLoad(device)
+

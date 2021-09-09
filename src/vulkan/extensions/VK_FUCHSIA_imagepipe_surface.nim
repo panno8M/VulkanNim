@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_FUCHSIA_imagepipe_surface
 
 
@@ -21,17 +21,16 @@ type
     flags*: ImagePipeSurfaceCreateFlagsFUCHSIA
     imagePipeHandle*: zx_handle_t
 
-var # command cages
-  createImagePipeSurfaceFUCHSIACage: proc(instance: Instance; pCreateInfo: ptr ImagePipeSurfaceCreateInfoFUCHSIA; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
 proc createImagePipeSurfaceFUCHSIA*(
       instance: Instance;
       pCreateInfo: ptr ImagePipeSurfaceCreateInfoFUCHSIA;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl, discardable.} =
-  createImagePipeSurfaceFUCHSIACage(instance,pCreateInfo,pAllocator,pSurface)
+    ): Result {.cdecl, lazyload("vkCreateImagePipeSurfaceFUCHSIA", InstanceLevel).}
+
+proc loadAllVK_FUCHSIA_imagepipe_surface*(instance: Instance) =
+  createImagePipeSurfaceFUCHSIA.smartLoad(instance)
 
 proc loadVK_FUCHSIA_imagepipe_surface*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  createImagePipeSurfaceFUCHSIA.smartLoad(instance)
 
-  createImagePipeSurfaceFUCHSIACage << "vkCreateImagePipeSurfaceFUCHSIA"

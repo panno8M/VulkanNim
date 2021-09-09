@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_swapchain
 
 
@@ -95,32 +95,23 @@ type
     pNext*: pointer
     modes*: DeviceGroupPresentModeFlagsKHR
 
-var # command cages
-  createSwapchainKHRCage: proc(device: Device; pCreateInfo: ptr SwapchainCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pSwapchain: ptr SwapchainKHR;): Result {.cdecl.}
-  destroySwapchainKHRCage: proc(device: Device; swapchain: SwapchainKHR; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  getSwapchainImagesKHRCage: proc(device: Device; swapchain: SwapchainKHR; pSwapchainImageCount: ptr uint32; pSwapchainImages: ptr Image;): Result {.cdecl.}
-  acquireNextImageKHRCage: proc(device: Device; swapchain: SwapchainKHR; timeout: uint64; semaphore: Semaphore; fence: Fence; pImageIndex: ptr uint32;): Result {.cdecl.}
-  queuePresentKHRCage: proc(queue: Queue; pPresentInfo: ptr PresentInfoKHR;): Result {.cdecl.}
 proc createSwapchainKHR*(
       device: Device;
       pCreateInfo: ptr SwapchainCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pSwapchain: ptr SwapchainKHR;
-    ): Result {.cdecl, discardable.} =
-  createSwapchainKHRCage(device,pCreateInfo,pAllocator,pSwapchain)
+    ): Result {.cdecl, lazyload("vkCreateSwapchainKHR", DeviceLevel).}
 proc destroySwapchainKHR*(
       device: Device;
       swapchain: SwapchainKHR;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroySwapchainKHRCage(device,swapchain,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroySwapchainKHR", DeviceLevel).}
 proc getSwapchainImagesKHR*(
       device: Device;
       swapchain: SwapchainKHR;
       pSwapchainImageCount: ptr uint32;
       pSwapchainImages: ptr Image;
-    ): Result {.cdecl, discardable.} =
-  getSwapchainImagesKHRCage(device,swapchain,pSwapchainImageCount,pSwapchainImages)
+    ): Result {.cdecl, lazyload("vkGetSwapchainImagesKHR", DeviceLevel).}
 proc acquireNextImageKHR*(
       device: Device;
       swapchain: SwapchainKHR;
@@ -128,55 +119,57 @@ proc acquireNextImageKHR*(
       semaphore: Semaphore;
       fence: Fence;
       pImageIndex: ptr uint32;
-    ): Result {.cdecl, discardable.} =
-  acquireNextImageKHRCage(device,swapchain,timeout,semaphore,fence,pImageIndex)
+    ): Result {.cdecl, lazyload("vkAcquireNextImageKHR", DeviceLevel).}
 proc queuePresentKHR*(
       queue: Queue;
       pPresentInfo: ptr PresentInfoKHR;
-    ): Result {.cdecl, discardable.} =
-  queuePresentKHRCage(queue,pPresentInfo)
+    ): Result {.cdecl, lazyload("vkQueuePresentKHR", DeviceLevel).}
 
 
-var # command cages
-  getDeviceGroupPresentCapabilitiesKHRCage: proc(device: Device; pDeviceGroupPresentCapabilities: ptr DeviceGroupPresentCapabilitiesKHR;): Result {.cdecl.}
-  getDeviceGroupSurfacePresentModesKHRCage: proc(device: Device; surface: SurfaceKHR; pModes: ptr DeviceGroupPresentModeFlagsKHR;): Result {.cdecl.}
-  getPhysicalDevicePresentRectanglesKHRCage: proc(physicalDevice: PhysicalDevice; surface: SurfaceKHR; pRectCount: ptr uint32; pRects: ptr Rect2D;): Result {.cdecl.}
-  acquireNextImage2KHRCage: proc(device: Device; pAcquireInfo: ptr AcquireNextImageInfoKHR; pImageIndex: ptr uint32;): Result {.cdecl.}
 proc getDeviceGroupPresentCapabilitiesKHR*(
       device: Device;
       pDeviceGroupPresentCapabilities: ptr DeviceGroupPresentCapabilitiesKHR;
-    ): Result {.cdecl, discardable.} =
-  getDeviceGroupPresentCapabilitiesKHRCage(device,pDeviceGroupPresentCapabilities)
+    ): Result {.cdecl, lazyload("vkGetDeviceGroupPresentCapabilitiesKHR", DeviceLevel).}
 proc getDeviceGroupSurfacePresentModesKHR*(
       device: Device;
       surface: SurfaceKHR;
       pModes: ptr DeviceGroupPresentModeFlagsKHR;
-    ): Result {.cdecl, discardable.} =
-  getDeviceGroupSurfacePresentModesKHRCage(device,surface,pModes)
+    ): Result {.cdecl, lazyload("vkGetDeviceGroupSurfacePresentModesKHR", DeviceLevel).}
 proc getPhysicalDevicePresentRectanglesKHR*(
       physicalDevice: PhysicalDevice;
       surface: SurfaceKHR;
       pRectCount: ptr uint32;
       pRects: ptr Rect2D;
-    ): Result {.cdecl, discardable.} =
-  getPhysicalDevicePresentRectanglesKHRCage(physicalDevice,surface,pRectCount,pRects)
+    ): Result {.cdecl, lazyload("vkGetPhysicalDevicePresentRectanglesKHR", InstanceLevel).}
 proc acquireNextImage2KHR*(
       device: Device;
       pAcquireInfo: ptr AcquireNextImageInfoKHR;
       pImageIndex: ptr uint32;
-    ): Result {.cdecl, discardable.} =
-  acquireNextImage2KHRCage(device,pAcquireInfo,pImageIndex)
+    ): Result {.cdecl, lazyload("vkAcquireNextImage2KHR", DeviceLevel).}
+
+proc loadAllVK_KHR_swapchain*(instance: Instance) =
+  createSwapchainKHR.smartLoad(instance)
+  destroySwapchainKHR.smartLoad(instance)
+  getSwapchainImagesKHR.smartLoad(instance)
+  acquireNextImageKHR.smartLoad(instance)
+  queuePresentKHR.smartLoad(instance)
+
+  getDeviceGroupPresentCapabilitiesKHR.smartLoad(instance)
+  getDeviceGroupSurfacePresentModesKHR.smartLoad(instance)
+  getPhysicalDevicePresentRectanglesKHR.smartLoad(instance)
+  acquireNextImage2KHR.smartLoad(instance)
 
 proc loadVK_KHR_swapchain*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  getPhysicalDevicePresentRectanglesKHR.smartLoad(instance)
 
-  createSwapchainKHRCage << "vkCreateSwapchainKHR"
-  destroySwapchainKHRCage << "vkDestroySwapchainKHR"
-  getSwapchainImagesKHRCage << "vkGetSwapchainImagesKHR"
-  acquireNextImageKHRCage << "vkAcquireNextImageKHR"
-  queuePresentKHRCage << "vkQueuePresentKHR"
+proc loadVK_KHR_swapchain*(device: Device) =
+  createSwapchainKHR.smartLoad(device)
+  destroySwapchainKHR.smartLoad(device)
+  getSwapchainImagesKHR.smartLoad(device)
+  acquireNextImageKHR.smartLoad(device)
+  queuePresentKHR.smartLoad(device)
 
-  getDeviceGroupPresentCapabilitiesKHRCage << "vkGetDeviceGroupPresentCapabilitiesKHR"
-  getDeviceGroupSurfacePresentModesKHRCage << "vkGetDeviceGroupSurfacePresentModesKHR"
-  getPhysicalDevicePresentRectanglesKHRCage << "vkGetPhysicalDevicePresentRectanglesKHR"
-  acquireNextImage2KHRCage << "vkAcquireNextImage2KHR"
+  getDeviceGroupPresentCapabilitiesKHR.smartLoad(device)
+  getDeviceGroupSurfacePresentModesKHR.smartLoad(device)
+  acquireNextImage2KHR.smartLoad(device)
+

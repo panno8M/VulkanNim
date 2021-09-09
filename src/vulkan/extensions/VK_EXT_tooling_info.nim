@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_EXT_tooling_info
 
 
@@ -40,16 +40,15 @@ type
     description*: array[MaxDescriptionSize, char]
     layer*: array[MaxExtensionNameSize, char]
 
-var # command cages
-  getPhysicalDeviceToolPropertiesEXTCage: proc(physicalDevice: PhysicalDevice; pToolCount: ptr uint32; pToolProperties: ptr PhysicalDeviceToolPropertiesEXT;): Result {.cdecl.}
 proc getPhysicalDeviceToolPropertiesEXT*(
       physicalDevice: PhysicalDevice;
       pToolCount: ptr uint32;
       pToolProperties: ptr PhysicalDeviceToolPropertiesEXT;
-    ): Result {.cdecl, discardable.} =
-  getPhysicalDeviceToolPropertiesEXTCage(physicalDevice,pToolCount,pToolProperties)
+    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceToolPropertiesEXT", InstanceLevel).}
+
+proc loadAllVK_EXT_tooling_info*(instance: Instance) =
+  getPhysicalDeviceToolPropertiesEXT.smartLoad(instance)
 
 proc loadVK_EXT_tooling_info*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  getPhysicalDeviceToolPropertiesEXT.smartLoad(instance)
 
-  getPhysicalDeviceToolPropertiesEXTCage << "vkGetPhysicalDeviceToolPropertiesEXT"

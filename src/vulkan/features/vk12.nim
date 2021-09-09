@@ -1,4 +1,4 @@
-# Generated at 2021-09-01T23:32:32Z
+# Generated at 2021-09-09T01:49:36Z
 # vk12
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -606,9 +606,6 @@ template apiVersion12*(): untyped = makeVersion(1, 2, 0)
 
 # Promoted from VK_KHR_draw_indirect_count (extension 170)
 # --------------------------------------------------------
-var # command cages
-  cmdDrawIndirectCountCage: proc(commandBuffer: CommandBuffer; buffer: Buffer; offset: DeviceSize; countBuffer: Buffer; countBufferOffset: DeviceSize; maxDrawCount: uint32; stride: uint32;): void {.cdecl.}
-  cmdDrawIndexedIndirectCountCage: proc(commandBuffer: CommandBuffer; buffer: Buffer; offset: DeviceSize; countBuffer: Buffer; countBufferOffset: DeviceSize; maxDrawCount: uint32; stride: uint32;): void {.cdecl.}
 proc cmdDrawIndirectCount*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
@@ -617,8 +614,7 @@ proc cmdDrawIndirectCount*(
       countBufferOffset: DeviceSize;
       maxDrawCount: uint32;
       stride: uint32;
-    ): void {.cdecl.} =
-  cmdDrawIndirectCountCage(commandBuffer,buffer,offset,countBuffer,countBufferOffset,maxDrawCount,stride)
+    ): void {.cdecl, lazyload("vkCmdDrawIndirectCount", DeviceLevel).}
 proc cmdDrawIndexedIndirectCount*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
@@ -627,41 +623,31 @@ proc cmdDrawIndexedIndirectCount*(
       countBufferOffset: DeviceSize;
       maxDrawCount: uint32;
       stride: uint32;
-    ): void {.cdecl.} =
-  cmdDrawIndexedIndirectCountCage(commandBuffer,buffer,offset,countBuffer,countBufferOffset,maxDrawCount,stride)
+    ): void {.cdecl, lazyload("vkCmdDrawIndexedIndirectCount", DeviceLevel).}
 
 
 # Promoted from VK_KHR_create_renderpass2 (extension 110)
 # -------------------------------------------------------
-var # command cages
-  createRenderPass2Cage: proc(device: Device; pCreateInfo: ptr RenderPassCreateInfo2; pAllocator: ptr AllocationCallbacks; pRenderPass: ptr RenderPass;): Result {.cdecl.}
-  cmdBeginRenderPass2Cage: proc(commandBuffer: CommandBuffer; pRenderPassBegin: ptr RenderPassBeginInfo; pSubpassBeginInfo: ptr SubpassBeginInfo;): void {.cdecl.}
-  cmdNextSubpass2Cage: proc(commandBuffer: CommandBuffer; pSubpassBeginInfo: ptr SubpassBeginInfo; pSubpassEndInfo: ptr SubpassEndInfo;): void {.cdecl.}
-  cmdEndRenderPass2Cage: proc(commandBuffer: CommandBuffer; pSubpassEndInfo: ptr SubpassEndInfo;): void {.cdecl.}
 proc createRenderPass2*(
       device: Device;
       pCreateInfo: ptr RenderPassCreateInfo2;
       pAllocator: ptr AllocationCallbacks;
       pRenderPass: ptr RenderPass;
-    ): Result {.cdecl, discardable.} =
-  createRenderPass2Cage(device,pCreateInfo,pAllocator,pRenderPass)
+    ): Result {.cdecl, lazyload("vkCreateRenderPass2", DeviceLevel).}
 proc cmdBeginRenderPass2*(
       commandBuffer: CommandBuffer;
       pRenderPassBegin: ptr RenderPassBeginInfo;
       pSubpassBeginInfo: ptr SubpassBeginInfo;
-    ): void {.cdecl.} =
-  cmdBeginRenderPass2Cage(commandBuffer,pRenderPassBegin,pSubpassBeginInfo)
+    ): void {.cdecl, lazyload("vkCmdBeginRenderPass2", DeviceLevel).}
 proc cmdNextSubpass2*(
       commandBuffer: CommandBuffer;
       pSubpassBeginInfo: ptr SubpassBeginInfo;
       pSubpassEndInfo: ptr SubpassEndInfo;
-    ): void {.cdecl.} =
-  cmdNextSubpass2Cage(commandBuffer,pSubpassBeginInfo,pSubpassEndInfo)
+    ): void {.cdecl, lazyload("vkCmdNextSubpass2", DeviceLevel).}
 proc cmdEndRenderPass2*(
       commandBuffer: CommandBuffer;
       pSubpassEndInfo: ptr SubpassEndInfo;
-    ): void {.cdecl.} =
-  cmdEndRenderPass2Cage(commandBuffer,pSubpassEndInfo)
+    ): void {.cdecl, lazyload("vkCmdEndRenderPass2", DeviceLevel).}
 
 
 # Promoted from VK_KHR_8bit_storage (extension 178)
@@ -734,86 +720,92 @@ proc cmdEndRenderPass2*(
 
 # Promoted from VK_EXT_host_query_reset (extension 262)
 # -----------------------------------------------------
-var # command cages
-  resetQueryPoolCage: proc(device: Device; queryPool: QueryPool; firstQuery: uint32; queryCount: uint32;): void {.cdecl.}
 proc resetQueryPool*(
       device: Device;
       queryPool: QueryPool;
       firstQuery: uint32;
       queryCount: uint32;
-    ): void {.cdecl.} =
-  resetQueryPoolCage(device,queryPool,firstQuery,queryCount)
+    ): void {.cdecl, lazyload("vkResetQueryPool", DeviceLevel).}
 
 
 # Promoted from VK_KHR_timeline_semaphore (extension 208)
 # -------------------------------------------------------
-var # command cages
-  getSemaphoreCounterValueCage: proc(device: Device; semaphore: Semaphore; pValue: ptr uint64;): Result {.cdecl.}
-  waitSemaphoresCage: proc(device: Device; pWaitInfo: ptr SemaphoreWaitInfo; timeout: uint64;): Result {.cdecl.}
-  signalSemaphoreCage: proc(device: Device; pSignalInfo: ptr SemaphoreSignalInfo;): Result {.cdecl.}
 proc getSemaphoreCounterValue*(
       device: Device;
       semaphore: Semaphore;
       pValue: ptr uint64;
-    ): Result {.cdecl, discardable.} =
-  getSemaphoreCounterValueCage(device,semaphore,pValue)
+    ): Result {.cdecl, lazyload("vkGetSemaphoreCounterValue", DeviceLevel).}
 proc waitSemaphores*(
       device: Device;
       pWaitInfo: ptr SemaphoreWaitInfo;
       timeout: uint64;
-    ): Result {.cdecl, discardable.} =
-  waitSemaphoresCage(device,pWaitInfo,timeout)
+    ): Result {.cdecl, lazyload("vkWaitSemaphores", DeviceLevel).}
 proc signalSemaphore*(
       device: Device;
       pSignalInfo: ptr SemaphoreSignalInfo;
-    ): Result {.cdecl, discardable.} =
-  signalSemaphoreCage(device,pSignalInfo)
+    ): Result {.cdecl, lazyload("vkSignalSemaphore", DeviceLevel).}
 
 
 # Promoted from VK_KHR_buffer_device_address (extension 258)
 # ----------------------------------------------------------
-var # command cages
-  getBufferDeviceAddressCage: proc(device: Device; pInfo: ptr BufferDeviceAddressInfo;): DeviceAddress {.cdecl.}
-  getBufferOpaqueCaptureAddressCage: proc(device: Device; pInfo: ptr BufferDeviceAddressInfo;): uint64 {.cdecl.}
-  getDeviceMemoryOpaqueCaptureAddressCage: proc(device: Device; pInfo: ptr DeviceMemoryOpaqueCaptureAddressInfo;): uint64 {.cdecl.}
 proc getBufferDeviceAddress*(
       device: Device;
       pInfo: ptr BufferDeviceAddressInfo;
-    ): DeviceAddress {.cdecl.} =
-  getBufferDeviceAddressCage(device,pInfo)
+    ): DeviceAddress {.cdecl, lazyload("vkGetBufferDeviceAddress", DeviceLevel).}
 proc getBufferOpaqueCaptureAddress*(
       device: Device;
       pInfo: ptr BufferDeviceAddressInfo;
-    ): uint64 {.cdecl.} =
-  getBufferOpaqueCaptureAddressCage(device,pInfo)
+    ): uint64 {.cdecl, lazyload("vkGetBufferOpaqueCaptureAddress", DeviceLevel).}
 proc getDeviceMemoryOpaqueCaptureAddress*(
       device: Device;
       pInfo: ptr DeviceMemoryOpaqueCaptureAddressInfo;
-    ): uint64 {.cdecl.} =
-  getDeviceMemoryOpaqueCaptureAddressCage(device,pInfo)
+    ): uint64 {.cdecl, lazyload("vkGetDeviceMemoryOpaqueCaptureAddress", DeviceLevel).}
 
-proc loadVk12*(instance: Instance) =
-  instance.defineLoader(`<<`)
-
+proc loadAllVk12*(instance: Instance) =
   # Promoted from VK_KHR_draw_indirect_count (extension 170)
-  cmdDrawIndirectCountCage << "vkCmdDrawIndirectCount"
-  cmdDrawIndexedIndirectCountCage << "vkCmdDrawIndexedIndirectCount"
+  cmdDrawIndirectCount.smartLoad(instance)
+  cmdDrawIndexedIndirectCount.smartLoad(instance)
 
   # Promoted from VK_KHR_create_renderpass2 (extension 110)
-  createRenderPass2Cage << "vkCreateRenderPass2"
-  cmdBeginRenderPass2Cage << "vkCmdBeginRenderPass2"
-  cmdNextSubpass2Cage << "vkCmdNextSubpass2"
-  cmdEndRenderPass2Cage << "vkCmdEndRenderPass2"
+  createRenderPass2.smartLoad(instance)
+  cmdBeginRenderPass2.smartLoad(instance)
+  cmdNextSubpass2.smartLoad(instance)
+  cmdEndRenderPass2.smartLoad(instance)
 
   # Promoted from VK_EXT_host_query_reset (extension 262)
-  resetQueryPoolCage << "vkResetQueryPool"
+  resetQueryPool.smartLoad(instance)
 
   # Promoted from VK_KHR_timeline_semaphore (extension 208)
-  getSemaphoreCounterValueCage << "vkGetSemaphoreCounterValue"
-  waitSemaphoresCage << "vkWaitSemaphores"
-  signalSemaphoreCage << "vkSignalSemaphore"
+  getSemaphoreCounterValue.smartLoad(instance)
+  waitSemaphores.smartLoad(instance)
+  signalSemaphore.smartLoad(instance)
 
   # Promoted from VK_KHR_buffer_device_address (extension 258)
-  getBufferDeviceAddressCage << "vkGetBufferDeviceAddress"
-  getBufferOpaqueCaptureAddressCage << "vkGetBufferOpaqueCaptureAddress"
-  getDeviceMemoryOpaqueCaptureAddressCage << "vkGetDeviceMemoryOpaqueCaptureAddress"
+  getBufferDeviceAddress.smartLoad(instance)
+  getBufferOpaqueCaptureAddress.smartLoad(instance)
+  getDeviceMemoryOpaqueCaptureAddress.smartLoad(instance)
+
+proc loadVk12*(device: Device) =
+  # Promoted from VK_KHR_draw_indirect_count (extension 170)
+  cmdDrawIndirectCount.smartLoad(device)
+  cmdDrawIndexedIndirectCount.smartLoad(device)
+
+  # Promoted from VK_KHR_create_renderpass2 (extension 110)
+  createRenderPass2.smartLoad(device)
+  cmdBeginRenderPass2.smartLoad(device)
+  cmdNextSubpass2.smartLoad(device)
+  cmdEndRenderPass2.smartLoad(device)
+
+  # Promoted from VK_EXT_host_query_reset (extension 262)
+  resetQueryPool.smartLoad(device)
+
+  # Promoted from VK_KHR_timeline_semaphore (extension 208)
+  getSemaphoreCounterValue.smartLoad(device)
+  waitSemaphores.smartLoad(device)
+  signalSemaphore.smartLoad(device)
+
+  # Promoted from VK_KHR_buffer_device_address (extension 258)
+  getBufferDeviceAddress.smartLoad(device)
+  getBufferOpaqueCaptureAddress.smartLoad(device)
+  getDeviceMemoryOpaqueCaptureAddress.smartLoad(device)
+

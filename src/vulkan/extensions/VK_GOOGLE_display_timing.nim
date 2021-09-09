@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_GOOGLE_display_timing
 
 
@@ -29,25 +29,23 @@ type
     presentID*: uint32
     desiredPresentTime*: uint64
 
-var # command cages
-  getRefreshCycleDurationGOOGLECage: proc(device: Device; swapchain: SwapchainKHR; pDisplayTimingProperties: ptr RefreshCycleDurationGOOGLE;): Result {.cdecl.}
-  getPastPresentationTimingGOOGLECage: proc(device: Device; swapchain: SwapchainKHR; pPresentationTimingCount: ptr uint32; pPresentationTimings: ptr PastPresentationTimingGOOGLE;): Result {.cdecl.}
 proc getRefreshCycleDurationGOOGLE*(
       device: Device;
       swapchain: SwapchainKHR;
       pDisplayTimingProperties: ptr RefreshCycleDurationGOOGLE;
-    ): Result {.cdecl, discardable.} =
-  getRefreshCycleDurationGOOGLECage(device,swapchain,pDisplayTimingProperties)
+    ): Result {.cdecl, lazyload("vkGetRefreshCycleDurationGOOGLE", DeviceLevel).}
 proc getPastPresentationTimingGOOGLE*(
       device: Device;
       swapchain: SwapchainKHR;
       pPresentationTimingCount: ptr uint32;
       pPresentationTimings: ptr PastPresentationTimingGOOGLE;
-    ): Result {.cdecl, discardable.} =
-  getPastPresentationTimingGOOGLECage(device,swapchain,pPresentationTimingCount,pPresentationTimings)
+    ): Result {.cdecl, lazyload("vkGetPastPresentationTimingGOOGLE", DeviceLevel).}
 
-proc loadVK_GOOGLE_display_timing*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_GOOGLE_display_timing*(instance: Instance) =
+  getRefreshCycleDurationGOOGLE.smartLoad(instance)
+  getPastPresentationTimingGOOGLE.smartLoad(instance)
 
-  getRefreshCycleDurationGOOGLECage << "vkGetRefreshCycleDurationGOOGLE"
-  getPastPresentationTimingGOOGLECage << "vkGetPastPresentationTimingGOOGLE"
+proc loadVK_GOOGLE_display_timing*(device: Device) =
+  getRefreshCycleDurationGOOGLE.smartLoad(device)
+  getPastPresentationTimingGOOGLE.smartLoad(device)
+

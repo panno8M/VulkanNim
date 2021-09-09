@@ -1,4 +1,4 @@
-# Generated at 2021-09-01T23:32:32Z
+# Generated at 2021-09-09T09:06:59Z
 # vk10
 # Vulkan core API interface definitions
 # =====================================
@@ -3409,46 +3409,29 @@ template nullHandle*(): untyped = ( cast[NullHandle](0) )
 
 # Device initialization
 # ---------------------
-var # command cages
-  createInstanceCage: proc(pCreateInfo: ptr InstanceCreateInfo; pAllocator: ptr AllocationCallbacks; pInstance: ptr Instance;): Result {.cdecl.}
-  destroyInstanceCage: proc(instance: Instance; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  enumeratePhysicalDevicesCage: proc(instance: Instance; pPhysicalDeviceCount: ptr uint32; pPhysicalDevices: ptr PhysicalDevice;): Result {.cdecl.}
-  getPhysicalDeviceFeaturesCage: proc(physicalDevice: PhysicalDevice; pFeatures: ptr PhysicalDeviceFeatures;): void {.cdecl.}
-  getPhysicalDeviceFormatPropertiesCage: proc(physicalDevice: PhysicalDevice; format: Format; pFormatProperties: ptr FormatProperties;): void {.cdecl.}
-  getPhysicalDeviceImageFormatPropertiesCage: proc(physicalDevice: PhysicalDevice; format: Format; theType: ImageType; tiling: ImageTiling; usage: ImageUsageFlags; flags: ImageCreateFlags; pImageFormatProperties: ptr ImageFormatProperties;): Result {.cdecl.}
-  getPhysicalDevicePropertiesCage: proc(physicalDevice: PhysicalDevice; pProperties: ptr PhysicalDeviceProperties;): void {.cdecl.}
-  getPhysicalDeviceQueueFamilyPropertiesCage: proc(physicalDevice: PhysicalDevice; pQueueFamilyPropertyCount: ptr uint32; pQueueFamilyProperties: ptr QueueFamilyProperties;): void {.cdecl.}
-  getPhysicalDeviceMemoryPropertiesCage: proc(physicalDevice: PhysicalDevice; pMemoryProperties: ptr PhysicalDeviceMemoryProperties;): void {.cdecl.}
-  getInstanceProcAddrCage: proc(instance: Instance; pName: cstring;): PFN_VoidFunction {.cdecl.}
-  getDeviceProcAddrCage: proc(device: Device; pName: cstring;): PFN_VoidFunction {.cdecl.}
 proc createInstance*(
       pCreateInfo: ptr InstanceCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pInstance: ptr Instance;
-    ): Result {.cdecl, discardable.} =
-  createInstanceCage(pCreateInfo,pAllocator,pInstance)
+    ): Result {.cdecl, preload("vkCreateInstance").}
 proc destroyInstance*(
       instance: Instance;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyInstanceCage(instance,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyInstance", InstanceLevel).}
 proc enumeratePhysicalDevices*(
       instance: Instance;
       pPhysicalDeviceCount: ptr uint32;
       pPhysicalDevices: ptr PhysicalDevice;
-    ): Result {.cdecl, discardable.} =
-  enumeratePhysicalDevicesCage(instance,pPhysicalDeviceCount,pPhysicalDevices)
+    ): Result {.cdecl, lazyload("vkEnumeratePhysicalDevices", InstanceLevel).}
 proc getPhysicalDeviceFeatures*(
       physicalDevice: PhysicalDevice;
       pFeatures: ptr PhysicalDeviceFeatures;
-    ): void {.cdecl.} =
-  getPhysicalDeviceFeaturesCage(physicalDevice,pFeatures)
+    ): void {.cdecl, lazyload("vkGetPhysicalDeviceFeatures", InstanceLevel).}
 proc getPhysicalDeviceFormatProperties*(
       physicalDevice: PhysicalDevice;
       format: Format;
       pFormatProperties: ptr FormatProperties;
-    ): void {.cdecl.} =
-  getPhysicalDeviceFormatPropertiesCage(physicalDevice,format,pFormatProperties)
+    ): void {.cdecl, lazyload("vkGetPhysicalDeviceFormatProperties", InstanceLevel).}
 proc getPhysicalDeviceImageFormatProperties*(
       physicalDevice: PhysicalDevice;
       format: Format;
@@ -3457,147 +3440,107 @@ proc getPhysicalDeviceImageFormatProperties*(
       usage: ImageUsageFlags;
       flags: ImageCreateFlags;
       pImageFormatProperties: ptr ImageFormatProperties;
-    ): Result {.cdecl, discardable.} =
-  getPhysicalDeviceImageFormatPropertiesCage(physicalDevice,format,theType,tiling,usage,flags,pImageFormatProperties)
+    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceImageFormatProperties", InstanceLevel).}
 proc getPhysicalDeviceProperties*(
       physicalDevice: PhysicalDevice;
       pProperties: ptr PhysicalDeviceProperties;
-    ): void {.cdecl.} =
-  getPhysicalDevicePropertiesCage(physicalDevice,pProperties)
+    ): void {.cdecl, lazyload("vkGetPhysicalDeviceProperties", InstanceLevel).}
 proc getPhysicalDeviceQueueFamilyProperties*(
       physicalDevice: PhysicalDevice;
       pQueueFamilyPropertyCount: ptr uint32;
       pQueueFamilyProperties: ptr QueueFamilyProperties;
-    ): void {.cdecl.} =
-  getPhysicalDeviceQueueFamilyPropertiesCage(physicalDevice,pQueueFamilyPropertyCount,pQueueFamilyProperties)
+    ): void {.cdecl, lazyload("vkGetPhysicalDeviceQueueFamilyProperties", InstanceLevel).}
 proc getPhysicalDeviceMemoryProperties*(
       physicalDevice: PhysicalDevice;
       pMemoryProperties: ptr PhysicalDeviceMemoryProperties;
-    ): void {.cdecl.} =
-  getPhysicalDeviceMemoryPropertiesCage(physicalDevice,pMemoryProperties)
+    ): void {.cdecl, lazyload("vkGetPhysicalDeviceMemoryProperties", InstanceLevel).}
 proc getInstanceProcAddr*(
       instance: Instance;
       pName: cstring;
-    ): PFN_VoidFunction {.cdecl.} =
-  getInstanceProcAddrCage(instance,pName)
+    ): PFN_VoidFunction {.cdecl, preload("vkGetInstanceProcAddr").}
 proc getDeviceProcAddr*(
       device: Device;
       pName: cstring;
-    ): PFN_VoidFunction {.cdecl.} =
-  getDeviceProcAddrCage(device,pName)
+    ): PFN_VoidFunction {.cdecl, preload("vkGetDeviceProcAddr").}
 
 
 # Device commands
 # ---------------
-var # command cages
-  createDeviceCage: proc(physicalDevice: PhysicalDevice; pCreateInfo: ptr DeviceCreateInfo; pAllocator: ptr AllocationCallbacks; pDevice: ptr Device;): Result {.cdecl.}
-  destroyDeviceCage: proc(device: Device; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
 proc createDevice*(
       physicalDevice: PhysicalDevice;
       pCreateInfo: ptr DeviceCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pDevice: ptr Device;
-    ): Result {.cdecl, discardable.} =
-  createDeviceCage(physicalDevice,pCreateInfo,pAllocator,pDevice)
+    ): Result {.cdecl, lazyload("vkCreateDevice", InstanceLevel).}
 proc destroyDevice*(
       device: Device;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyDeviceCage(device,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyDevice", DeviceLevel).}
 
 
 # Extension discovery commands
 # ----------------------------
-var # command cages
-  enumerateInstanceExtensionPropertiesCage: proc(pLayerName: cstring; pPropertyCount: ptr uint32; pProperties: ptr ExtensionProperties;): Result {.cdecl.}
-  enumerateDeviceExtensionPropertiesCage: proc(physicalDevice: PhysicalDevice; pLayerName: cstring; pPropertyCount: ptr uint32; pProperties: ptr ExtensionProperties;): Result {.cdecl.}
 proc enumerateInstanceExtensionProperties*(
       pLayerName: cstring;
       pPropertyCount: ptr uint32;
       pProperties: ptr ExtensionProperties;
-    ): Result {.cdecl, discardable.} =
-  enumerateInstanceExtensionPropertiesCage(pLayerName,pPropertyCount,pProperties)
+    ): Result {.cdecl, preload("vkEnumerateInstanceExtensionProperties").}
 proc enumerateDeviceExtensionProperties*(
       physicalDevice: PhysicalDevice;
       pLayerName: cstring;
       pPropertyCount: ptr uint32;
       pProperties: ptr ExtensionProperties;
-    ): Result {.cdecl, discardable.} =
-  enumerateDeviceExtensionPropertiesCage(physicalDevice,pLayerName,pPropertyCount,pProperties)
+    ): Result {.cdecl, lazyload("vkEnumerateDeviceExtensionProperties", InstanceLevel).}
 
 
 # Layer discovery commands
 # ------------------------
-var # command cages
-  enumerateInstanceLayerPropertiesCage: proc(pPropertyCount: ptr uint32; pProperties: ptr LayerProperties;): Result {.cdecl.}
-  enumerateDeviceLayerPropertiesCage: proc(physicalDevice: PhysicalDevice; pPropertyCount: ptr uint32; pProperties: ptr LayerProperties;): Result {.cdecl.}
 proc enumerateInstanceLayerProperties*(
       pPropertyCount: ptr uint32;
       pProperties: ptr LayerProperties;
-    ): Result {.cdecl, discardable.} =
-  enumerateInstanceLayerPropertiesCage(pPropertyCount,pProperties)
+    ): Result {.cdecl, preload("vkEnumerateInstanceLayerProperties").}
 proc enumerateDeviceLayerProperties*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
       pProperties: ptr LayerProperties;
-    ): Result {.cdecl, discardable.} =
-  enumerateDeviceLayerPropertiesCage(physicalDevice,pPropertyCount,pProperties)
+    ): Result {.cdecl, lazyload("vkEnumerateDeviceLayerProperties", InstanceLevel).}
 
 
 # Queue commands
 # --------------
-var # command cages
-  getDeviceQueueCage: proc(device: Device; queueFamilyIndex: uint32; queueIndex: uint32; pQueue: ptr Queue;): void {.cdecl.}
-  queueSubmitCage: proc(queue: Queue; submitCount: uint32; pSubmits: ptr SubmitInfo; fence: Fence;): Result {.cdecl.}
-  queueWaitIdleCage: proc(queue: Queue;): Result {.cdecl.}
-  deviceWaitIdleCage: proc(device: Device;): Result {.cdecl.}
 proc getDeviceQueue*(
       device: Device;
       queueFamilyIndex: uint32;
       queueIndex: uint32;
       pQueue: ptr Queue;
-    ): void {.cdecl.} =
-  getDeviceQueueCage(device,queueFamilyIndex,queueIndex,pQueue)
+    ): void {.cdecl, lazyload("vkGetDeviceQueue", DeviceLevel).}
 proc queueSubmit*(
       queue: Queue;
       submitCount: uint32;
       pSubmits: ptr SubmitInfo;
       fence: Fence;
-    ): Result {.cdecl, discardable.} =
-  queueSubmitCage(queue,submitCount,pSubmits,fence)
+    ): Result {.cdecl, lazyload("vkQueueSubmit", DeviceLevel).}
 proc queueWaitIdle*(
       queue: Queue;
-    ): Result {.cdecl, discardable.} =
-  queueWaitIdleCage(queue)
+    ): Result {.cdecl, lazyload("vkQueueWaitIdle", DeviceLevel).}
 proc deviceWaitIdle*(
       device: Device;
-    ): Result {.cdecl, discardable.} =
-  deviceWaitIdleCage(device)
+    ): Result {.cdecl, lazyload("vkDeviceWaitIdle", DeviceLevel).}
 
 
 # Memory commands
 # ---------------
-var # command cages
-  allocateMemoryCage: proc(device: Device; pAllocateInfo: ptr MemoryAllocateInfo; pAllocator: ptr AllocationCallbacks; pMemory: ptr DeviceMemory;): Result {.cdecl.}
-  freeMemoryCage: proc(device: Device; memory: DeviceMemory; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  mapMemoryCage: proc(device: Device; memory: DeviceMemory; offset: DeviceSize; size: DeviceSize; flags: MemoryMapFlags; ppData: ptr pointer;): Result {.cdecl.}
-  unmapMemoryCage: proc(device: Device; memory: DeviceMemory;): void {.cdecl.}
-  flushMappedMemoryRangesCage: proc(device: Device; memoryRangeCount: uint32; pMemoryRanges: ptr MappedMemoryRange;): Result {.cdecl.}
-  invalidateMappedMemoryRangesCage: proc(device: Device; memoryRangeCount: uint32; pMemoryRanges: ptr MappedMemoryRange;): Result {.cdecl.}
-  getDeviceMemoryCommitmentCage: proc(device: Device; memory: DeviceMemory; pCommittedMemoryInBytes: ptr DeviceSize;): void {.cdecl.}
 proc allocateMemory*(
       device: Device;
       pAllocateInfo: ptr MemoryAllocateInfo;
       pAllocator: ptr AllocationCallbacks;
       pMemory: ptr DeviceMemory;
-    ): Result {.cdecl, discardable.} =
-  allocateMemoryCage(device,pAllocateInfo,pAllocator,pMemory)
+    ): Result {.cdecl, lazyload("vkAllocateMemory", DeviceLevel).}
 proc freeMemory*(
       device: Device;
       memory: DeviceMemory;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  freeMemoryCage(device,memory,pAllocator)
+    ): void {.cdecl, lazyload("vkFreeMemory", DeviceLevel).}
 proc mapMemory*(
       device: Device;
       memory: DeviceMemory;
@@ -3605,81 +3548,62 @@ proc mapMemory*(
       size: DeviceSize;
       flags: MemoryMapFlags;
       ppData: ptr pointer;
-    ): Result {.cdecl, discardable.} =
-  mapMemoryCage(device,memory,offset,size,flags,ppData)
+    ): Result {.cdecl, lazyload("vkMapMemory", DeviceLevel).}
 proc unmapMemory*(
       device: Device;
       memory: DeviceMemory;
-    ): void {.cdecl.} =
-  unmapMemoryCage(device,memory)
+    ): void {.cdecl, lazyload("vkUnmapMemory", DeviceLevel).}
 proc flushMappedMemoryRanges*(
       device: Device;
       memoryRangeCount: uint32;
       pMemoryRanges: ptr MappedMemoryRange;
-    ): Result {.cdecl, discardable.} =
-  flushMappedMemoryRangesCage(device,memoryRangeCount,pMemoryRanges)
+    ): Result {.cdecl, lazyload("vkFlushMappedMemoryRanges", DeviceLevel).}
 proc invalidateMappedMemoryRanges*(
       device: Device;
       memoryRangeCount: uint32;
       pMemoryRanges: ptr MappedMemoryRange;
-    ): Result {.cdecl, discardable.} =
-  invalidateMappedMemoryRangesCage(device,memoryRangeCount,pMemoryRanges)
+    ): Result {.cdecl, lazyload("vkInvalidateMappedMemoryRanges", DeviceLevel).}
 proc getDeviceMemoryCommitment*(
       device: Device;
       memory: DeviceMemory;
       pCommittedMemoryInBytes: ptr DeviceSize;
-    ): void {.cdecl.} =
-  getDeviceMemoryCommitmentCage(device,memory,pCommittedMemoryInBytes)
+    ): void {.cdecl, lazyload("vkGetDeviceMemoryCommitment", DeviceLevel).}
 
 
 # Memory management API commands
 # ------------------------------
-var # command cages
-  bindBufferMemoryCage: proc(device: Device; buffer: Buffer; memory: DeviceMemory; memoryOffset: DeviceSize;): Result {.cdecl.}
-  bindImageMemoryCage: proc(device: Device; image: Image; memory: DeviceMemory; memoryOffset: DeviceSize;): Result {.cdecl.}
-  getBufferMemoryRequirementsCage: proc(device: Device; buffer: Buffer; pMemoryRequirements: ptr MemoryRequirements;): void {.cdecl.}
-  getImageMemoryRequirementsCage: proc(device: Device; image: Image; pMemoryRequirements: ptr MemoryRequirements;): void {.cdecl.}
 proc bindBufferMemory*(
       device: Device;
       buffer: Buffer;
       memory: DeviceMemory;
       memoryOffset: DeviceSize;
-    ): Result {.cdecl, discardable.} =
-  bindBufferMemoryCage(device,buffer,memory,memoryOffset)
+    ): Result {.cdecl, lazyload("vkBindBufferMemory", DeviceLevel).}
 proc bindImageMemory*(
       device: Device;
       image: Image;
       memory: DeviceMemory;
       memoryOffset: DeviceSize;
-    ): Result {.cdecl, discardable.} =
-  bindImageMemoryCage(device,image,memory,memoryOffset)
+    ): Result {.cdecl, lazyload("vkBindImageMemory", DeviceLevel).}
 proc getBufferMemoryRequirements*(
       device: Device;
       buffer: Buffer;
       pMemoryRequirements: ptr MemoryRequirements;
-    ): void {.cdecl.} =
-  getBufferMemoryRequirementsCage(device,buffer,pMemoryRequirements)
+    ): void {.cdecl, lazyload("vkGetBufferMemoryRequirements", DeviceLevel).}
 proc getImageMemoryRequirements*(
       device: Device;
       image: Image;
       pMemoryRequirements: ptr MemoryRequirements;
-    ): void {.cdecl.} =
-  getImageMemoryRequirementsCage(device,image,pMemoryRequirements)
+    ): void {.cdecl, lazyload("vkGetImageMemoryRequirements", DeviceLevel).}
 
 
 # Sparse resource memory management API commands
 # ----------------------------------------------
-var # command cages
-  getImageSparseMemoryRequirementsCage: proc(device: Device; image: Image; pSparseMemoryRequirementCount: ptr uint32; pSparseMemoryRequirements: ptr SparseImageMemoryRequirements;): void {.cdecl.}
-  getPhysicalDeviceSparseImageFormatPropertiesCage: proc(physicalDevice: PhysicalDevice; format: Format; theType: ImageType; samples: SampleCountFlagBits; usage: ImageUsageFlags; tiling: ImageTiling; pPropertyCount: ptr uint32; pProperties: ptr SparseImageFormatProperties;): void {.cdecl.}
-  queueBindSparseCage: proc(queue: Queue; bindInfoCount: uint32; pBindInfo: ptr BindSparseInfo; fence: Fence;): Result {.cdecl.}
 proc getImageSparseMemoryRequirements*(
       device: Device;
       image: Image;
       pSparseMemoryRequirementCount: ptr uint32;
       pSparseMemoryRequirements: ptr SparseImageMemoryRequirements;
-    ): void {.cdecl.} =
-  getImageSparseMemoryRequirementsCage(device,image,pSparseMemoryRequirementCount,pSparseMemoryRequirements)
+    ): void {.cdecl, lazyload("vkGetImageSparseMemoryRequirements", DeviceLevel).}
 proc getPhysicalDeviceSparseImageFormatProperties*(
       physicalDevice: PhysicalDevice;
       format: Format;
@@ -3689,136 +3613,101 @@ proc getPhysicalDeviceSparseImageFormatProperties*(
       tiling: ImageTiling;
       pPropertyCount: ptr uint32;
       pProperties: ptr SparseImageFormatProperties;
-    ): void {.cdecl.} =
-  getPhysicalDeviceSparseImageFormatPropertiesCage(physicalDevice,format,theType,samples,usage,tiling,pPropertyCount,pProperties)
+    ): void {.cdecl, lazyload("vkGetPhysicalDeviceSparseImageFormatProperties", InstanceLevel).}
 proc queueBindSparse*(
       queue: Queue;
       bindInfoCount: uint32;
       pBindInfo: ptr BindSparseInfo;
       fence: Fence;
-    ): Result {.cdecl, discardable.} =
-  queueBindSparseCage(queue,bindInfoCount,pBindInfo,fence)
+    ): Result {.cdecl, lazyload("vkQueueBindSparse", DeviceLevel).}
 
 
 # Fence commands
 # --------------
-var # command cages
-  createFenceCage: proc(device: Device; pCreateInfo: ptr FenceCreateInfo; pAllocator: ptr AllocationCallbacks; pFence: ptr Fence;): Result {.cdecl.}
-  destroyFenceCage: proc(device: Device; fence: Fence; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  resetFencesCage: proc(device: Device; fenceCount: uint32; pFences: ptr Fence;): Result {.cdecl.}
-  getFenceStatusCage: proc(device: Device; fence: Fence;): Result {.cdecl.}
-  waitForFencesCage: proc(device: Device; fenceCount: uint32; pFences: ptr Fence; waitAll: Bool32; timeout: uint64;): Result {.cdecl.}
 proc createFence*(
       device: Device;
       pCreateInfo: ptr FenceCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pFence: ptr Fence;
-    ): Result {.cdecl, discardable.} =
-  createFenceCage(device,pCreateInfo,pAllocator,pFence)
+    ): Result {.cdecl, lazyload("vkCreateFence", DeviceLevel).}
 proc destroyFence*(
       device: Device;
       fence: Fence;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyFenceCage(device,fence,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyFence", DeviceLevel).}
 proc resetFences*(
       device: Device;
       fenceCount: uint32;
       pFences: ptr Fence;
-    ): Result {.cdecl, discardable.} =
-  resetFencesCage(device,fenceCount,pFences)
+    ): Result {.cdecl, lazyload("vkResetFences", DeviceLevel).}
 proc getFenceStatus*(
       device: Device;
       fence: Fence;
-    ): Result {.cdecl, discardable.} =
-  getFenceStatusCage(device,fence)
+    ): Result {.cdecl, lazyload("vkGetFenceStatus", DeviceLevel).}
 proc waitForFences*(
       device: Device;
       fenceCount: uint32;
       pFences: ptr Fence;
       waitAll: Bool32;
       timeout: uint64;
-    ): Result {.cdecl, discardable.} =
-  waitForFencesCage(device,fenceCount,pFences,waitAll,timeout)
+    ): Result {.cdecl, lazyload("vkWaitForFences", DeviceLevel).}
 
 
 # Queue semaphore commands
 # ------------------------
-var # command cages
-  createSemaphoreCage: proc(device: Device; pCreateInfo: ptr SemaphoreCreateInfo; pAllocator: ptr AllocationCallbacks; pSemaphore: ptr Semaphore;): Result {.cdecl.}
-  destroySemaphoreCage: proc(device: Device; semaphore: Semaphore; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
 proc createSemaphore*(
       device: Device;
       pCreateInfo: ptr SemaphoreCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pSemaphore: ptr Semaphore;
-    ): Result {.cdecl, discardable.} =
-  createSemaphoreCage(device,pCreateInfo,pAllocator,pSemaphore)
+    ): Result {.cdecl, lazyload("vkCreateSemaphore", DeviceLevel).}
 proc destroySemaphore*(
       device: Device;
       semaphore: Semaphore;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroySemaphoreCage(device,semaphore,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroySemaphore", DeviceLevel).}
 
 
 # Event commands
 # --------------
-var # command cages
-  createEventCage: proc(device: Device; pCreateInfo: ptr EventCreateInfo; pAllocator: ptr AllocationCallbacks; pEvent: ptr Event;): Result {.cdecl.}
-  destroyEventCage: proc(device: Device; event: Event; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  getEventStatusCage: proc(device: Device; event: Event;): Result {.cdecl.}
-  setEventCage: proc(device: Device; event: Event;): Result {.cdecl.}
-  resetEventCage: proc(device: Device; event: Event;): Result {.cdecl.}
 proc createEvent*(
       device: Device;
       pCreateInfo: ptr EventCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pEvent: ptr Event;
-    ): Result {.cdecl, discardable.} =
-  createEventCage(device,pCreateInfo,pAllocator,pEvent)
+    ): Result {.cdecl, lazyload("vkCreateEvent", DeviceLevel).}
 proc destroyEvent*(
       device: Device;
       event: Event;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyEventCage(device,event,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyEvent", DeviceLevel).}
 proc getEventStatus*(
       device: Device;
       event: Event;
-    ): Result {.cdecl, discardable.} =
-  getEventStatusCage(device,event)
+    ): Result {.cdecl, lazyload("vkGetEventStatus", DeviceLevel).}
 proc setEvent*(
       device: Device;
       event: Event;
-    ): Result {.cdecl, discardable.} =
-  setEventCage(device,event)
+    ): Result {.cdecl, lazyload("vkSetEvent", DeviceLevel).}
 proc resetEvent*(
       device: Device;
       event: Event;
-    ): Result {.cdecl, discardable.} =
-  resetEventCage(device,event)
+    ): Result {.cdecl, lazyload("vkResetEvent", DeviceLevel).}
 
 
 # Query commands
 # --------------
-var # command cages
-  createQueryPoolCage: proc(device: Device; pCreateInfo: ptr QueryPoolCreateInfo; pAllocator: ptr AllocationCallbacks; pQueryPool: ptr QueryPool;): Result {.cdecl.}
-  destroyQueryPoolCage: proc(device: Device; queryPool: QueryPool; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  getQueryPoolResultsCage: proc(device: Device; queryPool: QueryPool; firstQuery: uint32; queryCount: uint32; dataSize: uint; pData: pointer; stride: DeviceSize; flags: QueryResultFlags;): Result {.cdecl.}
 proc createQueryPool*(
       device: Device;
       pCreateInfo: ptr QueryPoolCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pQueryPool: ptr QueryPool;
-    ): Result {.cdecl, discardable.} =
-  createQueryPoolCage(device,pCreateInfo,pAllocator,pQueryPool)
+    ): Result {.cdecl, lazyload("vkCreateQueryPool", DeviceLevel).}
 proc destroyQueryPool*(
       device: Device;
       queryPool: QueryPool;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyQueryPoolCage(device,queryPool,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyQueryPool", DeviceLevel).}
 proc getQueryPoolResults*(
       device: Device;
       queryPool: QueryPool;
@@ -3828,160 +3717,119 @@ proc getQueryPoolResults*(
       pData: pointer;
       stride: DeviceSize;
       flags: QueryResultFlags;
-    ): Result {.cdecl, discardable.} =
-  getQueryPoolResultsCage(device,queryPool,firstQuery,queryCount,dataSize,pData,stride,flags)
+    ): Result {.cdecl, lazyload("vkGetQueryPoolResults", DeviceLevel).}
 
 
 # Buffer commands
 # ---------------
-var # command cages
-  createBufferCage: proc(device: Device; pCreateInfo: ptr BufferCreateInfo; pAllocator: ptr AllocationCallbacks; pBuffer: ptr Buffer;): Result {.cdecl.}
-  destroyBufferCage: proc(device: Device; buffer: Buffer; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
 proc createBuffer*(
       device: Device;
       pCreateInfo: ptr BufferCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pBuffer: ptr Buffer;
-    ): Result {.cdecl, discardable.} =
-  createBufferCage(device,pCreateInfo,pAllocator,pBuffer)
+    ): Result {.cdecl, lazyload("vkCreateBuffer", DeviceLevel).}
 proc destroyBuffer*(
       device: Device;
       buffer: Buffer;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyBufferCage(device,buffer,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyBuffer", DeviceLevel).}
 
 
 # Buffer view commands
 # --------------------
-var # command cages
-  createBufferViewCage: proc(device: Device; pCreateInfo: ptr BufferViewCreateInfo; pAllocator: ptr AllocationCallbacks; pView: ptr BufferView;): Result {.cdecl.}
-  destroyBufferViewCage: proc(device: Device; bufferView: BufferView; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
 proc createBufferView*(
       device: Device;
       pCreateInfo: ptr BufferViewCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pView: ptr BufferView;
-    ): Result {.cdecl, discardable.} =
-  createBufferViewCage(device,pCreateInfo,pAllocator,pView)
+    ): Result {.cdecl, lazyload("vkCreateBufferView", DeviceLevel).}
 proc destroyBufferView*(
       device: Device;
       bufferView: BufferView;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyBufferViewCage(device,bufferView,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyBufferView", DeviceLevel).}
 
 
 # Image commands
 # --------------
-var # command cages
-  createImageCage: proc(device: Device; pCreateInfo: ptr ImageCreateInfo; pAllocator: ptr AllocationCallbacks; pImage: ptr Image;): Result {.cdecl.}
-  destroyImageCage: proc(device: Device; image: Image; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  getImageSubresourceLayoutCage: proc(device: Device; image: Image; pSubresource: ptr ImageSubresource; pLayout: ptr SubresourceLayout;): void {.cdecl.}
 proc createImage*(
       device: Device;
       pCreateInfo: ptr ImageCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pImage: ptr Image;
-    ): Result {.cdecl, discardable.} =
-  createImageCage(device,pCreateInfo,pAllocator,pImage)
+    ): Result {.cdecl, lazyload("vkCreateImage", DeviceLevel).}
 proc destroyImage*(
       device: Device;
       image: Image;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyImageCage(device,image,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyImage", DeviceLevel).}
 proc getImageSubresourceLayout*(
       device: Device;
       image: Image;
       pSubresource: ptr ImageSubresource;
       pLayout: ptr SubresourceLayout;
-    ): void {.cdecl.} =
-  getImageSubresourceLayoutCage(device,image,pSubresource,pLayout)
+    ): void {.cdecl, lazyload("vkGetImageSubresourceLayout", DeviceLevel).}
 
 
 # Image view commands
 # -------------------
-var # command cages
-  createImageViewCage: proc(device: Device; pCreateInfo: ptr ImageViewCreateInfo; pAllocator: ptr AllocationCallbacks; pView: ptr ImageView;): Result {.cdecl.}
-  destroyImageViewCage: proc(device: Device; imageView: ImageView; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
 proc createImageView*(
       device: Device;
       pCreateInfo: ptr ImageViewCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pView: ptr ImageView;
-    ): Result {.cdecl, discardable.} =
-  createImageViewCage(device,pCreateInfo,pAllocator,pView)
+    ): Result {.cdecl, lazyload("vkCreateImageView", DeviceLevel).}
 proc destroyImageView*(
       device: Device;
       imageView: ImageView;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyImageViewCage(device,imageView,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyImageView", DeviceLevel).}
 
 
 # Shader commands
 # ---------------
-var # command cages
-  createShaderModuleCage: proc(device: Device; pCreateInfo: ptr ShaderModuleCreateInfo; pAllocator: ptr AllocationCallbacks; pShaderModule: ptr ShaderModule;): Result {.cdecl.}
-  destroyShaderModuleCage: proc(device: Device; shaderModule: ShaderModule; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
 proc createShaderModule*(
       device: Device;
       pCreateInfo: ptr ShaderModuleCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pShaderModule: ptr ShaderModule;
-    ): Result {.cdecl, discardable.} =
-  createShaderModuleCage(device,pCreateInfo,pAllocator,pShaderModule)
+    ): Result {.cdecl, lazyload("vkCreateShaderModule", DeviceLevel).}
 proc destroyShaderModule*(
       device: Device;
       shaderModule: ShaderModule;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyShaderModuleCage(device,shaderModule,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyShaderModule", DeviceLevel).}
 
 
 # Pipeline Cache commands
 # -----------------------
-var # command cages
-  createPipelineCacheCage: proc(device: Device; pCreateInfo: ptr PipelineCacheCreateInfo; pAllocator: ptr AllocationCallbacks; pPipelineCache: ptr PipelineCache;): Result {.cdecl.}
-  destroyPipelineCacheCage: proc(device: Device; pipelineCache: PipelineCache; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  getPipelineCacheDataCage: proc(device: Device; pipelineCache: PipelineCache; pDataSize: ptr uint; pData: pointer;): Result {.cdecl.}
-  mergePipelineCachesCage: proc(device: Device; dstCache: PipelineCache; srcCacheCount: uint32; pSrcCaches: ptr PipelineCache;): Result {.cdecl.}
 proc createPipelineCache*(
       device: Device;
       pCreateInfo: ptr PipelineCacheCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pPipelineCache: ptr PipelineCache;
-    ): Result {.cdecl, discardable.} =
-  createPipelineCacheCage(device,pCreateInfo,pAllocator,pPipelineCache)
+    ): Result {.cdecl, lazyload("vkCreatePipelineCache", DeviceLevel).}
 proc destroyPipelineCache*(
       device: Device;
       pipelineCache: PipelineCache;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyPipelineCacheCage(device,pipelineCache,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyPipelineCache", DeviceLevel).}
 proc getPipelineCacheData*(
       device: Device;
       pipelineCache: PipelineCache;
       pDataSize: ptr uint;
       pData: pointer;
-    ): Result {.cdecl, discardable.} =
-  getPipelineCacheDataCage(device,pipelineCache,pDataSize,pData)
+    ): Result {.cdecl, lazyload("vkGetPipelineCacheData", DeviceLevel).}
 proc mergePipelineCaches*(
       device: Device;
       dstCache: PipelineCache;
       srcCacheCount: uint32;
       pSrcCaches: ptr PipelineCache;
-    ): Result {.cdecl, discardable.} =
-  mergePipelineCachesCage(device,dstCache,srcCacheCount,pSrcCaches)
+    ): Result {.cdecl, lazyload("vkMergePipelineCaches", DeviceLevel).}
 
 
 # Pipeline commands
 # -----------------
-var # command cages
-  createGraphicsPipelinesCage: proc(device: Device; pipelineCache: PipelineCache; createInfoCount: uint32; pCreateInfos: ptr GraphicsPipelineCreateInfo; pAllocator: ptr AllocationCallbacks; pPipelines: ptr Pipeline;): Result {.cdecl.}
-  createComputePipelinesCage: proc(device: Device; pipelineCache: PipelineCache; createInfoCount: uint32; pCreateInfos: ptr ComputePipelineCreateInfo; pAllocator: ptr AllocationCallbacks; pPipelines: ptr Pipeline;): Result {.cdecl.}
-  destroyPipelineCage: proc(device: Device; pipeline: Pipeline; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
 proc createGraphicsPipelines*(
       device: Device;
       pipelineCache: PipelineCache;
@@ -3989,8 +3837,7 @@ proc createGraphicsPipelines*(
       pCreateInfos: ptr GraphicsPipelineCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pPipelines: ptr Pipeline;
-    ): Result {.cdecl, discardable.} =
-  createGraphicsPipelinesCage(device,pipelineCache,createInfoCount,pCreateInfos,pAllocator,pPipelines)
+    ): Result {.cdecl, lazyload("vkCreateGraphicsPipelines", DeviceLevel).}
 proc createComputePipelines*(
       device: Device;
       pipelineCache: PipelineCache;
@@ -3998,226 +3845,168 @@ proc createComputePipelines*(
       pCreateInfos: ptr ComputePipelineCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pPipelines: ptr Pipeline;
-    ): Result {.cdecl, discardable.} =
-  createComputePipelinesCage(device,pipelineCache,createInfoCount,pCreateInfos,pAllocator,pPipelines)
+    ): Result {.cdecl, lazyload("vkCreateComputePipelines", DeviceLevel).}
 proc destroyPipeline*(
       device: Device;
       pipeline: Pipeline;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyPipelineCage(device,pipeline,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyPipeline", DeviceLevel).}
 
 
 # Pipeline layout commands
 # ------------------------
-var # command cages
-  createPipelineLayoutCage: proc(device: Device; pCreateInfo: ptr PipelineLayoutCreateInfo; pAllocator: ptr AllocationCallbacks; pPipelineLayout: ptr PipelineLayout;): Result {.cdecl.}
-  destroyPipelineLayoutCage: proc(device: Device; pipelineLayout: PipelineLayout; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
 proc createPipelineLayout*(
       device: Device;
       pCreateInfo: ptr PipelineLayoutCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pPipelineLayout: ptr PipelineLayout;
-    ): Result {.cdecl, discardable.} =
-  createPipelineLayoutCage(device,pCreateInfo,pAllocator,pPipelineLayout)
+    ): Result {.cdecl, lazyload("vkCreatePipelineLayout", DeviceLevel).}
 proc destroyPipelineLayout*(
       device: Device;
       pipelineLayout: PipelineLayout;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyPipelineLayoutCage(device,pipelineLayout,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyPipelineLayout", DeviceLevel).}
 
 
 # Sampler commands
 # ----------------
-var # command cages
-  createSamplerCage: proc(device: Device; pCreateInfo: ptr SamplerCreateInfo; pAllocator: ptr AllocationCallbacks; pSampler: ptr Sampler;): Result {.cdecl.}
-  destroySamplerCage: proc(device: Device; sampler: Sampler; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
 proc createSampler*(
       device: Device;
       pCreateInfo: ptr SamplerCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pSampler: ptr Sampler;
-    ): Result {.cdecl, discardable.} =
-  createSamplerCage(device,pCreateInfo,pAllocator,pSampler)
+    ): Result {.cdecl, lazyload("vkCreateSampler", DeviceLevel).}
 proc destroySampler*(
       device: Device;
       sampler: Sampler;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroySamplerCage(device,sampler,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroySampler", DeviceLevel).}
 
 
 # Descriptor set commands
 # -----------------------
-var # command cages
-  createDescriptorSetLayoutCage: proc(device: Device; pCreateInfo: ptr DescriptorSetLayoutCreateInfo; pAllocator: ptr AllocationCallbacks; pSetLayout: ptr DescriptorSetLayout;): Result {.cdecl.}
-  destroyDescriptorSetLayoutCage: proc(device: Device; descriptorSetLayout: DescriptorSetLayout; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  createDescriptorPoolCage: proc(device: Device; pCreateInfo: ptr DescriptorPoolCreateInfo; pAllocator: ptr AllocationCallbacks; pDescriptorPool: ptr DescriptorPool;): Result {.cdecl.}
-  destroyDescriptorPoolCage: proc(device: Device; descriptorPool: DescriptorPool; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  resetDescriptorPoolCage: proc(device: Device; descriptorPool: DescriptorPool; flags: DescriptorPoolResetFlags;): Result {.cdecl.}
-  allocateDescriptorSetsCage: proc(device: Device; pAllocateInfo: ptr DescriptorSetAllocateInfo; pDescriptorSets: ptr DescriptorSet;): Result {.cdecl.}
-  freeDescriptorSetsCage: proc(device: Device; descriptorPool: DescriptorPool; descriptorSetCount: uint32; pDescriptorSets: ptr DescriptorSet;): Result {.cdecl.}
-  updateDescriptorSetsCage: proc(device: Device; descriptorWriteCount: uint32; pDescriptorWrites: ptr WriteDescriptorSet; descriptorCopyCount: uint32; pDescriptorCopies: ptr CopyDescriptorSet;): void {.cdecl.}
 proc createDescriptorSetLayout*(
       device: Device;
       pCreateInfo: ptr DescriptorSetLayoutCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pSetLayout: ptr DescriptorSetLayout;
-    ): Result {.cdecl, discardable.} =
-  createDescriptorSetLayoutCage(device,pCreateInfo,pAllocator,pSetLayout)
+    ): Result {.cdecl, lazyload("vkCreateDescriptorSetLayout", DeviceLevel).}
 proc destroyDescriptorSetLayout*(
       device: Device;
       descriptorSetLayout: DescriptorSetLayout;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyDescriptorSetLayoutCage(device,descriptorSetLayout,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyDescriptorSetLayout", DeviceLevel).}
 proc createDescriptorPool*(
       device: Device;
       pCreateInfo: ptr DescriptorPoolCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pDescriptorPool: ptr DescriptorPool;
-    ): Result {.cdecl, discardable.} =
-  createDescriptorPoolCage(device,pCreateInfo,pAllocator,pDescriptorPool)
+    ): Result {.cdecl, lazyload("vkCreateDescriptorPool", DeviceLevel).}
 proc destroyDescriptorPool*(
       device: Device;
       descriptorPool: DescriptorPool;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyDescriptorPoolCage(device,descriptorPool,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyDescriptorPool", DeviceLevel).}
 proc resetDescriptorPool*(
       device: Device;
       descriptorPool: DescriptorPool;
       flags: DescriptorPoolResetFlags;
-    ): Result {.cdecl, discardable.} =
-  resetDescriptorPoolCage(device,descriptorPool,flags)
+    ): Result {.cdecl, lazyload("vkResetDescriptorPool", DeviceLevel).}
 proc allocateDescriptorSets*(
       device: Device;
       pAllocateInfo: ptr DescriptorSetAllocateInfo;
       pDescriptorSets: ptr DescriptorSet;
-    ): Result {.cdecl, discardable.} =
-  allocateDescriptorSetsCage(device,pAllocateInfo,pDescriptorSets)
+    ): Result {.cdecl, lazyload("vkAllocateDescriptorSets", DeviceLevel).}
 proc freeDescriptorSets*(
       device: Device;
       descriptorPool: DescriptorPool;
       descriptorSetCount: uint32;
       pDescriptorSets: ptr DescriptorSet;
-    ): Result {.cdecl, discardable.} =
-  freeDescriptorSetsCage(device,descriptorPool,descriptorSetCount,pDescriptorSets)
+    ): Result {.cdecl, lazyload("vkFreeDescriptorSets", DeviceLevel).}
 proc updateDescriptorSets*(
       device: Device;
       descriptorWriteCount: uint32;
       pDescriptorWrites: ptr WriteDescriptorSet;
       descriptorCopyCount: uint32;
       pDescriptorCopies: ptr CopyDescriptorSet;
-    ): void {.cdecl.} =
-  updateDescriptorSetsCage(device,descriptorWriteCount,pDescriptorWrites,descriptorCopyCount,pDescriptorCopies)
+    ): void {.cdecl, lazyload("vkUpdateDescriptorSets", DeviceLevel).}
 
 
 # Pass commands
 # -------------
-var # command cages
-  createFramebufferCage: proc(device: Device; pCreateInfo: ptr FramebufferCreateInfo; pAllocator: ptr AllocationCallbacks; pFramebuffer: ptr Framebuffer;): Result {.cdecl.}
-  destroyFramebufferCage: proc(device: Device; framebuffer: Framebuffer; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  createRenderPassCage: proc(device: Device; pCreateInfo: ptr RenderPassCreateInfo; pAllocator: ptr AllocationCallbacks; pRenderPass: ptr RenderPass;): Result {.cdecl.}
-  destroyRenderPassCage: proc(device: Device; renderPass: RenderPass; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  getRenderAreaGranularityCage: proc(device: Device; renderPass: RenderPass; pGranularity: ptr Extent2D;): void {.cdecl.}
 proc createFramebuffer*(
       device: Device;
       pCreateInfo: ptr FramebufferCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pFramebuffer: ptr Framebuffer;
-    ): Result {.cdecl, discardable.} =
-  createFramebufferCage(device,pCreateInfo,pAllocator,pFramebuffer)
+    ): Result {.cdecl, lazyload("vkCreateFramebuffer", DeviceLevel).}
 proc destroyFramebuffer*(
       device: Device;
       framebuffer: Framebuffer;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyFramebufferCage(device,framebuffer,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyFramebuffer", DeviceLevel).}
 proc createRenderPass*(
       device: Device;
       pCreateInfo: ptr RenderPassCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pRenderPass: ptr RenderPass;
-    ): Result {.cdecl, discardable.} =
-  createRenderPassCage(device,pCreateInfo,pAllocator,pRenderPass)
+    ): Result {.cdecl, lazyload("vkCreateRenderPass", DeviceLevel).}
 proc destroyRenderPass*(
       device: Device;
       renderPass: RenderPass;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyRenderPassCage(device,renderPass,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyRenderPass", DeviceLevel).}
 proc getRenderAreaGranularity*(
       device: Device;
       renderPass: RenderPass;
       pGranularity: ptr Extent2D;
-    ): void {.cdecl.} =
-  getRenderAreaGranularityCage(device,renderPass,pGranularity)
+    ): void {.cdecl, lazyload("vkGetRenderAreaGranularity", DeviceLevel).}
 
 
 # Command pool commands
 # ---------------------
-var # command cages
-  createCommandPoolCage: proc(device: Device; pCreateInfo: ptr CommandPoolCreateInfo; pAllocator: ptr AllocationCallbacks; pCommandPool: ptr CommandPool;): Result {.cdecl.}
-  destroyCommandPoolCage: proc(device: Device; commandPool: CommandPool; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  resetCommandPoolCage: proc(device: Device; commandPool: CommandPool; flags: CommandPoolResetFlags;): Result {.cdecl.}
 proc createCommandPool*(
       device: Device;
       pCreateInfo: ptr CommandPoolCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pCommandPool: ptr CommandPool;
-    ): Result {.cdecl, discardable.} =
-  createCommandPoolCage(device,pCreateInfo,pAllocator,pCommandPool)
+    ): Result {.cdecl, lazyload("vkCreateCommandPool", DeviceLevel).}
 proc destroyCommandPool*(
       device: Device;
       commandPool: CommandPool;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyCommandPoolCage(device,commandPool,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyCommandPool", DeviceLevel).}
 proc resetCommandPool*(
       device: Device;
       commandPool: CommandPool;
       flags: CommandPoolResetFlags;
-    ): Result {.cdecl, discardable.} =
-  resetCommandPoolCage(device,commandPool,flags)
+    ): Result {.cdecl, lazyload("vkResetCommandPool", DeviceLevel).}
 
 
 # Command buffer commands
 # -----------------------
-var # command cages
-  allocateCommandBuffersCage: proc(device: Device; pAllocateInfo: ptr CommandBufferAllocateInfo; pCommandBuffers: ptr CommandBuffer;): Result {.cdecl.}
-  freeCommandBuffersCage: proc(device: Device; commandPool: CommandPool; commandBufferCount: uint32; pCommandBuffers: ptr CommandBuffer;): void {.cdecl.}
-  beginCommandBufferCage: proc(commandBuffer: CommandBuffer; pBeginInfo: ptr CommandBufferBeginInfo;): Result {.cdecl.}
-  endCommandBufferCage: proc(commandBuffer: CommandBuffer;): Result {.cdecl.}
-  resetCommandBufferCage: proc(commandBuffer: CommandBuffer; flags: CommandBufferResetFlags;): Result {.cdecl.}
 proc allocateCommandBuffers*(
       device: Device;
       pAllocateInfo: ptr CommandBufferAllocateInfo;
       pCommandBuffers: ptr CommandBuffer;
-    ): Result {.cdecl, discardable.} =
-  allocateCommandBuffersCage(device,pAllocateInfo,pCommandBuffers)
+    ): Result {.cdecl, lazyload("vkAllocateCommandBuffers", DeviceLevel).}
 proc freeCommandBuffers*(
       device: Device;
       commandPool: CommandPool;
       commandBufferCount: uint32;
       pCommandBuffers: ptr CommandBuffer;
-    ): void {.cdecl.} =
-  freeCommandBuffersCage(device,commandPool,commandBufferCount,pCommandBuffers)
+    ): void {.cdecl, lazyload("vkFreeCommandBuffers", DeviceLevel).}
 proc beginCommandBuffer*(
       commandBuffer: CommandBuffer;
       pBeginInfo: ptr CommandBufferBeginInfo;
-    ): Result {.cdecl, discardable.} =
-  beginCommandBufferCage(commandBuffer,pBeginInfo)
+    ): Result {.cdecl, lazyload("vkBeginCommandBuffer", DeviceLevel).}
 proc endCommandBuffer*(
       commandBuffer: CommandBuffer;
-    ): Result {.cdecl, discardable.} =
-  endCommandBufferCage(commandBuffer)
+    ): Result {.cdecl, lazyload("vkEndCommandBuffer", DeviceLevel).}
 proc resetCommandBuffer*(
       commandBuffer: CommandBuffer;
       flags: CommandBufferResetFlags;
-    ): Result {.cdecl, discardable.} =
-  resetCommandBufferCage(commandBuffer,flags)
+    ): Result {.cdecl, lazyload("vkResetCommandBuffer", DeviceLevel).}
 
 
 # Command buffer building commands
@@ -4225,112 +4014,57 @@ proc resetCommandBuffer*(
 StencilFaceFlagBits.defineAliases:
   frontAndBack as stencilFrontAndBack # Alias for backwards compatibility
 
-var # command cages
-  cmdBindPipelineCage: proc(commandBuffer: CommandBuffer; pipelineBindPoint: PipelineBindPoint; pipeline: Pipeline;): void {.cdecl.}
-  cmdSetViewportCage: proc(commandBuffer: CommandBuffer; firstViewport: uint32; viewportCount: uint32; pViewports: ptr Viewport;): void {.cdecl.}
-  cmdSetScissorCage: proc(commandBuffer: CommandBuffer; firstScissor: uint32; scissorCount: uint32; pScissors: ptr Rect2D;): void {.cdecl.}
-  cmdSetLineWidthCage: proc(commandBuffer: CommandBuffer; lineWidth: float32;): void {.cdecl.}
-  cmdSetDepthBiasCage: proc(commandBuffer: CommandBuffer; depthBiasConstantFactor: float32; depthBiasClamp: float32; depthBiasSlopeFactor: float32;): void {.cdecl.}
-  cmdSetBlendConstantsCage: proc(commandBuffer: CommandBuffer; blendConstants: float32;): void {.cdecl.}
-  cmdSetDepthBoundsCage: proc(commandBuffer: CommandBuffer; minDepthBounds: float32; maxDepthBounds: float32;): void {.cdecl.}
-  cmdSetStencilCompareMaskCage: proc(commandBuffer: CommandBuffer; faceMask: StencilFaceFlags; compareMask: uint32;): void {.cdecl.}
-  cmdSetStencilWriteMaskCage: proc(commandBuffer: CommandBuffer; faceMask: StencilFaceFlags; writeMask: uint32;): void {.cdecl.}
-  cmdSetStencilReferenceCage: proc(commandBuffer: CommandBuffer; faceMask: StencilFaceFlags; reference: uint32;): void {.cdecl.}
-  cmdBindDescriptorSetsCage: proc(commandBuffer: CommandBuffer; pipelineBindPoint: PipelineBindPoint; layout: PipelineLayout; firstSet: uint32; descriptorSetCount: uint32; pDescriptorSets: ptr DescriptorSet; dynamicOffsetCount: uint32; pDynamicOffsets: ptr uint32;): void {.cdecl.}
-  cmdBindIndexBufferCage: proc(commandBuffer: CommandBuffer; buffer: Buffer; offset: DeviceSize; indexType: IndexType;): void {.cdecl.}
-  cmdBindVertexBuffersCage: proc(commandBuffer: CommandBuffer; firstBinding: uint32; bindingCount: uint32; pBuffers: ptr Buffer; pOffsets: ptr DeviceSize;): void {.cdecl.}
-  cmdDrawCage: proc(commandBuffer: CommandBuffer; vertexCount: uint32; instanceCount: uint32; firstVertex: uint32; firstInstance: uint32;): void {.cdecl.}
-  cmdDrawIndexedCage: proc(commandBuffer: CommandBuffer; indexCount: uint32; instanceCount: uint32; firstIndex: uint32; vertexOffset: int32; firstInstance: uint32;): void {.cdecl.}
-  cmdDrawIndirectCage: proc(commandBuffer: CommandBuffer; buffer: Buffer; offset: DeviceSize; drawCount: uint32; stride: uint32;): void {.cdecl.}
-  cmdDrawIndexedIndirectCage: proc(commandBuffer: CommandBuffer; buffer: Buffer; offset: DeviceSize; drawCount: uint32; stride: uint32;): void {.cdecl.}
-  cmdDispatchCage: proc(commandBuffer: CommandBuffer; groupCountX: uint32; groupCountY: uint32; groupCountZ: uint32;): void {.cdecl.}
-  cmdDispatchIndirectCage: proc(commandBuffer: CommandBuffer; buffer: Buffer; offset: DeviceSize;): void {.cdecl.}
-  cmdCopyBufferCage: proc(commandBuffer: CommandBuffer; srcBuffer: Buffer; dstBuffer: Buffer; regionCount: uint32; pRegions: ptr BufferCopy;): void {.cdecl.}
-  cmdCopyImageCage: proc(commandBuffer: CommandBuffer; srcImage: Image; srcImageLayout: ImageLayout; dstImage: Image; dstImageLayout: ImageLayout; regionCount: uint32; pRegions: ptr ImageCopy;): void {.cdecl.}
-  cmdBlitImageCage: proc(commandBuffer: CommandBuffer; srcImage: Image; srcImageLayout: ImageLayout; dstImage: Image; dstImageLayout: ImageLayout; regionCount: uint32; pRegions: ptr ImageBlit; filter: Filter;): void {.cdecl.}
-  cmdCopyBufferToImageCage: proc(commandBuffer: CommandBuffer; srcBuffer: Buffer; dstImage: Image; dstImageLayout: ImageLayout; regionCount: uint32; pRegions: ptr BufferImageCopy;): void {.cdecl.}
-  cmdCopyImageToBufferCage: proc(commandBuffer: CommandBuffer; srcImage: Image; srcImageLayout: ImageLayout; dstBuffer: Buffer; regionCount: uint32; pRegions: ptr BufferImageCopy;): void {.cdecl.}
-  cmdUpdateBufferCage: proc(commandBuffer: CommandBuffer; dstBuffer: Buffer; dstOffset: DeviceSize; dataSize: DeviceSize; pData: pointer;): void {.cdecl.}
-  cmdFillBufferCage: proc(commandBuffer: CommandBuffer; dstBuffer: Buffer; dstOffset: DeviceSize; size: DeviceSize; data: uint32;): void {.cdecl.}
-  cmdClearColorImageCage: proc(commandBuffer: CommandBuffer; image: Image; imageLayout: ImageLayout; pColor: ptr ClearColorValue; rangeCount: uint32; pRanges: ptr ImageSubresourceRange;): void {.cdecl.}
-  cmdClearDepthStencilImageCage: proc(commandBuffer: CommandBuffer; image: Image; imageLayout: ImageLayout; pDepthStencil: ptr ClearDepthStencilValue; rangeCount: uint32; pRanges: ptr ImageSubresourceRange;): void {.cdecl.}
-  cmdClearAttachmentsCage: proc(commandBuffer: CommandBuffer; attachmentCount: uint32; pAttachments: ptr ClearAttachment; rectCount: uint32; pRects: ptr ClearRect;): void {.cdecl.}
-  cmdResolveImageCage: proc(commandBuffer: CommandBuffer; srcImage: Image; srcImageLayout: ImageLayout; dstImage: Image; dstImageLayout: ImageLayout; regionCount: uint32; pRegions: ptr ImageResolve;): void {.cdecl.}
-  cmdSetEventCage: proc(commandBuffer: CommandBuffer; event: Event; stageMask: PipelineStageFlags;): void {.cdecl.}
-  cmdResetEventCage: proc(commandBuffer: CommandBuffer; event: Event; stageMask: PipelineStageFlags;): void {.cdecl.}
-  cmdWaitEventsCage: proc(commandBuffer: CommandBuffer; eventCount: uint32; pEvents: ptr Event; srcStageMask: PipelineStageFlags; dstStageMask: PipelineStageFlags; memoryBarrierCount: uint32; pMemoryBarriers: ptr MemoryBarrier; bufferMemoryBarrierCount: uint32; pBufferMemoryBarriers: ptr BufferMemoryBarrier; imageMemoryBarrierCount: uint32; pImageMemoryBarriers: ptr ImageMemoryBarrier;): void {.cdecl.}
-  cmdPipelineBarrierCage: proc(commandBuffer: CommandBuffer; srcStageMask: PipelineStageFlags; dstStageMask: PipelineStageFlags; dependencyFlags: DependencyFlags; memoryBarrierCount: uint32; pMemoryBarriers: ptr MemoryBarrier; bufferMemoryBarrierCount: uint32; pBufferMemoryBarriers: ptr BufferMemoryBarrier; imageMemoryBarrierCount: uint32; pImageMemoryBarriers: ptr ImageMemoryBarrier;): void {.cdecl.}
-  cmdBeginQueryCage: proc(commandBuffer: CommandBuffer; queryPool: QueryPool; query: uint32; flags: QueryControlFlags;): void {.cdecl.}
-  cmdEndQueryCage: proc(commandBuffer: CommandBuffer; queryPool: QueryPool; query: uint32;): void {.cdecl.}
-  cmdResetQueryPoolCage: proc(commandBuffer: CommandBuffer; queryPool: QueryPool; firstQuery: uint32; queryCount: uint32;): void {.cdecl.}
-  cmdWriteTimestampCage: proc(commandBuffer: CommandBuffer; pipelineStage: PipelineStageFlagBits; queryPool: QueryPool; query: uint32;): void {.cdecl.}
-  cmdCopyQueryPoolResultsCage: proc(commandBuffer: CommandBuffer; queryPool: QueryPool; firstQuery: uint32; queryCount: uint32; dstBuffer: Buffer; dstOffset: DeviceSize; stride: DeviceSize; flags: QueryResultFlags;): void {.cdecl.}
-  cmdPushConstantsCage: proc(commandBuffer: CommandBuffer; layout: PipelineLayout; stageFlags: ShaderStageFlags; offset: uint32; size: uint32; pValues: pointer;): void {.cdecl.}
-  cmdBeginRenderPassCage: proc(commandBuffer: CommandBuffer; pRenderPassBegin: ptr RenderPassBeginInfo; contents: SubpassContents;): void {.cdecl.}
-  cmdNextSubpassCage: proc(commandBuffer: CommandBuffer; contents: SubpassContents;): void {.cdecl.}
-  cmdEndRenderPassCage: proc(commandBuffer: CommandBuffer;): void {.cdecl.}
-  cmdExecuteCommandsCage: proc(commandBuffer: CommandBuffer; commandBufferCount: uint32; pCommandBuffers: ptr CommandBuffer;): void {.cdecl.}
 proc cmdBindPipeline*(
       commandBuffer: CommandBuffer;
       pipelineBindPoint: PipelineBindPoint;
       pipeline: Pipeline;
-    ): void {.cdecl.} =
-  cmdBindPipelineCage(commandBuffer,pipelineBindPoint,pipeline)
+    ): void {.cdecl, lazyload("vkCmdBindPipeline", DeviceLevel).}
 proc cmdSetViewport*(
       commandBuffer: CommandBuffer;
       firstViewport: uint32;
       viewportCount: uint32;
       pViewports: ptr Viewport;
-    ): void {.cdecl.} =
-  cmdSetViewportCage(commandBuffer,firstViewport,viewportCount,pViewports)
+    ): void {.cdecl, lazyload("vkCmdSetViewport", DeviceLevel).}
 proc cmdSetScissor*(
       commandBuffer: CommandBuffer;
       firstScissor: uint32;
       scissorCount: uint32;
       pScissors: ptr Rect2D;
-    ): void {.cdecl.} =
-  cmdSetScissorCage(commandBuffer,firstScissor,scissorCount,pScissors)
+    ): void {.cdecl, lazyload("vkCmdSetScissor", DeviceLevel).}
 proc cmdSetLineWidth*(
       commandBuffer: CommandBuffer;
       lineWidth: float32;
-    ): void {.cdecl.} =
-  cmdSetLineWidthCage(commandBuffer,lineWidth)
+    ): void {.cdecl, lazyload("vkCmdSetLineWidth", DeviceLevel).}
 proc cmdSetDepthBias*(
       commandBuffer: CommandBuffer;
       depthBiasConstantFactor: float32;
       depthBiasClamp: float32;
       depthBiasSlopeFactor: float32;
-    ): void {.cdecl.} =
-  cmdSetDepthBiasCage(commandBuffer,depthBiasConstantFactor,depthBiasClamp,depthBiasSlopeFactor)
+    ): void {.cdecl, lazyload("vkCmdSetDepthBias", DeviceLevel).}
 proc cmdSetBlendConstants*(
       commandBuffer: CommandBuffer;
       blendConstants: float32;
-    ): void {.cdecl.} =
-  cmdSetBlendConstantsCage(commandBuffer,blendConstants)
+    ): void {.cdecl, lazyload("vkCmdSetBlendConstants", DeviceLevel).}
 proc cmdSetDepthBounds*(
       commandBuffer: CommandBuffer;
       minDepthBounds: float32;
       maxDepthBounds: float32;
-    ): void {.cdecl.} =
-  cmdSetDepthBoundsCage(commandBuffer,minDepthBounds,maxDepthBounds)
+    ): void {.cdecl, lazyload("vkCmdSetDepthBounds", DeviceLevel).}
 proc cmdSetStencilCompareMask*(
       commandBuffer: CommandBuffer;
       faceMask: StencilFaceFlags;
       compareMask: uint32;
-    ): void {.cdecl.} =
-  cmdSetStencilCompareMaskCage(commandBuffer,faceMask,compareMask)
+    ): void {.cdecl, lazyload("vkCmdSetStencilCompareMask", DeviceLevel).}
 proc cmdSetStencilWriteMask*(
       commandBuffer: CommandBuffer;
       faceMask: StencilFaceFlags;
       writeMask: uint32;
-    ): void {.cdecl.} =
-  cmdSetStencilWriteMaskCage(commandBuffer,faceMask,writeMask)
+    ): void {.cdecl, lazyload("vkCmdSetStencilWriteMask", DeviceLevel).}
 proc cmdSetStencilReference*(
       commandBuffer: CommandBuffer;
       faceMask: StencilFaceFlags;
       reference: uint32;
-    ): void {.cdecl.} =
-  cmdSetStencilReferenceCage(commandBuffer,faceMask,reference)
+    ): void {.cdecl, lazyload("vkCmdSetStencilReference", DeviceLevel).}
 proc cmdBindDescriptorSets*(
       commandBuffer: CommandBuffer;
       pipelineBindPoint: PipelineBindPoint;
@@ -4340,31 +4074,27 @@ proc cmdBindDescriptorSets*(
       pDescriptorSets: ptr DescriptorSet;
       dynamicOffsetCount: uint32;
       pDynamicOffsets: ptr uint32;
-    ): void {.cdecl.} =
-  cmdBindDescriptorSetsCage(commandBuffer,pipelineBindPoint,layout,firstSet,descriptorSetCount,pDescriptorSets,dynamicOffsetCount,pDynamicOffsets)
+    ): void {.cdecl, lazyload("vkCmdBindDescriptorSets", DeviceLevel).}
 proc cmdBindIndexBuffer*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
       offset: DeviceSize;
       indexType: IndexType;
-    ): void {.cdecl.} =
-  cmdBindIndexBufferCage(commandBuffer,buffer,offset,indexType)
+    ): void {.cdecl, lazyload("vkCmdBindIndexBuffer", DeviceLevel).}
 proc cmdBindVertexBuffers*(
       commandBuffer: CommandBuffer;
       firstBinding: uint32;
       bindingCount: uint32;
       pBuffers: ptr Buffer;
       pOffsets: ptr DeviceSize;
-    ): void {.cdecl.} =
-  cmdBindVertexBuffersCage(commandBuffer,firstBinding,bindingCount,pBuffers,pOffsets)
+    ): void {.cdecl, lazyload("vkCmdBindVertexBuffers", DeviceLevel).}
 proc cmdDraw*(
       commandBuffer: CommandBuffer;
       vertexCount: uint32;
       instanceCount: uint32;
       firstVertex: uint32;
       firstInstance: uint32;
-    ): void {.cdecl.} =
-  cmdDrawCage(commandBuffer,vertexCount,instanceCount,firstVertex,firstInstance)
+    ): void {.cdecl, lazyload("vkCmdDraw", DeviceLevel).}
 proc cmdDrawIndexed*(
       commandBuffer: CommandBuffer;
       indexCount: uint32;
@@ -4372,45 +4102,39 @@ proc cmdDrawIndexed*(
       firstIndex: uint32;
       vertexOffset: int32;
       firstInstance: uint32;
-    ): void {.cdecl.} =
-  cmdDrawIndexedCage(commandBuffer,indexCount,instanceCount,firstIndex,vertexOffset,firstInstance)
+    ): void {.cdecl, lazyload("vkCmdDrawIndexed", DeviceLevel).}
 proc cmdDrawIndirect*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
       offset: DeviceSize;
       drawCount: uint32;
       stride: uint32;
-    ): void {.cdecl.} =
-  cmdDrawIndirectCage(commandBuffer,buffer,offset,drawCount,stride)
+    ): void {.cdecl, lazyload("vkCmdDrawIndirect", DeviceLevel).}
 proc cmdDrawIndexedIndirect*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
       offset: DeviceSize;
       drawCount: uint32;
       stride: uint32;
-    ): void {.cdecl.} =
-  cmdDrawIndexedIndirectCage(commandBuffer,buffer,offset,drawCount,stride)
+    ): void {.cdecl, lazyload("vkCmdDrawIndexedIndirect", DeviceLevel).}
 proc cmdDispatch*(
       commandBuffer: CommandBuffer;
       groupCountX: uint32;
       groupCountY: uint32;
       groupCountZ: uint32;
-    ): void {.cdecl.} =
-  cmdDispatchCage(commandBuffer,groupCountX,groupCountY,groupCountZ)
+    ): void {.cdecl, lazyload("vkCmdDispatch", DeviceLevel).}
 proc cmdDispatchIndirect*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
       offset: DeviceSize;
-    ): void {.cdecl.} =
-  cmdDispatchIndirectCage(commandBuffer,buffer,offset)
+    ): void {.cdecl, lazyload("vkCmdDispatchIndirect", DeviceLevel).}
 proc cmdCopyBuffer*(
       commandBuffer: CommandBuffer;
       srcBuffer: Buffer;
       dstBuffer: Buffer;
       regionCount: uint32;
       pRegions: ptr BufferCopy;
-    ): void {.cdecl.} =
-  cmdCopyBufferCage(commandBuffer,srcBuffer,dstBuffer,regionCount,pRegions)
+    ): void {.cdecl, lazyload("vkCmdCopyBuffer", DeviceLevel).}
 proc cmdCopyImage*(
       commandBuffer: CommandBuffer;
       srcImage: Image;
@@ -4419,8 +4143,7 @@ proc cmdCopyImage*(
       dstImageLayout: ImageLayout;
       regionCount: uint32;
       pRegions: ptr ImageCopy;
-    ): void {.cdecl.} =
-  cmdCopyImageCage(commandBuffer,srcImage,srcImageLayout,dstImage,dstImageLayout,regionCount,pRegions)
+    ): void {.cdecl, lazyload("vkCmdCopyImage", DeviceLevel).}
 proc cmdBlitImage*(
       commandBuffer: CommandBuffer;
       srcImage: Image;
@@ -4430,8 +4153,7 @@ proc cmdBlitImage*(
       regionCount: uint32;
       pRegions: ptr ImageBlit;
       filter: Filter;
-    ): void {.cdecl.} =
-  cmdBlitImageCage(commandBuffer,srcImage,srcImageLayout,dstImage,dstImageLayout,regionCount,pRegions,filter)
+    ): void {.cdecl, lazyload("vkCmdBlitImage", DeviceLevel).}
 proc cmdCopyBufferToImage*(
       commandBuffer: CommandBuffer;
       srcBuffer: Buffer;
@@ -4439,8 +4161,7 @@ proc cmdCopyBufferToImage*(
       dstImageLayout: ImageLayout;
       regionCount: uint32;
       pRegions: ptr BufferImageCopy;
-    ): void {.cdecl.} =
-  cmdCopyBufferToImageCage(commandBuffer,srcBuffer,dstImage,dstImageLayout,regionCount,pRegions)
+    ): void {.cdecl, lazyload("vkCmdCopyBufferToImage", DeviceLevel).}
 proc cmdCopyImageToBuffer*(
       commandBuffer: CommandBuffer;
       srcImage: Image;
@@ -4448,24 +4169,21 @@ proc cmdCopyImageToBuffer*(
       dstBuffer: Buffer;
       regionCount: uint32;
       pRegions: ptr BufferImageCopy;
-    ): void {.cdecl.} =
-  cmdCopyImageToBufferCage(commandBuffer,srcImage,srcImageLayout,dstBuffer,regionCount,pRegions)
+    ): void {.cdecl, lazyload("vkCmdCopyImageToBuffer", DeviceLevel).}
 proc cmdUpdateBuffer*(
       commandBuffer: CommandBuffer;
       dstBuffer: Buffer;
       dstOffset: DeviceSize;
       dataSize: DeviceSize;
       pData: pointer;
-    ): void {.cdecl.} =
-  cmdUpdateBufferCage(commandBuffer,dstBuffer,dstOffset,dataSize,pData)
+    ): void {.cdecl, lazyload("vkCmdUpdateBuffer", DeviceLevel).}
 proc cmdFillBuffer*(
       commandBuffer: CommandBuffer;
       dstBuffer: Buffer;
       dstOffset: DeviceSize;
       size: DeviceSize;
       data: uint32;
-    ): void {.cdecl.} =
-  cmdFillBufferCage(commandBuffer,dstBuffer,dstOffset,size,data)
+    ): void {.cdecl, lazyload("vkCmdFillBuffer", DeviceLevel).}
 proc cmdClearColorImage*(
       commandBuffer: CommandBuffer;
       image: Image;
@@ -4473,8 +4191,7 @@ proc cmdClearColorImage*(
       pColor: ptr ClearColorValue;
       rangeCount: uint32;
       pRanges: ptr ImageSubresourceRange;
-    ): void {.cdecl.} =
-  cmdClearColorImageCage(commandBuffer,image,imageLayout,pColor,rangeCount,pRanges)
+    ): void {.cdecl, lazyload("vkCmdClearColorImage", DeviceLevel).}
 proc cmdClearDepthStencilImage*(
       commandBuffer: CommandBuffer;
       image: Image;
@@ -4482,16 +4199,14 @@ proc cmdClearDepthStencilImage*(
       pDepthStencil: ptr ClearDepthStencilValue;
       rangeCount: uint32;
       pRanges: ptr ImageSubresourceRange;
-    ): void {.cdecl.} =
-  cmdClearDepthStencilImageCage(commandBuffer,image,imageLayout,pDepthStencil,rangeCount,pRanges)
+    ): void {.cdecl, lazyload("vkCmdClearDepthStencilImage", DeviceLevel).}
 proc cmdClearAttachments*(
       commandBuffer: CommandBuffer;
       attachmentCount: uint32;
       pAttachments: ptr ClearAttachment;
       rectCount: uint32;
       pRects: ptr ClearRect;
-    ): void {.cdecl.} =
-  cmdClearAttachmentsCage(commandBuffer,attachmentCount,pAttachments,rectCount,pRects)
+    ): void {.cdecl, lazyload("vkCmdClearAttachments", DeviceLevel).}
 proc cmdResolveImage*(
       commandBuffer: CommandBuffer;
       srcImage: Image;
@@ -4500,20 +4215,17 @@ proc cmdResolveImage*(
       dstImageLayout: ImageLayout;
       regionCount: uint32;
       pRegions: ptr ImageResolve;
-    ): void {.cdecl.} =
-  cmdResolveImageCage(commandBuffer,srcImage,srcImageLayout,dstImage,dstImageLayout,regionCount,pRegions)
+    ): void {.cdecl, lazyload("vkCmdResolveImage", DeviceLevel).}
 proc cmdSetEvent*(
       commandBuffer: CommandBuffer;
       event: Event;
       stageMask: PipelineStageFlags;
-    ): void {.cdecl.} =
-  cmdSetEventCage(commandBuffer,event,stageMask)
+    ): void {.cdecl, lazyload("vkCmdSetEvent", DeviceLevel).}
 proc cmdResetEvent*(
       commandBuffer: CommandBuffer;
       event: Event;
       stageMask: PipelineStageFlags;
-    ): void {.cdecl.} =
-  cmdResetEventCage(commandBuffer,event,stageMask)
+    ): void {.cdecl, lazyload("vkCmdResetEvent", DeviceLevel).}
 proc cmdWaitEvents*(
       commandBuffer: CommandBuffer;
       eventCount: uint32;
@@ -4526,8 +4238,7 @@ proc cmdWaitEvents*(
       pBufferMemoryBarriers: ptr BufferMemoryBarrier;
       imageMemoryBarrierCount: uint32;
       pImageMemoryBarriers: ptr ImageMemoryBarrier;
-    ): void {.cdecl.} =
-  cmdWaitEventsCage(commandBuffer,eventCount,pEvents,srcStageMask,dstStageMask,memoryBarrierCount,pMemoryBarriers,bufferMemoryBarrierCount,pBufferMemoryBarriers,imageMemoryBarrierCount,pImageMemoryBarriers)
+    ): void {.cdecl, lazyload("vkCmdWaitEvents", DeviceLevel).}
 proc cmdPipelineBarrier*(
       commandBuffer: CommandBuffer;
       srcStageMask: PipelineStageFlags;
@@ -4539,35 +4250,30 @@ proc cmdPipelineBarrier*(
       pBufferMemoryBarriers: ptr BufferMemoryBarrier;
       imageMemoryBarrierCount: uint32;
       pImageMemoryBarriers: ptr ImageMemoryBarrier;
-    ): void {.cdecl.} =
-  cmdPipelineBarrierCage(commandBuffer,srcStageMask,dstStageMask,dependencyFlags,memoryBarrierCount,pMemoryBarriers,bufferMemoryBarrierCount,pBufferMemoryBarriers,imageMemoryBarrierCount,pImageMemoryBarriers)
+    ): void {.cdecl, lazyload("vkCmdPipelineBarrier", DeviceLevel).}
 proc cmdBeginQuery*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
       query: uint32;
       flags: QueryControlFlags;
-    ): void {.cdecl.} =
-  cmdBeginQueryCage(commandBuffer,queryPool,query,flags)
+    ): void {.cdecl, lazyload("vkCmdBeginQuery", DeviceLevel).}
 proc cmdEndQuery*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
       query: uint32;
-    ): void {.cdecl.} =
-  cmdEndQueryCage(commandBuffer,queryPool,query)
+    ): void {.cdecl, lazyload("vkCmdEndQuery", DeviceLevel).}
 proc cmdResetQueryPool*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
       firstQuery: uint32;
       queryCount: uint32;
-    ): void {.cdecl.} =
-  cmdResetQueryPoolCage(commandBuffer,queryPool,firstQuery,queryCount)
+    ): void {.cdecl, lazyload("vkCmdResetQueryPool", DeviceLevel).}
 proc cmdWriteTimestamp*(
       commandBuffer: CommandBuffer;
       pipelineStage: PipelineStageFlagBits;
       queryPool: QueryPool;
       query: uint32;
-    ): void {.cdecl.} =
-  cmdWriteTimestampCage(commandBuffer,pipelineStage,queryPool,query)
+    ): void {.cdecl, lazyload("vkCmdWriteTimestamp", DeviceLevel).}
 proc cmdCopyQueryPoolResults*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
@@ -4577,8 +4283,7 @@ proc cmdCopyQueryPoolResults*(
       dstOffset: DeviceSize;
       stride: DeviceSize;
       flags: QueryResultFlags;
-    ): void {.cdecl.} =
-  cmdCopyQueryPoolResultsCage(commandBuffer,queryPool,firstQuery,queryCount,dstBuffer,dstOffset,stride,flags)
+    ): void {.cdecl, lazyload("vkCmdCopyQueryPoolResults", DeviceLevel).}
 proc cmdPushConstants*(
       commandBuffer: CommandBuffer;
       layout: PipelineLayout;
@@ -4586,227 +4291,445 @@ proc cmdPushConstants*(
       offset: uint32;
       size: uint32;
       pValues: pointer;
-    ): void {.cdecl.} =
-  cmdPushConstantsCage(commandBuffer,layout,stageFlags,offset,size,pValues)
+    ): void {.cdecl, lazyload("vkCmdPushConstants", DeviceLevel).}
 proc cmdBeginRenderPass*(
       commandBuffer: CommandBuffer;
       pRenderPassBegin: ptr RenderPassBeginInfo;
       contents: SubpassContents;
-    ): void {.cdecl.} =
-  cmdBeginRenderPassCage(commandBuffer,pRenderPassBegin,contents)
+    ): void {.cdecl, lazyload("vkCmdBeginRenderPass", DeviceLevel).}
 proc cmdNextSubpass*(
       commandBuffer: CommandBuffer;
       contents: SubpassContents;
-    ): void {.cdecl.} =
-  cmdNextSubpassCage(commandBuffer,contents)
+    ): void {.cdecl, lazyload("vkCmdNextSubpass", DeviceLevel).}
 proc cmdEndRenderPass*(
       commandBuffer: CommandBuffer;
-    ): void {.cdecl.} =
-  cmdEndRenderPassCage(commandBuffer)
+    ): void {.cdecl, lazyload("vkCmdEndRenderPass", DeviceLevel).}
 proc cmdExecuteCommands*(
       commandBuffer: CommandBuffer;
       commandBufferCount: uint32;
       pCommandBuffers: ptr CommandBuffer;
-    ): void {.cdecl.} =
-  cmdExecuteCommandsCage(commandBuffer,commandBufferCount,pCommandBuffers)
-proc loadInstanceProcs*() =
-  nil.defineLoader(`<<`)
-  getInstanceProcAddrCage << "vkGetInstanceAddr"
-  enumerateInstanceExtensionPropertiesCage << "vkEnumerateInstanceExtensionProperties"
-  enumerateInstanceLayerPropertiesCage << "vkEnumerateInstanceLayerProperties"
-  createInstanceCage << "vkCreateInstance"
+    ): void {.cdecl, lazyload("vkCmdExecuteCommands", DeviceLevel).}
 
-proc loadVk10*(instance: Instance) =
-  instance.defineLoader(`<<`)
 
+# ========================= #
+#      LOADER TEMPLATE      #
+# ========================= #
+
+# You can use these templates to load Vulkan proc dynamically and individually.
+import macros
+import strformat
+
+template load*(vkProcPtr: untyped; instance: Instance): untyped =
+  when not vkProcPtr.hasCustomPragma(loadable):
+    {.fatal: "Specify the loading config with loadable pragma.", vkProcPtr.}
+  const pg = vkProcPtr.getCustomPragmaVal(loadable)
+  when LoadWith.Instance in pg.with:
+    vkProcPtr = cast[typeof vkProcPtr](instance.getInstanceProcAddr(pg.loadFrom))
+  else:
+    {.fatal: "To load using with Instance, add \"LoadWith.Instance\" to the loadable pragma if available.", vkProcPtr.}
+template smartLoad*(vkProcPtr: untyped; instance: Instance): untyped =
+  if vkProcPtr.isNil:
+    vkProcPtr.load(instance)
+template withLoad*(vkProcPtr: untyped; instance: Instance): typeof vkProcPtr =
+  vkProcPtr.load(instance)
+  vkProcPtr
+
+template load*(vkProcPtr: untyped; device: Device): untyped =
+  when not vkProcPtr.hasCustomPragma(loadable):
+    {.fatal: "Specify the loading config with loadable pragma.", vkProcPtr.}
+  const pg = vkProcPtr.getCustomPragmaVal(loadable)
+  when LoadWith.Device in pg.with:
+    vkProcPtr = cast[typeof vkProcPtr](device.getDeviceProcAddr(pg.loadFrom))
+  else:
+    {.fatal: "To load using with Device, add \"LoadWith.Device\" to the loadable pragma if available.", vkProcPtr.}
+template smartLoad*(vkProcPtr: untyped; device: Device): untyped =
+  if vkProcPtr.isNil:
+    vkProcPtr.load(device)
+template withLoad*(vkProcPtr: untyped; device: Device): typeof vkProcPtr =
+  vkProcPtr.load(device)
+  vkProcPtr
+
+# ========================= #
+#      LOADER TEMPLATE      #
+# ========================= #
+
+
+proc loadAllVk10*(instance: Instance) =
   # Device initialization
-  createInstanceCage << "vkCreateInstance"
-  destroyInstanceCage << "vkDestroyInstance"
-  enumeratePhysicalDevicesCage << "vkEnumeratePhysicalDevices"
-  getPhysicalDeviceFeaturesCage << "vkGetPhysicalDeviceFeatures"
-  getPhysicalDeviceFormatPropertiesCage << "vkGetPhysicalDeviceFormatProperties"
-  getPhysicalDeviceImageFormatPropertiesCage << "vkGetPhysicalDeviceImageFormatProperties"
-  getPhysicalDevicePropertiesCage << "vkGetPhysicalDeviceProperties"
-  getPhysicalDeviceQueueFamilyPropertiesCage << "vkGetPhysicalDeviceQueueFamilyProperties"
-  getPhysicalDeviceMemoryPropertiesCage << "vkGetPhysicalDeviceMemoryProperties"
-  getInstanceProcAddrCage << "vkGetInstanceProcAddr"
-  getDeviceProcAddrCage << "vkGetDeviceProcAddr"
+  destroyInstance.smartLoad(instance)
+  enumeratePhysicalDevices.smartLoad(instance)
+  getPhysicalDeviceFeatures.smartLoad(instance)
+  getPhysicalDeviceFormatProperties.smartLoad(instance)
+  getPhysicalDeviceImageFormatProperties.smartLoad(instance)
+  getPhysicalDeviceProperties.smartLoad(instance)
+  getPhysicalDeviceQueueFamilyProperties.smartLoad(instance)
+  getPhysicalDeviceMemoryProperties.smartLoad(instance)
 
   # Device commands
-  createDeviceCage << "vkCreateDevice"
-  destroyDeviceCage << "vkDestroyDevice"
+  createDevice.smartLoad(instance)
+  destroyDevice.smartLoad(instance)
 
   # Extension discovery commands
-  enumerateInstanceExtensionPropertiesCage << "vkEnumerateInstanceExtensionProperties"
-  enumerateDeviceExtensionPropertiesCage << "vkEnumerateDeviceExtensionProperties"
+  enumerateDeviceExtensionProperties.smartLoad(instance)
 
   # Layer discovery commands
-  enumerateInstanceLayerPropertiesCage << "vkEnumerateInstanceLayerProperties"
-  enumerateDeviceLayerPropertiesCage << "vkEnumerateDeviceLayerProperties"
+  enumerateDeviceLayerProperties.smartLoad(instance)
 
   # Queue commands
-  getDeviceQueueCage << "vkGetDeviceQueue"
-  queueSubmitCage << "vkQueueSubmit"
-  queueWaitIdleCage << "vkQueueWaitIdle"
-  deviceWaitIdleCage << "vkDeviceWaitIdle"
+  getDeviceQueue.smartLoad(instance)
+  queueSubmit.smartLoad(instance)
+  queueWaitIdle.smartLoad(instance)
+  deviceWaitIdle.smartLoad(instance)
 
   # Memory commands
-  allocateMemoryCage << "vkAllocateMemory"
-  freeMemoryCage << "vkFreeMemory"
-  mapMemoryCage << "vkMapMemory"
-  unmapMemoryCage << "vkUnmapMemory"
-  flushMappedMemoryRangesCage << "vkFlushMappedMemoryRanges"
-  invalidateMappedMemoryRangesCage << "vkInvalidateMappedMemoryRanges"
-  getDeviceMemoryCommitmentCage << "vkGetDeviceMemoryCommitment"
+  allocateMemory.smartLoad(instance)
+  freeMemory.smartLoad(instance)
+  mapMemory.smartLoad(instance)
+  unmapMemory.smartLoad(instance)
+  flushMappedMemoryRanges.smartLoad(instance)
+  invalidateMappedMemoryRanges.smartLoad(instance)
+  getDeviceMemoryCommitment.smartLoad(instance)
 
   # Memory management API commands
-  bindBufferMemoryCage << "vkBindBufferMemory"
-  bindImageMemoryCage << "vkBindImageMemory"
-  getBufferMemoryRequirementsCage << "vkGetBufferMemoryRequirements"
-  getImageMemoryRequirementsCage << "vkGetImageMemoryRequirements"
+  bindBufferMemory.smartLoad(instance)
+  bindImageMemory.smartLoad(instance)
+  getBufferMemoryRequirements.smartLoad(instance)
+  getImageMemoryRequirements.smartLoad(instance)
 
   # Sparse resource memory management API commands
-  getImageSparseMemoryRequirementsCage << "vkGetImageSparseMemoryRequirements"
-  getPhysicalDeviceSparseImageFormatPropertiesCage << "vkGetPhysicalDeviceSparseImageFormatProperties"
-  queueBindSparseCage << "vkQueueBindSparse"
+  getImageSparseMemoryRequirements.smartLoad(instance)
+  getPhysicalDeviceSparseImageFormatProperties.smartLoad(instance)
+  queueBindSparse.smartLoad(instance)
 
   # Fence commands
-  createFenceCage << "vkCreateFence"
-  destroyFenceCage << "vkDestroyFence"
-  resetFencesCage << "vkResetFences"
-  getFenceStatusCage << "vkGetFenceStatus"
-  waitForFencesCage << "vkWaitForFences"
+  createFence.smartLoad(instance)
+  destroyFence.smartLoad(instance)
+  resetFences.smartLoad(instance)
+  getFenceStatus.smartLoad(instance)
+  waitForFences.smartLoad(instance)
 
   # Queue semaphore commands
-  createSemaphoreCage << "vkCreateSemaphore"
-  destroySemaphoreCage << "vkDestroySemaphore"
+  createSemaphore.smartLoad(instance)
+  destroySemaphore.smartLoad(instance)
 
   # Event commands
-  createEventCage << "vkCreateEvent"
-  destroyEventCage << "vkDestroyEvent"
-  getEventStatusCage << "vkGetEventStatus"
-  setEventCage << "vkSetEvent"
-  resetEventCage << "vkResetEvent"
+  createEvent.smartLoad(instance)
+  destroyEvent.smartLoad(instance)
+  getEventStatus.smartLoad(instance)
+  setEvent.smartLoad(instance)
+  resetEvent.smartLoad(instance)
 
   # Query commands
-  createQueryPoolCage << "vkCreateQueryPool"
-  destroyQueryPoolCage << "vkDestroyQueryPool"
-  getQueryPoolResultsCage << "vkGetQueryPoolResults"
+  createQueryPool.smartLoad(instance)
+  destroyQueryPool.smartLoad(instance)
+  getQueryPoolResults.smartLoad(instance)
 
   # Buffer commands
-  createBufferCage << "vkCreateBuffer"
-  destroyBufferCage << "vkDestroyBuffer"
+  createBuffer.smartLoad(instance)
+  destroyBuffer.smartLoad(instance)
 
   # Buffer view commands
-  createBufferViewCage << "vkCreateBufferView"
-  destroyBufferViewCage << "vkDestroyBufferView"
+  createBufferView.smartLoad(instance)
+  destroyBufferView.smartLoad(instance)
 
   # Image commands
-  createImageCage << "vkCreateImage"
-  destroyImageCage << "vkDestroyImage"
-  getImageSubresourceLayoutCage << "vkGetImageSubresourceLayout"
+  createImage.smartLoad(instance)
+  destroyImage.smartLoad(instance)
+  getImageSubresourceLayout.smartLoad(instance)
 
   # Image view commands
-  createImageViewCage << "vkCreateImageView"
-  destroyImageViewCage << "vkDestroyImageView"
+  createImageView.smartLoad(instance)
+  destroyImageView.smartLoad(instance)
 
   # Shader commands
-  createShaderModuleCage << "vkCreateShaderModule"
-  destroyShaderModuleCage << "vkDestroyShaderModule"
+  createShaderModule.smartLoad(instance)
+  destroyShaderModule.smartLoad(instance)
 
   # Pipeline Cache commands
-  createPipelineCacheCage << "vkCreatePipelineCache"
-  destroyPipelineCacheCage << "vkDestroyPipelineCache"
-  getPipelineCacheDataCage << "vkGetPipelineCacheData"
-  mergePipelineCachesCage << "vkMergePipelineCaches"
+  createPipelineCache.smartLoad(instance)
+  destroyPipelineCache.smartLoad(instance)
+  getPipelineCacheData.smartLoad(instance)
+  mergePipelineCaches.smartLoad(instance)
 
   # Pipeline commands
-  createGraphicsPipelinesCage << "vkCreateGraphicsPipelines"
-  createComputePipelinesCage << "vkCreateComputePipelines"
-  destroyPipelineCage << "vkDestroyPipeline"
+  createGraphicsPipelines.smartLoad(instance)
+  createComputePipelines.smartLoad(instance)
+  destroyPipeline.smartLoad(instance)
 
   # Pipeline layout commands
-  createPipelineLayoutCage << "vkCreatePipelineLayout"
-  destroyPipelineLayoutCage << "vkDestroyPipelineLayout"
+  createPipelineLayout.smartLoad(instance)
+  destroyPipelineLayout.smartLoad(instance)
 
   # Sampler commands
-  createSamplerCage << "vkCreateSampler"
-  destroySamplerCage << "vkDestroySampler"
+  createSampler.smartLoad(instance)
+  destroySampler.smartLoad(instance)
 
   # Descriptor set commands
-  createDescriptorSetLayoutCage << "vkCreateDescriptorSetLayout"
-  destroyDescriptorSetLayoutCage << "vkDestroyDescriptorSetLayout"
-  createDescriptorPoolCage << "vkCreateDescriptorPool"
-  destroyDescriptorPoolCage << "vkDestroyDescriptorPool"
-  resetDescriptorPoolCage << "vkResetDescriptorPool"
-  allocateDescriptorSetsCage << "vkAllocateDescriptorSets"
-  freeDescriptorSetsCage << "vkFreeDescriptorSets"
-  updateDescriptorSetsCage << "vkUpdateDescriptorSets"
+  createDescriptorSetLayout.smartLoad(instance)
+  destroyDescriptorSetLayout.smartLoad(instance)
+  createDescriptorPool.smartLoad(instance)
+  destroyDescriptorPool.smartLoad(instance)
+  resetDescriptorPool.smartLoad(instance)
+  allocateDescriptorSets.smartLoad(instance)
+  freeDescriptorSets.smartLoad(instance)
+  updateDescriptorSets.smartLoad(instance)
 
   # Pass commands
-  createFramebufferCage << "vkCreateFramebuffer"
-  destroyFramebufferCage << "vkDestroyFramebuffer"
-  createRenderPassCage << "vkCreateRenderPass"
-  destroyRenderPassCage << "vkDestroyRenderPass"
-  getRenderAreaGranularityCage << "vkGetRenderAreaGranularity"
+  createFramebuffer.smartLoad(instance)
+  destroyFramebuffer.smartLoad(instance)
+  createRenderPass.smartLoad(instance)
+  destroyRenderPass.smartLoad(instance)
+  getRenderAreaGranularity.smartLoad(instance)
 
   # Command pool commands
-  createCommandPoolCage << "vkCreateCommandPool"
-  destroyCommandPoolCage << "vkDestroyCommandPool"
-  resetCommandPoolCage << "vkResetCommandPool"
+  createCommandPool.smartLoad(instance)
+  destroyCommandPool.smartLoad(instance)
+  resetCommandPool.smartLoad(instance)
 
   # Command buffer commands
-  allocateCommandBuffersCage << "vkAllocateCommandBuffers"
-  freeCommandBuffersCage << "vkFreeCommandBuffers"
-  beginCommandBufferCage << "vkBeginCommandBuffer"
-  endCommandBufferCage << "vkEndCommandBuffer"
-  resetCommandBufferCage << "vkResetCommandBuffer"
+  allocateCommandBuffers.smartLoad(instance)
+  freeCommandBuffers.smartLoad(instance)
+  beginCommandBuffer.smartLoad(instance)
+  endCommandBuffer.smartLoad(instance)
+  resetCommandBuffer.smartLoad(instance)
 
   # Command buffer building commands
-  cmdBindPipelineCage << "vkCmdBindPipeline"
-  cmdSetViewportCage << "vkCmdSetViewport"
-  cmdSetScissorCage << "vkCmdSetScissor"
-  cmdSetLineWidthCage << "vkCmdSetLineWidth"
-  cmdSetDepthBiasCage << "vkCmdSetDepthBias"
-  cmdSetBlendConstantsCage << "vkCmdSetBlendConstants"
-  cmdSetDepthBoundsCage << "vkCmdSetDepthBounds"
-  cmdSetStencilCompareMaskCage << "vkCmdSetStencilCompareMask"
-  cmdSetStencilWriteMaskCage << "vkCmdSetStencilWriteMask"
-  cmdSetStencilReferenceCage << "vkCmdSetStencilReference"
-  cmdBindDescriptorSetsCage << "vkCmdBindDescriptorSets"
-  cmdBindIndexBufferCage << "vkCmdBindIndexBuffer"
-  cmdBindVertexBuffersCage << "vkCmdBindVertexBuffers"
-  cmdDrawCage << "vkCmdDraw"
-  cmdDrawIndexedCage << "vkCmdDrawIndexed"
-  cmdDrawIndirectCage << "vkCmdDrawIndirect"
-  cmdDrawIndexedIndirectCage << "vkCmdDrawIndexedIndirect"
-  cmdDispatchCage << "vkCmdDispatch"
-  cmdDispatchIndirectCage << "vkCmdDispatchIndirect"
-  cmdCopyBufferCage << "vkCmdCopyBuffer"
-  cmdCopyImageCage << "vkCmdCopyImage"
-  cmdBlitImageCage << "vkCmdBlitImage"
-  cmdCopyBufferToImageCage << "vkCmdCopyBufferToImage"
-  cmdCopyImageToBufferCage << "vkCmdCopyImageToBuffer"
-  cmdUpdateBufferCage << "vkCmdUpdateBuffer"
-  cmdFillBufferCage << "vkCmdFillBuffer"
-  cmdClearColorImageCage << "vkCmdClearColorImage"
-  cmdClearDepthStencilImageCage << "vkCmdClearDepthStencilImage"
-  cmdClearAttachmentsCage << "vkCmdClearAttachments"
-  cmdResolveImageCage << "vkCmdResolveImage"
-  cmdSetEventCage << "vkCmdSetEvent"
-  cmdResetEventCage << "vkCmdResetEvent"
-  cmdWaitEventsCage << "vkCmdWaitEvents"
-  cmdPipelineBarrierCage << "vkCmdPipelineBarrier"
-  cmdBeginQueryCage << "vkCmdBeginQuery"
-  cmdEndQueryCage << "vkCmdEndQuery"
-  cmdResetQueryPoolCage << "vkCmdResetQueryPool"
-  cmdWriteTimestampCage << "vkCmdWriteTimestamp"
-  cmdCopyQueryPoolResultsCage << "vkCmdCopyQueryPoolResults"
-  cmdPushConstantsCage << "vkCmdPushConstants"
-  cmdBeginRenderPassCage << "vkCmdBeginRenderPass"
-  cmdNextSubpassCage << "vkCmdNextSubpass"
-  cmdEndRenderPassCage << "vkCmdEndRenderPass"
-  cmdExecuteCommandsCage << "vkCmdExecuteCommands"
+  cmdBindPipeline.smartLoad(instance)
+  cmdSetViewport.smartLoad(instance)
+  cmdSetScissor.smartLoad(instance)
+  cmdSetLineWidth.smartLoad(instance)
+  cmdSetDepthBias.smartLoad(instance)
+  cmdSetBlendConstants.smartLoad(instance)
+  cmdSetDepthBounds.smartLoad(instance)
+  cmdSetStencilCompareMask.smartLoad(instance)
+  cmdSetStencilWriteMask.smartLoad(instance)
+  cmdSetStencilReference.smartLoad(instance)
+  cmdBindDescriptorSets.smartLoad(instance)
+  cmdBindIndexBuffer.smartLoad(instance)
+  cmdBindVertexBuffers.smartLoad(instance)
+  cmdDraw.smartLoad(instance)
+  cmdDrawIndexed.smartLoad(instance)
+  cmdDrawIndirect.smartLoad(instance)
+  cmdDrawIndexedIndirect.smartLoad(instance)
+  cmdDispatch.smartLoad(instance)
+  cmdDispatchIndirect.smartLoad(instance)
+  cmdCopyBuffer.smartLoad(instance)
+  cmdCopyImage.smartLoad(instance)
+  cmdBlitImage.smartLoad(instance)
+  cmdCopyBufferToImage.smartLoad(instance)
+  cmdCopyImageToBuffer.smartLoad(instance)
+  cmdUpdateBuffer.smartLoad(instance)
+  cmdFillBuffer.smartLoad(instance)
+  cmdClearColorImage.smartLoad(instance)
+  cmdClearDepthStencilImage.smartLoad(instance)
+  cmdClearAttachments.smartLoad(instance)
+  cmdResolveImage.smartLoad(instance)
+  cmdSetEvent.smartLoad(instance)
+  cmdResetEvent.smartLoad(instance)
+  cmdWaitEvents.smartLoad(instance)
+  cmdPipelineBarrier.smartLoad(instance)
+  cmdBeginQuery.smartLoad(instance)
+  cmdEndQuery.smartLoad(instance)
+  cmdResetQueryPool.smartLoad(instance)
+  cmdWriteTimestamp.smartLoad(instance)
+  cmdCopyQueryPoolResults.smartLoad(instance)
+  cmdPushConstants.smartLoad(instance)
+  cmdBeginRenderPass.smartLoad(instance)
+  cmdNextSubpass.smartLoad(instance)
+  cmdEndRenderPass.smartLoad(instance)
+  cmdExecuteCommands.smartLoad(instance)
+
+proc loadVk10*(instance: Instance) =
+  # Device initialization
+  destroyInstance.smartLoad(instance)
+  enumeratePhysicalDevices.smartLoad(instance)
+  getPhysicalDeviceFeatures.smartLoad(instance)
+  getPhysicalDeviceFormatProperties.smartLoad(instance)
+  getPhysicalDeviceImageFormatProperties.smartLoad(instance)
+  getPhysicalDeviceProperties.smartLoad(instance)
+  getPhysicalDeviceQueueFamilyProperties.smartLoad(instance)
+  getPhysicalDeviceMemoryProperties.smartLoad(instance)
+
+  # Device commands
+  createDevice.smartLoad(instance)
+
+  # Extension discovery commands
+  enumerateDeviceExtensionProperties.smartLoad(instance)
+
+  # Layer discovery commands
+  enumerateDeviceLayerProperties.smartLoad(instance)
+
+  # Sparse resource memory management API commands
+  getPhysicalDeviceSparseImageFormatProperties.smartLoad(instance)
+
+proc loadVk10*(device: Device) =
+  # Device commands
+  destroyDevice.smartLoad(device)
+
+  # Queue commands
+  getDeviceQueue.smartLoad(device)
+  queueSubmit.smartLoad(device)
+  queueWaitIdle.smartLoad(device)
+  deviceWaitIdle.smartLoad(device)
+
+  # Memory commands
+  allocateMemory.smartLoad(device)
+  freeMemory.smartLoad(device)
+  mapMemory.smartLoad(device)
+  unmapMemory.smartLoad(device)
+  flushMappedMemoryRanges.smartLoad(device)
+  invalidateMappedMemoryRanges.smartLoad(device)
+  getDeviceMemoryCommitment.smartLoad(device)
+
+  # Memory management API commands
+  bindBufferMemory.smartLoad(device)
+  bindImageMemory.smartLoad(device)
+  getBufferMemoryRequirements.smartLoad(device)
+  getImageMemoryRequirements.smartLoad(device)
+
+  # Sparse resource memory management API commands
+  getImageSparseMemoryRequirements.smartLoad(device)
+  queueBindSparse.smartLoad(device)
+
+  # Fence commands
+  createFence.smartLoad(device)
+  destroyFence.smartLoad(device)
+  resetFences.smartLoad(device)
+  getFenceStatus.smartLoad(device)
+  waitForFences.smartLoad(device)
+
+  # Queue semaphore commands
+  createSemaphore.smartLoad(device)
+  destroySemaphore.smartLoad(device)
+
+  # Event commands
+  createEvent.smartLoad(device)
+  destroyEvent.smartLoad(device)
+  getEventStatus.smartLoad(device)
+  setEvent.smartLoad(device)
+  resetEvent.smartLoad(device)
+
+  # Query commands
+  createQueryPool.smartLoad(device)
+  destroyQueryPool.smartLoad(device)
+  getQueryPoolResults.smartLoad(device)
+
+  # Buffer commands
+  createBuffer.smartLoad(device)
+  destroyBuffer.smartLoad(device)
+
+  # Buffer view commands
+  createBufferView.smartLoad(device)
+  destroyBufferView.smartLoad(device)
+
+  # Image commands
+  createImage.smartLoad(device)
+  destroyImage.smartLoad(device)
+  getImageSubresourceLayout.smartLoad(device)
+
+  # Image view commands
+  createImageView.smartLoad(device)
+  destroyImageView.smartLoad(device)
+
+  # Shader commands
+  createShaderModule.smartLoad(device)
+  destroyShaderModule.smartLoad(device)
+
+  # Pipeline Cache commands
+  createPipelineCache.smartLoad(device)
+  destroyPipelineCache.smartLoad(device)
+  getPipelineCacheData.smartLoad(device)
+  mergePipelineCaches.smartLoad(device)
+
+  # Pipeline commands
+  createGraphicsPipelines.smartLoad(device)
+  createComputePipelines.smartLoad(device)
+  destroyPipeline.smartLoad(device)
+
+  # Pipeline layout commands
+  createPipelineLayout.smartLoad(device)
+  destroyPipelineLayout.smartLoad(device)
+
+  # Sampler commands
+  createSampler.smartLoad(device)
+  destroySampler.smartLoad(device)
+
+  # Descriptor set commands
+  createDescriptorSetLayout.smartLoad(device)
+  destroyDescriptorSetLayout.smartLoad(device)
+  createDescriptorPool.smartLoad(device)
+  destroyDescriptorPool.smartLoad(device)
+  resetDescriptorPool.smartLoad(device)
+  allocateDescriptorSets.smartLoad(device)
+  freeDescriptorSets.smartLoad(device)
+  updateDescriptorSets.smartLoad(device)
+
+  # Pass commands
+  createFramebuffer.smartLoad(device)
+  destroyFramebuffer.smartLoad(device)
+  createRenderPass.smartLoad(device)
+  destroyRenderPass.smartLoad(device)
+  getRenderAreaGranularity.smartLoad(device)
+
+  # Command pool commands
+  createCommandPool.smartLoad(device)
+  destroyCommandPool.smartLoad(device)
+  resetCommandPool.smartLoad(device)
+
+  # Command buffer commands
+  allocateCommandBuffers.smartLoad(device)
+  freeCommandBuffers.smartLoad(device)
+  beginCommandBuffer.smartLoad(device)
+  endCommandBuffer.smartLoad(device)
+  resetCommandBuffer.smartLoad(device)
+
+  # Command buffer building commands
+  cmdBindPipeline.smartLoad(device)
+  cmdSetViewport.smartLoad(device)
+  cmdSetScissor.smartLoad(device)
+  cmdSetLineWidth.smartLoad(device)
+  cmdSetDepthBias.smartLoad(device)
+  cmdSetBlendConstants.smartLoad(device)
+  cmdSetDepthBounds.smartLoad(device)
+  cmdSetStencilCompareMask.smartLoad(device)
+  cmdSetStencilWriteMask.smartLoad(device)
+  cmdSetStencilReference.smartLoad(device)
+  cmdBindDescriptorSets.smartLoad(device)
+  cmdBindIndexBuffer.smartLoad(device)
+  cmdBindVertexBuffers.smartLoad(device)
+  cmdDraw.smartLoad(device)
+  cmdDrawIndexed.smartLoad(device)
+  cmdDrawIndirect.smartLoad(device)
+  cmdDrawIndexedIndirect.smartLoad(device)
+  cmdDispatch.smartLoad(device)
+  cmdDispatchIndirect.smartLoad(device)
+  cmdCopyBuffer.smartLoad(device)
+  cmdCopyImage.smartLoad(device)
+  cmdBlitImage.smartLoad(device)
+  cmdCopyBufferToImage.smartLoad(device)
+  cmdCopyImageToBuffer.smartLoad(device)
+  cmdUpdateBuffer.smartLoad(device)
+  cmdFillBuffer.smartLoad(device)
+  cmdClearColorImage.smartLoad(device)
+  cmdClearDepthStencilImage.smartLoad(device)
+  cmdClearAttachments.smartLoad(device)
+  cmdResolveImage.smartLoad(device)
+  cmdSetEvent.smartLoad(device)
+  cmdResetEvent.smartLoad(device)
+  cmdWaitEvents.smartLoad(device)
+  cmdPipelineBarrier.smartLoad(device)
+  cmdBeginQuery.smartLoad(device)
+  cmdEndQuery.smartLoad(device)
+  cmdResetQueryPool.smartLoad(device)
+  cmdWriteTimestamp.smartLoad(device)
+  cmdCopyQueryPoolResults.smartLoad(device)
+  cmdPushConstants.smartLoad(device)
+  cmdBeginRenderPass.smartLoad(device)
+  cmdNextSubpass.smartLoad(device)
+  cmdEndRenderPass.smartLoad(device)
+  cmdExecuteCommands.smartLoad(device)
+
+
 
 # Bitmask operations
 # Utility for bitmask operation added independently

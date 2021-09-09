@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_push_descriptor
 
 
@@ -21,8 +21,6 @@ type
     pNext*: pointer
     maxPushDescriptors*: uint32
 
-var # command cages
-  cmdPushDescriptorSetKHRCage: proc(commandBuffer: CommandBuffer; pipelineBindPoint: PipelineBindPoint; layout: PipelineLayout; set: uint32; descriptorWriteCount: uint32; pDescriptorWrites: ptr WriteDescriptorSet;): void {.cdecl.}
 proc cmdPushDescriptorSetKHR*(
       commandBuffer: CommandBuffer;
       pipelineBindPoint: PipelineBindPoint;
@@ -30,26 +28,28 @@ proc cmdPushDescriptorSetKHR*(
       set: uint32;
       descriptorWriteCount: uint32;
       pDescriptorWrites: ptr WriteDescriptorSet;
-    ): void {.cdecl.} =
-  cmdPushDescriptorSetKHRCage(commandBuffer,pipelineBindPoint,layout,set,descriptorWriteCount,pDescriptorWrites)
+    ): void {.cdecl, lazyload("vkCmdPushDescriptorSetKHR", DeviceLevel).}
 
 
-var # command cages
-  cmdPushDescriptorSetWithTemplateKHRCage: proc(commandBuffer: CommandBuffer; descriptorUpdateTemplate: DescriptorUpdateTemplate; layout: PipelineLayout; set: uint32; pData: pointer;): void {.cdecl.}
 proc cmdPushDescriptorSetWithTemplateKHR*(
       commandBuffer: CommandBuffer;
       descriptorUpdateTemplate: DescriptorUpdateTemplate;
       layout: PipelineLayout;
       set: uint32;
       pData: pointer;
-    ): void {.cdecl.} =
-  cmdPushDescriptorSetWithTemplateKHRCage(commandBuffer,descriptorUpdateTemplate,layout,set,pData)
+    ): void {.cdecl, lazyload("vkCmdPushDescriptorSetWithTemplateKHR", DeviceLevel).}
 
-proc loadVK_KHR_push_descriptor*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_KHR_push_descriptor*(instance: Instance) =
+  cmdPushDescriptorSetKHR.smartLoad(instance)
 
-  cmdPushDescriptorSetKHRCage << "vkCmdPushDescriptorSetKHR"
+  cmdPushDescriptorSetWithTemplateKHR.smartLoad(instance)
 
-  cmdPushDescriptorSetWithTemplateKHRCage << "vkCmdPushDescriptorSetWithTemplateKHR"
+  cmdPushDescriptorSetWithTemplateKHR.smartLoad(instance)
 
-  cmdPushDescriptorSetWithTemplateKHRCage << "vkCmdPushDescriptorSetWithTemplateKHR"
+proc loadVK_KHR_push_descriptor*(device: Device) =
+  cmdPushDescriptorSetKHR.smartLoad(device)
+
+  cmdPushDescriptorSetWithTemplateKHR.smartLoad(device)
+
+  cmdPushDescriptorSetWithTemplateKHR.smartLoad(device)
+

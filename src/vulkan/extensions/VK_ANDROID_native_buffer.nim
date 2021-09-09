@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:02Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_ANDROID_native_buffer
 
 
@@ -37,34 +37,26 @@ type
     consumer*: uint64
     producer*: uint64
 
-var # command cages
-  getSwapchainGrallocUsageANDROIDCage: proc(device: Device; format: Format; imageUsage: ImageUsageFlags; grallocUsage: ptr int;): Result {.cdecl.}
-  acquireImageANDROIDCage: proc(device: Device; image: Image; nativeFenceFd: int; semaphore: Semaphore; fence: Fence;): Result {.cdecl.}
-  queueSignalReleaseImageANDROIDCage: proc(queue: Queue; waitSemaphoreCount: uint32; pWaitSemaphores: ptr Semaphore; image: Image; pNativeFenceFd: ptr int;): Result {.cdecl.}
-  getSwapchainGrallocUsage2ANDROIDCage: proc(device: Device; format: Format; imageUsage: ImageUsageFlags; swapchainImageUsage: SwapchainImageUsageFlagsANDROID; grallocConsumerUsage: ptr uint64; grallocProducerUsage: ptr uint64;): Result {.cdecl.}
 proc getSwapchainGrallocUsageANDROID*(
       device: Device;
       format: Format;
       imageUsage: ImageUsageFlags;
       grallocUsage: ptr int;
-    ): Result {.cdecl, discardable.} =
-  getSwapchainGrallocUsageANDROIDCage(device,format,imageUsage,grallocUsage)
+    ): Result {.cdecl, lazyload("vkGetSwapchainGrallocUsageANDROID", DeviceLevel).}
 proc acquireImageANDROID*(
       device: Device;
       image: Image;
       nativeFenceFd: int;
       semaphore: Semaphore;
       fence: Fence;
-    ): Result {.cdecl, discardable.} =
-  acquireImageANDROIDCage(device,image,nativeFenceFd,semaphore,fence)
+    ): Result {.cdecl, lazyload("vkAcquireImageANDROID", DeviceLevel).}
 proc queueSignalReleaseImageANDROID*(
       queue: Queue;
       waitSemaphoreCount: uint32;
       pWaitSemaphores: ptr Semaphore;
       image: Image;
       pNativeFenceFd: ptr int;
-    ): Result {.cdecl, discardable.} =
-  queueSignalReleaseImageANDROIDCage(queue,waitSemaphoreCount,pWaitSemaphores,image,pNativeFenceFd)
+    ): Result {.cdecl, lazyload("vkQueueSignalReleaseImageANDROID", DeviceLevel).}
 proc getSwapchainGrallocUsage2ANDROID*(
       device: Device;
       format: Format;
@@ -72,13 +64,17 @@ proc getSwapchainGrallocUsage2ANDROID*(
       swapchainImageUsage: SwapchainImageUsageFlagsANDROID;
       grallocConsumerUsage: ptr uint64;
       grallocProducerUsage: ptr uint64;
-    ): Result {.cdecl, discardable.} =
-  getSwapchainGrallocUsage2ANDROIDCage(device,format,imageUsage,swapchainImageUsage,grallocConsumerUsage,grallocProducerUsage)
+    ): Result {.cdecl, lazyload("vkGetSwapchainGrallocUsage2ANDROID", DeviceLevel).}
 
-proc loadVK_ANDROID_native_buffer*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_ANDROID_native_buffer*(instance: Instance) =
+  getSwapchainGrallocUsageANDROID.smartLoad(instance)
+  acquireImageANDROID.smartLoad(instance)
+  queueSignalReleaseImageANDROID.smartLoad(instance)
+  getSwapchainGrallocUsage2ANDROID.smartLoad(instance)
 
-  getSwapchainGrallocUsageANDROIDCage << "vkGetSwapchainGrallocUsageANDROID"
-  acquireImageANDROIDCage << "vkAcquireImageANDROID"
-  queueSignalReleaseImageANDROIDCage << "vkQueueSignalReleaseImageANDROID"
-  getSwapchainGrallocUsage2ANDROIDCage << "vkGetSwapchainGrallocUsage2ANDROID"
+proc loadVK_ANDROID_native_buffer*(device: Device) =
+  getSwapchainGrallocUsageANDROID.smartLoad(device)
+  acquireImageANDROID.smartLoad(device)
+  queueSignalReleaseImageANDROID.smartLoad(device)
+  getSwapchainGrallocUsage2ANDROID.smartLoad(device)
+

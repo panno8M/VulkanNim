@@ -161,21 +161,9 @@ proc render*(handle: NodeHandle): string =
     let alias = handle.alias.replaceBasicTypes
     "{name}* = {alias}".fmt
 
-proc renderCage*(command: NodeCommand): string =
-  if command.kind == nkbrNormal:
-    let name = command.name.parseCommandName & "Cage"
-    let theType = command.theType.parseTypeName
-    result &= "{name}: proc(".fmt
-    let params = command.params
-      .mapIt( block:
-        let name = it.name.parseParamName
-        let theType = it.theType.parseTypeName(it.ptrLv)
-        "{name}: {theType};".fmt)
-    if params.len != 0:
-      result &= params.join(" ")
-    result &= "): {theType} {commandPragma}".fmt
-proc renderAccessor*(command: NodeCommand): string =
+proc render*(command: NodeCommand): string =
   let name = command.name.parseCommandName
+  # let name = command.name
   case command.kind
   of nkbrNormal:
     let theType = command.theType.parseTypeName
@@ -185,17 +173,19 @@ proc renderAccessor*(command: NodeCommand): string =
         let name = it.name.parseParamName
         let theType = it.theType.parseTypeName(it.ptrLv)
         "      {name}: {theType};".fmt)
-    let procFutter =
-      if theType == "Result": "    ): {theType} {discardableCommandPragma} =\n".fmt
-      else: "    ): {theType} {commandPragma} =\n".fmt
-    let cageName = name & "Cage"
-    let cageParams = command.params.mapIt(it.name.parseParamName)
+    let loadMethod = case command.loadMode
+      of lmPreload: "preload(\"{command.name}\")".fmt
+      of lmWithInstance: "lazyload(\"{command.name}\", InstanceLevel)".fmt
+      of lmWithDevice: "lazyload(\"{command.name}\", DeviceLevel)".fmt
+    let procFutter = "    ): {theType} {{.cdecl, {loadMethod}.}}".fmt
+    # let cageName = command.name
+    # let cageParams = command.params.mapIt(it.name.parseParamName)
 
     result &= procHeader
     if procParams.len != 0:
       result &= '\n' & procParams.join("\n") & '\n'
     result &= procFutter
-    result &= "  {cageName}({cageParams.join(\",\")})".fmt
+    # result &= "  {cageName}({cageParams.join(\",\")})".fmt
     return
   of nkbrAlias:
     let alias = command.alias.parseCommandName
@@ -212,54 +202,73 @@ proc render*(basetype: NodeBasetype): string =
   of nkbExternal:
     "{name}* = ptr object # defined at {basetype.path}".fmt
 
-proc renderCommandLoaderComponent*(require: NodeRequire; resources: Resources): string =
+type CommandRenderingMode = enum
+  crmAll
+  crmInstance
+  crmDevice
+
+proc renderCommandLoaderComponent*(require: NodeRequire; resources: Resources; commandRenderingMode = crmAll): string =
   if require.targets.filterIt(it.kind == nkrCommand).len == 0: return
   var commandLoaderDef = newSeq[string]()
 
-  if require.comment.isSome:
-    commandLoaderDef.add require.comment.get.commentify
   for req in require.targets.filter(x => x.kind == nkrCommand):
-    if not resources.commands.hasKey(req.name) or
-       resources.commands[req.name].kind == nkbrAlias: continue
-    commandLoaderDef.add "{req.name.parseCommandName}Cage << \"{req.name}\"".fmt
+    if not resources.commands.hasKey(req.name): continue
+    let command = resources.commands[req.name]
+    if command.kind == nkbrAlias or
+       command.loadMode == lmPreload: continue
+
+    commandLoaderDef.add case commandRenderingMode
+      of crmInstance:
+        if command.loadMode != lmWithInstance: continue
+        "{req.name.parseCommandname}.smartLoad(instance)".fmt
+      of crmDevice:
+        if command.loadMode != lmWithDevice: continue
+        "{req.name.parseCommandname}.smartLoad(device)".fmt
+      of crmAll:
+        "{req.name.parseCommandname}.smartLoad(instance)".fmt
+
+  if require.comment.isSome and commandLoaderDef.len != 0:
+    commandLoaderDef.insert(require.comment.get.commentify, 0)
 
   return commandLoaderDef.join("\n")
 
-proc renderCommandLoader*(libFile: LibFile; resources: Resources): string =
+proc renderCommandLoader*(libFile: LibFile; resources: Resources; commandRenderingMode = crmAll): string =
   var resultDefs: seq[string]
 
   for i, fileRequire in libFile.requires:
     let loaderName = @[libFile.fileName].concat(libFile.mergedFileNames)[i].splitFile.name.capitalizeAscii
     var commandLoaderDefs = newSeq[string]()
     for require in fileRequire:
-      let def = require.renderCommandLoaderComponent(resources)
+      let def = require.renderCommandLoaderComponent(resources, commandRenderingMode)
       if not def.isEmptyOrWhitespace:
         commandLoaderDefs.add def
 
-    resultDefs.add if commandLoaderDefs.len == 0: ""
-    else:
-      "proc load{loaderName}*(instance: Instance) =\n".fmt &
-      "  instance.defineLoader(`<<`)\n\n" &
-      commandLoaderDefs.mapIt(it.indent(2)).join("\n\n")
+    if commandLoaderDefs.len != 0:
+      let loaderHeader = case commandRenderingMode
+        of crmAll: "proc loadAll{loaderName}*(instance: Instance) =\n".fmt
+        of crmInstance: "proc load{loaderName}*(instance: Instance) =\n".fmt
+        of crmDevice: "proc load{loaderName}*(device: Device) =\n".fmt
+
+      resultDefs.add(
+        loaderHeader &
+        commandLoaderDefs.mapIt(it.indent(2)).join("\n\n")
+      )
   resultDefs.join("\n\n")
 
 func renderInstanceCommandLoader*(fileName: string): string =
   assert fileName in ["features/vk10", "features/vk11"]
   case fileName
   of "features/vk10":
-    result =
-      "proc loadInstanceProcs*() =\n" &
-      "  nil.defineLoader(`<<`)\n" &
-      "  getInstanceProcAddrCage << \"vkGetInstanceAddr\"\n" &
-      "  enumerateInstanceExtensionPropertiesCage << \"vkEnumerateInstanceExtensionProperties\"\n" &
-      "  enumerateInstanceLayerPropertiesCage << \"vkEnumerateInstanceLayerProperties\"\n" &
-      "  createInstanceCage << \"vkCreateInstance\""
+    "proc loadInstanceProcs*() =\n" &
+    "  getInstanceProcAddr.load(instance = nil)\n" &
+    "  enumerateInstanceExtensionProperties.load(instance = nil)\n" &
+    "  enumerateInstanceLayerProperties.load(instance = nil)\n" &
+    "  createInstance.load(instance = nil)"
   of "features/vk11":
-    result =
-      "proc loadInstanceProcs*() =\n" &
-      "  vk10.loadInstanceProcs()\n" &
-      "  nil.defineLoader(`<<`)\n" &
-      "  enumerateInstanceVersionCage << \"vkEnumerateInstanceVersion\""
+    "proc loadInstanceProcs*() =\n" &
+    "  vk10.loadInstanceProcs()\n" &
+    "  enumerateInstanceVersion.load(instance = nil)"
+  else: ""
 
 proc render*(libFile: LibFile; library: Library; resources: Resources): string =
   var renderedNodes: seq[string]
@@ -292,12 +301,7 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
     if dependencies.filterIt(it.exportit).len != 0:
       result &= dependencies
         .filterIt(it.exportIt)
-        .mapIt( block:
-          if it.fileName == "./vk10":
-            "export {it.fileName.splitFile.name} except loadInstanceProcs".fmt
-          else:
-            "export {it.fileName.splitFile.name}".fmt
-        )
+        .mapIt("export {it.fileName.splitFile.name}".fmt)
         .join("\n").LF
     result.LF
 
@@ -456,20 +460,10 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
 
         let reqCommands = require.targets.filter(x => x.kind == nkrCommand)
         if reqCommands.len != 0:
-          var commandDef: seq[string]
           for reqCommand in reqCommands:
             if reqCommand.name in renderedNodes: continue
             if resources.commands.hasKey(reqCommand.name):
-              if resources.commands[reqCommand.name].kind == nkbrAlias: continue
-              commandDef.add resources.commands[reqCommand.name].renderCage.indent(2)
-          if commandDef.len != 0:
-            reqDefs[^1].add "var # command cages"
-            reqDefs[^1].add commandDef
-
-          for reqCommand in reqCommands:
-            if reqCommand.name in renderedNodes: continue
-            if resources.commands.hasKey(reqCommand.name):
-              reqDefs[^1].add resources.commands[reqCommand.name].renderAccessor
+              reqDefs[^1].add resources.commands[reqCommand.name].render
               renderedNodes.add reqCommand.name
 
         let reqEnumExts = require.targets.filter(x => x.kind == nkrEnumExtendAlias)
@@ -494,13 +488,29 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
     if reqDefs.len != 0:
       result &= reqDefs.mapIt(it.join("\n")).filterIt(it.len != 0).join("\n\n\n")
       result.LF
+      result.LF
 
-  if libFile.fileName in ["features/vk10", "features/vk11"]: # Insert_basic_loader:
-    result &= libFile.fileName.renderInstanceCommandLoader
+  if libFile.fileName == "features/vk10":
+    result &= readFile("src/vulkan/generator/resources/loadoperators.nim")
+    result.LF
     result.LF
 
-  result.LF
-  result &= libFile.renderCommandLoader(resources)
+  block Render_command_loaders:
+    let loadAll = libFile.renderCommandLoader(resources)
+    if loadAll.len != 0:
+      result &= loadAll
+      result.LF
+      result.LF
+    let loadInstance = libFile.renderCommandLoader(resources, crmInstance)
+    if loadInstance.len != 0:
+      result &= loadInstance
+      result.LF
+      result.LF
+    let loadDevice = libFile.renderCommandLoader(resources, crmDevice)
+    if loadDevice.len != 0:
+      result &= loadDevice
+      result.LF
+      result.LF
 
   if not libFile.fileFooter.isEmptyOrWhitespace:
     result.LF
@@ -790,6 +800,14 @@ func extractNodeCommand*(typeDef: XmlNode): NodeCommand {.raises: [UnexpectedXml
   #     <param optional="false,true"><type>uint32_t</type>* <name>pExecutableCount</name></param>
   #     <param optional="true" len="pExecutableCount"><type>VkPipelineExecutablePropertiesKHR</type>* <name>pProperties</name></param>
   # </command>
+  const preloadableProcs = [
+    "vkGetInstanceProcAddr",
+    "vkGetDeviceProcAddr",
+    "vkEnumerateInstanceVersion",
+    "vkEnumerateInstanceExtensionProperties",
+    "vkEnumerateInstanceLayerProperties",
+    "vkCreateInstance",
+  ]
   if typeDef.kind != xnElement or
      typeDef.tag != "command":
     xmlError invalidStructure("command Extraction"): $typeDef
@@ -811,6 +829,11 @@ func extractNodeCommand*(typeDef: XmlNode): NodeCommand {.raises: [UnexpectedXml
         name: param["name"].innerText.parseWords[0],
         theType: param["type"].innerText.parseWords[0],
         ptrLv: ($param).count("*"),)
+    result.loadMode =
+      if result.name in preloadableProcs: lmPreload
+      elif result.params[0].theType in ["VkInstance", "VkPhysicalDevice"]: lmWithInstance
+      else: lmWithDevice
+
 
 func extractNodeBasetype*(typeDef: XmlNode): NodeBasetype {.raises: [UnexpectedXmlStructureError].} =
   if typeDef.kind != xnElement or

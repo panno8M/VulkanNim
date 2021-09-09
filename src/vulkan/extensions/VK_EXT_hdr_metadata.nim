@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:02Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_EXT_hdr_metadata
 
 
@@ -28,17 +28,16 @@ type
     x*: float32
     y*: float32
 
-var # command cages
-  setHdrMetadataEXTCage: proc(device: Device; swapchainCount: uint32; pSwapchains: ptr SwapchainKHR; pMetadata: ptr HdrMetadataEXT;): void {.cdecl.}
 proc setHdrMetadataEXT*(
       device: Device;
       swapchainCount: uint32;
       pSwapchains: ptr SwapchainKHR;
       pMetadata: ptr HdrMetadataEXT;
-    ): void {.cdecl.} =
-  setHdrMetadataEXTCage(device,swapchainCount,pSwapchains,pMetadata)
+    ): void {.cdecl, lazyload("vkSetHdrMetadataEXT", DeviceLevel).}
 
-proc loadVK_EXT_hdr_metadata*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_EXT_hdr_metadata*(instance: Instance) =
+  setHdrMetadataEXT.smartLoad(instance)
 
-  setHdrMetadataEXTCage << "vkSetHdrMetadataEXT"
+proc loadVK_EXT_hdr_metadata*(device: Device) =
+  setHdrMetadataEXT.smartLoad(device)
+

@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:02Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_surface
 # VK_KHR_display
 
@@ -151,120 +151,107 @@ type
 ColorSpaceKHR.defineAliases:
   srgbNonlinearKhr as colorspaceSrgbNonlinearKhr # Backwards-compatible alias containing a typo
 
-var # command cages
-  destroySurfaceKHRCage: proc(instance: Instance; surface: SurfaceKHR; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  getPhysicalDeviceSurfaceSupportKHRCage: proc(physicalDevice: PhysicalDevice; queueFamilyIndex: uint32; surface: SurfaceKHR; pSupported: ptr Bool32;): Result {.cdecl.}
-  getPhysicalDeviceSurfaceCapabilitiesKHRCage: proc(physicalDevice: PhysicalDevice; surface: SurfaceKHR; pSurfaceCapabilities: ptr SurfaceCapabilitiesKHR;): Result {.cdecl.}
-  getPhysicalDeviceSurfaceFormatsKHRCage: proc(physicalDevice: PhysicalDevice; surface: SurfaceKHR; pSurfaceFormatCount: ptr uint32; pSurfaceFormats: ptr SurfaceFormatKHR;): Result {.cdecl.}
-  getPhysicalDeviceSurfacePresentModesKHRCage: proc(physicalDevice: PhysicalDevice; surface: SurfaceKHR; pPresentModeCount: ptr uint32; pPresentModes: ptr PresentModeKHR;): Result {.cdecl.}
 proc destroySurfaceKHR*(
       instance: Instance;
       surface: SurfaceKHR;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroySurfaceKHRCage(instance,surface,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroySurfaceKHR", InstanceLevel).}
 proc getPhysicalDeviceSurfaceSupportKHR*(
       physicalDevice: PhysicalDevice;
       queueFamilyIndex: uint32;
       surface: SurfaceKHR;
       pSupported: ptr Bool32;
-    ): Result {.cdecl, discardable.} =
-  getPhysicalDeviceSurfaceSupportKHRCage(physicalDevice,queueFamilyIndex,surface,pSupported)
+    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceSurfaceSupportKHR", InstanceLevel).}
 proc getPhysicalDeviceSurfaceCapabilitiesKHR*(
       physicalDevice: PhysicalDevice;
       surface: SurfaceKHR;
       pSurfaceCapabilities: ptr SurfaceCapabilitiesKHR;
-    ): Result {.cdecl, discardable.} =
-  getPhysicalDeviceSurfaceCapabilitiesKHRCage(physicalDevice,surface,pSurfaceCapabilities)
+    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceSurfaceCapabilitiesKHR", InstanceLevel).}
 proc getPhysicalDeviceSurfaceFormatsKHR*(
       physicalDevice: PhysicalDevice;
       surface: SurfaceKHR;
       pSurfaceFormatCount: ptr uint32;
       pSurfaceFormats: ptr SurfaceFormatKHR;
-    ): Result {.cdecl, discardable.} =
-  getPhysicalDeviceSurfaceFormatsKHRCage(physicalDevice,surface,pSurfaceFormatCount,pSurfaceFormats)
+    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceSurfaceFormatsKHR", InstanceLevel).}
 proc getPhysicalDeviceSurfacePresentModesKHR*(
       physicalDevice: PhysicalDevice;
       surface: SurfaceKHR;
       pPresentModeCount: ptr uint32;
       pPresentModes: ptr PresentModeKHR;
-    ): Result {.cdecl, discardable.} =
-  getPhysicalDeviceSurfacePresentModesKHRCage(physicalDevice,surface,pPresentModeCount,pPresentModes)
+    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceSurfacePresentModesKHR", InstanceLevel).}
 
 
-var # command cages
-  getPhysicalDeviceDisplayPropertiesKHRCage: proc(physicalDevice: PhysicalDevice; pPropertyCount: ptr uint32; pProperties: ptr DisplayPropertiesKHR;): Result {.cdecl.}
-  getPhysicalDeviceDisplayPlanePropertiesKHRCage: proc(physicalDevice: PhysicalDevice; pPropertyCount: ptr uint32; pProperties: ptr DisplayPlanePropertiesKHR;): Result {.cdecl.}
-  getDisplayPlaneSupportedDisplaysKHRCage: proc(physicalDevice: PhysicalDevice; planeIndex: uint32; pDisplayCount: ptr uint32; pDisplays: ptr DisplayKHR;): Result {.cdecl.}
-  getDisplayModePropertiesKHRCage: proc(physicalDevice: PhysicalDevice; display: DisplayKHR; pPropertyCount: ptr uint32; pProperties: ptr DisplayModePropertiesKHR;): Result {.cdecl.}
-  createDisplayModeKHRCage: proc(physicalDevice: PhysicalDevice; display: DisplayKHR; pCreateInfo: ptr DisplayModeCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pMode: ptr DisplayModeKHR;): Result {.cdecl.}
-  getDisplayPlaneCapabilitiesKHRCage: proc(physicalDevice: PhysicalDevice; mode: DisplayModeKHR; planeIndex: uint32; pCapabilities: ptr DisplayPlaneCapabilitiesKHR;): Result {.cdecl.}
-  createDisplayPlaneSurfaceKHRCage: proc(instance: Instance; pCreateInfo: ptr DisplaySurfaceCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
 proc getPhysicalDeviceDisplayPropertiesKHR*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
       pProperties: ptr DisplayPropertiesKHR;
-    ): Result {.cdecl, discardable.} =
-  getPhysicalDeviceDisplayPropertiesKHRCage(physicalDevice,pPropertyCount,pProperties)
+    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceDisplayPropertiesKHR", InstanceLevel).}
 proc getPhysicalDeviceDisplayPlanePropertiesKHR*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
       pProperties: ptr DisplayPlanePropertiesKHR;
-    ): Result {.cdecl, discardable.} =
-  getPhysicalDeviceDisplayPlanePropertiesKHRCage(physicalDevice,pPropertyCount,pProperties)
+    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceDisplayPlanePropertiesKHR", InstanceLevel).}
 proc getDisplayPlaneSupportedDisplaysKHR*(
       physicalDevice: PhysicalDevice;
       planeIndex: uint32;
       pDisplayCount: ptr uint32;
       pDisplays: ptr DisplayKHR;
-    ): Result {.cdecl, discardable.} =
-  getDisplayPlaneSupportedDisplaysKHRCage(physicalDevice,planeIndex,pDisplayCount,pDisplays)
+    ): Result {.cdecl, lazyload("vkGetDisplayPlaneSupportedDisplaysKHR", InstanceLevel).}
 proc getDisplayModePropertiesKHR*(
       physicalDevice: PhysicalDevice;
       display: DisplayKHR;
       pPropertyCount: ptr uint32;
       pProperties: ptr DisplayModePropertiesKHR;
-    ): Result {.cdecl, discardable.} =
-  getDisplayModePropertiesKHRCage(physicalDevice,display,pPropertyCount,pProperties)
+    ): Result {.cdecl, lazyload("vkGetDisplayModePropertiesKHR", InstanceLevel).}
 proc createDisplayModeKHR*(
       physicalDevice: PhysicalDevice;
       display: DisplayKHR;
       pCreateInfo: ptr DisplayModeCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pMode: ptr DisplayModeKHR;
-    ): Result {.cdecl, discardable.} =
-  createDisplayModeKHRCage(physicalDevice,display,pCreateInfo,pAllocator,pMode)
+    ): Result {.cdecl, lazyload("vkCreateDisplayModeKHR", InstanceLevel).}
 proc getDisplayPlaneCapabilitiesKHR*(
       physicalDevice: PhysicalDevice;
       mode: DisplayModeKHR;
       planeIndex: uint32;
       pCapabilities: ptr DisplayPlaneCapabilitiesKHR;
-    ): Result {.cdecl, discardable.} =
-  getDisplayPlaneCapabilitiesKHRCage(physicalDevice,mode,planeIndex,pCapabilities)
+    ): Result {.cdecl, lazyload("vkGetDisplayPlaneCapabilitiesKHR", InstanceLevel).}
 proc createDisplayPlaneSurfaceKHR*(
       instance: Instance;
       pCreateInfo: ptr DisplaySurfaceCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl, discardable.} =
-  createDisplayPlaneSurfaceKHRCage(instance,pCreateInfo,pAllocator,pSurface)
+    ): Result {.cdecl, lazyload("vkCreateDisplayPlaneSurfaceKHR", InstanceLevel).}
+
+proc loadAllVK_KHR_surface*(instance: Instance) =
+  destroySurfaceKHR.smartLoad(instance)
+  getPhysicalDeviceSurfaceSupportKHR.smartLoad(instance)
+  getPhysicalDeviceSurfaceCapabilitiesKHR.smartLoad(instance)
+  getPhysicalDeviceSurfaceFormatsKHR.smartLoad(instance)
+  getPhysicalDeviceSurfacePresentModesKHR.smartLoad(instance)
+
+proc loadAllVK_KHR_display*(instance: Instance) =
+  getPhysicalDeviceDisplayPropertiesKHR.smartLoad(instance)
+  getPhysicalDeviceDisplayPlanePropertiesKHR.smartLoad(instance)
+  getDisplayPlaneSupportedDisplaysKHR.smartLoad(instance)
+  getDisplayModePropertiesKHR.smartLoad(instance)
+  createDisplayModeKHR.smartLoad(instance)
+  getDisplayPlaneCapabilitiesKHR.smartLoad(instance)
+  createDisplayPlaneSurfaceKHR.smartLoad(instance)
 
 proc loadVK_KHR_surface*(instance: Instance) =
-  instance.defineLoader(`<<`)
-
-  destroySurfaceKHRCage << "vkDestroySurfaceKHR"
-  getPhysicalDeviceSurfaceSupportKHRCage << "vkGetPhysicalDeviceSurfaceSupportKHR"
-  getPhysicalDeviceSurfaceCapabilitiesKHRCage << "vkGetPhysicalDeviceSurfaceCapabilitiesKHR"
-  getPhysicalDeviceSurfaceFormatsKHRCage << "vkGetPhysicalDeviceSurfaceFormatsKHR"
-  getPhysicalDeviceSurfacePresentModesKHRCage << "vkGetPhysicalDeviceSurfacePresentModesKHR"
+  destroySurfaceKHR.smartLoad(instance)
+  getPhysicalDeviceSurfaceSupportKHR.smartLoad(instance)
+  getPhysicalDeviceSurfaceCapabilitiesKHR.smartLoad(instance)
+  getPhysicalDeviceSurfaceFormatsKHR.smartLoad(instance)
+  getPhysicalDeviceSurfacePresentModesKHR.smartLoad(instance)
 
 proc loadVK_KHR_display*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  getPhysicalDeviceDisplayPropertiesKHR.smartLoad(instance)
+  getPhysicalDeviceDisplayPlanePropertiesKHR.smartLoad(instance)
+  getDisplayPlaneSupportedDisplaysKHR.smartLoad(instance)
+  getDisplayModePropertiesKHR.smartLoad(instance)
+  createDisplayModeKHR.smartLoad(instance)
+  getDisplayPlaneCapabilitiesKHR.smartLoad(instance)
+  createDisplayPlaneSurfaceKHR.smartLoad(instance)
 
-  getPhysicalDeviceDisplayPropertiesKHRCage << "vkGetPhysicalDeviceDisplayPropertiesKHR"
-  getPhysicalDeviceDisplayPlanePropertiesKHRCage << "vkGetPhysicalDeviceDisplayPlanePropertiesKHR"
-  getDisplayPlaneSupportedDisplaysKHRCage << "vkGetDisplayPlaneSupportedDisplaysKHR"
-  getDisplayModePropertiesKHRCage << "vkGetDisplayModePropertiesKHR"
-  createDisplayModeKHRCage << "vkCreateDisplayModeKHR"
-  getDisplayPlaneCapabilitiesKHRCage << "vkGetDisplayPlaneCapabilitiesKHR"
-  createDisplayPlaneSurfaceKHRCage << "vkCreateDisplayPlaneSurfaceKHR"

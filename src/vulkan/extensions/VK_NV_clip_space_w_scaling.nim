@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_NV_clip_space_w_scaling
 
 
@@ -20,17 +20,16 @@ type
     viewportCount*: uint32
     pViewportWScalings*: ptr ViewportWScalingNV
 
-var # command cages
-  cmdSetViewportWScalingNVCage: proc(commandBuffer: CommandBuffer; firstViewport: uint32; viewportCount: uint32; pViewportWScalings: ptr ViewportWScalingNV;): void {.cdecl.}
 proc cmdSetViewportWScalingNV*(
       commandBuffer: CommandBuffer;
       firstViewport: uint32;
       viewportCount: uint32;
       pViewportWScalings: ptr ViewportWScalingNV;
-    ): void {.cdecl.} =
-  cmdSetViewportWScalingNVCage(commandBuffer,firstViewport,viewportCount,pViewportWScalings)
+    ): void {.cdecl, lazyload("vkCmdSetViewportWScalingNV", DeviceLevel).}
 
-proc loadVK_NV_clip_space_w_scaling*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_NV_clip_space_w_scaling*(instance: Instance) =
+  cmdSetViewportWScalingNV.smartLoad(instance)
 
-  cmdSetViewportWScalingNVCage << "vkCmdSetViewportWScalingNV"
+proc loadVK_NV_clip_space_w_scaling*(device: Device) =
+  cmdSetViewportWScalingNV.smartLoad(device)
+

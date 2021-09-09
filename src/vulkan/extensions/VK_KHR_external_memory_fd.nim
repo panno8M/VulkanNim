@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:02Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_external_memory_fd
 
 
@@ -27,25 +27,23 @@ type
     memory*: DeviceMemory
     handleType*: ExternalMemoryHandleTypeFlagBits
 
-var # command cages
-  getMemoryFdKHRCage: proc(device: Device; pGetFdInfo: ptr MemoryGetFdInfoKHR; pFd: ptr int;): Result {.cdecl.}
-  getMemoryFdPropertiesKHRCage: proc(device: Device; handleType: ExternalMemoryHandleTypeFlagBits; fd: int; pMemoryFdProperties: ptr MemoryFdPropertiesKHR;): Result {.cdecl.}
 proc getMemoryFdKHR*(
       device: Device;
       pGetFdInfo: ptr MemoryGetFdInfoKHR;
       pFd: ptr int;
-    ): Result {.cdecl, discardable.} =
-  getMemoryFdKHRCage(device,pGetFdInfo,pFd)
+    ): Result {.cdecl, lazyload("vkGetMemoryFdKHR", DeviceLevel).}
 proc getMemoryFdPropertiesKHR*(
       device: Device;
       handleType: ExternalMemoryHandleTypeFlagBits;
       fd: int;
       pMemoryFdProperties: ptr MemoryFdPropertiesKHR;
-    ): Result {.cdecl, discardable.} =
-  getMemoryFdPropertiesKHRCage(device,handleType,fd,pMemoryFdProperties)
+    ): Result {.cdecl, lazyload("vkGetMemoryFdPropertiesKHR", DeviceLevel).}
 
-proc loadVK_KHR_external_memory_fd*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_KHR_external_memory_fd*(instance: Instance) =
+  getMemoryFdKHR.smartLoad(instance)
+  getMemoryFdPropertiesKHR.smartLoad(instance)
 
-  getMemoryFdKHRCage << "vkGetMemoryFdKHR"
-  getMemoryFdPropertiesKHRCage << "vkGetMemoryFdPropertiesKHR"
+proc loadVK_KHR_external_memory_fd*(device: Device) =
+  getMemoryFdKHR.smartLoad(device)
+  getMemoryFdPropertiesKHR.smartLoad(device)
+

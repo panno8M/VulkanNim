@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_external_memory_win32
 
 
@@ -34,25 +34,23 @@ type
     memory*: DeviceMemory
     handleType*: ExternalMemoryHandleTypeFlagBits
 
-var # command cages
-  getMemoryWin32HandleKHRCage: proc(device: Device; pGetWin32HandleInfo: ptr MemoryGetWin32HandleInfoKHR; pHandle: ptr Win32Handle;): Result {.cdecl.}
-  getMemoryWin32HandlePropertiesKHRCage: proc(device: Device; handleType: ExternalMemoryHandleTypeFlagBits; handle: Win32Handle; pMemoryWin32HandleProperties: ptr MemoryWin32HandlePropertiesKHR;): Result {.cdecl.}
 proc getMemoryWin32HandleKHR*(
       device: Device;
       pGetWin32HandleInfo: ptr MemoryGetWin32HandleInfoKHR;
       pHandle: ptr Win32Handle;
-    ): Result {.cdecl, discardable.} =
-  getMemoryWin32HandleKHRCage(device,pGetWin32HandleInfo,pHandle)
+    ): Result {.cdecl, lazyload("vkGetMemoryWin32HandleKHR", DeviceLevel).}
 proc getMemoryWin32HandlePropertiesKHR*(
       device: Device;
       handleType: ExternalMemoryHandleTypeFlagBits;
       handle: Win32Handle;
       pMemoryWin32HandleProperties: ptr MemoryWin32HandlePropertiesKHR;
-    ): Result {.cdecl, discardable.} =
-  getMemoryWin32HandlePropertiesKHRCage(device,handleType,handle,pMemoryWin32HandleProperties)
+    ): Result {.cdecl, lazyload("vkGetMemoryWin32HandlePropertiesKHR", DeviceLevel).}
 
-proc loadVK_KHR_external_memory_win32*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_KHR_external_memory_win32*(instance: Instance) =
+  getMemoryWin32HandleKHR.smartLoad(instance)
+  getMemoryWin32HandlePropertiesKHR.smartLoad(instance)
 
-  getMemoryWin32HandleKHRCage << "vkGetMemoryWin32HandleKHR"
-  getMemoryWin32HandlePropertiesKHRCage << "vkGetMemoryWin32HandlePropertiesKHR"
+proc loadVK_KHR_external_memory_win32*(device: Device) =
+  getMemoryWin32HandleKHR.smartLoad(device)
+  getMemoryWin32HandlePropertiesKHR.smartLoad(device)
+

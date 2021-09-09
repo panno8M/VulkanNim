@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:02Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_xlib_surface
 
 
@@ -22,26 +22,24 @@ type
     dpy*: ptr Display
     window*: Window
 
-var # command cages
-  createXlibSurfaceKHRCage: proc(instance: Instance; pCreateInfo: ptr XlibSurfaceCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
-  getPhysicalDeviceXlibPresentationSupportKHRCage: proc(physicalDevice: PhysicalDevice; queueFamilyIndex: uint32; dpy: ptr Display; visualID: VisualID;): Bool32 {.cdecl.}
 proc createXlibSurfaceKHR*(
       instance: Instance;
       pCreateInfo: ptr XlibSurfaceCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl, discardable.} =
-  createXlibSurfaceKHRCage(instance,pCreateInfo,pAllocator,pSurface)
+    ): Result {.cdecl, lazyload("vkCreateXlibSurfaceKHR", InstanceLevel).}
 proc getPhysicalDeviceXlibPresentationSupportKHR*(
       physicalDevice: PhysicalDevice;
       queueFamilyIndex: uint32;
       dpy: ptr Display;
       visualID: VisualID;
-    ): Bool32 {.cdecl.} =
-  getPhysicalDeviceXlibPresentationSupportKHRCage(physicalDevice,queueFamilyIndex,dpy,visualID)
+    ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceXlibPresentationSupportKHR", InstanceLevel).}
+
+proc loadAllVK_KHR_xlib_surface*(instance: Instance) =
+  createXlibSurfaceKHR.smartLoad(instance)
+  getPhysicalDeviceXlibPresentationSupportKHR.smartLoad(instance)
 
 proc loadVK_KHR_xlib_surface*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  createXlibSurfaceKHR.smartLoad(instance)
+  getPhysicalDeviceXlibPresentationSupportKHR.smartLoad(instance)
 
-  createXlibSurfaceKHRCage << "vkCreateXlibSurfaceKHR"
-  getPhysicalDeviceXlibPresentationSupportKHRCage << "vkGetPhysicalDeviceXlibPresentationSupportKHR"

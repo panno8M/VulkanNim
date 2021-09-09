@@ -1,4 +1,4 @@
-# Generated at 2021-09-01T23:32:32Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_NV_shading_rate_image
 
 
@@ -68,34 +68,31 @@ type
     customSampleOrderCount*: uint32
     pCustomSampleOrders*: ptr CoarseSampleOrderCustomNV
 
-var # command cages
-  cmdBindShadingRateImageNVCage: proc(commandBuffer: CommandBuffer; imageView: ImageView; imageLayout: ImageLayout;): void {.cdecl.}
-  cmdSetViewportShadingRatePaletteNVCage: proc(commandBuffer: CommandBuffer; firstViewport: uint32; viewportCount: uint32; pShadingRatePalettes: ptr ShadingRatePaletteNV;): void {.cdecl.}
-  cmdSetCoarseSampleOrderNVCage: proc(commandBuffer: CommandBuffer; sampleOrderType: CoarseSampleOrderTypeNV; customSampleOrderCount: uint32; pCustomSampleOrders: ptr CoarseSampleOrderCustomNV;): void {.cdecl.}
 proc cmdBindShadingRateImageNV*(
       commandBuffer: CommandBuffer;
       imageView: ImageView;
       imageLayout: ImageLayout;
-    ): void {.cdecl.} =
-  cmdBindShadingRateImageNVCage(commandBuffer,imageView,imageLayout)
+    ): void {.cdecl, lazyload("vkCmdBindShadingRateImageNV", DeviceLevel).}
 proc cmdSetViewportShadingRatePaletteNV*(
       commandBuffer: CommandBuffer;
       firstViewport: uint32;
       viewportCount: uint32;
       pShadingRatePalettes: ptr ShadingRatePaletteNV;
-    ): void {.cdecl.} =
-  cmdSetViewportShadingRatePaletteNVCage(commandBuffer,firstViewport,viewportCount,pShadingRatePalettes)
+    ): void {.cdecl, lazyload("vkCmdSetViewportShadingRatePaletteNV", DeviceLevel).}
 proc cmdSetCoarseSampleOrderNV*(
       commandBuffer: CommandBuffer;
       sampleOrderType: CoarseSampleOrderTypeNV;
       customSampleOrderCount: uint32;
       pCustomSampleOrders: ptr CoarseSampleOrderCustomNV;
-    ): void {.cdecl.} =
-  cmdSetCoarseSampleOrderNVCage(commandBuffer,sampleOrderType,customSampleOrderCount,pCustomSampleOrders)
+    ): void {.cdecl, lazyload("vkCmdSetCoarseSampleOrderNV", DeviceLevel).}
 
-proc loadVK_NV_shading_rate_image*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_NV_shading_rate_image*(instance: Instance) =
+  cmdBindShadingRateImageNV.smartLoad(instance)
+  cmdSetViewportShadingRatePaletteNV.smartLoad(instance)
+  cmdSetCoarseSampleOrderNV.smartLoad(instance)
 
-  cmdBindShadingRateImageNVCage << "vkCmdBindShadingRateImageNV"
-  cmdSetViewportShadingRatePaletteNVCage << "vkCmdSetViewportShadingRatePaletteNV"
-  cmdSetCoarseSampleOrderNVCage << "vkCmdSetCoarseSampleOrderNV"
+proc loadVK_NV_shading_rate_image*(device: Device) =
+  cmdBindShadingRateImageNV.smartLoad(device)
+  cmdSetViewportShadingRatePaletteNV.smartLoad(device)
+  cmdSetCoarseSampleOrderNV.smartLoad(device)
+

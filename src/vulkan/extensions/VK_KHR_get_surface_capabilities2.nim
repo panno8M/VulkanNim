@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:02Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_get_surface_capabilities2
 
 
@@ -25,25 +25,23 @@ type
     pNext*: pointer
     surfaceFormat*: SurfaceFormatKHR
 
-var # command cages
-  getPhysicalDeviceSurfaceCapabilities2KHRCage: proc(physicalDevice: PhysicalDevice; pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR; pSurfaceCapabilities: ptr SurfaceCapabilities2KHR;): Result {.cdecl.}
-  getPhysicalDeviceSurfaceFormats2KHRCage: proc(physicalDevice: PhysicalDevice; pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR; pSurfaceFormatCount: ptr uint32; pSurfaceFormats: ptr SurfaceFormat2KHR;): Result {.cdecl.}
 proc getPhysicalDeviceSurfaceCapabilities2KHR*(
       physicalDevice: PhysicalDevice;
       pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR;
       pSurfaceCapabilities: ptr SurfaceCapabilities2KHR;
-    ): Result {.cdecl, discardable.} =
-  getPhysicalDeviceSurfaceCapabilities2KHRCage(physicalDevice,pSurfaceInfo,pSurfaceCapabilities)
+    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceSurfaceCapabilities2KHR", InstanceLevel).}
 proc getPhysicalDeviceSurfaceFormats2KHR*(
       physicalDevice: PhysicalDevice;
       pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR;
       pSurfaceFormatCount: ptr uint32;
       pSurfaceFormats: ptr SurfaceFormat2KHR;
-    ): Result {.cdecl, discardable.} =
-  getPhysicalDeviceSurfaceFormats2KHRCage(physicalDevice,pSurfaceInfo,pSurfaceFormatCount,pSurfaceFormats)
+    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceSurfaceFormats2KHR", InstanceLevel).}
+
+proc loadAllVK_KHR_get_surface_capabilities2*(instance: Instance) =
+  getPhysicalDeviceSurfaceCapabilities2KHR.smartLoad(instance)
+  getPhysicalDeviceSurfaceFormats2KHR.smartLoad(instance)
 
 proc loadVK_KHR_get_surface_capabilities2*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  getPhysicalDeviceSurfaceCapabilities2KHR.smartLoad(instance)
+  getPhysicalDeviceSurfaceFormats2KHR.smartLoad(instance)
 
-  getPhysicalDeviceSurfaceCapabilities2KHRCage << "vkGetPhysicalDeviceSurfaceCapabilities2KHR"
-  getPhysicalDeviceSurfaceFormats2KHRCage << "vkGetPhysicalDeviceSurfaceFormats2KHR"

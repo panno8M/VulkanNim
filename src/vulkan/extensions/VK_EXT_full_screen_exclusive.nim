@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:02Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_EXT_full_screen_exclusive
 
 
@@ -43,45 +43,45 @@ type
     pNext*: pointer
     hmonitor*: HMONITOR
 
-var # command cages
-  getPhysicalDeviceSurfacePresentModes2EXTCage: proc(physicalDevice: PhysicalDevice; pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR; pPresentModeCount: ptr uint32; pPresentModes: ptr PresentModeKHR;): Result {.cdecl.}
-  acquireFullScreenExclusiveModeEXTCage: proc(device: Device; swapchain: SwapchainKHR;): Result {.cdecl.}
-  releaseFullScreenExclusiveModeEXTCage: proc(device: Device; swapchain: SwapchainKHR;): Result {.cdecl.}
 proc getPhysicalDeviceSurfacePresentModes2EXT*(
       physicalDevice: PhysicalDevice;
       pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR;
       pPresentModeCount: ptr uint32;
       pPresentModes: ptr PresentModeKHR;
-    ): Result {.cdecl, discardable.} =
-  getPhysicalDeviceSurfacePresentModes2EXTCage(physicalDevice,pSurfaceInfo,pPresentModeCount,pPresentModes)
+    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceSurfacePresentModes2EXT", InstanceLevel).}
 proc acquireFullScreenExclusiveModeEXT*(
       device: Device;
       swapchain: SwapchainKHR;
-    ): Result {.cdecl, discardable.} =
-  acquireFullScreenExclusiveModeEXTCage(device,swapchain)
+    ): Result {.cdecl, lazyload("vkAcquireFullScreenExclusiveModeEXT", DeviceLevel).}
 proc releaseFullScreenExclusiveModeEXT*(
       device: Device;
       swapchain: SwapchainKHR;
-    ): Result {.cdecl, discardable.} =
-  releaseFullScreenExclusiveModeEXTCage(device,swapchain)
+    ): Result {.cdecl, lazyload("vkReleaseFullScreenExclusiveModeEXT", DeviceLevel).}
 
 
-var # command cages
-  getDeviceGroupSurfacePresentModes2EXTCage: proc(device: Device; pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR; pModes: ptr DeviceGroupPresentModeFlagsKHR;): Result {.cdecl.}
 proc getDeviceGroupSurfacePresentModes2EXT*(
       device: Device;
       pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR;
       pModes: ptr DeviceGroupPresentModeFlagsKHR;
-    ): Result {.cdecl, discardable.} =
-  getDeviceGroupSurfacePresentModes2EXTCage(device,pSurfaceInfo,pModes)
+    ): Result {.cdecl, lazyload("vkGetDeviceGroupSurfacePresentModes2EXT", DeviceLevel).}
+
+proc loadAllVK_EXT_full_screen_exclusive*(instance: Instance) =
+  getPhysicalDeviceSurfacePresentModes2EXT.smartLoad(instance)
+  acquireFullScreenExclusiveModeEXT.smartLoad(instance)
+  releaseFullScreenExclusiveModeEXT.smartLoad(instance)
+
+  getDeviceGroupSurfacePresentModes2EXT.smartLoad(instance)
+
+  getDeviceGroupSurfacePresentModes2EXT.smartLoad(instance)
 
 proc loadVK_EXT_full_screen_exclusive*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  getPhysicalDeviceSurfacePresentModes2EXT.smartLoad(instance)
 
-  getPhysicalDeviceSurfacePresentModes2EXTCage << "vkGetPhysicalDeviceSurfacePresentModes2EXT"
-  acquireFullScreenExclusiveModeEXTCage << "vkAcquireFullScreenExclusiveModeEXT"
-  releaseFullScreenExclusiveModeEXTCage << "vkReleaseFullScreenExclusiveModeEXT"
+proc loadVK_EXT_full_screen_exclusive*(device: Device) =
+  acquireFullScreenExclusiveModeEXT.smartLoad(device)
+  releaseFullScreenExclusiveModeEXT.smartLoad(device)
 
-  getDeviceGroupSurfacePresentModes2EXTCage << "vkGetDeviceGroupSurfacePresentModes2EXT"
+  getDeviceGroupSurfacePresentModes2EXT.smartLoad(device)
 
-  getDeviceGroupSurfacePresentModes2EXTCage << "vkGetDeviceGroupSurfacePresentModes2EXT"
+  getDeviceGroupSurfacePresentModes2EXT.smartLoad(device)
+

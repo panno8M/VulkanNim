@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_shared_presentable_image
 
 
@@ -21,15 +21,14 @@ type
     pNext*: pointer
     sharedPresentSupportedUsageFlags*: ImageUsageFlags
 
-var # command cages
-  getSwapchainStatusKHRCage: proc(device: Device; swapchain: SwapchainKHR;): Result {.cdecl.}
 proc getSwapchainStatusKHR*(
       device: Device;
       swapchain: SwapchainKHR;
-    ): Result {.cdecl, discardable.} =
-  getSwapchainStatusKHRCage(device,swapchain)
+    ): Result {.cdecl, lazyload("vkGetSwapchainStatusKHR", DeviceLevel).}
 
-proc loadVK_KHR_shared_presentable_image*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_KHR_shared_presentable_image*(instance: Instance) =
+  getSwapchainStatusKHR.smartLoad(instance)
 
-  getSwapchainStatusKHRCage << "vkGetSwapchainStatusKHR"
+proc loadVK_KHR_shared_presentable_image*(device: Device) =
+  getSwapchainStatusKHR.smartLoad(device)
+

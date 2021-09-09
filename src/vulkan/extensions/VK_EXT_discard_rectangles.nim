@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_EXT_discard_rectangles
 
 
@@ -30,17 +30,16 @@ type
     discardRectangleCount*: uint32
     pDiscardRectangles*: ptr Rect2D
 
-var # command cages
-  cmdSetDiscardRectangleEXTCage: proc(commandBuffer: CommandBuffer; firstDiscardRectangle: uint32; discardRectangleCount: uint32; pDiscardRectangles: ptr Rect2D;): void {.cdecl.}
 proc cmdSetDiscardRectangleEXT*(
       commandBuffer: CommandBuffer;
       firstDiscardRectangle: uint32;
       discardRectangleCount: uint32;
       pDiscardRectangles: ptr Rect2D;
-    ): void {.cdecl.} =
-  cmdSetDiscardRectangleEXTCage(commandBuffer,firstDiscardRectangle,discardRectangleCount,pDiscardRectangles)
+    ): void {.cdecl, lazyload("vkCmdSetDiscardRectangleEXT", DeviceLevel).}
 
-proc loadVK_EXT_discard_rectangles*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_EXT_discard_rectangles*(instance: Instance) =
+  cmdSetDiscardRectangleEXT.smartLoad(instance)
 
-  cmdSetDiscardRectangleEXTCage << "vkCmdSetDiscardRectangleEXT"
+proc loadVK_EXT_discard_rectangles*(device: Device) =
+  cmdSetDiscardRectangleEXT.smartLoad(device)
+

@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_EXT_external_memory_host
 
 
@@ -26,17 +26,16 @@ type
     pNext*: pointer
     minImportedHostPointerAlignment*: DeviceSize
 
-var # command cages
-  getMemoryHostPointerPropertiesEXTCage: proc(device: Device; handleType: ExternalMemoryHandleTypeFlagBits; pHostPointer: pointer; pMemoryHostPointerProperties: ptr MemoryHostPointerPropertiesEXT;): Result {.cdecl.}
 proc getMemoryHostPointerPropertiesEXT*(
       device: Device;
       handleType: ExternalMemoryHandleTypeFlagBits;
       pHostPointer: pointer;
       pMemoryHostPointerProperties: ptr MemoryHostPointerPropertiesEXT;
-    ): Result {.cdecl, discardable.} =
-  getMemoryHostPointerPropertiesEXTCage(device,handleType,pHostPointer,pMemoryHostPointerProperties)
+    ): Result {.cdecl, lazyload("vkGetMemoryHostPointerPropertiesEXT", DeviceLevel).}
 
-proc loadVK_EXT_external_memory_host*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_EXT_external_memory_host*(instance: Instance) =
+  getMemoryHostPointerPropertiesEXT.smartLoad(instance)
 
-  getMemoryHostPointerPropertiesEXTCage << "vkGetMemoryHostPointerPropertiesEXT"
+proc loadVK_EXT_external_memory_host*(device: Device) =
+  getMemoryHostPointerPropertiesEXT.smartLoad(device)
+

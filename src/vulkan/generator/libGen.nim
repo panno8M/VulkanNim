@@ -29,7 +29,7 @@ let dependencies = newTable [
 proc generate*() =
   var updatedFiles: seq[string]
   var library = [
-    ("platform", LibFile(fileName: "platform", fileHeader: "src/vulkan/generator/platform.nim".readFile))
+    ("platform", LibFile(fileName: "platform", fileHeader: "src/vulkan/generator/resources/platform.nim".readFile))
   ].newTable
   let fileGroup = [
     ("extensions/VK_KHR_surface", @["extensions/VK_KHR_display", #["extensions/VK_KHR_swapchain"]#]),
@@ -53,7 +53,7 @@ proc generate*() =
           deps: dependencies[name]
         )
     if libFile.fileName == "features/vk10":
-      libFile.fileFooter = "src/vulkan/generator/additionalOperations.nim".readFile
+      libFile.fileFooter = "src/vulkan/generator/resources/additionalOperations.nim".readFile
 
     if (?comment).isSome:
       libFile.fileHeader &= comment.underline('=').commentify

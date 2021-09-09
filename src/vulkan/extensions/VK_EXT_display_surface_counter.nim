@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_EXT_display_surface_counter
 
 
@@ -32,19 +32,18 @@ type
     supportedUsageFlags*: ImageUsageFlags
     supportedSurfaceCounters*: SurfaceCounterFlagsEXT
 
-var # command cages
-  getPhysicalDeviceSurfaceCapabilities2EXTCage: proc(physicalDevice: PhysicalDevice; surface: SurfaceKHR; pSurfaceCapabilities: ptr SurfaceCapabilities2EXT;): Result {.cdecl.}
 proc getPhysicalDeviceSurfaceCapabilities2EXT*(
       physicalDevice: PhysicalDevice;
       surface: SurfaceKHR;
       pSurfaceCapabilities: ptr SurfaceCapabilities2EXT;
-    ): Result {.cdecl, discardable.} =
-  getPhysicalDeviceSurfaceCapabilities2EXTCage(physicalDevice,surface,pSurfaceCapabilities)
+    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceSurfaceCapabilities2EXT", InstanceLevel).}
 StructureType.defineAliases:
   surfaceCapabilities2Ext as surfaceCapabilities2Ext
 
 
-proc loadVK_EXT_display_surface_counter*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_EXT_display_surface_counter*(instance: Instance) =
+  getPhysicalDeviceSurfaceCapabilities2EXT.smartLoad(instance)
 
-  getPhysicalDeviceSurfaceCapabilities2EXTCage << "vkGetPhysicalDeviceSurfaceCapabilities2EXT"
+proc loadVK_EXT_display_surface_counter*(instance: Instance) =
+  getPhysicalDeviceSurfaceCapabilities2EXT.smartLoad(instance)
+

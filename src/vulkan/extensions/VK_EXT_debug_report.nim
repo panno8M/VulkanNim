@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_EXT_debug_report
 
 
@@ -81,23 +81,17 @@ DebugReportObjectTypeEXT.defineAliases:
   debugReportCallbackExtExt as debugReportExt # Backwards-compatible alias containing a typo
   validationCacheExtExt as validationCacheExt # Backwards-compatible alias containing a typo
 
-var # command cages
-  createDebugReportCallbackEXTCage: proc(instance: Instance; pCreateInfo: ptr DebugReportCallbackCreateInfoEXT; pAllocator: ptr AllocationCallbacks; pCallback: ptr DebugReportCallbackEXT;): Result {.cdecl.}
-  destroyDebugReportCallbackEXTCage: proc(instance: Instance; callback: DebugReportCallbackEXT; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  debugReportMessageEXTCage: proc(instance: Instance; flags: DebugReportFlagsEXT; objectType: DebugReportObjectTypeEXT; `object`: uint64; location: uint; messageCode: int32; pLayerPrefix: cstring; pMessage: cstring;): void {.cdecl.}
 proc createDebugReportCallbackEXT*(
       instance: Instance;
       pCreateInfo: ptr DebugReportCallbackCreateInfoEXT;
       pAllocator: ptr AllocationCallbacks;
       pCallback: ptr DebugReportCallbackEXT;
-    ): Result {.cdecl, discardable.} =
-  createDebugReportCallbackEXTCage(instance,pCreateInfo,pAllocator,pCallback)
+    ): Result {.cdecl, lazyload("vkCreateDebugReportCallbackEXT", InstanceLevel).}
 proc destroyDebugReportCallbackEXT*(
       instance: Instance;
       callback: DebugReportCallbackEXT;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyDebugReportCallbackEXTCage(instance,callback,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyDebugReportCallbackEXT", InstanceLevel).}
 proc debugReportMessageEXT*(
       instance: Instance;
       flags: DebugReportFlagsEXT;
@@ -107,15 +101,18 @@ proc debugReportMessageEXT*(
       messageCode: int32;
       pLayerPrefix: cstring;
       pMessage: cstring;
-    ): void {.cdecl.} =
-  debugReportMessageEXTCage(instance,flags,objectType,`object`,location,messageCode,pLayerPrefix,pMessage)
+    ): void {.cdecl, lazyload("vkDebugReportMessageEXT", InstanceLevel).}
 StructureType.defineAliases:
   debugReportCallbackCreateInfoExt as debugReportCreateInfoExt
 
 
-proc loadVK_EXT_debug_report*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_EXT_debug_report*(instance: Instance) =
+  createDebugReportCallbackEXT.smartLoad(instance)
+  destroyDebugReportCallbackEXT.smartLoad(instance)
+  debugReportMessageEXT.smartLoad(instance)
 
-  createDebugReportCallbackEXTCage << "vkCreateDebugReportCallbackEXT"
-  destroyDebugReportCallbackEXTCage << "vkDestroyDebugReportCallbackEXT"
-  debugReportMessageEXTCage << "vkDebugReportMessageEXT"
+proc loadVK_EXT_debug_report*(instance: Instance) =
+  createDebugReportCallbackEXT.smartLoad(instance)
+  destroyDebugReportCallbackEXT.smartLoad(instance)
+  debugReportMessageEXT.smartLoad(instance)
+

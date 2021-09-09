@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_EXT_debug_marker
 
 
@@ -79,42 +79,37 @@ DebugReportObjectTypeEXT.defineAliases:
   debugReportCallbackExtExt as debugReportExt # Backwards-compatible alias containing a typo
   validationCacheExtExt as validationCacheExt # Backwards-compatible alias containing a typo
 
-var # command cages
-  debugMarkerSetObjectTagEXTCage: proc(device: Device; pTagInfo: ptr DebugMarkerObjectTagInfoEXT;): Result {.cdecl.}
-  debugMarkerSetObjectNameEXTCage: proc(device: Device; pNameInfo: ptr DebugMarkerObjectNameInfoEXT;): Result {.cdecl.}
-  cmdDebugMarkerBeginEXTCage: proc(commandBuffer: CommandBuffer; pMarkerInfo: ptr DebugMarkerMarkerInfoEXT;): void {.cdecl.}
-  cmdDebugMarkerEndEXTCage: proc(commandBuffer: CommandBuffer;): void {.cdecl.}
-  cmdDebugMarkerInsertEXTCage: proc(commandBuffer: CommandBuffer; pMarkerInfo: ptr DebugMarkerMarkerInfoEXT;): void {.cdecl.}
 proc debugMarkerSetObjectTagEXT*(
       device: Device;
       pTagInfo: ptr DebugMarkerObjectTagInfoEXT;
-    ): Result {.cdecl, discardable.} =
-  debugMarkerSetObjectTagEXTCage(device,pTagInfo)
+    ): Result {.cdecl, lazyload("vkDebugMarkerSetObjectTagEXT", DeviceLevel).}
 proc debugMarkerSetObjectNameEXT*(
       device: Device;
       pNameInfo: ptr DebugMarkerObjectNameInfoEXT;
-    ): Result {.cdecl, discardable.} =
-  debugMarkerSetObjectNameEXTCage(device,pNameInfo)
+    ): Result {.cdecl, lazyload("vkDebugMarkerSetObjectNameEXT", DeviceLevel).}
 proc cmdDebugMarkerBeginEXT*(
       commandBuffer: CommandBuffer;
       pMarkerInfo: ptr DebugMarkerMarkerInfoEXT;
-    ): void {.cdecl.} =
-  cmdDebugMarkerBeginEXTCage(commandBuffer,pMarkerInfo)
+    ): void {.cdecl, lazyload("vkCmdDebugMarkerBeginEXT", DeviceLevel).}
 proc cmdDebugMarkerEndEXT*(
       commandBuffer: CommandBuffer;
-    ): void {.cdecl.} =
-  cmdDebugMarkerEndEXTCage(commandBuffer)
+    ): void {.cdecl, lazyload("vkCmdDebugMarkerEndEXT", DeviceLevel).}
 proc cmdDebugMarkerInsertEXT*(
       commandBuffer: CommandBuffer;
       pMarkerInfo: ptr DebugMarkerMarkerInfoEXT;
-    ): void {.cdecl.} =
-  cmdDebugMarkerInsertEXTCage(commandBuffer,pMarkerInfo)
+    ): void {.cdecl, lazyload("vkCmdDebugMarkerInsertEXT", DeviceLevel).}
 
-proc loadVK_EXT_debug_marker*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_EXT_debug_marker*(instance: Instance) =
+  debugMarkerSetObjectTagEXT.smartLoad(instance)
+  debugMarkerSetObjectNameEXT.smartLoad(instance)
+  cmdDebugMarkerBeginEXT.smartLoad(instance)
+  cmdDebugMarkerEndEXT.smartLoad(instance)
+  cmdDebugMarkerInsertEXT.smartLoad(instance)
 
-  debugMarkerSetObjectTagEXTCage << "vkDebugMarkerSetObjectTagEXT"
-  debugMarkerSetObjectNameEXTCage << "vkDebugMarkerSetObjectNameEXT"
-  cmdDebugMarkerBeginEXTCage << "vkCmdDebugMarkerBeginEXT"
-  cmdDebugMarkerEndEXTCage << "vkCmdDebugMarkerEndEXT"
-  cmdDebugMarkerInsertEXTCage << "vkCmdDebugMarkerInsertEXT"
+proc loadVK_EXT_debug_marker*(device: Device) =
+  debugMarkerSetObjectTagEXT.smartLoad(device)
+  debugMarkerSetObjectNameEXT.smartLoad(device)
+  cmdDebugMarkerBeginEXT.smartLoad(device)
+  cmdDebugMarkerEndEXT.smartLoad(device)
+  cmdDebugMarkerInsertEXT.smartLoad(device)
+

@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_NVX_image_view_handle
 
 
@@ -22,23 +22,21 @@ type
     deviceAddress*: DeviceAddress
     size*: DeviceSize
 
-var # command cages
-  getImageViewHandleNVXCage: proc(device: Device; pInfo: ptr ImageViewHandleInfoNVX;): uint32 {.cdecl.}
-  getImageViewAddressNVXCage: proc(device: Device; imageView: ImageView; pProperties: ptr ImageViewAddressPropertiesNVX;): Result {.cdecl.}
 proc getImageViewHandleNVX*(
       device: Device;
       pInfo: ptr ImageViewHandleInfoNVX;
-    ): uint32 {.cdecl.} =
-  getImageViewHandleNVXCage(device,pInfo)
+    ): uint32 {.cdecl, lazyload("vkGetImageViewHandleNVX", DeviceLevel).}
 proc getImageViewAddressNVX*(
       device: Device;
       imageView: ImageView;
       pProperties: ptr ImageViewAddressPropertiesNVX;
-    ): Result {.cdecl, discardable.} =
-  getImageViewAddressNVXCage(device,imageView,pProperties)
+    ): Result {.cdecl, lazyload("vkGetImageViewAddressNVX", DeviceLevel).}
 
-proc loadVK_NVX_image_view_handle*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_NVX_image_view_handle*(instance: Instance) =
+  getImageViewHandleNVX.smartLoad(instance)
+  getImageViewAddressNVX.smartLoad(instance)
 
-  getImageViewHandleNVXCage << "vkGetImageViewHandleNVX"
-  getImageViewAddressNVXCage << "vkGetImageViewAddressNVX"
+proc loadVK_NVX_image_view_handle*(device: Device) =
+  getImageViewHandleNVX.smartLoad(device)
+  getImageViewAddressNVX.smartLoad(device)
+

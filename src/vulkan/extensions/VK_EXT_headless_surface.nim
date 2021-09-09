@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:02Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_EXT_headless_surface
 
 
@@ -20,17 +20,16 @@ type
     pNext*: pointer
     flags*: HeadlessSurfaceCreateFlagsEXT
 
-var # command cages
-  createHeadlessSurfaceEXTCage: proc(instance: Instance; pCreateInfo: ptr HeadlessSurfaceCreateInfoEXT; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
 proc createHeadlessSurfaceEXT*(
       instance: Instance;
       pCreateInfo: ptr HeadlessSurfaceCreateInfoEXT;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl, discardable.} =
-  createHeadlessSurfaceEXTCage(instance,pCreateInfo,pAllocator,pSurface)
+    ): Result {.cdecl, lazyload("vkCreateHeadlessSurfaceEXT", InstanceLevel).}
+
+proc loadAllVK_EXT_headless_surface*(instance: Instance) =
+  createHeadlessSurfaceEXT.smartLoad(instance)
 
 proc loadVK_EXT_headless_surface*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  createHeadlessSurfaceEXT.smartLoad(instance)
 
-  createHeadlessSurfaceEXTCage << "vkCreateHeadlessSurfaceEXT"

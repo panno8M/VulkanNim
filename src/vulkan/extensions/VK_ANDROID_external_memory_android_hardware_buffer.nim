@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_ANDROID_external_memory_android_hardware_buffer
 
 
@@ -54,24 +54,22 @@ type
     pNext*: pointer
     externalFormat*: uint64
 
-var # command cages
-  getAndroidHardwareBufferPropertiesANDROIDCage: proc(device: Device; buffer: ptr AHardwareBuffer; pProperties: ptr AndroidHardwareBufferPropertiesANDROID;): Result {.cdecl.}
-  getMemoryAndroidHardwareBufferANDROIDCage: proc(device: Device; pInfo: ptr MemoryGetAndroidHardwareBufferInfoANDROID; pBuffer: ptr ptr AHardwareBuffer;): Result {.cdecl.}
 proc getAndroidHardwareBufferPropertiesANDROID*(
       device: Device;
       buffer: ptr AHardwareBuffer;
       pProperties: ptr AndroidHardwareBufferPropertiesANDROID;
-    ): Result {.cdecl, discardable.} =
-  getAndroidHardwareBufferPropertiesANDROIDCage(device,buffer,pProperties)
+    ): Result {.cdecl, lazyload("vkGetAndroidHardwareBufferPropertiesANDROID", DeviceLevel).}
 proc getMemoryAndroidHardwareBufferANDROID*(
       device: Device;
       pInfo: ptr MemoryGetAndroidHardwareBufferInfoANDROID;
       pBuffer: ptr ptr AHardwareBuffer;
-    ): Result {.cdecl, discardable.} =
-  getMemoryAndroidHardwareBufferANDROIDCage(device,pInfo,pBuffer)
+    ): Result {.cdecl, lazyload("vkGetMemoryAndroidHardwareBufferANDROID", DeviceLevel).}
 
-proc loadVK_ANDROID_external_memory_android_hardware_buffer*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_ANDROID_external_memory_android_hardware_buffer*(instance: Instance) =
+  getAndroidHardwareBufferPropertiesANDROID.smartLoad(instance)
+  getMemoryAndroidHardwareBufferANDROID.smartLoad(instance)
 
-  getAndroidHardwareBufferPropertiesANDROIDCage << "vkGetAndroidHardwareBufferPropertiesANDROID"
-  getMemoryAndroidHardwareBufferANDROIDCage << "vkGetMemoryAndroidHardwareBufferANDROID"
+proc loadVK_ANDROID_external_memory_android_hardware_buffer*(device: Device) =
+  getAndroidHardwareBufferPropertiesANDROID.smartLoad(device)
+  getMemoryAndroidHardwareBufferANDROID.smartLoad(device)
+

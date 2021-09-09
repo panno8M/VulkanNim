@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_NV_external_memory_capabilities
 
 
@@ -29,8 +29,6 @@ type
     exportFromImportedHandleTypes*: ExternalMemoryHandleTypeFlagsNV
     compatibleHandleTypes*: ExternalMemoryHandleTypeFlagsNV
 
-var # command cages
-  getPhysicalDeviceExternalImageFormatPropertiesNVCage: proc(physicalDevice: PhysicalDevice; format: Format; theType: ImageType; tiling: ImageTiling; usage: ImageUsageFlags; flags: ImageCreateFlags; externalHandleType: ExternalMemoryHandleTypeFlagsNV; pExternalImageFormatProperties: ptr ExternalImageFormatPropertiesNV;): Result {.cdecl.}
 proc getPhysicalDeviceExternalImageFormatPropertiesNV*(
       physicalDevice: PhysicalDevice;
       format: Format;
@@ -40,10 +38,11 @@ proc getPhysicalDeviceExternalImageFormatPropertiesNV*(
       flags: ImageCreateFlags;
       externalHandleType: ExternalMemoryHandleTypeFlagsNV;
       pExternalImageFormatProperties: ptr ExternalImageFormatPropertiesNV;
-    ): Result {.cdecl, discardable.} =
-  getPhysicalDeviceExternalImageFormatPropertiesNVCage(physicalDevice,format,theType,tiling,usage,flags,externalHandleType,pExternalImageFormatProperties)
+    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceExternalImageFormatPropertiesNV", InstanceLevel).}
+
+proc loadAllVK_NV_external_memory_capabilities*(instance: Instance) =
+  getPhysicalDeviceExternalImageFormatPropertiesNV.smartLoad(instance)
 
 proc loadVK_NV_external_memory_capabilities*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  getPhysicalDeviceExternalImageFormatPropertiesNV.smartLoad(instance)
 
-  getPhysicalDeviceExternalImageFormatPropertiesNVCage << "vkGetPhysicalDeviceExternalImageFormatPropertiesNV"

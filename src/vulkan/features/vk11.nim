@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:02Z
+# Generated at 2021-09-09T01:49:36Z
 # vk11
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -6,7 +6,7 @@
 
 import ../platform
 import ./vk10
-export vk10 except loadInstanceProcs
+export vk10
 
 const
   # Promoted from VK_KHR_device_group_creation
@@ -569,12 +569,9 @@ template apiVersion11*(): untyped = makeVersion(1, 1, 0)
 
 # Device Initialization
 # ---------------------
-var # command cages
-  enumerateInstanceVersionCage: proc(pApiVersion: ptr uint32;): Result {.cdecl.}
 proc enumerateInstanceVersion*(
       pApiVersion: ptr uint32;
-    ): Result {.cdecl, discardable.} =
-  enumerateInstanceVersionCage(pApiVersion)
+    ): Result {.cdecl, preload("vkEnumerateInstanceVersion").}
 
 
 # Promoted from VK_KHR_relaxed_block_layout, which has no API
@@ -591,21 +588,16 @@ proc enumerateInstanceVersion*(
 
 # Promoted from VK_KHR_bind_memory2
 # ---------------------------------
-var # command cages
-  bindBufferMemory2Cage: proc(device: Device; bindInfoCount: uint32; pBindInfos: ptr BindBufferMemoryInfo;): Result {.cdecl.}
-  bindImageMemory2Cage: proc(device: Device; bindInfoCount: uint32; pBindInfos: ptr BindImageMemoryInfo;): Result {.cdecl.}
 proc bindBufferMemory2*(
       device: Device;
       bindInfoCount: uint32;
       pBindInfos: ptr BindBufferMemoryInfo;
-    ): Result {.cdecl, discardable.} =
-  bindBufferMemory2Cage(device,bindInfoCount,pBindInfos)
+    ): Result {.cdecl, lazyload("vkBindBufferMemory2", DeviceLevel).}
 proc bindImageMemory2*(
       device: Device;
       bindInfoCount: uint32;
       pBindInfos: ptr BindImageMemoryInfo;
-    ): Result {.cdecl, discardable.} =
-  bindImageMemory2Cage(device,bindInfoCount,pBindInfos)
+    ): Result {.cdecl, lazyload("vkBindImageMemory2", DeviceLevel).}
 
 
 # Promoted from VK_KHR_16bit_storage
@@ -618,23 +610,17 @@ proc bindImageMemory2*(
 
 # Promoted from VK_KHR_device_group
 # ---------------------------------
-var # command cages
-  getDeviceGroupPeerMemoryFeaturesCage: proc(device: Device; heapIndex: uint32; localDeviceIndex: uint32; remoteDeviceIndex: uint32; pPeerMemoryFeatures: ptr PeerMemoryFeatureFlags;): void {.cdecl.}
-  cmdSetDeviceMaskCage: proc(commandBuffer: CommandBuffer; deviceMask: uint32;): void {.cdecl.}
-  cmdDispatchBaseCage: proc(commandBuffer: CommandBuffer; baseGroupX: uint32; baseGroupY: uint32; baseGroupZ: uint32; groupCountX: uint32; groupCountY: uint32; groupCountZ: uint32;): void {.cdecl.}
 proc getDeviceGroupPeerMemoryFeatures*(
       device: Device;
       heapIndex: uint32;
       localDeviceIndex: uint32;
       remoteDeviceIndex: uint32;
       pPeerMemoryFeatures: ptr PeerMemoryFeatureFlags;
-    ): void {.cdecl.} =
-  getDeviceGroupPeerMemoryFeaturesCage(device,heapIndex,localDeviceIndex,remoteDeviceIndex,pPeerMemoryFeatures)
+    ): void {.cdecl, lazyload("vkGetDeviceGroupPeerMemoryFeatures", DeviceLevel).}
 proc cmdSetDeviceMask*(
       commandBuffer: CommandBuffer;
       deviceMask: uint32;
-    ): void {.cdecl.} =
-  cmdSetDeviceMaskCage(commandBuffer,deviceMask)
+    ): void {.cdecl, lazyload("vkCmdSetDeviceMask", DeviceLevel).}
 proc cmdDispatchBase*(
       commandBuffer: CommandBuffer;
       baseGroupX: uint32;
@@ -643,8 +629,7 @@ proc cmdDispatchBase*(
       groupCountX: uint32;
       groupCountY: uint32;
       groupCountZ: uint32;
-    ): void {.cdecl.} =
-  cmdDispatchBaseCage(commandBuffer,baseGroupX,baseGroupY,baseGroupZ,groupCountX,groupCountY,groupCountZ)
+    ): void {.cdecl, lazyload("vkCmdDispatchBase", DeviceLevel).}
 PipelineCreateFlagBits.defineAliases:
   dispatchBase as dispatchBase
 
@@ -656,105 +641,77 @@ PipelineCreateFlagBits.defineAliases:
 
 # Promoted from VK_KHR_device_group_creation
 # ------------------------------------------
-var # command cages
-  enumeratePhysicalDeviceGroupsCage: proc(instance: Instance; pPhysicalDeviceGroupCount: ptr uint32; pPhysicalDeviceGroupProperties: ptr PhysicalDeviceGroupProperties;): Result {.cdecl.}
 proc enumeratePhysicalDeviceGroups*(
       instance: Instance;
       pPhysicalDeviceGroupCount: ptr uint32;
       pPhysicalDeviceGroupProperties: ptr PhysicalDeviceGroupProperties;
-    ): Result {.cdecl, discardable.} =
-  enumeratePhysicalDeviceGroupsCage(instance,pPhysicalDeviceGroupCount,pPhysicalDeviceGroupProperties)
+    ): Result {.cdecl, lazyload("vkEnumeratePhysicalDeviceGroups", InstanceLevel).}
 
 
 # Promoted from VK_KHR_get_memory_requirements2
 # ---------------------------------------------
-var # command cages
-  getImageMemoryRequirements2Cage: proc(device: Device; pInfo: ptr ImageMemoryRequirementsInfo2; pMemoryRequirements: ptr MemoryRequirements2;): void {.cdecl.}
-  getBufferMemoryRequirements2Cage: proc(device: Device; pInfo: ptr BufferMemoryRequirementsInfo2; pMemoryRequirements: ptr MemoryRequirements2;): void {.cdecl.}
-  getImageSparseMemoryRequirements2Cage: proc(device: Device; pInfo: ptr ImageSparseMemoryRequirementsInfo2; pSparseMemoryRequirementCount: ptr uint32; pSparseMemoryRequirements: ptr SparseImageMemoryRequirements2;): void {.cdecl.}
 proc getImageMemoryRequirements2*(
       device: Device;
       pInfo: ptr ImageMemoryRequirementsInfo2;
       pMemoryRequirements: ptr MemoryRequirements2;
-    ): void {.cdecl.} =
-  getImageMemoryRequirements2Cage(device,pInfo,pMemoryRequirements)
+    ): void {.cdecl, lazyload("vkGetImageMemoryRequirements2", DeviceLevel).}
 proc getBufferMemoryRequirements2*(
       device: Device;
       pInfo: ptr BufferMemoryRequirementsInfo2;
       pMemoryRequirements: ptr MemoryRequirements2;
-    ): void {.cdecl.} =
-  getBufferMemoryRequirements2Cage(device,pInfo,pMemoryRequirements)
+    ): void {.cdecl, lazyload("vkGetBufferMemoryRequirements2", DeviceLevel).}
 proc getImageSparseMemoryRequirements2*(
       device: Device;
       pInfo: ptr ImageSparseMemoryRequirementsInfo2;
       pSparseMemoryRequirementCount: ptr uint32;
       pSparseMemoryRequirements: ptr SparseImageMemoryRequirements2;
-    ): void {.cdecl.} =
-  getImageSparseMemoryRequirements2Cage(device,pInfo,pSparseMemoryRequirementCount,pSparseMemoryRequirements)
+    ): void {.cdecl, lazyload("vkGetImageSparseMemoryRequirements2", DeviceLevel).}
 
 
 # Promoted from VK_KHR_get_physical_device_properties2
 # ----------------------------------------------------
-var # command cages
-  getPhysicalDeviceFeatures2Cage: proc(physicalDevice: PhysicalDevice; pFeatures: ptr PhysicalDeviceFeatures2;): void {.cdecl.}
-  getPhysicalDeviceProperties2Cage: proc(physicalDevice: PhysicalDevice; pProperties: ptr PhysicalDeviceProperties2;): void {.cdecl.}
-  getPhysicalDeviceFormatProperties2Cage: proc(physicalDevice: PhysicalDevice; format: Format; pFormatProperties: ptr FormatProperties2;): void {.cdecl.}
-  getPhysicalDeviceImageFormatProperties2Cage: proc(physicalDevice: PhysicalDevice; pImageFormatInfo: ptr PhysicalDeviceImageFormatInfo2; pImageFormatProperties: ptr ImageFormatProperties2;): Result {.cdecl.}
-  getPhysicalDeviceQueueFamilyProperties2Cage: proc(physicalDevice: PhysicalDevice; pQueueFamilyPropertyCount: ptr uint32; pQueueFamilyProperties: ptr QueueFamilyProperties2;): void {.cdecl.}
-  getPhysicalDeviceMemoryProperties2Cage: proc(physicalDevice: PhysicalDevice; pMemoryProperties: ptr PhysicalDeviceMemoryProperties2;): void {.cdecl.}
-  getPhysicalDeviceSparseImageFormatProperties2Cage: proc(physicalDevice: PhysicalDevice; pFormatInfo: ptr PhysicalDeviceSparseImageFormatInfo2; pPropertyCount: ptr uint32; pProperties: ptr SparseImageFormatProperties2;): void {.cdecl.}
 proc getPhysicalDeviceFeatures2*(
       physicalDevice: PhysicalDevice;
       pFeatures: ptr PhysicalDeviceFeatures2;
-    ): void {.cdecl.} =
-  getPhysicalDeviceFeatures2Cage(physicalDevice,pFeatures)
+    ): void {.cdecl, lazyload("vkGetPhysicalDeviceFeatures2", InstanceLevel).}
 proc getPhysicalDeviceProperties2*(
       physicalDevice: PhysicalDevice;
       pProperties: ptr PhysicalDeviceProperties2;
-    ): void {.cdecl.} =
-  getPhysicalDeviceProperties2Cage(physicalDevice,pProperties)
+    ): void {.cdecl, lazyload("vkGetPhysicalDeviceProperties2", InstanceLevel).}
 proc getPhysicalDeviceFormatProperties2*(
       physicalDevice: PhysicalDevice;
       format: Format;
       pFormatProperties: ptr FormatProperties2;
-    ): void {.cdecl.} =
-  getPhysicalDeviceFormatProperties2Cage(physicalDevice,format,pFormatProperties)
+    ): void {.cdecl, lazyload("vkGetPhysicalDeviceFormatProperties2", InstanceLevel).}
 proc getPhysicalDeviceImageFormatProperties2*(
       physicalDevice: PhysicalDevice;
       pImageFormatInfo: ptr PhysicalDeviceImageFormatInfo2;
       pImageFormatProperties: ptr ImageFormatProperties2;
-    ): Result {.cdecl, discardable.} =
-  getPhysicalDeviceImageFormatProperties2Cage(physicalDevice,pImageFormatInfo,pImageFormatProperties)
+    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceImageFormatProperties2", InstanceLevel).}
 proc getPhysicalDeviceQueueFamilyProperties2*(
       physicalDevice: PhysicalDevice;
       pQueueFamilyPropertyCount: ptr uint32;
       pQueueFamilyProperties: ptr QueueFamilyProperties2;
-    ): void {.cdecl.} =
-  getPhysicalDeviceQueueFamilyProperties2Cage(physicalDevice,pQueueFamilyPropertyCount,pQueueFamilyProperties)
+    ): void {.cdecl, lazyload("vkGetPhysicalDeviceQueueFamilyProperties2", InstanceLevel).}
 proc getPhysicalDeviceMemoryProperties2*(
       physicalDevice: PhysicalDevice;
       pMemoryProperties: ptr PhysicalDeviceMemoryProperties2;
-    ): void {.cdecl.} =
-  getPhysicalDeviceMemoryProperties2Cage(physicalDevice,pMemoryProperties)
+    ): void {.cdecl, lazyload("vkGetPhysicalDeviceMemoryProperties2", InstanceLevel).}
 proc getPhysicalDeviceSparseImageFormatProperties2*(
       physicalDevice: PhysicalDevice;
       pFormatInfo: ptr PhysicalDeviceSparseImageFormatInfo2;
       pPropertyCount: ptr uint32;
       pProperties: ptr SparseImageFormatProperties2;
-    ): void {.cdecl.} =
-  getPhysicalDeviceSparseImageFormatProperties2Cage(physicalDevice,pFormatInfo,pPropertyCount,pProperties)
+    ): void {.cdecl, lazyload("vkGetPhysicalDeviceSparseImageFormatProperties2", InstanceLevel).}
 
 
 # Promoted from VK_KHR_maintenance1
 # ---------------------------------
-var # command cages
-  trimCommandPoolCage: proc(device: Device; commandPool: CommandPool; flags: CommandPoolTrimFlags;): void {.cdecl.}
 proc trimCommandPool*(
       device: Device;
       commandPool: CommandPool;
       flags: CommandPoolTrimFlags;
-    ): void {.cdecl.} =
-  trimCommandPoolCage(device,commandPool,flags)
+    ): void {.cdecl, lazyload("vkTrimCommandPool", DeviceLevel).}
 
 
 # Promoted from VK_KHR_maintenance2
@@ -774,74 +731,56 @@ StructureType.defineAliases:
 
 # Originally based on VK_KHR_protected_memory (extension 146), which was never published; thus the mystifying large value= numbers below. These are not aliased since they weren't actually promoted from an extension.
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-var # command cages
-  getDeviceQueue2Cage: proc(device: Device; pQueueInfo: ptr DeviceQueueInfo2; pQueue: ptr Queue;): void {.cdecl.}
 proc getDeviceQueue2*(
       device: Device;
       pQueueInfo: ptr DeviceQueueInfo2;
       pQueue: ptr Queue;
-    ): void {.cdecl.} =
-  getDeviceQueue2Cage(device,pQueueInfo,pQueue)
+    ): void {.cdecl, lazyload("vkGetDeviceQueue2", DeviceLevel).}
 
 
 # Promoted from VK_KHR_sampler_ycbcr_conversion
 # ---------------------------------------------
-var # command cages
-  createSamplerYcbcrConversionCage: proc(device: Device; pCreateInfo: ptr SamplerYcbcrConversionCreateInfo; pAllocator: ptr AllocationCallbacks; pYcbcrConversion: ptr SamplerYcbcrConversion;): Result {.cdecl.}
-  destroySamplerYcbcrConversionCage: proc(device: Device; ycbcrConversion: SamplerYcbcrConversion; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
 proc createSamplerYcbcrConversion*(
       device: Device;
       pCreateInfo: ptr SamplerYcbcrConversionCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pYcbcrConversion: ptr SamplerYcbcrConversion;
-    ): Result {.cdecl, discardable.} =
-  createSamplerYcbcrConversionCage(device,pCreateInfo,pAllocator,pYcbcrConversion)
+    ): Result {.cdecl, lazyload("vkCreateSamplerYcbcrConversion", DeviceLevel).}
 proc destroySamplerYcbcrConversion*(
       device: Device;
       ycbcrConversion: SamplerYcbcrConversion;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroySamplerYcbcrConversionCage(device,ycbcrConversion,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroySamplerYcbcrConversion", DeviceLevel).}
 
 
 # Promoted from VK_KHR_descriptor_update_template
 # -----------------------------------------------
-var # command cages
-  createDescriptorUpdateTemplateCage: proc(device: Device; pCreateInfo: ptr DescriptorUpdateTemplateCreateInfo; pAllocator: ptr AllocationCallbacks; pDescriptorUpdateTemplate: ptr DescriptorUpdateTemplate;): Result {.cdecl.}
-  destroyDescriptorUpdateTemplateCage: proc(device: Device; descriptorUpdateTemplate: DescriptorUpdateTemplate; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  updateDescriptorSetWithTemplateCage: proc(device: Device; descriptorSet: DescriptorSet; descriptorUpdateTemplate: DescriptorUpdateTemplate; pData: pointer;): void {.cdecl.}
 proc createDescriptorUpdateTemplate*(
       device: Device;
       pCreateInfo: ptr DescriptorUpdateTemplateCreateInfo;
       pAllocator: ptr AllocationCallbacks;
       pDescriptorUpdateTemplate: ptr DescriptorUpdateTemplate;
-    ): Result {.cdecl, discardable.} =
-  createDescriptorUpdateTemplateCage(device,pCreateInfo,pAllocator,pDescriptorUpdateTemplate)
+    ): Result {.cdecl, lazyload("vkCreateDescriptorUpdateTemplate", DeviceLevel).}
 proc destroyDescriptorUpdateTemplate*(
       device: Device;
       descriptorUpdateTemplate: DescriptorUpdateTemplate;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyDescriptorUpdateTemplateCage(device,descriptorUpdateTemplate,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyDescriptorUpdateTemplate", DeviceLevel).}
 proc updateDescriptorSetWithTemplate*(
       device: Device;
       descriptorSet: DescriptorSet;
       descriptorUpdateTemplate: DescriptorUpdateTemplate;
       pData: pointer;
-    ): void {.cdecl.} =
-  updateDescriptorSetWithTemplateCage(device,descriptorSet,descriptorUpdateTemplate,pData)
+    ): void {.cdecl, lazyload("vkUpdateDescriptorSetWithTemplate", DeviceLevel).}
 
 
 # Promoted from VK_KHR_external_memory_capabilities
 # -------------------------------------------------
-var # command cages
-  getPhysicalDeviceExternalBufferPropertiesCage: proc(physicalDevice: PhysicalDevice; pExternalBufferInfo: ptr PhysicalDeviceExternalBufferInfo; pExternalBufferProperties: ptr ExternalBufferProperties;): void {.cdecl.}
 proc getPhysicalDeviceExternalBufferProperties*(
       physicalDevice: PhysicalDevice;
       pExternalBufferInfo: ptr PhysicalDeviceExternalBufferInfo;
       pExternalBufferProperties: ptr ExternalBufferProperties;
-    ): void {.cdecl.} =
-  getPhysicalDeviceExternalBufferPropertiesCage(physicalDevice,pExternalBufferInfo,pExternalBufferProperties)
+    ): void {.cdecl, lazyload("vkGetPhysicalDeviceExternalBufferProperties", InstanceLevel).}
 
 
 # Promoted from VK_KHR_external_memory
@@ -850,14 +789,11 @@ proc getPhysicalDeviceExternalBufferProperties*(
 
 # Promoted from VK_KHR_external_fence_capabilities
 # ------------------------------------------------
-var # command cages
-  getPhysicalDeviceExternalFencePropertiesCage: proc(physicalDevice: PhysicalDevice; pExternalFenceInfo: ptr PhysicalDeviceExternalFenceInfo; pExternalFenceProperties: ptr ExternalFenceProperties;): void {.cdecl.}
 proc getPhysicalDeviceExternalFenceProperties*(
       physicalDevice: PhysicalDevice;
       pExternalFenceInfo: ptr PhysicalDeviceExternalFenceInfo;
       pExternalFenceProperties: ptr ExternalFenceProperties;
-    ): void {.cdecl.} =
-  getPhysicalDeviceExternalFencePropertiesCage(physicalDevice,pExternalFenceInfo,pExternalFenceProperties)
+    ): void {.cdecl, lazyload("vkGetPhysicalDeviceExternalFenceProperties", InstanceLevel).}
 
 
 # Promoted from VK_KHR_external_fence
@@ -873,26 +809,20 @@ proc getPhysicalDeviceExternalFenceProperties*(
 ExternalSemaphoreHandleTypeFlagBits.defineAliases:
   d3d12Fence as d3d11Fence
 
-var # command cages
-  getPhysicalDeviceExternalSemaphorePropertiesCage: proc(physicalDevice: PhysicalDevice; pExternalSemaphoreInfo: ptr PhysicalDeviceExternalSemaphoreInfo; pExternalSemaphoreProperties: ptr ExternalSemaphoreProperties;): void {.cdecl.}
 proc getPhysicalDeviceExternalSemaphoreProperties*(
       physicalDevice: PhysicalDevice;
       pExternalSemaphoreInfo: ptr PhysicalDeviceExternalSemaphoreInfo;
       pExternalSemaphoreProperties: ptr ExternalSemaphoreProperties;
-    ): void {.cdecl.} =
-  getPhysicalDeviceExternalSemaphorePropertiesCage(physicalDevice,pExternalSemaphoreInfo,pExternalSemaphoreProperties)
+    ): void {.cdecl, lazyload("vkGetPhysicalDeviceExternalSemaphoreProperties", InstanceLevel).}
 
 
 # Promoted from VK_KHR_maintenance3
 # ---------------------------------
-var # command cages
-  getDescriptorSetLayoutSupportCage: proc(device: Device; pCreateInfo: ptr DescriptorSetLayoutCreateInfo; pSupport: ptr DescriptorSetLayoutSupport;): void {.cdecl.}
 proc getDescriptorSetLayoutSupport*(
       device: Device;
       pCreateInfo: ptr DescriptorSetLayoutCreateInfo;
       pSupport: ptr DescriptorSetLayoutSupport;
-    ): void {.cdecl.} =
-  getDescriptorSetLayoutSupportCage(device,pCreateInfo,pSupport)
+    ): void {.cdecl, lazyload("vkGetDescriptorSetLayoutSupport", DeviceLevel).}
 
 
 # Promoted from VK_KHR_shader_draw_parameters, with a feature support query added
@@ -900,66 +830,113 @@ proc getDescriptorSetLayoutSupport*(
 StructureType.defineAliases:
   physicalDeviceShaderDrawParametersFeatures as physicalDeviceShaderDrawParameterFeatures
 
-proc loadInstanceProcs*() =
-  vk10.loadInstanceProcs()
-  nil.defineLoader(`<<`)
-  enumerateInstanceVersionCage << "vkEnumerateInstanceVersion"
 
-proc loadVk11*(instance: Instance) =
-  instance.defineLoader(`<<`)
-
-  # Device Initialization
-  enumerateInstanceVersionCage << "vkEnumerateInstanceVersion"
-
+proc loadAllVk11*(instance: Instance) =
   # Promoted from VK_KHR_bind_memory2
-  bindBufferMemory2Cage << "vkBindBufferMemory2"
-  bindImageMemory2Cage << "vkBindImageMemory2"
+  bindBufferMemory2.smartLoad(instance)
+  bindImageMemory2.smartLoad(instance)
 
   # Promoted from VK_KHR_device_group
-  getDeviceGroupPeerMemoryFeaturesCage << "vkGetDeviceGroupPeerMemoryFeatures"
-  cmdSetDeviceMaskCage << "vkCmdSetDeviceMask"
-  cmdDispatchBaseCage << "vkCmdDispatchBase"
+  getDeviceGroupPeerMemoryFeatures.smartLoad(instance)
+  cmdSetDeviceMask.smartLoad(instance)
+  cmdDispatchBase.smartLoad(instance)
 
   # Promoted from VK_KHR_device_group_creation
-  enumeratePhysicalDeviceGroupsCage << "vkEnumeratePhysicalDeviceGroups"
+  enumeratePhysicalDeviceGroups.smartLoad(instance)
 
   # Promoted from VK_KHR_get_memory_requirements2
-  getImageMemoryRequirements2Cage << "vkGetImageMemoryRequirements2"
-  getBufferMemoryRequirements2Cage << "vkGetBufferMemoryRequirements2"
-  getImageSparseMemoryRequirements2Cage << "vkGetImageSparseMemoryRequirements2"
+  getImageMemoryRequirements2.smartLoad(instance)
+  getBufferMemoryRequirements2.smartLoad(instance)
+  getImageSparseMemoryRequirements2.smartLoad(instance)
 
   # Promoted from VK_KHR_get_physical_device_properties2
-  getPhysicalDeviceFeatures2Cage << "vkGetPhysicalDeviceFeatures2"
-  getPhysicalDeviceProperties2Cage << "vkGetPhysicalDeviceProperties2"
-  getPhysicalDeviceFormatProperties2Cage << "vkGetPhysicalDeviceFormatProperties2"
-  getPhysicalDeviceImageFormatProperties2Cage << "vkGetPhysicalDeviceImageFormatProperties2"
-  getPhysicalDeviceQueueFamilyProperties2Cage << "vkGetPhysicalDeviceQueueFamilyProperties2"
-  getPhysicalDeviceMemoryProperties2Cage << "vkGetPhysicalDeviceMemoryProperties2"
-  getPhysicalDeviceSparseImageFormatProperties2Cage << "vkGetPhysicalDeviceSparseImageFormatProperties2"
+  getPhysicalDeviceFeatures2.smartLoad(instance)
+  getPhysicalDeviceProperties2.smartLoad(instance)
+  getPhysicalDeviceFormatProperties2.smartLoad(instance)
+  getPhysicalDeviceImageFormatProperties2.smartLoad(instance)
+  getPhysicalDeviceQueueFamilyProperties2.smartLoad(instance)
+  getPhysicalDeviceMemoryProperties2.smartLoad(instance)
+  getPhysicalDeviceSparseImageFormatProperties2.smartLoad(instance)
 
   # Promoted from VK_KHR_maintenance1
-  trimCommandPoolCage << "vkTrimCommandPool"
+  trimCommandPool.smartLoad(instance)
 
   # Originally based on VK_KHR_protected_memory (extension 146), which was never published; thus the mystifying large value= numbers below. These are not aliased since they weren't actually promoted from an extension.
-  getDeviceQueue2Cage << "vkGetDeviceQueue2"
+  getDeviceQueue2.smartLoad(instance)
 
   # Promoted from VK_KHR_sampler_ycbcr_conversion
-  createSamplerYcbcrConversionCage << "vkCreateSamplerYcbcrConversion"
-  destroySamplerYcbcrConversionCage << "vkDestroySamplerYcbcrConversion"
+  createSamplerYcbcrConversion.smartLoad(instance)
+  destroySamplerYcbcrConversion.smartLoad(instance)
 
   # Promoted from VK_KHR_descriptor_update_template
-  createDescriptorUpdateTemplateCage << "vkCreateDescriptorUpdateTemplate"
-  destroyDescriptorUpdateTemplateCage << "vkDestroyDescriptorUpdateTemplate"
-  updateDescriptorSetWithTemplateCage << "vkUpdateDescriptorSetWithTemplate"
+  createDescriptorUpdateTemplate.smartLoad(instance)
+  destroyDescriptorUpdateTemplate.smartLoad(instance)
+  updateDescriptorSetWithTemplate.smartLoad(instance)
 
   # Promoted from VK_KHR_external_memory_capabilities
-  getPhysicalDeviceExternalBufferPropertiesCage << "vkGetPhysicalDeviceExternalBufferProperties"
+  getPhysicalDeviceExternalBufferProperties.smartLoad(instance)
 
   # Promoted from VK_KHR_external_fence_capabilities
-  getPhysicalDeviceExternalFencePropertiesCage << "vkGetPhysicalDeviceExternalFenceProperties"
+  getPhysicalDeviceExternalFenceProperties.smartLoad(instance)
 
   # Promoted from VK_KHR_external_semaphore_capabilities
-  getPhysicalDeviceExternalSemaphorePropertiesCage << "vkGetPhysicalDeviceExternalSemaphoreProperties"
+  getPhysicalDeviceExternalSemaphoreProperties.smartLoad(instance)
 
   # Promoted from VK_KHR_maintenance3
-  getDescriptorSetLayoutSupportCage << "vkGetDescriptorSetLayoutSupport"
+  getDescriptorSetLayoutSupport.smartLoad(instance)
+
+proc loadVk11*(instance: Instance) =
+  # Promoted from VK_KHR_device_group_creation
+  enumeratePhysicalDeviceGroups.smartLoad(instance)
+
+  # Promoted from VK_KHR_get_physical_device_properties2
+  getPhysicalDeviceFeatures2.smartLoad(instance)
+  getPhysicalDeviceProperties2.smartLoad(instance)
+  getPhysicalDeviceFormatProperties2.smartLoad(instance)
+  getPhysicalDeviceImageFormatProperties2.smartLoad(instance)
+  getPhysicalDeviceQueueFamilyProperties2.smartLoad(instance)
+  getPhysicalDeviceMemoryProperties2.smartLoad(instance)
+  getPhysicalDeviceSparseImageFormatProperties2.smartLoad(instance)
+
+  # Promoted from VK_KHR_external_memory_capabilities
+  getPhysicalDeviceExternalBufferProperties.smartLoad(instance)
+
+  # Promoted from VK_KHR_external_fence_capabilities
+  getPhysicalDeviceExternalFenceProperties.smartLoad(instance)
+
+  # Promoted from VK_KHR_external_semaphore_capabilities
+  getPhysicalDeviceExternalSemaphoreProperties.smartLoad(instance)
+
+proc loadVk11*(device: Device) =
+  # Promoted from VK_KHR_bind_memory2
+  bindBufferMemory2.smartLoad(device)
+  bindImageMemory2.smartLoad(device)
+
+  # Promoted from VK_KHR_device_group
+  getDeviceGroupPeerMemoryFeatures.smartLoad(device)
+  cmdSetDeviceMask.smartLoad(device)
+  cmdDispatchBase.smartLoad(device)
+
+  # Promoted from VK_KHR_get_memory_requirements2
+  getImageMemoryRequirements2.smartLoad(device)
+  getBufferMemoryRequirements2.smartLoad(device)
+  getImageSparseMemoryRequirements2.smartLoad(device)
+
+  # Promoted from VK_KHR_maintenance1
+  trimCommandPool.smartLoad(device)
+
+  # Originally based on VK_KHR_protected_memory (extension 146), which was never published; thus the mystifying large value= numbers below. These are not aliased since they weren't actually promoted from an extension.
+  getDeviceQueue2.smartLoad(device)
+
+  # Promoted from VK_KHR_sampler_ycbcr_conversion
+  createSamplerYcbcrConversion.smartLoad(device)
+  destroySamplerYcbcrConversion.smartLoad(device)
+
+  # Promoted from VK_KHR_descriptor_update_template
+  createDescriptorUpdateTemplate.smartLoad(device)
+  destroyDescriptorUpdateTemplate.smartLoad(device)
+  updateDescriptorSetWithTemplate.smartLoad(device)
+
+  # Promoted from VK_KHR_maintenance3
+  getDescriptorSetLayoutSupport.smartLoad(device)
+

@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_ray_tracing
 # VK_NV_ray_tracing
 # Explicit sort order to require processing after VK_NV_ray_tracing
@@ -371,91 +371,58 @@ type
   AabbPositionsNV* = object
   AccelerationStructureInstanceNV* = object
 
-var # command cages
-  createAccelerationStructureKHRCage: proc(device: Device; pCreateInfo: ptr AccelerationStructureCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pAccelerationStructure: ptr AccelerationStructureKHR;): Result {.cdecl.}
-  destroyAccelerationStructureKHRCage: proc(device: Device; accelerationStructure: AccelerationStructureKHR; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  getAccelerationStructureMemoryRequirementsKHRCage: proc(device: Device; pInfo: ptr AccelerationStructureMemoryRequirementsInfoKHR; pMemoryRequirements: ptr MemoryRequirements2;): void {.cdecl.}
-  bindAccelerationStructureMemoryKHRCage: proc(device: Device; bindInfoCount: uint32; pBindInfos: ptr BindAccelerationStructureMemoryInfoKHR;): Result {.cdecl.}
-  cmdBuildAccelerationStructureKHRCage: proc(commandBuffer: CommandBuffer; infoCount: uint32; pInfos: ptr AccelerationStructureBuildGeometryInfoKHR; ppOffsetInfos: ptr ptr AccelerationStructureBuildOffsetInfoKHR;): void {.cdecl.}
-  cmdBuildAccelerationStructureIndirectKHRCage: proc(commandBuffer: CommandBuffer; pInfo: ptr AccelerationStructureBuildGeometryInfoKHR; indirectBuffer: Buffer; indirectOffset: DeviceSize; indirectStride: uint32;): void {.cdecl.}
-  buildAccelerationStructureKHRCage: proc(device: Device; infoCount: uint32; pInfos: ptr AccelerationStructureBuildGeometryInfoKHR; ppOffsetInfos: ptr ptr AccelerationStructureBuildOffsetInfoKHR;): Result {.cdecl.}
-  copyAccelerationStructureKHRCage: proc(device: Device; pInfo: ptr CopyAccelerationStructureInfoKHR;): Result {.cdecl.}
-  copyAccelerationStructureToMemoryKHRCage: proc(device: Device; pInfo: ptr CopyAccelerationStructureToMemoryInfoKHR;): Result {.cdecl.}
-  copyMemoryToAccelerationStructureKHRCage: proc(device: Device; pInfo: ptr CopyMemoryToAccelerationStructureInfoKHR;): Result {.cdecl.}
-  writeAccelerationStructuresPropertiesKHRCage: proc(device: Device; accelerationStructureCount: uint32; pAccelerationStructures: ptr AccelerationStructureKHR; queryType: QueryType; dataSize: uint; pData: pointer; stride: uint;): Result {.cdecl.}
-  cmdCopyAccelerationStructureKHRCage: proc(commandBuffer: CommandBuffer; pInfo: ptr CopyAccelerationStructureInfoKHR;): void {.cdecl.}
-  cmdCopyAccelerationStructureToMemoryKHRCage: proc(commandBuffer: CommandBuffer; pInfo: ptr CopyAccelerationStructureToMemoryInfoKHR;): void {.cdecl.}
-  cmdCopyMemoryToAccelerationStructureKHRCage: proc(commandBuffer: CommandBuffer; pInfo: ptr CopyMemoryToAccelerationStructureInfoKHR;): void {.cdecl.}
-  cmdTraceRaysKHRCage: proc(commandBuffer: CommandBuffer; pRaygenShaderBindingTable: ptr StridedBufferRegionKHR; pMissShaderBindingTable: ptr StridedBufferRegionKHR; pHitShaderBindingTable: ptr StridedBufferRegionKHR; pCallableShaderBindingTable: ptr StridedBufferRegionKHR; width: uint32; height: uint32; depth: uint32;): void {.cdecl.}
-  createRayTracingPipelinesKHRCage: proc(device: Device; pipelineCache: PipelineCache; createInfoCount: uint32; pCreateInfos: ptr RayTracingPipelineCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pPipelines: ptr Pipeline;): Result {.cdecl.}
-  getRayTracingShaderGroupHandlesKHRCage: proc(device: Device; pipeline: Pipeline; firstGroup: uint32; groupCount: uint32; dataSize: uint; pData: pointer;): Result {.cdecl.}
-  getAccelerationStructureDeviceAddressKHRCage: proc(device: Device; pInfo: ptr AccelerationStructureDeviceAddressInfoKHR;): DeviceAddress {.cdecl.}
-  getRayTracingCaptureReplayShaderGroupHandlesKHRCage: proc(device: Device; pipeline: Pipeline; firstGroup: uint32; groupCount: uint32; dataSize: uint; pData: pointer;): Result {.cdecl.}
-  cmdWriteAccelerationStructuresPropertiesKHRCage: proc(commandBuffer: CommandBuffer; accelerationStructureCount: uint32; pAccelerationStructures: ptr AccelerationStructureKHR; queryType: QueryType; queryPool: QueryPool; firstQuery: uint32;): void {.cdecl.}
-  cmdTraceRaysIndirectKHRCage: proc(commandBuffer: CommandBuffer; pRaygenShaderBindingTable: ptr StridedBufferRegionKHR; pMissShaderBindingTable: ptr StridedBufferRegionKHR; pHitShaderBindingTable: ptr StridedBufferRegionKHR; pCallableShaderBindingTable: ptr StridedBufferRegionKHR; buffer: Buffer; offset: DeviceSize;): void {.cdecl.}
-  getDeviceAccelerationStructureCompatibilityKHRCage: proc(device: Device; version: ptr AccelerationStructureVersionKHR;): Result {.cdecl.}
 proc createAccelerationStructureKHR*(
       device: Device;
       pCreateInfo: ptr AccelerationStructureCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pAccelerationStructure: ptr AccelerationStructureKHR;
-    ): Result {.cdecl, discardable.} =
-  createAccelerationStructureKHRCage(device,pCreateInfo,pAllocator,pAccelerationStructure)
+    ): Result {.cdecl, lazyload("vkCreateAccelerationStructureKHR", DeviceLevel).}
 proc destroyAccelerationStructureKHR*(
       device: Device;
       accelerationStructure: AccelerationStructureKHR;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyAccelerationStructureKHRCage(device,accelerationStructure,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyAccelerationStructureKHR", DeviceLevel).}
 proc getAccelerationStructureMemoryRequirementsKHR*(
       device: Device;
       pInfo: ptr AccelerationStructureMemoryRequirementsInfoKHR;
       pMemoryRequirements: ptr MemoryRequirements2;
-    ): void {.cdecl.} =
-  getAccelerationStructureMemoryRequirementsKHRCage(device,pInfo,pMemoryRequirements)
+    ): void {.cdecl, lazyload("vkGetAccelerationStructureMemoryRequirementsKHR", DeviceLevel).}
 proc bindAccelerationStructureMemoryKHR*(
       device: Device;
       bindInfoCount: uint32;
       pBindInfos: ptr BindAccelerationStructureMemoryInfoKHR;
-    ): Result {.cdecl, discardable.} =
-  bindAccelerationStructureMemoryKHRCage(device,bindInfoCount,pBindInfos)
+    ): Result {.cdecl, lazyload("vkBindAccelerationStructureMemoryKHR", DeviceLevel).}
 proc cmdBuildAccelerationStructureKHR*(
       commandBuffer: CommandBuffer;
       infoCount: uint32;
       pInfos: ptr AccelerationStructureBuildGeometryInfoKHR;
       ppOffsetInfos: ptr ptr AccelerationStructureBuildOffsetInfoKHR;
-    ): void {.cdecl.} =
-  cmdBuildAccelerationStructureKHRCage(commandBuffer,infoCount,pInfos,ppOffsetInfos)
+    ): void {.cdecl, lazyload("vkCmdBuildAccelerationStructureKHR", DeviceLevel).}
 proc cmdBuildAccelerationStructureIndirectKHR*(
       commandBuffer: CommandBuffer;
       pInfo: ptr AccelerationStructureBuildGeometryInfoKHR;
       indirectBuffer: Buffer;
       indirectOffset: DeviceSize;
       indirectStride: uint32;
-    ): void {.cdecl.} =
-  cmdBuildAccelerationStructureIndirectKHRCage(commandBuffer,pInfo,indirectBuffer,indirectOffset,indirectStride)
+    ): void {.cdecl, lazyload("vkCmdBuildAccelerationStructureIndirectKHR", DeviceLevel).}
 proc buildAccelerationStructureKHR*(
       device: Device;
       infoCount: uint32;
       pInfos: ptr AccelerationStructureBuildGeometryInfoKHR;
       ppOffsetInfos: ptr ptr AccelerationStructureBuildOffsetInfoKHR;
-    ): Result {.cdecl, discardable.} =
-  buildAccelerationStructureKHRCage(device,infoCount,pInfos,ppOffsetInfos)
+    ): Result {.cdecl, lazyload("vkBuildAccelerationStructureKHR", DeviceLevel).}
 proc copyAccelerationStructureKHR*(
       device: Device;
       pInfo: ptr CopyAccelerationStructureInfoKHR;
-    ): Result {.cdecl, discardable.} =
-  copyAccelerationStructureKHRCage(device,pInfo)
+    ): Result {.cdecl, lazyload("vkCopyAccelerationStructureKHR", DeviceLevel).}
 proc copyAccelerationStructureToMemoryKHR*(
       device: Device;
       pInfo: ptr CopyAccelerationStructureToMemoryInfoKHR;
-    ): Result {.cdecl, discardable.} =
-  copyAccelerationStructureToMemoryKHRCage(device,pInfo)
+    ): Result {.cdecl, lazyload("vkCopyAccelerationStructureToMemoryKHR", DeviceLevel).}
 proc copyMemoryToAccelerationStructureKHR*(
       device: Device;
       pInfo: ptr CopyMemoryToAccelerationStructureInfoKHR;
-    ): Result {.cdecl, discardable.} =
-  copyMemoryToAccelerationStructureKHRCage(device,pInfo)
+    ): Result {.cdecl, lazyload("vkCopyMemoryToAccelerationStructureKHR", DeviceLevel).}
 proc writeAccelerationStructuresPropertiesKHR*(
       device: Device;
       accelerationStructureCount: uint32;
@@ -464,23 +431,19 @@ proc writeAccelerationStructuresPropertiesKHR*(
       dataSize: uint;
       pData: pointer;
       stride: uint;
-    ): Result {.cdecl, discardable.} =
-  writeAccelerationStructuresPropertiesKHRCage(device,accelerationStructureCount,pAccelerationStructures,queryType,dataSize,pData,stride)
+    ): Result {.cdecl, lazyload("vkWriteAccelerationStructuresPropertiesKHR", DeviceLevel).}
 proc cmdCopyAccelerationStructureKHR*(
       commandBuffer: CommandBuffer;
       pInfo: ptr CopyAccelerationStructureInfoKHR;
-    ): void {.cdecl.} =
-  cmdCopyAccelerationStructureKHRCage(commandBuffer,pInfo)
+    ): void {.cdecl, lazyload("vkCmdCopyAccelerationStructureKHR", DeviceLevel).}
 proc cmdCopyAccelerationStructureToMemoryKHR*(
       commandBuffer: CommandBuffer;
       pInfo: ptr CopyAccelerationStructureToMemoryInfoKHR;
-    ): void {.cdecl.} =
-  cmdCopyAccelerationStructureToMemoryKHRCage(commandBuffer,pInfo)
+    ): void {.cdecl, lazyload("vkCmdCopyAccelerationStructureToMemoryKHR", DeviceLevel).}
 proc cmdCopyMemoryToAccelerationStructureKHR*(
       commandBuffer: CommandBuffer;
       pInfo: ptr CopyMemoryToAccelerationStructureInfoKHR;
-    ): void {.cdecl.} =
-  cmdCopyMemoryToAccelerationStructureKHRCage(commandBuffer,pInfo)
+    ): void {.cdecl, lazyload("vkCmdCopyMemoryToAccelerationStructureKHR", DeviceLevel).}
 proc cmdTraceRaysKHR*(
       commandBuffer: CommandBuffer;
       pRaygenShaderBindingTable: ptr StridedBufferRegionKHR;
@@ -490,8 +453,7 @@ proc cmdTraceRaysKHR*(
       width: uint32;
       height: uint32;
       depth: uint32;
-    ): void {.cdecl.} =
-  cmdTraceRaysKHRCage(commandBuffer,pRaygenShaderBindingTable,pMissShaderBindingTable,pHitShaderBindingTable,pCallableShaderBindingTable,width,height,depth)
+    ): void {.cdecl, lazyload("vkCmdTraceRaysKHR", DeviceLevel).}
 proc createRayTracingPipelinesKHR*(
       device: Device;
       pipelineCache: PipelineCache;
@@ -499,8 +461,7 @@ proc createRayTracingPipelinesKHR*(
       pCreateInfos: ptr RayTracingPipelineCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pPipelines: ptr Pipeline;
-    ): Result {.cdecl, discardable.} =
-  createRayTracingPipelinesKHRCage(device,pipelineCache,createInfoCount,pCreateInfos,pAllocator,pPipelines)
+    ): Result {.cdecl, lazyload("vkCreateRayTracingPipelinesKHR", DeviceLevel).}
 proc getRayTracingShaderGroupHandlesKHR*(
       device: Device;
       pipeline: Pipeline;
@@ -508,13 +469,11 @@ proc getRayTracingShaderGroupHandlesKHR*(
       groupCount: uint32;
       dataSize: uint;
       pData: pointer;
-    ): Result {.cdecl, discardable.} =
-  getRayTracingShaderGroupHandlesKHRCage(device,pipeline,firstGroup,groupCount,dataSize,pData)
+    ): Result {.cdecl, lazyload("vkGetRayTracingShaderGroupHandlesKHR", DeviceLevel).}
 proc getAccelerationStructureDeviceAddressKHR*(
       device: Device;
       pInfo: ptr AccelerationStructureDeviceAddressInfoKHR;
-    ): DeviceAddress {.cdecl.} =
-  getAccelerationStructureDeviceAddressKHRCage(device,pInfo)
+    ): DeviceAddress {.cdecl, lazyload("vkGetAccelerationStructureDeviceAddressKHR", DeviceLevel).}
 proc getRayTracingCaptureReplayShaderGroupHandlesKHR*(
       device: Device;
       pipeline: Pipeline;
@@ -522,8 +481,7 @@ proc getRayTracingCaptureReplayShaderGroupHandlesKHR*(
       groupCount: uint32;
       dataSize: uint;
       pData: pointer;
-    ): Result {.cdecl, discardable.} =
-  getRayTracingCaptureReplayShaderGroupHandlesKHRCage(device,pipeline,firstGroup,groupCount,dataSize,pData)
+    ): Result {.cdecl, lazyload("vkGetRayTracingCaptureReplayShaderGroupHandlesKHR", DeviceLevel).}
 proc cmdWriteAccelerationStructuresPropertiesKHR*(
       commandBuffer: CommandBuffer;
       accelerationStructureCount: uint32;
@@ -531,8 +489,7 @@ proc cmdWriteAccelerationStructuresPropertiesKHR*(
       queryType: QueryType;
       queryPool: QueryPool;
       firstQuery: uint32;
-    ): void {.cdecl.} =
-  cmdWriteAccelerationStructuresPropertiesKHRCage(commandBuffer,accelerationStructureCount,pAccelerationStructures,queryType,queryPool,firstQuery)
+    ): void {.cdecl, lazyload("vkCmdWriteAccelerationStructuresPropertiesKHR", DeviceLevel).}
 proc cmdTraceRaysIndirectKHR*(
       commandBuffer: CommandBuffer;
       pRaygenShaderBindingTable: ptr StridedBufferRegionKHR;
@@ -541,38 +498,25 @@ proc cmdTraceRaysIndirectKHR*(
       pCallableShaderBindingTable: ptr StridedBufferRegionKHR;
       buffer: Buffer;
       offset: DeviceSize;
-    ): void {.cdecl.} =
-  cmdTraceRaysIndirectKHRCage(commandBuffer,pRaygenShaderBindingTable,pMissShaderBindingTable,pHitShaderBindingTable,pCallableShaderBindingTable,buffer,offset)
+    ): void {.cdecl, lazyload("vkCmdTraceRaysIndirectKHR", DeviceLevel).}
 proc getDeviceAccelerationStructureCompatibilityKHR*(
       device: Device;
       version: ptr AccelerationStructureVersionKHR;
-    ): Result {.cdecl, discardable.} =
-  getDeviceAccelerationStructureCompatibilityKHRCage(device,version)
+    ): Result {.cdecl, lazyload("vkGetDeviceAccelerationStructureCompatibilityKHR", DeviceLevel).}
 
 
-var # command cages
-  createAccelerationStructureNVCage: proc(device: Device; pCreateInfo: ptr AccelerationStructureCreateInfoNV; pAllocator: ptr AllocationCallbacks; pAccelerationStructure: ptr AccelerationStructureNV;): Result {.cdecl.}
-  getAccelerationStructureMemoryRequirementsNVCage: proc(device: Device; pInfo: ptr AccelerationStructureMemoryRequirementsInfoNV; pMemoryRequirements: ptr MemoryRequirements2KHR;): void {.cdecl.}
-  cmdBuildAccelerationStructureNVCage: proc(commandBuffer: CommandBuffer; pInfo: ptr AccelerationStructureInfoNV; instanceData: Buffer; instanceOffset: DeviceSize; update: Bool32; dst: AccelerationStructureKHR; src: AccelerationStructureKHR; scratch: Buffer; scratchOffset: DeviceSize;): void {.cdecl.}
-  cmdCopyAccelerationStructureNVCage: proc(commandBuffer: CommandBuffer; dst: AccelerationStructureKHR; src: AccelerationStructureKHR; mode: CopyAccelerationStructureModeKHR;): void {.cdecl.}
-  cmdTraceRaysNVCage: proc(commandBuffer: CommandBuffer; raygenShaderBindingTableBuffer: Buffer; raygenShaderBindingOffset: DeviceSize; missShaderBindingTableBuffer: Buffer; missShaderBindingOffset: DeviceSize; missShaderBindingStride: DeviceSize; hitShaderBindingTableBuffer: Buffer; hitShaderBindingOffset: DeviceSize; hitShaderBindingStride: DeviceSize; callableShaderBindingTableBuffer: Buffer; callableShaderBindingOffset: DeviceSize; callableShaderBindingStride: DeviceSize; width: uint32; height: uint32; depth: uint32;): void {.cdecl.}
-  createRayTracingPipelinesNVCage: proc(device: Device; pipelineCache: PipelineCache; createInfoCount: uint32; pCreateInfos: ptr RayTracingPipelineCreateInfoNV; pAllocator: ptr AllocationCallbacks; pPipelines: ptr Pipeline;): Result {.cdecl.}
-  getAccelerationStructureHandleNVCage: proc(device: Device; accelerationStructure: AccelerationStructureKHR; dataSize: uint; pData: pointer;): Result {.cdecl.}
-  compileDeferredNVCage: proc(device: Device; pipeline: Pipeline; shader: uint32;): Result {.cdecl.}
 proc createAccelerationStructureNV*(
       device: Device;
       pCreateInfo: ptr AccelerationStructureCreateInfoNV;
       pAllocator: ptr AllocationCallbacks;
       pAccelerationStructure: ptr AccelerationStructureNV;
-    ): Result {.cdecl, discardable.} =
-  createAccelerationStructureNVCage(device,pCreateInfo,pAllocator,pAccelerationStructure)
+    ): Result {.cdecl, lazyload("vkCreateAccelerationStructureNV", DeviceLevel).}
 const destroyAccelerationStructureNV* = destroyAccelerationStructureKHR
 proc getAccelerationStructureMemoryRequirementsNV*(
       device: Device;
       pInfo: ptr AccelerationStructureMemoryRequirementsInfoNV;
       pMemoryRequirements: ptr MemoryRequirements2KHR;
-    ): void {.cdecl.} =
-  getAccelerationStructureMemoryRequirementsNVCage(device,pInfo,pMemoryRequirements)
+    ): void {.cdecl, lazyload("vkGetAccelerationStructureMemoryRequirementsNV", DeviceLevel).}
 const bindAccelerationStructureMemoryNV* = bindAccelerationStructureMemoryKHR
 proc cmdBuildAccelerationStructureNV*(
       commandBuffer: CommandBuffer;
@@ -584,15 +528,13 @@ proc cmdBuildAccelerationStructureNV*(
       src: AccelerationStructureKHR;
       scratch: Buffer;
       scratchOffset: DeviceSize;
-    ): void {.cdecl.} =
-  cmdBuildAccelerationStructureNVCage(commandBuffer,pInfo,instanceData,instanceOffset,update,dst,src,scratch,scratchOffset)
+    ): void {.cdecl, lazyload("vkCmdBuildAccelerationStructureNV", DeviceLevel).}
 proc cmdCopyAccelerationStructureNV*(
       commandBuffer: CommandBuffer;
       dst: AccelerationStructureKHR;
       src: AccelerationStructureKHR;
       mode: CopyAccelerationStructureModeKHR;
-    ): void {.cdecl.} =
-  cmdCopyAccelerationStructureNVCage(commandBuffer,dst,src,mode)
+    ): void {.cdecl, lazyload("vkCmdCopyAccelerationStructureNV", DeviceLevel).}
 proc cmdTraceRaysNV*(
       commandBuffer: CommandBuffer;
       raygenShaderBindingTableBuffer: Buffer;
@@ -609,8 +551,7 @@ proc cmdTraceRaysNV*(
       width: uint32;
       height: uint32;
       depth: uint32;
-    ): void {.cdecl.} =
-  cmdTraceRaysNVCage(commandBuffer,raygenShaderBindingTableBuffer,raygenShaderBindingOffset,missShaderBindingTableBuffer,missShaderBindingOffset,missShaderBindingStride,hitShaderBindingTableBuffer,hitShaderBindingOffset,hitShaderBindingStride,callableShaderBindingTableBuffer,callableShaderBindingOffset,callableShaderBindingStride,width,height,depth)
+    ): void {.cdecl, lazyload("vkCmdTraceRaysNV", DeviceLevel).}
 proc createRayTracingPipelinesNV*(
       device: Device;
       pipelineCache: PipelineCache;
@@ -618,23 +559,20 @@ proc createRayTracingPipelinesNV*(
       pCreateInfos: ptr RayTracingPipelineCreateInfoNV;
       pAllocator: ptr AllocationCallbacks;
       pPipelines: ptr Pipeline;
-    ): Result {.cdecl, discardable.} =
-  createRayTracingPipelinesNVCage(device,pipelineCache,createInfoCount,pCreateInfos,pAllocator,pPipelines)
+    ): Result {.cdecl, lazyload("vkCreateRayTracingPipelinesNV", DeviceLevel).}
 const getRayTracingShaderGroupHandlesNV* = getRayTracingShaderGroupHandlesKHR
 proc getAccelerationStructureHandleNV*(
       device: Device;
       accelerationStructure: AccelerationStructureKHR;
       dataSize: uint;
       pData: pointer;
-    ): Result {.cdecl, discardable.} =
-  getAccelerationStructureHandleNVCage(device,accelerationStructure,dataSize,pData)
+    ): Result {.cdecl, lazyload("vkGetAccelerationStructureHandleNV", DeviceLevel).}
 const cmdWriteAccelerationStructuresPropertiesNV* = cmdWriteAccelerationStructuresPropertiesKHR
 proc compileDeferredNV*(
       device: Device;
       pipeline: Pipeline;
       shader: uint32;
-    ): Result {.cdecl, discardable.} =
-  compileDeferredNVCage(device,pipeline,shader)
+    ): Result {.cdecl, lazyload("vkCompileDeferredNV", DeviceLevel).}
 PipelineStageFlagBits.defineAliases:
   rayTracingShaderKhr as rayTracingShaderNv
   accelerationStructureBuildKhr as accelerationStructureBuildNv
@@ -716,40 +654,71 @@ IndexType.defineAliases:
   noneKhr as noneNv
 
 
-proc loadVK_KHR_ray_tracing*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_KHR_ray_tracing*(instance: Instance) =
+  createAccelerationStructureKHR.smartLoad(instance)
+  destroyAccelerationStructureKHR.smartLoad(instance)
+  getAccelerationStructureMemoryRequirementsKHR.smartLoad(instance)
+  bindAccelerationStructureMemoryKHR.smartLoad(instance)
+  cmdBuildAccelerationStructureKHR.smartLoad(instance)
+  cmdBuildAccelerationStructureIndirectKHR.smartLoad(instance)
+  buildAccelerationStructureKHR.smartLoad(instance)
+  copyAccelerationStructureKHR.smartLoad(instance)
+  copyAccelerationStructureToMemoryKHR.smartLoad(instance)
+  copyMemoryToAccelerationStructureKHR.smartLoad(instance)
+  writeAccelerationStructuresPropertiesKHR.smartLoad(instance)
+  cmdCopyAccelerationStructureKHR.smartLoad(instance)
+  cmdCopyAccelerationStructureToMemoryKHR.smartLoad(instance)
+  cmdCopyMemoryToAccelerationStructureKHR.smartLoad(instance)
+  cmdTraceRaysKHR.smartLoad(instance)
+  createRayTracingPipelinesKHR.smartLoad(instance)
+  getRayTracingShaderGroupHandlesKHR.smartLoad(instance)
+  getAccelerationStructureDeviceAddressKHR.smartLoad(instance)
+  getRayTracingCaptureReplayShaderGroupHandlesKHR.smartLoad(instance)
+  cmdWriteAccelerationStructuresPropertiesKHR.smartLoad(instance)
+  cmdTraceRaysIndirectKHR.smartLoad(instance)
+  getDeviceAccelerationStructureCompatibilityKHR.smartLoad(instance)
 
-  createAccelerationStructureKHRCage << "vkCreateAccelerationStructureKHR"
-  destroyAccelerationStructureKHRCage << "vkDestroyAccelerationStructureKHR"
-  getAccelerationStructureMemoryRequirementsKHRCage << "vkGetAccelerationStructureMemoryRequirementsKHR"
-  bindAccelerationStructureMemoryKHRCage << "vkBindAccelerationStructureMemoryKHR"
-  cmdBuildAccelerationStructureKHRCage << "vkCmdBuildAccelerationStructureKHR"
-  cmdBuildAccelerationStructureIndirectKHRCage << "vkCmdBuildAccelerationStructureIndirectKHR"
-  buildAccelerationStructureKHRCage << "vkBuildAccelerationStructureKHR"
-  copyAccelerationStructureKHRCage << "vkCopyAccelerationStructureKHR"
-  copyAccelerationStructureToMemoryKHRCage << "vkCopyAccelerationStructureToMemoryKHR"
-  copyMemoryToAccelerationStructureKHRCage << "vkCopyMemoryToAccelerationStructureKHR"
-  writeAccelerationStructuresPropertiesKHRCage << "vkWriteAccelerationStructuresPropertiesKHR"
-  cmdCopyAccelerationStructureKHRCage << "vkCmdCopyAccelerationStructureKHR"
-  cmdCopyAccelerationStructureToMemoryKHRCage << "vkCmdCopyAccelerationStructureToMemoryKHR"
-  cmdCopyMemoryToAccelerationStructureKHRCage << "vkCmdCopyMemoryToAccelerationStructureKHR"
-  cmdTraceRaysKHRCage << "vkCmdTraceRaysKHR"
-  createRayTracingPipelinesKHRCage << "vkCreateRayTracingPipelinesKHR"
-  getRayTracingShaderGroupHandlesKHRCage << "vkGetRayTracingShaderGroupHandlesKHR"
-  getAccelerationStructureDeviceAddressKHRCage << "vkGetAccelerationStructureDeviceAddressKHR"
-  getRayTracingCaptureReplayShaderGroupHandlesKHRCage << "vkGetRayTracingCaptureReplayShaderGroupHandlesKHR"
-  cmdWriteAccelerationStructuresPropertiesKHRCage << "vkCmdWriteAccelerationStructuresPropertiesKHR"
-  cmdTraceRaysIndirectKHRCage << "vkCmdTraceRaysIndirectKHR"
-  getDeviceAccelerationStructureCompatibilityKHRCage << "vkGetDeviceAccelerationStructureCompatibilityKHR"
+proc loadAllVK_NV_ray_tracing*(instance: Instance) =
+  createAccelerationStructureNV.smartLoad(instance)
+  getAccelerationStructureMemoryRequirementsNV.smartLoad(instance)
+  cmdBuildAccelerationStructureNV.smartLoad(instance)
+  cmdCopyAccelerationStructureNV.smartLoad(instance)
+  cmdTraceRaysNV.smartLoad(instance)
+  createRayTracingPipelinesNV.smartLoad(instance)
+  getAccelerationStructureHandleNV.smartLoad(instance)
+  compileDeferredNV.smartLoad(instance)
 
-proc loadVK_NV_ray_tracing*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadVK_KHR_ray_tracing*(device: Device) =
+  createAccelerationStructureKHR.smartLoad(device)
+  destroyAccelerationStructureKHR.smartLoad(device)
+  getAccelerationStructureMemoryRequirementsKHR.smartLoad(device)
+  bindAccelerationStructureMemoryKHR.smartLoad(device)
+  cmdBuildAccelerationStructureKHR.smartLoad(device)
+  cmdBuildAccelerationStructureIndirectKHR.smartLoad(device)
+  buildAccelerationStructureKHR.smartLoad(device)
+  copyAccelerationStructureKHR.smartLoad(device)
+  copyAccelerationStructureToMemoryKHR.smartLoad(device)
+  copyMemoryToAccelerationStructureKHR.smartLoad(device)
+  writeAccelerationStructuresPropertiesKHR.smartLoad(device)
+  cmdCopyAccelerationStructureKHR.smartLoad(device)
+  cmdCopyAccelerationStructureToMemoryKHR.smartLoad(device)
+  cmdCopyMemoryToAccelerationStructureKHR.smartLoad(device)
+  cmdTraceRaysKHR.smartLoad(device)
+  createRayTracingPipelinesKHR.smartLoad(device)
+  getRayTracingShaderGroupHandlesKHR.smartLoad(device)
+  getAccelerationStructureDeviceAddressKHR.smartLoad(device)
+  getRayTracingCaptureReplayShaderGroupHandlesKHR.smartLoad(device)
+  cmdWriteAccelerationStructuresPropertiesKHR.smartLoad(device)
+  cmdTraceRaysIndirectKHR.smartLoad(device)
+  getDeviceAccelerationStructureCompatibilityKHR.smartLoad(device)
 
-  createAccelerationStructureNVCage << "vkCreateAccelerationStructureNV"
-  getAccelerationStructureMemoryRequirementsNVCage << "vkGetAccelerationStructureMemoryRequirementsNV"
-  cmdBuildAccelerationStructureNVCage << "vkCmdBuildAccelerationStructureNV"
-  cmdCopyAccelerationStructureNVCage << "vkCmdCopyAccelerationStructureNV"
-  cmdTraceRaysNVCage << "vkCmdTraceRaysNV"
-  createRayTracingPipelinesNVCage << "vkCreateRayTracingPipelinesNV"
-  getAccelerationStructureHandleNVCage << "vkGetAccelerationStructureHandleNV"
-  compileDeferredNVCage << "vkCompileDeferredNV"
+proc loadVK_NV_ray_tracing*(device: Device) =
+  createAccelerationStructureNV.smartLoad(device)
+  getAccelerationStructureMemoryRequirementsNV.smartLoad(device)
+  cmdBuildAccelerationStructureNV.smartLoad(device)
+  cmdCopyAccelerationStructureNV.smartLoad(device)
+  cmdTraceRaysNV.smartLoad(device)
+  createRayTracingPipelinesNV.smartLoad(device)
+  getAccelerationStructureHandleNV.smartLoad(device)
+  compileDeferredNV.smartLoad(device)
+

@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:02Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_NV_mesh_shader
 
 
@@ -37,24 +37,18 @@ type
     taskCount*: uint32
     firstTask*: uint32
 
-var # command cages
-  cmdDrawMeshTasksNVCage: proc(commandBuffer: CommandBuffer; taskCount: uint32; firstTask: uint32;): void {.cdecl.}
-  cmdDrawMeshTasksIndirectNVCage: proc(commandBuffer: CommandBuffer; buffer: Buffer; offset: DeviceSize; drawCount: uint32; stride: uint32;): void {.cdecl.}
-  cmdDrawMeshTasksIndirectCountNVCage: proc(commandBuffer: CommandBuffer; buffer: Buffer; offset: DeviceSize; countBuffer: Buffer; countBufferOffset: DeviceSize; maxDrawCount: uint32; stride: uint32;): void {.cdecl.}
 proc cmdDrawMeshTasksNV*(
       commandBuffer: CommandBuffer;
       taskCount: uint32;
       firstTask: uint32;
-    ): void {.cdecl.} =
-  cmdDrawMeshTasksNVCage(commandBuffer,taskCount,firstTask)
+    ): void {.cdecl, lazyload("vkCmdDrawMeshTasksNV", DeviceLevel).}
 proc cmdDrawMeshTasksIndirectNV*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
       offset: DeviceSize;
       drawCount: uint32;
       stride: uint32;
-    ): void {.cdecl.} =
-  cmdDrawMeshTasksIndirectNVCage(commandBuffer,buffer,offset,drawCount,stride)
+    ): void {.cdecl, lazyload("vkCmdDrawMeshTasksIndirectNV", DeviceLevel).}
 proc cmdDrawMeshTasksIndirectCountNV*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
@@ -63,12 +57,15 @@ proc cmdDrawMeshTasksIndirectCountNV*(
       countBufferOffset: DeviceSize;
       maxDrawCount: uint32;
       stride: uint32;
-    ): void {.cdecl.} =
-  cmdDrawMeshTasksIndirectCountNVCage(commandBuffer,buffer,offset,countBuffer,countBufferOffset,maxDrawCount,stride)
+    ): void {.cdecl, lazyload("vkCmdDrawMeshTasksIndirectCountNV", DeviceLevel).}
 
-proc loadVK_NV_mesh_shader*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_NV_mesh_shader*(instance: Instance) =
+  cmdDrawMeshTasksNV.smartLoad(instance)
+  cmdDrawMeshTasksIndirectNV.smartLoad(instance)
+  cmdDrawMeshTasksIndirectCountNV.smartLoad(instance)
 
-  cmdDrawMeshTasksNVCage << "vkCmdDrawMeshTasksNV"
-  cmdDrawMeshTasksIndirectNVCage << "vkCmdDrawMeshTasksIndirectNV"
-  cmdDrawMeshTasksIndirectCountNVCage << "vkCmdDrawMeshTasksIndirectCountNV"
+proc loadVK_NV_mesh_shader*(device: Device) =
+  cmdDrawMeshTasksNV.smartLoad(device)
+  cmdDrawMeshTasksIndirectNV.smartLoad(device)
+  cmdDrawMeshTasksIndirectCountNV.smartLoad(device)
+

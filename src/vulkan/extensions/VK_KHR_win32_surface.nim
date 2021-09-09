@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_win32_surface
 
 
@@ -22,24 +22,22 @@ type
     hinstance*: HINSTANCE
     hwnd*: HWND
 
-var # command cages
-  createWin32SurfaceKHRCage: proc(instance: Instance; pCreateInfo: ptr Win32SurfaceCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
-  getPhysicalDeviceWin32PresentationSupportKHRCage: proc(physicalDevice: PhysicalDevice; queueFamilyIndex: uint32;): Bool32 {.cdecl.}
 proc createWin32SurfaceKHR*(
       instance: Instance;
       pCreateInfo: ptr Win32SurfaceCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl, discardable.} =
-  createWin32SurfaceKHRCage(instance,pCreateInfo,pAllocator,pSurface)
+    ): Result {.cdecl, lazyload("vkCreateWin32SurfaceKHR", InstanceLevel).}
 proc getPhysicalDeviceWin32PresentationSupportKHR*(
       physicalDevice: PhysicalDevice;
       queueFamilyIndex: uint32;
-    ): Bool32 {.cdecl.} =
-  getPhysicalDeviceWin32PresentationSupportKHRCage(physicalDevice,queueFamilyIndex)
+    ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceWin32PresentationSupportKHR", InstanceLevel).}
+
+proc loadAllVK_KHR_win32_surface*(instance: Instance) =
+  createWin32SurfaceKHR.smartLoad(instance)
+  getPhysicalDeviceWin32PresentationSupportKHR.smartLoad(instance)
 
 proc loadVK_KHR_win32_surface*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  createWin32SurfaceKHR.smartLoad(instance)
+  getPhysicalDeviceWin32PresentationSupportKHR.smartLoad(instance)
 
-  createWin32SurfaceKHRCage << "vkCreateWin32SurfaceKHR"
-  getPhysicalDeviceWin32PresentationSupportKHRCage << "vkGetPhysicalDeviceWin32PresentationSupportKHR"

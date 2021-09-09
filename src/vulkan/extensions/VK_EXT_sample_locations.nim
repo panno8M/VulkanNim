@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:02Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_EXT_sample_locations
 
 
@@ -53,23 +53,23 @@ type
     pNext*: pointer
     maxSampleLocationGridSize*: Extent2D
 
-var # command cages
-  cmdSetSampleLocationsEXTCage: proc(commandBuffer: CommandBuffer; pSampleLocationsInfo: ptr SampleLocationsInfoEXT;): void {.cdecl.}
-  getPhysicalDeviceMultisamplePropertiesEXTCage: proc(physicalDevice: PhysicalDevice; samples: SampleCountFlagBits; pMultisampleProperties: ptr MultisamplePropertiesEXT;): void {.cdecl.}
 proc cmdSetSampleLocationsEXT*(
       commandBuffer: CommandBuffer;
       pSampleLocationsInfo: ptr SampleLocationsInfoEXT;
-    ): void {.cdecl.} =
-  cmdSetSampleLocationsEXTCage(commandBuffer,pSampleLocationsInfo)
+    ): void {.cdecl, lazyload("vkCmdSetSampleLocationsEXT", DeviceLevel).}
 proc getPhysicalDeviceMultisamplePropertiesEXT*(
       physicalDevice: PhysicalDevice;
       samples: SampleCountFlagBits;
       pMultisampleProperties: ptr MultisamplePropertiesEXT;
-    ): void {.cdecl.} =
-  getPhysicalDeviceMultisamplePropertiesEXTCage(physicalDevice,samples,pMultisampleProperties)
+    ): void {.cdecl, lazyload("vkGetPhysicalDeviceMultisamplePropertiesEXT", InstanceLevel).}
+
+proc loadAllVK_EXT_sample_locations*(instance: Instance) =
+  cmdSetSampleLocationsEXT.smartLoad(instance)
+  getPhysicalDeviceMultisamplePropertiesEXT.smartLoad(instance)
 
 proc loadVK_EXT_sample_locations*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  getPhysicalDeviceMultisamplePropertiesEXT.smartLoad(instance)
 
-  cmdSetSampleLocationsEXTCage << "vkCmdSetSampleLocationsEXT"
-  getPhysicalDeviceMultisamplePropertiesEXTCage << "vkGetPhysicalDeviceMultisamplePropertiesEXT"
+proc loadVK_EXT_sample_locations*(device: Device) =
+  cmdSetSampleLocationsEXT.smartLoad(device)
+

@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_AMD_display_native_hdr
 
 
@@ -25,16 +25,15 @@ type
     pNext*: pointer
     localDimmingEnable*: Bool32
 
-var # command cages
-  setLocalDimmingAMDCage: proc(device: Device; swapChain: SwapchainKHR; localDimmingEnable: Bool32;): void {.cdecl.}
 proc setLocalDimmingAMD*(
       device: Device;
       swapChain: SwapchainKHR;
       localDimmingEnable: Bool32;
-    ): void {.cdecl.} =
-  setLocalDimmingAMDCage(device,swapChain,localDimmingEnable)
+    ): void {.cdecl, lazyload("vkSetLocalDimmingAMD", DeviceLevel).}
 
-proc loadVK_AMD_display_native_hdr*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_AMD_display_native_hdr*(instance: Instance) =
+  setLocalDimmingAMD.smartLoad(instance)
 
-  setLocalDimmingAMDCage << "vkSetLocalDimmingAMD"
+proc loadVK_AMD_display_native_hdr*(device: Device) =
+  setLocalDimmingAMD.smartLoad(device)
+

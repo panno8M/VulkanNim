@@ -1,8 +1,9 @@
-# Generated at 2021-08-31T10:20:46Z
+# Generated at 2021-09-08T14:18:16Z
 # platform
 import strformat
 import macros
-import dynlib
+import sequtils
+export macros.hasCustomPragma, macros.getCustomPragmaVal
 
 const vkDllPath =
   when defined(windows):
@@ -11,11 +12,6 @@ const vkDllPath =
     "libMoltenVK.dylib"
   else:
     "libvulkan.so.1"
-let vkDll = vkDllPath.loadLib
-
-if vkDll.isNil:
-  quit("Could not load: {vkDllPath}".fmt)
-
 
 type
   UnusedEnum* = object ## Reserved for future use
@@ -45,19 +41,6 @@ type
   Window* = ptr object
   VisualID* = ptr object
 
-let getInstanceProcAddrPlatform* = cast[proc(inst: pointer, s: cstring): pointer {.cdecl.}](vkDll.symAddr("vkGetInstanceProcAddr"))
-if getInstanceProcAddrPlatform == nil:
-  quit("failed to load `vkGetInstanceProcAddr` from " & vkDllPath)
-
-template loadProc*(instance, target: untyped; loadFrom: string): untyped =
-  target = cast[typeof(target)](getInstanceProcAddrPlatform(instance.pointer, loadFrom))
-template loadProc*(target: untyped, loadFrom: string): untyped =
-  target = cast[typeof(target)](getInstanceProcAddrPlatform(nil, loadFrom))
-
-template defineLoader*(instance: untyped; procName: untyped): untyped =
-  template procName(target: untyped; loadFrom: string): untyped =
-    target = cast[typeof(target)](getInstanceProcAddrPlatform(instance.pointer, loadFrom))
-
 template defineAlias*(TEnum: typedesc; original, alias: untyped): untyped =
   template alias*(tEnum: typedesc[TEnum]): TEnum =
     TEnum.original
@@ -81,6 +64,44 @@ macro defineAliases*(TEnum: typedesc; body: untyped): untyped =
     for alias in aliases:
       result.add "defineAlias({repr TEnum}, {alias.original}, {alias.alias})".fmt.parseStmt
 
+type LoadWith* {.pure.} = enum
+  Instance, Device
+const InstanceLevel* = {LoadWith.Instance}
+const DeviceLevel* = {LoadWith.Instance, LoadWith.Device}
+
+template loadable*(loadFrom: string, with = InstanceLevel) {.pragma.}
+
+macro preload*(loadFrom: string, def: untyped): untyped =
+  def.expectKind nnkProcDef
+  if def.body.kind != nnkEmpty: error("the body must be empty")
+  def.addPragma ident("discardable")
+  def.addPragma ident("dynlib").newCall(newStrLitNode(vkDllPath))
+  def.addPragma ident("importc").newCall(newStrLitNode($loadFrom))
+  return def
+macro lazyload*(loadFrom: string; with = InstanceLevel; def: untyped): untyped =
+  ## The proc expands to something like:
+  ##
+  ## var procName: procDef {.[procPragma], loadable(loadFrom, with).}
+  ##
+  ## As you can see the proc pointer has loadable pragma so, you can use load macro to dynamic load.
+
+  def.expectKind nnkProcDef
+  if def.body.kind != nnkEmpty: error("the body must be empty")
+
+  let
+    pragma = newNimNode(nnkPragma).add(concat(
+      def.pragma[0..^1],
+      @[ident("loadable").newCall(loadFrom, with)],
+    ))
+    procTy = newNimNode(nnkProcTy).add(
+      def.params,
+      pragma)
+
+  newNimNode(nnkVarSection).add(newIdentDefs(
+    def[0], # def.name
+    procTy,
+    newEmptyNode()
+  ))
 
 
 

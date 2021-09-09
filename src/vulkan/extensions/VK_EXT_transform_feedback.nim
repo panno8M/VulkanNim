@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:02Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_EXT_transform_feedback
 
 
@@ -39,13 +39,6 @@ type
     flags*: PipelineRasterizationStateStreamCreateFlagsEXT
     rasterizationStream*: uint32
 
-var # command cages
-  cmdBindTransformFeedbackBuffersEXTCage: proc(commandBuffer: CommandBuffer; firstBinding: uint32; bindingCount: uint32; pBuffers: ptr Buffer; pOffsets: ptr DeviceSize; pSizes: ptr DeviceSize;): void {.cdecl.}
-  cmdBeginTransformFeedbackEXTCage: proc(commandBuffer: CommandBuffer; firstCounterBuffer: uint32; counterBufferCount: uint32; pCounterBuffers: ptr Buffer; pCounterBufferOffsets: ptr DeviceSize;): void {.cdecl.}
-  cmdEndTransformFeedbackEXTCage: proc(commandBuffer: CommandBuffer; firstCounterBuffer: uint32; counterBufferCount: uint32; pCounterBuffers: ptr Buffer; pCounterBufferOffsets: ptr DeviceSize;): void {.cdecl.}
-  cmdBeginQueryIndexedEXTCage: proc(commandBuffer: CommandBuffer; queryPool: QueryPool; query: uint32; flags: QueryControlFlags; index: uint32;): void {.cdecl.}
-  cmdEndQueryIndexedEXTCage: proc(commandBuffer: CommandBuffer; queryPool: QueryPool; query: uint32; index: uint32;): void {.cdecl.}
-  cmdDrawIndirectByteCountEXTCage: proc(commandBuffer: CommandBuffer; instanceCount: uint32; firstInstance: uint32; counterBuffer: Buffer; counterBufferOffset: DeviceSize; counterOffset: uint32; vertexStride: uint32;): void {.cdecl.}
 proc cmdBindTransformFeedbackBuffersEXT*(
       commandBuffer: CommandBuffer;
       firstBinding: uint32;
@@ -53,39 +46,34 @@ proc cmdBindTransformFeedbackBuffersEXT*(
       pBuffers: ptr Buffer;
       pOffsets: ptr DeviceSize;
       pSizes: ptr DeviceSize;
-    ): void {.cdecl.} =
-  cmdBindTransformFeedbackBuffersEXTCage(commandBuffer,firstBinding,bindingCount,pBuffers,pOffsets,pSizes)
+    ): void {.cdecl, lazyload("vkCmdBindTransformFeedbackBuffersEXT", DeviceLevel).}
 proc cmdBeginTransformFeedbackEXT*(
       commandBuffer: CommandBuffer;
       firstCounterBuffer: uint32;
       counterBufferCount: uint32;
       pCounterBuffers: ptr Buffer;
       pCounterBufferOffsets: ptr DeviceSize;
-    ): void {.cdecl.} =
-  cmdBeginTransformFeedbackEXTCage(commandBuffer,firstCounterBuffer,counterBufferCount,pCounterBuffers,pCounterBufferOffsets)
+    ): void {.cdecl, lazyload("vkCmdBeginTransformFeedbackEXT", DeviceLevel).}
 proc cmdEndTransformFeedbackEXT*(
       commandBuffer: CommandBuffer;
       firstCounterBuffer: uint32;
       counterBufferCount: uint32;
       pCounterBuffers: ptr Buffer;
       pCounterBufferOffsets: ptr DeviceSize;
-    ): void {.cdecl.} =
-  cmdEndTransformFeedbackEXTCage(commandBuffer,firstCounterBuffer,counterBufferCount,pCounterBuffers,pCounterBufferOffsets)
+    ): void {.cdecl, lazyload("vkCmdEndTransformFeedbackEXT", DeviceLevel).}
 proc cmdBeginQueryIndexedEXT*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
       query: uint32;
       flags: QueryControlFlags;
       index: uint32;
-    ): void {.cdecl.} =
-  cmdBeginQueryIndexedEXTCage(commandBuffer,queryPool,query,flags,index)
+    ): void {.cdecl, lazyload("vkCmdBeginQueryIndexedEXT", DeviceLevel).}
 proc cmdEndQueryIndexedEXT*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
       query: uint32;
       index: uint32;
-    ): void {.cdecl.} =
-  cmdEndQueryIndexedEXTCage(commandBuffer,queryPool,query,index)
+    ): void {.cdecl, lazyload("vkCmdEndQueryIndexedEXT", DeviceLevel).}
 proc cmdDrawIndirectByteCountEXT*(
       commandBuffer: CommandBuffer;
       instanceCount: uint32;
@@ -94,15 +82,21 @@ proc cmdDrawIndirectByteCountEXT*(
       counterBufferOffset: DeviceSize;
       counterOffset: uint32;
       vertexStride: uint32;
-    ): void {.cdecl.} =
-  cmdDrawIndirectByteCountEXTCage(commandBuffer,instanceCount,firstInstance,counterBuffer,counterBufferOffset,counterOffset,vertexStride)
+    ): void {.cdecl, lazyload("vkCmdDrawIndirectByteCountEXT", DeviceLevel).}
 
-proc loadVK_EXT_transform_feedback*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_EXT_transform_feedback*(instance: Instance) =
+  cmdBindTransformFeedbackBuffersEXT.smartLoad(instance)
+  cmdBeginTransformFeedbackEXT.smartLoad(instance)
+  cmdEndTransformFeedbackEXT.smartLoad(instance)
+  cmdBeginQueryIndexedEXT.smartLoad(instance)
+  cmdEndQueryIndexedEXT.smartLoad(instance)
+  cmdDrawIndirectByteCountEXT.smartLoad(instance)
 
-  cmdBindTransformFeedbackBuffersEXTCage << "vkCmdBindTransformFeedbackBuffersEXT"
-  cmdBeginTransformFeedbackEXTCage << "vkCmdBeginTransformFeedbackEXT"
-  cmdEndTransformFeedbackEXTCage << "vkCmdEndTransformFeedbackEXT"
-  cmdBeginQueryIndexedEXTCage << "vkCmdBeginQueryIndexedEXT"
-  cmdEndQueryIndexedEXTCage << "vkCmdEndQueryIndexedEXT"
-  cmdDrawIndirectByteCountEXTCage << "vkCmdDrawIndirectByteCountEXT"
+proc loadVK_EXT_transform_feedback*(device: Device) =
+  cmdBindTransformFeedbackBuffersEXT.smartLoad(device)
+  cmdBeginTransformFeedbackEXT.smartLoad(device)
+  cmdEndTransformFeedbackEXT.smartLoad(device)
+  cmdBeginQueryIndexedEXT.smartLoad(device)
+  cmdEndQueryIndexedEXT.smartLoad(device)
+  cmdDrawIndirectByteCountEXT.smartLoad(device)
+

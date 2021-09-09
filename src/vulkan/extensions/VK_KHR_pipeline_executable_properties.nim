@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:02Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_pipeline_executable_properties
 
 
@@ -61,35 +61,32 @@ type
     dataSize*: uint
     pData*: pointer
 
-var # command cages
-  getPipelineExecutablePropertiesKHRCage: proc(device: Device; pPipelineInfo: ptr PipelineInfoKHR; pExecutableCount: ptr uint32; pProperties: ptr PipelineExecutablePropertiesKHR;): Result {.cdecl.}
-  getPipelineExecutableStatisticsKHRCage: proc(device: Device; pExecutableInfo: ptr PipelineExecutableInfoKHR; pStatisticCount: ptr uint32; pStatistics: ptr PipelineExecutableStatisticKHR;): Result {.cdecl.}
-  getPipelineExecutableInternalRepresentationsKHRCage: proc(device: Device; pExecutableInfo: ptr PipelineExecutableInfoKHR; pInternalRepresentationCount: ptr uint32; pInternalRepresentations: ptr PipelineExecutableInternalRepresentationKHR;): Result {.cdecl.}
 proc getPipelineExecutablePropertiesKHR*(
       device: Device;
       pPipelineInfo: ptr PipelineInfoKHR;
       pExecutableCount: ptr uint32;
       pProperties: ptr PipelineExecutablePropertiesKHR;
-    ): Result {.cdecl, discardable.} =
-  getPipelineExecutablePropertiesKHRCage(device,pPipelineInfo,pExecutableCount,pProperties)
+    ): Result {.cdecl, lazyload("vkGetPipelineExecutablePropertiesKHR", DeviceLevel).}
 proc getPipelineExecutableStatisticsKHR*(
       device: Device;
       pExecutableInfo: ptr PipelineExecutableInfoKHR;
       pStatisticCount: ptr uint32;
       pStatistics: ptr PipelineExecutableStatisticKHR;
-    ): Result {.cdecl, discardable.} =
-  getPipelineExecutableStatisticsKHRCage(device,pExecutableInfo,pStatisticCount,pStatistics)
+    ): Result {.cdecl, lazyload("vkGetPipelineExecutableStatisticsKHR", DeviceLevel).}
 proc getPipelineExecutableInternalRepresentationsKHR*(
       device: Device;
       pExecutableInfo: ptr PipelineExecutableInfoKHR;
       pInternalRepresentationCount: ptr uint32;
       pInternalRepresentations: ptr PipelineExecutableInternalRepresentationKHR;
-    ): Result {.cdecl, discardable.} =
-  getPipelineExecutableInternalRepresentationsKHRCage(device,pExecutableInfo,pInternalRepresentationCount,pInternalRepresentations)
+    ): Result {.cdecl, lazyload("vkGetPipelineExecutableInternalRepresentationsKHR", DeviceLevel).}
 
-proc loadVK_KHR_pipeline_executable_properties*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_KHR_pipeline_executable_properties*(instance: Instance) =
+  getPipelineExecutablePropertiesKHR.smartLoad(instance)
+  getPipelineExecutableStatisticsKHR.smartLoad(instance)
+  getPipelineExecutableInternalRepresentationsKHR.smartLoad(instance)
 
-  getPipelineExecutablePropertiesKHRCage << "vkGetPipelineExecutablePropertiesKHR"
-  getPipelineExecutableStatisticsKHRCage << "vkGetPipelineExecutableStatisticsKHR"
-  getPipelineExecutableInternalRepresentationsKHRCage << "vkGetPipelineExecutableInternalRepresentationsKHR"
+proc loadVK_KHR_pipeline_executable_properties*(device: Device) =
+  getPipelineExecutablePropertiesKHR.smartLoad(device)
+  getPipelineExecutableStatisticsKHR.smartLoad(device)
+  getPipelineExecutableInternalRepresentationsKHR.smartLoad(device)
+

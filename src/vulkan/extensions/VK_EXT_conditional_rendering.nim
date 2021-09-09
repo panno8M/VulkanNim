@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_EXT_conditional_rendering
 
 
@@ -31,21 +31,19 @@ type
     pNext*: pointer
     conditionalRenderingEnable*: Bool32
 
-var # command cages
-  cmdBeginConditionalRenderingEXTCage: proc(commandBuffer: CommandBuffer; pConditionalRenderingBegin: ptr ConditionalRenderingBeginInfoEXT;): void {.cdecl.}
-  cmdEndConditionalRenderingEXTCage: proc(commandBuffer: CommandBuffer;): void {.cdecl.}
 proc cmdBeginConditionalRenderingEXT*(
       commandBuffer: CommandBuffer;
       pConditionalRenderingBegin: ptr ConditionalRenderingBeginInfoEXT;
-    ): void {.cdecl.} =
-  cmdBeginConditionalRenderingEXTCage(commandBuffer,pConditionalRenderingBegin)
+    ): void {.cdecl, lazyload("vkCmdBeginConditionalRenderingEXT", DeviceLevel).}
 proc cmdEndConditionalRenderingEXT*(
       commandBuffer: CommandBuffer;
-    ): void {.cdecl.} =
-  cmdEndConditionalRenderingEXTCage(commandBuffer)
+    ): void {.cdecl, lazyload("vkCmdEndConditionalRenderingEXT", DeviceLevel).}
 
-proc loadVK_EXT_conditional_rendering*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_EXT_conditional_rendering*(instance: Instance) =
+  cmdBeginConditionalRenderingEXT.smartLoad(instance)
+  cmdEndConditionalRenderingEXT.smartLoad(instance)
 
-  cmdBeginConditionalRenderingEXTCage << "vkCmdBeginConditionalRenderingEXT"
-  cmdEndConditionalRenderingEXTCage << "vkCmdEndConditionalRenderingEXT"
+proc loadVK_EXT_conditional_rendering*(device: Device) =
+  cmdBeginConditionalRenderingEXT.smartLoad(device)
+  cmdEndConditionalRenderingEXT.smartLoad(device)
+

@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_EXT_display_control
 
 
@@ -41,44 +41,40 @@ type
     pNext*: pointer
     surfaceCounters*: SurfaceCounterFlagsEXT
 
-var # command cages
-  displayPowerControlEXTCage: proc(device: Device; display: DisplayKHR; pDisplayPowerInfo: ptr DisplayPowerInfoEXT;): Result {.cdecl.}
-  registerDeviceEventEXTCage: proc(device: Device; pDeviceEventInfo: ptr DeviceEventInfoEXT; pAllocator: ptr AllocationCallbacks; pFence: ptr Fence;): Result {.cdecl.}
-  registerDisplayEventEXTCage: proc(device: Device; display: DisplayKHR; pDisplayEventInfo: ptr DisplayEventInfoEXT; pAllocator: ptr AllocationCallbacks; pFence: ptr Fence;): Result {.cdecl.}
-  getSwapchainCounterEXTCage: proc(device: Device; swapchain: SwapchainKHR; counter: SurfaceCounterFlagBitsEXT; pCounterValue: ptr uint64;): Result {.cdecl.}
 proc displayPowerControlEXT*(
       device: Device;
       display: DisplayKHR;
       pDisplayPowerInfo: ptr DisplayPowerInfoEXT;
-    ): Result {.cdecl, discardable.} =
-  displayPowerControlEXTCage(device,display,pDisplayPowerInfo)
+    ): Result {.cdecl, lazyload("vkDisplayPowerControlEXT", DeviceLevel).}
 proc registerDeviceEventEXT*(
       device: Device;
       pDeviceEventInfo: ptr DeviceEventInfoEXT;
       pAllocator: ptr AllocationCallbacks;
       pFence: ptr Fence;
-    ): Result {.cdecl, discardable.} =
-  registerDeviceEventEXTCage(device,pDeviceEventInfo,pAllocator,pFence)
+    ): Result {.cdecl, lazyload("vkRegisterDeviceEventEXT", DeviceLevel).}
 proc registerDisplayEventEXT*(
       device: Device;
       display: DisplayKHR;
       pDisplayEventInfo: ptr DisplayEventInfoEXT;
       pAllocator: ptr AllocationCallbacks;
       pFence: ptr Fence;
-    ): Result {.cdecl, discardable.} =
-  registerDisplayEventEXTCage(device,display,pDisplayEventInfo,pAllocator,pFence)
+    ): Result {.cdecl, lazyload("vkRegisterDisplayEventEXT", DeviceLevel).}
 proc getSwapchainCounterEXT*(
       device: Device;
       swapchain: SwapchainKHR;
       counter: SurfaceCounterFlagBitsEXT;
       pCounterValue: ptr uint64;
-    ): Result {.cdecl, discardable.} =
-  getSwapchainCounterEXTCage(device,swapchain,counter,pCounterValue)
+    ): Result {.cdecl, lazyload("vkGetSwapchainCounterEXT", DeviceLevel).}
 
-proc loadVK_EXT_display_control*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_EXT_display_control*(instance: Instance) =
+  displayPowerControlEXT.smartLoad(instance)
+  registerDeviceEventEXT.smartLoad(instance)
+  registerDisplayEventEXT.smartLoad(instance)
+  getSwapchainCounterEXT.smartLoad(instance)
 
-  displayPowerControlEXTCage << "vkDisplayPowerControlEXT"
-  registerDeviceEventEXTCage << "vkRegisterDeviceEventEXT"
-  registerDisplayEventEXTCage << "vkRegisterDisplayEventEXT"
-  getSwapchainCounterEXTCage << "vkGetSwapchainCounterEXT"
+proc loadVK_EXT_display_control*(device: Device) =
+  displayPowerControlEXT.smartLoad(device)
+  registerDeviceEventEXT.smartLoad(device)
+  registerDisplayEventEXT.smartLoad(device)
+  getSwapchainCounterEXT.smartLoad(device)
+

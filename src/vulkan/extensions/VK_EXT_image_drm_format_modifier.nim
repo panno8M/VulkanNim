@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:02Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_EXT_image_drm_format_modifier
 
 
@@ -50,16 +50,15 @@ type
     pNext*: pointer
     drmFormatModifier*: uint64
 
-var # command cages
-  getImageDrmFormatModifierPropertiesEXTCage: proc(device: Device; image: Image; pProperties: ptr ImageDrmFormatModifierPropertiesEXT;): Result {.cdecl.}
 proc getImageDrmFormatModifierPropertiesEXT*(
       device: Device;
       image: Image;
       pProperties: ptr ImageDrmFormatModifierPropertiesEXT;
-    ): Result {.cdecl, discardable.} =
-  getImageDrmFormatModifierPropertiesEXTCage(device,image,pProperties)
+    ): Result {.cdecl, lazyload("vkGetImageDrmFormatModifierPropertiesEXT", DeviceLevel).}
 
-proc loadVK_EXT_image_drm_format_modifier*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_EXT_image_drm_format_modifier*(instance: Instance) =
+  getImageDrmFormatModifierPropertiesEXT.smartLoad(instance)
 
-  getImageDrmFormatModifierPropertiesEXTCage << "vkGetImageDrmFormatModifierPropertiesEXT"
+proc loadVK_EXT_image_drm_format_modifier*(device: Device) =
+  getImageDrmFormatModifierPropertiesEXT.smartLoad(device)
+

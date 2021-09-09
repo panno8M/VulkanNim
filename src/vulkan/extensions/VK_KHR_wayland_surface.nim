@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_wayland_surface
 
 
@@ -22,25 +22,23 @@ type
     display*: ptr wl_display
     surface*: ptr wl_surface
 
-var # command cages
-  createWaylandSurfaceKHRCage: proc(instance: Instance; pCreateInfo: ptr WaylandSurfaceCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
-  getPhysicalDeviceWaylandPresentationSupportKHRCage: proc(physicalDevice: PhysicalDevice; queueFamilyIndex: uint32; display: ptr wl_display;): Bool32 {.cdecl.}
 proc createWaylandSurfaceKHR*(
       instance: Instance;
       pCreateInfo: ptr WaylandSurfaceCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl, discardable.} =
-  createWaylandSurfaceKHRCage(instance,pCreateInfo,pAllocator,pSurface)
+    ): Result {.cdecl, lazyload("vkCreateWaylandSurfaceKHR", InstanceLevel).}
 proc getPhysicalDeviceWaylandPresentationSupportKHR*(
       physicalDevice: PhysicalDevice;
       queueFamilyIndex: uint32;
       display: ptr wl_display;
-    ): Bool32 {.cdecl.} =
-  getPhysicalDeviceWaylandPresentationSupportKHRCage(physicalDevice,queueFamilyIndex,display)
+    ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceWaylandPresentationSupportKHR", InstanceLevel).}
+
+proc loadAllVK_KHR_wayland_surface*(instance: Instance) =
+  createWaylandSurfaceKHR.smartLoad(instance)
+  getPhysicalDeviceWaylandPresentationSupportKHR.smartLoad(instance)
 
 proc loadVK_KHR_wayland_surface*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  createWaylandSurfaceKHR.smartLoad(instance)
+  getPhysicalDeviceWaylandPresentationSupportKHR.smartLoad(instance)
 
-  createWaylandSurfaceKHRCage << "vkCreateWaylandSurfaceKHR"
-  getPhysicalDeviceWaylandPresentationSupportKHRCage << "vkGetPhysicalDeviceWaylandPresentationSupportKHR"

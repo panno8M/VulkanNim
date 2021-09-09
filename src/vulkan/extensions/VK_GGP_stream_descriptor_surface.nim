@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_GGP_stream_descriptor_surface
 
 
@@ -21,17 +21,16 @@ type
     flags*: StreamDescriptorSurfaceCreateFlagsGGP
     streamDescriptor*: GgpStreamDescriptor
 
-var # command cages
-  createStreamDescriptorSurfaceGGPCage: proc(instance: Instance; pCreateInfo: ptr StreamDescriptorSurfaceCreateInfoGGP; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
 proc createStreamDescriptorSurfaceGGP*(
       instance: Instance;
       pCreateInfo: ptr StreamDescriptorSurfaceCreateInfoGGP;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl, discardable.} =
-  createStreamDescriptorSurfaceGGPCage(instance,pCreateInfo,pAllocator,pSurface)
+    ): Result {.cdecl, lazyload("vkCreateStreamDescriptorSurfaceGGP", InstanceLevel).}
+
+proc loadAllVK_GGP_stream_descriptor_surface*(instance: Instance) =
+  createStreamDescriptorSurfaceGGP.smartLoad(instance)
 
 proc loadVK_GGP_stream_descriptor_surface*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  createStreamDescriptorSurfaceGGP.smartLoad(instance)
 
-  createStreamDescriptorSurfaceGGPCage << "vkCreateStreamDescriptorSurfaceGGP"

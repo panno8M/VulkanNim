@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_NV_cooperative_matrix
 
 
@@ -52,16 +52,15 @@ type
     pNext*: pointer
     cooperativeMatrixSupportedStages*: ShaderStageFlags
 
-var # command cages
-  getPhysicalDeviceCooperativeMatrixPropertiesNVCage: proc(physicalDevice: PhysicalDevice; pPropertyCount: ptr uint32; pProperties: ptr CooperativeMatrixPropertiesNV;): Result {.cdecl.}
 proc getPhysicalDeviceCooperativeMatrixPropertiesNV*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
       pProperties: ptr CooperativeMatrixPropertiesNV;
-    ): Result {.cdecl, discardable.} =
-  getPhysicalDeviceCooperativeMatrixPropertiesNVCage(physicalDevice,pPropertyCount,pProperties)
+    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceCooperativeMatrixPropertiesNV", InstanceLevel).}
+
+proc loadAllVK_NV_cooperative_matrix*(instance: Instance) =
+  getPhysicalDeviceCooperativeMatrixPropertiesNV.smartLoad(instance)
 
 proc loadVK_NV_cooperative_matrix*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  getPhysicalDeviceCooperativeMatrixPropertiesNV.smartLoad(instance)
 
-  getPhysicalDeviceCooperativeMatrixPropertiesNVCage << "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV"

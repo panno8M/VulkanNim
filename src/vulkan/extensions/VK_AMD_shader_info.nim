@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_AMD_shader_info
 
 
@@ -31,8 +31,6 @@ type
     numAvailableSgprs*: uint32
     computeWorkGroupSize*: array[3, uint32]
 
-var # command cages
-  getShaderInfoAMDCage: proc(device: Device; pipeline: Pipeline; shaderStage: ShaderStageFlagBits; infoType: ShaderInfoTypeAMD; pInfoSize: ptr uint; pInfo: pointer;): Result {.cdecl.}
 proc getShaderInfoAMD*(
       device: Device;
       pipeline: Pipeline;
@@ -40,10 +38,11 @@ proc getShaderInfoAMD*(
       infoType: ShaderInfoTypeAMD;
       pInfoSize: ptr uint;
       pInfo: pointer;
-    ): Result {.cdecl, discardable.} =
-  getShaderInfoAMDCage(device,pipeline,shaderStage,infoType,pInfoSize,pInfo)
+    ): Result {.cdecl, lazyload("vkGetShaderInfoAMD", DeviceLevel).}
 
-proc loadVK_AMD_shader_info*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_AMD_shader_info*(instance: Instance) =
+  getShaderInfoAMD.smartLoad(instance)
 
-  getShaderInfoAMDCage << "vkGetShaderInfoAMD"
+proc loadVK_AMD_shader_info*(device: Device) =
+  getShaderInfoAMD.smartLoad(device)
+

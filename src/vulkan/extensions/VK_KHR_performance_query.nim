@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_performance_query
 
 
@@ -97,39 +97,37 @@ PerformanceCounterScopeKHR.defineAliases:
   renderPassKhr as queryScopeRenderPassKhr
   commandKhr as queryScopeCommandKhr
 
-var # command cages
-  enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHRCage: proc(physicalDevice: PhysicalDevice; queueFamilyIndex: uint32; pCounterCount: ptr uint32; pCounters: ptr PerformanceCounterKHR; pCounterDescriptions: ptr PerformanceCounterDescriptionKHR;): Result {.cdecl.}
-  getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHRCage: proc(physicalDevice: PhysicalDevice; pPerformanceQueryCreateInfo: ptr QueryPoolPerformanceCreateInfoKHR; pNumPasses: ptr uint32;): void {.cdecl.}
-  acquireProfilingLockKHRCage: proc(device: Device; pInfo: ptr AcquireProfilingLockInfoKHR;): Result {.cdecl.}
-  releaseProfilingLockKHRCage: proc(device: Device;): void {.cdecl.}
 proc enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR*(
       physicalDevice: PhysicalDevice;
       queueFamilyIndex: uint32;
       pCounterCount: ptr uint32;
       pCounters: ptr PerformanceCounterKHR;
       pCounterDescriptions: ptr PerformanceCounterDescriptionKHR;
-    ): Result {.cdecl, discardable.} =
-  enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHRCage(physicalDevice,queueFamilyIndex,pCounterCount,pCounters,pCounterDescriptions)
+    ): Result {.cdecl, lazyload("vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR", InstanceLevel).}
 proc getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR*(
       physicalDevice: PhysicalDevice;
       pPerformanceQueryCreateInfo: ptr QueryPoolPerformanceCreateInfoKHR;
       pNumPasses: ptr uint32;
-    ): void {.cdecl.} =
-  getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHRCage(physicalDevice,pPerformanceQueryCreateInfo,pNumPasses)
+    ): void {.cdecl, lazyload("vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR", InstanceLevel).}
 proc acquireProfilingLockKHR*(
       device: Device;
       pInfo: ptr AcquireProfilingLockInfoKHR;
-    ): Result {.cdecl, discardable.} =
-  acquireProfilingLockKHRCage(device,pInfo)
+    ): Result {.cdecl, lazyload("vkAcquireProfilingLockKHR", DeviceLevel).}
 proc releaseProfilingLockKHR*(
       device: Device;
-    ): void {.cdecl.} =
-  releaseProfilingLockKHRCage(device)
+    ): void {.cdecl, lazyload("vkReleaseProfilingLockKHR", DeviceLevel).}
+
+proc loadAllVK_KHR_performance_query*(instance: Instance) =
+  enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR.smartLoad(instance)
+  getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR.smartLoad(instance)
+  acquireProfilingLockKHR.smartLoad(instance)
+  releaseProfilingLockKHR.smartLoad(instance)
 
 proc loadVK_KHR_performance_query*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR.smartLoad(instance)
+  getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR.smartLoad(instance)
 
-  enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHRCage << "vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR"
-  getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHRCage << "vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR"
-  acquireProfilingLockKHRCage << "vkAcquireProfilingLockKHR"
-  releaseProfilingLockKHRCage << "vkReleaseProfilingLockKHR"
+proc loadVK_KHR_performance_query*(device: Device) =
+  acquireProfilingLockKHR.smartLoad(device)
+  releaseProfilingLockKHR.smartLoad(device)
+

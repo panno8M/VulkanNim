@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_EXT_directfb_surface
 
 
@@ -22,25 +22,23 @@ type
     dfb*: ptr IDirectFB
     surface*: ptr IDirectFBSurface
 
-var # command cages
-  createDirectFBSurfaceEXTCage: proc(instance: Instance; pCreateInfo: ptr DirectFBSurfaceCreateInfoEXT; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
-  getPhysicalDeviceDirectFBPresentationSupportEXTCage: proc(physicalDevice: PhysicalDevice; queueFamilyIndex: uint32; dfb: ptr IDirectFB;): Bool32 {.cdecl.}
 proc createDirectFBSurfaceEXT*(
       instance: Instance;
       pCreateInfo: ptr DirectFBSurfaceCreateInfoEXT;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl, discardable.} =
-  createDirectFBSurfaceEXTCage(instance,pCreateInfo,pAllocator,pSurface)
+    ): Result {.cdecl, lazyload("vkCreateDirectFBSurfaceEXT", InstanceLevel).}
 proc getPhysicalDeviceDirectFBPresentationSupportEXT*(
       physicalDevice: PhysicalDevice;
       queueFamilyIndex: uint32;
       dfb: ptr IDirectFB;
-    ): Bool32 {.cdecl.} =
-  getPhysicalDeviceDirectFBPresentationSupportEXTCage(physicalDevice,queueFamilyIndex,dfb)
+    ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceDirectFBPresentationSupportEXT", InstanceLevel).}
+
+proc loadAllVK_EXT_directfb_surface*(instance: Instance) =
+  createDirectFBSurfaceEXT.smartLoad(instance)
+  getPhysicalDeviceDirectFBPresentationSupportEXT.smartLoad(instance)
 
 proc loadVK_EXT_directfb_surface*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  createDirectFBSurfaceEXT.smartLoad(instance)
+  getPhysicalDeviceDirectFBPresentationSupportEXT.smartLoad(instance)
 
-  createDirectFBSurfaceEXTCage << "vkCreateDirectFBSurfaceEXT"
-  getPhysicalDeviceDirectFBPresentationSupportEXTCage << "vkGetPhysicalDeviceDirectFBPresentationSupportEXT"

@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:02Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_EXT_private_data
 
 
@@ -29,45 +29,41 @@ type
   HtPrivateDataSlotEXT = object of HandleType
   PrivateDataSlotEXT* = NonDispatchableHandle[HtPrivateDataSlotEXT]
 
-var # command cages
-  createPrivateDataSlotEXTCage: proc(device: Device; pCreateInfo: ptr PrivateDataSlotCreateInfoEXT; pAllocator: ptr AllocationCallbacks; pPrivateDataSlot: ptr PrivateDataSlotEXT;): Result {.cdecl.}
-  destroyPrivateDataSlotEXTCage: proc(device: Device; privateDataSlot: PrivateDataSlotEXT; pAllocator: ptr AllocationCallbacks;): void {.cdecl.}
-  setPrivateDataEXTCage: proc(device: Device; objectType: ObjectType; objectHandle: uint64; privateDataSlot: PrivateDataSlotEXT; data: uint64;): Result {.cdecl.}
-  getPrivateDataEXTCage: proc(device: Device; objectType: ObjectType; objectHandle: uint64; privateDataSlot: PrivateDataSlotEXT; pData: ptr uint64;): void {.cdecl.}
 proc createPrivateDataSlotEXT*(
       device: Device;
       pCreateInfo: ptr PrivateDataSlotCreateInfoEXT;
       pAllocator: ptr AllocationCallbacks;
       pPrivateDataSlot: ptr PrivateDataSlotEXT;
-    ): Result {.cdecl, discardable.} =
-  createPrivateDataSlotEXTCage(device,pCreateInfo,pAllocator,pPrivateDataSlot)
+    ): Result {.cdecl, lazyload("vkCreatePrivateDataSlotEXT", DeviceLevel).}
 proc destroyPrivateDataSlotEXT*(
       device: Device;
       privateDataSlot: PrivateDataSlotEXT;
       pAllocator: ptr AllocationCallbacks;
-    ): void {.cdecl.} =
-  destroyPrivateDataSlotEXTCage(device,privateDataSlot,pAllocator)
+    ): void {.cdecl, lazyload("vkDestroyPrivateDataSlotEXT", DeviceLevel).}
 proc setPrivateDataEXT*(
       device: Device;
       objectType: ObjectType;
       objectHandle: uint64;
       privateDataSlot: PrivateDataSlotEXT;
       data: uint64;
-    ): Result {.cdecl, discardable.} =
-  setPrivateDataEXTCage(device,objectType,objectHandle,privateDataSlot,data)
+    ): Result {.cdecl, lazyload("vkSetPrivateDataEXT", DeviceLevel).}
 proc getPrivateDataEXT*(
       device: Device;
       objectType: ObjectType;
       objectHandle: uint64;
       privateDataSlot: PrivateDataSlotEXT;
       pData: ptr uint64;
-    ): void {.cdecl.} =
-  getPrivateDataEXTCage(device,objectType,objectHandle,privateDataSlot,pData)
+    ): void {.cdecl, lazyload("vkGetPrivateDataEXT", DeviceLevel).}
 
-proc loadVK_EXT_private_data*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_EXT_private_data*(instance: Instance) =
+  createPrivateDataSlotEXT.smartLoad(instance)
+  destroyPrivateDataSlotEXT.smartLoad(instance)
+  setPrivateDataEXT.smartLoad(instance)
+  getPrivateDataEXT.smartLoad(instance)
 
-  createPrivateDataSlotEXTCage << "vkCreatePrivateDataSlotEXT"
-  destroyPrivateDataSlotEXTCage << "vkDestroyPrivateDataSlotEXT"
-  setPrivateDataEXTCage << "vkSetPrivateDataEXT"
-  getPrivateDataEXTCage << "vkGetPrivateDataEXT"
+proc loadVK_EXT_private_data*(device: Device) =
+  createPrivateDataSlotEXT.smartLoad(device)
+  destroyPrivateDataSlotEXT.smartLoad(device)
+  setPrivateDataEXT.smartLoad(device)
+  getPrivateDataEXT.smartLoad(device)
+

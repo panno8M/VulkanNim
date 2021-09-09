@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_external_semaphore_fd
 
 
@@ -25,23 +25,21 @@ type
     semaphore*: Semaphore
     handleType*: ExternalSemaphoreHandleTypeFlagBits
 
-var # command cages
-  importSemaphoreFdKHRCage: proc(device: Device; pImportSemaphoreFdInfo: ptr ImportSemaphoreFdInfoKHR;): Result {.cdecl.}
-  getSemaphoreFdKHRCage: proc(device: Device; pGetFdInfo: ptr SemaphoreGetFdInfoKHR; pFd: ptr int;): Result {.cdecl.}
 proc importSemaphoreFdKHR*(
       device: Device;
       pImportSemaphoreFdInfo: ptr ImportSemaphoreFdInfoKHR;
-    ): Result {.cdecl, discardable.} =
-  importSemaphoreFdKHRCage(device,pImportSemaphoreFdInfo)
+    ): Result {.cdecl, lazyload("vkImportSemaphoreFdKHR", DeviceLevel).}
 proc getSemaphoreFdKHR*(
       device: Device;
       pGetFdInfo: ptr SemaphoreGetFdInfoKHR;
       pFd: ptr int;
-    ): Result {.cdecl, discardable.} =
-  getSemaphoreFdKHRCage(device,pGetFdInfo,pFd)
+    ): Result {.cdecl, lazyload("vkGetSemaphoreFdKHR", DeviceLevel).}
 
-proc loadVK_KHR_external_semaphore_fd*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_KHR_external_semaphore_fd*(instance: Instance) =
+  importSemaphoreFdKHR.smartLoad(instance)
+  getSemaphoreFdKHR.smartLoad(instance)
 
-  importSemaphoreFdKHRCage << "vkImportSemaphoreFdKHR"
-  getSemaphoreFdKHRCage << "vkGetSemaphoreFdKHR"
+proc loadVK_KHR_external_semaphore_fd*(device: Device) =
+  importSemaphoreFdKHR.smartLoad(device)
+  getSemaphoreFdKHR.smartLoad(device)
+

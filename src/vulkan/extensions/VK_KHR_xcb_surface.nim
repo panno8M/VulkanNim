@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:02Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_xcb_surface
 
 
@@ -22,26 +22,24 @@ type
     connection*: ptr xcb_connection_t
     window*: xcb_window_t
 
-var # command cages
-  createXcbSurfaceKHRCage: proc(instance: Instance; pCreateInfo: ptr XcbSurfaceCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
-  getPhysicalDeviceXcbPresentationSupportKHRCage: proc(physicalDevice: PhysicalDevice; queueFamilyIndex: uint32; connection: ptr xcb_connection_t; visual_id: xcb_visualid_t;): Bool32 {.cdecl.}
 proc createXcbSurfaceKHR*(
       instance: Instance;
       pCreateInfo: ptr XcbSurfaceCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl, discardable.} =
-  createXcbSurfaceKHRCage(instance,pCreateInfo,pAllocator,pSurface)
+    ): Result {.cdecl, lazyload("vkCreateXcbSurfaceKHR", InstanceLevel).}
 proc getPhysicalDeviceXcbPresentationSupportKHR*(
       physicalDevice: PhysicalDevice;
       queueFamilyIndex: uint32;
       connection: ptr xcb_connection_t;
       visual_id: xcb_visualid_t;
-    ): Bool32 {.cdecl.} =
-  getPhysicalDeviceXcbPresentationSupportKHRCage(physicalDevice,queueFamilyIndex,connection,visual_id)
+    ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceXcbPresentationSupportKHR", InstanceLevel).}
+
+proc loadAllVK_KHR_xcb_surface*(instance: Instance) =
+  createXcbSurfaceKHR.smartLoad(instance)
+  getPhysicalDeviceXcbPresentationSupportKHR.smartLoad(instance)
 
 proc loadVK_KHR_xcb_surface*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  createXcbSurfaceKHR.smartLoad(instance)
+  getPhysicalDeviceXcbPresentationSupportKHR.smartLoad(instance)
 
-  createXcbSurfaceKHRCage << "vkCreateXcbSurfaceKHR"
-  getPhysicalDeviceXcbPresentationSupportKHRCage << "vkGetPhysicalDeviceXcbPresentationSupportKHR"

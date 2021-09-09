@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_EXT_direct_mode_display
 
 
@@ -11,15 +11,14 @@ const
   ExtDirectModeDisplaySpecVersion* = 1
   ExtDirectModeDisplayExtensionName* = "VK_EXT_direct_mode_display"
 
-var # command cages
-  releaseDisplayEXTCage: proc(physicalDevice: PhysicalDevice; display: DisplayKHR;): Result {.cdecl.}
 proc releaseDisplayEXT*(
       physicalDevice: PhysicalDevice;
       display: DisplayKHR;
-    ): Result {.cdecl, discardable.} =
-  releaseDisplayEXTCage(physicalDevice,display)
+    ): Result {.cdecl, lazyload("vkReleaseDisplayEXT", InstanceLevel).}
+
+proc loadAllVK_EXT_direct_mode_display*(instance: Instance) =
+  releaseDisplayEXT.smartLoad(instance)
 
 proc loadVK_EXT_direct_mode_display*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  releaseDisplayEXT.smartLoad(instance)
 
-  releaseDisplayEXTCage << "vkReleaseDisplayEXT"

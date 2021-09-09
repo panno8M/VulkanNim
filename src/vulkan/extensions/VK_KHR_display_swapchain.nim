@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_display_swapchain
 
 
@@ -21,18 +21,17 @@ type
     dstRect*: Rect2D
     persistent*: Bool32
 
-var # command cages
-  createSharedSwapchainsKHRCage: proc(device: Device; swapchainCount: uint32; pCreateInfos: ptr SwapchainCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pSwapchains: ptr SwapchainKHR;): Result {.cdecl.}
 proc createSharedSwapchainsKHR*(
       device: Device;
       swapchainCount: uint32;
       pCreateInfos: ptr SwapchainCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pSwapchains: ptr SwapchainKHR;
-    ): Result {.cdecl, discardable.} =
-  createSharedSwapchainsKHRCage(device,swapchainCount,pCreateInfos,pAllocator,pSwapchains)
+    ): Result {.cdecl, lazyload("vkCreateSharedSwapchainsKHR", DeviceLevel).}
 
-proc loadVK_KHR_display_swapchain*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_KHR_display_swapchain*(instance: Instance) =
+  createSharedSwapchainsKHR.smartLoad(instance)
 
-  createSharedSwapchainsKHRCage << "vkCreateSharedSwapchainsKHR"
+proc loadVK_KHR_display_swapchain*(device: Device) =
+  createSharedSwapchainsKHR.smartLoad(device)
+

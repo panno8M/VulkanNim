@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_external_semaphore_win32
 
 
@@ -39,23 +39,21 @@ type
     semaphore*: Semaphore
     handleType*: ExternalSemaphoreHandleTypeFlagBits
 
-var # command cages
-  importSemaphoreWin32HandleKHRCage: proc(device: Device; pImportSemaphoreWin32HandleInfo: ptr ImportSemaphoreWin32HandleInfoKHR;): Result {.cdecl.}
-  getSemaphoreWin32HandleKHRCage: proc(device: Device; pGetWin32HandleInfo: ptr SemaphoreGetWin32HandleInfoKHR; pHandle: ptr Win32Handle;): Result {.cdecl.}
 proc importSemaphoreWin32HandleKHR*(
       device: Device;
       pImportSemaphoreWin32HandleInfo: ptr ImportSemaphoreWin32HandleInfoKHR;
-    ): Result {.cdecl, discardable.} =
-  importSemaphoreWin32HandleKHRCage(device,pImportSemaphoreWin32HandleInfo)
+    ): Result {.cdecl, lazyload("vkImportSemaphoreWin32HandleKHR", DeviceLevel).}
 proc getSemaphoreWin32HandleKHR*(
       device: Device;
       pGetWin32HandleInfo: ptr SemaphoreGetWin32HandleInfoKHR;
       pHandle: ptr Win32Handle;
-    ): Result {.cdecl, discardable.} =
-  getSemaphoreWin32HandleKHRCage(device,pGetWin32HandleInfo,pHandle)
+    ): Result {.cdecl, lazyload("vkGetSemaphoreWin32HandleKHR", DeviceLevel).}
 
-proc loadVK_KHR_external_semaphore_win32*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_KHR_external_semaphore_win32*(instance: Instance) =
+  importSemaphoreWin32HandleKHR.smartLoad(instance)
+  getSemaphoreWin32HandleKHR.smartLoad(instance)
 
-  importSemaphoreWin32HandleKHRCage << "vkImportSemaphoreWin32HandleKHR"
-  getSemaphoreWin32HandleKHRCage << "vkGetSemaphoreWin32HandleKHR"
+proc loadVK_KHR_external_semaphore_win32*(device: Device) =
+  importSemaphoreWin32HandleKHR.smartLoad(device)
+  getSemaphoreWin32HandleKHR.smartLoad(device)
+

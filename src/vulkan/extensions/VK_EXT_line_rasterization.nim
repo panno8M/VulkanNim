@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:02Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_EXT_line_rasterization
 
 
@@ -40,16 +40,15 @@ type
     lineStippleFactor*: uint32
     lineStipplePattern*: uint16
 
-var # command cages
-  cmdSetLineStippleEXTCage: proc(commandBuffer: CommandBuffer; lineStippleFactor: uint32; lineStipplePattern: uint16;): void {.cdecl.}
 proc cmdSetLineStippleEXT*(
       commandBuffer: CommandBuffer;
       lineStippleFactor: uint32;
       lineStipplePattern: uint16;
-    ): void {.cdecl.} =
-  cmdSetLineStippleEXTCage(commandBuffer,lineStippleFactor,lineStipplePattern)
+    ): void {.cdecl, lazyload("vkCmdSetLineStippleEXT", DeviceLevel).}
 
-proc loadVK_EXT_line_rasterization*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_EXT_line_rasterization*(instance: Instance) =
+  cmdSetLineStippleEXT.smartLoad(instance)
 
-  cmdSetLineStippleEXTCage << "vkCmdSetLineStippleEXT"
+proc loadVK_EXT_line_rasterization*(device: Device) =
+  cmdSetLineStippleEXT.smartLoad(device)
+

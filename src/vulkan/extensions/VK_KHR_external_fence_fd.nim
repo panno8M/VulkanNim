@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_external_fence_fd
 
 
@@ -25,23 +25,21 @@ type
     fence*: Fence
     handleType*: ExternalFenceHandleTypeFlagBits
 
-var # command cages
-  importFenceFdKHRCage: proc(device: Device; pImportFenceFdInfo: ptr ImportFenceFdInfoKHR;): Result {.cdecl.}
-  getFenceFdKHRCage: proc(device: Device; pGetFdInfo: ptr FenceGetFdInfoKHR; pFd: ptr int;): Result {.cdecl.}
 proc importFenceFdKHR*(
       device: Device;
       pImportFenceFdInfo: ptr ImportFenceFdInfoKHR;
-    ): Result {.cdecl, discardable.} =
-  importFenceFdKHRCage(device,pImportFenceFdInfo)
+    ): Result {.cdecl, lazyload("vkImportFenceFdKHR", DeviceLevel).}
 proc getFenceFdKHR*(
       device: Device;
       pGetFdInfo: ptr FenceGetFdInfoKHR;
       pFd: ptr int;
-    ): Result {.cdecl, discardable.} =
-  getFenceFdKHRCage(device,pGetFdInfo,pFd)
+    ): Result {.cdecl, lazyload("vkGetFenceFdKHR", DeviceLevel).}
 
-proc loadVK_KHR_external_fence_fd*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_KHR_external_fence_fd*(instance: Instance) =
+  importFenceFdKHR.smartLoad(instance)
+  getFenceFdKHR.smartLoad(instance)
 
-  importFenceFdKHRCage << "vkImportFenceFdKHR"
-  getFenceFdKHRCage << "vkGetFenceFdKHR"
+proc loadVK_KHR_external_fence_fd*(device: Device) =
+  importFenceFdKHR.smartLoad(device)
+  getFenceFdKHR.smartLoad(device)
+

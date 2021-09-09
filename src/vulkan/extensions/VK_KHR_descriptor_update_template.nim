@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_descriptor_update_template
 
 
@@ -39,23 +39,22 @@ DescriptorUpdateTemplateType.defineAliases:
 
 
 
-var # command cages
-  cmdPushDescriptorSetWithTemplateKHRCage: proc(commandBuffer: CommandBuffer; descriptorUpdateTemplate: DescriptorUpdateTemplate; layout: PipelineLayout; set: uint32; pData: pointer;): void {.cdecl.}
 proc cmdPushDescriptorSetWithTemplateKHR*(
       commandBuffer: CommandBuffer;
       descriptorUpdateTemplate: DescriptorUpdateTemplate;
       layout: PipelineLayout;
       set: uint32;
       pData: pointer;
-    ): void {.cdecl.} =
-  cmdPushDescriptorSetWithTemplateKHRCage(commandBuffer,descriptorUpdateTemplate,layout,set,pData)
+    ): void {.cdecl, lazyload("vkCmdPushDescriptorSetWithTemplateKHR", DeviceLevel).}
 
 
 DebugReportObjectTypeEXT.defineAliases:
   descriptorUpdateTemplateExt as descriptorUpdateTemplateKhrExt
 
 
-proc loadVK_KHR_descriptor_update_template*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_KHR_descriptor_update_template*(instance: Instance) =
+  cmdPushDescriptorSetWithTemplateKHR.smartLoad(instance)
 
-  cmdPushDescriptorSetWithTemplateKHRCage << "vkCmdPushDescriptorSetWithTemplateKHR"
+proc loadVK_KHR_descriptor_update_template*(device: Device) =
+  cmdPushDescriptorSetWithTemplateKHR.smartLoad(device)
+

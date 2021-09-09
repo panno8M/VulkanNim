@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_NV_device_diagnostic_checkpoints
 
 
@@ -22,23 +22,21 @@ type
     stage*: PipelineStageFlagBits
     pCheckpointMarker*: pointer
 
-var # command cages
-  cmdSetCheckpointNVCage: proc(commandBuffer: CommandBuffer; pCheckpointMarker: pointer;): void {.cdecl.}
-  getQueueCheckpointDataNVCage: proc(queue: Queue; pCheckpointDataCount: ptr uint32; pCheckpointData: ptr CheckpointDataNV;): void {.cdecl.}
 proc cmdSetCheckpointNV*(
       commandBuffer: CommandBuffer;
       pCheckpointMarker: pointer;
-    ): void {.cdecl.} =
-  cmdSetCheckpointNVCage(commandBuffer,pCheckpointMarker)
+    ): void {.cdecl, lazyload("vkCmdSetCheckpointNV", DeviceLevel).}
 proc getQueueCheckpointDataNV*(
       queue: Queue;
       pCheckpointDataCount: ptr uint32;
       pCheckpointData: ptr CheckpointDataNV;
-    ): void {.cdecl.} =
-  getQueueCheckpointDataNVCage(queue,pCheckpointDataCount,pCheckpointData)
+    ): void {.cdecl, lazyload("vkGetQueueCheckpointDataNV", DeviceLevel).}
 
-proc loadVK_NV_device_diagnostic_checkpoints*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_NV_device_diagnostic_checkpoints*(instance: Instance) =
+  cmdSetCheckpointNV.smartLoad(instance)
+  getQueueCheckpointDataNV.smartLoad(instance)
 
-  cmdSetCheckpointNVCage << "vkCmdSetCheckpointNV"
-  getQueueCheckpointDataNVCage << "vkGetQueueCheckpointDataNV"
+proc loadVK_NV_device_diagnostic_checkpoints*(device: Device) =
+  cmdSetCheckpointNV.smartLoad(device)
+  getQueueCheckpointDataNV.smartLoad(device)
+

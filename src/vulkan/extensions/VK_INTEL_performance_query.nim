@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_INTEL_performance_query
 
 
@@ -67,75 +67,66 @@ type
   HtPerformanceConfigurationINTEL = object of HandleType
   PerformanceConfigurationINTEL* = NonDispatchableHandle[HtPerformanceConfigurationINTEL]
 
-var # command cages
-  initializePerformanceApiINTELCage: proc(device: Device; pInitializeInfo: ptr InitializePerformanceApiInfoINTEL;): Result {.cdecl.}
-  uninitializePerformanceApiINTELCage: proc(device: Device;): void {.cdecl.}
-  cmdSetPerformanceMarkerINTELCage: proc(commandBuffer: CommandBuffer; pMarkerInfo: ptr PerformanceMarkerInfoINTEL;): Result {.cdecl.}
-  cmdSetPerformanceStreamMarkerINTELCage: proc(commandBuffer: CommandBuffer; pMarkerInfo: ptr PerformanceStreamMarkerInfoINTEL;): Result {.cdecl.}
-  cmdSetPerformanceOverrideINTELCage: proc(commandBuffer: CommandBuffer; pOverrideInfo: ptr PerformanceOverrideInfoINTEL;): Result {.cdecl.}
-  acquirePerformanceConfigurationINTELCage: proc(device: Device; pAcquireInfo: ptr PerformanceConfigurationAcquireInfoINTEL; pConfiguration: ptr PerformanceConfigurationINTEL;): Result {.cdecl.}
-  releasePerformanceConfigurationINTELCage: proc(device: Device; configuration: PerformanceConfigurationINTEL;): Result {.cdecl.}
-  queueSetPerformanceConfigurationINTELCage: proc(queue: Queue; configuration: PerformanceConfigurationINTEL;): Result {.cdecl.}
-  getPerformanceParameterINTELCage: proc(device: Device; parameter: PerformanceParameterTypeINTEL; pValue: ptr PerformanceValueINTEL;): Result {.cdecl.}
 proc initializePerformanceApiINTEL*(
       device: Device;
       pInitializeInfo: ptr InitializePerformanceApiInfoINTEL;
-    ): Result {.cdecl, discardable.} =
-  initializePerformanceApiINTELCage(device,pInitializeInfo)
+    ): Result {.cdecl, lazyload("vkInitializePerformanceApiINTEL", DeviceLevel).}
 proc uninitializePerformanceApiINTEL*(
       device: Device;
-    ): void {.cdecl.} =
-  uninitializePerformanceApiINTELCage(device)
+    ): void {.cdecl, lazyload("vkUninitializePerformanceApiINTEL", DeviceLevel).}
 proc cmdSetPerformanceMarkerINTEL*(
       commandBuffer: CommandBuffer;
       pMarkerInfo: ptr PerformanceMarkerInfoINTEL;
-    ): Result {.cdecl, discardable.} =
-  cmdSetPerformanceMarkerINTELCage(commandBuffer,pMarkerInfo)
+    ): Result {.cdecl, lazyload("vkCmdSetPerformanceMarkerINTEL", DeviceLevel).}
 proc cmdSetPerformanceStreamMarkerINTEL*(
       commandBuffer: CommandBuffer;
       pMarkerInfo: ptr PerformanceStreamMarkerInfoINTEL;
-    ): Result {.cdecl, discardable.} =
-  cmdSetPerformanceStreamMarkerINTELCage(commandBuffer,pMarkerInfo)
+    ): Result {.cdecl, lazyload("vkCmdSetPerformanceStreamMarkerINTEL", DeviceLevel).}
 proc cmdSetPerformanceOverrideINTEL*(
       commandBuffer: CommandBuffer;
       pOverrideInfo: ptr PerformanceOverrideInfoINTEL;
-    ): Result {.cdecl, discardable.} =
-  cmdSetPerformanceOverrideINTELCage(commandBuffer,pOverrideInfo)
+    ): Result {.cdecl, lazyload("vkCmdSetPerformanceOverrideINTEL", DeviceLevel).}
 proc acquirePerformanceConfigurationINTEL*(
       device: Device;
       pAcquireInfo: ptr PerformanceConfigurationAcquireInfoINTEL;
       pConfiguration: ptr PerformanceConfigurationINTEL;
-    ): Result {.cdecl, discardable.} =
-  acquirePerformanceConfigurationINTELCage(device,pAcquireInfo,pConfiguration)
+    ): Result {.cdecl, lazyload("vkAcquirePerformanceConfigurationINTEL", DeviceLevel).}
 proc releasePerformanceConfigurationINTEL*(
       device: Device;
       configuration: PerformanceConfigurationINTEL;
-    ): Result {.cdecl, discardable.} =
-  releasePerformanceConfigurationINTELCage(device,configuration)
+    ): Result {.cdecl, lazyload("vkReleasePerformanceConfigurationINTEL", DeviceLevel).}
 proc queueSetPerformanceConfigurationINTEL*(
       queue: Queue;
       configuration: PerformanceConfigurationINTEL;
-    ): Result {.cdecl, discardable.} =
-  queueSetPerformanceConfigurationINTELCage(queue,configuration)
+    ): Result {.cdecl, lazyload("vkQueueSetPerformanceConfigurationINTEL", DeviceLevel).}
 proc getPerformanceParameterINTEL*(
       device: Device;
       parameter: PerformanceParameterTypeINTEL;
       pValue: ptr PerformanceValueINTEL;
-    ): Result {.cdecl, discardable.} =
-  getPerformanceParameterINTELCage(device,parameter,pValue)
+    ): Result {.cdecl, lazyload("vkGetPerformanceParameterINTEL", DeviceLevel).}
 StructureType.defineAliases:
   queryPoolPerformanceQueryCreateInfoIntel as queryPoolCreateInfoIntel
 
 
-proc loadVK_INTEL_performance_query*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_INTEL_performance_query*(instance: Instance) =
+  initializePerformanceApiINTEL.smartLoad(instance)
+  uninitializePerformanceApiINTEL.smartLoad(instance)
+  cmdSetPerformanceMarkerINTEL.smartLoad(instance)
+  cmdSetPerformanceStreamMarkerINTEL.smartLoad(instance)
+  cmdSetPerformanceOverrideINTEL.smartLoad(instance)
+  acquirePerformanceConfigurationINTEL.smartLoad(instance)
+  releasePerformanceConfigurationINTEL.smartLoad(instance)
+  queueSetPerformanceConfigurationINTEL.smartLoad(instance)
+  getPerformanceParameterINTEL.smartLoad(instance)
 
-  initializePerformanceApiINTELCage << "vkInitializePerformanceApiINTEL"
-  uninitializePerformanceApiINTELCage << "vkUninitializePerformanceApiINTEL"
-  cmdSetPerformanceMarkerINTELCage << "vkCmdSetPerformanceMarkerINTEL"
-  cmdSetPerformanceStreamMarkerINTELCage << "vkCmdSetPerformanceStreamMarkerINTEL"
-  cmdSetPerformanceOverrideINTELCage << "vkCmdSetPerformanceOverrideINTEL"
-  acquirePerformanceConfigurationINTELCage << "vkAcquirePerformanceConfigurationINTEL"
-  releasePerformanceConfigurationINTELCage << "vkReleasePerformanceConfigurationINTEL"
-  queueSetPerformanceConfigurationINTELCage << "vkQueueSetPerformanceConfigurationINTEL"
-  getPerformanceParameterINTELCage << "vkGetPerformanceParameterINTEL"
+proc loadVK_INTEL_performance_query*(device: Device) =
+  initializePerformanceApiINTEL.smartLoad(device)
+  uninitializePerformanceApiINTEL.smartLoad(device)
+  cmdSetPerformanceMarkerINTEL.smartLoad(device)
+  cmdSetPerformanceStreamMarkerINTEL.smartLoad(device)
+  cmdSetPerformanceOverrideINTEL.smartLoad(device)
+  acquirePerformanceConfigurationINTEL.smartLoad(device)
+  releasePerformanceConfigurationINTEL.smartLoad(device)
+  queueSetPerformanceConfigurationINTEL.smartLoad(device)
+  getPerformanceParameterINTEL.smartLoad(device)
+

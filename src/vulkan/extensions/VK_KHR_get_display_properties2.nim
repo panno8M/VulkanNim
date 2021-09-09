@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_get_display_properties2
 
 
@@ -34,41 +34,37 @@ type
     pNext*: pointer
     capabilities*: DisplayPlaneCapabilitiesKHR
 
-var # command cages
-  getPhysicalDeviceDisplayProperties2KHRCage: proc(physicalDevice: PhysicalDevice; pPropertyCount: ptr uint32; pProperties: ptr DisplayProperties2KHR;): Result {.cdecl.}
-  getPhysicalDeviceDisplayPlaneProperties2KHRCage: proc(physicalDevice: PhysicalDevice; pPropertyCount: ptr uint32; pProperties: ptr DisplayPlaneProperties2KHR;): Result {.cdecl.}
-  getDisplayModeProperties2KHRCage: proc(physicalDevice: PhysicalDevice; display: DisplayKHR; pPropertyCount: ptr uint32; pProperties: ptr DisplayModeProperties2KHR;): Result {.cdecl.}
-  getDisplayPlaneCapabilities2KHRCage: proc(physicalDevice: PhysicalDevice; pDisplayPlaneInfo: ptr DisplayPlaneInfo2KHR; pCapabilities: ptr DisplayPlaneCapabilities2KHR;): Result {.cdecl.}
 proc getPhysicalDeviceDisplayProperties2KHR*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
       pProperties: ptr DisplayProperties2KHR;
-    ): Result {.cdecl, discardable.} =
-  getPhysicalDeviceDisplayProperties2KHRCage(physicalDevice,pPropertyCount,pProperties)
+    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceDisplayProperties2KHR", InstanceLevel).}
 proc getPhysicalDeviceDisplayPlaneProperties2KHR*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
       pProperties: ptr DisplayPlaneProperties2KHR;
-    ): Result {.cdecl, discardable.} =
-  getPhysicalDeviceDisplayPlaneProperties2KHRCage(physicalDevice,pPropertyCount,pProperties)
+    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceDisplayPlaneProperties2KHR", InstanceLevel).}
 proc getDisplayModeProperties2KHR*(
       physicalDevice: PhysicalDevice;
       display: DisplayKHR;
       pPropertyCount: ptr uint32;
       pProperties: ptr DisplayModeProperties2KHR;
-    ): Result {.cdecl, discardable.} =
-  getDisplayModeProperties2KHRCage(physicalDevice,display,pPropertyCount,pProperties)
+    ): Result {.cdecl, lazyload("vkGetDisplayModeProperties2KHR", InstanceLevel).}
 proc getDisplayPlaneCapabilities2KHR*(
       physicalDevice: PhysicalDevice;
       pDisplayPlaneInfo: ptr DisplayPlaneInfo2KHR;
       pCapabilities: ptr DisplayPlaneCapabilities2KHR;
-    ): Result {.cdecl, discardable.} =
-  getDisplayPlaneCapabilities2KHRCage(physicalDevice,pDisplayPlaneInfo,pCapabilities)
+    ): Result {.cdecl, lazyload("vkGetDisplayPlaneCapabilities2KHR", InstanceLevel).}
+
+proc loadAllVK_KHR_get_display_properties2*(instance: Instance) =
+  getPhysicalDeviceDisplayProperties2KHR.smartLoad(instance)
+  getPhysicalDeviceDisplayPlaneProperties2KHR.smartLoad(instance)
+  getDisplayModeProperties2KHR.smartLoad(instance)
+  getDisplayPlaneCapabilities2KHR.smartLoad(instance)
 
 proc loadVK_KHR_get_display_properties2*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  getPhysicalDeviceDisplayProperties2KHR.smartLoad(instance)
+  getPhysicalDeviceDisplayPlaneProperties2KHR.smartLoad(instance)
+  getDisplayModeProperties2KHR.smartLoad(instance)
+  getDisplayPlaneCapabilities2KHR.smartLoad(instance)
 
-  getPhysicalDeviceDisplayProperties2KHRCage << "vkGetPhysicalDeviceDisplayProperties2KHR"
-  getPhysicalDeviceDisplayPlaneProperties2KHRCage << "vkGetPhysicalDeviceDisplayPlaneProperties2KHR"
-  getDisplayModeProperties2KHRCage << "vkGetDisplayModeProperties2KHR"
-  getDisplayPlaneCapabilities2KHRCage << "vkGetDisplayPlaneCapabilities2KHR"

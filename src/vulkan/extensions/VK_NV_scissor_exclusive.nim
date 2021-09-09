@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:02Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_NV_scissor_exclusive
 
 
@@ -22,17 +22,16 @@ type
     pNext*: pointer
     exclusiveScissor*: Bool32
 
-var # command cages
-  cmdSetExclusiveScissorNVCage: proc(commandBuffer: CommandBuffer; firstExclusiveScissor: uint32; exclusiveScissorCount: uint32; pExclusiveScissors: ptr Rect2D;): void {.cdecl.}
 proc cmdSetExclusiveScissorNV*(
       commandBuffer: CommandBuffer;
       firstExclusiveScissor: uint32;
       exclusiveScissorCount: uint32;
       pExclusiveScissors: ptr Rect2D;
-    ): void {.cdecl.} =
-  cmdSetExclusiveScissorNVCage(commandBuffer,firstExclusiveScissor,exclusiveScissorCount,pExclusiveScissors)
+    ): void {.cdecl, lazyload("vkCmdSetExclusiveScissorNV", DeviceLevel).}
 
-proc loadVK_NV_scissor_exclusive*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_NV_scissor_exclusive*(instance: Instance) =
+  cmdSetExclusiveScissorNV.smartLoad(instance)
 
-  cmdSetExclusiveScissorNVCage << "vkCmdSetExclusiveScissorNV"
+proc loadVK_NV_scissor_exclusive*(device: Device) =
+  cmdSetExclusiveScissorNV.smartLoad(device)
+

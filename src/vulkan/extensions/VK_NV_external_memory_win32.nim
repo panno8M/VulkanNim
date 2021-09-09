@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_NV_external_memory_win32
 
 
@@ -23,17 +23,16 @@ type
     pAttributes*: ptr SECURITY_ATTRIBUTES
     dwAccess*: DWORD
 
-var # command cages
-  getMemoryWin32HandleNVCage: proc(device: Device; memory: DeviceMemory; handleType: ExternalMemoryHandleTypeFlagsNV; pHandle: ptr Win32Handle;): Result {.cdecl.}
 proc getMemoryWin32HandleNV*(
       device: Device;
       memory: DeviceMemory;
       handleType: ExternalMemoryHandleTypeFlagsNV;
       pHandle: ptr Win32Handle;
-    ): Result {.cdecl, discardable.} =
-  getMemoryWin32HandleNVCage(device,memory,handleType,pHandle)
+    ): Result {.cdecl, lazyload("vkGetMemoryWin32HandleNV", DeviceLevel).}
 
-proc loadVK_NV_external_memory_win32*(instance: Instance) =
-  instance.defineLoader(`<<`)
+proc loadAllVK_NV_external_memory_win32*(instance: Instance) =
+  getMemoryWin32HandleNV.smartLoad(instance)
 
-  getMemoryWin32HandleNVCage << "vkGetMemoryWin32HandleNV"
+proc loadVK_NV_external_memory_win32*(device: Device) =
+  getMemoryWin32HandleNV.smartLoad(device)
+

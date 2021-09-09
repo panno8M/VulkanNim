@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:02Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_EXT_calibrated_timestamps
 
 
@@ -22,26 +22,26 @@ type
     pNext*: pointer
     timeDomain*: TimeDomainEXT
 
-var # command cages
-  getPhysicalDeviceCalibrateableTimeDomainsEXTCage: proc(physicalDevice: PhysicalDevice; pTimeDomainCount: ptr uint32; pTimeDomains: ptr TimeDomainEXT;): Result {.cdecl.}
-  getCalibratedTimestampsEXTCage: proc(device: Device; timestampCount: uint32; pTimestampInfos: ptr CalibratedTimestampInfoEXT; pTimestamps: ptr uint64; pMaxDeviation: ptr uint64;): Result {.cdecl.}
 proc getPhysicalDeviceCalibrateableTimeDomainsEXT*(
       physicalDevice: PhysicalDevice;
       pTimeDomainCount: ptr uint32;
       pTimeDomains: ptr TimeDomainEXT;
-    ): Result {.cdecl, discardable.} =
-  getPhysicalDeviceCalibrateableTimeDomainsEXTCage(physicalDevice,pTimeDomainCount,pTimeDomains)
+    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceCalibrateableTimeDomainsEXT", InstanceLevel).}
 proc getCalibratedTimestampsEXT*(
       device: Device;
       timestampCount: uint32;
       pTimestampInfos: ptr CalibratedTimestampInfoEXT;
       pTimestamps: ptr uint64;
       pMaxDeviation: ptr uint64;
-    ): Result {.cdecl, discardable.} =
-  getCalibratedTimestampsEXTCage(device,timestampCount,pTimestampInfos,pTimestamps,pMaxDeviation)
+    ): Result {.cdecl, lazyload("vkGetCalibratedTimestampsEXT", DeviceLevel).}
+
+proc loadAllVK_EXT_calibrated_timestamps*(instance: Instance) =
+  getPhysicalDeviceCalibrateableTimeDomainsEXT.smartLoad(instance)
+  getCalibratedTimestampsEXT.smartLoad(instance)
 
 proc loadVK_EXT_calibrated_timestamps*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  getPhysicalDeviceCalibrateableTimeDomainsEXT.smartLoad(instance)
 
-  getPhysicalDeviceCalibrateableTimeDomainsEXTCage << "vkGetPhysicalDeviceCalibrateableTimeDomainsEXT"
-  getCalibratedTimestampsEXTCage << "vkGetCalibratedTimestampsEXT"
+proc loadVK_EXT_calibrated_timestamps*(device: Device) =
+  getCalibratedTimestampsEXT.smartLoad(device)
+

@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:02Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_NV_coverage_reduction_mode
 
 
@@ -35,16 +35,15 @@ type
     depthStencilSamples*: SampleCountFlags
     colorSamples*: SampleCountFlags
 
-var # command cages
-  getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNVCage: proc(physicalDevice: PhysicalDevice; pCombinationCount: ptr uint32; pCombinations: ptr FramebufferMixedSamplesCombinationNV;): Result {.cdecl.}
 proc getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV*(
       physicalDevice: PhysicalDevice;
       pCombinationCount: ptr uint32;
       pCombinations: ptr FramebufferMixedSamplesCombinationNV;
-    ): Result {.cdecl, discardable.} =
-  getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNVCage(physicalDevice,pCombinationCount,pCombinations)
+    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV", InstanceLevel).}
+
+proc loadAllVK_NV_coverage_reduction_mode*(instance: Instance) =
+  getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV.smartLoad(instance)
 
 proc loadVK_NV_coverage_reduction_mode*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV.smartLoad(instance)
 
-  getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNVCage << "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV"

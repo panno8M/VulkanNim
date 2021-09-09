@@ -38,6 +38,10 @@ type
   NodeKindBasicResource* = enum
     nkbrNormal
     nkbrAlias
+  LoadMode* = enum
+    lmWithInstance
+    lmWithDevice
+    lmPreload
 
   NodeEnumAlias* = ref object
     name*: string
@@ -128,6 +132,7 @@ type
     name*: string
     case kind*: NodeKindBasicResource
     of nkbrNormal:
+      loadMode*: LoadMode
       theType*: string
       successCodes*: seq[string]
       errorCodes*: seq[string]

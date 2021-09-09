@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_KHR_android_surface
 
 
@@ -24,17 +24,16 @@ type
     flags*: AndroidSurfaceCreateFlagsKHR
     window*: ptr ANativeWindow
 
-var # command cages
-  createAndroidSurfaceKHRCage: proc(instance: Instance; pCreateInfo: ptr AndroidSurfaceCreateInfoKHR; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
 proc createAndroidSurfaceKHR*(
       instance: Instance;
       pCreateInfo: ptr AndroidSurfaceCreateInfoKHR;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl, discardable.} =
-  createAndroidSurfaceKHRCage(instance,pCreateInfo,pAllocator,pSurface)
+    ): Result {.cdecl, lazyload("vkCreateAndroidSurfaceKHR", InstanceLevel).}
+
+proc loadAllVK_KHR_android_surface*(instance: Instance) =
+  createAndroidSurfaceKHR.smartLoad(instance)
 
 proc loadVK_KHR_android_surface*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  createAndroidSurfaceKHR.smartLoad(instance)
 
-  createAndroidSurfaceKHRCage << "vkCreateAndroidSurfaceKHR"

@@ -1,4 +1,4 @@
-# Generated at 2021-08-31T05:19:03Z
+# Generated at 2021-09-09T01:49:36Z
 # VK_NN_vi_surface
 
 
@@ -21,17 +21,16 @@ type
     flags*: ViSurfaceCreateFlagsNN
     window*: pointer
 
-var # command cages
-  createViSurfaceNNCage: proc(instance: Instance; pCreateInfo: ptr ViSurfaceCreateInfoNN; pAllocator: ptr AllocationCallbacks; pSurface: ptr SurfaceKHR;): Result {.cdecl.}
 proc createViSurfaceNN*(
       instance: Instance;
       pCreateInfo: ptr ViSurfaceCreateInfoNN;
       pAllocator: ptr AllocationCallbacks;
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl, discardable.} =
-  createViSurfaceNNCage(instance,pCreateInfo,pAllocator,pSurface)
+    ): Result {.cdecl, lazyload("vkCreateViSurfaceNN", InstanceLevel).}
+
+proc loadAllVK_NN_vi_surface*(instance: Instance) =
+  createViSurfaceNN.smartLoad(instance)
 
 proc loadVK_NN_vi_surface*(instance: Instance) =
-  instance.defineLoader(`<<`)
+  createViSurfaceNN.smartLoad(instance)
 
-  createViSurfaceNNCage << "vkCreateViSurfaceNN"
