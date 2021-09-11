@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_ANDROID_native_buffer
 
 
@@ -18,20 +18,20 @@ type # enums and bitmasks
 
 type
   NativeBufferANDROID* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.nativeBufferAndroid).}: StructureType
+    pNext* {.optional.}: pointer
     handle*: pointer
     stride*: int
     format*: int
     usage*: int
     usage2*: NativeBufferUsage2ANDROID
   SwapchainImageCreateInfoANDROID* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.swapchainImageCreateInfoAndroid).}: StructureType
+    pNext* {.optional.}: pointer
     usage*: SwapchainImageUsageFlagsANDROID
   PhysicalDevicePresentationPropertiesANDROID* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDevicePresentationPropertiesAndroid).}: StructureType
+    pNext* {.optional.}: pointer
     sharedImage*: Bool32
   NativeBufferUsage2ANDROID* = object
     consumer*: uint64

@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_memory_budget
 
 
@@ -14,8 +14,8 @@ const
 
 type
   PhysicalDeviceMemoryBudgetPropertiesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceMemoryBudgetPropertiesExt).}: StructureType
+    pNext* {.optional.}: pointer
     heapBudget*: array[MaxMemoryHeaps, DeviceSize]
     heapUsage*: array[MaxMemoryHeaps, DeviceSize]
 

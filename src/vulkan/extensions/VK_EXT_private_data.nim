@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_private_data
 
 
@@ -15,16 +15,16 @@ type # enums and bitmasks
 
 type
   PhysicalDevicePrivateDataFeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDevicePrivateDataFeaturesExt).}: StructureType
+    pNext* {.optional.}: pointer
     privateData*: Bool32
   DevicePrivateDataCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.devicePrivateDataCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     privateDataSlotRequestCount*: uint32
   PrivateDataSlotCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.privateDataSlotCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     flags*: PrivateDataSlotCreateFlagsEXT
   HtPrivateDataSlotEXT = object of HandleType
   PrivateDataSlotEXT* = NonDispatchableHandle[HtPrivateDataSlotEXT]

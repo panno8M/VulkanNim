@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_validation_cache
 
 
@@ -18,14 +18,14 @@ type
   HtValidationCacheEXT = object of HandleType
   ValidationCacheEXT* = NonDispatchableHandle[HtValidationCacheEXT]
   ValidationCacheCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: ValidationCacheCreateFlagsEXT
-    initialDataSize*: uint
+    sType* {.constant: (StructureType.validationCacheCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: ValidationCacheCreateFlagsEXT
+    initialDataSize* {.optional.}: uint
     pInitialData*: pointer
   ShaderModuleValidationCacheCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.shaderModuleValidationCacheCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     validationCache*: ValidationCacheEXT
 
 proc createValidationCacheEXT*(

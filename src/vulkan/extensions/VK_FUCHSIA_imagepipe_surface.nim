@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_FUCHSIA_imagepipe_surface
 
 
@@ -16,9 +16,9 @@ type # enums and bitmasks
 
 type
   ImagePipeSurfaceCreateInfoFUCHSIA* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: ImagePipeSurfaceCreateFlagsFUCHSIA
+    sType* {.constant: (StructureType.imagepipeSurfaceCreateInfoFuchsia).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: ImagePipeSurfaceCreateFlagsFUCHSIA
     imagePipeHandle*: zx_handle_t
 
 proc createImagePipeSurfaceFUCHSIA*(

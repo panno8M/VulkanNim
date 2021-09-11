@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_pipeline_library
 
 
@@ -11,9 +11,9 @@ const
 
 type
   PipelineLibraryCreateInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    libraryCount*: uint32
+    sType* {.constant: (StructureType.pipelineLibraryCreateInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    libraryCount* {.optional.}: uint32
     pLibraries*: ptr Pipeline
 
 

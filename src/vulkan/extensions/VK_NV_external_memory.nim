@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NV_external_memory
 
 
@@ -13,13 +13,13 @@ const
 
 type
   ExternalMemoryImageCreateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    handleTypes*: ExternalMemoryHandleTypeFlagsNV
+    sType* {.constant: (StructureType.externalMemoryImageCreateInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
+    handleTypes* {.optional.}: ExternalMemoryHandleTypeFlagsNV
   ExportMemoryAllocateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    handleTypes*: ExternalMemoryHandleTypeFlagsNV
+    sType* {.constant: (StructureType.exportMemoryAllocateInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
+    handleTypes* {.optional.}: ExternalMemoryHandleTypeFlagsNV
 
 
 

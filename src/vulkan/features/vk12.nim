@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # vk12
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -78,8 +78,8 @@ type # enums and bitmasks
 
 type
   PhysicalDeviceVulkan11Features* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceVulkan11Features).}: StructureType
+    pNext* {.optional.}: pointer
     storageBuffer16BitAccess*: Bool32
     uniformAndStorageBuffer16BitAccess*: Bool32
     storagePushConstant16*: Bool32
@@ -93,8 +93,8 @@ type
     samplerYcbcrConversion*: Bool32
     shaderDrawParameters*: Bool32
   PhysicalDeviceVulkan11Properties* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceVulkan11Properties).}: StructureType
+    pNext* {.optional.}: pointer
     deviceUUID*: array[UuidSize, uint8]
     driverUUID*: array[UuidSize, uint8]
     deviceLUID*: array[LuidSize, uint8]
@@ -111,8 +111,8 @@ type
     maxPerSetDescriptors*: uint32
     maxMemoryAllocationSize*: DeviceSize
   PhysicalDeviceVulkan12Features* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceVulkan12Features).}: StructureType
+    pNext* {.optional.}: pointer
     samplerMirrorClampToEdge*: Bool32
     drawIndirectCount*: Bool32
     storageBuffer8BitAccess*: Bool32
@@ -161,8 +161,8 @@ type
     shaderOutputLayer*: Bool32
     subgroupBroadcastDynamicId*: Bool32
   PhysicalDeviceVulkan12Properties* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceVulkan12Properties).}: StructureType
+    pNext* {.optional.}: pointer
     driverID*: DriverId
     driverName*: array[MaxDriverNameSize, char]
     driverInfo*: array[MaxDriverInfoSize, char]
@@ -214,34 +214,34 @@ type
     filterMinmaxSingleComponentFormats*: Bool32
     filterMinmaxImageComponentMapping*: Bool32
     maxTimelineSemaphoreValueDifference*: uint64
-    framebufferIntegerColorSampleCounts*: SampleCountFlags
+    framebufferIntegerColorSampleCounts* {.optional.}: SampleCountFlags
 
   # Promoted from VK_KHR_image_format_list (extension 148)
   # ------------------------------------------------------
   ImageFormatListCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    viewFormatCount*: uint32
+    sType* {.constant: (StructureType.imageFormatListCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    viewFormatCount* {.optional.}: uint32
     pViewFormats*: ptr Format
 
   # Promoted from VK_KHR_create_renderpass2 (extension 110)
   # -------------------------------------------------------
   RenderPassCreateInfo2* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: RenderPassCreateFlags
-    attachmentCount*: uint32
+    sType* {.constant: (StructureType.renderPassCreateInfo2).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: RenderPassCreateFlags
+    attachmentCount* {.optional.}: uint32
     pAttachments*: ptr AttachmentDescription2
     subpassCount*: uint32
     pSubpasses*: ptr SubpassDescription2
-    dependencyCount*: uint32
+    dependencyCount* {.optional.}: uint32
     pDependencies*: ptr SubpassDependency2
-    correlatedViewMaskCount*: uint32
+    correlatedViewMaskCount* {.optional.}: uint32
     pCorrelatedViewMasks*: ptr uint32
   AttachmentDescription2* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: AttachmentDescriptionFlags
+    sType* {.constant: (StructureType.attachmentDescription2).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: AttachmentDescriptionFlags
     format*: Format
     samples*: SampleCountFlagBits
     loadOp*: AttachmentLoadOp
@@ -251,49 +251,49 @@ type
     initialLayout*: ImageLayout
     finalLayout*: ImageLayout
   AttachmentReference2* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.attachmentReference2).}: StructureType
+    pNext* {.optional.}: pointer
     attachment*: uint32
     layout*: ImageLayout
     aspectMask*: ImageAspectFlags
   SubpassDescription2* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: SubpassDescriptionFlags
+    sType* {.constant: (StructureType.subpassDescription2).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: SubpassDescriptionFlags
     pipelineBindPoint*: PipelineBindPoint
     viewMask*: uint32
-    inputAttachmentCount*: uint32
+    inputAttachmentCount* {.optional.}: uint32
     pInputAttachments*: ptr AttachmentReference2
-    colorAttachmentCount*: uint32
+    colorAttachmentCount* {.optional.}: uint32
     pColorAttachments*: ptr AttachmentReference2
-    pResolveAttachments*: ptr AttachmentReference2
-    pDepthStencilAttachment*: ptr AttachmentReference2
-    preserveAttachmentCount*: uint32
+    pResolveAttachments* {.optional.}: ptr AttachmentReference2
+    pDepthStencilAttachment* {.optional.}: ptr AttachmentReference2
+    preserveAttachmentCount* {.optional.}: uint32
     pPreserveAttachments*: ptr uint32
   SubpassDependency2* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.subpassDependency2).}: StructureType
+    pNext* {.optional.}: pointer
     srcSubpass*: uint32
     dstSubpass*: uint32
     srcStageMask*: PipelineStageFlags
     dstStageMask*: PipelineStageFlags
-    srcAccessMask*: AccessFlags
-    dstAccessMask*: AccessFlags
-    dependencyFlags*: DependencyFlags
-    viewOffset*: int32
+    srcAccessMask* {.optional.}: AccessFlags
+    dstAccessMask* {.optional.}: AccessFlags
+    dependencyFlags* {.optional.}: DependencyFlags
+    viewOffset* {.optional.}: int32
   SubpassBeginInfo* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.subpassBeginInfo).}: StructureType
+    pNext* {.optional.}: pointer
     contents*: SubpassContents
   SubpassEndInfo* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.subpassEndInfo).}: StructureType
+    pNext* {.optional.}: pointer
 
   # Promoted from VK_KHR_8bit_storage (extension 178)
   # -------------------------------------------------
   PhysicalDevice8BitStorageFeatures* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDevice8bitStorageFeatures).}: StructureType
+    pNext* {.optional.}: pointer
     storageBuffer8BitAccess*: Bool32
     uniformAndStorageBuffer8BitAccess*: Bool32
     storagePushConstant8*: Bool32
@@ -306,8 +306,8 @@ type
     subminor*: uint8
     patch*: uint8
   PhysicalDeviceDriverProperties* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceDriverProperties).}: StructureType
+    pNext* {.optional.}: pointer
     driverID*: DriverId
     driverName*: array[MaxDriverNameSize, char]
     driverInfo*: array[MaxDriverInfoSize, char]
@@ -316,24 +316,24 @@ type
   # Promoted from VK_KHR_shader_atomic_int64 (extension 181)
   # --------------------------------------------------------
   PhysicalDeviceShaderAtomicInt64Features* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceShaderAtomicInt64Features).}: StructureType
+    pNext* {.optional.}: pointer
     shaderBufferInt64Atomics*: Bool32
     shaderSharedInt64Atomics*: Bool32
 
   # Promoted from VK_KHR_shader_float16_int8 (extension 83)
   # -------------------------------------------------------
   PhysicalDeviceShaderFloat16Int8Features* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceShaderFloat16Int8Features).}: StructureType
+    pNext* {.optional.}: pointer
     shaderFloat16*: Bool32
     shaderInt8*: Bool32
 
   # Promoted from VK_KHR_shader_float_controls (extension 198)
   # ----------------------------------------------------------
   PhysicalDeviceFloatControlsProperties* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceFloatControlsProperties).}: StructureType
+    pNext* {.optional.}: pointer
     denormBehaviorIndependence*: ShaderFloatControlsIndependence
     roundingModeIndependence*: ShaderFloatControlsIndependence
     shaderSignedZeroInfNanPreserveFloat16*: Bool32
@@ -355,13 +355,13 @@ type
   # Promoted from VK_EXT_descriptor_indexing (extension 162)
   # --------------------------------------------------------
   DescriptorSetLayoutBindingFlagsCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    bindingCount*: uint32
+    sType* {.constant: (StructureType.descriptorSetLayoutBindingFlagsCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    bindingCount* {.optional.}: uint32
     pBindingFlags*: ptr DescriptorBindingFlags
   PhysicalDeviceDescriptorIndexingFeatures* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceDescriptorIndexingFeatures).}: StructureType
+    pNext* {.optional.}: pointer
     shaderInputAttachmentArrayDynamicIndexing*: Bool32
     shaderUniformTexelBufferArrayDynamicIndexing*: Bool32
     shaderStorageTexelBufferArrayDynamicIndexing*: Bool32
@@ -383,8 +383,8 @@ type
     descriptorBindingVariableDescriptorCount*: Bool32
     runtimeDescriptorArray*: Bool32
   PhysicalDeviceDescriptorIndexingProperties* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceDescriptorIndexingProperties).}: StructureType
+    pNext* {.optional.}: pointer
     maxUpdateAfterBindDescriptorsInAllPools*: uint32
     shaderUniformBufferArrayNonUniformIndexingNative*: Bool32
     shaderSampledImageArrayNonUniformIndexingNative*: Bool32
@@ -409,26 +409,26 @@ type
     maxDescriptorSetUpdateAfterBindStorageImages*: uint32
     maxDescriptorSetUpdateAfterBindInputAttachments*: uint32
   DescriptorSetVariableDescriptorCountAllocateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    descriptorSetCount*: uint32
+    sType* {.constant: (StructureType.descriptorSetVariableDescriptorCountAllocateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    descriptorSetCount* {.optional.}: uint32
     pDescriptorCounts*: ptr uint32
   DescriptorSetVariableDescriptorCountLayoutSupport* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.descriptorSetVariableDescriptorCountLayoutSupport).}: StructureType
+    pNext* {.optional.}: pointer
     maxVariableDescriptorCount*: uint32
 
   # Promoted from VK_KHR_depth_stencil_resolve (extension 200)
   # ----------------------------------------------------------
   SubpassDescriptionDepthStencilResolve* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.subpassDescriptionDepthStencilResolve).}: StructureType
+    pNext* {.optional.}: pointer
     depthResolveMode*: ResolveModeFlagBits
     stencilResolveMode*: ResolveModeFlagBits
-    pDepthStencilResolveAttachment*: ptr AttachmentReference2
+    pDepthStencilResolveAttachment* {.optional.}: ptr AttachmentReference2
   PhysicalDeviceDepthStencilResolveProperties* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceDepthStencilResolveProperties).}: StructureType
+    pNext* {.optional.}: pointer
     supportedDepthResolveModes*: ResolveModeFlags
     supportedStencilResolveModes*: ResolveModeFlags
     independentResolveNone*: Bool32
@@ -437,34 +437,34 @@ type
   # Promoted from VK_EXT_scalar_block_layout (extension 222))
   # ---------------------------------------------------------
   PhysicalDeviceScalarBlockLayoutFeatures* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceScalarBlockLayoutFeatures).}: StructureType
+    pNext* {.optional.}: pointer
     scalarBlockLayout*: Bool32
 
   # Promoted from VK_EXT_separate_stencil_usage (extension 247)
   # -----------------------------------------------------------
   ImageStencilUsageCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.imageStencilUsageCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
     stencilUsage*: ImageUsageFlags
 
   # Promoted from VK_EXT_sampler_filter_minmax (extension 131)
   # ----------------------------------------------------------
   SamplerReductionModeCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.samplerReductionModeCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
     reductionMode*: SamplerReductionMode
   PhysicalDeviceSamplerFilterMinmaxProperties* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceSamplerFilterMinmaxProperties).}: StructureType
+    pNext* {.optional.}: pointer
     filterMinmaxSingleComponentFormats*: Bool32
     filterMinmaxImageComponentMapping*: Bool32
 
   # Promoted from VK_KHR_vulkan_memory_model (extension 212)
   # --------------------------------------------------------
   PhysicalDeviceVulkanMemoryModelFeatures* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceVulkanMemoryModelFeatures).}: StructureType
+    pNext* {.optional.}: pointer
     vulkanMemoryModel*: Bool32
     vulkanMemoryModelDeviceScope*: Bool32
     vulkanMemoryModelAvailabilityVisibilityChains*: Bool32
@@ -472,125 +472,125 @@ type
   # Promoted from VK_KHR_imageless_framebuffer (extension 109)
   # ----------------------------------------------------------
   PhysicalDeviceImagelessFramebufferFeatures* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceImagelessFramebufferFeatures).}: StructureType
+    pNext* {.optional.}: pointer
     imagelessFramebuffer*: Bool32
   FramebufferAttachmentsCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    attachmentImageInfoCount*: uint32
+    sType* {.constant: (StructureType.framebufferAttachmentsCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    attachmentImageInfoCount* {.optional.}: uint32
     pAttachmentImageInfos*: ptr FramebufferAttachmentImageInfo
   FramebufferAttachmentImageInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: ImageCreateFlags
+    sType* {.constant: (StructureType.framebufferAttachmentImageInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: ImageCreateFlags
     usage*: ImageUsageFlags
     width*: uint32
     height*: uint32
     layerCount*: uint32
-    viewFormatCount*: uint32
+    viewFormatCount* {.optional.}: uint32
     pViewFormats*: ptr Format
   RenderPassAttachmentBeginInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    attachmentCount*: uint32
+    sType* {.constant: (StructureType.renderPassAttachmentBeginInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    attachmentCount* {.optional.}: uint32
     pAttachments*: ptr ImageView
 
   # Promoted from VK_KHR_uniform_buffer_standard_layout (extension 254)
   # -------------------------------------------------------------------
   PhysicalDeviceUniformBufferStandardLayoutFeatures* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceUniformBufferStandardLayoutFeatures).}: StructureType
+    pNext* {.optional.}: pointer
     uniformBufferStandardLayout*: Bool32
 
   # Promoted from VK_KHR_shader_subgroup_extended_types (extension 176)
   # -------------------------------------------------------------------
   PhysicalDeviceShaderSubgroupExtendedTypesFeatures* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceShaderSubgroupExtendedTypesFeatures).}: StructureType
+    pNext* {.optional.}: pointer
     shaderSubgroupExtendedTypes*: Bool32
 
   # Promoted from VK_KHR_separate_depth_stencil_layouts (extension 242)
   # -------------------------------------------------------------------
   PhysicalDeviceSeparateDepthStencilLayoutsFeatures* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceSeparateDepthStencilLayoutsFeatures).}: StructureType
+    pNext* {.optional.}: pointer
     separateDepthStencilLayouts*: Bool32
   AttachmentReferenceStencilLayout* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.attachmentReferenceStencilLayout).}: StructureType
+    pNext* {.optional.}: pointer
     stencilLayout*: ImageLayout
   AttachmentDescriptionStencilLayout* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.attachmentDescriptionStencilLayout).}: StructureType
+    pNext* {.optional.}: pointer
     stencilInitialLayout*: ImageLayout
     stencilFinalLayout*: ImageLayout
 
   # Promoted from VK_EXT_host_query_reset (extension 262)
   # -----------------------------------------------------
   PhysicalDeviceHostQueryResetFeatures* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceHostQueryResetFeatures).}: StructureType
+    pNext* {.optional.}: pointer
     hostQueryReset*: Bool32
 
   # Promoted from VK_KHR_timeline_semaphore (extension 208)
   # -------------------------------------------------------
   PhysicalDeviceTimelineSemaphoreFeatures* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceTimelineSemaphoreFeatures).}: StructureType
+    pNext* {.optional.}: pointer
     timelineSemaphore*: Bool32
   PhysicalDeviceTimelineSemaphoreProperties* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceTimelineSemaphoreProperties).}: StructureType
+    pNext* {.optional.}: pointer
     maxTimelineSemaphoreValueDifference*: uint64
   SemaphoreTypeCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.semaphoreTypeCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
     semaphoreType*: SemaphoreType
     initialValue*: uint64
   TimelineSemaphoreSubmitInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    waitSemaphoreValueCount*: uint32
-    pWaitSemaphoreValues*: ptr uint64
-    signalSemaphoreValueCount*: uint32
-    pSignalSemaphoreValues*: ptr uint64
+    sType* {.constant: (StructureType.timelineSemaphoreSubmitInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    waitSemaphoreValueCount* {.optional.}: uint32
+    pWaitSemaphoreValues* {.optional.}: ptr uint64
+    signalSemaphoreValueCount* {.optional.}: uint32
+    pSignalSemaphoreValues* {.optional.}: ptr uint64
   SemaphoreWaitInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: SemaphoreWaitFlags
+    sType* {.constant: (StructureType.semaphoreWaitInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: SemaphoreWaitFlags
     semaphoreCount*: uint32
     pSemaphores*: ptr Semaphore
     pValues*: ptr uint64
   SemaphoreSignalInfo* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.semaphoreSignalInfo).}: StructureType
+    pNext* {.optional.}: pointer
     semaphore*: Semaphore
     value*: uint64
 
   # Promoted from VK_KHR_buffer_device_address (extension 258)
   # ----------------------------------------------------------
   PhysicalDeviceBufferDeviceAddressFeatures* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceBufferDeviceAddressFeatures).}: StructureType
+    pNext* {.optional.}: pointer
     bufferDeviceAddress*: Bool32
     bufferDeviceAddressCaptureReplay*: Bool32
     bufferDeviceAddressMultiDevice*: Bool32
   BufferDeviceAddressInfo* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.bufferDeviceAddressInfo).}: StructureType
+    pNext* {.optional.}: pointer
     buffer*: Buffer
   BufferOpaqueCaptureAddressCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.bufferOpaqueCaptureAddressCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
     opaqueCaptureAddress*: uint64
   MemoryOpaqueCaptureAddressAllocateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.memoryOpaqueCaptureAddressAllocateInfo).}: StructureType
+    pNext* {.optional.}: pointer
     opaqueCaptureAddress*: uint64
   DeviceMemoryOpaqueCaptureAddressInfo* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.deviceMemoryOpaqueCaptureAddressInfo).}: StructureType
+    pNext* {.optional.}: pointer
     memory*: DeviceMemory
 
 template apiVersion12*(): untyped = makeVersion(1, 2, 0)

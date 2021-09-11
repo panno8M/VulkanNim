@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NV_scissor_exclusive
 
 
@@ -13,13 +13,13 @@ const
 
 type
   PipelineViewportExclusiveScissorStateCreateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    exclusiveScissorCount*: uint32
+    sType* {.constant: (StructureType.pipelineViewportExclusiveScissorStateCreateInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
+    exclusiveScissorCount* {.optional.}: uint32
     pExclusiveScissors*: ptr Rect2D
   PhysicalDeviceExclusiveScissorFeaturesNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceExclusiveScissorFeaturesNv).}: StructureType
+    pNext* {.optional.}: pointer
     exclusiveScissor*: Bool32
 
 proc cmdSetExclusiveScissorNV*(

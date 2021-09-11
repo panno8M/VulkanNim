@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_external_semaphore_win32
 
 
@@ -13,29 +13,29 @@ const
 
 type
   ImportSemaphoreWin32HandleInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.importSemaphoreWin32HandleInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     semaphore*: Semaphore
-    flags*: SemaphoreImportFlags
-    handleType*: ExternalSemaphoreHandleTypeFlagBits
-    handle*: Win32Handle
-    name*: LPCWSTR
+    flags* {.optional.}: SemaphoreImportFlags
+    handleType* {.optional.}: ExternalSemaphoreHandleTypeFlagBits
+    handle* {.optional.}: Win32Handle
+    name* {.optional.}: LPCWSTR
   ExportSemaphoreWin32HandleInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    pAttributes*: ptr SECURITY_ATTRIBUTES
+    sType* {.constant: (StructureType.exportSemaphoreWin32HandleInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    pAttributes* {.optional.}: ptr SECURITY_ATTRIBUTES
     dwAccess*: DWORD
     name*: LPCWSTR
   D3D12FenceSubmitInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    waitSemaphoreValuesCount*: uint32
-    pWaitSemaphoreValues*: ptr uint64
-    signalSemaphoreValuesCount*: uint32
-    pSignalSemaphoreValues*: ptr uint64
+    sType* {.constant: (StructureType.d3d12FenceSubmitInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    waitSemaphoreValuesCount* {.optional.}: uint32
+    pWaitSemaphoreValues* {.optional.}: ptr uint64
+    signalSemaphoreValuesCount* {.optional.}: uint32
+    pSignalSemaphoreValues* {.optional.}: ptr uint64
   SemaphoreGetWin32HandleInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.semaphoreGetWin32HandleInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     semaphore*: Semaphore
     handleType*: ExternalSemaphoreHandleTypeFlagBits
 

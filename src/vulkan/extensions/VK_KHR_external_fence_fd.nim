@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_external_fence_fd
 
 
@@ -13,15 +13,15 @@ const
 
 type
   ImportFenceFdInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.importFenceFdInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     fence*: Fence
-    flags*: FenceImportFlags
+    flags* {.optional.}: FenceImportFlags
     handleType*: ExternalFenceHandleTypeFlagBits
     fd*: int
   FenceGetFdInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.fenceGetFdInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     fence*: Fence
     handleType*: ExternalFenceHandleTypeFlagBits
 

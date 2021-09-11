@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_texel_buffer_alignment
 
 
@@ -13,12 +13,12 @@ const
 
 type
   PhysicalDeviceTexelBufferAlignmentFeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceTexelBufferAlignmentFeaturesExt).}: StructureType
+    pNext* {.optional.}: pointer
     texelBufferAlignment*: Bool32
   PhysicalDeviceTexelBufferAlignmentPropertiesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceTexelBufferAlignmentPropertiesExt).}: StructureType
+    pNext* {.optional.}: pointer
     storageTexelBufferOffsetAlignmentBytes*: DeviceSize
     storageTexelBufferOffsetSingleTexelAlignment*: Bool32
     uniformTexelBufferOffsetAlignmentBytes*: DeviceSize

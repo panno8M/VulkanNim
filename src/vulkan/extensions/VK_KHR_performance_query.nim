@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_performance_query
 
 
@@ -46,31 +46,31 @@ type # enums and bitmasks
 
 type
   PhysicalDevicePerformanceQueryFeaturesKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDevicePerformanceQueryFeaturesKhr).}: StructureType
+    pNext* {.optional.}: pointer
     performanceCounterQueryPools*: Bool32
     performanceCounterMultipleQueryPools*: Bool32
   PhysicalDevicePerformanceQueryPropertiesKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDevicePerformanceQueryPropertiesKhr).}: StructureType
+    pNext* {.optional.}: pointer
     allowCommandBufferQueryCopies*: Bool32
   PerformanceCounterKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.performanceCounterKhr).}: StructureType
+    pNext* {.optional.}: pointer
     unit*: PerformanceCounterUnitKHR
     scope*: PerformanceCounterScopeKHR
     storage*: PerformanceCounterStorageKHR
     uuid*: array[UuidSize, uint8]
   PerformanceCounterDescriptionKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PerformanceCounterDescriptionFlagsKHR
+    sType* {.constant: (StructureType.performanceCounterDescriptionKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PerformanceCounterDescriptionFlagsKHR
     name*: array[MaxDescriptionSize, char]
     category*: array[MaxDescriptionSize, char]
     description*: array[MaxDescriptionSize, char]
   QueryPoolPerformanceCreateInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.queryPoolPerformanceCreateInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     queueFamilyIndex*: uint32
     counterIndexCount*: uint32
     pCounterIndices*: ptr uint32
@@ -83,13 +83,13 @@ type
     float32*: float32
     float64*: float64
   AcquireProfilingLockInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: AcquireProfilingLockFlagsKHR
+    sType* {.constant: (StructureType.acquireProfilingLockInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: AcquireProfilingLockFlagsKHR
     timeout*: uint64
   PerformanceQuerySubmitInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.performanceQuerySubmitInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     counterPassIndex*: uint32
 
 PerformanceCounterScopeKHR.defineAliases:

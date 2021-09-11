@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_ray_tracing
 # VK_NV_ray_tracing
 # Explicit sort order to require processing after VK_NV_ray_tracing
@@ -97,30 +97,30 @@ type
   AccelerationStructureBuildOffsetInfoKHR* = object
     primitiveCount*: uint32
     primitiveOffset*: uint32
-    firstVertex*: uint32
-    transformOffset*: uint32
+    firstVertex* {.optional.}: uint32
+    transformOffset* {.optional.}: uint32
   RayTracingShaderGroupCreateInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.rayTracingShaderGroupCreateInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     theType*: RayTracingShaderGroupTypeKHR
     generalShader*: uint32
     closestHitShader*: uint32
     anyHitShader*: uint32
     intersectionShader*: uint32
-    pShaderGroupCaptureReplayHandle*: pointer
+    pShaderGroupCaptureReplayHandle* {.optional.}: pointer
   RayTracingPipelineCreateInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineCreateFlags
-    stageCount*: uint32
+    sType* {.constant: (StructureType.rayTracingPipelineCreateInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineCreateFlags
+    stageCount* {.optional.}: uint32
     pStages*: ptr PipelineShaderStageCreateInfo
-    groupCount*: uint32
+    groupCount* {.optional.}: uint32
     pGroups*: ptr RayTracingShaderGroupCreateInfoKHR
     maxRecursionDepth*: uint32
     libraries*: PipelineLibraryCreateInfoKHR
-    pLibraryInterface*: ptr RayTracingPipelineInterfaceCreateInfoKHR
+    pLibraryInterface* {.optional.}: ptr RayTracingPipelineInterfaceCreateInfoKHR
     layout*: PipelineLayout
-    basePipelineHandle*: Pipeline
+    basePipelineHandle* {.optional.}: Pipeline
     basePipelineIndex*: int32
   AabbPositionsKHR* = object
     minX*: float32
@@ -130,31 +130,31 @@ type
     maxY*: float32
     maxZ*: float32
   AccelerationStructureGeometryTrianglesDataKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.accelerationStructureGeometryTrianglesDataKhr).}: StructureType
+    pNext* {.optional.}: pointer
     vertexFormat*: Format
     vertexData*: DeviceOrHostAddressConstKHR
     vertexStride*: DeviceSize
     indexType*: IndexType
-    indexData*: DeviceOrHostAddressConstKHR
-    transformData*: DeviceOrHostAddressConstKHR
+    indexData* {.optional.}: DeviceOrHostAddressConstKHR
+    transformData* {.optional.}: DeviceOrHostAddressConstKHR
   TransformMatrixKHR* = object
     matrix*: array[3, array[4, float32]]
   AccelerationStructureBuildGeometryInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.accelerationStructureBuildGeometryInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     theType*: AccelerationStructureTypeKHR
-    flags*: BuildAccelerationStructureFlagsKHR
+    flags* {.optional.}: BuildAccelerationStructureFlagsKHR
     update*: Bool32
-    srcAccelerationStructure*: AccelerationStructureKHR
+    srcAccelerationStructure* {.optional.}: AccelerationStructureKHR
     dstAccelerationStructure*: AccelerationStructureKHR
     geometryArrayOfPointers*: Bool32
-    geometryCount*: uint32
+    geometryCount* {.optional.}: uint32
     ppGeometries*: ptr ptr AccelerationStructureGeometryKHR
     scratchData*: DeviceOrHostAddressKHR
   AccelerationStructureGeometryAabbsDataKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.accelerationStructureGeometryAabbsDataKhr).}: StructureType
+    pNext* {.optional.}: pointer
     data*: DeviceOrHostAddressConstKHR
     stride*: DeviceSize
   AccelerationStructureInstanceKHR* = object
@@ -162,11 +162,11 @@ type
     instanceCustomIndex*: uint32
     mask*: uint32
     instanceShaderBindingTableRecordOffset*: uint32
-    flags*: GeometryInstanceFlagsKHR
+    flags* {.optional.}: GeometryInstanceFlagsKHR
     accelerationStructureReference*: uint64
   AccelerationStructureGeometryInstancesDataKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.accelerationStructureGeometryInstancesDataKhr).}: StructureType
+    pNext* {.optional.}: pointer
     arrayOfPointers*: Bool32
     data*: DeviceOrHostAddressConstKHR
   AccelerationStructureGeometryDataKHR* {.union.} = object
@@ -174,53 +174,53 @@ type
     aabbs*: AccelerationStructureGeometryAabbsDataKHR
     instances*: AccelerationStructureGeometryInstancesDataKHR
   AccelerationStructureGeometryKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.accelerationStructureGeometryKhr).}: StructureType
+    pNext* {.optional.}: pointer
     geometryType*: GeometryTypeKHR
     geometry*: AccelerationStructureGeometryDataKHR
-    flags*: GeometryFlagsKHR
+    flags* {.optional.}: GeometryFlagsKHR
   AccelerationStructureCreateGeometryTypeInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.accelerationStructureCreateGeometryTypeInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     geometryType*: GeometryTypeKHR
     maxPrimitiveCount*: uint32
     indexType*: IndexType
-    maxVertexCount*: uint32
-    vertexFormat*: Format
-    allowsTransforms*: Bool32
+    maxVertexCount* {.optional.}: uint32
+    vertexFormat* {.optional.}: Format
+    allowsTransforms* {.optional.}: Bool32
   AccelerationStructureCreateInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.accelerationStructureCreateInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     compactedSize*: DeviceSize
     theType*: AccelerationStructureTypeKHR
-    flags*: BuildAccelerationStructureFlagsKHR
-    maxGeometryCount*: uint32
+    flags* {.optional.}: BuildAccelerationStructureFlagsKHR
+    maxGeometryCount* {.optional.}: uint32
     pGeometryInfos*: ptr AccelerationStructureCreateGeometryTypeInfoKHR
-    deviceAddress*: DeviceAddress
+    deviceAddress* {.optional.}: DeviceAddress
   HtAccelerationStructureKHR = object of HandleType
   AccelerationStructureKHR* = NonDispatchableHandle[HtAccelerationStructureKHR]
   BindAccelerationStructureMemoryInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.bindAccelerationStructureMemoryInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     accelerationStructure*: AccelerationStructureKHR
     memory*: DeviceMemory
     memoryOffset*: DeviceSize
-    deviceIndexCount*: uint32
+    deviceIndexCount* {.optional.}: uint32
     pDeviceIndices*: ptr uint32
   WriteDescriptorSetAccelerationStructureKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.writeDescriptorSetAccelerationStructureKhr).}: StructureType
+    pNext* {.optional.}: pointer
     accelerationStructureCount*: uint32
     pAccelerationStructures*: ptr AccelerationStructureKHR
   AccelerationStructureMemoryRequirementsInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.accelerationStructureMemoryRequirementsInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     theType*: AccelerationStructureMemoryRequirementsTypeKHR
     buildType*: AccelerationStructureBuildTypeKHR
     accelerationStructure*: AccelerationStructureKHR
   PhysicalDeviceRayTracingFeaturesKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceRayTracingFeaturesKhr).}: StructureType
+    pNext* {.optional.}: pointer
     rayTracing*: Bool32
     rayTracingShaderGroupHandleCaptureReplay*: Bool32
     rayTracingShaderGroupHandleCaptureReplayMixed*: Bool32
@@ -231,8 +231,8 @@ type
     rayQuery*: Bool32
     rayTracingPrimitiveCulling*: Bool32
   PhysicalDeviceRayTracingPropertiesKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceRayTracingPropertiesKhr).}: StructureType
+    pNext* {.optional.}: pointer
     shaderGroupHandleSize*: uint32
     maxRecursionDepth*: uint32
     maxShaderGroupStride*: uint32
@@ -243,15 +243,15 @@ type
     maxDescriptorSetAccelerationStructures*: uint32
     shaderGroupHandleCaptureReplaySize*: uint32
   AccelerationStructureDeviceAddressInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.accelerationStructureDeviceAddressInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     accelerationStructure*: AccelerationStructureKHR
   AccelerationStructureVersionKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.accelerationStructureVersionKhr).}: StructureType
+    pNext* {.optional.}: pointer
     versionData*: ptr uint8
   StridedBufferRegionKHR* = object
-    buffer*: Buffer
+    buffer* {.optional.}: Buffer
     offset*: DeviceSize
     stride*: DeviceSize
     size*: DeviceSize
@@ -260,68 +260,68 @@ type
     height*: uint32
     depth*: uint32
   CopyAccelerationStructureToMemoryInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.copyAccelerationStructureToMemoryInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     src*: AccelerationStructureKHR
     dst*: DeviceOrHostAddressKHR
     mode*: CopyAccelerationStructureModeKHR
   CopyMemoryToAccelerationStructureInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.copyMemoryToAccelerationStructureInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     src*: DeviceOrHostAddressConstKHR
     dst*: AccelerationStructureKHR
     mode*: CopyAccelerationStructureModeKHR
   CopyAccelerationStructureInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.copyAccelerationStructureInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     src*: AccelerationStructureKHR
     dst*: AccelerationStructureKHR
     mode*: CopyAccelerationStructureModeKHR
   RayTracingPipelineInterfaceCreateInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.rayTracingPipelineInterfaceCreateInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     maxPayloadSize*: uint32
     maxAttributeSize*: uint32
     maxCallableSize*: uint32
 
   RayTracingShaderGroupCreateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.rayTracingShaderGroupCreateInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
     theType*: RayTracingShaderGroupTypeKHR
     generalShader*: uint32
     closestHitShader*: uint32
     anyHitShader*: uint32
     intersectionShader*: uint32
   RayTracingPipelineCreateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineCreateFlags
+    sType* {.constant: (StructureType.rayTracingPipelineCreateInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineCreateFlags
     stageCount*: uint32
     pStages*: ptr PipelineShaderStageCreateInfo
     groupCount*: uint32
     pGroups*: ptr RayTracingShaderGroupCreateInfoNV
     maxRecursionDepth*: uint32
     layout*: PipelineLayout
-    basePipelineHandle*: Pipeline
+    basePipelineHandle* {.optional.}: Pipeline
     basePipelineIndex*: int32
   GeometryTrianglesNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    vertexData*: Buffer
+    sType* {.constant: (StructureType.geometryTrianglesNv).}: StructureType
+    pNext* {.optional.}: pointer
+    vertexData* {.optional.}: Buffer
     vertexOffset*: DeviceSize
     vertexCount*: uint32
     vertexStride*: DeviceSize
     vertexFormat*: Format
-    indexData*: Buffer
+    indexData* {.optional.}: Buffer
     indexOffset*: DeviceSize
     indexCount*: uint32
     indexType*: IndexType
-    transformData*: Buffer
+    transformData* {.optional.}: Buffer
     transformOffset*: DeviceSize
   GeometryAABBNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    aabbData*: Buffer
+    sType* {.constant: (StructureType.geometryAabbNv).}: StructureType
+    pNext* {.optional.}: pointer
+    aabbData* {.optional.}: Buffer
     numAABBs*: uint32
     stride*: uint32
     offset*: DeviceSize
@@ -329,35 +329,35 @@ type
     triangles*: GeometryTrianglesNV
     aabbs*: GeometryAABBNV
   GeometryNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.geometryNv).}: StructureType
+    pNext* {.optional.}: pointer
     geometryType*: GeometryTypeKHR
     geometry*: GeometryDataNV
-    flags*: GeometryFlagsKHR
+    flags* {.optional.}: GeometryFlagsKHR
   AccelerationStructureInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.accelerationStructureInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
     theType*: AccelerationStructureTypeNV
-    flags*: BuildAccelerationStructureFlagsNV
-    instanceCount*: uint32
-    geometryCount*: uint32
+    flags* {.optional.}: BuildAccelerationStructureFlagsNV
+    instanceCount* {.optional.}: uint32
+    geometryCount* {.optional.}: uint32
     pGeometries*: ptr GeometryNV
   AccelerationStructureCreateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.accelerationStructureCreateInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
     compactedSize*: DeviceSize
     info*: AccelerationStructureInfoNV
   AccelerationStructureNV* = AccelerationStructureKHR
   BindAccelerationStructureMemoryInfoNV* = object
   WriteDescriptorSetAccelerationStructureNV* = object
   AccelerationStructureMemoryRequirementsInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.accelerationStructureMemoryRequirementsInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
     theType*: AccelerationStructureMemoryRequirementsTypeNV
     accelerationStructure*: AccelerationStructureNV
   PhysicalDeviceRayTracingPropertiesNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceRayTracingPropertiesNv).}: StructureType
+    pNext* {.optional.}: pointer
     shaderGroupHandleSize*: uint32
     maxRecursionDepth*: uint32
     maxShaderGroupStride*: uint32

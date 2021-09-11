@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_discard_rectangles
 
 
@@ -19,15 +19,15 @@ type # enums and bitmasks
 
 type
   PhysicalDeviceDiscardRectanglePropertiesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceDiscardRectanglePropertiesExt).}: StructureType
+    pNext* {.optional.}: pointer
     maxDiscardRectangles*: uint32
   PipelineDiscardRectangleStateCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineDiscardRectangleStateCreateFlagsEXT
+    sType* {.constant: (StructureType.pipelineDiscardRectangleStateCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineDiscardRectangleStateCreateFlagsEXT
     discardRectangleMode*: DiscardRectangleModeEXT
-    discardRectangleCount*: uint32
+    discardRectangleCount* {.optional.}: uint32
     pDiscardRectangles*: ptr Rect2D
 
 proc cmdSetDiscardRectangleEXT*(

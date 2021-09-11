@@ -6,7 +6,9 @@
 import macros
 import strformat
 import strutils
+import sequtils
 import sets
+import options
 
 proc `==`*[Flagbits: enum](a, b: Flags[Flagbits]): bool =
   a.uint32 == b.uint32
@@ -166,3 +168,166 @@ proc `$`*(b: Bool32): string = b.toString
 
 converter toBool*(b: Bool32): bool = bool(b)
 converter toBool32*(b: bool): Bool32 = Bool32(b)
+
+
+# Struct Constructor
+# It makes it easier to understand what is optional, what is
+# implicitly determined, and what needs to be explicitly set
+# for many items in the vulkan structure. It also makes it
+# easier to write the creation of structures.
+# ==========================================================
+
+macro makeConstructor*(Struct: typedesc[object]): untyped =
+  runnableExamples:
+    import ../platform
+    type InstanceCreateInfo* = object
+      sType* {.constant: (StructureType.instanceCreateInfo).}: StructureType
+      pNext* {.optional.}: pointer
+      flags* {.optional.}: InstanceCreateFlags
+      pApplicationInfo* {.optional.}: ptr ApplicationInfo
+      enabledLayerCount* {.optional.}: uint32
+      ppEnabledLayerNames*: cstringArray
+      enabledExtensionCount* {.optional.}: uint32
+      ppEnabledExtensionNames*: cstringArray
+
+    let instanceCreateInfoConstructor = Instance.makeConstructor()
+
+    # makeConstructor expands the constructor for InstanceCreateInfo as follows:
+    # This proc is the same as the contents of instanceCreateInfoConstructor
+    discard proc(
+          # sType: It is omitted because the {.constant.} pragma has been set.
+          pNext = default(pointer); # Members with the optional pragma are set to the initial value of that type.
+          flags = default(InstanceCreateFlags); # optional
+          pApplicationInfo = default(ptr ApplicationInfo); # optional
+          enabledLayerCount = default(uint32); # optional
+          ppEnabledLayerNames: cstringArray;
+          enabledExtensionCount = default(uint32); # optional
+          ppEnabledExtensionNames: cstringArray;
+        ): InstanceCreateInfo =
+      InstanceCreateInfo(
+        sType: StructureType.instanceCreateInfo, # The values set in the constant pragma are directly expanded here.
+        pNext: pNext,
+        flags: flags,
+        pApplicationInfo: pApplicationInfo,
+        enabledLayerCount: enabledLayerCount,
+        ppEnabledLayerNames: ppEnabledLayerNames,
+        enabledExtensionCount: enabledExtensionCount,
+        ppEnabledExtensionNames: ppEnabledExtensionNames,
+      )
+
+    var instanceCreateInfo = instanceCreateInfoConstructor(
+      enabledLayerCount = 0,
+      ppEnabledLayerNames = nil,
+      enabledExtensionCount = 0,
+      ppEnabledExtensionNames = nil,
+    )
+
+    echo repr InstanceCreateInfo
+    # stdout:
+    #   [sType = instanceCreateInfo,
+    #   pNext = nil,
+    #   flags = 0,
+    #   pApplicationInfo = nil,
+    #   enabledLayerCount = 0,
+    #   ppEnabledLayerNames = nil,
+    #   enabledExtensionCount = 0,
+    #   ppEnabledExtensionNames = nil]
+
+  type Arg = object
+    name: NimNode
+    theType: NimNode
+    value: Option[NimNode]
+    optional: bool
+  var args: seq[Arg]
+
+  let impl = Struct.getImpl
+  let objName = impl[0]
+  let objRecList = impl[2][2]
+  for rec in objRecList:
+    rec.expectKind nnkIdentDefs
+    var arg: Arg
+    case rec[0].kind
+    of nnkIdent: arg.name = rec[0]
+    of nnkPostfix:
+      let postfix = rec[0]
+      if postfix[0].kind == nnkIdent and postfix[0].eqIdent "*":
+        arg.name = postfix[1]
+      else: error("Unexpected node", rec[0])
+    of nnkPragmaExpr:
+      let pragmaExpr = rec[0]
+
+      case pragmaExpr[0].kind
+      of nnkIdent: arg.name = pragmaExpr[0]
+      of nnkPostfix:
+        let postfix = pragmaExpr[0]
+        if postfix[0].kind == nnkIdent and postfix[0].eqIdent "*":
+          arg.name = postfix[1]
+        else: error("Unexpected node", pragmaExpr[0])
+      else: error("Unexpected node", pragmaExpr[0])
+
+      pragmaExpr[1].expectKind nnkPragma
+      let pragmas = pragmaExpr[1]
+      for pragma in pragmas:
+        case pragma.kind
+        of nnkSym:
+          if $pragma == "optional": arg.optional = true
+        of nnkExprColonExpr, nnkCall:
+          if $pragma[0] == "constant": arg.value = some pragma[1]
+        else: error("Unexpected statement", pragma)
+    else: error("Unexpected node", rec[0])
+
+    arg.theType = rec[1]
+
+    args.add arg
+
+  let procParams = args.map(proc(arg: Arg): NimNode =
+    if arg.value.isSome: newEmptyNode()
+    else:
+      newIdentDefs(
+        name = arg.name,
+        kind =
+          if arg.optional: newEmptyNode()
+          else: arg.theType,
+        default =
+          if arg.optional: ident"default".newCall ident"typeof".newCall arg.theType
+          else: newEmptyNode(),
+      )
+    ).filterIt(it != newEmptyNode())
+  let constrParams = args.map proc(arg: Arg): NimNode =
+    if arg.value.isSome: newColonExpr(arg.name, arg.value.get)
+    else: newColonExpr(arg.name, arg.name)
+
+  newProc(
+    params = @[objName].concat(procParams),
+    body = newStmtList().add(
+      newNimNode(nnkObjConstr)
+        .add(objName)
+        .add(constrParams)
+      ),
+    procType = nnkLambda
+  )
+macro construct*(struct: typedesc[object]; procArgs: varargs[untyped]): untyped =
+  ## Execute the constructor immediately. It can be written
+  ## concisely, but the disadvantages are that error messages
+  ## are difficult to read and that lambda expressions are
+  ## generated for each of the multiple calls.
+  runnableExamples:
+    import ../platform
+    type InstanceCreateInfo* = object
+      sType* {.constant: (StructureType.instanceCreateInfo).}: StructureType
+      pNext* {.optional.}: pointer
+      flags* {.optional.}: InstanceCreateFlags
+      pApplicationInfo* {.optional.}: ptr ApplicationInfo
+      enabledLayerCount* {.optional.}: uint32
+      ppEnabledLayerNames*: cstringArray
+      enabledExtensionCount* {.optional.}: uint32
+      ppEnabledExtensionNames*: cstringArray
+
+    var instanceCreateInfo = InstanceCreateInfo.construct(
+      enabledLayerCount = 0,
+      ppEnabledLayerNames = nil,
+      enabledExtensionCount = 0,
+      ppEnabledExtensionNames = nil,
+    )
+
+  return ident"makeConstructor".newCall(struct).newCall(procArgs[0..^1])

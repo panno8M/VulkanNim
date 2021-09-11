@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_AMD_texture_gather_bias_lod
 
 
@@ -13,8 +13,8 @@ const
 
 type
   TextureLODGatherFormatPropertiesAMD* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.textureLodGatherFormatPropertiesAmd).}: StructureType
+    pNext* {.optional.}: pointer
     supportsTextureGatherLODBiasAMD*: Bool32
 
 

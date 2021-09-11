@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_sample_locations
 
 
@@ -16,11 +16,11 @@ type
     x*: float32
     y*: float32
   SampleLocationsInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
-    sampleLocationsPerPixel*: SampleCountFlagBits
+    sType* {.constant: (StructureType.sampleLocationsInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
+    sampleLocationsPerPixel* {.optional.}: SampleCountFlagBits
     sampleLocationGridSize*: Extent2D
-    sampleLocationsCount*: uint32
+    sampleLocationsCount* {.optional.}: uint32
     pSampleLocations*: ptr SampleLocationEXT
   AttachmentSampleLocationsEXT* = object
     attachmentIndex*: uint32
@@ -29,28 +29,28 @@ type
     subpassIndex*: uint32
     sampleLocationsInfo*: SampleLocationsInfoEXT
   RenderPassSampleLocationsBeginInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
-    attachmentInitialSampleLocationsCount*: uint32
+    sType* {.constant: (StructureType.renderPassSampleLocationsBeginInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
+    attachmentInitialSampleLocationsCount* {.optional.}: uint32
     pAttachmentInitialSampleLocations*: ptr AttachmentSampleLocationsEXT
-    postSubpassSampleLocationsCount*: uint32
+    postSubpassSampleLocationsCount* {.optional.}: uint32
     pPostSubpassSampleLocations*: ptr SubpassSampleLocationsEXT
   PipelineSampleLocationsStateCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.pipelineSampleLocationsStateCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     sampleLocationsEnable*: Bool32
     sampleLocationsInfo*: SampleLocationsInfoEXT
   PhysicalDeviceSampleLocationsPropertiesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceSampleLocationsPropertiesExt).}: StructureType
+    pNext* {.optional.}: pointer
     sampleLocationSampleCounts*: SampleCountFlags
     maxSampleLocationGridSize*: Extent2D
     sampleLocationCoordinateRange*: array[2, float32]
     sampleLocationSubPixelBits*: uint32
     variableSampleLocations*: Bool32
   MultisamplePropertiesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.multisamplePropertiesExt).}: StructureType
+    pNext* {.optional.}: pointer
     maxSampleLocationGridSize*: Extent2D
 
 proc cmdSetSampleLocationsEXT*(

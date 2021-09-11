@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_metal_surface
 
 
@@ -19,9 +19,9 @@ type # enums and bitmasks
 
 type
   MetalSurfaceCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: MetalSurfaceCreateFlagsEXT
+    sType* {.constant: (StructureType.metalSurfaceCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: MetalSurfaceCreateFlagsEXT
     pLayer*: ptr CAMetalLayer
 
 proc createMetalSurfaceEXT*(

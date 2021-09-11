@@ -100,3 +100,6 @@ macro lazyload*(loadFrom: string; with = InstanceLevel; def: untyped): untyped =
     procTy,
     newEmptyNode()
   ))
+
+template optional*() {.pragma.}
+template constant*(v: typed) {.pragma.}

@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NV_win32_keyed_mutex
 
 
@@ -15,13 +15,13 @@ const
 
 type
   Win32KeyedMutexAcquireReleaseInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    acquireCount*: uint32
+    sType* {.constant: (StructureType.win32KeyedMutexAcquireReleaseInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
+    acquireCount* {.optional.}: uint32
     pAcquireSyncs*: ptr DeviceMemory
     pAcquireKeys*: ptr uint64
     pAcquireTimeoutMilliseconds*: ptr uint32
-    releaseCount*: uint32
+    releaseCount* {.optional.}: uint32
     pReleaseSyncs*: ptr DeviceMemory
     pReleaseKeys*: ptr uint64
 

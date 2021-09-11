@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_image_robustness
 
 
@@ -13,8 +13,8 @@ const
 
 type
   PhysicalDeviceImageRobustnessFeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceImageRobustnessFeaturesExt).}: StructureType
+    pNext* {.optional.}: pointer
     robustImageAccess*: Bool32
 
 

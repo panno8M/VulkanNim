@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_custom_border_color
 
 
@@ -11,17 +11,17 @@ const
 
 type
   SamplerCustomBorderColorCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.samplerCustomBorderColorCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     customBorderColor*: ClearColorValue
     format*: Format
   PhysicalDeviceCustomBorderColorPropertiesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceCustomBorderColorPropertiesExt).}: StructureType
+    pNext* {.optional.}: pointer
     maxCustomBorderColorSamplers*: uint32
   PhysicalDeviceCustomBorderColorFeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceCustomBorderColorFeaturesExt).}: StructureType
+    pNext* {.optional.}: pointer
     customBorderColors*: Bool32
     customBorderColorWithoutFormat*: Bool32
 

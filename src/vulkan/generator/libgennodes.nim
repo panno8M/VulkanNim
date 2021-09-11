@@ -128,7 +128,14 @@ proc render*(struct: Nodestruct): string =
       let
         theType = it.theType.parseTypeName(it.ptrLv, it.length)
         name = it.name.parseParamName
-      "  {name}*: {theType}".fmt)
+      if it.optional:
+        "  {name}* {{.optional.}}: {theType}".fmt
+      elif it.values.isSome:
+        # Expect that the value is single StructureType enum.
+        let value = it.values.get.parseEnumValue("vkStructureType", @[])
+        "  {name}* {{.constant: (StructureType.{value}).}}: {theType}".fmt
+      else:
+        "  {name}*: {theType}".fmt)
   if members.len != 0:
     result.LF
     result &= members.join("\n")
@@ -700,6 +707,11 @@ func extractNodeStructMember*(typeDef: XmlNode): (NodeStructMember, seq[string])
       name: typeDef["name"].innerText.parseWords[0],
       length: @[]
     )
+    if (?typeDef{"values"}).isSome:
+      result[0].values = some typeDef{"values"}
+    else:
+      result[0].optional = (typeDef{"optional"} == "true") or (result[0].name == "pNext")
+
     for m in typeDef:
       if m.kind == xnElement:
         if m.tag == "enum":

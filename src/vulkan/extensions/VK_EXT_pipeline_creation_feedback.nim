@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_pipeline_creation_feedback
 
 
@@ -18,8 +18,8 @@ type # enums and bitmasks
 
 type
   PipelineCreationFeedbackCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.pipelineCreationFeedbackCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     pPipelineCreationFeedback*: ptr PipelineCreationFeedbackEXT
     pipelineStageCreationFeedbackCount*: uint32
     pPipelineStageCreationFeedbacks*: ptr PipelineCreationFeedbackEXT

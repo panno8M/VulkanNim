@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_inline_uniform_block
 
 
@@ -15,26 +15,26 @@ const
 
 type
   PhysicalDeviceInlineUniformBlockFeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceInlineUniformBlockFeaturesExt).}: StructureType
+    pNext* {.optional.}: pointer
     inlineUniformBlock*: Bool32
     descriptorBindingInlineUniformBlockUpdateAfterBind*: Bool32
   PhysicalDeviceInlineUniformBlockPropertiesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceInlineUniformBlockPropertiesExt).}: StructureType
+    pNext* {.optional.}: pointer
     maxInlineUniformBlockSize*: uint32
     maxPerStageDescriptorInlineUniformBlocks*: uint32
     maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks*: uint32
     maxDescriptorSetInlineUniformBlocks*: uint32
     maxDescriptorSetUpdateAfterBindInlineUniformBlocks*: uint32
   WriteDescriptorSetInlineUniformBlockEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.writeDescriptorSetInlineUniformBlockExt).}: StructureType
+    pNext* {.optional.}: pointer
     dataSize*: uint32
     pData*: pointer
   DescriptorPoolInlineUniformBlockCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.descriptorPoolInlineUniformBlockCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     maxInlineUniformBlockBindings*: uint32
 
 

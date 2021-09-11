@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_swapchain
 
 
@@ -32,9 +32,9 @@ type # enums and bitmasks
 
 type
   SwapchainCreateInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: SwapchainCreateFlagsKHR
+    sType* {.constant: (StructureType.swapchainCreateInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: SwapchainCreateFlagsKHR
     surface*: SurfaceKHR
     minImageCount*: uint32
     imageFormat*: Format
@@ -43,56 +43,56 @@ type
     imageArrayLayers*: uint32
     imageUsage*: ImageUsageFlags
     imageSharingMode*: SharingMode
-    queueFamilyIndexCount*: uint32
+    queueFamilyIndexCount* {.optional.}: uint32
     pQueueFamilyIndices*: ptr uint32
     preTransform*: SurfaceTransformFlagBitsKHR
     compositeAlpha*: CompositeAlphaFlagBitsKHR
     presentMode*: PresentModeKHR
     clipped*: Bool32
-    oldSwapchain*: SwapchainKHR
+    oldSwapchain* {.optional.}: SwapchainKHR
   HtSwapchainKHR = object of HandleType
   SwapchainKHR* = NonDispatchableHandle[HtSwapchainKHR]
   PresentInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    waitSemaphoreCount*: uint32
+    sType* {.constant: (StructureType.presentInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    waitSemaphoreCount* {.optional.}: uint32
     pWaitSemaphores*: ptr Semaphore
     swapchainCount*: uint32
     pSwapchains*: ptr SwapchainKHR
     pImageIndices*: ptr uint32
-    pResults*: ptr Result
+    pResults* {.optional.}: ptr Result
 
   ImageSwapchainCreateInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    swapchain*: SwapchainKHR
+    sType* {.constant: (StructureType.imageSwapchainCreateInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    swapchain* {.optional.}: SwapchainKHR
   BindImageMemorySwapchainInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.bindImageMemorySwapchainInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     swapchain*: SwapchainKHR
     imageIndex*: uint32
   AcquireNextImageInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.acquireNextImageInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     swapchain*: SwapchainKHR
     timeout*: uint64
-    semaphore*: Semaphore
-    fence*: Fence
+    semaphore* {.optional.}: Semaphore
+    fence* {.optional.}: Fence
     deviceMask*: uint32
   DeviceGroupPresentCapabilitiesKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.deviceGroupPresentCapabilitiesKhr).}: StructureType
+    pNext* {.optional.}: pointer
     presentMask*: array[MaxDeviceGroupSize, uint32]
     modes*: DeviceGroupPresentModeFlagsKHR
   DeviceGroupPresentInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    swapchainCount*: uint32
+    sType* {.constant: (StructureType.deviceGroupPresentInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    swapchainCount* {.optional.}: uint32
     pDeviceMasks*: ptr uint32
     mode*: DeviceGroupPresentModeFlagBitsKHR
   DeviceGroupSwapchainCreateInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.deviceGroupSwapchainCreateInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     modes*: DeviceGroupPresentModeFlagsKHR
 
 proc createSwapchainKHR*(

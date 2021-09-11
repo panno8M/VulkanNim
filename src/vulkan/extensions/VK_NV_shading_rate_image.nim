@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NV_shading_rate_image
 
 
@@ -36,19 +36,19 @@ type
     shadingRatePaletteEntryCount*: uint32
     pShadingRatePaletteEntries*: ptr ShadingRatePaletteEntryNV
   PipelineViewportShadingRateImageStateCreateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.pipelineViewportShadingRateImageStateCreateInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
     shadingRateImageEnable*: Bool32
     viewportCount*: uint32
     pShadingRatePalettes*: ptr ShadingRatePaletteNV
   PhysicalDeviceShadingRateImageFeaturesNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceShadingRateImageFeaturesNv).}: StructureType
+    pNext* {.optional.}: pointer
     shadingRateImage*: Bool32
     shadingRateCoarseSampleOrder*: Bool32
   PhysicalDeviceShadingRateImagePropertiesNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceShadingRateImagePropertiesNv).}: StructureType
+    pNext* {.optional.}: pointer
     shadingRateTexelSize*: Extent2D
     shadingRatePaletteSize*: uint32
     shadingRateMaxCoarseSamples*: uint32
@@ -62,10 +62,10 @@ type
     sampleLocationCount*: uint32
     pSampleLocations*: ptr CoarseSampleLocationNV
   PipelineViewportCoarseSampleOrderStateCreateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.pipelineViewportCoarseSampleOrderStateCreateInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
     sampleOrderType*: CoarseSampleOrderTypeNV
-    customSampleOrderCount*: uint32
+    customSampleOrderCount* {.optional.}: uint32
     pCustomSampleOrders*: ptr CoarseSampleOrderCustomNV
 
 proc cmdBindShadingRateImageNV*(

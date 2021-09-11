@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_memory_priority
 
 
@@ -13,12 +13,12 @@ const
 
 type
   PhysicalDeviceMemoryPriorityFeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceMemoryPriorityFeaturesExt).}: StructureType
+    pNext* {.optional.}: pointer
     memoryPriority*: Bool32
   MemoryPriorityAllocateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.memoryPriorityAllocateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     priority*: float32
 
 

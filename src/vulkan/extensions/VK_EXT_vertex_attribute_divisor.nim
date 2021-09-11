@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_vertex_attribute_divisor
 
 
@@ -13,20 +13,20 @@ const
 
 type
   PhysicalDeviceVertexAttributeDivisorPropertiesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceVertexAttributeDivisorPropertiesExt).}: StructureType
+    pNext* {.optional.}: pointer
     maxVertexAttribDivisor*: uint32
   VertexInputBindingDivisorDescriptionEXT* = object
     binding*: uint32
     divisor*: uint32
   PipelineVertexInputDivisorStateCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.pipelineVertexInputDivisorStateCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     vertexBindingDivisorCount*: uint32
     pVertexBindingDivisors*: ptr VertexInputBindingDivisorDescriptionEXT
   PhysicalDeviceVertexAttributeDivisorFeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceVertexAttributeDivisorFeaturesExt).}: StructureType
+    pNext* {.optional.}: pointer
     vertexAttributeInstanceRateDivisor*: Bool32
     vertexAttributeInstanceRateZeroDivisor*: Bool32
 

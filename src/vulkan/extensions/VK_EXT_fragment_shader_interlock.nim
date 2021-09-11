@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_fragment_shader_interlock
 
 
@@ -13,8 +13,8 @@ const
 
 type
   PhysicalDeviceFragmentShaderInterlockFeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceFragmentShaderInterlockFeaturesExt).}: StructureType
+    pNext* {.optional.}: pointer
     fragmentShaderSampleInterlock*: Bool32
     fragmentShaderPixelInterlock*: Bool32
     fragmentShaderShadingRateInterlock*: Bool32

@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NV_dedicated_allocation
 
 
@@ -11,18 +11,18 @@ const
 
 type
   DedicatedAllocationImageCreateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.dedicatedAllocationImageCreateInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
     dedicatedAllocation*: Bool32
   DedicatedAllocationBufferCreateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.dedicatedAllocationBufferCreateInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
     dedicatedAllocation*: Bool32
   DedicatedAllocationMemoryAllocateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    image*: Image
-    buffer*: Buffer
+    sType* {.constant: (StructureType.dedicatedAllocationMemoryAllocateInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
+    image* {.optional.}: Image
+    buffer* {.optional.}: Buffer
 
 
 

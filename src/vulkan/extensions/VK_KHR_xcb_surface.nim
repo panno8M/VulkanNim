@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_xcb_surface
 
 
@@ -16,9 +16,9 @@ type # enums and bitmasks
 
 type
   XcbSurfaceCreateInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: XcbSurfaceCreateFlagsKHR
+    sType* {.constant: (StructureType.xcbSurfaceCreateInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: XcbSurfaceCreateFlagsKHR
     connection*: ptr xcb_connection_t
     window*: xcb_window_t
 

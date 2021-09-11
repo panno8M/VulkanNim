@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_conservative_rasterization
 
 
@@ -20,8 +20,8 @@ type # enums and bitmasks
 
 type
   PhysicalDeviceConservativeRasterizationPropertiesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceConservativeRasterizationPropertiesExt).}: StructureType
+    pNext* {.optional.}: pointer
     primitiveOverestimationSize*: float32
     maxExtraPrimitiveOverestimationSize*: float32
     extraPrimitiveOverestimationSizeGranularity*: float32
@@ -32,9 +32,9 @@ type
     fullyCoveredFragmentShaderInputVariable*: Bool32
     conservativeRasterizationPostDepthCoverage*: Bool32
   PipelineRasterizationConservativeStateCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineRasterizationConservativeStateCreateFlagsEXT
+    sType* {.constant: (StructureType.pipelineRasterizationConservativeStateCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineRasterizationConservativeStateCreateFlagsEXT
     conservativeRasterizationMode*: ConservativeRasterizationModeEXT
     extraPrimitiveOverestimationSize*: float32
 

@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_image_drm_format_modifier
 
 
@@ -19,35 +19,35 @@ const
 
 type
   DrmFormatModifierPropertiesListEXT* = object
-    sType*: StructureType
-    pNext*: pointer
-    drmFormatModifierCount*: uint32
+    sType* {.constant: (StructureType.drmFormatModifierPropertiesListExt).}: StructureType
+    pNext* {.optional.}: pointer
+    drmFormatModifierCount* {.optional.}: uint32
     pDrmFormatModifierProperties*: ptr DrmFormatModifierPropertiesEXT
   DrmFormatModifierPropertiesEXT* = object
     drmFormatModifier*: uint64
     drmFormatModifierPlaneCount*: uint32
     drmFormatModifierTilingFeatures*: FormatFeatureFlags
   PhysicalDeviceImageDrmFormatModifierInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceImageDrmFormatModifierInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     drmFormatModifier*: uint64
     sharingMode*: SharingMode
-    queueFamilyIndexCount*: uint32
+    queueFamilyIndexCount* {.optional.}: uint32
     pQueueFamilyIndices*: ptr uint32
   ImageDrmFormatModifierListCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.imageDrmFormatModifierListCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     drmFormatModifierCount*: uint32
     pDrmFormatModifiers*: ptr uint64
   ImageDrmFormatModifierExplicitCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.imageDrmFormatModifierExplicitCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     drmFormatModifier*: uint64
     drmFormatModifierPlaneCount*: uint32
     pPlaneLayouts*: ptr SubresourceLayout
   ImageDrmFormatModifierPropertiesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.imageDrmFormatModifierPropertiesExt).}: StructureType
+    pNext* {.optional.}: pointer
     drmFormatModifier*: uint64
 
 proc getImageDrmFormatModifierPropertiesEXT*(

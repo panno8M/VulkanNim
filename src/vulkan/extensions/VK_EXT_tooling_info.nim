@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_tooling_info
 
 
@@ -32,8 +32,8 @@ type # enums and bitmasks
 
 type
   PhysicalDeviceToolPropertiesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceToolPropertiesExt).}: StructureType
+    pNext* {.optional.}: pointer
     name*: array[MaxExtensionNameSize, char]
     version*: array[MaxExtensionNameSize, char]
     purposes*: ToolPurposeFlagsEXT

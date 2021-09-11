@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_index_type_uint8
 
 
@@ -11,8 +11,8 @@ const
 
 type
   PhysicalDeviceIndexTypeUint8FeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceIndexTypeUint8FeaturesExt).}: StructureType
+    pNext* {.optional.}: pointer
     indexTypeUint8*: Bool32
 
 

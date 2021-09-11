@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_shader_clock
 
 
@@ -13,8 +13,8 @@ const
 
 type
   PhysicalDeviceShaderClockFeaturesKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceShaderClockFeaturesKhr).}: StructureType
+    pNext* {.optional.}: pointer
     shaderSubgroupClock*: Bool32
     shaderDeviceClock*: Bool32
 

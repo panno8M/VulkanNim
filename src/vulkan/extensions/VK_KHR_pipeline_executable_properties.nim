@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_pipeline_executable_properties
 
 
@@ -21,23 +21,23 @@ type # enums and bitmasks
 
 type
   PhysicalDevicePipelineExecutablePropertiesFeaturesKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDevicePipelineExecutablePropertiesFeaturesKhr).}: StructureType
+    pNext* {.optional.}: pointer
     pipelineExecutableInfo*: Bool32
   PipelineInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.pipelineInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     pipeline*: Pipeline
   PipelineExecutablePropertiesKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.pipelineExecutablePropertiesKhr).}: StructureType
+    pNext* {.optional.}: pointer
     stages*: ShaderStageFlags
     name*: array[MaxDescriptionSize, char]
     description*: array[MaxDescriptionSize, char]
     subgroupSize*: uint32
   PipelineExecutableInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.pipelineExecutableInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     pipeline*: Pipeline
     executableIndex*: uint32
   PipelineExecutableStatisticValueKHR* {.union.} = object
@@ -46,20 +46,20 @@ type
     u64*: uint64
     f64*: float64
   PipelineExecutableStatisticKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.pipelineExecutableStatisticKhr).}: StructureType
+    pNext* {.optional.}: pointer
     name*: array[MaxDescriptionSize, char]
     description*: array[MaxDescriptionSize, char]
     format*: PipelineExecutableStatisticFormatKHR
     value*: PipelineExecutableStatisticValueKHR
   PipelineExecutableInternalRepresentationKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.pipelineExecutableInternalRepresentationKhr).}: StructureType
+    pNext* {.optional.}: pointer
     name*: array[MaxDescriptionSize, char]
     description*: array[MaxDescriptionSize, char]
     isText*: Bool32
-    dataSize*: uint
-    pData*: pointer
+    dataSize* {.optional.}: uint
+    pData* {.optional.}: pointer
 
 proc getPipelineExecutablePropertiesKHR*(
       device: Device;

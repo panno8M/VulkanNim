@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_conditional_rendering
 
 
@@ -16,19 +16,19 @@ type # enums and bitmasks
 
 type
   ConditionalRenderingBeginInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.conditionalRenderingBeginInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     buffer*: Buffer
     offset*: DeviceSize
-    flags*: ConditionalRenderingFlagsEXT
+    flags* {.optional.}: ConditionalRenderingFlagsEXT
   PhysicalDeviceConditionalRenderingFeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceConditionalRenderingFeaturesExt).}: StructureType
+    pNext* {.optional.}: pointer
     conditionalRendering*: Bool32
     inheritedConditionalRendering*: Bool32
   CommandBufferInheritanceConditionalRenderingInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.commandBufferInheritanceConditionalRenderingInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     conditionalRenderingEnable*: Bool32
 
 proc cmdBeginConditionalRenderingEXT*(

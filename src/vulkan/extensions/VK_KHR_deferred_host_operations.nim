@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_deferred_host_operations
 
 
@@ -13,8 +13,8 @@ type
   HtDeferredOperationKHR = object of HandleType
   DeferredOperationKHR* = NonDispatchableHandle[HtDeferredOperationKHR]
   DeferredOperationInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.deferredOperationInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     operationHandle*: DeferredOperationKHR
 
 proc createDeferredOperationKHR*(

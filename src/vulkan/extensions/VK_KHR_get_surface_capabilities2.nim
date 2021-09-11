@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_get_surface_capabilities2
 
 
@@ -13,16 +13,16 @@ const
 
 type
   PhysicalDeviceSurfaceInfo2KHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceSurfaceInfo2Khr).}: StructureType
+    pNext* {.optional.}: pointer
     surface*: SurfaceKHR
   SurfaceCapabilities2KHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.surfaceCapabilities2Khr).}: StructureType
+    pNext* {.optional.}: pointer
     surfaceCapabilities*: SurfaceCapabilitiesKHR
   SurfaceFormat2KHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.surfaceFormat2Khr).}: StructureType
+    pNext* {.optional.}: pointer
     surfaceFormat*: SurfaceFormatKHR
 
 proc getPhysicalDeviceSurfaceCapabilities2KHR*(

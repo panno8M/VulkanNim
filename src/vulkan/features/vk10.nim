@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T09:06:59Z
+# Generated at 2021-09-10T13:05:11Z
 # vk10
 # Vulkan core API interface definitions
 # =====================================
@@ -2361,13 +2361,13 @@ type
   # --------------------------------------------------------------------------------------------
   BaseInStructure* = object
     sType*: StructureType
-    pNext*: ptr BaseInStructure
+    pNext* {.optional.}: ptr BaseInStructure
   BaseOutStructure* = object
     sType*: StructureType
-    pNext*: ptr BaseOutStructure
+    pNext* {.optional.}: ptr BaseOutStructure
   BufferMemoryBarrier* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.bufferMemoryBarrier).}: StructureType
+    pNext* {.optional.}: pointer
     srcAccessMask*: AccessFlags
     dstAccessMask*: AccessFlags
     srcQueueFamilyIndex*: uint32
@@ -2391,8 +2391,8 @@ type
     firstVertex*: uint32
     firstInstance*: uint32
   ImageMemoryBarrier* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.imageMemoryBarrier).}: StructureType
+    pNext* {.optional.}: pointer
     srcAccessMask*: AccessFlags
     dstAccessMask*: AccessFlags
     oldLayout*: ImageLayout
@@ -2402,10 +2402,10 @@ type
     image*: Image
     subresourceRange*: ImageSubresourceRange
   MemoryBarrier* = object
-    sType*: StructureType
-    pNext*: pointer
-    srcAccessMask*: AccessFlags
-    dstAccessMask*: AccessFlags
+    sType* {.constant: (StructureType.memoryBarrier).}: StructureType
+    pNext* {.optional.}: pointer
+    srcAccessMask* {.optional.}: AccessFlags
+    dstAccessMask* {.optional.}: AccessFlags
 
   # Device initialization
   # ---------------------
@@ -2440,46 +2440,46 @@ type
     ): pointer {.cdecl.}
   PFN_VoidFunction* = proc(): void {.cdecl.}
   AllocationCallbacks* = object
-    pUserData*: pointer
+    pUserData* {.optional.}: pointer
     pfnAllocation*: PFN_AllocationFunction
     pfnReallocation*: PFN_ReallocationFunction
     pfnFree*: PFN_FreeFunction
-    pfnInternalAllocation*: PFN_InternalAllocationNotification
-    pfnInternalFree*: PFN_InternalFreeNotification
+    pfnInternalAllocation* {.optional.}: PFN_InternalAllocationNotification
+    pfnInternalFree* {.optional.}: PFN_InternalFreeNotification
   ApplicationInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    pApplicationName*: cstring
+    sType* {.constant: (StructureType.applicationInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    pApplicationName* {.optional.}: cstring
     applicationVersion*: uint32
-    pEngineName*: cstring
+    pEngineName* {.optional.}: cstring
     engineVersion*: uint32
     apiVersion*: uint32
   FormatProperties* = object
-    linearTilingFeatures*: FormatFeatureFlags
-    optimalTilingFeatures*: FormatFeatureFlags
-    bufferFeatures*: FormatFeatureFlags
+    linearTilingFeatures* {.optional.}: FormatFeatureFlags
+    optimalTilingFeatures* {.optional.}: FormatFeatureFlags
+    bufferFeatures* {.optional.}: FormatFeatureFlags
   ImageFormatProperties* = object
     maxExtent*: Extent3D
     maxMipLevels*: uint32
     maxArrayLayers*: uint32
-    sampleCounts*: SampleCountFlags
+    sampleCounts* {.optional.}: SampleCountFlags
     maxResourceSize*: DeviceSize
   HtInstance = object of HandleType
   Instance* = Handle[HtInstance]
   InstanceCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: InstanceCreateFlags
-    pApplicationInfo*: ptr ApplicationInfo
-    enabledLayerCount*: uint32
+    sType* {.constant: (StructureType.instanceCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: InstanceCreateFlags
+    pApplicationInfo* {.optional.}: ptr ApplicationInfo
+    enabledLayerCount* {.optional.}: uint32
     ppEnabledLayerNames*: cstringArray
-    enabledExtensionCount*: uint32
+    enabledExtensionCount* {.optional.}: uint32
     ppEnabledExtensionNames*: cstringArray
   MemoryHeap* = object
     size*: DeviceSize
-    flags*: MemoryHeapFlags
+    flags* {.optional.}: MemoryHeapFlags
   MemoryType* = object
-    propertyFlags*: MemoryPropertyFlags
+    propertyFlags* {.optional.}: MemoryPropertyFlags
     heapIndex*: uint32
   HtPhysicalDevice = object of HandleType
   PhysicalDevice* = Handle[HtPhysicalDevice]
@@ -2620,16 +2620,16 @@ type
     maxFramebufferWidth*: uint32
     maxFramebufferHeight*: uint32
     maxFramebufferLayers*: uint32
-    framebufferColorSampleCounts*: SampleCountFlags
-    framebufferDepthSampleCounts*: SampleCountFlags
-    framebufferStencilSampleCounts*: SampleCountFlags
-    framebufferNoAttachmentsSampleCounts*: SampleCountFlags
+    framebufferColorSampleCounts* {.optional.}: SampleCountFlags
+    framebufferDepthSampleCounts* {.optional.}: SampleCountFlags
+    framebufferStencilSampleCounts* {.optional.}: SampleCountFlags
+    framebufferNoAttachmentsSampleCounts* {.optional.}: SampleCountFlags
     maxColorAttachments*: uint32
-    sampledImageColorSampleCounts*: SampleCountFlags
-    sampledImageIntegerSampleCounts*: SampleCountFlags
-    sampledImageDepthSampleCounts*: SampleCountFlags
-    sampledImageStencilSampleCounts*: SampleCountFlags
-    storageImageSampleCounts*: SampleCountFlags
+    sampledImageColorSampleCounts* {.optional.}: SampleCountFlags
+    sampledImageIntegerSampleCounts* {.optional.}: SampleCountFlags
+    sampledImageDepthSampleCounts* {.optional.}: SampleCountFlags
+    sampledImageStencilSampleCounts* {.optional.}: SampleCountFlags
+    storageImageSampleCounts* {.optional.}: SampleCountFlags
     maxSampleMaskWords*: uint32
     timestampComputeAndGraphics*: Bool32
     timestampPeriod*: float32
@@ -2668,7 +2668,7 @@ type
     residencyAlignedMipSize*: Bool32
     residencyNonResidentStrict*: Bool32
   QueueFamilyProperties* = object
-    queueFlags*: QueueFlags
+    queueFlags* {.optional.}: QueueFlags
     queueCount*: uint32
     timestampValidBits*: uint32
     minImageTransferGranularity*: Extent3D
@@ -2678,20 +2678,20 @@ type
   HtDevice = object of HandleType
   Device* = Handle[HtDevice]
   DeviceCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: DeviceCreateFlags
+    sType* {.constant: (StructureType.deviceCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: DeviceCreateFlags
     queueCreateInfoCount*: uint32
     pQueueCreateInfos*: ptr DeviceQueueCreateInfo
-    enabledLayerCount*: uint32
+    enabledLayerCount* {.optional.}: uint32
     ppEnabledLayerNames*: cstringArray
-    enabledExtensionCount*: uint32
+    enabledExtensionCount* {.optional.}: uint32
     ppEnabledExtensionNames*: cstringArray
-    pEnabledFeatures*: ptr PhysicalDeviceFeatures
+    pEnabledFeatures* {.optional.}: ptr PhysicalDeviceFeatures
   DeviceQueueCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: DeviceQueueCreateFlags
+    sType* {.constant: (StructureType.deviceQueueCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: DeviceQueueCreateFlags
     queueFamilyIndex*: uint32
     queueCount*: uint32
     pQueuePriorities*: ptr float32
@@ -2715,27 +2715,27 @@ type
   HtQueue = object of HandleType
   Queue* = Handle[HtQueue]
   SubmitInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    waitSemaphoreCount*: uint32
+    sType* {.constant: (StructureType.submitInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    waitSemaphoreCount* {.optional.}: uint32
     pWaitSemaphores*: ptr Semaphore
     pWaitDstStageMask*: ptr PipelineStageFlags
-    commandBufferCount*: uint32
+    commandBufferCount* {.optional.}: uint32
     pCommandBuffers*: ptr CommandBuffer
-    signalSemaphoreCount*: uint32
+    signalSemaphoreCount* {.optional.}: uint32
     pSignalSemaphores*: ptr Semaphore
 
   # Memory commands
   # ---------------
   MappedMemoryRange* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.mappedMemoryRange).}: StructureType
+    pNext* {.optional.}: pointer
     memory*: DeviceMemory
     offset*: DeviceSize
     size*: DeviceSize
   MemoryAllocateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.memoryAllocateInfo).}: StructureType
+    pNext* {.optional.}: pointer
     allocationSize*: DeviceSize
     memoryTypeIndex*: uint32
 
@@ -2751,17 +2751,17 @@ type
   # Sparse resource memory management API commands
   # ----------------------------------------------
   BindSparseInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    waitSemaphoreCount*: uint32
+    sType* {.constant: (StructureType.bindSparseInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    waitSemaphoreCount* {.optional.}: uint32
     pWaitSemaphores*: ptr Semaphore
-    bufferBindCount*: uint32
+    bufferBindCount* {.optional.}: uint32
     pBufferBinds*: ptr SparseBufferMemoryBindInfo
-    imageOpaqueBindCount*: uint32
+    imageOpaqueBindCount* {.optional.}: uint32
     pImageOpaqueBinds*: ptr SparseImageOpaqueMemoryBindInfo
-    imageBindCount*: uint32
+    imageBindCount* {.optional.}: uint32
     pImageBinds*: ptr SparseImageMemoryBindInfo
-    signalSemaphoreCount*: uint32
+    signalSemaphoreCount* {.optional.}: uint32
     pSignalSemaphores*: ptr Semaphore
   ImageSubresource* = object
     aspectMask*: ImageAspectFlags
@@ -2772,16 +2772,16 @@ type
     bindCount*: uint32
     pBinds*: ptr SparseMemoryBind
   SparseImageFormatProperties* = object
-    aspectMask*: ImageAspectFlags
+    aspectMask* {.optional.}: ImageAspectFlags
     imageGranularity*: Extent3D
-    flags*: SparseImageFormatFlags
+    flags* {.optional.}: SparseImageFormatFlags
   SparseImageMemoryBind* = object
     subresource*: ImageSubresource
     offset*: Offset3D
     extent*: Extent3D
-    memory*: DeviceMemory
+    memory* {.optional.}: DeviceMemory
     memoryOffset*: DeviceSize
-    flags*: SparseMemoryBindFlags
+    flags* {.optional.}: SparseMemoryBindFlags
   SparseImageMemoryBindInfo* = object
     image*: Image
     bindCount*: uint32
@@ -2799,61 +2799,61 @@ type
   SparseMemoryBind* = object
     resourceOffset*: DeviceSize
     size*: DeviceSize
-    memory*: DeviceMemory
+    memory* {.optional.}: DeviceMemory
     memoryOffset*: DeviceSize
-    flags*: SparseMemoryBindFlags
+    flags* {.optional.}: SparseMemoryBindFlags
 
   # Fence commands
   # --------------
   HtFence = object of HandleType
   Fence* = NonDispatchableHandle[HtFence]
   FenceCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: FenceCreateFlags
+    sType* {.constant: (StructureType.fenceCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: FenceCreateFlags
 
   # Queue semaphore commands
   # ------------------------
   HtSemaphore = object of HandleType
   Semaphore* = NonDispatchableHandle[HtSemaphore]
   SemaphoreCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: SemaphoreCreateFlags
+    sType* {.constant: (StructureType.semaphoreCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: SemaphoreCreateFlags
 
   # Event commands
   # --------------
   HtEvent = object of HandleType
   Event* = NonDispatchableHandle[HtEvent]
   EventCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: EventCreateFlags
+    sType* {.constant: (StructureType.eventCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: EventCreateFlags
 
   # Query commands
   # --------------
   HtQueryPool = object of HandleType
   QueryPool* = NonDispatchableHandle[HtQueryPool]
   QueryPoolCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: QueryPoolCreateFlags
+    sType* {.constant: (StructureType.queryPoolCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: QueryPoolCreateFlags
     queryType*: QueryType
     queryCount*: uint32
-    pipelineStatistics*: QueryPipelineStatisticFlags
+    pipelineStatistics* {.optional.}: QueryPipelineStatisticFlags
 
   # Buffer commands
   # ---------------
   HtBuffer = object of HandleType
   Buffer* = NonDispatchableHandle[HtBuffer]
   BufferCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: BufferCreateFlags
+    sType* {.constant: (StructureType.bufferCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: BufferCreateFlags
     size*: DeviceSize
     usage*: BufferUsageFlags
     sharingMode*: SharingMode
-    queueFamilyIndexCount*: uint32
+    queueFamilyIndexCount* {.optional.}: uint32
     pQueueFamilyIndices*: ptr uint32
 
   # Buffer view commands
@@ -2861,9 +2861,9 @@ type
   HtBufferView = object of HandleType
   BufferView* = NonDispatchableHandle[HtBufferView]
   BufferViewCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: BufferViewCreateFlags
+    sType* {.constant: (StructureType.bufferViewCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: BufferViewCreateFlags
     buffer*: Buffer
     format*: Format
     offset*: DeviceSize
@@ -2874,9 +2874,9 @@ type
   HtImage = object of HandleType
   Image* = NonDispatchableHandle[HtImage]
   ImageCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: ImageCreateFlags
+    sType* {.constant: (StructureType.imageCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: ImageCreateFlags
     imageType*: ImageType
     format*: Format
     extent*: Extent3D
@@ -2886,7 +2886,7 @@ type
     tiling*: ImageTiling
     usage*: ImageUsageFlags
     sharingMode*: SharingMode
-    queueFamilyIndexCount*: uint32
+    queueFamilyIndexCount* {.optional.}: uint32
     pQueueFamilyIndices*: ptr uint32
     initialLayout*: ImageLayout
   SubresourceLayout* = object
@@ -2912,9 +2912,9 @@ type
   HtImageView = object of HandleType
   ImageView* = NonDispatchableHandle[HtImageView]
   ImageViewCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: ImageViewCreateFlags
+    sType* {.constant: (StructureType.imageViewCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: ImageViewCreateFlags
     image*: Image
     viewType*: ImageViewType
     format*: Format
@@ -2926,9 +2926,9 @@ type
   HtShaderModule = object of HandleType
   ShaderModule* = NonDispatchableHandle[HtShaderModule]
   ShaderModuleCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: ShaderModuleCreateFlags
+    sType* {.constant: (StructureType.shaderModuleCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: ShaderModuleCreateFlags
     codeSize*: uint
     pCode*: ptr uint32
 
@@ -2937,41 +2937,41 @@ type
   HtPipelineCache = object of HandleType
   PipelineCache* = NonDispatchableHandle[HtPipelineCache]
   PipelineCacheCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineCacheCreateFlags
-    initialDataSize*: uint
+    sType* {.constant: (StructureType.pipelineCacheCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineCacheCreateFlags
+    initialDataSize* {.optional.}: uint
     pInitialData*: pointer
 
   # Pipeline commands
   # -----------------
   ComputePipelineCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineCreateFlags
+    sType* {.constant: (StructureType.computePipelineCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineCreateFlags
     stage*: PipelineShaderStageCreateInfo
     layout*: PipelineLayout
-    basePipelineHandle*: Pipeline
+    basePipelineHandle* {.optional.}: Pipeline
     basePipelineIndex*: int32
   GraphicsPipelineCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineCreateFlags
+    sType* {.constant: (StructureType.graphicsPipelineCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineCreateFlags
     stageCount*: uint32
     pStages*: ptr PipelineShaderStageCreateInfo
-    pVertexInputState*: ptr PipelineVertexInputStateCreateInfo
-    pInputAssemblyState*: ptr PipelineInputAssemblyStateCreateInfo
-    pTessellationState*: ptr PipelineTessellationStateCreateInfo
-    pViewportState*: ptr PipelineViewportStateCreateInfo
+    pVertexInputState* {.optional.}: ptr PipelineVertexInputStateCreateInfo
+    pInputAssemblyState* {.optional.}: ptr PipelineInputAssemblyStateCreateInfo
+    pTessellationState* {.optional.}: ptr PipelineTessellationStateCreateInfo
+    pViewportState* {.optional.}: ptr PipelineViewportStateCreateInfo
     pRasterizationState*: ptr PipelineRasterizationStateCreateInfo
-    pMultisampleState*: ptr PipelineMultisampleStateCreateInfo
-    pDepthStencilState*: ptr PipelineDepthStencilStateCreateInfo
-    pColorBlendState*: ptr PipelineColorBlendStateCreateInfo
-    pDynamicState*: ptr PipelineDynamicStateCreateInfo
+    pMultisampleState* {.optional.}: ptr PipelineMultisampleStateCreateInfo
+    pDepthStencilState* {.optional.}: ptr PipelineDepthStencilStateCreateInfo
+    pColorBlendState* {.optional.}: ptr PipelineColorBlendStateCreateInfo
+    pDynamicState* {.optional.}: ptr PipelineDynamicStateCreateInfo
     layout*: PipelineLayout
     renderPass*: RenderPass
     subpass*: uint32
-    basePipelineHandle*: Pipeline
+    basePipelineHandle* {.optional.}: Pipeline
     basePipelineIndex*: int32
   HtPipeline = object of HandleType
   Pipeline* = NonDispatchableHandle[HtPipeline]
@@ -2983,20 +2983,20 @@ type
     srcAlphaBlendFactor*: BlendFactor
     dstAlphaBlendFactor*: BlendFactor
     alphaBlendOp*: BlendOp
-    colorWriteMask*: ColorComponentFlags
+    colorWriteMask* {.optional.}: ColorComponentFlags
   PipelineColorBlendStateCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineColorBlendStateCreateFlags
+    sType* {.constant: (StructureType.pipelineColorBlendStateCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineColorBlendStateCreateFlags
     logicOpEnable*: Bool32
     logicOp*: LogicOp
-    attachmentCount*: uint32
+    attachmentCount* {.optional.}: uint32
     pAttachments*: ptr PipelineColorBlendAttachmentState
     blendConstants*: array[4, float32]
   PipelineDepthStencilStateCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineDepthStencilStateCreateFlags
+    sType* {.constant: (StructureType.pipelineDepthStencilStateCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineDepthStencilStateCreateFlags
     depthTestEnable*: Bool32
     depthWriteEnable*: Bool32
     depthCompareOp*: CompareOp
@@ -3007,35 +3007,35 @@ type
     minDepthBounds*: float32
     maxDepthBounds*: float32
   PipelineDynamicStateCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineDynamicStateCreateFlags
-    dynamicStateCount*: uint32
+    sType* {.constant: (StructureType.pipelineDynamicStateCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineDynamicStateCreateFlags
+    dynamicStateCount* {.optional.}: uint32
     pDynamicStates*: ptr DynamicState
   PipelineInputAssemblyStateCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineInputAssemblyStateCreateFlags
+    sType* {.constant: (StructureType.pipelineInputAssemblyStateCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineInputAssemblyStateCreateFlags
     topology*: PrimitiveTopology
     primitiveRestartEnable*: Bool32
   PipelineMultisampleStateCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineMultisampleStateCreateFlags
+    sType* {.constant: (StructureType.pipelineMultisampleStateCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineMultisampleStateCreateFlags
     rasterizationSamples*: SampleCountFlagBits
     sampleShadingEnable*: Bool32
     minSampleShading*: float32
-    pSampleMask*: ptr SampleMask
+    pSampleMask* {.optional.}: ptr SampleMask
     alphaToCoverageEnable*: Bool32
     alphaToOneEnable*: Bool32
   PipelineRasterizationStateCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineRasterizationStateCreateFlags
+    sType* {.constant: (StructureType.pipelineRasterizationStateCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineRasterizationStateCreateFlags
     depthClampEnable*: Bool32
     rasterizerDiscardEnable*: Bool32
     polygonMode*: PolygonMode
-    cullMode*: CullModeFlags
+    cullMode* {.optional.}: CullModeFlags
     frontFace*: FrontFace
     depthBiasEnable*: Bool32
     depthBiasConstantFactor*: float32
@@ -3043,38 +3043,38 @@ type
     depthBiasSlopeFactor*: float32
     lineWidth*: float32
   PipelineShaderStageCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineShaderStageCreateFlags
+    sType* {.constant: (StructureType.pipelineShaderStageCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineShaderStageCreateFlags
     stage*: ShaderStageFlagBits
     module*: ShaderModule
     pName*: cstring
-    pSpecializationInfo*: ptr SpecializationInfo
+    pSpecializationInfo* {.optional.}: ptr SpecializationInfo
   PipelineTessellationStateCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineTessellationStateCreateFlags
+    sType* {.constant: (StructureType.pipelineTessellationStateCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineTessellationStateCreateFlags
     patchControlPoints*: uint32
   PipelineVertexInputStateCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineVertexInputStateCreateFlags
-    vertexBindingDescriptionCount*: uint32
+    sType* {.constant: (StructureType.pipelineVertexInputStateCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineVertexInputStateCreateFlags
+    vertexBindingDescriptionCount* {.optional.}: uint32
     pVertexBindingDescriptions*: ptr VertexInputBindingDescription
-    vertexAttributeDescriptionCount*: uint32
+    vertexAttributeDescriptionCount* {.optional.}: uint32
     pVertexAttributeDescriptions*: ptr VertexInputAttributeDescription
   PipelineViewportStateCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineViewportStateCreateFlags
-    viewportCount*: uint32
-    pViewports*: ptr Viewport
-    scissorCount*: uint32
-    pScissors*: ptr Rect2D
+    sType* {.constant: (StructureType.pipelineViewportStateCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineViewportStateCreateFlags
+    viewportCount* {.optional.}: uint32
+    pViewports* {.optional.}: ptr Viewport
+    scissorCount* {.optional.}: uint32
+    pScissors* {.optional.}: ptr Rect2D
   SpecializationInfo* = object
-    mapEntryCount*: uint32
+    mapEntryCount* {.optional.}: uint32
     pMapEntries*: ptr SpecializationMapEntry
-    dataSize*: uint
+    dataSize* {.optional.}: uint
     pData*: pointer
   SpecializationMapEntry* = object
     constantID*: uint32
@@ -3110,12 +3110,12 @@ type
   HtPipelineLayout = object of HandleType
   PipelineLayout* = NonDispatchableHandle[HtPipelineLayout]
   PipelineLayoutCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineLayoutCreateFlags
-    setLayoutCount*: uint32
+    sType* {.constant: (StructureType.pipelineLayoutCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineLayoutCreateFlags
+    setLayoutCount* {.optional.}: uint32
     pSetLayouts*: ptr DescriptorSetLayout
-    pushConstantRangeCount*: uint32
+    pushConstantRangeCount* {.optional.}: uint32
     pPushConstantRanges*: ptr PushConstantRange
   PushConstantRange* = object
     stageFlags*: ShaderStageFlags
@@ -3127,9 +3127,9 @@ type
   HtSampler = object of HandleType
   Sampler* = NonDispatchableHandle[HtSampler]
   SamplerCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: SamplerCreateFlags
+    sType* {.constant: (StructureType.samplerCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: SamplerCreateFlags
     magFilter*: Filter
     minFilter*: Filter
     mipmapMode*: SamplerMipmapMode
@@ -3149,8 +3149,8 @@ type
   # Descriptor set commands
   # -----------------------
   CopyDescriptorSet* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.copyDescriptorSet).}: StructureType
+    pNext* {.optional.}: pointer
     srcSet*: DescriptorSet
     srcBinding*: uint32
     srcArrayElement*: uint32
@@ -3159,7 +3159,7 @@ type
     dstArrayElement*: uint32
     descriptorCount*: uint32
   DescriptorBufferInfo* = object
-    buffer*: Buffer
+    buffer* {.optional.}: Buffer
     offset*: DeviceSize
     range*: DeviceSize
   DescriptorImageInfo* = object
@@ -3169,9 +3169,9 @@ type
   HtDescriptorPool = object of HandleType
   DescriptorPool* = NonDispatchableHandle[HtDescriptorPool]
   DescriptorPoolCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: DescriptorPoolCreateFlags
+    sType* {.constant: (StructureType.descriptorPoolCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: DescriptorPoolCreateFlags
     maxSets*: uint32
     poolSizeCount*: uint32
     pPoolSizes*: ptr DescriptorPoolSize
@@ -3181,8 +3181,8 @@ type
   HtDescriptorSet = object of HandleType
   DescriptorSet* = NonDispatchableHandle[HtDescriptorSet]
   DescriptorSetAllocateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.descriptorSetAllocateInfo).}: StructureType
+    pNext* {.optional.}: pointer
     descriptorPool*: DescriptorPool
     descriptorSetCount*: uint32
     pSetLayouts*: ptr DescriptorSetLayout
@@ -3191,18 +3191,18 @@ type
   DescriptorSetLayoutBinding* = object
     binding*: uint32
     descriptorType*: DescriptorType
-    descriptorCount*: uint32
+    descriptorCount* {.optional.}: uint32
     stageFlags*: ShaderStageFlags
-    pImmutableSamplers*: ptr Sampler
+    pImmutableSamplers* {.optional.}: ptr Sampler
   DescriptorSetLayoutCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: DescriptorSetLayoutCreateFlags
-    bindingCount*: uint32
+    sType* {.constant: (StructureType.descriptorSetLayoutCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: DescriptorSetLayoutCreateFlags
+    bindingCount* {.optional.}: uint32
     pBindings*: ptr DescriptorSetLayoutBinding
   WriteDescriptorSet* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.writeDescriptorSet).}: StructureType
+    pNext* {.optional.}: pointer
     dstSet*: DescriptorSet
     dstBinding*: uint32
     dstArrayElement*: uint32
@@ -3215,7 +3215,7 @@ type
   # Pass commands
   # -------------
   AttachmentDescription* = object
-    flags*: AttachmentDescriptionFlags
+    flags* {.optional.}: AttachmentDescriptionFlags
     format*: Format
     samples*: SampleCountFlagBits
     loadOp*: AttachmentLoadOp
@@ -3230,11 +3230,11 @@ type
   HtFramebuffer = object of HandleType
   Framebuffer* = NonDispatchableHandle[HtFramebuffer]
   FramebufferCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: FramebufferCreateFlags
+    sType* {.constant: (StructureType.framebufferCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: FramebufferCreateFlags
     renderPass*: RenderPass
-    attachmentCount*: uint32
+    attachmentCount* {.optional.}: uint32
     pAttachments*: ptr ImageView
     width*: uint32
     height*: uint32
@@ -3242,33 +3242,33 @@ type
   HtRenderPass = object of HandleType
   RenderPass* = NonDispatchableHandle[HtRenderPass]
   RenderPassCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: RenderPassCreateFlags
-    attachmentCount*: uint32
+    sType* {.constant: (StructureType.renderPassCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: RenderPassCreateFlags
+    attachmentCount* {.optional.}: uint32
     pAttachments*: ptr AttachmentDescription
     subpassCount*: uint32
     pSubpasses*: ptr SubpassDescription
-    dependencyCount*: uint32
+    dependencyCount* {.optional.}: uint32
     pDependencies*: ptr SubpassDependency
   SubpassDependency* = object
     srcSubpass*: uint32
     dstSubpass*: uint32
     srcStageMask*: PipelineStageFlags
     dstStageMask*: PipelineStageFlags
-    srcAccessMask*: AccessFlags
-    dstAccessMask*: AccessFlags
-    dependencyFlags*: DependencyFlags
+    srcAccessMask* {.optional.}: AccessFlags
+    dstAccessMask* {.optional.}: AccessFlags
+    dependencyFlags* {.optional.}: DependencyFlags
   SubpassDescription* = object
-    flags*: SubpassDescriptionFlags
+    flags* {.optional.}: SubpassDescriptionFlags
     pipelineBindPoint*: PipelineBindPoint
-    inputAttachmentCount*: uint32
+    inputAttachmentCount* {.optional.}: uint32
     pInputAttachments*: ptr AttachmentReference
-    colorAttachmentCount*: uint32
+    colorAttachmentCount* {.optional.}: uint32
     pColorAttachments*: ptr AttachmentReference
-    pResolveAttachments*: ptr AttachmentReference
-    pDepthStencilAttachment*: ptr AttachmentReference
-    preserveAttachmentCount*: uint32
+    pResolveAttachments* {.optional.}: ptr AttachmentReference
+    pDepthStencilAttachment* {.optional.}: ptr AttachmentReference
+    preserveAttachmentCount* {.optional.}: uint32
     pPreserveAttachments*: ptr uint32
 
   # Command pool commands
@@ -3276,9 +3276,9 @@ type
   HtCommandPool = object of HandleType
   CommandPool* = NonDispatchableHandle[HtCommandPool]
   CommandPoolCreateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: CommandPoolCreateFlags
+    sType* {.constant: (StructureType.commandPoolCreateInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: CommandPoolCreateFlags
     queueFamilyIndex*: uint32
 
   # Command buffer commands
@@ -3286,25 +3286,25 @@ type
   HtCommandBuffer = object of HandleType
   CommandBuffer* = Handle[HtCommandBuffer]
   CommandBufferAllocateInfo* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.commandBufferAllocateInfo).}: StructureType
+    pNext* {.optional.}: pointer
     commandPool*: CommandPool
     level*: CommandBufferLevel
     commandBufferCount*: uint32
   CommandBufferBeginInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: CommandBufferUsageFlags
-    pInheritanceInfo*: ptr CommandBufferInheritanceInfo
+    sType* {.constant: (StructureType.commandBufferBeginInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: CommandBufferUsageFlags
+    pInheritanceInfo* {.optional.}: ptr CommandBufferInheritanceInfo
   CommandBufferInheritanceInfo* = object
-    sType*: StructureType
-    pNext*: pointer
-    renderPass*: RenderPass
+    sType* {.constant: (StructureType.commandBufferInheritanceInfo).}: StructureType
+    pNext* {.optional.}: pointer
+    renderPass* {.optional.}: RenderPass
     subpass*: uint32
-    framebuffer*: Framebuffer
+    framebuffer* {.optional.}: Framebuffer
     occlusionQueryEnable*: Bool32
-    queryFlags*: QueryControlFlags
-    pipelineStatistics*: QueryPipelineStatisticFlags
+    queryFlags* {.optional.}: QueryControlFlags
+    pipelineStatistics* {.optional.}: QueryPipelineStatisticFlags
 
   # Command buffer building commands
   # --------------------------------
@@ -3362,12 +3362,12 @@ type
     baseArrayLayer*: uint32
     layerCount*: uint32
   RenderPassBeginInfo* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.renderPassBeginInfo).}: StructureType
+    pNext* {.optional.}: pointer
     renderPass*: RenderPass
     framebuffer*: Framebuffer
     renderArea*: Rect2D
-    clearValueCount*: uint32
+    clearValueCount* {.optional.}: uint32
     pClearValues*: ptr ClearValue
 
 # Header boilerplate
@@ -4738,7 +4738,9 @@ proc loadVk10*(device: Device) =
 import macros
 import strformat
 import strutils
+import sequtils
 import sets
+import options
 
 proc `==`*[Flagbits: enum](a, b: Flags[Flagbits]): bool =
   a.uint32 == b.uint32
@@ -4898,3 +4900,166 @@ proc `$`*(b: Bool32): string = b.toString
 
 converter toBool*(b: Bool32): bool = bool(b)
 converter toBool32*(b: bool): Bool32 = Bool32(b)
+
+
+# Struct Constructor
+# It makes it easier to understand what is optional, what is
+# implicitly determined, and what needs to be explicitly set
+# for many items in the vulkan structure. It also makes it
+# easier to write the creation of structures.
+# ==========================================================
+
+macro makeConstructor*(Struct: typedesc[object]): untyped =
+  runnableExamples:
+    import ../platform
+    type InstanceCreateInfo* = object
+      sType* {.constant: (StructureType.instanceCreateInfo).}: StructureType
+      pNext* {.optional.}: pointer
+      flags* {.optional.}: InstanceCreateFlags
+      pApplicationInfo* {.optional.}: ptr ApplicationInfo
+      enabledLayerCount* {.optional.}: uint32
+      ppEnabledLayerNames*: cstringArray
+      enabledExtensionCount* {.optional.}: uint32
+      ppEnabledExtensionNames*: cstringArray
+
+    let instanceCreateInfoConstructor = Instance.makeConstructor()
+
+    # makeConstructor expands the constructor for InstanceCreateInfo as follows:
+    # This proc is the same as the contents of instanceCreateInfoConstructor
+    discard proc(
+          # sType: It is omitted because the {.constant.} pragma has been set.
+          pNext = default(pointer); # Members with the optional pragma are set to the initial value of that type.
+          flags = default(InstanceCreateFlags); # optional
+          pApplicationInfo = default(ptr ApplicationInfo); # optional
+          enabledLayerCount = default(uint32); # optional
+          ppEnabledLayerNames: cstringArray;
+          enabledExtensionCount = default(uint32); # optional
+          ppEnabledExtensionNames: cstringArray;
+        ): InstanceCreateInfo =
+      InstanceCreateInfo(
+        sType: StructureType.instanceCreateInfo, # The values set in the constant pragma are directly expanded here.
+        pNext: pNext,
+        flags: flags,
+        pApplicationInfo: pApplicationInfo,
+        enabledLayerCount: enabledLayerCount,
+        ppEnabledLayerNames: ppEnabledLayerNames,
+        enabledExtensionCount: enabledExtensionCount,
+        ppEnabledExtensionNames: ppEnabledExtensionNames,
+      )
+
+    var instanceCreateInfo = instanceCreateInfoConstructor(
+      enabledLayerCount = 0,
+      ppEnabledLayerNames = nil,
+      enabledExtensionCount = 0,
+      ppEnabledExtensionNames = nil,
+    )
+
+    echo repr InstanceCreateInfo
+    # stdout:
+    #   [sType = instanceCreateInfo,
+    #   pNext = nil,
+    #   flags = 0,
+    #   pApplicationInfo = nil,
+    #   enabledLayerCount = 0,
+    #   ppEnabledLayerNames = nil,
+    #   enabledExtensionCount = 0,
+    #   ppEnabledExtensionNames = nil]
+
+  type Arg = object
+    name: NimNode
+    theType: NimNode
+    value: Option[NimNode]
+    optional: bool
+  var args: seq[Arg]
+
+  let impl = Struct.getImpl
+  let objName = impl[0]
+  let objRecList = impl[2][2]
+  for rec in objRecList:
+    rec.expectKind nnkIdentDefs
+    var arg: Arg
+    case rec[0].kind
+    of nnkIdent: arg.name = rec[0]
+    of nnkPostfix:
+      let postfix = rec[0]
+      if postfix[0].kind == nnkIdent and postfix[0].eqIdent "*":
+        arg.name = postfix[1]
+      else: error("Unexpected node", rec[0])
+    of nnkPragmaExpr:
+      let pragmaExpr = rec[0]
+
+      case pragmaExpr[0].kind
+      of nnkIdent: arg.name = pragmaExpr[0]
+      of nnkPostfix:
+        let postfix = pragmaExpr[0]
+        if postfix[0].kind == nnkIdent and postfix[0].eqIdent "*":
+          arg.name = postfix[1]
+        else: error("Unexpected node", pragmaExpr[0])
+      else: error("Unexpected node", pragmaExpr[0])
+
+      pragmaExpr[1].expectKind nnkPragma
+      let pragmas = pragmaExpr[1]
+      for pragma in pragmas:
+        case pragma.kind
+        of nnkSym:
+          if $pragma == "optional": arg.optional = true
+        of nnkExprColonExpr, nnkCall:
+          if $pragma[0] == "constant": arg.value = some pragma[1]
+        else: error("Unexpected statement", pragma)
+    else: error("Unexpected node", rec[0])
+
+    arg.theType = rec[1]
+
+    args.add arg
+
+  let procParams = args.map(proc(arg: Arg): NimNode =
+    if arg.value.isSome: newEmptyNode()
+    else:
+      newIdentDefs(
+        name = arg.name,
+        kind =
+          if arg.optional: newEmptyNode()
+          else: arg.theType,
+        default =
+          if arg.optional: ident"default".newCall ident"typeof".newCall arg.theType
+          else: newEmptyNode(),
+      )
+    ).filterIt(it != newEmptyNode())
+  let constrParams = args.map proc(arg: Arg): NimNode =
+    if arg.value.isSome: newColonExpr(arg.name, arg.value.get)
+    else: newColonExpr(arg.name, arg.name)
+
+  newProc(
+    params = @[objName].concat(procParams),
+    body = newStmtList().add(
+      newNimNode(nnkObjConstr)
+        .add(objName)
+        .add(constrParams)
+      ),
+    procType = nnkLambda
+  )
+macro construct*(struct: typedesc[object]; procArgs: varargs[untyped]): untyped =
+  ## Execute the constructor immediately. It can be written
+  ## concisely, but the disadvantages are that error messages
+  ## are difficult to read and that lambda expressions are
+  ## generated for each of the multiple calls.
+  runnableExamples:
+    import ../platform
+    type InstanceCreateInfo* = object
+      sType* {.constant: (StructureType.instanceCreateInfo).}: StructureType
+      pNext* {.optional.}: pointer
+      flags* {.optional.}: InstanceCreateFlags
+      pApplicationInfo* {.optional.}: ptr ApplicationInfo
+      enabledLayerCount* {.optional.}: uint32
+      ppEnabledLayerNames*: cstringArray
+      enabledExtensionCount* {.optional.}: uint32
+      ppEnabledExtensionNames*: cstringArray
+
+    var instanceCreateInfo = InstanceCreateInfo.construct(
+      enabledLayerCount = 0,
+      ppEnabledLayerNames = nil,
+      enabledExtensionCount = 0,
+      ppEnabledExtensionNames = nil,
+    )
+
+  return ident"makeConstructor".newCall(struct).newCall(procArgs[0..^1])

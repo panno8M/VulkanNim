@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_win32_surface
 
 
@@ -16,9 +16,9 @@ type # enums and bitmasks
 
 type
   Win32SurfaceCreateInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: Win32SurfaceCreateFlagsKHR
+    sType* {.constant: (StructureType.win32SurfaceCreateInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: Win32SurfaceCreateFlagsKHR
     hinstance*: HINSTANCE
     hwnd*: HWND
 

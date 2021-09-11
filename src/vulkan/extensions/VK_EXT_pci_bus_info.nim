@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_pci_bus_info
 
 
@@ -13,8 +13,8 @@ const
 
 type
   PhysicalDevicePCIBusInfoPropertiesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDevicePciBusInfoPropertiesExt).}: StructureType
+    pNext* {.optional.}: pointer
     pciDomain*: uint32
     pciBus*: uint32
     pciDevice*: uint32

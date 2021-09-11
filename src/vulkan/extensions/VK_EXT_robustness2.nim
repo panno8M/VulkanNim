@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_robustness2
 
 
@@ -11,14 +11,14 @@ const
 
 type
   PhysicalDeviceRobustness2FeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceRobustness2FeaturesExt).}: StructureType
+    pNext* {.optional.}: pointer
     robustBufferAccess2*: Bool32
     robustImageAccess2*: Bool32
     nullDescriptor*: Bool32
   PhysicalDeviceRobustness2PropertiesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceRobustness2PropertiesExt).}: StructureType
+    pNext* {.optional.}: pointer
     robustStorageBufferAccessSizeAlignment*: DeviceSize
     robustUniformBufferAccessSizeAlignment*: DeviceSize
 

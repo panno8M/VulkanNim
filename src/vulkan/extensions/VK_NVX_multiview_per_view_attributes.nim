@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NVX_multiview_per_view_attributes
 
 
@@ -13,8 +13,8 @@ const
 
 type
   PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceMultiviewPerViewAttributesPropertiesNvx).}: StructureType
+    pNext* {.optional.}: pointer
     perViewPositionAllComponents*: Bool32
 
 

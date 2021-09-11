@@ -1,4 +1,4 @@
-# Generated at 2021-09-08T14:18:16Z
+# Generated at 2021-09-10T05:27:58Z
 # platform
 import strformat
 import macros
@@ -102,6 +102,9 @@ macro lazyload*(loadFrom: string; with = InstanceLevel; def: untyped): untyped =
     procTy,
     newEmptyNode()
   ))
+
+template optional*() {.pragma.}
+template constant*(v: typed) {.pragma.}
 
 
 

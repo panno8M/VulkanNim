@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_depth_clip_enable
 
 
@@ -14,13 +14,13 @@ type # enums and bitmasks
 
 type
   PhysicalDeviceDepthClipEnableFeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceDepthClipEnableFeaturesExt).}: StructureType
+    pNext* {.optional.}: pointer
     depthClipEnable*: Bool32
   PipelineRasterizationDepthClipStateCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineRasterizationDepthClipStateCreateFlagsEXT
+    sType* {.constant: (StructureType.pipelineRasterizationDepthClipStateCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineRasterizationDepthClipStateCreateFlagsEXT
     depthClipEnable*: Bool32
 
 

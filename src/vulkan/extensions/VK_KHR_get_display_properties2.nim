@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_get_display_properties2
 
 
@@ -13,25 +13,25 @@ const
 
 type
   DisplayProperties2KHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.displayProperties2Khr).}: StructureType
+    pNext* {.optional.}: pointer
     displayProperties*: DisplayPropertiesKHR
   DisplayPlaneProperties2KHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.displayPlaneProperties2Khr).}: StructureType
+    pNext* {.optional.}: pointer
     displayPlaneProperties*: DisplayPlanePropertiesKHR
   DisplayModeProperties2KHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.displayModeProperties2Khr).}: StructureType
+    pNext* {.optional.}: pointer
     displayModeProperties*: DisplayModePropertiesKHR
   DisplayPlaneInfo2KHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.displayPlaneInfo2Khr).}: StructureType
+    pNext* {.optional.}: pointer
     mode*: DisplayModeKHR
     planeIndex*: uint32
   DisplayPlaneCapabilities2KHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.displayPlaneCapabilities2Khr).}: StructureType
+    pNext* {.optional.}: pointer
     capabilities*: DisplayPlaneCapabilitiesKHR
 
 proc getPhysicalDeviceDisplayProperties2KHR*(

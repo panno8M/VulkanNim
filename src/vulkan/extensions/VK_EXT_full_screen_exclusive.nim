@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_full_screen_exclusive
 
 
@@ -30,17 +30,17 @@ type # enums and bitmasks
 
 type
   SurfaceFullScreenExclusiveInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.surfaceFullScreenExclusiveInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     fullScreenExclusive*: FullScreenExclusiveEXT
   SurfaceCapabilitiesFullScreenExclusiveEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.surfaceCapabilitiesFullScreenExclusiveExt).}: StructureType
+    pNext* {.optional.}: pointer
     fullScreenExclusiveSupported*: Bool32
 
   SurfaceFullScreenExclusiveWin32InfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.surfaceFullScreenExclusiveWin32InfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     hmonitor*: HMONITOR
 
 proc getPhysicalDeviceSurfacePresentModes2EXT*(

@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_display_swapchain
 
 
@@ -15,8 +15,8 @@ const
 
 type
   DisplayPresentInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.displayPresentInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     srcRect*: Rect2D
     dstRect*: Rect2D
     persistent*: Bool32

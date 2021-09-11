@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_blend_operation_advanced
 
 
@@ -17,12 +17,12 @@ type # enums and bitmasks
 
 type
   PhysicalDeviceBlendOperationAdvancedFeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceBlendOperationAdvancedFeaturesExt).}: StructureType
+    pNext* {.optional.}: pointer
     advancedBlendCoherentOperations*: Bool32
   PhysicalDeviceBlendOperationAdvancedPropertiesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceBlendOperationAdvancedPropertiesExt).}: StructureType
+    pNext* {.optional.}: pointer
     advancedBlendMaxColorAttachments*: uint32
     advancedBlendIndependentBlend*: Bool32
     advancedBlendNonPremultipliedSrcColor*: Bool32
@@ -30,8 +30,8 @@ type
     advancedBlendCorrelatedOverlap*: Bool32
     advancedBlendAllOperations*: Bool32
   PipelineColorBlendAdvancedStateCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.pipelineColorBlendAdvancedStateCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     srcPremultiplied*: Bool32
     dstPremultiplied*: Bool32
     blendOverlap*: BlendOverlapEXT

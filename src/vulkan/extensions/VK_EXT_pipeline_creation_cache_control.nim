@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_pipeline_creation_cache_control
 
 
@@ -11,8 +11,8 @@ const
 
 type
   PhysicalDevicePipelineCreationCacheControlFeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDevicePipelineCreationCacheControlFeaturesExt).}: StructureType
+    pNext* {.optional.}: pointer
     pipelineCreationCacheControl*: Bool32
 
 Result.defineAliases:

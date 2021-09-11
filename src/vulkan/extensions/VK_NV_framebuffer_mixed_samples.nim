@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NV_framebuffer_mixed_samples
 
 
@@ -19,13 +19,13 @@ type # enums and bitmasks
 
 type
   PipelineCoverageModulationStateCreateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineCoverageModulationStateCreateFlagsNV
+    sType* {.constant: (StructureType.pipelineCoverageModulationStateCreateInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineCoverageModulationStateCreateFlagsNV
     coverageModulationMode*: CoverageModulationModeNV
     coverageModulationTableEnable*: Bool32
-    coverageModulationTableCount*: uint32
-    pCoverageModulationTable*: ptr float32
+    coverageModulationTableCount* {.optional.}: uint32
+    pCoverageModulationTable* {.optional.}: ptr float32
 
 
 

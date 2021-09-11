@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_display_control
 
 
@@ -25,21 +25,21 @@ type # enums and bitmasks
 
 type
   DisplayPowerInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.displayPowerInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     powerState*: DisplayPowerStateEXT
   DeviceEventInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.deviceEventInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     deviceEvent*: DeviceEventTypeEXT
   DisplayEventInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.displayEventInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     displayEvent*: DisplayEventTypeEXT
   SwapchainCounterCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
-    surfaceCounters*: SurfaceCounterFlagsEXT
+    sType* {.constant: (StructureType.swapchainCounterCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
+    surfaceCounters* {.optional.}: SurfaceCounterFlagsEXT
 
 proc displayPowerControlEXT*(
       device: Device;

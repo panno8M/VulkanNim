@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_transform_feedback
 
 
@@ -16,13 +16,13 @@ type # enums and bitmasks
 
 type
   PhysicalDeviceTransformFeedbackFeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceTransformFeedbackFeaturesExt).}: StructureType
+    pNext* {.optional.}: pointer
     transformFeedback*: Bool32
     geometryStreams*: Bool32
   PhysicalDeviceTransformFeedbackPropertiesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceTransformFeedbackPropertiesExt).}: StructureType
+    pNext* {.optional.}: pointer
     maxTransformFeedbackStreams*: uint32
     maxTransformFeedbackBuffers*: uint32
     maxTransformFeedbackBufferSize*: DeviceSize
@@ -34,9 +34,9 @@ type
     transformFeedbackRasterizationStreamSelect*: Bool32
     transformFeedbackDraw*: Bool32
   PipelineRasterizationStateStreamCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineRasterizationStateStreamCreateFlagsEXT
+    sType* {.constant: (StructureType.pipelineRasterizationStateStreamCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineRasterizationStateStreamCreateFlagsEXT
     rasterizationStream*: uint32
 
 proc cmdBindTransformFeedbackBuffersEXT*(

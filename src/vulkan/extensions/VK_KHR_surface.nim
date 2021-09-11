@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_surface
 # VK_KHR_display
 
@@ -92,10 +92,10 @@ type
     minImageExtent*: Extent2D
     maxImageExtent*: Extent2D
     maxImageArrayLayers*: uint32
-    supportedTransforms*: SurfaceTransformFlagsKHR
+    supportedTransforms* {.optional.}: SurfaceTransformFlagsKHR
     currentTransform*: SurfaceTransformFlagBitsKHR
-    supportedCompositeAlpha*: CompositeAlphaFlagsKHR
-    supportedUsageFlags*: ImageUsageFlags
+    supportedCompositeAlpha* {.optional.}: CompositeAlphaFlagsKHR
+    supportedUsageFlags* {.optional.}: ImageUsageFlags
   SurfaceFormatKHR* = object
     format*: Format
     colorSpace*: ColorSpaceKHR
@@ -103,9 +103,9 @@ type
   HtDisplayKHR = object of HandleType
   DisplayKHR* = NonDispatchableHandle[HtDisplayKHR]
   DisplayModeCreateInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: DisplayModeCreateFlagsKHR
+    sType* {.constant: (StructureType.displayModeCreateInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: DisplayModeCreateFlagsKHR
     parameters*: DisplayModeParametersKHR
   HtDisplayModeKHR = object of HandleType
   DisplayModeKHR* = NonDispatchableHandle[HtDisplayModeKHR]
@@ -116,7 +116,7 @@ type
     displayMode*: DisplayModeKHR
     parameters*: DisplayModeParametersKHR
   DisplayPlaneCapabilitiesKHR* = object
-    supportedAlpha*: DisplayPlaneAlphaFlagsKHR
+    supportedAlpha* {.optional.}: DisplayPlaneAlphaFlagsKHR
     minSrcPosition*: Offset2D
     maxSrcPosition*: Offset2D
     minSrcExtent*: Extent2D
@@ -133,13 +133,13 @@ type
     displayName*: cstring
     physicalDimensions*: Extent2D
     physicalResolution*: Extent2D
-    supportedTransforms*: SurfaceTransformFlagsKHR
+    supportedTransforms* {.optional.}: SurfaceTransformFlagsKHR
     planeReorderPossible*: Bool32
     persistentContent*: Bool32
   DisplaySurfaceCreateInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: DisplaySurfaceCreateFlagsKHR
+    sType* {.constant: (StructureType.displaySurfaceCreateInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: DisplaySurfaceCreateFlagsKHR
     displayMode*: DisplayModeKHR
     planeIndex*: uint32
     planeStackIndex*: uint32

@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NV_mesh_shader
 
 
@@ -13,13 +13,13 @@ const
 
 type
   PhysicalDeviceMeshShaderFeaturesNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceMeshShaderFeaturesNv).}: StructureType
+    pNext* {.optional.}: pointer
     taskShader*: Bool32
     meshShader*: Bool32
   PhysicalDeviceMeshShaderPropertiesNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceMeshShaderPropertiesNv).}: StructureType
+    pNext* {.optional.}: pointer
     maxDrawMeshTasksCount*: uint32
     maxTaskWorkGroupInvocations*: uint32
     maxTaskWorkGroupSize*: array[3, uint32]

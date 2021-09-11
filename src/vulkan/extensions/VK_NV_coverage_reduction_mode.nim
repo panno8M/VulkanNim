@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NV_coverage_reduction_mode
 
 
@@ -19,17 +19,17 @@ type # enums and bitmasks
 
 type
   PhysicalDeviceCoverageReductionModeFeaturesNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceCoverageReductionModeFeaturesNv).}: StructureType
+    pNext* {.optional.}: pointer
     coverageReductionMode*: Bool32
   PipelineCoverageReductionStateCreateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineCoverageReductionStateCreateFlagsNV
+    sType* {.constant: (StructureType.pipelineCoverageReductionStateCreateInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineCoverageReductionStateCreateFlagsNV
     coverageReductionMode*: CoverageReductionModeNV
   FramebufferMixedSamplesCombinationNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.framebufferMixedSamplesCombinationNv).}: StructureType
+    pNext* {.optional.}: pointer
     coverageReductionMode*: CoverageReductionModeNV
     rasterizationSamples*: SampleCountFlagBits
     depthStencilSamples*: SampleCountFlags

@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_wayland_surface
 
 
@@ -16,9 +16,9 @@ type # enums and bitmasks
 
 type
   WaylandSurfaceCreateInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: WaylandSurfaceCreateFlagsKHR
+    sType* {.constant: (StructureType.waylandSurfaceCreateInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: WaylandSurfaceCreateFlagsKHR
     display*: ptr wl_display
     surface*: ptr wl_surface
 

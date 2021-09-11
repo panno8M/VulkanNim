@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_astc_decode_mode
 
 
@@ -13,12 +13,12 @@ const
 
 type
   ImageViewASTCDecodeModeEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.imageViewAstcDecodeModeExt).}: StructureType
+    pNext* {.optional.}: pointer
     decodeMode*: Format
   PhysicalDeviceASTCDecodeFeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceAstcDecodeFeaturesExt).}: StructureType
+    pNext* {.optional.}: pointer
     decodeModeSharedExponent*: Bool32
 
 

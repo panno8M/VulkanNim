@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_directfb_surface
 
 
@@ -16,9 +16,9 @@ type # enums and bitmasks
 
 type
   DirectFBSurfaceCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: DirectFBSurfaceCreateFlagsEXT
+    sType* {.constant: (StructureType.directfbSurfaceCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: DirectFBSurfaceCreateFlagsEXT
     dfb*: ptr IDirectFB
     surface*: ptr IDirectFBSurface
 

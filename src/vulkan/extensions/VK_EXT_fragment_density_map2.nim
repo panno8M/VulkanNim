@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_fragment_density_map2
 
 
@@ -13,12 +13,12 @@ const
 
 type
   PhysicalDeviceFragmentDensityMap2FeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceFragmentDensityMap2FeaturesExt).}: StructureType
+    pNext* {.optional.}: pointer
     fragmentDensityMapDeferred*: Bool32
   PhysicalDeviceFragmentDensityMap2PropertiesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceFragmentDensityMap2PropertiesExt).}: StructureType
+    pNext* {.optional.}: pointer
     subsampledLoads*: Bool32
     subsampledCoarseReconstructionEarlyAccess*: Bool32
     maxSubsampledArrayLayers*: uint32

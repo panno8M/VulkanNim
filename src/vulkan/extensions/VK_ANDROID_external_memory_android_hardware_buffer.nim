@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_ANDROID_external_memory_android_hardware_buffer
 
 
@@ -22,17 +22,17 @@ const
 
 type
   AndroidHardwareBufferUsageANDROID* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.androidHardwareBufferUsageAndroid).}: StructureType
+    pNext* {.optional.}: pointer
     androidHardwareBufferUsage*: uint64
   AndroidHardwareBufferPropertiesANDROID* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.androidHardwareBufferPropertiesAndroid).}: StructureType
+    pNext* {.optional.}: pointer
     allocationSize*: DeviceSize
     memoryTypeBits*: uint32
   AndroidHardwareBufferFormatPropertiesANDROID* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.androidHardwareBufferFormatPropertiesAndroid).}: StructureType
+    pNext* {.optional.}: pointer
     format*: Format
     externalFormat*: uint64
     formatFeatures*: FormatFeatureFlags
@@ -42,16 +42,16 @@ type
     suggestedXChromaOffset*: ChromaLocation
     suggestedYChromaOffset*: ChromaLocation
   ImportAndroidHardwareBufferInfoANDROID* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.importAndroidHardwareBufferInfoAndroid).}: StructureType
+    pNext* {.optional.}: pointer
     buffer*: ptr AHardwareBuffer
   MemoryGetAndroidHardwareBufferInfoANDROID* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.memoryGetAndroidHardwareBufferInfoAndroid).}: StructureType
+    pNext* {.optional.}: pointer
     memory*: DeviceMemory
   ExternalFormatANDROID* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.externalFormatAndroid).}: StructureType
+    pNext* {.optional.}: pointer
     externalFormat*: uint64
 
 proc getAndroidHardwareBufferPropertiesANDROID*(

@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_AMD_display_native_hdr
 
 
@@ -17,12 +17,12 @@ const
 
 type
   DisplayNativeHdrSurfaceCapabilitiesAMD* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.displayNativeHdrSurfaceCapabilitiesAmd).}: StructureType
+    pNext* {.optional.}: pointer
     localDimmingSupport*: Bool32
   SwapchainDisplayNativeHdrCreateInfoAMD* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.swapchainDisplayNativeHdrCreateInfoAmd).}: StructureType
+    pNext* {.optional.}: pointer
     localDimmingEnable*: Bool32
 
 proc setLocalDimmingAMD*(

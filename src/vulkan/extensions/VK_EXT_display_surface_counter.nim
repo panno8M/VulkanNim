@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_display_surface_counter
 
 
@@ -18,19 +18,19 @@ type # enums and bitmasks
 
 type
   SurfaceCapabilities2EXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.surfaceCapabilities2Ext).}: StructureType
+    pNext* {.optional.}: pointer
     minImageCount*: uint32
     maxImageCount*: uint32
     currentExtent*: Extent2D
     minImageExtent*: Extent2D
     maxImageExtent*: Extent2D
     maxImageArrayLayers*: uint32
-    supportedTransforms*: SurfaceTransformFlagsKHR
+    supportedTransforms* {.optional.}: SurfaceTransformFlagsKHR
     currentTransform*: SurfaceTransformFlagBitsKHR
-    supportedCompositeAlpha*: CompositeAlphaFlagsKHR
-    supportedUsageFlags*: ImageUsageFlags
-    supportedSurfaceCounters*: SurfaceCounterFlagsEXT
+    supportedCompositeAlpha* {.optional.}: CompositeAlphaFlagsKHR
+    supportedUsageFlags* {.optional.}: ImageUsageFlags
+    supportedSurfaceCounters* {.optional.}: SurfaceCounterFlagsEXT
 
 proc getPhysicalDeviceSurfaceCapabilities2EXT*(
       physicalDevice: PhysicalDevice;

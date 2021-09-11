@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NV_corner_sampled_image
 
 
@@ -13,8 +13,8 @@ const
 
 type
   PhysicalDeviceCornerSampledImageFeaturesNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceCornerSampledImageFeaturesNv).}: StructureType
+    pNext* {.optional.}: pointer
     cornerSampledImage*: Bool32
 
 

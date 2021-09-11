@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NV_cooperative_matrix
 
 
@@ -32,8 +32,8 @@ type # enums and bitmasks
 
 type
   CooperativeMatrixPropertiesNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.cooperativeMatrixPropertiesNv).}: StructureType
+    pNext* {.optional.}: pointer
     MSize*: uint32
     NSize*: uint32
     KSize*: uint32
@@ -43,13 +43,13 @@ type
     DType*: ComponentTypeNV
     scope*: ScopeNV
   PhysicalDeviceCooperativeMatrixFeaturesNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceCooperativeMatrixFeaturesNv).}: StructureType
+    pNext* {.optional.}: pointer
     cooperativeMatrix*: Bool32
     cooperativeMatrixRobustBufferAccess*: Bool32
   PhysicalDeviceCooperativeMatrixPropertiesNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceCooperativeMatrixPropertiesNv).}: StructureType
+    pNext* {.optional.}: pointer
     cooperativeMatrixSupportedStages*: ShaderStageFlags
 
 proc getPhysicalDeviceCooperativeMatrixPropertiesNV*(

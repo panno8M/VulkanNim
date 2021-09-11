@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NV_clip_space_w_scaling
 
 
@@ -14,11 +14,11 @@ type
     xcoeff*: float32
     ycoeff*: float32
   PipelineViewportWScalingStateCreateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.pipelineViewportWScalingStateCreateInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
     viewportWScalingEnable*: Bool32
     viewportCount*: uint32
-    pViewportWScalings*: ptr ViewportWScalingNV
+    pViewportWScalings* {.optional.}: ptr ViewportWScalingNV
 
 proc cmdSetViewportWScalingNV*(
       commandBuffer: CommandBuffer;

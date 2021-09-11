@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NV_device_diagnostic_checkpoints
 
 
@@ -13,12 +13,12 @@ const
 
 type
   QueueFamilyCheckpointPropertiesNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.queueFamilyCheckpointPropertiesNv).}: StructureType
+    pNext* {.optional.}: pointer
     checkpointExecutionStageMask*: PipelineStageFlags
   CheckpointDataNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.checkpointDataNv).}: StructureType
+    pNext* {.optional.}: pointer
     stage*: PipelineStageFlagBits
     pCheckpointMarker*: pointer
 

@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NV_device_generated_commands
 
 
@@ -30,8 +30,8 @@ type # enums and bitmasks
 
 type
   PhysicalDeviceDeviceGeneratedCommandsPropertiesNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceDeviceGeneratedCommandsPropertiesNv).}: StructureType
+    pNext* {.optional.}: pointer
     maxGraphicsShaderGroupCount*: uint32
     maxIndirectSequenceCount*: uint32
     maxIndirectCommandsTokenCount*: uint32
@@ -42,22 +42,22 @@ type
     minSequencesIndexBufferOffsetAlignment*: uint32
     minIndirectCommandsBufferOffsetAlignment*: uint32
   PhysicalDeviceDeviceGeneratedCommandsFeaturesNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceDeviceGeneratedCommandsFeaturesNv).}: StructureType
+    pNext* {.optional.}: pointer
     deviceGeneratedCommands*: Bool32
   GraphicsShaderGroupCreateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.graphicsShaderGroupCreateInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
     stageCount*: uint32
     pStages*: ptr PipelineShaderStageCreateInfo
-    pVertexInputState*: ptr PipelineVertexInputStateCreateInfo
-    pTessellationState*: ptr PipelineTessellationStateCreateInfo
+    pVertexInputState* {.optional.}: ptr PipelineVertexInputStateCreateInfo
+    pTessellationState* {.optional.}: ptr PipelineTessellationStateCreateInfo
   GraphicsPipelineShaderGroupsCreateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.graphicsPipelineShaderGroupsCreateInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
     groupCount*: uint32
     pGroups*: ptr GraphicsShaderGroupCreateInfoNV
-    pipelineCount*: uint32
+    pipelineCount* {.optional.}: uint32
     pPipelines*: ptr Pipeline
   BindShaderGroupIndirectCommandNV* = object
     groupIndex*: uint32
@@ -77,24 +77,24 @@ type
     buffer*: Buffer
     offset*: DeviceSize
   IndirectCommandsLayoutTokenNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.indirectCommandsLayoutTokenNv).}: StructureType
+    pNext* {.optional.}: pointer
     tokenType*: IndirectCommandsTokenTypeNV
     stream*: uint32
     offset*: uint32
     vertexBindingUnit*: uint32
     vertexDynamicStride*: Bool32
-    pushconstantPipelineLayout*: PipelineLayout
-    pushconstantShaderStageFlags*: ShaderStageFlags
+    pushconstantPipelineLayout* {.optional.}: PipelineLayout
+    pushconstantShaderStageFlags* {.optional.}: ShaderStageFlags
     pushconstantOffset*: uint32
     pushconstantSize*: uint32
-    indirectStateFlags*: IndirectStateFlagsNV
-    indexTypeCount*: uint32
+    indirectStateFlags* {.optional.}: IndirectStateFlagsNV
+    indexTypeCount* {.optional.}: uint32
     pIndexTypes*: ptr IndexType
     pIndexTypeValues*: ptr uint32
   IndirectCommandsLayoutCreateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.indirectCommandsLayoutCreateInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
     flags*: IndirectCommandsLayoutUsageFlagsNV
     pipelineBindPoint*: PipelineBindPoint
     tokenCount*: uint32
@@ -102,8 +102,8 @@ type
     streamCount*: uint32
     pStreamStrides*: ptr uint32
   GeneratedCommandsInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.generatedCommandsInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
     pipelineBindPoint*: PipelineBindPoint
     pipeline*: Pipeline
     indirectCommandsLayout*: IndirectCommandsLayoutNV
@@ -113,13 +113,13 @@ type
     preprocessBuffer*: Buffer
     preprocessOffset*: DeviceSize
     preprocessSize*: DeviceSize
-    sequencesCountBuffer*: Buffer
-    sequencesCountOffset*: DeviceSize
-    sequencesIndexBuffer*: Buffer
-    sequencesIndexOffset*: DeviceSize
+    sequencesCountBuffer* {.optional.}: Buffer
+    sequencesCountOffset* {.optional.}: DeviceSize
+    sequencesIndexBuffer* {.optional.}: Buffer
+    sequencesIndexOffset* {.optional.}: DeviceSize
   GeneratedCommandsMemoryRequirementsInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.generatedCommandsMemoryRequirementsInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
     pipelineBindPoint*: PipelineBindPoint
     pipeline*: Pipeline
     indirectCommandsLayout*: IndirectCommandsLayoutNV

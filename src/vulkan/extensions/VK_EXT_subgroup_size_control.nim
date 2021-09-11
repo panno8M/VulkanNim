@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_subgroup_size_control
 
 
@@ -11,20 +11,20 @@ const
 
 type
   PhysicalDeviceSubgroupSizeControlFeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceSubgroupSizeControlFeaturesExt).}: StructureType
+    pNext* {.optional.}: pointer
     subgroupSizeControl*: Bool32
     computeFullSubgroups*: Bool32
   PhysicalDeviceSubgroupSizeControlPropertiesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceSubgroupSizeControlPropertiesExt).}: StructureType
+    pNext* {.optional.}: pointer
     minSubgroupSize*: uint32
     maxSubgroupSize*: uint32
     maxComputeWorkgroupSubgroups*: uint32
     requiredSubgroupSizeStages*: ShaderStageFlags
   PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.pipelineShaderStageRequiredSubgroupSizeCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     requiredSubgroupSize*: uint32
 
 

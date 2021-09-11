@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NV_dedicated_allocation_image_aliasing
 
 
@@ -13,8 +13,8 @@ const
 
 type
   PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceDedicatedAllocationImageAliasingFeaturesNv).}: StructureType
+    pNext* {.optional.}: pointer
     dedicatedAllocationImageAliasing*: Bool32
 
 

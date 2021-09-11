@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NV_external_memory_win32
 
 
@@ -13,15 +13,15 @@ const
 
 type
   ImportMemoryWin32HandleInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    handleType*: ExternalMemoryHandleTypeFlagsNV
-    handle*: Win32Handle
+    sType* {.constant: (StructureType.importMemoryWin32HandleInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
+    handleType* {.optional.}: ExternalMemoryHandleTypeFlagsNV
+    handle* {.optional.}: Win32Handle
   ExportMemoryWin32HandleInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    pAttributes*: ptr SECURITY_ATTRIBUTES
-    dwAccess*: DWORD
+    sType* {.constant: (StructureType.exportMemoryWin32HandleInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
+    pAttributes* {.optional.}: ptr SECURITY_ATTRIBUTES
+    dwAccess* {.optional.}: DWORD
 
 proc getMemoryWin32HandleNV*(
       device: Device;

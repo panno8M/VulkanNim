@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_INTEL_performance_query
 
 
@@ -38,31 +38,31 @@ type
     theType*: PerformanceValueTypeINTEL
     data*: PerformanceValueDataINTEL
   InitializePerformanceApiInfoINTEL* = object
-    sType*: StructureType
-    pNext*: pointer
-    pUserData*: pointer
+    sType* {.constant: (StructureType.initializePerformanceApiInfoIntel).}: StructureType
+    pNext* {.optional.}: pointer
+    pUserData* {.optional.}: pointer
   QueryPoolCreateInfoINTEL* = object
   QueryPoolPerformanceQueryCreateInfoINTEL* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.queryPoolPerformanceQueryCreateInfoIntel).}: StructureType
+    pNext* {.optional.}: pointer
     performanceCountersSampling*: QueryPoolSamplingModeINTEL
   PerformanceMarkerInfoINTEL* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.performanceMarkerInfoIntel).}: StructureType
+    pNext* {.optional.}: pointer
     marker*: uint64
   PerformanceStreamMarkerInfoINTEL* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.performanceStreamMarkerInfoIntel).}: StructureType
+    pNext* {.optional.}: pointer
     marker*: uint32
   PerformanceOverrideInfoINTEL* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.performanceOverrideInfoIntel).}: StructureType
+    pNext* {.optional.}: pointer
     theType*: PerformanceOverrideTypeINTEL
     enable*: Bool32
     parameter*: uint64
   PerformanceConfigurationAcquireInfoINTEL* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.performanceConfigurationAcquireInfoIntel).}: StructureType
+    pNext* {.optional.}: pointer
     theType*: PerformanceConfigurationTypeINTEL
   HtPerformanceConfigurationINTEL = object of HandleType
   PerformanceConfigurationINTEL* = NonDispatchableHandle[HtPerformanceConfigurationINTEL]

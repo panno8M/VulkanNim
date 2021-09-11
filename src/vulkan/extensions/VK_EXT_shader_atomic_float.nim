@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_shader_atomic_float
 
 
@@ -13,8 +13,8 @@ const
 
 type
   PhysicalDeviceShaderAtomicFloatFeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceShaderAtomicFloatFeaturesExt).}: StructureType
+    pNext* {.optional.}: pointer
     shaderBufferFloat32Atomics*: Bool32
     shaderBufferFloat32AtomicAdd*: Bool32
     shaderBufferFloat64Atomics*: Bool32

@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NV_fragment_coverage_to_color
 
 
@@ -14,11 +14,11 @@ type # enums and bitmasks
 
 type
   PipelineCoverageToColorStateCreateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineCoverageToColorStateCreateFlagsNV
+    sType* {.constant: (StructureType.pipelineCoverageToColorStateCreateInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineCoverageToColorStateCreateFlagsNV
     coverageToColorEnable*: Bool32
-    coverageToColorLocation*: uint32
+    coverageToColorLocation* {.optional.}: uint32
 
 
 

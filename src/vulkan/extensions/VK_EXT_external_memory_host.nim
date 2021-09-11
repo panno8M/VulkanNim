@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_external_memory_host
 
 
@@ -13,17 +13,17 @@ const
 
 type
   ImportMemoryHostPointerInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.importMemoryHostPointerInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     handleType*: ExternalMemoryHandleTypeFlagBits
     pHostPointer*: pointer
   MemoryHostPointerPropertiesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.memoryHostPointerPropertiesExt).}: StructureType
+    pNext* {.optional.}: pointer
     memoryTypeBits*: uint32
   PhysicalDeviceExternalMemoryHostPropertiesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceExternalMemoryHostPropertiesExt).}: StructureType
+    pNext* {.optional.}: pointer
     minImportedHostPointerAlignment*: DeviceSize
 
 proc getMemoryHostPointerPropertiesEXT*(

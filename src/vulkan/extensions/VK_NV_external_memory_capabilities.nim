@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T00:21:47Z
 # VK_NV_external_memory_capabilities
 
 
@@ -25,9 +25,9 @@ type # enums and bitmasks
 type
   ExternalImageFormatPropertiesNV* = object
     imageFormatProperties*: ImageFormatProperties
-    externalMemoryFeatures*: ExternalMemoryFeatureFlagsNV
-    exportFromImportedHandleTypes*: ExternalMemoryHandleTypeFlagsNV
-    compatibleHandleTypes*: ExternalMemoryHandleTypeFlagsNV
+    externalMemoryFeatures* {.optional.}: ExternalMemoryFeatureFlagsNV
+    exportFromImportedHandleTypes* {.optional.}: ExternalMemoryHandleTypeFlagsNV
+    compatibleHandleTypes* {.optional.}: ExternalMemoryHandleTypeFlagsNV
 
 proc getPhysicalDeviceExternalImageFormatPropertiesNV*(
       physicalDevice: PhysicalDevice;

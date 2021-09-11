@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NV_shader_image_footprint
 
 
@@ -13,8 +13,8 @@ const
 
 type
   PhysicalDeviceShaderImageFootprintFeaturesNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceShaderImageFootprintFeaturesNv).}: StructureType
+    pNext* {.optional.}: pointer
     imageFootprint*: Bool32
 
 

@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_push_descriptor
 
 
@@ -17,8 +17,8 @@ const
 
 type
   PhysicalDevicePushDescriptorPropertiesKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDevicePushDescriptorPropertiesKhr).}: StructureType
+    pNext* {.optional.}: pointer
     maxPushDescriptors*: uint32
 
 proc cmdPushDescriptorSetKHR*(

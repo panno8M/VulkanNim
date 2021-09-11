@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NN_vi_surface
 
 
@@ -16,9 +16,9 @@ type # enums and bitmasks
 
 type
   ViSurfaceCreateInfoNN* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: ViSurfaceCreateFlagsNN
+    sType* {.constant: (StructureType.viSurfaceCreateInfoNn).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: ViSurfaceCreateFlagsNN
     window*: pointer
 
 proc createViSurfaceNN*(

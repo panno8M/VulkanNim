@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_AMD_device_coherent_memory
 
 
@@ -11,8 +11,8 @@ const
 
 type
   PhysicalDeviceCoherentMemoryFeaturesAMD* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceCoherentMemoryFeaturesAmd).}: StructureType
+    pNext* {.optional.}: pointer
     deviceCoherentMemory*: Bool32
 
 

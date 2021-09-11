@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_external_fence_win32
 
 
@@ -13,22 +13,22 @@ const
 
 type
   ImportFenceWin32HandleInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.importFenceWin32HandleInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     fence*: Fence
-    flags*: FenceImportFlags
-    handleType*: ExternalFenceHandleTypeFlagBits
-    handle*: Win32Handle
-    name*: LPCWSTR
+    flags* {.optional.}: FenceImportFlags
+    handleType* {.optional.}: ExternalFenceHandleTypeFlagBits
+    handle* {.optional.}: Win32Handle
+    name* {.optional.}: LPCWSTR
   ExportFenceWin32HandleInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    pAttributes*: ptr SECURITY_ATTRIBUTES
+    sType* {.constant: (StructureType.exportFenceWin32HandleInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    pAttributes* {.optional.}: ptr SECURITY_ATTRIBUTES
     dwAccess*: DWORD
     name*: LPCWSTR
   FenceGetWin32HandleInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.fenceGetWin32HandleInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     fence*: Fence
     handleType*: ExternalFenceHandleTypeFlagBits
 

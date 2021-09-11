@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_xlib_surface
 
 
@@ -16,9 +16,9 @@ type # enums and bitmasks
 
 type
   XlibSurfaceCreateInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: XlibSurfaceCreateFlagsKHR
+    sType* {.constant: (StructureType.xlibSurfaceCreateInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: XlibSurfaceCreateFlagsKHR
     dpy*: ptr Display
     window*: Window
 

@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_external_semaphore_fd
 
 
@@ -13,15 +13,15 @@ const
 
 type
   ImportSemaphoreFdInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.importSemaphoreFdInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     semaphore*: Semaphore
-    flags*: SemaphoreImportFlags
+    flags* {.optional.}: SemaphoreImportFlags
     handleType*: ExternalSemaphoreHandleTypeFlagBits
     fd*: int
   SemaphoreGetFdInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.semaphoreGetFdInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     semaphore*: Semaphore
     handleType*: ExternalSemaphoreHandleTypeFlagBits
 

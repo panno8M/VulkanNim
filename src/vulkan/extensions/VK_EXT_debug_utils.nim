@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_debug_utils
 
 
@@ -32,42 +32,42 @@ type
       pUserData: pointer;
     ): Bool32 {.cdecl.}
   DebugUtilsLabelEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.debugUtilsLabelExt).}: StructureType
+    pNext* {.optional.}: pointer
     pLabelName*: cstring
-    color*: array[4, float32]
+    color* {.optional.}: array[4, float32]
   DebugUtilsMessengerCallbackDataEXT* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: DebugUtilsMessengerCallbackDataFlagsEXT
-    pMessageIdName*: cstring
-    messageIdNumber*: int32
+    sType* {.constant: (StructureType.debugUtilsMessengerCallbackDataExt).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: DebugUtilsMessengerCallbackDataFlagsEXT
+    pMessageIdName* {.optional.}: cstring
+    messageIdNumber* {.optional.}: int32
     pMessage*: cstring
-    queueLabelCount*: uint32
+    queueLabelCount* {.optional.}: uint32
     pQueueLabels*: ptr DebugUtilsLabelEXT
-    cmdBufLabelCount*: uint32
+    cmdBufLabelCount* {.optional.}: uint32
     pCmdBufLabels*: ptr DebugUtilsLabelEXT
-    objectCount*: uint32
+    objectCount* {.optional.}: uint32
     pObjects*: ptr DebugUtilsObjectNameInfoEXT
   DebugUtilsMessengerCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: DebugUtilsMessengerCreateFlagsEXT
+    sType* {.constant: (StructureType.debugUtilsMessengerCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: DebugUtilsMessengerCreateFlagsEXT
     messageSeverity*: DebugUtilsMessageSeverityFlagsEXT
     messageType*: DebugUtilsMessageTypeFlagsEXT
     pfnUserCallback*: PFN_DebugUtilsMessengerCallbackEXT
-    pUserData*: pointer
+    pUserData* {.optional.}: pointer
   HtDebugUtilsMessengerEXT = object of HandleType
   DebugUtilsMessengerEXT* = NonDispatchableHandle[HtDebugUtilsMessengerEXT]
   DebugUtilsObjectNameInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.debugUtilsObjectNameInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     objectType*: ObjectType
     objectHandle*: uint64
-    pObjectName*: cstring
+    pObjectName* {.optional.}: cstring
   DebugUtilsObjectTagInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.debugUtilsObjectTagInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     objectType*: ObjectType
     objectHandle*: uint64
     tagName*: uint64

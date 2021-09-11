@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_hdr_metadata
 
 
@@ -13,8 +13,8 @@ const
 
 type
   HdrMetadataEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.hdrMetadataExt).}: StructureType
+    pNext* {.optional.}: pointer
     displayPrimaryRed*: XYColorEXT
     displayPrimaryGreen*: XYColorEXT
     displayPrimaryBlue*: XYColorEXT

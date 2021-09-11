@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NV_viewport_swizzle
 
 
@@ -28,9 +28,9 @@ type
     z*: ViewportCoordinateSwizzleNV
     w*: ViewportCoordinateSwizzleNV
   PipelineViewportSwizzleStateCreateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: PipelineViewportSwizzleStateCreateFlagsNV
+    sType* {.constant: (StructureType.pipelineViewportSwizzleStateCreateInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: PipelineViewportSwizzleStateCreateFlagsNV
     viewportCount*: uint32
     pViewportSwizzles*: ptr ViewportSwizzleNV
 

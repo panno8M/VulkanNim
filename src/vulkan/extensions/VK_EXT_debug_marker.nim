@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_debug_marker
 
 
@@ -56,24 +56,24 @@ type # enums and bitmasks
 
 type
   DebugMarkerObjectNameInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.debugMarkerObjectNameInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     objectType*: DebugReportObjectTypeEXT
     `object`*: uint64
     pObjectName*: cstring
   DebugMarkerObjectTagInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.debugMarkerObjectTagInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     objectType*: DebugReportObjectTypeEXT
     `object`*: uint64
     tagName*: uint64
     tagSize*: uint
     pTag*: pointer
   DebugMarkerMarkerInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.debugMarkerMarkerInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     pMarkerName*: cstring
-    color*: array[4, float32]
+    color* {.optional.}: array[4, float32]
 
 DebugReportObjectTypeEXT.defineAliases:
   debugReportCallbackExtExt as debugReportExt # Backwards-compatible alias containing a typo

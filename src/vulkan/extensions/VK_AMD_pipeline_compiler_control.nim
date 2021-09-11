@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_AMD_pipeline_compiler_control
 
 
@@ -15,9 +15,9 @@ type # enums and bitmasks
 
 type
   PipelineCompilerControlCreateInfoAMD* = object
-    sType*: StructureType
-    pNext*: pointer
-    compilerControlFlags*: PipelineCompilerControlFlagsAMD
+    sType* {.constant: (StructureType.pipelineCompilerControlCreateInfoAmd).}: StructureType
+    pNext* {.optional.}: pointer
+    compilerControlFlags* {.optional.}: PipelineCompilerControlFlagsAMD
 
 
 

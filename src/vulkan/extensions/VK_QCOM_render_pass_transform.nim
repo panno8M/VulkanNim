@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_QCOM_render_pass_transform
 
 
@@ -15,12 +15,12 @@ const
 
 type
   RenderPassTransformBeginInfoQCOM* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.renderPassTransformBeginInfoQcom).}: StructureType
+    pNext* {.optional.}: pointer
     transform*: SurfaceTransformFlagBitsKHR
   CommandBufferInheritanceRenderPassTransformInfoQCOM* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.commandBufferInheritanceRenderPassTransformInfoQcom).}: StructureType
+    pNext* {.optional.}: pointer
     transform*: SurfaceTransformFlagBitsKHR
     renderArea*: Rect2D
 

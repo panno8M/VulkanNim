@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_buffer_device_address
 
 
@@ -14,15 +14,15 @@ const
 type
   PhysicalDeviceBufferAddressFeaturesEXT* = object
   PhysicalDeviceBufferDeviceAddressFeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceBufferDeviceAddressFeaturesExt).}: StructureType
+    pNext* {.optional.}: pointer
     bufferDeviceAddress*: Bool32
     bufferDeviceAddressCaptureReplay*: Bool32
     bufferDeviceAddressMultiDevice*: Bool32
   BufferDeviceAddressInfoEXT* = object
   BufferDeviceAddressCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.bufferDeviceAddressCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     deviceAddress*: DeviceAddress
 
 const getBufferDeviceAddressEXT* = getBufferDeviceAddress

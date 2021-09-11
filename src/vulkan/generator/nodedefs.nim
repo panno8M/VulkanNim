@@ -101,6 +101,8 @@ type
     theType*: string
     ptrLv*: Natural
     length*: seq[NodeArrayLength]
+    optional*: bool
+    values*: Option[string]
   NodeStruct* = ref object
     isUnion*: bool
     name*: string

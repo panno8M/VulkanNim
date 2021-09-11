@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_device_group
 
 
@@ -44,37 +44,37 @@ type
   BindImageMemoryDeviceGroupInfoKHR* = object
 
   DeviceGroupPresentCapabilitiesKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.deviceGroupPresentCapabilitiesKhr).}: StructureType
+    pNext* {.optional.}: pointer
     presentMask*: array[MaxDeviceGroupSize, uint32]
     modes*: DeviceGroupPresentModeFlagsKHR
 
   ImageSwapchainCreateInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    swapchain*: SwapchainKHR
+    sType* {.constant: (StructureType.imageSwapchainCreateInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    swapchain* {.optional.}: SwapchainKHR
   BindImageMemorySwapchainInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.bindImageMemorySwapchainInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     swapchain*: SwapchainKHR
     imageIndex*: uint32
   AcquireNextImageInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.acquireNextImageInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     swapchain*: SwapchainKHR
     timeout*: uint64
-    semaphore*: Semaphore
-    fence*: Fence
+    semaphore* {.optional.}: Semaphore
+    fence* {.optional.}: Fence
     deviceMask*: uint32
   DeviceGroupPresentInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    swapchainCount*: uint32
+    sType* {.constant: (StructureType.deviceGroupPresentInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    swapchainCount* {.optional.}: uint32
     pDeviceMasks*: ptr uint32
     mode*: DeviceGroupPresentModeFlagBitsKHR
   DeviceGroupSwapchainCreateInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.deviceGroupSwapchainCreateInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     modes*: DeviceGroupPresentModeFlagsKHR
 
 const getDeviceGroupPeerMemoryFeaturesKHR* = getDeviceGroupPeerMemoryFeatures

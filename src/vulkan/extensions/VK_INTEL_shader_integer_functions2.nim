@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_INTEL_shader_integer_functions2
 
 
@@ -13,8 +13,8 @@ const
 
 type
   PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceShaderIntegerFunctions2FeaturesIntel).}: StructureType
+    pNext* {.optional.}: pointer
     shaderIntegerFunctions2*: Bool32
 
 

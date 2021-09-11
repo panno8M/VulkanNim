@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_AMD_memory_overallocation_behavior
 
 
@@ -17,8 +17,8 @@ type # enums and bitmasks
 
 type
   DeviceMemoryOverallocationCreateInfoAMD* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.deviceMemoryOverallocationCreateInfoAmd).}: StructureType
+    pNext* {.optional.}: pointer
     overallocationBehavior*: MemoryOverallocationBehaviorAMD
 
 

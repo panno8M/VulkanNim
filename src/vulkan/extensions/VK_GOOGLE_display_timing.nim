@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_GOOGLE_display_timing
 
 
@@ -21,10 +21,10 @@ type
     earliestPresentTime*: uint64
     presentMargin*: uint64
   PresentTimesInfoGOOGLE* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.presentTimesInfoGoogle).}: StructureType
+    pNext* {.optional.}: pointer
     swapchainCount*: uint32
-    pTimes*: ptr PresentTimeGOOGLE
+    pTimes* {.optional.}: ptr PresentTimeGOOGLE
   PresentTimeGOOGLE* = object
     presentID*: uint32
     desiredPresentTime*: uint64

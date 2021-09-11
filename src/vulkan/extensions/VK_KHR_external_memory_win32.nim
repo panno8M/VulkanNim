@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_external_memory_win32
 
 
@@ -13,24 +13,24 @@ const
 
 type
   ImportMemoryWin32HandleInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    handleType*: ExternalMemoryHandleTypeFlagBits
-    handle*: Win32Handle
-    name*: LPCWSTR
+    sType* {.constant: (StructureType.importMemoryWin32HandleInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    handleType* {.optional.}: ExternalMemoryHandleTypeFlagBits
+    handle* {.optional.}: Win32Handle
+    name* {.optional.}: LPCWSTR
   ExportMemoryWin32HandleInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    pAttributes*: ptr SECURITY_ATTRIBUTES
+    sType* {.constant: (StructureType.exportMemoryWin32HandleInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    pAttributes* {.optional.}: ptr SECURITY_ATTRIBUTES
     dwAccess*: DWORD
     name*: LPCWSTR
   MemoryWin32HandlePropertiesKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.memoryWin32HandlePropertiesKhr).}: StructureType
+    pNext* {.optional.}: pointer
     memoryTypeBits*: uint32
   MemoryGetWin32HandleInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.memoryGetWin32HandleInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     memory*: DeviceMemory
     handleType*: ExternalMemoryHandleTypeFlagBits
 

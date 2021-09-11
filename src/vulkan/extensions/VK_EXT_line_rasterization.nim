@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_line_rasterization
 
 
@@ -20,8 +20,8 @@ type # enums and bitmasks
 
 type
   PhysicalDeviceLineRasterizationFeaturesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceLineRasterizationFeaturesExt).}: StructureType
+    pNext* {.optional.}: pointer
     rectangularLines*: Bool32
     bresenhamLines*: Bool32
     smoothLines*: Bool32
@@ -29,16 +29,16 @@ type
     stippledBresenhamLines*: Bool32
     stippledSmoothLines*: Bool32
   PhysicalDeviceLineRasterizationPropertiesEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceLineRasterizationPropertiesExt).}: StructureType
+    pNext* {.optional.}: pointer
     lineSubPixelPrecisionBits*: uint32
   PipelineRasterizationLineStateCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.pipelineRasterizationLineStateCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
     lineRasterizationMode*: LineRasterizationModeEXT
     stippledLineEnable*: Bool32
-    lineStippleFactor*: uint32
-    lineStipplePattern*: uint16
+    lineStippleFactor* {.optional.}: uint32
+    lineStipplePattern* {.optional.}: uint16
 
 proc cmdSetLineStippleEXT*(
       commandBuffer: CommandBuffer;

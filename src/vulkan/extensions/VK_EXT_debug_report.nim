@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_EXT_debug_report
 
 
@@ -71,11 +71,11 @@ type
       pUserData: pointer;
     ): Bool32 {.cdecl.}
   DebugReportCallbackCreateInfoEXT* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: DebugReportFlagsEXT
+    sType* {.constant: (StructureType.debugReportCallbackCreateInfoExt).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: DebugReportFlagsEXT
     pfnCallback*: PFN_DebugReportCallbackEXT
-    pUserData*: pointer
+    pUserData* {.optional.}: pointer
 
 DebugReportObjectTypeEXT.defineAliases:
   debugReportCallbackExtExt as debugReportExt # Backwards-compatible alias containing a typo

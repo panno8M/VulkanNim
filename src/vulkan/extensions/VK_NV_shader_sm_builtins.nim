@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NV_shader_sm_builtins
 
 
@@ -11,13 +11,13 @@ const
 
 type
   PhysicalDeviceShaderSMBuiltinsPropertiesNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceShaderSmBuiltinsPropertiesNv).}: StructureType
+    pNext* {.optional.}: pointer
     shaderSMCount*: uint32
     shaderWarpsPerSM*: uint32
   PhysicalDeviceShaderSMBuiltinsFeaturesNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceShaderSmBuiltinsFeaturesNv).}: StructureType
+    pNext* {.optional.}: pointer
     shaderSMBuiltins*: Bool32
 
 

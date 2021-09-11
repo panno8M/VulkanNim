@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_NV_device_diagnostics_config
 
 
@@ -20,13 +20,13 @@ type # enums and bitmasks
 
 type
   PhysicalDeviceDiagnosticsConfigFeaturesNV* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.physicalDeviceDiagnosticsConfigFeaturesNv).}: StructureType
+    pNext* {.optional.}: pointer
     diagnosticsConfig*: Bool32
   DeviceDiagnosticsConfigCreateInfoNV* = object
-    sType*: StructureType
-    pNext*: pointer
-    flags*: DeviceDiagnosticsConfigFlagsNV
+    sType* {.constant: (StructureType.deviceDiagnosticsConfigCreateInfoNv).}: StructureType
+    pNext* {.optional.}: pointer
+    flags* {.optional.}: DeviceDiagnosticsConfigFlagsNV
 
 
 

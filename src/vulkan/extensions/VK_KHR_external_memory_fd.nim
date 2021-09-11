@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-10T05:27:58Z
 # VK_KHR_external_memory_fd
 
 
@@ -13,17 +13,17 @@ const
 
 type
   ImportMemoryFdInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
-    handleType*: ExternalMemoryHandleTypeFlagBits
+    sType* {.constant: (StructureType.importMemoryFdInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    handleType* {.optional.}: ExternalMemoryHandleTypeFlagBits
     fd*: int
   MemoryFdPropertiesKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.memoryFdPropertiesKhr).}: StructureType
+    pNext* {.optional.}: pointer
     memoryTypeBits*: uint32
   MemoryGetFdInfoKHR* = object
-    sType*: StructureType
-    pNext*: pointer
+    sType* {.constant: (StructureType.memoryGetFdInfoKhr).}: StructureType
+    pNext* {.optional.}: pointer
     memory*: DeviceMemory
     handleType*: ExternalMemoryHandleTypeFlagBits
 
