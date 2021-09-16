@@ -1,4 +1,4 @@
-# Generated at 2021-09-12T04:58:23Z
+# Generated at 2021-09-16T07:11:43Z
 # VK_KHR_ray_tracing
 # VK_NV_ray_tracing
 # Explicit sort order to require processing after VK_NV_ray_tracing
@@ -374,13 +374,13 @@ type
 proc createAccelerationStructureKHR*(
       device: Device;
       pCreateInfo: ptr AccelerationStructureCreateInfoKHR;
-      pAllocator: ptr AllocationCallbacks;
+      pAllocator = default(ptr AllocationCallbacks); # optional
       pAccelerationStructure: ptr AccelerationStructureKHR;
     ): Result {.cdecl, lazyload("vkCreateAccelerationStructureKHR", DeviceLevel).}
 proc destroyAccelerationStructureKHR*(
       device: Device;
-      accelerationStructure: AccelerationStructureKHR;
-      pAllocator: ptr AllocationCallbacks;
+      accelerationStructure = default(AccelerationStructureKHR); # optional
+      pAllocator = default(ptr AllocationCallbacks); # optional
     ): void {.cdecl, lazyload("vkDestroyAccelerationStructureKHR", DeviceLevel).}
 proc getAccelerationStructureMemoryRequirementsKHR*(
       device: Device;
@@ -456,10 +456,10 @@ proc cmdTraceRaysKHR*(
     ): void {.cdecl, lazyload("vkCmdTraceRaysKHR", DeviceLevel).}
 proc createRayTracingPipelinesKHR*(
       device: Device;
-      pipelineCache: PipelineCache;
+      pipelineCache = default(PipelineCache); # optional
       createInfoCount: uint32;
       pCreateInfos: ptr RayTracingPipelineCreateInfoKHR;
-      pAllocator: ptr AllocationCallbacks;
+      pAllocator = default(ptr AllocationCallbacks); # optional
       pPipelines: ptr Pipeline;
     ): Result {.cdecl, lazyload("vkCreateRayTracingPipelinesKHR", DeviceLevel).}
 proc getRayTracingShaderGroupHandlesKHR*(
@@ -508,7 +508,7 @@ proc getDeviceAccelerationStructureCompatibilityKHR*(
 proc createAccelerationStructureNV*(
       device: Device;
       pCreateInfo: ptr AccelerationStructureCreateInfoNV;
-      pAllocator: ptr AllocationCallbacks;
+      pAllocator = default(ptr AllocationCallbacks); # optional
       pAccelerationStructure: ptr AccelerationStructureNV;
     ): Result {.cdecl, lazyload("vkCreateAccelerationStructureNV", DeviceLevel).}
 const destroyAccelerationStructureNV* = destroyAccelerationStructureKHR
@@ -521,11 +521,11 @@ const bindAccelerationStructureMemoryNV* = bindAccelerationStructureMemoryKHR
 proc cmdBuildAccelerationStructureNV*(
       commandBuffer: CommandBuffer;
       pInfo: ptr AccelerationStructureInfoNV;
-      instanceData: Buffer;
+      instanceData = default(Buffer); # optional
       instanceOffset: DeviceSize;
       update: Bool32;
       dst: AccelerationStructureKHR;
-      src: AccelerationStructureKHR;
+      src = default(AccelerationStructureKHR); # optional
       scratch: Buffer;
       scratchOffset: DeviceSize;
     ): void {.cdecl, lazyload("vkCmdBuildAccelerationStructureNV", DeviceLevel).}
@@ -539,13 +539,13 @@ proc cmdTraceRaysNV*(
       commandBuffer: CommandBuffer;
       raygenShaderBindingTableBuffer: Buffer;
       raygenShaderBindingOffset: DeviceSize;
-      missShaderBindingTableBuffer: Buffer;
+      missShaderBindingTableBuffer = default(Buffer); # optional
       missShaderBindingOffset: DeviceSize;
       missShaderBindingStride: DeviceSize;
-      hitShaderBindingTableBuffer: Buffer;
+      hitShaderBindingTableBuffer = default(Buffer); # optional
       hitShaderBindingOffset: DeviceSize;
       hitShaderBindingStride: DeviceSize;
-      callableShaderBindingTableBuffer: Buffer;
+      callableShaderBindingTableBuffer = default(Buffer); # optional
       callableShaderBindingOffset: DeviceSize;
       callableShaderBindingStride: DeviceSize;
       width: uint32;
@@ -554,10 +554,10 @@ proc cmdTraceRaysNV*(
     ): void {.cdecl, lazyload("vkCmdTraceRaysNV", DeviceLevel).}
 proc createRayTracingPipelinesNV*(
       device: Device;
-      pipelineCache: PipelineCache;
+      pipelineCache = default(PipelineCache); # optional
       createInfoCount: uint32;
       pCreateInfos: ptr RayTracingPipelineCreateInfoNV;
-      pAllocator: ptr AllocationCallbacks;
+      pAllocator = default(ptr AllocationCallbacks); # optional
       pPipelines: ptr Pipeline;
     ): Result {.cdecl, lazyload("vkCreateRayTracingPipelinesNV", DeviceLevel).}
 const getRayTracingShaderGroupHandlesNV* = getRayTracingShaderGroupHandlesKHR

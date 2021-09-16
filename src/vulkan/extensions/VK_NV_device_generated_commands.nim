@@ -1,4 +1,4 @@
-# Generated at 2021-09-12T04:58:24Z
+# Generated at 2021-09-16T07:11:43Z
 # VK_NV_device_generated_commands
 
 
@@ -148,13 +148,13 @@ proc cmdBindPipelineShaderGroupNV*(
 proc createIndirectCommandsLayoutNV*(
       device: Device;
       pCreateInfo: ptr IndirectCommandsLayoutCreateInfoNV;
-      pAllocator: ptr AllocationCallbacks;
+      pAllocator = default(ptr AllocationCallbacks); # optional
       pIndirectCommandsLayout: ptr IndirectCommandsLayoutNV;
     ): Result {.cdecl, lazyload("vkCreateIndirectCommandsLayoutNV", DeviceLevel).}
 proc destroyIndirectCommandsLayoutNV*(
       device: Device;
-      indirectCommandsLayout: IndirectCommandsLayoutNV;
-      pAllocator: ptr AllocationCallbacks;
+      indirectCommandsLayout = default(IndirectCommandsLayoutNV); # optional
+      pAllocator = default(ptr AllocationCallbacks); # optional
     ): void {.cdecl, lazyload("vkDestroyIndirectCommandsLayoutNV", DeviceLevel).}
 
 proc loadAllVK_NV_device_generated_commands*(instance: Instance) =

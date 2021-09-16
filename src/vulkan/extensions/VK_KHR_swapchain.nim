@@ -1,4 +1,4 @@
-# Generated at 2021-09-12T04:58:23Z
+# Generated at 2021-09-16T07:11:43Z
 # VK_KHR_swapchain
 
 
@@ -98,26 +98,26 @@ type
 proc createSwapchainKHR*(
       device: Device;
       pCreateInfo: ptr SwapchainCreateInfoKHR;
-      pAllocator: ptr AllocationCallbacks;
+      pAllocator = default(ptr AllocationCallbacks); # optional
       pSwapchain: ptr SwapchainKHR;
     ): Result {.cdecl, lazyload("vkCreateSwapchainKHR", DeviceLevel).}
 proc destroySwapchainKHR*(
       device: Device;
-      swapchain: SwapchainKHR;
-      pAllocator: ptr AllocationCallbacks;
+      swapchain = default(SwapchainKHR); # optional
+      pAllocator = default(ptr AllocationCallbacks); # optional
     ): void {.cdecl, lazyload("vkDestroySwapchainKHR", DeviceLevel).}
 proc getSwapchainImagesKHR*(
       device: Device;
       swapchain: SwapchainKHR;
       pSwapchainImageCount: ptr uint32;
-      pSwapchainImages: ptr Image;
+      pSwapchainImages = default(ptr Image); # optional
     ): Result {.cdecl, lazyload("vkGetSwapchainImagesKHR", DeviceLevel).}
 proc acquireNextImageKHR*(
       device: Device;
       swapchain: SwapchainKHR;
       timeout: uint64;
-      semaphore: Semaphore;
-      fence: Fence;
+      semaphore = default(Semaphore); # optional
+      fence = default(Fence); # optional
       pImageIndex: ptr uint32;
     ): Result {.cdecl, lazyload("vkAcquireNextImageKHR", DeviceLevel).}
 proc queuePresentKHR*(
@@ -139,7 +139,7 @@ proc getPhysicalDevicePresentRectanglesKHR*(
       physicalDevice: PhysicalDevice;
       surface: SurfaceKHR;
       pRectCount: ptr uint32;
-      pRects: ptr Rect2D;
+      pRects = default(ptr Rect2D); # optional
     ): Result {.cdecl, lazyload("vkGetPhysicalDevicePresentRectanglesKHR", InstanceLevel).}
 proc acquireNextImage2KHR*(
       device: Device;

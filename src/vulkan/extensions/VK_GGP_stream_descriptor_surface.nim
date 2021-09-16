@@ -1,4 +1,4 @@
-# Generated at 2021-09-12T04:58:23Z
+# Generated at 2021-09-16T07:11:43Z
 # VK_GGP_stream_descriptor_surface
 
 
@@ -24,7 +24,7 @@ type
 proc createStreamDescriptorSurfaceGGP*(
       instance: Instance;
       pCreateInfo: ptr StreamDescriptorSurfaceCreateInfoGGP;
-      pAllocator: ptr AllocationCallbacks;
+      pAllocator = default(ptr AllocationCallbacks); # optional
       pSurface: ptr SurfaceKHR;
     ): Result {.cdecl, lazyload("vkCreateStreamDescriptorSurfaceGGP", InstanceLevel).}
 

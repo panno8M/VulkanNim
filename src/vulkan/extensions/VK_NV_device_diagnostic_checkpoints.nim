@@ -1,4 +1,4 @@
-# Generated at 2021-09-12T04:58:24Z
+# Generated at 2021-09-16T07:11:43Z
 # VK_NV_device_diagnostic_checkpoints
 
 
@@ -29,7 +29,7 @@ proc cmdSetCheckpointNV*(
 proc getQueueCheckpointDataNV*(
       queue: Queue;
       pCheckpointDataCount: ptr uint32;
-      pCheckpointData: ptr CheckpointDataNV;
+      pCheckpointData = default(ptr CheckpointDataNV); # optional
     ): void {.cdecl, lazyload("vkGetQueueCheckpointDataNV", DeviceLevel).}
 
 proc loadAllVK_NV_device_diagnostic_checkpoints*(instance: Instance) =

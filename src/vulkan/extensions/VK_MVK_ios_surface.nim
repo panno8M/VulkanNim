@@ -1,4 +1,4 @@
-# Generated at 2021-09-12T04:58:24Z
+# Generated at 2021-09-16T07:11:43Z
 # VK_MVK_ios_surface
 
 
@@ -24,7 +24,7 @@ type
 proc createIOSSurfaceMVK*(
       instance: Instance;
       pCreateInfo: ptr IOSSurfaceCreateInfoMVK;
-      pAllocator: ptr AllocationCallbacks;
+      pAllocator = default(ptr AllocationCallbacks); # optional
       pSurface: ptr SurfaceKHR;
     ): Result {.cdecl, lazyload("vkCreateIOSSurfaceMVK", InstanceLevel).}
 

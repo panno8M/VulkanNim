@@ -1,4 +1,4 @@
-# Generated at 2021-09-12T04:58:24Z
+# Generated at 2021-09-16T07:11:43Z
 # VK_EXT_tooling_info
 
 
@@ -43,7 +43,7 @@ type
 proc getPhysicalDeviceToolPropertiesEXT*(
       physicalDevice: PhysicalDevice;
       pToolCount: ptr uint32;
-      pToolProperties: ptr PhysicalDeviceToolPropertiesEXT;
+      pToolProperties = default(ptr PhysicalDeviceToolPropertiesEXT); # optional
     ): Result {.cdecl, lazyload("vkGetPhysicalDeviceToolPropertiesEXT", InstanceLevel).}
 
 proc loadAllVK_EXT_tooling_info*(instance: Instance) =

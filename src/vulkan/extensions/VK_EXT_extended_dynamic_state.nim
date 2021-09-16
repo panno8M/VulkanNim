@@ -1,4 +1,4 @@
-# Generated at 2021-09-12T04:58:24Z
+# Generated at 2021-09-16T07:11:43Z
 # VK_EXT_extended_dynamic_state
 
 
@@ -19,7 +19,7 @@ type
 
 proc cmdSetCullModeEXT*(
       commandBuffer: CommandBuffer;
-      cullMode: CullModeFlags;
+      cullMode = default(CullModeFlags); # optional
     ): void {.cdecl, lazyload("vkCmdSetCullModeEXT", DeviceLevel).}
 proc cmdSetFrontFaceEXT*(
       commandBuffer: CommandBuffer;
@@ -45,8 +45,8 @@ proc cmdBindVertexBuffers2EXT*(
       bindingCount: uint32;
       pBuffers: ptr Buffer;
       pOffsets: ptr DeviceSize;
-      pSizes: ptr DeviceSize;
-      pStrides: ptr DeviceSize;
+      pSizes = default(ptr DeviceSize); # optional
+      pStrides = default(ptr DeviceSize); # optional
     ): void {.cdecl, lazyload("vkCmdBindVertexBuffers2EXT", DeviceLevel).}
 proc cmdSetDepthTestEnableEXT*(
       commandBuffer: CommandBuffer;

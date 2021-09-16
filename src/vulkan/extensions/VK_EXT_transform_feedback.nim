@@ -1,4 +1,4 @@
-# Generated at 2021-09-12T04:58:23Z
+# Generated at 2021-09-16T07:11:43Z
 # VK_EXT_transform_feedback
 
 
@@ -45,27 +45,27 @@ proc cmdBindTransformFeedbackBuffersEXT*(
       bindingCount: uint32;
       pBuffers: ptr Buffer;
       pOffsets: ptr DeviceSize;
-      pSizes: ptr DeviceSize;
+      pSizes = default(ptr DeviceSize); # optional
     ): void {.cdecl, lazyload("vkCmdBindTransformFeedbackBuffersEXT", DeviceLevel).}
 proc cmdBeginTransformFeedbackEXT*(
       commandBuffer: CommandBuffer;
       firstCounterBuffer: uint32;
-      counterBufferCount: uint32;
+      counterBufferCount = default(uint32); # optional
       pCounterBuffers: ptr Buffer;
-      pCounterBufferOffsets: ptr DeviceSize;
+      pCounterBufferOffsets = default(ptr DeviceSize); # optional
     ): void {.cdecl, lazyload("vkCmdBeginTransformFeedbackEXT", DeviceLevel).}
 proc cmdEndTransformFeedbackEXT*(
       commandBuffer: CommandBuffer;
       firstCounterBuffer: uint32;
-      counterBufferCount: uint32;
+      counterBufferCount = default(uint32); # optional
       pCounterBuffers: ptr Buffer;
-      pCounterBufferOffsets: ptr DeviceSize;
+      pCounterBufferOffsets = default(ptr DeviceSize); # optional
     ): void {.cdecl, lazyload("vkCmdEndTransformFeedbackEXT", DeviceLevel).}
 proc cmdBeginQueryIndexedEXT*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
       query: uint32;
-      flags: QueryControlFlags;
+      flags = default(QueryControlFlags); # optional
       index: uint32;
     ): void {.cdecl, lazyload("vkCmdBeginQueryIndexedEXT", DeviceLevel).}
 proc cmdEndQueryIndexedEXT*(

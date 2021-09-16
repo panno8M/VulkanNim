@@ -1,4 +1,4 @@
-# Generated at 2021-09-12T04:58:24Z
+# Generated at 2021-09-16T07:11:43Z
 # VK_KHR_display_swapchain
 
 
@@ -25,7 +25,7 @@ proc createSharedSwapchainsKHR*(
       device: Device;
       swapchainCount: uint32;
       pCreateInfos: ptr SwapchainCreateInfoKHR;
-      pAllocator: ptr AllocationCallbacks;
+      pAllocator = default(ptr AllocationCallbacks); # optional
       pSwapchains: ptr SwapchainKHR;
     ): Result {.cdecl, lazyload("vkCreateSharedSwapchainsKHR", DeviceLevel).}
 

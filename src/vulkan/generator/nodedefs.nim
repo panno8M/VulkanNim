@@ -130,6 +130,7 @@ type
     name*: string
     theType*: string
     ptrLv*: Natural
+    optional*: bool
   NodeCommand* = ref object
     name*: string
     case kind*: NodeKindBasicResource

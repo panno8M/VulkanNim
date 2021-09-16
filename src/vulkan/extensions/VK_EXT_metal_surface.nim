@@ -1,4 +1,4 @@
-# Generated at 2021-09-12T04:58:23Z
+# Generated at 2021-09-16T07:11:43Z
 # VK_EXT_metal_surface
 
 
@@ -27,7 +27,7 @@ type
 proc createMetalSurfaceEXT*(
       instance: Instance;
       pCreateInfo: ptr MetalSurfaceCreateInfoEXT;
-      pAllocator: ptr AllocationCallbacks;
+      pAllocator = default(ptr AllocationCallbacks); # optional
       pSurface: ptr SurfaceKHR;
     ): Result {.cdecl, lazyload("vkCreateMetalSurfaceEXT", InstanceLevel).}
 

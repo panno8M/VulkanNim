@@ -1,4 +1,4 @@
-# Generated at 2021-09-12T04:58:24Z
+# Generated at 2021-09-16T07:11:43Z
 # VK_AMD_shader_info
 
 
@@ -37,7 +37,7 @@ proc getShaderInfoAMD*(
       shaderStage: ShaderStageFlagBits;
       infoType: ShaderInfoTypeAMD;
       pInfoSize: ptr uint;
-      pInfo: pointer;
+      pInfo = default(pointer); # optional
     ): Result {.cdecl, lazyload("vkGetShaderInfoAMD", DeviceLevel).}
 
 proc loadAllVK_AMD_shader_info*(instance: Instance) =

@@ -1,4 +1,4 @@
-# Generated at 2021-09-12T04:58:24Z
+# Generated at 2021-09-16T07:11:43Z
 # VK_EXT_display_control
 
 
@@ -49,14 +49,14 @@ proc displayPowerControlEXT*(
 proc registerDeviceEventEXT*(
       device: Device;
       pDeviceEventInfo: ptr DeviceEventInfoEXT;
-      pAllocator: ptr AllocationCallbacks;
+      pAllocator = default(ptr AllocationCallbacks); # optional
       pFence: ptr Fence;
     ): Result {.cdecl, lazyload("vkRegisterDeviceEventEXT", DeviceLevel).}
 proc registerDisplayEventEXT*(
       device: Device;
       display: DisplayKHR;
       pDisplayEventInfo: ptr DisplayEventInfoEXT;
-      pAllocator: ptr AllocationCallbacks;
+      pAllocator = default(ptr AllocationCallbacks); # optional
       pFence: ptr Fence;
     ): Result {.cdecl, lazyload("vkRegisterDisplayEventEXT", DeviceLevel).}
 proc getSwapchainCounterEXT*(

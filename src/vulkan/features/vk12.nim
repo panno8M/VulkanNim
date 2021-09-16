@@ -1,4 +1,4 @@
-# Generated at 2021-09-12T04:58:24Z
+# Generated at 2021-09-16T07:11:43Z
 # vk12
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -631,7 +631,7 @@ proc cmdDrawIndexedIndirectCount*(
 proc createRenderPass2*(
       device: Device;
       pCreateInfo: ptr RenderPassCreateInfo2;
-      pAllocator: ptr AllocationCallbacks;
+      pAllocator = default(ptr AllocationCallbacks); # optional
       pRenderPass: ptr RenderPass;
     ): Result {.cdecl, lazyload("vkCreateRenderPass2", DeviceLevel).}
 proc cmdBeginRenderPass2*(
