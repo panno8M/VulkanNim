@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_NV_cooperative_matrix
 
 
@@ -59,8 +59,8 @@ proc getPhysicalDeviceCooperativeMatrixPropertiesNV*(
     ): Result {.cdecl, lazyload("vkGetPhysicalDeviceCooperativeMatrixPropertiesNV", InstanceLevel).}
 
 proc loadAllVK_NV_cooperative_matrix*(instance: Instance) =
-  getPhysicalDeviceCooperativeMatrixPropertiesNV.smartLoad(instance)
+  getPhysicalDeviceCooperativeMatrixPropertiesNV.load(instance)
 
 proc loadVK_NV_cooperative_matrix*(instance: Instance) =
-  getPhysicalDeviceCooperativeMatrixPropertiesNV.smartLoad(instance)
+  getPhysicalDeviceCooperativeMatrixPropertiesNV.load(instance)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_EXT_debug_report
 
 
@@ -107,12 +107,12 @@ StructureType.defineAliases:
 
 
 proc loadAllVK_EXT_debug_report*(instance: Instance) =
-  createDebugReportCallbackEXT.smartLoad(instance)
-  destroyDebugReportCallbackEXT.smartLoad(instance)
-  debugReportMessageEXT.smartLoad(instance)
+  createDebugReportCallbackEXT.load(instance)
+  destroyDebugReportCallbackEXT.load(instance)
+  debugReportMessageEXT.load(instance)
 
 proc loadVK_EXT_debug_report*(instance: Instance) =
-  createDebugReportCallbackEXT.smartLoad(instance)
-  destroyDebugReportCallbackEXT.smartLoad(instance)
-  debugReportMessageEXT.smartLoad(instance)
+  createDebugReportCallbackEXT.load(instance)
+  destroyDebugReportCallbackEXT.load(instance)
+  debugReportMessageEXT.load(instance)
 

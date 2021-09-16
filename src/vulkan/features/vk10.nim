@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T13:05:11Z
+# Generated at 2021-09-12T07:04:40Z
 # vk10
 # Vulkan core API interface definitions
 # =====================================
@@ -4317,37 +4317,62 @@ proc cmdExecuteCommands*(
 
 # You can use these templates to load Vulkan proc dynamically and individually.
 import macros
-import strformat
+import sequtils
 
-template load*(vkProcPtr: untyped; instance: Instance): untyped =
-  when not vkProcPtr.hasCustomPragma(loadable):
-    {.fatal: "Specify the loading config with loadable pragma.", vkProcPtr.}
-  const pg = vkProcPtr.getCustomPragmaVal(loadable)
-  when LoadWith.Instance in pg.with:
-    vkProcPtr = cast[typeof vkProcPtr](instance.getInstanceProcAddr(pg.loadFrom))
-  else:
-    {.fatal: "To load using with Instance, add \"LoadWith.Instance\" to the loadable pragma if available.", vkProcPtr.}
-template smartLoad*(vkProcPtr: untyped; instance: Instance): untyped =
-  if vkProcPtr.isNil:
-    vkProcPtr.load(instance)
-template withLoad*(vkProcPtr: untyped; instance: Instance): typeof vkProcPtr =
-  vkProcPtr.load(instance)
-  vkProcPtr
+macro load*[T: proc](procType: typedesc[T]; handle: Instance or Device): T =
+  let procTypeDef =
+    if procType.kind == nnkSym and procType.symKind == nskType:
+      procType.getImpl[2]
+    elif procType.kind == nnkTypeOfExpr:
+      procType.getTypeImpl[1].getTypeImpl
+    else:
+      procType
 
-template load*(vkProcPtr: untyped; device: Device): untyped =
-  when not vkProcPtr.hasCustomPragma(loadable):
-    {.fatal: "Specify the loading config with loadable pragma.", vkProcPtr.}
-  const pg = vkProcPtr.getCustomPragmaVal(loadable)
-  when LoadWith.Device in pg.with:
-    vkProcPtr = cast[typeof vkProcPtr](device.getDeviceProcAddr(pg.loadFrom))
-  else:
-    {.fatal: "To load using with Device, add \"LoadWith.Device\" to the loadable pragma if available.", vkProcPtr.}
-template smartLoad*(vkProcPtr: untyped; device: Device): untyped =
-  if vkProcPtr.isNil:
-    vkProcPtr.load(device)
-template withLoad*(vkProcPtr: untyped; device: Device): typeof vkProcPtr =
-  vkProcPtr.load(device)
-  vkProcPtr
+  if procTypeDef.kind != nnkProcTy: error "unexpected"
+
+  let procPragmas = procTypeDef.pragma
+
+  var loadablePragma: NimNode
+  for pragma in procPragmas:
+    case pragma.kind
+    of nnkCall, nnkExprColonExpr:
+      if pragma[0].kind == nnkSym and
+          pragma[0].symkind == nskTemplate and
+          $pragma[0] == "loadable":
+        loadablePragma = pragma
+        break
+    else: continue
+  if loadablePragma == nil:
+    error "The loadable pragma must be set for the proc type.", procType
+
+  let loadFrom = loadablePragma[1]
+  let loadWith = loadablePragma[2][0..^1].mapIt(LoadWith(it.intVal))
+
+
+  case handle.getTypeInst.repr
+  of Instance.getTypeInst.repr:
+    if LoadWith.Instance in loadWith:
+      return quote do:
+        cast[`procType`](`handle`.getInstanceProcAddr(`loadFrom`))
+    else:
+      error "Not available to load with instance.", handle
+
+  of Device.getTypeInst.repr:
+    if LoadWith.Device in `loadWith`:
+      return quote do:
+        cast[`procType`](`handle`.getDeviceProcAddr(`loadFrom`))
+    else:
+      error "Not available to load with device.", handle
+
+  else: error "Type of the handle must be Instance or Device", procType
+
+template load*[T: proc](procVar: var T; handle: Instance or Device) =
+  procVar = procVar.typeof.load(handle)
+
+template withLoad*[T: proc](procVar: var T; handle: Instance or Device): T =
+  procVar.load(handle)
+  procVar
+
 
 # ========================= #
 #      LOADER TEMPLATE      #
@@ -4356,378 +4381,378 @@ template withLoad*(vkProcPtr: untyped; device: Device): typeof vkProcPtr =
 
 proc loadAllVk10*(instance: Instance) =
   # Device initialization
-  destroyInstance.smartLoad(instance)
-  enumeratePhysicalDevices.smartLoad(instance)
-  getPhysicalDeviceFeatures.smartLoad(instance)
-  getPhysicalDeviceFormatProperties.smartLoad(instance)
-  getPhysicalDeviceImageFormatProperties.smartLoad(instance)
-  getPhysicalDeviceProperties.smartLoad(instance)
-  getPhysicalDeviceQueueFamilyProperties.smartLoad(instance)
-  getPhysicalDeviceMemoryProperties.smartLoad(instance)
+  destroyInstance.load(instance)
+  enumeratePhysicalDevices.load(instance)
+  getPhysicalDeviceFeatures.load(instance)
+  getPhysicalDeviceFormatProperties.load(instance)
+  getPhysicalDeviceImageFormatProperties.load(instance)
+  getPhysicalDeviceProperties.load(instance)
+  getPhysicalDeviceQueueFamilyProperties.load(instance)
+  getPhysicalDeviceMemoryProperties.load(instance)
 
   # Device commands
-  createDevice.smartLoad(instance)
-  destroyDevice.smartLoad(instance)
+  createDevice.load(instance)
+  destroyDevice.load(instance)
 
   # Extension discovery commands
-  enumerateDeviceExtensionProperties.smartLoad(instance)
+  enumerateDeviceExtensionProperties.load(instance)
 
   # Layer discovery commands
-  enumerateDeviceLayerProperties.smartLoad(instance)
+  enumerateDeviceLayerProperties.load(instance)
 
   # Queue commands
-  getDeviceQueue.smartLoad(instance)
-  queueSubmit.smartLoad(instance)
-  queueWaitIdle.smartLoad(instance)
-  deviceWaitIdle.smartLoad(instance)
+  getDeviceQueue.load(instance)
+  queueSubmit.load(instance)
+  queueWaitIdle.load(instance)
+  deviceWaitIdle.load(instance)
 
   # Memory commands
-  allocateMemory.smartLoad(instance)
-  freeMemory.smartLoad(instance)
-  mapMemory.smartLoad(instance)
-  unmapMemory.smartLoad(instance)
-  flushMappedMemoryRanges.smartLoad(instance)
-  invalidateMappedMemoryRanges.smartLoad(instance)
-  getDeviceMemoryCommitment.smartLoad(instance)
+  allocateMemory.load(instance)
+  freeMemory.load(instance)
+  mapMemory.load(instance)
+  unmapMemory.load(instance)
+  flushMappedMemoryRanges.load(instance)
+  invalidateMappedMemoryRanges.load(instance)
+  getDeviceMemoryCommitment.load(instance)
 
   # Memory management API commands
-  bindBufferMemory.smartLoad(instance)
-  bindImageMemory.smartLoad(instance)
-  getBufferMemoryRequirements.smartLoad(instance)
-  getImageMemoryRequirements.smartLoad(instance)
+  bindBufferMemory.load(instance)
+  bindImageMemory.load(instance)
+  getBufferMemoryRequirements.load(instance)
+  getImageMemoryRequirements.load(instance)
 
   # Sparse resource memory management API commands
-  getImageSparseMemoryRequirements.smartLoad(instance)
-  getPhysicalDeviceSparseImageFormatProperties.smartLoad(instance)
-  queueBindSparse.smartLoad(instance)
+  getImageSparseMemoryRequirements.load(instance)
+  getPhysicalDeviceSparseImageFormatProperties.load(instance)
+  queueBindSparse.load(instance)
 
   # Fence commands
-  createFence.smartLoad(instance)
-  destroyFence.smartLoad(instance)
-  resetFences.smartLoad(instance)
-  getFenceStatus.smartLoad(instance)
-  waitForFences.smartLoad(instance)
+  createFence.load(instance)
+  destroyFence.load(instance)
+  resetFences.load(instance)
+  getFenceStatus.load(instance)
+  waitForFences.load(instance)
 
   # Queue semaphore commands
-  createSemaphore.smartLoad(instance)
-  destroySemaphore.smartLoad(instance)
+  createSemaphore.load(instance)
+  destroySemaphore.load(instance)
 
   # Event commands
-  createEvent.smartLoad(instance)
-  destroyEvent.smartLoad(instance)
-  getEventStatus.smartLoad(instance)
-  setEvent.smartLoad(instance)
-  resetEvent.smartLoad(instance)
+  createEvent.load(instance)
+  destroyEvent.load(instance)
+  getEventStatus.load(instance)
+  setEvent.load(instance)
+  resetEvent.load(instance)
 
   # Query commands
-  createQueryPool.smartLoad(instance)
-  destroyQueryPool.smartLoad(instance)
-  getQueryPoolResults.smartLoad(instance)
+  createQueryPool.load(instance)
+  destroyQueryPool.load(instance)
+  getQueryPoolResults.load(instance)
 
   # Buffer commands
-  createBuffer.smartLoad(instance)
-  destroyBuffer.smartLoad(instance)
+  createBuffer.load(instance)
+  destroyBuffer.load(instance)
 
   # Buffer view commands
-  createBufferView.smartLoad(instance)
-  destroyBufferView.smartLoad(instance)
+  createBufferView.load(instance)
+  destroyBufferView.load(instance)
 
   # Image commands
-  createImage.smartLoad(instance)
-  destroyImage.smartLoad(instance)
-  getImageSubresourceLayout.smartLoad(instance)
+  createImage.load(instance)
+  destroyImage.load(instance)
+  getImageSubresourceLayout.load(instance)
 
   # Image view commands
-  createImageView.smartLoad(instance)
-  destroyImageView.smartLoad(instance)
+  createImageView.load(instance)
+  destroyImageView.load(instance)
 
   # Shader commands
-  createShaderModule.smartLoad(instance)
-  destroyShaderModule.smartLoad(instance)
+  createShaderModule.load(instance)
+  destroyShaderModule.load(instance)
 
   # Pipeline Cache commands
-  createPipelineCache.smartLoad(instance)
-  destroyPipelineCache.smartLoad(instance)
-  getPipelineCacheData.smartLoad(instance)
-  mergePipelineCaches.smartLoad(instance)
+  createPipelineCache.load(instance)
+  destroyPipelineCache.load(instance)
+  getPipelineCacheData.load(instance)
+  mergePipelineCaches.load(instance)
 
   # Pipeline commands
-  createGraphicsPipelines.smartLoad(instance)
-  createComputePipelines.smartLoad(instance)
-  destroyPipeline.smartLoad(instance)
+  createGraphicsPipelines.load(instance)
+  createComputePipelines.load(instance)
+  destroyPipeline.load(instance)
 
   # Pipeline layout commands
-  createPipelineLayout.smartLoad(instance)
-  destroyPipelineLayout.smartLoad(instance)
+  createPipelineLayout.load(instance)
+  destroyPipelineLayout.load(instance)
 
   # Sampler commands
-  createSampler.smartLoad(instance)
-  destroySampler.smartLoad(instance)
+  createSampler.load(instance)
+  destroySampler.load(instance)
 
   # Descriptor set commands
-  createDescriptorSetLayout.smartLoad(instance)
-  destroyDescriptorSetLayout.smartLoad(instance)
-  createDescriptorPool.smartLoad(instance)
-  destroyDescriptorPool.smartLoad(instance)
-  resetDescriptorPool.smartLoad(instance)
-  allocateDescriptorSets.smartLoad(instance)
-  freeDescriptorSets.smartLoad(instance)
-  updateDescriptorSets.smartLoad(instance)
+  createDescriptorSetLayout.load(instance)
+  destroyDescriptorSetLayout.load(instance)
+  createDescriptorPool.load(instance)
+  destroyDescriptorPool.load(instance)
+  resetDescriptorPool.load(instance)
+  allocateDescriptorSets.load(instance)
+  freeDescriptorSets.load(instance)
+  updateDescriptorSets.load(instance)
 
   # Pass commands
-  createFramebuffer.smartLoad(instance)
-  destroyFramebuffer.smartLoad(instance)
-  createRenderPass.smartLoad(instance)
-  destroyRenderPass.smartLoad(instance)
-  getRenderAreaGranularity.smartLoad(instance)
+  createFramebuffer.load(instance)
+  destroyFramebuffer.load(instance)
+  createRenderPass.load(instance)
+  destroyRenderPass.load(instance)
+  getRenderAreaGranularity.load(instance)
 
   # Command pool commands
-  createCommandPool.smartLoad(instance)
-  destroyCommandPool.smartLoad(instance)
-  resetCommandPool.smartLoad(instance)
+  createCommandPool.load(instance)
+  destroyCommandPool.load(instance)
+  resetCommandPool.load(instance)
 
   # Command buffer commands
-  allocateCommandBuffers.smartLoad(instance)
-  freeCommandBuffers.smartLoad(instance)
-  beginCommandBuffer.smartLoad(instance)
-  endCommandBuffer.smartLoad(instance)
-  resetCommandBuffer.smartLoad(instance)
+  allocateCommandBuffers.load(instance)
+  freeCommandBuffers.load(instance)
+  beginCommandBuffer.load(instance)
+  endCommandBuffer.load(instance)
+  resetCommandBuffer.load(instance)
 
   # Command buffer building commands
-  cmdBindPipeline.smartLoad(instance)
-  cmdSetViewport.smartLoad(instance)
-  cmdSetScissor.smartLoad(instance)
-  cmdSetLineWidth.smartLoad(instance)
-  cmdSetDepthBias.smartLoad(instance)
-  cmdSetBlendConstants.smartLoad(instance)
-  cmdSetDepthBounds.smartLoad(instance)
-  cmdSetStencilCompareMask.smartLoad(instance)
-  cmdSetStencilWriteMask.smartLoad(instance)
-  cmdSetStencilReference.smartLoad(instance)
-  cmdBindDescriptorSets.smartLoad(instance)
-  cmdBindIndexBuffer.smartLoad(instance)
-  cmdBindVertexBuffers.smartLoad(instance)
-  cmdDraw.smartLoad(instance)
-  cmdDrawIndexed.smartLoad(instance)
-  cmdDrawIndirect.smartLoad(instance)
-  cmdDrawIndexedIndirect.smartLoad(instance)
-  cmdDispatch.smartLoad(instance)
-  cmdDispatchIndirect.smartLoad(instance)
-  cmdCopyBuffer.smartLoad(instance)
-  cmdCopyImage.smartLoad(instance)
-  cmdBlitImage.smartLoad(instance)
-  cmdCopyBufferToImage.smartLoad(instance)
-  cmdCopyImageToBuffer.smartLoad(instance)
-  cmdUpdateBuffer.smartLoad(instance)
-  cmdFillBuffer.smartLoad(instance)
-  cmdClearColorImage.smartLoad(instance)
-  cmdClearDepthStencilImage.smartLoad(instance)
-  cmdClearAttachments.smartLoad(instance)
-  cmdResolveImage.smartLoad(instance)
-  cmdSetEvent.smartLoad(instance)
-  cmdResetEvent.smartLoad(instance)
-  cmdWaitEvents.smartLoad(instance)
-  cmdPipelineBarrier.smartLoad(instance)
-  cmdBeginQuery.smartLoad(instance)
-  cmdEndQuery.smartLoad(instance)
-  cmdResetQueryPool.smartLoad(instance)
-  cmdWriteTimestamp.smartLoad(instance)
-  cmdCopyQueryPoolResults.smartLoad(instance)
-  cmdPushConstants.smartLoad(instance)
-  cmdBeginRenderPass.smartLoad(instance)
-  cmdNextSubpass.smartLoad(instance)
-  cmdEndRenderPass.smartLoad(instance)
-  cmdExecuteCommands.smartLoad(instance)
+  cmdBindPipeline.load(instance)
+  cmdSetViewport.load(instance)
+  cmdSetScissor.load(instance)
+  cmdSetLineWidth.load(instance)
+  cmdSetDepthBias.load(instance)
+  cmdSetBlendConstants.load(instance)
+  cmdSetDepthBounds.load(instance)
+  cmdSetStencilCompareMask.load(instance)
+  cmdSetStencilWriteMask.load(instance)
+  cmdSetStencilReference.load(instance)
+  cmdBindDescriptorSets.load(instance)
+  cmdBindIndexBuffer.load(instance)
+  cmdBindVertexBuffers.load(instance)
+  cmdDraw.load(instance)
+  cmdDrawIndexed.load(instance)
+  cmdDrawIndirect.load(instance)
+  cmdDrawIndexedIndirect.load(instance)
+  cmdDispatch.load(instance)
+  cmdDispatchIndirect.load(instance)
+  cmdCopyBuffer.load(instance)
+  cmdCopyImage.load(instance)
+  cmdBlitImage.load(instance)
+  cmdCopyBufferToImage.load(instance)
+  cmdCopyImageToBuffer.load(instance)
+  cmdUpdateBuffer.load(instance)
+  cmdFillBuffer.load(instance)
+  cmdClearColorImage.load(instance)
+  cmdClearDepthStencilImage.load(instance)
+  cmdClearAttachments.load(instance)
+  cmdResolveImage.load(instance)
+  cmdSetEvent.load(instance)
+  cmdResetEvent.load(instance)
+  cmdWaitEvents.load(instance)
+  cmdPipelineBarrier.load(instance)
+  cmdBeginQuery.load(instance)
+  cmdEndQuery.load(instance)
+  cmdResetQueryPool.load(instance)
+  cmdWriteTimestamp.load(instance)
+  cmdCopyQueryPoolResults.load(instance)
+  cmdPushConstants.load(instance)
+  cmdBeginRenderPass.load(instance)
+  cmdNextSubpass.load(instance)
+  cmdEndRenderPass.load(instance)
+  cmdExecuteCommands.load(instance)
 
 proc loadVk10*(instance: Instance) =
   # Device initialization
-  destroyInstance.smartLoad(instance)
-  enumeratePhysicalDevices.smartLoad(instance)
-  getPhysicalDeviceFeatures.smartLoad(instance)
-  getPhysicalDeviceFormatProperties.smartLoad(instance)
-  getPhysicalDeviceImageFormatProperties.smartLoad(instance)
-  getPhysicalDeviceProperties.smartLoad(instance)
-  getPhysicalDeviceQueueFamilyProperties.smartLoad(instance)
-  getPhysicalDeviceMemoryProperties.smartLoad(instance)
+  destroyInstance.load(instance)
+  enumeratePhysicalDevices.load(instance)
+  getPhysicalDeviceFeatures.load(instance)
+  getPhysicalDeviceFormatProperties.load(instance)
+  getPhysicalDeviceImageFormatProperties.load(instance)
+  getPhysicalDeviceProperties.load(instance)
+  getPhysicalDeviceQueueFamilyProperties.load(instance)
+  getPhysicalDeviceMemoryProperties.load(instance)
 
   # Device commands
-  createDevice.smartLoad(instance)
+  createDevice.load(instance)
 
   # Extension discovery commands
-  enumerateDeviceExtensionProperties.smartLoad(instance)
+  enumerateDeviceExtensionProperties.load(instance)
 
   # Layer discovery commands
-  enumerateDeviceLayerProperties.smartLoad(instance)
+  enumerateDeviceLayerProperties.load(instance)
 
   # Sparse resource memory management API commands
-  getPhysicalDeviceSparseImageFormatProperties.smartLoad(instance)
+  getPhysicalDeviceSparseImageFormatProperties.load(instance)
 
 proc loadVk10*(device: Device) =
   # Device commands
-  destroyDevice.smartLoad(device)
+  destroyDevice.load(device)
 
   # Queue commands
-  getDeviceQueue.smartLoad(device)
-  queueSubmit.smartLoad(device)
-  queueWaitIdle.smartLoad(device)
-  deviceWaitIdle.smartLoad(device)
+  getDeviceQueue.load(device)
+  queueSubmit.load(device)
+  queueWaitIdle.load(device)
+  deviceWaitIdle.load(device)
 
   # Memory commands
-  allocateMemory.smartLoad(device)
-  freeMemory.smartLoad(device)
-  mapMemory.smartLoad(device)
-  unmapMemory.smartLoad(device)
-  flushMappedMemoryRanges.smartLoad(device)
-  invalidateMappedMemoryRanges.smartLoad(device)
-  getDeviceMemoryCommitment.smartLoad(device)
+  allocateMemory.load(device)
+  freeMemory.load(device)
+  mapMemory.load(device)
+  unmapMemory.load(device)
+  flushMappedMemoryRanges.load(device)
+  invalidateMappedMemoryRanges.load(device)
+  getDeviceMemoryCommitment.load(device)
 
   # Memory management API commands
-  bindBufferMemory.smartLoad(device)
-  bindImageMemory.smartLoad(device)
-  getBufferMemoryRequirements.smartLoad(device)
-  getImageMemoryRequirements.smartLoad(device)
+  bindBufferMemory.load(device)
+  bindImageMemory.load(device)
+  getBufferMemoryRequirements.load(device)
+  getImageMemoryRequirements.load(device)
 
   # Sparse resource memory management API commands
-  getImageSparseMemoryRequirements.smartLoad(device)
-  queueBindSparse.smartLoad(device)
+  getImageSparseMemoryRequirements.load(device)
+  queueBindSparse.load(device)
 
   # Fence commands
-  createFence.smartLoad(device)
-  destroyFence.smartLoad(device)
-  resetFences.smartLoad(device)
-  getFenceStatus.smartLoad(device)
-  waitForFences.smartLoad(device)
+  createFence.load(device)
+  destroyFence.load(device)
+  resetFences.load(device)
+  getFenceStatus.load(device)
+  waitForFences.load(device)
 
   # Queue semaphore commands
-  createSemaphore.smartLoad(device)
-  destroySemaphore.smartLoad(device)
+  createSemaphore.load(device)
+  destroySemaphore.load(device)
 
   # Event commands
-  createEvent.smartLoad(device)
-  destroyEvent.smartLoad(device)
-  getEventStatus.smartLoad(device)
-  setEvent.smartLoad(device)
-  resetEvent.smartLoad(device)
+  createEvent.load(device)
+  destroyEvent.load(device)
+  getEventStatus.load(device)
+  setEvent.load(device)
+  resetEvent.load(device)
 
   # Query commands
-  createQueryPool.smartLoad(device)
-  destroyQueryPool.smartLoad(device)
-  getQueryPoolResults.smartLoad(device)
+  createQueryPool.load(device)
+  destroyQueryPool.load(device)
+  getQueryPoolResults.load(device)
 
   # Buffer commands
-  createBuffer.smartLoad(device)
-  destroyBuffer.smartLoad(device)
+  createBuffer.load(device)
+  destroyBuffer.load(device)
 
   # Buffer view commands
-  createBufferView.smartLoad(device)
-  destroyBufferView.smartLoad(device)
+  createBufferView.load(device)
+  destroyBufferView.load(device)
 
   # Image commands
-  createImage.smartLoad(device)
-  destroyImage.smartLoad(device)
-  getImageSubresourceLayout.smartLoad(device)
+  createImage.load(device)
+  destroyImage.load(device)
+  getImageSubresourceLayout.load(device)
 
   # Image view commands
-  createImageView.smartLoad(device)
-  destroyImageView.smartLoad(device)
+  createImageView.load(device)
+  destroyImageView.load(device)
 
   # Shader commands
-  createShaderModule.smartLoad(device)
-  destroyShaderModule.smartLoad(device)
+  createShaderModule.load(device)
+  destroyShaderModule.load(device)
 
   # Pipeline Cache commands
-  createPipelineCache.smartLoad(device)
-  destroyPipelineCache.smartLoad(device)
-  getPipelineCacheData.smartLoad(device)
-  mergePipelineCaches.smartLoad(device)
+  createPipelineCache.load(device)
+  destroyPipelineCache.load(device)
+  getPipelineCacheData.load(device)
+  mergePipelineCaches.load(device)
 
   # Pipeline commands
-  createGraphicsPipelines.smartLoad(device)
-  createComputePipelines.smartLoad(device)
-  destroyPipeline.smartLoad(device)
+  createGraphicsPipelines.load(device)
+  createComputePipelines.load(device)
+  destroyPipeline.load(device)
 
   # Pipeline layout commands
-  createPipelineLayout.smartLoad(device)
-  destroyPipelineLayout.smartLoad(device)
+  createPipelineLayout.load(device)
+  destroyPipelineLayout.load(device)
 
   # Sampler commands
-  createSampler.smartLoad(device)
-  destroySampler.smartLoad(device)
+  createSampler.load(device)
+  destroySampler.load(device)
 
   # Descriptor set commands
-  createDescriptorSetLayout.smartLoad(device)
-  destroyDescriptorSetLayout.smartLoad(device)
-  createDescriptorPool.smartLoad(device)
-  destroyDescriptorPool.smartLoad(device)
-  resetDescriptorPool.smartLoad(device)
-  allocateDescriptorSets.smartLoad(device)
-  freeDescriptorSets.smartLoad(device)
-  updateDescriptorSets.smartLoad(device)
+  createDescriptorSetLayout.load(device)
+  destroyDescriptorSetLayout.load(device)
+  createDescriptorPool.load(device)
+  destroyDescriptorPool.load(device)
+  resetDescriptorPool.load(device)
+  allocateDescriptorSets.load(device)
+  freeDescriptorSets.load(device)
+  updateDescriptorSets.load(device)
 
   # Pass commands
-  createFramebuffer.smartLoad(device)
-  destroyFramebuffer.smartLoad(device)
-  createRenderPass.smartLoad(device)
-  destroyRenderPass.smartLoad(device)
-  getRenderAreaGranularity.smartLoad(device)
+  createFramebuffer.load(device)
+  destroyFramebuffer.load(device)
+  createRenderPass.load(device)
+  destroyRenderPass.load(device)
+  getRenderAreaGranularity.load(device)
 
   # Command pool commands
-  createCommandPool.smartLoad(device)
-  destroyCommandPool.smartLoad(device)
-  resetCommandPool.smartLoad(device)
+  createCommandPool.load(device)
+  destroyCommandPool.load(device)
+  resetCommandPool.load(device)
 
   # Command buffer commands
-  allocateCommandBuffers.smartLoad(device)
-  freeCommandBuffers.smartLoad(device)
-  beginCommandBuffer.smartLoad(device)
-  endCommandBuffer.smartLoad(device)
-  resetCommandBuffer.smartLoad(device)
+  allocateCommandBuffers.load(device)
+  freeCommandBuffers.load(device)
+  beginCommandBuffer.load(device)
+  endCommandBuffer.load(device)
+  resetCommandBuffer.load(device)
 
   # Command buffer building commands
-  cmdBindPipeline.smartLoad(device)
-  cmdSetViewport.smartLoad(device)
-  cmdSetScissor.smartLoad(device)
-  cmdSetLineWidth.smartLoad(device)
-  cmdSetDepthBias.smartLoad(device)
-  cmdSetBlendConstants.smartLoad(device)
-  cmdSetDepthBounds.smartLoad(device)
-  cmdSetStencilCompareMask.smartLoad(device)
-  cmdSetStencilWriteMask.smartLoad(device)
-  cmdSetStencilReference.smartLoad(device)
-  cmdBindDescriptorSets.smartLoad(device)
-  cmdBindIndexBuffer.smartLoad(device)
-  cmdBindVertexBuffers.smartLoad(device)
-  cmdDraw.smartLoad(device)
-  cmdDrawIndexed.smartLoad(device)
-  cmdDrawIndirect.smartLoad(device)
-  cmdDrawIndexedIndirect.smartLoad(device)
-  cmdDispatch.smartLoad(device)
-  cmdDispatchIndirect.smartLoad(device)
-  cmdCopyBuffer.smartLoad(device)
-  cmdCopyImage.smartLoad(device)
-  cmdBlitImage.smartLoad(device)
-  cmdCopyBufferToImage.smartLoad(device)
-  cmdCopyImageToBuffer.smartLoad(device)
-  cmdUpdateBuffer.smartLoad(device)
-  cmdFillBuffer.smartLoad(device)
-  cmdClearColorImage.smartLoad(device)
-  cmdClearDepthStencilImage.smartLoad(device)
-  cmdClearAttachments.smartLoad(device)
-  cmdResolveImage.smartLoad(device)
-  cmdSetEvent.smartLoad(device)
-  cmdResetEvent.smartLoad(device)
-  cmdWaitEvents.smartLoad(device)
-  cmdPipelineBarrier.smartLoad(device)
-  cmdBeginQuery.smartLoad(device)
-  cmdEndQuery.smartLoad(device)
-  cmdResetQueryPool.smartLoad(device)
-  cmdWriteTimestamp.smartLoad(device)
-  cmdCopyQueryPoolResults.smartLoad(device)
-  cmdPushConstants.smartLoad(device)
-  cmdBeginRenderPass.smartLoad(device)
-  cmdNextSubpass.smartLoad(device)
-  cmdEndRenderPass.smartLoad(device)
-  cmdExecuteCommands.smartLoad(device)
+  cmdBindPipeline.load(device)
+  cmdSetViewport.load(device)
+  cmdSetScissor.load(device)
+  cmdSetLineWidth.load(device)
+  cmdSetDepthBias.load(device)
+  cmdSetBlendConstants.load(device)
+  cmdSetDepthBounds.load(device)
+  cmdSetStencilCompareMask.load(device)
+  cmdSetStencilWriteMask.load(device)
+  cmdSetStencilReference.load(device)
+  cmdBindDescriptorSets.load(device)
+  cmdBindIndexBuffer.load(device)
+  cmdBindVertexBuffers.load(device)
+  cmdDraw.load(device)
+  cmdDrawIndexed.load(device)
+  cmdDrawIndirect.load(device)
+  cmdDrawIndexedIndirect.load(device)
+  cmdDispatch.load(device)
+  cmdDispatchIndirect.load(device)
+  cmdCopyBuffer.load(device)
+  cmdCopyImage.load(device)
+  cmdBlitImage.load(device)
+  cmdCopyBufferToImage.load(device)
+  cmdCopyImageToBuffer.load(device)
+  cmdUpdateBuffer.load(device)
+  cmdFillBuffer.load(device)
+  cmdClearColorImage.load(device)
+  cmdClearDepthStencilImage.load(device)
+  cmdClearAttachments.load(device)
+  cmdResolveImage.load(device)
+  cmdSetEvent.load(device)
+  cmdResetEvent.load(device)
+  cmdWaitEvents.load(device)
+  cmdPipelineBarrier.load(device)
+  cmdBeginQuery.load(device)
+  cmdEndQuery.load(device)
+  cmdResetQueryPool.load(device)
+  cmdWriteTimestamp.load(device)
+  cmdCopyQueryPoolResults.load(device)
+  cmdPushConstants.load(device)
+  cmdBeginRenderPass.load(device)
+  cmdNextSubpass.load(device)
+  cmdEndRenderPass.load(device)
+  cmdExecuteCommands.load(device)
 
 
 

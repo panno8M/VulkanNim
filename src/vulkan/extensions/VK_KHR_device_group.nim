@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_KHR_device_group
 
 
@@ -138,18 +138,18 @@ proc acquireNextImage2KHR*(
     ): Result {.cdecl, lazyload("vkAcquireNextImage2KHR", DeviceLevel).}
 
 proc loadAllVK_KHR_device_group*(instance: Instance) =
-  getDeviceGroupPresentCapabilitiesKHR.smartLoad(instance)
-  getDeviceGroupSurfacePresentModesKHR.smartLoad(instance)
-  getPhysicalDevicePresentRectanglesKHR.smartLoad(instance)
+  getDeviceGroupPresentCapabilitiesKHR.load(instance)
+  getDeviceGroupSurfacePresentModesKHR.load(instance)
+  getPhysicalDevicePresentRectanglesKHR.load(instance)
 
-  acquireNextImage2KHR.smartLoad(instance)
+  acquireNextImage2KHR.load(instance)
 
 proc loadVK_KHR_device_group*(instance: Instance) =
-  getPhysicalDevicePresentRectanglesKHR.smartLoad(instance)
+  getPhysicalDevicePresentRectanglesKHR.load(instance)
 
 proc loadVK_KHR_device_group*(device: Device) =
-  getDeviceGroupPresentCapabilitiesKHR.smartLoad(device)
-  getDeviceGroupSurfacePresentModesKHR.smartLoad(device)
+  getDeviceGroupPresentCapabilitiesKHR.load(device)
+  getDeviceGroupSurfacePresentModesKHR.load(device)
 
-  acquireNextImage2KHR.smartLoad(device)
+  acquireNextImage2KHR.load(device)
 

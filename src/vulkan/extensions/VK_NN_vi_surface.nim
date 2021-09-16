@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_NN_vi_surface
 
 
@@ -29,8 +29,8 @@ proc createViSurfaceNN*(
     ): Result {.cdecl, lazyload("vkCreateViSurfaceNN", InstanceLevel).}
 
 proc loadAllVK_NN_vi_surface*(instance: Instance) =
-  createViSurfaceNN.smartLoad(instance)
+  createViSurfaceNN.load(instance)
 
 proc loadVK_NN_vi_surface*(instance: Instance) =
-  createViSurfaceNN.smartLoad(instance)
+  createViSurfaceNN.load(instance)
 

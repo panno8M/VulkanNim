@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_EXT_external_memory_host
 
 
@@ -34,8 +34,8 @@ proc getMemoryHostPointerPropertiesEXT*(
     ): Result {.cdecl, lazyload("vkGetMemoryHostPointerPropertiesEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_external_memory_host*(instance: Instance) =
-  getMemoryHostPointerPropertiesEXT.smartLoad(instance)
+  getMemoryHostPointerPropertiesEXT.load(instance)
 
 proc loadVK_EXT_external_memory_host*(device: Device) =
-  getMemoryHostPointerPropertiesEXT.smartLoad(device)
+  getMemoryHostPointerPropertiesEXT.load(device)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_KHR_xcb_surface
 
 
@@ -36,10 +36,10 @@ proc getPhysicalDeviceXcbPresentationSupportKHR*(
     ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceXcbPresentationSupportKHR", InstanceLevel).}
 
 proc loadAllVK_KHR_xcb_surface*(instance: Instance) =
-  createXcbSurfaceKHR.smartLoad(instance)
-  getPhysicalDeviceXcbPresentationSupportKHR.smartLoad(instance)
+  createXcbSurfaceKHR.load(instance)
+  getPhysicalDeviceXcbPresentationSupportKHR.load(instance)
 
 proc loadVK_KHR_xcb_surface*(instance: Instance) =
-  createXcbSurfaceKHR.smartLoad(instance)
-  getPhysicalDeviceXcbPresentationSupportKHR.smartLoad(instance)
+  createXcbSurfaceKHR.load(instance)
+  getPhysicalDeviceXcbPresentationSupportKHR.load(instance)
 

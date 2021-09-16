@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_KHR_deferred_host_operations
 
 
@@ -41,16 +41,16 @@ proc deferredOperationJoinKHR*(
     ): Result {.cdecl, lazyload("vkDeferredOperationJoinKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_deferred_host_operations*(instance: Instance) =
-  createDeferredOperationKHR.smartLoad(instance)
-  destroyDeferredOperationKHR.smartLoad(instance)
-  getDeferredOperationMaxConcurrencyKHR.smartLoad(instance)
-  getDeferredOperationResultKHR.smartLoad(instance)
-  deferredOperationJoinKHR.smartLoad(instance)
+  createDeferredOperationKHR.load(instance)
+  destroyDeferredOperationKHR.load(instance)
+  getDeferredOperationMaxConcurrencyKHR.load(instance)
+  getDeferredOperationResultKHR.load(instance)
+  deferredOperationJoinKHR.load(instance)
 
 proc loadVK_KHR_deferred_host_operations*(device: Device) =
-  createDeferredOperationKHR.smartLoad(device)
-  destroyDeferredOperationKHR.smartLoad(device)
-  getDeferredOperationMaxConcurrencyKHR.smartLoad(device)
-  getDeferredOperationResultKHR.smartLoad(device)
-  deferredOperationJoinKHR.smartLoad(device)
+  createDeferredOperationKHR.load(device)
+  destroyDeferredOperationKHR.load(device)
+  getDeferredOperationMaxConcurrencyKHR.load(device)
+  getDeferredOperationResultKHR.load(device)
+  deferredOperationJoinKHR.load(device)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_EXT_validation_cache
 
 
@@ -53,14 +53,14 @@ proc getValidationCacheDataEXT*(
     ): Result {.cdecl, lazyload("vkGetValidationCacheDataEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_validation_cache*(instance: Instance) =
-  createValidationCacheEXT.smartLoad(instance)
-  destroyValidationCacheEXT.smartLoad(instance)
-  mergeValidationCachesEXT.smartLoad(instance)
-  getValidationCacheDataEXT.smartLoad(instance)
+  createValidationCacheEXT.load(instance)
+  destroyValidationCacheEXT.load(instance)
+  mergeValidationCachesEXT.load(instance)
+  getValidationCacheDataEXT.load(instance)
 
 proc loadVK_EXT_validation_cache*(device: Device) =
-  createValidationCacheEXT.smartLoad(device)
-  destroyValidationCacheEXT.smartLoad(device)
-  mergeValidationCachesEXT.smartLoad(device)
-  getValidationCacheDataEXT.smartLoad(device)
+  createValidationCacheEXT.load(device)
+  destroyValidationCacheEXT.load(device)
+  mergeValidationCachesEXT.load(device)
+  getValidationCacheDataEXT.load(device)
 

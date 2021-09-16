@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_KHR_external_fence_win32
 
 
@@ -43,10 +43,10 @@ proc getFenceWin32HandleKHR*(
     ): Result {.cdecl, lazyload("vkGetFenceWin32HandleKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_external_fence_win32*(instance: Instance) =
-  importFenceWin32HandleKHR.smartLoad(instance)
-  getFenceWin32HandleKHR.smartLoad(instance)
+  importFenceWin32HandleKHR.load(instance)
+  getFenceWin32HandleKHR.load(instance)
 
 proc loadVK_KHR_external_fence_win32*(device: Device) =
-  importFenceWin32HandleKHR.smartLoad(device)
-  getFenceWin32HandleKHR.smartLoad(device)
+  importFenceWin32HandleKHR.load(device)
+  getFenceWin32HandleKHR.load(device)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_KHR_get_display_properties2
 
 
@@ -57,14 +57,14 @@ proc getDisplayPlaneCapabilities2KHR*(
     ): Result {.cdecl, lazyload("vkGetDisplayPlaneCapabilities2KHR", InstanceLevel).}
 
 proc loadAllVK_KHR_get_display_properties2*(instance: Instance) =
-  getPhysicalDeviceDisplayProperties2KHR.smartLoad(instance)
-  getPhysicalDeviceDisplayPlaneProperties2KHR.smartLoad(instance)
-  getDisplayModeProperties2KHR.smartLoad(instance)
-  getDisplayPlaneCapabilities2KHR.smartLoad(instance)
+  getPhysicalDeviceDisplayProperties2KHR.load(instance)
+  getPhysicalDeviceDisplayPlaneProperties2KHR.load(instance)
+  getDisplayModeProperties2KHR.load(instance)
+  getDisplayPlaneCapabilities2KHR.load(instance)
 
 proc loadVK_KHR_get_display_properties2*(instance: Instance) =
-  getPhysicalDeviceDisplayProperties2KHR.smartLoad(instance)
-  getPhysicalDeviceDisplayPlaneProperties2KHR.smartLoad(instance)
-  getDisplayModeProperties2KHR.smartLoad(instance)
-  getDisplayPlaneCapabilities2KHR.smartLoad(instance)
+  getPhysicalDeviceDisplayProperties2KHR.load(instance)
+  getPhysicalDeviceDisplayPlaneProperties2KHR.load(instance)
+  getDisplayModeProperties2KHR.load(instance)
+  getDisplayPlaneCapabilities2KHR.load(instance)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_KHR_external_fence_fd
 
 
@@ -36,10 +36,10 @@ proc getFenceFdKHR*(
     ): Result {.cdecl, lazyload("vkGetFenceFdKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_external_fence_fd*(instance: Instance) =
-  importFenceFdKHR.smartLoad(instance)
-  getFenceFdKHR.smartLoad(instance)
+  importFenceFdKHR.load(instance)
+  getFenceFdKHR.load(instance)
 
 proc loadVK_KHR_external_fence_fd*(device: Device) =
-  importFenceFdKHR.smartLoad(device)
-  getFenceFdKHR.smartLoad(device)
+  importFenceFdKHR.load(device)
+  getFenceFdKHR.load(device)
 

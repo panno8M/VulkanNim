@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_EXT_calibrated_timestamps
 
 
@@ -36,12 +36,12 @@ proc getCalibratedTimestampsEXT*(
     ): Result {.cdecl, lazyload("vkGetCalibratedTimestampsEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_calibrated_timestamps*(instance: Instance) =
-  getPhysicalDeviceCalibrateableTimeDomainsEXT.smartLoad(instance)
-  getCalibratedTimestampsEXT.smartLoad(instance)
+  getPhysicalDeviceCalibrateableTimeDomainsEXT.load(instance)
+  getCalibratedTimestampsEXT.load(instance)
 
 proc loadVK_EXT_calibrated_timestamps*(instance: Instance) =
-  getPhysicalDeviceCalibrateableTimeDomainsEXT.smartLoad(instance)
+  getPhysicalDeviceCalibrateableTimeDomainsEXT.load(instance)
 
 proc loadVK_EXT_calibrated_timestamps*(device: Device) =
-  getCalibratedTimestampsEXT.smartLoad(device)
+  getCalibratedTimestampsEXT.load(device)
 

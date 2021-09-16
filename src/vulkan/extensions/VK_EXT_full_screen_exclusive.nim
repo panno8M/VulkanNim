@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_EXT_full_screen_exclusive
 
 
@@ -66,22 +66,22 @@ proc getDeviceGroupSurfacePresentModes2EXT*(
     ): Result {.cdecl, lazyload("vkGetDeviceGroupSurfacePresentModes2EXT", DeviceLevel).}
 
 proc loadAllVK_EXT_full_screen_exclusive*(instance: Instance) =
-  getPhysicalDeviceSurfacePresentModes2EXT.smartLoad(instance)
-  acquireFullScreenExclusiveModeEXT.smartLoad(instance)
-  releaseFullScreenExclusiveModeEXT.smartLoad(instance)
+  getPhysicalDeviceSurfacePresentModes2EXT.load(instance)
+  acquireFullScreenExclusiveModeEXT.load(instance)
+  releaseFullScreenExclusiveModeEXT.load(instance)
 
-  getDeviceGroupSurfacePresentModes2EXT.smartLoad(instance)
+  getDeviceGroupSurfacePresentModes2EXT.load(instance)
 
-  getDeviceGroupSurfacePresentModes2EXT.smartLoad(instance)
+  getDeviceGroupSurfacePresentModes2EXT.load(instance)
 
 proc loadVK_EXT_full_screen_exclusive*(instance: Instance) =
-  getPhysicalDeviceSurfacePresentModes2EXT.smartLoad(instance)
+  getPhysicalDeviceSurfacePresentModes2EXT.load(instance)
 
 proc loadVK_EXT_full_screen_exclusive*(device: Device) =
-  acquireFullScreenExclusiveModeEXT.smartLoad(device)
-  releaseFullScreenExclusiveModeEXT.smartLoad(device)
+  acquireFullScreenExclusiveModeEXT.load(device)
+  releaseFullScreenExclusiveModeEXT.load(device)
 
-  getDeviceGroupSurfacePresentModes2EXT.smartLoad(device)
+  getDeviceGroupSurfacePresentModes2EXT.load(device)
 
-  getDeviceGroupSurfacePresentModes2EXT.smartLoad(device)
+  getDeviceGroupSurfacePresentModes2EXT.load(device)
 

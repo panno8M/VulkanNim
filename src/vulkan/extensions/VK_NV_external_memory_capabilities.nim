@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T00:21:47Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_NV_external_memory_capabilities
 
 
@@ -41,8 +41,8 @@ proc getPhysicalDeviceExternalImageFormatPropertiesNV*(
     ): Result {.cdecl, lazyload("vkGetPhysicalDeviceExternalImageFormatPropertiesNV", InstanceLevel).}
 
 proc loadAllVK_NV_external_memory_capabilities*(instance: Instance) =
-  getPhysicalDeviceExternalImageFormatPropertiesNV.smartLoad(instance)
+  getPhysicalDeviceExternalImageFormatPropertiesNV.load(instance)
 
 proc loadVK_NV_external_memory_capabilities*(instance: Instance) =
-  getPhysicalDeviceExternalImageFormatPropertiesNV.smartLoad(instance)
+  getPhysicalDeviceExternalImageFormatPropertiesNV.load(instance)
 

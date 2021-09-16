@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_GGP_stream_descriptor_surface
 
 
@@ -29,8 +29,8 @@ proc createStreamDescriptorSurfaceGGP*(
     ): Result {.cdecl, lazyload("vkCreateStreamDescriptorSurfaceGGP", InstanceLevel).}
 
 proc loadAllVK_GGP_stream_descriptor_surface*(instance: Instance) =
-  createStreamDescriptorSurfaceGGP.smartLoad(instance)
+  createStreamDescriptorSurfaceGGP.load(instance)
 
 proc loadVK_GGP_stream_descriptor_surface*(instance: Instance) =
-  createStreamDescriptorSurfaceGGP.smartLoad(instance)
+  createStreamDescriptorSurfaceGGP.load(instance)
 

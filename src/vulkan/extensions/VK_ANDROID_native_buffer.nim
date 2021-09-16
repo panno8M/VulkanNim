@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_ANDROID_native_buffer
 
 
@@ -67,14 +67,14 @@ proc getSwapchainGrallocUsage2ANDROID*(
     ): Result {.cdecl, lazyload("vkGetSwapchainGrallocUsage2ANDROID", DeviceLevel).}
 
 proc loadAllVK_ANDROID_native_buffer*(instance: Instance) =
-  getSwapchainGrallocUsageANDROID.smartLoad(instance)
-  acquireImageANDROID.smartLoad(instance)
-  queueSignalReleaseImageANDROID.smartLoad(instance)
-  getSwapchainGrallocUsage2ANDROID.smartLoad(instance)
+  getSwapchainGrallocUsageANDROID.load(instance)
+  acquireImageANDROID.load(instance)
+  queueSignalReleaseImageANDROID.load(instance)
+  getSwapchainGrallocUsage2ANDROID.load(instance)
 
 proc loadVK_ANDROID_native_buffer*(device: Device) =
-  getSwapchainGrallocUsageANDROID.smartLoad(device)
-  acquireImageANDROID.smartLoad(device)
-  queueSignalReleaseImageANDROID.smartLoad(device)
-  getSwapchainGrallocUsage2ANDROID.smartLoad(device)
+  getSwapchainGrallocUsageANDROID.load(device)
+  acquireImageANDROID.load(device)
+  queueSignalReleaseImageANDROID.load(device)
+  getSwapchainGrallocUsage2ANDROID.load(device)
 

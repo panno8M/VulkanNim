@@ -95,11 +95,23 @@ macro lazyload*(loadFrom: string; with = InstanceLevel; def: untyped): untyped =
       def.params,
       pragma)
 
-  newNimNode(nnkVarSection).add(newIdentDefs(
-    def[0], # def.name
+  let typeDef = newNimNode(nnkTypeSection).add(newNimNode(nnkTypeDef).add(
+    if def[0].kind == nnkPostfix and def[0][0].eqIdent "*":
+      ident("PFN_" & $def.name).postfix("*")
+    else: ident("PFN_" & $def.name),
+    newEmptyNode(),
     procTy,
-    newEmptyNode()
   ))
+  let cageDef = newNimNode(nnkVarSection).add(newIdentDefs(
+      def[0], # def.name
+      ident("PFN_" & $def.name),
+      newEmptyNode()
+    ))
+
+  return newStmtList(
+    typeDef,
+    cageDef,
+  )
 
 template optional*() {.pragma.}
 template constant*(v: typed) {.pragma.}

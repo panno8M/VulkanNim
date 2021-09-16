@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_ANDROID_external_memory_android_hardware_buffer
 
 
@@ -66,10 +66,10 @@ proc getMemoryAndroidHardwareBufferANDROID*(
     ): Result {.cdecl, lazyload("vkGetMemoryAndroidHardwareBufferANDROID", DeviceLevel).}
 
 proc loadAllVK_ANDROID_external_memory_android_hardware_buffer*(instance: Instance) =
-  getAndroidHardwareBufferPropertiesANDROID.smartLoad(instance)
-  getMemoryAndroidHardwareBufferANDROID.smartLoad(instance)
+  getAndroidHardwareBufferPropertiesANDROID.load(instance)
+  getMemoryAndroidHardwareBufferANDROID.load(instance)
 
 proc loadVK_ANDROID_external_memory_android_hardware_buffer*(device: Device) =
-  getAndroidHardwareBufferPropertiesANDROID.smartLoad(device)
-  getMemoryAndroidHardwareBufferANDROID.smartLoad(device)
+  getAndroidHardwareBufferPropertiesANDROID.load(device)
+  getMemoryAndroidHardwareBufferANDROID.load(device)
 

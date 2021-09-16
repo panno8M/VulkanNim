@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_MVK_ios_surface
 
 
@@ -29,8 +29,8 @@ proc createIOSSurfaceMVK*(
     ): Result {.cdecl, lazyload("vkCreateIOSSurfaceMVK", InstanceLevel).}
 
 proc loadAllVK_MVK_ios_surface*(instance: Instance) =
-  createIOSSurfaceMVK.smartLoad(instance)
+  createIOSSurfaceMVK.load(instance)
 
 proc loadVK_MVK_ios_surface*(instance: Instance) =
-  createIOSSurfaceMVK.smartLoad(instance)
+  createIOSSurfaceMVK.load(instance)
 

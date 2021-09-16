@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_KHR_display_swapchain
 
 
@@ -30,8 +30,8 @@ proc createSharedSwapchainsKHR*(
     ): Result {.cdecl, lazyload("vkCreateSharedSwapchainsKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_display_swapchain*(instance: Instance) =
-  createSharedSwapchainsKHR.smartLoad(instance)
+  createSharedSwapchainsKHR.load(instance)
 
 proc loadVK_KHR_display_swapchain*(device: Device) =
-  createSharedSwapchainsKHR.smartLoad(device)
+  createSharedSwapchainsKHR.load(device)
 

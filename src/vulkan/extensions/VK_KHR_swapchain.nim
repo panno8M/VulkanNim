@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_KHR_swapchain
 
 
@@ -148,28 +148,28 @@ proc acquireNextImage2KHR*(
     ): Result {.cdecl, lazyload("vkAcquireNextImage2KHR", DeviceLevel).}
 
 proc loadAllVK_KHR_swapchain*(instance: Instance) =
-  createSwapchainKHR.smartLoad(instance)
-  destroySwapchainKHR.smartLoad(instance)
-  getSwapchainImagesKHR.smartLoad(instance)
-  acquireNextImageKHR.smartLoad(instance)
-  queuePresentKHR.smartLoad(instance)
+  createSwapchainKHR.load(instance)
+  destroySwapchainKHR.load(instance)
+  getSwapchainImagesKHR.load(instance)
+  acquireNextImageKHR.load(instance)
+  queuePresentKHR.load(instance)
 
-  getDeviceGroupPresentCapabilitiesKHR.smartLoad(instance)
-  getDeviceGroupSurfacePresentModesKHR.smartLoad(instance)
-  getPhysicalDevicePresentRectanglesKHR.smartLoad(instance)
-  acquireNextImage2KHR.smartLoad(instance)
+  getDeviceGroupPresentCapabilitiesKHR.load(instance)
+  getDeviceGroupSurfacePresentModesKHR.load(instance)
+  getPhysicalDevicePresentRectanglesKHR.load(instance)
+  acquireNextImage2KHR.load(instance)
 
 proc loadVK_KHR_swapchain*(instance: Instance) =
-  getPhysicalDevicePresentRectanglesKHR.smartLoad(instance)
+  getPhysicalDevicePresentRectanglesKHR.load(instance)
 
 proc loadVK_KHR_swapchain*(device: Device) =
-  createSwapchainKHR.smartLoad(device)
-  destroySwapchainKHR.smartLoad(device)
-  getSwapchainImagesKHR.smartLoad(device)
-  acquireNextImageKHR.smartLoad(device)
-  queuePresentKHR.smartLoad(device)
+  createSwapchainKHR.load(device)
+  destroySwapchainKHR.load(device)
+  getSwapchainImagesKHR.load(device)
+  acquireNextImageKHR.load(device)
+  queuePresentKHR.load(device)
 
-  getDeviceGroupPresentCapabilitiesKHR.smartLoad(device)
-  getDeviceGroupSurfacePresentModesKHR.smartLoad(device)
-  acquireNextImage2KHR.smartLoad(device)
+  getDeviceGroupPresentCapabilitiesKHR.load(device)
+  getDeviceGroupSurfacePresentModesKHR.load(device)
+  acquireNextImage2KHR.load(device)
 

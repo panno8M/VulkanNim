@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_EXT_display_control
 
 
@@ -67,14 +67,14 @@ proc getSwapchainCounterEXT*(
     ): Result {.cdecl, lazyload("vkGetSwapchainCounterEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_display_control*(instance: Instance) =
-  displayPowerControlEXT.smartLoad(instance)
-  registerDeviceEventEXT.smartLoad(instance)
-  registerDisplayEventEXT.smartLoad(instance)
-  getSwapchainCounterEXT.smartLoad(instance)
+  displayPowerControlEXT.load(instance)
+  registerDeviceEventEXT.load(instance)
+  registerDisplayEventEXT.load(instance)
+  getSwapchainCounterEXT.load(instance)
 
 proc loadVK_EXT_display_control*(device: Device) =
-  displayPowerControlEXT.smartLoad(device)
-  registerDeviceEventEXT.smartLoad(device)
-  registerDisplayEventEXT.smartLoad(device)
-  getSwapchainCounterEXT.smartLoad(device)
+  displayPowerControlEXT.load(device)
+  registerDeviceEventEXT.load(device)
+  registerDisplayEventEXT.load(device)
+  getSwapchainCounterEXT.load(device)
 

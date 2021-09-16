@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_EXT_private_data
 
 
@@ -56,14 +56,14 @@ proc getPrivateDataEXT*(
     ): void {.cdecl, lazyload("vkGetPrivateDataEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_private_data*(instance: Instance) =
-  createPrivateDataSlotEXT.smartLoad(instance)
-  destroyPrivateDataSlotEXT.smartLoad(instance)
-  setPrivateDataEXT.smartLoad(instance)
-  getPrivateDataEXT.smartLoad(instance)
+  createPrivateDataSlotEXT.load(instance)
+  destroyPrivateDataSlotEXT.load(instance)
+  setPrivateDataEXT.load(instance)
+  getPrivateDataEXT.load(instance)
 
 proc loadVK_EXT_private_data*(device: Device) =
-  createPrivateDataSlotEXT.smartLoad(device)
-  destroyPrivateDataSlotEXT.smartLoad(device)
-  setPrivateDataEXT.smartLoad(device)
-  getPrivateDataEXT.smartLoad(device)
+  createPrivateDataSlotEXT.load(device)
+  destroyPrivateDataSlotEXT.load(device)
+  setPrivateDataEXT.load(device)
+  getPrivateDataEXT.load(device)
 

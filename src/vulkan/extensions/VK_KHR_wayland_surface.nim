@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_KHR_wayland_surface
 
 
@@ -35,10 +35,10 @@ proc getPhysicalDeviceWaylandPresentationSupportKHR*(
     ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceWaylandPresentationSupportKHR", InstanceLevel).}
 
 proc loadAllVK_KHR_wayland_surface*(instance: Instance) =
-  createWaylandSurfaceKHR.smartLoad(instance)
-  getPhysicalDeviceWaylandPresentationSupportKHR.smartLoad(instance)
+  createWaylandSurfaceKHR.load(instance)
+  getPhysicalDeviceWaylandPresentationSupportKHR.load(instance)
 
 proc loadVK_KHR_wayland_surface*(instance: Instance) =
-  createWaylandSurfaceKHR.smartLoad(instance)
-  getPhysicalDeviceWaylandPresentationSupportKHR.smartLoad(instance)
+  createWaylandSurfaceKHR.load(instance)
+  getPhysicalDeviceWaylandPresentationSupportKHR.load(instance)
 

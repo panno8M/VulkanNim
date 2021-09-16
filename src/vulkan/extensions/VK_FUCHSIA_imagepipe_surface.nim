@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_FUCHSIA_imagepipe_surface
 
 
@@ -29,8 +29,8 @@ proc createImagePipeSurfaceFUCHSIA*(
     ): Result {.cdecl, lazyload("vkCreateImagePipeSurfaceFUCHSIA", InstanceLevel).}
 
 proc loadAllVK_FUCHSIA_imagepipe_surface*(instance: Instance) =
-  createImagePipeSurfaceFUCHSIA.smartLoad(instance)
+  createImagePipeSurfaceFUCHSIA.load(instance)
 
 proc loadVK_FUCHSIA_imagepipe_surface*(instance: Instance) =
-  createImagePipeSurfaceFUCHSIA.smartLoad(instance)
+  createImagePipeSurfaceFUCHSIA.load(instance)
 

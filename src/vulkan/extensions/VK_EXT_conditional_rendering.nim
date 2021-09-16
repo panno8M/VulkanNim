@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_EXT_conditional_rendering
 
 
@@ -40,10 +40,10 @@ proc cmdEndConditionalRenderingEXT*(
     ): void {.cdecl, lazyload("vkCmdEndConditionalRenderingEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_conditional_rendering*(instance: Instance) =
-  cmdBeginConditionalRenderingEXT.smartLoad(instance)
-  cmdEndConditionalRenderingEXT.smartLoad(instance)
+  cmdBeginConditionalRenderingEXT.load(instance)
+  cmdEndConditionalRenderingEXT.load(instance)
 
 proc loadVK_EXT_conditional_rendering*(device: Device) =
-  cmdBeginConditionalRenderingEXT.smartLoad(device)
-  cmdEndConditionalRenderingEXT.smartLoad(device)
+  cmdBeginConditionalRenderingEXT.load(device)
+  cmdEndConditionalRenderingEXT.load(device)
 

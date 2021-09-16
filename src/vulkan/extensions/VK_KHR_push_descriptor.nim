@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_KHR_push_descriptor
 
 
@@ -40,16 +40,16 @@ proc cmdPushDescriptorSetWithTemplateKHR*(
     ): void {.cdecl, lazyload("vkCmdPushDescriptorSetWithTemplateKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_push_descriptor*(instance: Instance) =
-  cmdPushDescriptorSetKHR.smartLoad(instance)
+  cmdPushDescriptorSetKHR.load(instance)
 
-  cmdPushDescriptorSetWithTemplateKHR.smartLoad(instance)
+  cmdPushDescriptorSetWithTemplateKHR.load(instance)
 
-  cmdPushDescriptorSetWithTemplateKHR.smartLoad(instance)
+  cmdPushDescriptorSetWithTemplateKHR.load(instance)
 
 proc loadVK_KHR_push_descriptor*(device: Device) =
-  cmdPushDescriptorSetKHR.smartLoad(device)
+  cmdPushDescriptorSetKHR.load(device)
 
-  cmdPushDescriptorSetWithTemplateKHR.smartLoad(device)
+  cmdPushDescriptorSetWithTemplateKHR.load(device)
 
-  cmdPushDescriptorSetWithTemplateKHR.smartLoad(device)
+  cmdPushDescriptorSetWithTemplateKHR.load(device)
 

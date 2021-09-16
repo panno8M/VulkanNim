@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_EXT_display_surface_counter
 
 
@@ -42,8 +42,8 @@ StructureType.defineAliases:
 
 
 proc loadAllVK_EXT_display_surface_counter*(instance: Instance) =
-  getPhysicalDeviceSurfaceCapabilities2EXT.smartLoad(instance)
+  getPhysicalDeviceSurfaceCapabilities2EXT.load(instance)
 
 proc loadVK_EXT_display_surface_counter*(instance: Instance) =
-  getPhysicalDeviceSurfaceCapabilities2EXT.smartLoad(instance)
+  getPhysicalDeviceSurfaceCapabilities2EXT.load(instance)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_NVX_image_view_handle
 
 
@@ -33,10 +33,10 @@ proc getImageViewAddressNVX*(
     ): Result {.cdecl, lazyload("vkGetImageViewAddressNVX", DeviceLevel).}
 
 proc loadAllVK_NVX_image_view_handle*(instance: Instance) =
-  getImageViewHandleNVX.smartLoad(instance)
-  getImageViewAddressNVX.smartLoad(instance)
+  getImageViewHandleNVX.load(instance)
+  getImageViewAddressNVX.load(instance)
 
 proc loadVK_NVX_image_view_handle*(device: Device) =
-  getImageViewHandleNVX.smartLoad(device)
-  getImageViewAddressNVX.smartLoad(device)
+  getImageViewHandleNVX.load(device)
+  getImageViewAddressNVX.load(device)
 

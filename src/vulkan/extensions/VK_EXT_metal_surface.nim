@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_EXT_metal_surface
 
 
@@ -32,8 +32,8 @@ proc createMetalSurfaceEXT*(
     ): Result {.cdecl, lazyload("vkCreateMetalSurfaceEXT", InstanceLevel).}
 
 proc loadAllVK_EXT_metal_surface*(instance: Instance) =
-  createMetalSurfaceEXT.smartLoad(instance)
+  createMetalSurfaceEXT.load(instance)
 
 proc loadVK_EXT_metal_surface*(instance: Instance) =
-  createMetalSurfaceEXT.smartLoad(instance)
+  createMetalSurfaceEXT.load(instance)
 

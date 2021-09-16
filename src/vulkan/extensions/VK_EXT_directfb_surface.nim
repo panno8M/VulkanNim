@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_EXT_directfb_surface
 
 
@@ -35,10 +35,10 @@ proc getPhysicalDeviceDirectFBPresentationSupportEXT*(
     ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceDirectFBPresentationSupportEXT", InstanceLevel).}
 
 proc loadAllVK_EXT_directfb_surface*(instance: Instance) =
-  createDirectFBSurfaceEXT.smartLoad(instance)
-  getPhysicalDeviceDirectFBPresentationSupportEXT.smartLoad(instance)
+  createDirectFBSurfaceEXT.load(instance)
+  getPhysicalDeviceDirectFBPresentationSupportEXT.load(instance)
 
 proc loadVK_EXT_directfb_surface*(instance: Instance) =
-  createDirectFBSurfaceEXT.smartLoad(instance)
-  getPhysicalDeviceDirectFBPresentationSupportEXT.smartLoad(instance)
+  createDirectFBSurfaceEXT.load(instance)
+  getPhysicalDeviceDirectFBPresentationSupportEXT.load(instance)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_EXT_direct_mode_display
 
 
@@ -17,8 +17,8 @@ proc releaseDisplayEXT*(
     ): Result {.cdecl, lazyload("vkReleaseDisplayEXT", InstanceLevel).}
 
 proc loadAllVK_EXT_direct_mode_display*(instance: Instance) =
-  releaseDisplayEXT.smartLoad(instance)
+  releaseDisplayEXT.load(instance)
 
 proc loadVK_EXT_direct_mode_display*(instance: Instance) =
-  releaseDisplayEXT.smartLoad(instance)
+  releaseDisplayEXT.load(instance)
 

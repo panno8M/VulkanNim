@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_GOOGLE_display_timing
 
 
@@ -42,10 +42,10 @@ proc getPastPresentationTimingGOOGLE*(
     ): Result {.cdecl, lazyload("vkGetPastPresentationTimingGOOGLE", DeviceLevel).}
 
 proc loadAllVK_GOOGLE_display_timing*(instance: Instance) =
-  getRefreshCycleDurationGOOGLE.smartLoad(instance)
-  getPastPresentationTimingGOOGLE.smartLoad(instance)
+  getRefreshCycleDurationGOOGLE.load(instance)
+  getPastPresentationTimingGOOGLE.load(instance)
 
 proc loadVK_GOOGLE_display_timing*(device: Device) =
-  getRefreshCycleDurationGOOGLE.smartLoad(device)
-  getPastPresentationTimingGOOGLE.smartLoad(device)
+  getRefreshCycleDurationGOOGLE.load(device)
+  getPastPresentationTimingGOOGLE.load(device)
 

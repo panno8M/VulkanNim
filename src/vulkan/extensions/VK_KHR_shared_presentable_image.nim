@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_KHR_shared_presentable_image
 
 
@@ -27,8 +27,8 @@ proc getSwapchainStatusKHR*(
     ): Result {.cdecl, lazyload("vkGetSwapchainStatusKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_shared_presentable_image*(instance: Instance) =
-  getSwapchainStatusKHR.smartLoad(instance)
+  getSwapchainStatusKHR.load(instance)
 
 proc loadVK_KHR_shared_presentable_image*(device: Device) =
-  getSwapchainStatusKHR.smartLoad(device)
+  getSwapchainStatusKHR.load(device)
 

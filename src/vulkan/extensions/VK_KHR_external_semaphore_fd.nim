@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_KHR_external_semaphore_fd
 
 
@@ -36,10 +36,10 @@ proc getSemaphoreFdKHR*(
     ): Result {.cdecl, lazyload("vkGetSemaphoreFdKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_external_semaphore_fd*(instance: Instance) =
-  importSemaphoreFdKHR.smartLoad(instance)
-  getSemaphoreFdKHR.smartLoad(instance)
+  importSemaphoreFdKHR.load(instance)
+  getSemaphoreFdKHR.load(instance)
 
 proc loadVK_KHR_external_semaphore_fd*(device: Device) =
-  importSemaphoreFdKHR.smartLoad(device)
-  getSemaphoreFdKHR.smartLoad(device)
+  importSemaphoreFdKHR.load(device)
+  getSemaphoreFdKHR.load(device)
 

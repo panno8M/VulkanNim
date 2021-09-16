@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_MVK_macos_surface
 
 
@@ -29,8 +29,8 @@ proc createMacOSSurfaceMVK*(
     ): Result {.cdecl, lazyload("vkCreateMacOSSurfaceMVK", InstanceLevel).}
 
 proc loadAllVK_MVK_macos_surface*(instance: Instance) =
-  createMacOSSurfaceMVK.smartLoad(instance)
+  createMacOSSurfaceMVK.load(instance)
 
 proc loadVK_MVK_macos_surface*(instance: Instance) =
-  createMacOSSurfaceMVK.smartLoad(instance)
+  createMacOSSurfaceMVK.load(instance)
 

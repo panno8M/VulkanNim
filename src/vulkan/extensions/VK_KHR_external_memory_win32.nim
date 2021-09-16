@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_KHR_external_memory_win32
 
 
@@ -47,10 +47,10 @@ proc getMemoryWin32HandlePropertiesKHR*(
     ): Result {.cdecl, lazyload("vkGetMemoryWin32HandlePropertiesKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_external_memory_win32*(instance: Instance) =
-  getMemoryWin32HandleKHR.smartLoad(instance)
-  getMemoryWin32HandlePropertiesKHR.smartLoad(instance)
+  getMemoryWin32HandleKHR.load(instance)
+  getMemoryWin32HandlePropertiesKHR.load(instance)
 
 proc loadVK_KHR_external_memory_win32*(device: Device) =
-  getMemoryWin32HandleKHR.smartLoad(device)
-  getMemoryWin32HandlePropertiesKHR.smartLoad(device)
+  getMemoryWin32HandleKHR.load(device)
+  getMemoryWin32HandlePropertiesKHR.load(device)
 

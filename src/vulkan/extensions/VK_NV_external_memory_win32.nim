@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_NV_external_memory_win32
 
 
@@ -31,8 +31,8 @@ proc getMemoryWin32HandleNV*(
     ): Result {.cdecl, lazyload("vkGetMemoryWin32HandleNV", DeviceLevel).}
 
 proc loadAllVK_NV_external_memory_win32*(instance: Instance) =
-  getMemoryWin32HandleNV.smartLoad(instance)
+  getMemoryWin32HandleNV.load(instance)
 
 proc loadVK_NV_external_memory_win32*(device: Device) =
-  getMemoryWin32HandleNV.smartLoad(device)
+  getMemoryWin32HandleNV.load(device)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_EXT_debug_marker
 
 
@@ -100,16 +100,16 @@ proc cmdDebugMarkerInsertEXT*(
     ): void {.cdecl, lazyload("vkCmdDebugMarkerInsertEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_debug_marker*(instance: Instance) =
-  debugMarkerSetObjectTagEXT.smartLoad(instance)
-  debugMarkerSetObjectNameEXT.smartLoad(instance)
-  cmdDebugMarkerBeginEXT.smartLoad(instance)
-  cmdDebugMarkerEndEXT.smartLoad(instance)
-  cmdDebugMarkerInsertEXT.smartLoad(instance)
+  debugMarkerSetObjectTagEXT.load(instance)
+  debugMarkerSetObjectNameEXT.load(instance)
+  cmdDebugMarkerBeginEXT.load(instance)
+  cmdDebugMarkerEndEXT.load(instance)
+  cmdDebugMarkerInsertEXT.load(instance)
 
 proc loadVK_EXT_debug_marker*(device: Device) =
-  debugMarkerSetObjectTagEXT.smartLoad(device)
-  debugMarkerSetObjectNameEXT.smartLoad(device)
-  cmdDebugMarkerBeginEXT.smartLoad(device)
-  cmdDebugMarkerEndEXT.smartLoad(device)
-  cmdDebugMarkerInsertEXT.smartLoad(device)
+  debugMarkerSetObjectTagEXT.load(device)
+  debugMarkerSetObjectNameEXT.load(device)
+  cmdDebugMarkerBeginEXT.load(device)
+  cmdDebugMarkerEndEXT.load(device)
+  cmdDebugMarkerInsertEXT.load(device)
 

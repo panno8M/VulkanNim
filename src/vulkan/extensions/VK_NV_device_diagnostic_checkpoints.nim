@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_NV_device_diagnostic_checkpoints
 
 
@@ -33,10 +33,10 @@ proc getQueueCheckpointDataNV*(
     ): void {.cdecl, lazyload("vkGetQueueCheckpointDataNV", DeviceLevel).}
 
 proc loadAllVK_NV_device_diagnostic_checkpoints*(instance: Instance) =
-  cmdSetCheckpointNV.smartLoad(instance)
-  getQueueCheckpointDataNV.smartLoad(instance)
+  cmdSetCheckpointNV.load(instance)
+  getQueueCheckpointDataNV.load(instance)
 
 proc loadVK_NV_device_diagnostic_checkpoints*(device: Device) =
-  cmdSetCheckpointNV.smartLoad(device)
-  getQueueCheckpointDataNV.smartLoad(device)
+  cmdSetCheckpointNV.load(device)
+  getQueueCheckpointDataNV.load(device)
 

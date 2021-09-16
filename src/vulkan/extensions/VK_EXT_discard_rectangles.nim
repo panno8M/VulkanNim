@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_EXT_discard_rectangles
 
 
@@ -38,8 +38,8 @@ proc cmdSetDiscardRectangleEXT*(
     ): void {.cdecl, lazyload("vkCmdSetDiscardRectangleEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_discard_rectangles*(instance: Instance) =
-  cmdSetDiscardRectangleEXT.smartLoad(instance)
+  cmdSetDiscardRectangleEXT.load(instance)
 
 proc loadVK_EXT_discard_rectangles*(device: Device) =
-  cmdSetDiscardRectangleEXT.smartLoad(device)
+  cmdSetDiscardRectangleEXT.load(device)
 

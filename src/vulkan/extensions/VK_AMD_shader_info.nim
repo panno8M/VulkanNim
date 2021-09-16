@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_AMD_shader_info
 
 
@@ -41,8 +41,8 @@ proc getShaderInfoAMD*(
     ): Result {.cdecl, lazyload("vkGetShaderInfoAMD", DeviceLevel).}
 
 proc loadAllVK_AMD_shader_info*(instance: Instance) =
-  getShaderInfoAMD.smartLoad(instance)
+  getShaderInfoAMD.load(instance)
 
 proc loadVK_AMD_shader_info*(device: Device) =
-  getShaderInfoAMD.smartLoad(device)
+  getShaderInfoAMD.load(device)
 

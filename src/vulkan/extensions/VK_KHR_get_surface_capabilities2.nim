@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_KHR_get_surface_capabilities2
 
 
@@ -38,10 +38,10 @@ proc getPhysicalDeviceSurfaceFormats2KHR*(
     ): Result {.cdecl, lazyload("vkGetPhysicalDeviceSurfaceFormats2KHR", InstanceLevel).}
 
 proc loadAllVK_KHR_get_surface_capabilities2*(instance: Instance) =
-  getPhysicalDeviceSurfaceCapabilities2KHR.smartLoad(instance)
-  getPhysicalDeviceSurfaceFormats2KHR.smartLoad(instance)
+  getPhysicalDeviceSurfaceCapabilities2KHR.load(instance)
+  getPhysicalDeviceSurfaceFormats2KHR.load(instance)
 
 proc loadVK_KHR_get_surface_capabilities2*(instance: Instance) =
-  getPhysicalDeviceSurfaceCapabilities2KHR.smartLoad(instance)
-  getPhysicalDeviceSurfaceFormats2KHR.smartLoad(instance)
+  getPhysicalDeviceSurfaceCapabilities2KHR.load(instance)
+  getPhysicalDeviceSurfaceFormats2KHR.load(instance)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_EXT_acquire_xlib_display
 
 
@@ -24,10 +24,10 @@ proc getRandROutputDisplayEXT*(
     ): Result {.cdecl, lazyload("vkGetRandROutputDisplayEXT", InstanceLevel).}
 
 proc loadAllVK_EXT_acquire_xlib_display*(instance: Instance) =
-  acquireXlibDisplayEXT.smartLoad(instance)
-  getRandROutputDisplayEXT.smartLoad(instance)
+  acquireXlibDisplayEXT.load(instance)
+  getRandROutputDisplayEXT.load(instance)
 
 proc loadVK_EXT_acquire_xlib_display*(instance: Instance) =
-  acquireXlibDisplayEXT.smartLoad(instance)
-  getRandROutputDisplayEXT.smartLoad(instance)
+  acquireXlibDisplayEXT.load(instance)
+  getRandROutputDisplayEXT.load(instance)
 

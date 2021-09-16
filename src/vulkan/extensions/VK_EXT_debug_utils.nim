@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_EXT_debug_utils
 
 
@@ -123,30 +123,30 @@ proc submitDebugUtilsMessageEXT*(
     ): void {.cdecl, lazyload("vkSubmitDebugUtilsMessageEXT", InstanceLevel).}
 
 proc loadAllVK_EXT_debug_utils*(instance: Instance) =
-  setDebugUtilsObjectNameEXT.smartLoad(instance)
-  setDebugUtilsObjectTagEXT.smartLoad(instance)
-  queueBeginDebugUtilsLabelEXT.smartLoad(instance)
-  queueEndDebugUtilsLabelEXT.smartLoad(instance)
-  queueInsertDebugUtilsLabelEXT.smartLoad(instance)
-  cmdBeginDebugUtilsLabelEXT.smartLoad(instance)
-  cmdEndDebugUtilsLabelEXT.smartLoad(instance)
-  cmdInsertDebugUtilsLabelEXT.smartLoad(instance)
-  createDebugUtilsMessengerEXT.smartLoad(instance)
-  destroyDebugUtilsMessengerEXT.smartLoad(instance)
-  submitDebugUtilsMessageEXT.smartLoad(instance)
+  setDebugUtilsObjectNameEXT.load(instance)
+  setDebugUtilsObjectTagEXT.load(instance)
+  queueBeginDebugUtilsLabelEXT.load(instance)
+  queueEndDebugUtilsLabelEXT.load(instance)
+  queueInsertDebugUtilsLabelEXT.load(instance)
+  cmdBeginDebugUtilsLabelEXT.load(instance)
+  cmdEndDebugUtilsLabelEXT.load(instance)
+  cmdInsertDebugUtilsLabelEXT.load(instance)
+  createDebugUtilsMessengerEXT.load(instance)
+  destroyDebugUtilsMessengerEXT.load(instance)
+  submitDebugUtilsMessageEXT.load(instance)
 
 proc loadVK_EXT_debug_utils*(instance: Instance) =
-  createDebugUtilsMessengerEXT.smartLoad(instance)
-  destroyDebugUtilsMessengerEXT.smartLoad(instance)
-  submitDebugUtilsMessageEXT.smartLoad(instance)
+  createDebugUtilsMessengerEXT.load(instance)
+  destroyDebugUtilsMessengerEXT.load(instance)
+  submitDebugUtilsMessageEXT.load(instance)
 
 proc loadVK_EXT_debug_utils*(device: Device) =
-  setDebugUtilsObjectNameEXT.smartLoad(device)
-  setDebugUtilsObjectTagEXT.smartLoad(device)
-  queueBeginDebugUtilsLabelEXT.smartLoad(device)
-  queueEndDebugUtilsLabelEXT.smartLoad(device)
-  queueInsertDebugUtilsLabelEXT.smartLoad(device)
-  cmdBeginDebugUtilsLabelEXT.smartLoad(device)
-  cmdEndDebugUtilsLabelEXT.smartLoad(device)
-  cmdInsertDebugUtilsLabelEXT.smartLoad(device)
+  setDebugUtilsObjectNameEXT.load(device)
+  setDebugUtilsObjectTagEXT.load(device)
+  queueBeginDebugUtilsLabelEXT.load(device)
+  queueEndDebugUtilsLabelEXT.load(device)
+  queueInsertDebugUtilsLabelEXT.load(device)
+  cmdBeginDebugUtilsLabelEXT.load(device)
+  cmdEndDebugUtilsLabelEXT.load(device)
+  cmdInsertDebugUtilsLabelEXT.load(device)
 

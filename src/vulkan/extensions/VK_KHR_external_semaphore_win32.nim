@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_KHR_external_semaphore_win32
 
 
@@ -50,10 +50,10 @@ proc getSemaphoreWin32HandleKHR*(
     ): Result {.cdecl, lazyload("vkGetSemaphoreWin32HandleKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_external_semaphore_win32*(instance: Instance) =
-  importSemaphoreWin32HandleKHR.smartLoad(instance)
-  getSemaphoreWin32HandleKHR.smartLoad(instance)
+  importSemaphoreWin32HandleKHR.load(instance)
+  getSemaphoreWin32HandleKHR.load(instance)
 
 proc loadVK_KHR_external_semaphore_win32*(device: Device) =
-  importSemaphoreWin32HandleKHR.smartLoad(device)
-  getSemaphoreWin32HandleKHR.smartLoad(device)
+  importSemaphoreWin32HandleKHR.load(device)
+  getSemaphoreWin32HandleKHR.load(device)
 

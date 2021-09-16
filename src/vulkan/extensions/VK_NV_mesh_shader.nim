@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_NV_mesh_shader
 
 
@@ -60,12 +60,12 @@ proc cmdDrawMeshTasksIndirectCountNV*(
     ): void {.cdecl, lazyload("vkCmdDrawMeshTasksIndirectCountNV", DeviceLevel).}
 
 proc loadAllVK_NV_mesh_shader*(instance: Instance) =
-  cmdDrawMeshTasksNV.smartLoad(instance)
-  cmdDrawMeshTasksIndirectNV.smartLoad(instance)
-  cmdDrawMeshTasksIndirectCountNV.smartLoad(instance)
+  cmdDrawMeshTasksNV.load(instance)
+  cmdDrawMeshTasksIndirectNV.load(instance)
+  cmdDrawMeshTasksIndirectCountNV.load(instance)
 
 proc loadVK_NV_mesh_shader*(device: Device) =
-  cmdDrawMeshTasksNV.smartLoad(device)
-  cmdDrawMeshTasksIndirectNV.smartLoad(device)
-  cmdDrawMeshTasksIndirectCountNV.smartLoad(device)
+  cmdDrawMeshTasksNV.load(device)
+  cmdDrawMeshTasksIndirectNV.load(device)
+  cmdDrawMeshTasksIndirectCountNV.load(device)
 

@@ -227,12 +227,12 @@ proc renderCommandLoaderComponent*(require: NodeRequire; resources: Resources; c
     commandLoaderDef.add case commandRenderingMode
       of crmInstance:
         if command.loadMode != lmWithInstance: continue
-        "{req.name.parseCommandname}.smartLoad(instance)".fmt
+        "{req.name.parseCommandname}.load(instance)".fmt
       of crmDevice:
         if command.loadMode != lmWithDevice: continue
-        "{req.name.parseCommandname}.smartLoad(device)".fmt
+        "{req.name.parseCommandname}.load(device)".fmt
       of crmAll:
-        "{req.name.parseCommandname}.smartLoad(instance)".fmt
+        "{req.name.parseCommandname}.load(instance)".fmt
 
   if require.comment.isSome and commandLoaderDef.len != 0:
     commandLoaderDef.insert(require.comment.get.commentify, 0)

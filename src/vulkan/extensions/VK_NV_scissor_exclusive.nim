@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_NV_scissor_exclusive
 
 
@@ -30,8 +30,8 @@ proc cmdSetExclusiveScissorNV*(
     ): void {.cdecl, lazyload("vkCmdSetExclusiveScissorNV", DeviceLevel).}
 
 proc loadAllVK_NV_scissor_exclusive*(instance: Instance) =
-  cmdSetExclusiveScissorNV.smartLoad(instance)
+  cmdSetExclusiveScissorNV.load(instance)
 
 proc loadVK_NV_scissor_exclusive*(device: Device) =
-  cmdSetExclusiveScissorNV.smartLoad(device)
+  cmdSetExclusiveScissorNV.load(device)
 

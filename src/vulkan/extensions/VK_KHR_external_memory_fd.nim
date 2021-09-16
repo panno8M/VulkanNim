@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_KHR_external_memory_fd
 
 
@@ -40,10 +40,10 @@ proc getMemoryFdPropertiesKHR*(
     ): Result {.cdecl, lazyload("vkGetMemoryFdPropertiesKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_external_memory_fd*(instance: Instance) =
-  getMemoryFdKHR.smartLoad(instance)
-  getMemoryFdPropertiesKHR.smartLoad(instance)
+  getMemoryFdKHR.load(instance)
+  getMemoryFdPropertiesKHR.load(instance)
 
 proc loadVK_KHR_external_memory_fd*(device: Device) =
-  getMemoryFdKHR.smartLoad(device)
-  getMemoryFdPropertiesKHR.smartLoad(device)
+  getMemoryFdKHR.load(device)
+  getMemoryFdPropertiesKHR.load(device)
 

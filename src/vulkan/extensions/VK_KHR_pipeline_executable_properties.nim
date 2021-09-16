@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_KHR_pipeline_executable_properties
 
 
@@ -81,12 +81,12 @@ proc getPipelineExecutableInternalRepresentationsKHR*(
     ): Result {.cdecl, lazyload("vkGetPipelineExecutableInternalRepresentationsKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_pipeline_executable_properties*(instance: Instance) =
-  getPipelineExecutablePropertiesKHR.smartLoad(instance)
-  getPipelineExecutableStatisticsKHR.smartLoad(instance)
-  getPipelineExecutableInternalRepresentationsKHR.smartLoad(instance)
+  getPipelineExecutablePropertiesKHR.load(instance)
+  getPipelineExecutableStatisticsKHR.load(instance)
+  getPipelineExecutableInternalRepresentationsKHR.load(instance)
 
 proc loadVK_KHR_pipeline_executable_properties*(device: Device) =
-  getPipelineExecutablePropertiesKHR.smartLoad(device)
-  getPipelineExecutableStatisticsKHR.smartLoad(device)
-  getPipelineExecutableInternalRepresentationsKHR.smartLoad(device)
+  getPipelineExecutablePropertiesKHR.load(device)
+  getPipelineExecutableStatisticsKHR.load(device)
+  getPipelineExecutableInternalRepresentationsKHR.load(device)
 

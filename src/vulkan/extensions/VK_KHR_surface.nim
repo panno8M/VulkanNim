@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_KHR_surface
 # VK_KHR_display
 
@@ -224,34 +224,34 @@ proc createDisplayPlaneSurfaceKHR*(
     ): Result {.cdecl, lazyload("vkCreateDisplayPlaneSurfaceKHR", InstanceLevel).}
 
 proc loadAllVK_KHR_surface*(instance: Instance) =
-  destroySurfaceKHR.smartLoad(instance)
-  getPhysicalDeviceSurfaceSupportKHR.smartLoad(instance)
-  getPhysicalDeviceSurfaceCapabilitiesKHR.smartLoad(instance)
-  getPhysicalDeviceSurfaceFormatsKHR.smartLoad(instance)
-  getPhysicalDeviceSurfacePresentModesKHR.smartLoad(instance)
+  destroySurfaceKHR.load(instance)
+  getPhysicalDeviceSurfaceSupportKHR.load(instance)
+  getPhysicalDeviceSurfaceCapabilitiesKHR.load(instance)
+  getPhysicalDeviceSurfaceFormatsKHR.load(instance)
+  getPhysicalDeviceSurfacePresentModesKHR.load(instance)
 
 proc loadAllVK_KHR_display*(instance: Instance) =
-  getPhysicalDeviceDisplayPropertiesKHR.smartLoad(instance)
-  getPhysicalDeviceDisplayPlanePropertiesKHR.smartLoad(instance)
-  getDisplayPlaneSupportedDisplaysKHR.smartLoad(instance)
-  getDisplayModePropertiesKHR.smartLoad(instance)
-  createDisplayModeKHR.smartLoad(instance)
-  getDisplayPlaneCapabilitiesKHR.smartLoad(instance)
-  createDisplayPlaneSurfaceKHR.smartLoad(instance)
+  getPhysicalDeviceDisplayPropertiesKHR.load(instance)
+  getPhysicalDeviceDisplayPlanePropertiesKHR.load(instance)
+  getDisplayPlaneSupportedDisplaysKHR.load(instance)
+  getDisplayModePropertiesKHR.load(instance)
+  createDisplayModeKHR.load(instance)
+  getDisplayPlaneCapabilitiesKHR.load(instance)
+  createDisplayPlaneSurfaceKHR.load(instance)
 
 proc loadVK_KHR_surface*(instance: Instance) =
-  destroySurfaceKHR.smartLoad(instance)
-  getPhysicalDeviceSurfaceSupportKHR.smartLoad(instance)
-  getPhysicalDeviceSurfaceCapabilitiesKHR.smartLoad(instance)
-  getPhysicalDeviceSurfaceFormatsKHR.smartLoad(instance)
-  getPhysicalDeviceSurfacePresentModesKHR.smartLoad(instance)
+  destroySurfaceKHR.load(instance)
+  getPhysicalDeviceSurfaceSupportKHR.load(instance)
+  getPhysicalDeviceSurfaceCapabilitiesKHR.load(instance)
+  getPhysicalDeviceSurfaceFormatsKHR.load(instance)
+  getPhysicalDeviceSurfacePresentModesKHR.load(instance)
 
 proc loadVK_KHR_display*(instance: Instance) =
-  getPhysicalDeviceDisplayPropertiesKHR.smartLoad(instance)
-  getPhysicalDeviceDisplayPlanePropertiesKHR.smartLoad(instance)
-  getDisplayPlaneSupportedDisplaysKHR.smartLoad(instance)
-  getDisplayModePropertiesKHR.smartLoad(instance)
-  createDisplayModeKHR.smartLoad(instance)
-  getDisplayPlaneCapabilitiesKHR.smartLoad(instance)
-  createDisplayPlaneSurfaceKHR.smartLoad(instance)
+  getPhysicalDeviceDisplayPropertiesKHR.load(instance)
+  getPhysicalDeviceDisplayPlanePropertiesKHR.load(instance)
+  getDisplayPlaneSupportedDisplaysKHR.load(instance)
+  getDisplayModePropertiesKHR.load(instance)
+  createDisplayModeKHR.load(instance)
+  getDisplayPlaneCapabilitiesKHR.load(instance)
+  createDisplayPlaneSurfaceKHR.load(instance)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_KHR_win32_surface
 
 
@@ -34,10 +34,10 @@ proc getPhysicalDeviceWin32PresentationSupportKHR*(
     ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceWin32PresentationSupportKHR", InstanceLevel).}
 
 proc loadAllVK_KHR_win32_surface*(instance: Instance) =
-  createWin32SurfaceKHR.smartLoad(instance)
-  getPhysicalDeviceWin32PresentationSupportKHR.smartLoad(instance)
+  createWin32SurfaceKHR.load(instance)
+  getPhysicalDeviceWin32PresentationSupportKHR.load(instance)
 
 proc loadVK_KHR_win32_surface*(instance: Instance) =
-  createWin32SurfaceKHR.smartLoad(instance)
-  getPhysicalDeviceWin32PresentationSupportKHR.smartLoad(instance)
+  createWin32SurfaceKHR.load(instance)
+  getPhysicalDeviceWin32PresentationSupportKHR.load(instance)
 

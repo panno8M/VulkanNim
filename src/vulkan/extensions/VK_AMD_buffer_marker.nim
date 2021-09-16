@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_AMD_buffer_marker
 
 
@@ -18,8 +18,8 @@ proc cmdWriteBufferMarkerAMD*(
     ): void {.cdecl, lazyload("vkCmdWriteBufferMarkerAMD", DeviceLevel).}
 
 proc loadAllVK_AMD_buffer_marker*(instance: Instance) =
-  cmdWriteBufferMarkerAMD.smartLoad(instance)
+  cmdWriteBufferMarkerAMD.load(instance)
 
 proc loadVK_AMD_buffer_marker*(device: Device) =
-  cmdWriteBufferMarkerAMD.smartLoad(device)
+  cmdWriteBufferMarkerAMD.load(device)
 

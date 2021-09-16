@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_EXT_sample_locations
 
 
@@ -64,12 +64,12 @@ proc getPhysicalDeviceMultisamplePropertiesEXT*(
     ): void {.cdecl, lazyload("vkGetPhysicalDeviceMultisamplePropertiesEXT", InstanceLevel).}
 
 proc loadAllVK_EXT_sample_locations*(instance: Instance) =
-  cmdSetSampleLocationsEXT.smartLoad(instance)
-  getPhysicalDeviceMultisamplePropertiesEXT.smartLoad(instance)
+  cmdSetSampleLocationsEXT.load(instance)
+  getPhysicalDeviceMultisamplePropertiesEXT.load(instance)
 
 proc loadVK_EXT_sample_locations*(instance: Instance) =
-  getPhysicalDeviceMultisamplePropertiesEXT.smartLoad(instance)
+  getPhysicalDeviceMultisamplePropertiesEXT.load(instance)
 
 proc loadVK_EXT_sample_locations*(device: Device) =
-  cmdSetSampleLocationsEXT.smartLoad(device)
+  cmdSetSampleLocationsEXT.load(device)
 

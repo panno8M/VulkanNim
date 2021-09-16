@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_NV_shading_rate_image
 
 
@@ -87,12 +87,12 @@ proc cmdSetCoarseSampleOrderNV*(
     ): void {.cdecl, lazyload("vkCmdSetCoarseSampleOrderNV", DeviceLevel).}
 
 proc loadAllVK_NV_shading_rate_image*(instance: Instance) =
-  cmdBindShadingRateImageNV.smartLoad(instance)
-  cmdSetViewportShadingRatePaletteNV.smartLoad(instance)
-  cmdSetCoarseSampleOrderNV.smartLoad(instance)
+  cmdBindShadingRateImageNV.load(instance)
+  cmdSetViewportShadingRatePaletteNV.load(instance)
+  cmdSetCoarseSampleOrderNV.load(instance)
 
 proc loadVK_NV_shading_rate_image*(device: Device) =
-  cmdBindShadingRateImageNV.smartLoad(device)
-  cmdSetViewportShadingRatePaletteNV.smartLoad(device)
-  cmdSetCoarseSampleOrderNV.smartLoad(device)
+  cmdBindShadingRateImageNV.load(device)
+  cmdSetViewportShadingRatePaletteNV.load(device)
+  cmdSetCoarseSampleOrderNV.load(device)
 

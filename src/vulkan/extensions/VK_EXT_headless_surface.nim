@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_EXT_headless_surface
 
 
@@ -28,8 +28,8 @@ proc createHeadlessSurfaceEXT*(
     ): Result {.cdecl, lazyload("vkCreateHeadlessSurfaceEXT", InstanceLevel).}
 
 proc loadAllVK_EXT_headless_surface*(instance: Instance) =
-  createHeadlessSurfaceEXT.smartLoad(instance)
+  createHeadlessSurfaceEXT.load(instance)
 
 proc loadVK_EXT_headless_surface*(instance: Instance) =
-  createHeadlessSurfaceEXT.smartLoad(instance)
+  createHeadlessSurfaceEXT.load(instance)
 

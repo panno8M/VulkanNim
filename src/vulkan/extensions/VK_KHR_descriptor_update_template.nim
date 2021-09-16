@@ -1,4 +1,4 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_KHR_descriptor_update_template
 
 
@@ -53,8 +53,8 @@ DebugReportObjectTypeEXT.defineAliases:
 
 
 proc loadAllVK_KHR_descriptor_update_template*(instance: Instance) =
-  cmdPushDescriptorSetWithTemplateKHR.smartLoad(instance)
+  cmdPushDescriptorSetWithTemplateKHR.load(instance)
 
 proc loadVK_KHR_descriptor_update_template*(device: Device) =
-  cmdPushDescriptorSetWithTemplateKHR.smartLoad(device)
+  cmdPushDescriptorSetWithTemplateKHR.load(device)
 

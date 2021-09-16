@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_KHR_xlib_surface
 
 
@@ -36,10 +36,10 @@ proc getPhysicalDeviceXlibPresentationSupportKHR*(
     ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceXlibPresentationSupportKHR", InstanceLevel).}
 
 proc loadAllVK_KHR_xlib_surface*(instance: Instance) =
-  createXlibSurfaceKHR.smartLoad(instance)
-  getPhysicalDeviceXlibPresentationSupportKHR.smartLoad(instance)
+  createXlibSurfaceKHR.load(instance)
+  getPhysicalDeviceXlibPresentationSupportKHR.load(instance)
 
 proc loadVK_KHR_xlib_surface*(instance: Instance) =
-  createXlibSurfaceKHR.smartLoad(instance)
-  getPhysicalDeviceXlibPresentationSupportKHR.smartLoad(instance)
+  createXlibSurfaceKHR.load(instance)
+  getPhysicalDeviceXlibPresentationSupportKHR.load(instance)
 

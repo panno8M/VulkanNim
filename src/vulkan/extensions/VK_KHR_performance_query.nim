@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # VK_KHR_performance_query
 
 
@@ -118,16 +118,16 @@ proc releaseProfilingLockKHR*(
     ): void {.cdecl, lazyload("vkReleaseProfilingLockKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_performance_query*(instance: Instance) =
-  enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR.smartLoad(instance)
-  getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR.smartLoad(instance)
-  acquireProfilingLockKHR.smartLoad(instance)
-  releaseProfilingLockKHR.smartLoad(instance)
+  enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR.load(instance)
+  getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR.load(instance)
+  acquireProfilingLockKHR.load(instance)
+  releaseProfilingLockKHR.load(instance)
 
 proc loadVK_KHR_performance_query*(instance: Instance) =
-  enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR.smartLoad(instance)
-  getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR.smartLoad(instance)
+  enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR.load(instance)
+  getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR.load(instance)
 
 proc loadVK_KHR_performance_query*(device: Device) =
-  acquireProfilingLockKHR.smartLoad(device)
-  releaseProfilingLockKHR.smartLoad(device)
+  acquireProfilingLockKHR.load(device)
+  releaseProfilingLockKHR.load(device)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_KHR_android_surface
 
 
@@ -32,8 +32,8 @@ proc createAndroidSurfaceKHR*(
     ): Result {.cdecl, lazyload("vkCreateAndroidSurfaceKHR", InstanceLevel).}
 
 proc loadAllVK_KHR_android_surface*(instance: Instance) =
-  createAndroidSurfaceKHR.smartLoad(instance)
+  createAndroidSurfaceKHR.load(instance)
 
 proc loadVK_KHR_android_surface*(instance: Instance) =
-  createAndroidSurfaceKHR.smartLoad(instance)
+  createAndroidSurfaceKHR.load(instance)
 

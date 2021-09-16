@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_EXT_image_drm_format_modifier
 
 
@@ -57,8 +57,8 @@ proc getImageDrmFormatModifierPropertiesEXT*(
     ): Result {.cdecl, lazyload("vkGetImageDrmFormatModifierPropertiesEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_image_drm_format_modifier*(instance: Instance) =
-  getImageDrmFormatModifierPropertiesEXT.smartLoad(instance)
+  getImageDrmFormatModifierPropertiesEXT.load(instance)
 
 proc loadVK_EXT_image_drm_format_modifier*(device: Device) =
-  getImageDrmFormatModifierPropertiesEXT.smartLoad(device)
+  getImageDrmFormatModifierPropertiesEXT.load(device)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_INTEL_performance_query
 
 
@@ -109,24 +109,24 @@ StructureType.defineAliases:
 
 
 proc loadAllVK_INTEL_performance_query*(instance: Instance) =
-  initializePerformanceApiINTEL.smartLoad(instance)
-  uninitializePerformanceApiINTEL.smartLoad(instance)
-  cmdSetPerformanceMarkerINTEL.smartLoad(instance)
-  cmdSetPerformanceStreamMarkerINTEL.smartLoad(instance)
-  cmdSetPerformanceOverrideINTEL.smartLoad(instance)
-  acquirePerformanceConfigurationINTEL.smartLoad(instance)
-  releasePerformanceConfigurationINTEL.smartLoad(instance)
-  queueSetPerformanceConfigurationINTEL.smartLoad(instance)
-  getPerformanceParameterINTEL.smartLoad(instance)
+  initializePerformanceApiINTEL.load(instance)
+  uninitializePerformanceApiINTEL.load(instance)
+  cmdSetPerformanceMarkerINTEL.load(instance)
+  cmdSetPerformanceStreamMarkerINTEL.load(instance)
+  cmdSetPerformanceOverrideINTEL.load(instance)
+  acquirePerformanceConfigurationINTEL.load(instance)
+  releasePerformanceConfigurationINTEL.load(instance)
+  queueSetPerformanceConfigurationINTEL.load(instance)
+  getPerformanceParameterINTEL.load(instance)
 
 proc loadVK_INTEL_performance_query*(device: Device) =
-  initializePerformanceApiINTEL.smartLoad(device)
-  uninitializePerformanceApiINTEL.smartLoad(device)
-  cmdSetPerformanceMarkerINTEL.smartLoad(device)
-  cmdSetPerformanceStreamMarkerINTEL.smartLoad(device)
-  cmdSetPerformanceOverrideINTEL.smartLoad(device)
-  acquirePerformanceConfigurationINTEL.smartLoad(device)
-  releasePerformanceConfigurationINTEL.smartLoad(device)
-  queueSetPerformanceConfigurationINTEL.smartLoad(device)
-  getPerformanceParameterINTEL.smartLoad(device)
+  initializePerformanceApiINTEL.load(device)
+  uninitializePerformanceApiINTEL.load(device)
+  cmdSetPerformanceMarkerINTEL.load(device)
+  cmdSetPerformanceStreamMarkerINTEL.load(device)
+  cmdSetPerformanceOverrideINTEL.load(device)
+  acquirePerformanceConfigurationINTEL.load(device)
+  releasePerformanceConfigurationINTEL.load(device)
+  queueSetPerformanceConfigurationINTEL.load(device)
+  getPerformanceParameterINTEL.load(device)
 

@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:23Z
 # VK_EXT_hdr_metadata
 
 
@@ -36,8 +36,8 @@ proc setHdrMetadataEXT*(
     ): void {.cdecl, lazyload("vkSetHdrMetadataEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_hdr_metadata*(instance: Instance) =
-  setHdrMetadataEXT.smartLoad(instance)
+  setHdrMetadataEXT.load(instance)
 
 proc loadVK_EXT_hdr_metadata*(device: Device) =
-  setHdrMetadataEXT.smartLoad(device)
+  setHdrMetadataEXT.load(device)
 

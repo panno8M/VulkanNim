@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-12T04:58:24Z
 # vk12
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -763,49 +763,49 @@ proc getDeviceMemoryOpaqueCaptureAddress*(
 
 proc loadAllVk12*(instance: Instance) =
   # Promoted from VK_KHR_draw_indirect_count (extension 170)
-  cmdDrawIndirectCount.smartLoad(instance)
-  cmdDrawIndexedIndirectCount.smartLoad(instance)
+  cmdDrawIndirectCount.load(instance)
+  cmdDrawIndexedIndirectCount.load(instance)
 
   # Promoted from VK_KHR_create_renderpass2 (extension 110)
-  createRenderPass2.smartLoad(instance)
-  cmdBeginRenderPass2.smartLoad(instance)
-  cmdNextSubpass2.smartLoad(instance)
-  cmdEndRenderPass2.smartLoad(instance)
+  createRenderPass2.load(instance)
+  cmdBeginRenderPass2.load(instance)
+  cmdNextSubpass2.load(instance)
+  cmdEndRenderPass2.load(instance)
 
   # Promoted from VK_EXT_host_query_reset (extension 262)
-  resetQueryPool.smartLoad(instance)
+  resetQueryPool.load(instance)
 
   # Promoted from VK_KHR_timeline_semaphore (extension 208)
-  getSemaphoreCounterValue.smartLoad(instance)
-  waitSemaphores.smartLoad(instance)
-  signalSemaphore.smartLoad(instance)
+  getSemaphoreCounterValue.load(instance)
+  waitSemaphores.load(instance)
+  signalSemaphore.load(instance)
 
   # Promoted from VK_KHR_buffer_device_address (extension 258)
-  getBufferDeviceAddress.smartLoad(instance)
-  getBufferOpaqueCaptureAddress.smartLoad(instance)
-  getDeviceMemoryOpaqueCaptureAddress.smartLoad(instance)
+  getBufferDeviceAddress.load(instance)
+  getBufferOpaqueCaptureAddress.load(instance)
+  getDeviceMemoryOpaqueCaptureAddress.load(instance)
 
 proc loadVk12*(device: Device) =
   # Promoted from VK_KHR_draw_indirect_count (extension 170)
-  cmdDrawIndirectCount.smartLoad(device)
-  cmdDrawIndexedIndirectCount.smartLoad(device)
+  cmdDrawIndirectCount.load(device)
+  cmdDrawIndexedIndirectCount.load(device)
 
   # Promoted from VK_KHR_create_renderpass2 (extension 110)
-  createRenderPass2.smartLoad(device)
-  cmdBeginRenderPass2.smartLoad(device)
-  cmdNextSubpass2.smartLoad(device)
-  cmdEndRenderPass2.smartLoad(device)
+  createRenderPass2.load(device)
+  cmdBeginRenderPass2.load(device)
+  cmdNextSubpass2.load(device)
+  cmdEndRenderPass2.load(device)
 
   # Promoted from VK_EXT_host_query_reset (extension 262)
-  resetQueryPool.smartLoad(device)
+  resetQueryPool.load(device)
 
   # Promoted from VK_KHR_timeline_semaphore (extension 208)
-  getSemaphoreCounterValue.smartLoad(device)
-  waitSemaphores.smartLoad(device)
-  signalSemaphore.smartLoad(device)
+  getSemaphoreCounterValue.load(device)
+  waitSemaphores.load(device)
+  signalSemaphore.load(device)
 
   # Promoted from VK_KHR_buffer_device_address (extension 258)
-  getBufferDeviceAddress.smartLoad(device)
-  getBufferOpaqueCaptureAddress.smartLoad(device)
-  getDeviceMemoryOpaqueCaptureAddress.smartLoad(device)
+  getBufferDeviceAddress.load(device)
+  getBufferOpaqueCaptureAddress.load(device)
+  getDeviceMemoryOpaqueCaptureAddress.load(device)
 
