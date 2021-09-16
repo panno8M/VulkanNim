@@ -131,6 +131,7 @@ type
     theType*: string
     ptrLv*: Natural
     optional*: bool
+    arrlen*: Option[string]
   NodeCommand* = ref object
     name*: string
     case kind*: NodeKindBasicResource

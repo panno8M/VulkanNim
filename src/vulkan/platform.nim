@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T06:45:56Z
+# Generated at 2021-09-16T08:33:23Z
 # platform
 import strformat
 import macros
@@ -118,5 +118,6 @@ macro lazyload*(loadFrom: string; with = InstanceLevel; def: untyped): untyped =
 template optional*() {.pragma.}
 template constant*(v: typed) {.pragma.}
 
+template length*(v: untyped) {.pragma.}
 
 

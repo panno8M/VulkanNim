@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T07:49:56Z
 # VK_KHR_android_surface
 
 
@@ -27,7 +27,7 @@ type
 proc createAndroidSurfaceKHR*(
       instance: Instance;
       pCreateInfo: ptr AndroidSurfaceCreateInfoKHR;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
     ): Result {.cdecl, lazyload("vkCreateAndroidSurfaceKHR", InstanceLevel).}
 

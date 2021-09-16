@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T08:32:06Z
 # VK_EXT_transform_feedback
 
 
@@ -43,29 +43,29 @@ proc cmdBindTransformFeedbackBuffersEXT*(
       commandBuffer: CommandBuffer;
       firstBinding: uint32;
       bindingCount: uint32;
-      pBuffers: ptr Buffer;
-      pOffsets: ptr DeviceSize;
-      pSizes = default(ptr DeviceSize); # optional
+      pBuffers {.length: bindingCount.}: ptr Buffer;
+      pOffsets {.length: bindingCount.}: ptr DeviceSize;
+      pSizes {.length: bindingCount.} = default(ptr DeviceSize);
     ): void {.cdecl, lazyload("vkCmdBindTransformFeedbackBuffersEXT", DeviceLevel).}
 proc cmdBeginTransformFeedbackEXT*(
       commandBuffer: CommandBuffer;
       firstCounterBuffer: uint32;
-      counterBufferCount = default(uint32); # optional
-      pCounterBuffers: ptr Buffer;
-      pCounterBufferOffsets = default(ptr DeviceSize); # optional
+      counterBufferCount = default(uint32);
+      pCounterBuffers {.length: counterBufferCount.}: ptr Buffer;
+      pCounterBufferOffsets {.length: counterBufferCount.} = default(ptr DeviceSize);
     ): void {.cdecl, lazyload("vkCmdBeginTransformFeedbackEXT", DeviceLevel).}
 proc cmdEndTransformFeedbackEXT*(
       commandBuffer: CommandBuffer;
       firstCounterBuffer: uint32;
-      counterBufferCount = default(uint32); # optional
-      pCounterBuffers: ptr Buffer;
-      pCounterBufferOffsets = default(ptr DeviceSize); # optional
+      counterBufferCount = default(uint32);
+      pCounterBuffers {.length: counterBufferCount.}: ptr Buffer;
+      pCounterBufferOffsets {.length: counterBufferCount.} = default(ptr DeviceSize);
     ): void {.cdecl, lazyload("vkCmdEndTransformFeedbackEXT", DeviceLevel).}
 proc cmdBeginQueryIndexedEXT*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
       query: uint32;
-      flags = default(QueryControlFlags); # optional
+      flags = default(QueryControlFlags);
       index: uint32;
     ): void {.cdecl, lazyload("vkCmdBeginQueryIndexedEXT", DeviceLevel).}
 proc cmdEndQueryIndexedEXT*(

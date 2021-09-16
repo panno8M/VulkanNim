@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T07:49:56Z
 # VK_EXT_debug_utils
 
 
@@ -107,13 +107,13 @@ proc cmdInsertDebugUtilsLabelEXT*(
 proc createDebugUtilsMessengerEXT*(
       instance: Instance;
       pCreateInfo: ptr DebugUtilsMessengerCreateInfoEXT;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pMessenger: ptr DebugUtilsMessengerEXT;
     ): Result {.cdecl, lazyload("vkCreateDebugUtilsMessengerEXT", InstanceLevel).}
 proc destroyDebugUtilsMessengerEXT*(
       instance: Instance;
-      messenger = default(DebugUtilsMessengerEXT); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      messenger = default(DebugUtilsMessengerEXT);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyDebugUtilsMessengerEXT", InstanceLevel).}
 proc submitDebugUtilsMessageEXT*(
       instance: Instance;

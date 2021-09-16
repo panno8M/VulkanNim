@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T07:49:56Z
 # VK_KHR_win32_surface
 
 
@@ -25,7 +25,7 @@ type
 proc createWin32SurfaceKHR*(
       instance: Instance;
       pCreateInfo: ptr Win32SurfaceCreateInfoKHR;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
     ): Result {.cdecl, lazyload("vkCreateWin32SurfaceKHR", InstanceLevel).}
 proc getPhysicalDeviceWin32PresentationSupportKHR*(

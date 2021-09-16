@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T08:32:06Z
 # VK_NV_cooperative_matrix
 
 
@@ -55,7 +55,7 @@ type
 proc getPhysicalDeviceCooperativeMatrixPropertiesNV*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
-      pProperties = default(ptr CooperativeMatrixPropertiesNV); # optional
+      pProperties {.length: pPropertyCount.} = default(ptr CooperativeMatrixPropertiesNV);
     ): Result {.cdecl, lazyload("vkGetPhysicalDeviceCooperativeMatrixPropertiesNV", InstanceLevel).}
 
 proc loadAllVK_NV_cooperative_matrix*(instance: Instance) =

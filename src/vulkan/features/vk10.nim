@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T08:45:19Z
 # vk10
 # Vulkan core API interface definitions
 # =====================================
@@ -3411,17 +3411,17 @@ template nullHandle*(): untyped = ( cast[NullHandle](0) )
 # ---------------------
 proc createInstance*(
       pCreateInfo: ptr InstanceCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pInstance: ptr Instance;
     ): Result {.cdecl, preload("vkCreateInstance").}
 proc destroyInstance*(
-      instance = default(Instance); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      instance = default(Instance);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyInstance", InstanceLevel).}
 proc enumeratePhysicalDevices*(
       instance: Instance;
       pPhysicalDeviceCount: ptr uint32;
-      pPhysicalDevices = default(ptr PhysicalDevice); # optional
+      pPhysicalDevices {.length: pPhysicalDeviceCount.} = default(ptr PhysicalDevice);
     ): Result {.cdecl, lazyload("vkEnumeratePhysicalDevices", InstanceLevel).}
 proc getPhysicalDeviceFeatures*(
       physicalDevice: PhysicalDevice;
@@ -3438,7 +3438,7 @@ proc getPhysicalDeviceImageFormatProperties*(
       theType: ImageType;
       tiling: ImageTiling;
       usage: ImageUsageFlags;
-      flags = default(ImageCreateFlags); # optional
+      flags = default(ImageCreateFlags);
       pImageFormatProperties: ptr ImageFormatProperties;
     ): Result {.cdecl, lazyload("vkGetPhysicalDeviceImageFormatProperties", InstanceLevel).}
 proc getPhysicalDeviceProperties*(
@@ -3448,19 +3448,19 @@ proc getPhysicalDeviceProperties*(
 proc getPhysicalDeviceQueueFamilyProperties*(
       physicalDevice: PhysicalDevice;
       pQueueFamilyPropertyCount: ptr uint32;
-      pQueueFamilyProperties = default(ptr QueueFamilyProperties); # optional
+      pQueueFamilyProperties {.length: pQueueFamilyPropertyCount.} = default(ptr QueueFamilyProperties);
     ): void {.cdecl, lazyload("vkGetPhysicalDeviceQueueFamilyProperties", InstanceLevel).}
 proc getPhysicalDeviceMemoryProperties*(
       physicalDevice: PhysicalDevice;
       pMemoryProperties: ptr PhysicalDeviceMemoryProperties;
     ): void {.cdecl, lazyload("vkGetPhysicalDeviceMemoryProperties", InstanceLevel).}
 proc getInstanceProcAddr*(
-      instance = default(Instance); # optional
-      pName: cstring;
+      instance = default(Instance);
+      pName {.length: null-terminated.}: cstring;
     ): PFN_VoidFunction {.cdecl, preload("vkGetInstanceProcAddr").}
 proc getDeviceProcAddr*(
       device: Device;
-      pName: cstring;
+      pName {.length: null-terminated.}: cstring;
     ): PFN_VoidFunction {.cdecl, preload("vkGetDeviceProcAddr").}
 
 
@@ -3469,27 +3469,27 @@ proc getDeviceProcAddr*(
 proc createDevice*(
       physicalDevice: PhysicalDevice;
       pCreateInfo: ptr DeviceCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pDevice: ptr Device;
     ): Result {.cdecl, lazyload("vkCreateDevice", InstanceLevel).}
 proc destroyDevice*(
-      device = default(Device); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      device = default(Device);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyDevice", DeviceLevel).}
 
 
 # Extension discovery commands
 # ----------------------------
 proc enumerateInstanceExtensionProperties*(
-      pLayerName = default(cstring); # optional
+      pLayerName {.length: null-terminated.} = default(cstring);
       pPropertyCount: ptr uint32;
-      pProperties = default(ptr ExtensionProperties); # optional
+      pProperties {.length: pPropertyCount.} = default(ptr ExtensionProperties);
     ): Result {.cdecl, preload("vkEnumerateInstanceExtensionProperties").}
 proc enumerateDeviceExtensionProperties*(
       physicalDevice: PhysicalDevice;
-      pLayerName = default(cstring); # optional
+      pLayerName {.length: null-terminated.} = default(cstring);
       pPropertyCount: ptr uint32;
-      pProperties = default(ptr ExtensionProperties); # optional
+      pProperties {.length: pPropertyCount.} = default(ptr ExtensionProperties);
     ): Result {.cdecl, lazyload("vkEnumerateDeviceExtensionProperties", InstanceLevel).}
 
 
@@ -3497,12 +3497,12 @@ proc enumerateDeviceExtensionProperties*(
 # ------------------------
 proc enumerateInstanceLayerProperties*(
       pPropertyCount: ptr uint32;
-      pProperties = default(ptr LayerProperties); # optional
+      pProperties {.length: pPropertyCount.} = default(ptr LayerProperties);
     ): Result {.cdecl, preload("vkEnumerateInstanceLayerProperties").}
 proc enumerateDeviceLayerProperties*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
-      pProperties = default(ptr LayerProperties); # optional
+      pProperties {.length: pPropertyCount.} = default(ptr LayerProperties);
     ): Result {.cdecl, lazyload("vkEnumerateDeviceLayerProperties", InstanceLevel).}
 
 
@@ -3516,9 +3516,9 @@ proc getDeviceQueue*(
     ): void {.cdecl, lazyload("vkGetDeviceQueue", DeviceLevel).}
 proc queueSubmit*(
       queue: Queue;
-      submitCount = default(uint32); # optional
-      pSubmits: ptr SubmitInfo;
-      fence = default(Fence); # optional
+      submitCount = default(uint32);
+      pSubmits {.length: submitCount.}: ptr SubmitInfo;
+      fence = default(Fence);
     ): Result {.cdecl, lazyload("vkQueueSubmit", DeviceLevel).}
 proc queueWaitIdle*(
       queue: Queue;
@@ -3533,20 +3533,20 @@ proc deviceWaitIdle*(
 proc allocateMemory*(
       device: Device;
       pAllocateInfo: ptr MemoryAllocateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pMemory: ptr DeviceMemory;
     ): Result {.cdecl, lazyload("vkAllocateMemory", DeviceLevel).}
 proc freeMemory*(
       device: Device;
-      memory = default(DeviceMemory); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      memory = default(DeviceMemory);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkFreeMemory", DeviceLevel).}
 proc mapMemory*(
       device: Device;
       memory: DeviceMemory;
       offset: DeviceSize;
       size: DeviceSize;
-      flags = default(MemoryMapFlags); # optional
+      flags = default(MemoryMapFlags);
       ppData: ptr pointer;
     ): Result {.cdecl, lazyload("vkMapMemory", DeviceLevel).}
 proc unmapMemory*(
@@ -3556,12 +3556,12 @@ proc unmapMemory*(
 proc flushMappedMemoryRanges*(
       device: Device;
       memoryRangeCount: uint32;
-      pMemoryRanges: ptr MappedMemoryRange;
+      pMemoryRanges {.length: memoryRangeCount.}: ptr MappedMemoryRange;
     ): Result {.cdecl, lazyload("vkFlushMappedMemoryRanges", DeviceLevel).}
 proc invalidateMappedMemoryRanges*(
       device: Device;
       memoryRangeCount: uint32;
-      pMemoryRanges: ptr MappedMemoryRange;
+      pMemoryRanges {.length: memoryRangeCount.}: ptr MappedMemoryRange;
     ): Result {.cdecl, lazyload("vkInvalidateMappedMemoryRanges", DeviceLevel).}
 proc getDeviceMemoryCommitment*(
       device: Device;
@@ -3602,7 +3602,7 @@ proc getImageSparseMemoryRequirements*(
       device: Device;
       image: Image;
       pSparseMemoryRequirementCount: ptr uint32;
-      pSparseMemoryRequirements = default(ptr SparseImageMemoryRequirements); # optional
+      pSparseMemoryRequirements {.length: pSparseMemoryRequirementCount.} = default(ptr SparseImageMemoryRequirements);
     ): void {.cdecl, lazyload("vkGetImageSparseMemoryRequirements", DeviceLevel).}
 proc getPhysicalDeviceSparseImageFormatProperties*(
       physicalDevice: PhysicalDevice;
@@ -3612,13 +3612,13 @@ proc getPhysicalDeviceSparseImageFormatProperties*(
       usage: ImageUsageFlags;
       tiling: ImageTiling;
       pPropertyCount: ptr uint32;
-      pProperties = default(ptr SparseImageFormatProperties); # optional
+      pProperties {.length: pPropertyCount.} = default(ptr SparseImageFormatProperties);
     ): void {.cdecl, lazyload("vkGetPhysicalDeviceSparseImageFormatProperties", InstanceLevel).}
 proc queueBindSparse*(
       queue: Queue;
-      bindInfoCount = default(uint32); # optional
-      pBindInfo: ptr BindSparseInfo;
-      fence = default(Fence); # optional
+      bindInfoCount = default(uint32);
+      pBindInfo {.length: bindInfoCount.}: ptr BindSparseInfo;
+      fence = default(Fence);
     ): Result {.cdecl, lazyload("vkQueueBindSparse", DeviceLevel).}
 
 
@@ -3627,18 +3627,18 @@ proc queueBindSparse*(
 proc createFence*(
       device: Device;
       pCreateInfo: ptr FenceCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pFence: ptr Fence;
     ): Result {.cdecl, lazyload("vkCreateFence", DeviceLevel).}
 proc destroyFence*(
       device: Device;
-      fence = default(Fence); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      fence = default(Fence);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyFence", DeviceLevel).}
 proc resetFences*(
       device: Device;
       fenceCount: uint32;
-      pFences: ptr Fence;
+      pFences {.length: fenceCount.}: ptr Fence;
     ): Result {.cdecl, lazyload("vkResetFences", DeviceLevel).}
 proc getFenceStatus*(
       device: Device;
@@ -3647,7 +3647,7 @@ proc getFenceStatus*(
 proc waitForFences*(
       device: Device;
       fenceCount: uint32;
-      pFences: ptr Fence;
+      pFences {.length: fenceCount.}: ptr Fence;
       waitAll: Bool32;
       timeout: uint64;
     ): Result {.cdecl, lazyload("vkWaitForFences", DeviceLevel).}
@@ -3658,13 +3658,13 @@ proc waitForFences*(
 proc createSemaphore*(
       device: Device;
       pCreateInfo: ptr SemaphoreCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pSemaphore: ptr Semaphore;
     ): Result {.cdecl, lazyload("vkCreateSemaphore", DeviceLevel).}
 proc destroySemaphore*(
       device: Device;
-      semaphore = default(Semaphore); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      semaphore = default(Semaphore);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroySemaphore", DeviceLevel).}
 
 
@@ -3673,13 +3673,13 @@ proc destroySemaphore*(
 proc createEvent*(
       device: Device;
       pCreateInfo: ptr EventCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pEvent: ptr Event;
     ): Result {.cdecl, lazyload("vkCreateEvent", DeviceLevel).}
 proc destroyEvent*(
       device: Device;
-      event = default(Event); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      event = default(Event);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyEvent", DeviceLevel).}
 proc getEventStatus*(
       device: Device;
@@ -3700,13 +3700,13 @@ proc resetEvent*(
 proc createQueryPool*(
       device: Device;
       pCreateInfo: ptr QueryPoolCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pQueryPool: ptr QueryPool;
     ): Result {.cdecl, lazyload("vkCreateQueryPool", DeviceLevel).}
 proc destroyQueryPool*(
       device: Device;
-      queryPool = default(QueryPool); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      queryPool = default(QueryPool);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyQueryPool", DeviceLevel).}
 proc getQueryPoolResults*(
       device: Device;
@@ -3714,9 +3714,9 @@ proc getQueryPoolResults*(
       firstQuery: uint32;
       queryCount: uint32;
       dataSize: uint;
-      pData: pointer;
+      pData {.length: dataSize.}: pointer;
       stride: DeviceSize;
-      flags = default(QueryResultFlags); # optional
+      flags = default(QueryResultFlags);
     ): Result {.cdecl, lazyload("vkGetQueryPoolResults", DeviceLevel).}
 
 
@@ -3725,13 +3725,13 @@ proc getQueryPoolResults*(
 proc createBuffer*(
       device: Device;
       pCreateInfo: ptr BufferCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pBuffer: ptr Buffer;
     ): Result {.cdecl, lazyload("vkCreateBuffer", DeviceLevel).}
 proc destroyBuffer*(
       device: Device;
-      buffer = default(Buffer); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      buffer = default(Buffer);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyBuffer", DeviceLevel).}
 
 
@@ -3740,13 +3740,13 @@ proc destroyBuffer*(
 proc createBufferView*(
       device: Device;
       pCreateInfo: ptr BufferViewCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pView: ptr BufferView;
     ): Result {.cdecl, lazyload("vkCreateBufferView", DeviceLevel).}
 proc destroyBufferView*(
       device: Device;
-      bufferView = default(BufferView); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      bufferView = default(BufferView);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyBufferView", DeviceLevel).}
 
 
@@ -3755,13 +3755,13 @@ proc destroyBufferView*(
 proc createImage*(
       device: Device;
       pCreateInfo: ptr ImageCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pImage: ptr Image;
     ): Result {.cdecl, lazyload("vkCreateImage", DeviceLevel).}
 proc destroyImage*(
       device: Device;
-      image = default(Image); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      image = default(Image);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyImage", DeviceLevel).}
 proc getImageSubresourceLayout*(
       device: Device;
@@ -3776,13 +3776,13 @@ proc getImageSubresourceLayout*(
 proc createImageView*(
       device: Device;
       pCreateInfo: ptr ImageViewCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pView: ptr ImageView;
     ): Result {.cdecl, lazyload("vkCreateImageView", DeviceLevel).}
 proc destroyImageView*(
       device: Device;
-      imageView = default(ImageView); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      imageView = default(ImageView);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyImageView", DeviceLevel).}
 
 
@@ -3791,13 +3791,13 @@ proc destroyImageView*(
 proc createShaderModule*(
       device: Device;
       pCreateInfo: ptr ShaderModuleCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pShaderModule: ptr ShaderModule;
     ): Result {.cdecl, lazyload("vkCreateShaderModule", DeviceLevel).}
 proc destroyShaderModule*(
       device: Device;
-      shaderModule = default(ShaderModule); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      shaderModule = default(ShaderModule);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyShaderModule", DeviceLevel).}
 
 
@@ -3806,25 +3806,25 @@ proc destroyShaderModule*(
 proc createPipelineCache*(
       device: Device;
       pCreateInfo: ptr PipelineCacheCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pPipelineCache: ptr PipelineCache;
     ): Result {.cdecl, lazyload("vkCreatePipelineCache", DeviceLevel).}
 proc destroyPipelineCache*(
       device: Device;
-      pipelineCache = default(PipelineCache); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pipelineCache = default(PipelineCache);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyPipelineCache", DeviceLevel).}
 proc getPipelineCacheData*(
       device: Device;
       pipelineCache: PipelineCache;
       pDataSize: ptr uint;
-      pData = default(pointer); # optional
+      pData {.length: pDataSize.} = default(pointer);
     ): Result {.cdecl, lazyload("vkGetPipelineCacheData", DeviceLevel).}
 proc mergePipelineCaches*(
       device: Device;
       dstCache: PipelineCache;
       srcCacheCount: uint32;
-      pSrcCaches: ptr PipelineCache;
+      pSrcCaches {.length: srcCacheCount.}: ptr PipelineCache;
     ): Result {.cdecl, lazyload("vkMergePipelineCaches", DeviceLevel).}
 
 
@@ -3832,24 +3832,24 @@ proc mergePipelineCaches*(
 # -----------------
 proc createGraphicsPipelines*(
       device: Device;
-      pipelineCache = default(PipelineCache); # optional
+      pipelineCache = default(PipelineCache);
       createInfoCount: uint32;
-      pCreateInfos: ptr GraphicsPipelineCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
-      pPipelines: ptr Pipeline;
+      pCreateInfos {.length: createInfoCount.}: ptr GraphicsPipelineCreateInfo;
+      pAllocator = default(ptr AllocationCallbacks);
+      pPipelines {.length: createInfoCount.}: ptr Pipeline;
     ): Result {.cdecl, lazyload("vkCreateGraphicsPipelines", DeviceLevel).}
 proc createComputePipelines*(
       device: Device;
-      pipelineCache = default(PipelineCache); # optional
+      pipelineCache = default(PipelineCache);
       createInfoCount: uint32;
-      pCreateInfos: ptr ComputePipelineCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
-      pPipelines: ptr Pipeline;
+      pCreateInfos {.length: createInfoCount.}: ptr ComputePipelineCreateInfo;
+      pAllocator = default(ptr AllocationCallbacks);
+      pPipelines {.length: createInfoCount.}: ptr Pipeline;
     ): Result {.cdecl, lazyload("vkCreateComputePipelines", DeviceLevel).}
 proc destroyPipeline*(
       device: Device;
-      pipeline = default(Pipeline); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pipeline = default(Pipeline);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyPipeline", DeviceLevel).}
 
 
@@ -3858,13 +3858,13 @@ proc destroyPipeline*(
 proc createPipelineLayout*(
       device: Device;
       pCreateInfo: ptr PipelineLayoutCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pPipelineLayout: ptr PipelineLayout;
     ): Result {.cdecl, lazyload("vkCreatePipelineLayout", DeviceLevel).}
 proc destroyPipelineLayout*(
       device: Device;
-      pipelineLayout = default(PipelineLayout); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pipelineLayout = default(PipelineLayout);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyPipelineLayout", DeviceLevel).}
 
 
@@ -3873,13 +3873,13 @@ proc destroyPipelineLayout*(
 proc createSampler*(
       device: Device;
       pCreateInfo: ptr SamplerCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pSampler: ptr Sampler;
     ): Result {.cdecl, lazyload("vkCreateSampler", DeviceLevel).}
 proc destroySampler*(
       device: Device;
-      sampler = default(Sampler); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      sampler = default(Sampler);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroySampler", DeviceLevel).}
 
 
@@ -3888,47 +3888,47 @@ proc destroySampler*(
 proc createDescriptorSetLayout*(
       device: Device;
       pCreateInfo: ptr DescriptorSetLayoutCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pSetLayout: ptr DescriptorSetLayout;
     ): Result {.cdecl, lazyload("vkCreateDescriptorSetLayout", DeviceLevel).}
 proc destroyDescriptorSetLayout*(
       device: Device;
-      descriptorSetLayout = default(DescriptorSetLayout); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      descriptorSetLayout = default(DescriptorSetLayout);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyDescriptorSetLayout", DeviceLevel).}
 proc createDescriptorPool*(
       device: Device;
       pCreateInfo: ptr DescriptorPoolCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pDescriptorPool: ptr DescriptorPool;
     ): Result {.cdecl, lazyload("vkCreateDescriptorPool", DeviceLevel).}
 proc destroyDescriptorPool*(
       device: Device;
-      descriptorPool = default(DescriptorPool); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      descriptorPool = default(DescriptorPool);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyDescriptorPool", DeviceLevel).}
 proc resetDescriptorPool*(
       device: Device;
       descriptorPool: DescriptorPool;
-      flags = default(DescriptorPoolResetFlags); # optional
+      flags = default(DescriptorPoolResetFlags);
     ): Result {.cdecl, lazyload("vkResetDescriptorPool", DeviceLevel).}
 proc allocateDescriptorSets*(
       device: Device;
       pAllocateInfo: ptr DescriptorSetAllocateInfo;
-      pDescriptorSets: ptr DescriptorSet;
+      pDescriptorSets {.length: pAllocateInfo.descriptorSetCount.}: ptr DescriptorSet;
     ): Result {.cdecl, lazyload("vkAllocateDescriptorSets", DeviceLevel).}
 proc freeDescriptorSets*(
       device: Device;
       descriptorPool: DescriptorPool;
       descriptorSetCount: uint32;
-      pDescriptorSets: ptr DescriptorSet;
+      pDescriptorSets {.length: descriptorSetCount.}: ptr DescriptorSet;
     ): Result {.cdecl, lazyload("vkFreeDescriptorSets", DeviceLevel).}
 proc updateDescriptorSets*(
       device: Device;
-      descriptorWriteCount = default(uint32); # optional
-      pDescriptorWrites: ptr WriteDescriptorSet;
-      descriptorCopyCount = default(uint32); # optional
-      pDescriptorCopies: ptr CopyDescriptorSet;
+      descriptorWriteCount = default(uint32);
+      pDescriptorWrites {.length: descriptorWriteCount.}: ptr WriteDescriptorSet;
+      descriptorCopyCount = default(uint32);
+      pDescriptorCopies {.length: descriptorCopyCount.}: ptr CopyDescriptorSet;
     ): void {.cdecl, lazyload("vkUpdateDescriptorSets", DeviceLevel).}
 
 
@@ -3937,24 +3937,24 @@ proc updateDescriptorSets*(
 proc createFramebuffer*(
       device: Device;
       pCreateInfo: ptr FramebufferCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pFramebuffer: ptr Framebuffer;
     ): Result {.cdecl, lazyload("vkCreateFramebuffer", DeviceLevel).}
 proc destroyFramebuffer*(
       device: Device;
-      framebuffer = default(Framebuffer); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      framebuffer = default(Framebuffer);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyFramebuffer", DeviceLevel).}
 proc createRenderPass*(
       device: Device;
       pCreateInfo: ptr RenderPassCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pRenderPass: ptr RenderPass;
     ): Result {.cdecl, lazyload("vkCreateRenderPass", DeviceLevel).}
 proc destroyRenderPass*(
       device: Device;
-      renderPass = default(RenderPass); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      renderPass = default(RenderPass);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyRenderPass", DeviceLevel).}
 proc getRenderAreaGranularity*(
       device: Device;
@@ -3968,18 +3968,18 @@ proc getRenderAreaGranularity*(
 proc createCommandPool*(
       device: Device;
       pCreateInfo: ptr CommandPoolCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pCommandPool: ptr CommandPool;
     ): Result {.cdecl, lazyload("vkCreateCommandPool", DeviceLevel).}
 proc destroyCommandPool*(
       device: Device;
-      commandPool = default(CommandPool); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      commandPool = default(CommandPool);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyCommandPool", DeviceLevel).}
 proc resetCommandPool*(
       device: Device;
       commandPool: CommandPool;
-      flags = default(CommandPoolResetFlags); # optional
+      flags = default(CommandPoolResetFlags);
     ): Result {.cdecl, lazyload("vkResetCommandPool", DeviceLevel).}
 
 
@@ -3988,13 +3988,13 @@ proc resetCommandPool*(
 proc allocateCommandBuffers*(
       device: Device;
       pAllocateInfo: ptr CommandBufferAllocateInfo;
-      pCommandBuffers: ptr CommandBuffer;
+      pCommandBuffers {.length: pAllocateInfo.commandBufferCount.}: ptr CommandBuffer;
     ): Result {.cdecl, lazyload("vkAllocateCommandBuffers", DeviceLevel).}
 proc freeCommandBuffers*(
       device: Device;
       commandPool: CommandPool;
       commandBufferCount: uint32;
-      pCommandBuffers: ptr CommandBuffer;
+      pCommandBuffers {.length: commandBufferCount.}: ptr CommandBuffer;
     ): void {.cdecl, lazyload("vkFreeCommandBuffers", DeviceLevel).}
 proc beginCommandBuffer*(
       commandBuffer: CommandBuffer;
@@ -4005,7 +4005,7 @@ proc endCommandBuffer*(
     ): Result {.cdecl, lazyload("vkEndCommandBuffer", DeviceLevel).}
 proc resetCommandBuffer*(
       commandBuffer: CommandBuffer;
-      flags = default(CommandBufferResetFlags); # optional
+      flags = default(CommandBufferResetFlags);
     ): Result {.cdecl, lazyload("vkResetCommandBuffer", DeviceLevel).}
 
 
@@ -4023,13 +4023,13 @@ proc cmdSetViewport*(
       commandBuffer: CommandBuffer;
       firstViewport: uint32;
       viewportCount: uint32;
-      pViewports: ptr Viewport;
+      pViewports {.length: viewportCount.}: ptr Viewport;
     ): void {.cdecl, lazyload("vkCmdSetViewport", DeviceLevel).}
 proc cmdSetScissor*(
       commandBuffer: CommandBuffer;
       firstScissor: uint32;
       scissorCount: uint32;
-      pScissors: ptr Rect2D;
+      pScissors {.length: scissorCount.}: ptr Rect2D;
     ): void {.cdecl, lazyload("vkCmdSetScissor", DeviceLevel).}
 proc cmdSetLineWidth*(
       commandBuffer: CommandBuffer;
@@ -4071,9 +4071,9 @@ proc cmdBindDescriptorSets*(
       layout: PipelineLayout;
       firstSet: uint32;
       descriptorSetCount: uint32;
-      pDescriptorSets: ptr DescriptorSet;
-      dynamicOffsetCount = default(uint32); # optional
-      pDynamicOffsets: ptr uint32;
+      pDescriptorSets {.length: descriptorSetCount.}: ptr DescriptorSet;
+      dynamicOffsetCount = default(uint32);
+      pDynamicOffsets {.length: dynamicOffsetCount.}: ptr uint32;
     ): void {.cdecl, lazyload("vkCmdBindDescriptorSets", DeviceLevel).}
 proc cmdBindIndexBuffer*(
       commandBuffer: CommandBuffer;
@@ -4085,8 +4085,8 @@ proc cmdBindVertexBuffers*(
       commandBuffer: CommandBuffer;
       firstBinding: uint32;
       bindingCount: uint32;
-      pBuffers: ptr Buffer;
-      pOffsets: ptr DeviceSize;
+      pBuffers {.length: bindingCount.}: ptr Buffer;
+      pOffsets {.length: bindingCount.}: ptr DeviceSize;
     ): void {.cdecl, lazyload("vkCmdBindVertexBuffers", DeviceLevel).}
 proc cmdDraw*(
       commandBuffer: CommandBuffer;
@@ -4133,7 +4133,7 @@ proc cmdCopyBuffer*(
       srcBuffer: Buffer;
       dstBuffer: Buffer;
       regionCount: uint32;
-      pRegions: ptr BufferCopy;
+      pRegions {.length: regionCount.}: ptr BufferCopy;
     ): void {.cdecl, lazyload("vkCmdCopyBuffer", DeviceLevel).}
 proc cmdCopyImage*(
       commandBuffer: CommandBuffer;
@@ -4142,7 +4142,7 @@ proc cmdCopyImage*(
       dstImage: Image;
       dstImageLayout: ImageLayout;
       regionCount: uint32;
-      pRegions: ptr ImageCopy;
+      pRegions {.length: regionCount.}: ptr ImageCopy;
     ): void {.cdecl, lazyload("vkCmdCopyImage", DeviceLevel).}
 proc cmdBlitImage*(
       commandBuffer: CommandBuffer;
@@ -4151,7 +4151,7 @@ proc cmdBlitImage*(
       dstImage: Image;
       dstImageLayout: ImageLayout;
       regionCount: uint32;
-      pRegions: ptr ImageBlit;
+      pRegions {.length: regionCount.}: ptr ImageBlit;
       filter: Filter;
     ): void {.cdecl, lazyload("vkCmdBlitImage", DeviceLevel).}
 proc cmdCopyBufferToImage*(
@@ -4160,7 +4160,7 @@ proc cmdCopyBufferToImage*(
       dstImage: Image;
       dstImageLayout: ImageLayout;
       regionCount: uint32;
-      pRegions: ptr BufferImageCopy;
+      pRegions {.length: regionCount.}: ptr BufferImageCopy;
     ): void {.cdecl, lazyload("vkCmdCopyBufferToImage", DeviceLevel).}
 proc cmdCopyImageToBuffer*(
       commandBuffer: CommandBuffer;
@@ -4168,14 +4168,14 @@ proc cmdCopyImageToBuffer*(
       srcImageLayout: ImageLayout;
       dstBuffer: Buffer;
       regionCount: uint32;
-      pRegions: ptr BufferImageCopy;
+      pRegions {.length: regionCount.}: ptr BufferImageCopy;
     ): void {.cdecl, lazyload("vkCmdCopyImageToBuffer", DeviceLevel).}
 proc cmdUpdateBuffer*(
       commandBuffer: CommandBuffer;
       dstBuffer: Buffer;
       dstOffset: DeviceSize;
       dataSize: DeviceSize;
-      pData: pointer;
+      pData {.length: dataSize.}: pointer;
     ): void {.cdecl, lazyload("vkCmdUpdateBuffer", DeviceLevel).}
 proc cmdFillBuffer*(
       commandBuffer: CommandBuffer;
@@ -4190,7 +4190,7 @@ proc cmdClearColorImage*(
       imageLayout: ImageLayout;
       pColor: ptr ClearColorValue;
       rangeCount: uint32;
-      pRanges: ptr ImageSubresourceRange;
+      pRanges {.length: rangeCount.}: ptr ImageSubresourceRange;
     ): void {.cdecl, lazyload("vkCmdClearColorImage", DeviceLevel).}
 proc cmdClearDepthStencilImage*(
       commandBuffer: CommandBuffer;
@@ -4198,14 +4198,14 @@ proc cmdClearDepthStencilImage*(
       imageLayout: ImageLayout;
       pDepthStencil: ptr ClearDepthStencilValue;
       rangeCount: uint32;
-      pRanges: ptr ImageSubresourceRange;
+      pRanges {.length: rangeCount.}: ptr ImageSubresourceRange;
     ): void {.cdecl, lazyload("vkCmdClearDepthStencilImage", DeviceLevel).}
 proc cmdClearAttachments*(
       commandBuffer: CommandBuffer;
       attachmentCount: uint32;
-      pAttachments: ptr ClearAttachment;
+      pAttachments {.length: attachmentCount.}: ptr ClearAttachment;
       rectCount: uint32;
-      pRects: ptr ClearRect;
+      pRects {.length: rectCount.}: ptr ClearRect;
     ): void {.cdecl, lazyload("vkCmdClearAttachments", DeviceLevel).}
 proc cmdResolveImage*(
       commandBuffer: CommandBuffer;
@@ -4214,7 +4214,7 @@ proc cmdResolveImage*(
       dstImage: Image;
       dstImageLayout: ImageLayout;
       regionCount: uint32;
-      pRegions: ptr ImageResolve;
+      pRegions {.length: regionCount.}: ptr ImageResolve;
     ): void {.cdecl, lazyload("vkCmdResolveImage", DeviceLevel).}
 proc cmdSetEvent*(
       commandBuffer: CommandBuffer;
@@ -4229,33 +4229,33 @@ proc cmdResetEvent*(
 proc cmdWaitEvents*(
       commandBuffer: CommandBuffer;
       eventCount: uint32;
-      pEvents: ptr Event;
+      pEvents {.length: eventCount.}: ptr Event;
       srcStageMask: PipelineStageFlags;
       dstStageMask: PipelineStageFlags;
-      memoryBarrierCount = default(uint32); # optional
-      pMemoryBarriers: ptr MemoryBarrier;
-      bufferMemoryBarrierCount = default(uint32); # optional
-      pBufferMemoryBarriers: ptr BufferMemoryBarrier;
-      imageMemoryBarrierCount = default(uint32); # optional
-      pImageMemoryBarriers: ptr ImageMemoryBarrier;
+      memoryBarrierCount = default(uint32);
+      pMemoryBarriers {.length: memoryBarrierCount.}: ptr MemoryBarrier;
+      bufferMemoryBarrierCount = default(uint32);
+      pBufferMemoryBarriers {.length: bufferMemoryBarrierCount.}: ptr BufferMemoryBarrier;
+      imageMemoryBarrierCount = default(uint32);
+      pImageMemoryBarriers {.length: imageMemoryBarrierCount.}: ptr ImageMemoryBarrier;
     ): void {.cdecl, lazyload("vkCmdWaitEvents", DeviceLevel).}
 proc cmdPipelineBarrier*(
       commandBuffer: CommandBuffer;
       srcStageMask: PipelineStageFlags;
       dstStageMask: PipelineStageFlags;
-      dependencyFlags = default(DependencyFlags); # optional
-      memoryBarrierCount = default(uint32); # optional
-      pMemoryBarriers: ptr MemoryBarrier;
-      bufferMemoryBarrierCount = default(uint32); # optional
-      pBufferMemoryBarriers: ptr BufferMemoryBarrier;
-      imageMemoryBarrierCount = default(uint32); # optional
-      pImageMemoryBarriers: ptr ImageMemoryBarrier;
+      dependencyFlags = default(DependencyFlags);
+      memoryBarrierCount = default(uint32);
+      pMemoryBarriers {.length: memoryBarrierCount.}: ptr MemoryBarrier;
+      bufferMemoryBarrierCount = default(uint32);
+      pBufferMemoryBarriers {.length: bufferMemoryBarrierCount.}: ptr BufferMemoryBarrier;
+      imageMemoryBarrierCount = default(uint32);
+      pImageMemoryBarriers {.length: imageMemoryBarrierCount.}: ptr ImageMemoryBarrier;
     ): void {.cdecl, lazyload("vkCmdPipelineBarrier", DeviceLevel).}
 proc cmdBeginQuery*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
       query: uint32;
-      flags = default(QueryControlFlags); # optional
+      flags = default(QueryControlFlags);
     ): void {.cdecl, lazyload("vkCmdBeginQuery", DeviceLevel).}
 proc cmdEndQuery*(
       commandBuffer: CommandBuffer;
@@ -4282,7 +4282,7 @@ proc cmdCopyQueryPoolResults*(
       dstBuffer: Buffer;
       dstOffset: DeviceSize;
       stride: DeviceSize;
-      flags = default(QueryResultFlags); # optional
+      flags = default(QueryResultFlags);
     ): void {.cdecl, lazyload("vkCmdCopyQueryPoolResults", DeviceLevel).}
 proc cmdPushConstants*(
       commandBuffer: CommandBuffer;
@@ -4290,7 +4290,7 @@ proc cmdPushConstants*(
       stageFlags: ShaderStageFlags;
       offset: uint32;
       size: uint32;
-      pValues: pointer;
+      pValues {.length: size.}: pointer;
     ): void {.cdecl, lazyload("vkCmdPushConstants", DeviceLevel).}
 proc cmdBeginRenderPass*(
       commandBuffer: CommandBuffer;
@@ -4307,7 +4307,7 @@ proc cmdEndRenderPass*(
 proc cmdExecuteCommands*(
       commandBuffer: CommandBuffer;
       commandBufferCount: uint32;
-      pCommandBuffers: ptr CommandBuffer;
+      pCommandBuffers {.length: commandBufferCount.}: ptr CommandBuffer;
     ): void {.cdecl, lazyload("vkCmdExecuteCommands", DeviceLevel).}
 
 

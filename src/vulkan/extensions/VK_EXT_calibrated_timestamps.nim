@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T08:32:06Z
 # VK_EXT_calibrated_timestamps
 
 
@@ -25,13 +25,13 @@ type
 proc getPhysicalDeviceCalibrateableTimeDomainsEXT*(
       physicalDevice: PhysicalDevice;
       pTimeDomainCount: ptr uint32;
-      pTimeDomains = default(ptr TimeDomainEXT); # optional
+      pTimeDomains {.length: pTimeDomainCount.} = default(ptr TimeDomainEXT);
     ): Result {.cdecl, lazyload("vkGetPhysicalDeviceCalibrateableTimeDomainsEXT", InstanceLevel).}
 proc getCalibratedTimestampsEXT*(
       device: Device;
       timestampCount: uint32;
-      pTimestampInfos: ptr CalibratedTimestampInfoEXT;
-      pTimestamps: ptr uint64;
+      pTimestampInfos {.length: timestampCount.}: ptr CalibratedTimestampInfoEXT;
+      pTimestamps {.length: timestampCount.}: ptr uint64;
       pMaxDeviation: ptr uint64;
     ): Result {.cdecl, lazyload("vkGetCalibratedTimestampsEXT", DeviceLevel).}
 

@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T08:32:06Z
 # VK_KHR_pipeline_executable_properties
 
 
@@ -65,19 +65,19 @@ proc getPipelineExecutablePropertiesKHR*(
       device: Device;
       pPipelineInfo: ptr PipelineInfoKHR;
       pExecutableCount: ptr uint32;
-      pProperties = default(ptr PipelineExecutablePropertiesKHR); # optional
+      pProperties {.length: pExecutableCount.} = default(ptr PipelineExecutablePropertiesKHR);
     ): Result {.cdecl, lazyload("vkGetPipelineExecutablePropertiesKHR", DeviceLevel).}
 proc getPipelineExecutableStatisticsKHR*(
       device: Device;
       pExecutableInfo: ptr PipelineExecutableInfoKHR;
       pStatisticCount: ptr uint32;
-      pStatistics = default(ptr PipelineExecutableStatisticKHR); # optional
+      pStatistics {.length: pStatisticCount.} = default(ptr PipelineExecutableStatisticKHR);
     ): Result {.cdecl, lazyload("vkGetPipelineExecutableStatisticsKHR", DeviceLevel).}
 proc getPipelineExecutableInternalRepresentationsKHR*(
       device: Device;
       pExecutableInfo: ptr PipelineExecutableInfoKHR;
       pInternalRepresentationCount: ptr uint32;
-      pInternalRepresentations = default(ptr PipelineExecutableInternalRepresentationKHR); # optional
+      pInternalRepresentations {.length: pInternalRepresentationCount.} = default(ptr PipelineExecutableInternalRepresentationKHR);
     ): Result {.cdecl, lazyload("vkGetPipelineExecutableInternalRepresentationsKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_pipeline_executable_properties*(instance: Instance) =

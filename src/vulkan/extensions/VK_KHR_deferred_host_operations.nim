@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T07:49:56Z
 # VK_KHR_deferred_host_operations
 
 
@@ -19,13 +19,13 @@ type
 
 proc createDeferredOperationKHR*(
       device: Device;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pDeferredOperation: ptr DeferredOperationKHR;
     ): Result {.cdecl, lazyload("vkCreateDeferredOperationKHR", DeviceLevel).}
 proc destroyDeferredOperationKHR*(
       device: Device;
-      operation = default(DeferredOperationKHR); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      operation = default(DeferredOperationKHR);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyDeferredOperationKHR", DeviceLevel).}
 proc getDeferredOperationMaxConcurrencyKHR*(
       device: Device;

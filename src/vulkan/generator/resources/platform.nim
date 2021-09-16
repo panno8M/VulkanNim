@@ -115,3 +115,5 @@ macro lazyload*(loadFrom: string; with = InstanceLevel; def: untyped): untyped =
 
 template optional*() {.pragma.}
 template constant*(v: typed) {.pragma.}
+
+template length*(v: untyped) {.pragma.}

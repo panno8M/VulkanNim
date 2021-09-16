@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T07:49:56Z
 # VK_INTEL_performance_query
 
 
@@ -93,7 +93,7 @@ proc acquirePerformanceConfigurationINTEL*(
     ): Result {.cdecl, lazyload("vkAcquirePerformanceConfigurationINTEL", DeviceLevel).}
 proc releasePerformanceConfigurationINTEL*(
       device: Device;
-      configuration = default(PerformanceConfigurationINTEL); # optional
+      configuration = default(PerformanceConfigurationINTEL);
     ): Result {.cdecl, lazyload("vkReleasePerformanceConfigurationINTEL", DeviceLevel).}
 proc queueSetPerformanceConfigurationINTEL*(
       queue: Queue;

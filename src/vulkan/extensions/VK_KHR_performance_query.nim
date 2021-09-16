@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T08:32:06Z
 # VK_KHR_performance_query
 
 
@@ -101,8 +101,8 @@ proc enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR*(
       physicalDevice: PhysicalDevice;
       queueFamilyIndex: uint32;
       pCounterCount: ptr uint32;
-      pCounters = default(ptr PerformanceCounterKHR); # optional
-      pCounterDescriptions = default(ptr PerformanceCounterDescriptionKHR); # optional
+      pCounters {.length: pCounterCount.} = default(ptr PerformanceCounterKHR);
+      pCounterDescriptions {.length: pCounterCount.} = default(ptr PerformanceCounterDescriptionKHR);
     ): Result {.cdecl, lazyload("vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR", InstanceLevel).}
 proc getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR*(
       physicalDevice: PhysicalDevice;

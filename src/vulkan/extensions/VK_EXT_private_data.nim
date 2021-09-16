@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T07:49:56Z
 # VK_EXT_private_data
 
 
@@ -32,13 +32,13 @@ type
 proc createPrivateDataSlotEXT*(
       device: Device;
       pCreateInfo: ptr PrivateDataSlotCreateInfoEXT;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pPrivateDataSlot: ptr PrivateDataSlotEXT;
     ): Result {.cdecl, lazyload("vkCreatePrivateDataSlotEXT", DeviceLevel).}
 proc destroyPrivateDataSlotEXT*(
       device: Device;
-      privateDataSlot = default(PrivateDataSlotEXT); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      privateDataSlot = default(PrivateDataSlotEXT);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyPrivateDataSlotEXT", DeviceLevel).}
 proc setPrivateDataEXT*(
       device: Device;

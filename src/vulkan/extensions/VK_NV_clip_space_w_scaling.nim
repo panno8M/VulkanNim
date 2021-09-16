@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T08:32:06Z
 # VK_NV_clip_space_w_scaling
 
 
@@ -24,7 +24,7 @@ proc cmdSetViewportWScalingNV*(
       commandBuffer: CommandBuffer;
       firstViewport: uint32;
       viewportCount: uint32;
-      pViewportWScalings: ptr ViewportWScalingNV;
+      pViewportWScalings {.length: viewportCount.}: ptr ViewportWScalingNV;
     ): void {.cdecl, lazyload("vkCmdSetViewportWScalingNV", DeviceLevel).}
 
 proc loadAllVK_NV_clip_space_w_scaling*(instance: Instance) =

@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T08:32:06Z
 # VK_KHR_device_group
 
 
@@ -127,7 +127,7 @@ proc getPhysicalDevicePresentRectanglesKHR*(
       physicalDevice: PhysicalDevice;
       surface: SurfaceKHR;
       pRectCount: ptr uint32;
-      pRects = default(ptr Rect2D); # optional
+      pRects {.length: pRectCount.} = default(ptr Rect2D);
     ): Result {.cdecl, lazyload("vkGetPhysicalDevicePresentRectanglesKHR", InstanceLevel).}
 
 

@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T08:32:06Z
 # VK_EXT_validation_cache
 
 
@@ -31,25 +31,25 @@ type
 proc createValidationCacheEXT*(
       device: Device;
       pCreateInfo: ptr ValidationCacheCreateInfoEXT;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pValidationCache: ptr ValidationCacheEXT;
     ): Result {.cdecl, lazyload("vkCreateValidationCacheEXT", DeviceLevel).}
 proc destroyValidationCacheEXT*(
       device: Device;
-      validationCache = default(ValidationCacheEXT); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      validationCache = default(ValidationCacheEXT);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyValidationCacheEXT", DeviceLevel).}
 proc mergeValidationCachesEXT*(
       device: Device;
       dstCache: ValidationCacheEXT;
       srcCacheCount: uint32;
-      pSrcCaches: ptr ValidationCacheEXT;
+      pSrcCaches {.length: srcCacheCount.}: ptr ValidationCacheEXT;
     ): Result {.cdecl, lazyload("vkMergeValidationCachesEXT", DeviceLevel).}
 proc getValidationCacheDataEXT*(
       device: Device;
       validationCache: ValidationCacheEXT;
       pDataSize: ptr uint;
-      pData = default(pointer); # optional
+      pData {.length: pDataSize.} = default(pointer);
     ): Result {.cdecl, lazyload("vkGetValidationCacheDataEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_validation_cache*(instance: Instance) =

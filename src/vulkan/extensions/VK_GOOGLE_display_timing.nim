@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T08:32:06Z
 # VK_GOOGLE_display_timing
 
 
@@ -38,7 +38,7 @@ proc getPastPresentationTimingGOOGLE*(
       device: Device;
       swapchain: SwapchainKHR;
       pPresentationTimingCount: ptr uint32;
-      pPresentationTimings = default(ptr PastPresentationTimingGOOGLE); # optional
+      pPresentationTimings {.length: pPresentationTimingCount.} = default(ptr PastPresentationTimingGOOGLE);
     ): Result {.cdecl, lazyload("vkGetPastPresentationTimingGOOGLE", DeviceLevel).}
 
 proc loadAllVK_GOOGLE_display_timing*(instance: Instance) =

@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T07:49:56Z
 # VK_KHR_xlib_surface
 
 
@@ -25,7 +25,7 @@ type
 proc createXlibSurfaceKHR*(
       instance: Instance;
       pCreateInfo: ptr XlibSurfaceCreateInfoKHR;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
     ): Result {.cdecl, lazyload("vkCreateXlibSurfaceKHR", InstanceLevel).}
 proc getPhysicalDeviceXlibPresentationSupportKHR*(

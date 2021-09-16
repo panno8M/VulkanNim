@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T08:32:06Z
 # vk11
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -591,12 +591,12 @@ proc enumerateInstanceVersion*(
 proc bindBufferMemory2*(
       device: Device;
       bindInfoCount: uint32;
-      pBindInfos: ptr BindBufferMemoryInfo;
+      pBindInfos {.length: bindInfoCount.}: ptr BindBufferMemoryInfo;
     ): Result {.cdecl, lazyload("vkBindBufferMemory2", DeviceLevel).}
 proc bindImageMemory2*(
       device: Device;
       bindInfoCount: uint32;
-      pBindInfos: ptr BindImageMemoryInfo;
+      pBindInfos {.length: bindInfoCount.}: ptr BindImageMemoryInfo;
     ): Result {.cdecl, lazyload("vkBindImageMemory2", DeviceLevel).}
 
 
@@ -644,7 +644,7 @@ PipelineCreateFlagBits.defineAliases:
 proc enumeratePhysicalDeviceGroups*(
       instance: Instance;
       pPhysicalDeviceGroupCount: ptr uint32;
-      pPhysicalDeviceGroupProperties = default(ptr PhysicalDeviceGroupProperties); # optional
+      pPhysicalDeviceGroupProperties {.length: pPhysicalDeviceGroupCount.} = default(ptr PhysicalDeviceGroupProperties);
     ): Result {.cdecl, lazyload("vkEnumeratePhysicalDeviceGroups", InstanceLevel).}
 
 
@@ -664,7 +664,7 @@ proc getImageSparseMemoryRequirements2*(
       device: Device;
       pInfo: ptr ImageSparseMemoryRequirementsInfo2;
       pSparseMemoryRequirementCount: ptr uint32;
-      pSparseMemoryRequirements = default(ptr SparseImageMemoryRequirements2); # optional
+      pSparseMemoryRequirements {.length: pSparseMemoryRequirementCount.} = default(ptr SparseImageMemoryRequirements2);
     ): void {.cdecl, lazyload("vkGetImageSparseMemoryRequirements2", DeviceLevel).}
 
 
@@ -691,7 +691,7 @@ proc getPhysicalDeviceImageFormatProperties2*(
 proc getPhysicalDeviceQueueFamilyProperties2*(
       physicalDevice: PhysicalDevice;
       pQueueFamilyPropertyCount: ptr uint32;
-      pQueueFamilyProperties = default(ptr QueueFamilyProperties2); # optional
+      pQueueFamilyProperties {.length: pQueueFamilyPropertyCount.} = default(ptr QueueFamilyProperties2);
     ): void {.cdecl, lazyload("vkGetPhysicalDeviceQueueFamilyProperties2", InstanceLevel).}
 proc getPhysicalDeviceMemoryProperties2*(
       physicalDevice: PhysicalDevice;
@@ -701,7 +701,7 @@ proc getPhysicalDeviceSparseImageFormatProperties2*(
       physicalDevice: PhysicalDevice;
       pFormatInfo: ptr PhysicalDeviceSparseImageFormatInfo2;
       pPropertyCount: ptr uint32;
-      pProperties = default(ptr SparseImageFormatProperties2); # optional
+      pProperties {.length: pPropertyCount.} = default(ptr SparseImageFormatProperties2);
     ): void {.cdecl, lazyload("vkGetPhysicalDeviceSparseImageFormatProperties2", InstanceLevel).}
 
 
@@ -710,7 +710,7 @@ proc getPhysicalDeviceSparseImageFormatProperties2*(
 proc trimCommandPool*(
       device: Device;
       commandPool: CommandPool;
-      flags = default(CommandPoolTrimFlags); # optional
+      flags = default(CommandPoolTrimFlags);
     ): void {.cdecl, lazyload("vkTrimCommandPool", DeviceLevel).}
 
 
@@ -743,13 +743,13 @@ proc getDeviceQueue2*(
 proc createSamplerYcbcrConversion*(
       device: Device;
       pCreateInfo: ptr SamplerYcbcrConversionCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pYcbcrConversion: ptr SamplerYcbcrConversion;
     ): Result {.cdecl, lazyload("vkCreateSamplerYcbcrConversion", DeviceLevel).}
 proc destroySamplerYcbcrConversion*(
       device: Device;
-      ycbcrConversion = default(SamplerYcbcrConversion); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      ycbcrConversion = default(SamplerYcbcrConversion);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroySamplerYcbcrConversion", DeviceLevel).}
 
 
@@ -758,13 +758,13 @@ proc destroySamplerYcbcrConversion*(
 proc createDescriptorUpdateTemplate*(
       device: Device;
       pCreateInfo: ptr DescriptorUpdateTemplateCreateInfo;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pDescriptorUpdateTemplate: ptr DescriptorUpdateTemplate;
     ): Result {.cdecl, lazyload("vkCreateDescriptorUpdateTemplate", DeviceLevel).}
 proc destroyDescriptorUpdateTemplate*(
       device: Device;
-      descriptorUpdateTemplate = default(DescriptorUpdateTemplate); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      descriptorUpdateTemplate = default(DescriptorUpdateTemplate);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyDescriptorUpdateTemplate", DeviceLevel).}
 proc updateDescriptorSetWithTemplate*(
       device: Device;

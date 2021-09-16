@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T08:32:06Z
 # VK_EXT_debug_report
 
 
@@ -84,13 +84,13 @@ DebugReportObjectTypeEXT.defineAliases:
 proc createDebugReportCallbackEXT*(
       instance: Instance;
       pCreateInfo: ptr DebugReportCallbackCreateInfoEXT;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pCallback: ptr DebugReportCallbackEXT;
     ): Result {.cdecl, lazyload("vkCreateDebugReportCallbackEXT", InstanceLevel).}
 proc destroyDebugReportCallbackEXT*(
       instance: Instance;
-      callback = default(DebugReportCallbackEXT); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      callback = default(DebugReportCallbackEXT);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyDebugReportCallbackEXT", InstanceLevel).}
 proc debugReportMessageEXT*(
       instance: Instance;
@@ -99,8 +99,8 @@ proc debugReportMessageEXT*(
       `object`: uint64;
       location: uint;
       messageCode: int32;
-      pLayerPrefix: cstring;
-      pMessage: cstring;
+      pLayerPrefix {.length: null-terminated.}: cstring;
+      pMessage {.length: null-terminated.}: cstring;
     ): void {.cdecl, lazyload("vkDebugReportMessageEXT", InstanceLevel).}
 StructureType.defineAliases:
   debugReportCallbackCreateInfoExt as debugReportCreateInfoExt

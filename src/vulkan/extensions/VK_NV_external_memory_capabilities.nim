@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T07:49:56Z
 # VK_NV_external_memory_capabilities
 
 
@@ -35,8 +35,8 @@ proc getPhysicalDeviceExternalImageFormatPropertiesNV*(
       theType: ImageType;
       tiling: ImageTiling;
       usage: ImageUsageFlags;
-      flags = default(ImageCreateFlags); # optional
-      externalHandleType = default(ExternalMemoryHandleTypeFlagsNV); # optional
+      flags = default(ImageCreateFlags);
+      externalHandleType = default(ExternalMemoryHandleTypeFlagsNV);
       pExternalImageFormatProperties: ptr ExternalImageFormatPropertiesNV;
     ): Result {.cdecl, lazyload("vkGetPhysicalDeviceExternalImageFormatPropertiesNV", InstanceLevel).}
 

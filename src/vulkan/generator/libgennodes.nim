@@ -179,10 +179,12 @@ proc render*(command: NodeCommand): string =
       .mapIt( block:
         let name = it.name.parseParamName
         let theType = it.theType.parseTypeName(it.ptrLv)
+        let lengthAnno = if it.arrlen.isNone: ""
+          else: " {{.length: {it.arrlen.get.replace(\"->\", \".\")}.}}".fmt
         if it.optional:
-          "      {name} = default({theType}); # optional".fmt
+          "      {name}{lengthAnno} = default({theType});".fmt
         else:
-          "      {name}: {theType};".fmt)
+          "      {name}{lengthAnno}: {theType};".fmt)
     let loadMethod = case command.loadMode
       of lmPreload: "preload(\"{command.name}\")".fmt
       of lmWithInstance: "lazyload(\"{command.name}\", InstanceLevel)".fmt
@@ -844,7 +846,8 @@ func extractNodeCommand*(typeDef: XmlNode): NodeCommand {.raises: [UnexpectedXml
         name: param["name"].innerText.parseWords[0],
         theType: param["type"].innerText.parseWords[0],
         ptrLv: ($param).count("*"),
-        optional: param{"optional"} == "true")
+        optional: param{"optional"} == "true",
+        arrlen: ?param{"len"})
     result.loadMode =
       if result.name in preloadableProcs: lmPreload
       elif result.params[0].theType in ["VkInstance", "VkPhysicalDevice"]: lmWithInstance

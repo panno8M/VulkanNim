@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T08:32:06Z
 # VK_EXT_extended_dynamic_state
 
 
@@ -19,7 +19,7 @@ type
 
 proc cmdSetCullModeEXT*(
       commandBuffer: CommandBuffer;
-      cullMode = default(CullModeFlags); # optional
+      cullMode = default(CullModeFlags);
     ): void {.cdecl, lazyload("vkCmdSetCullModeEXT", DeviceLevel).}
 proc cmdSetFrontFaceEXT*(
       commandBuffer: CommandBuffer;
@@ -32,21 +32,21 @@ proc cmdSetPrimitiveTopologyEXT*(
 proc cmdSetViewportWithCountEXT*(
       commandBuffer: CommandBuffer;
       viewportCount: uint32;
-      pViewports: ptr Viewport;
+      pViewports {.length: viewportCount.}: ptr Viewport;
     ): void {.cdecl, lazyload("vkCmdSetViewportWithCountEXT", DeviceLevel).}
 proc cmdSetScissorWithCountEXT*(
       commandBuffer: CommandBuffer;
       scissorCount: uint32;
-      pScissors: ptr Rect2D;
+      pScissors {.length: scissorCount.}: ptr Rect2D;
     ): void {.cdecl, lazyload("vkCmdSetScissorWithCountEXT", DeviceLevel).}
 proc cmdBindVertexBuffers2EXT*(
       commandBuffer: CommandBuffer;
       firstBinding: uint32;
       bindingCount: uint32;
-      pBuffers: ptr Buffer;
-      pOffsets: ptr DeviceSize;
-      pSizes = default(ptr DeviceSize); # optional
-      pStrides = default(ptr DeviceSize); # optional
+      pBuffers {.length: bindingCount.}: ptr Buffer;
+      pOffsets {.length: bindingCount.}: ptr DeviceSize;
+      pSizes {.length: bindingCount.} = default(ptr DeviceSize);
+      pStrides {.length: bindingCount.} = default(ptr DeviceSize);
     ): void {.cdecl, lazyload("vkCmdBindVertexBuffers2EXT", DeviceLevel).}
 proc cmdSetDepthTestEnableEXT*(
       commandBuffer: CommandBuffer;

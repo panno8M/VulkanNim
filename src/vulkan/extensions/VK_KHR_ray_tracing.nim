@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-16T08:32:06Z
 # VK_KHR_ray_tracing
 # VK_NV_ray_tracing
 # Explicit sort order to require processing after VK_NV_ray_tracing
@@ -374,13 +374,13 @@ type
 proc createAccelerationStructureKHR*(
       device: Device;
       pCreateInfo: ptr AccelerationStructureCreateInfoKHR;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pAccelerationStructure: ptr AccelerationStructureKHR;
     ): Result {.cdecl, lazyload("vkCreateAccelerationStructureKHR", DeviceLevel).}
 proc destroyAccelerationStructureKHR*(
       device: Device;
-      accelerationStructure = default(AccelerationStructureKHR); # optional
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      accelerationStructure = default(AccelerationStructureKHR);
+      pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyAccelerationStructureKHR", DeviceLevel).}
 proc getAccelerationStructureMemoryRequirementsKHR*(
       device: Device;
@@ -390,13 +390,13 @@ proc getAccelerationStructureMemoryRequirementsKHR*(
 proc bindAccelerationStructureMemoryKHR*(
       device: Device;
       bindInfoCount: uint32;
-      pBindInfos: ptr BindAccelerationStructureMemoryInfoKHR;
+      pBindInfos {.length: bindInfoCount.}: ptr BindAccelerationStructureMemoryInfoKHR;
     ): Result {.cdecl, lazyload("vkBindAccelerationStructureMemoryKHR", DeviceLevel).}
 proc cmdBuildAccelerationStructureKHR*(
       commandBuffer: CommandBuffer;
       infoCount: uint32;
-      pInfos: ptr AccelerationStructureBuildGeometryInfoKHR;
-      ppOffsetInfos: ptr ptr AccelerationStructureBuildOffsetInfoKHR;
+      pInfos {.length: infoCount.}: ptr AccelerationStructureBuildGeometryInfoKHR;
+      ppOffsetInfos {.length: infoCount.}: ptr ptr AccelerationStructureBuildOffsetInfoKHR;
     ): void {.cdecl, lazyload("vkCmdBuildAccelerationStructureKHR", DeviceLevel).}
 proc cmdBuildAccelerationStructureIndirectKHR*(
       commandBuffer: CommandBuffer;
@@ -408,8 +408,8 @@ proc cmdBuildAccelerationStructureIndirectKHR*(
 proc buildAccelerationStructureKHR*(
       device: Device;
       infoCount: uint32;
-      pInfos: ptr AccelerationStructureBuildGeometryInfoKHR;
-      ppOffsetInfos: ptr ptr AccelerationStructureBuildOffsetInfoKHR;
+      pInfos {.length: infoCount.}: ptr AccelerationStructureBuildGeometryInfoKHR;
+      ppOffsetInfos {.length: infoCount.}: ptr ptr AccelerationStructureBuildOffsetInfoKHR;
     ): Result {.cdecl, lazyload("vkBuildAccelerationStructureKHR", DeviceLevel).}
 proc copyAccelerationStructureKHR*(
       device: Device;
@@ -426,10 +426,10 @@ proc copyMemoryToAccelerationStructureKHR*(
 proc writeAccelerationStructuresPropertiesKHR*(
       device: Device;
       accelerationStructureCount: uint32;
-      pAccelerationStructures: ptr AccelerationStructureKHR;
+      pAccelerationStructures {.length: accelerationStructureCount.}: ptr AccelerationStructureKHR;
       queryType: QueryType;
       dataSize: uint;
-      pData: pointer;
+      pData {.length: dataSize.}: pointer;
       stride: uint;
     ): Result {.cdecl, lazyload("vkWriteAccelerationStructuresPropertiesKHR", DeviceLevel).}
 proc cmdCopyAccelerationStructureKHR*(
@@ -456,11 +456,11 @@ proc cmdTraceRaysKHR*(
     ): void {.cdecl, lazyload("vkCmdTraceRaysKHR", DeviceLevel).}
 proc createRayTracingPipelinesKHR*(
       device: Device;
-      pipelineCache = default(PipelineCache); # optional
+      pipelineCache = default(PipelineCache);
       createInfoCount: uint32;
-      pCreateInfos: ptr RayTracingPipelineCreateInfoKHR;
-      pAllocator = default(ptr AllocationCallbacks); # optional
-      pPipelines: ptr Pipeline;
+      pCreateInfos {.length: createInfoCount.}: ptr RayTracingPipelineCreateInfoKHR;
+      pAllocator = default(ptr AllocationCallbacks);
+      pPipelines {.length: createInfoCount.}: ptr Pipeline;
     ): Result {.cdecl, lazyload("vkCreateRayTracingPipelinesKHR", DeviceLevel).}
 proc getRayTracingShaderGroupHandlesKHR*(
       device: Device;
@@ -468,7 +468,7 @@ proc getRayTracingShaderGroupHandlesKHR*(
       firstGroup: uint32;
       groupCount: uint32;
       dataSize: uint;
-      pData: pointer;
+      pData {.length: dataSize.}: pointer;
     ): Result {.cdecl, lazyload("vkGetRayTracingShaderGroupHandlesKHR", DeviceLevel).}
 proc getAccelerationStructureDeviceAddressKHR*(
       device: Device;
@@ -480,12 +480,12 @@ proc getRayTracingCaptureReplayShaderGroupHandlesKHR*(
       firstGroup: uint32;
       groupCount: uint32;
       dataSize: uint;
-      pData: pointer;
+      pData {.length: dataSize.}: pointer;
     ): Result {.cdecl, lazyload("vkGetRayTracingCaptureReplayShaderGroupHandlesKHR", DeviceLevel).}
 proc cmdWriteAccelerationStructuresPropertiesKHR*(
       commandBuffer: CommandBuffer;
       accelerationStructureCount: uint32;
-      pAccelerationStructures: ptr AccelerationStructureKHR;
+      pAccelerationStructures {.length: accelerationStructureCount.}: ptr AccelerationStructureKHR;
       queryType: QueryType;
       queryPool: QueryPool;
       firstQuery: uint32;
@@ -508,7 +508,7 @@ proc getDeviceAccelerationStructureCompatibilityKHR*(
 proc createAccelerationStructureNV*(
       device: Device;
       pCreateInfo: ptr AccelerationStructureCreateInfoNV;
-      pAllocator = default(ptr AllocationCallbacks); # optional
+      pAllocator = default(ptr AllocationCallbacks);
       pAccelerationStructure: ptr AccelerationStructureNV;
     ): Result {.cdecl, lazyload("vkCreateAccelerationStructureNV", DeviceLevel).}
 const destroyAccelerationStructureNV* = destroyAccelerationStructureKHR
@@ -521,11 +521,11 @@ const bindAccelerationStructureMemoryNV* = bindAccelerationStructureMemoryKHR
 proc cmdBuildAccelerationStructureNV*(
       commandBuffer: CommandBuffer;
       pInfo: ptr AccelerationStructureInfoNV;
-      instanceData = default(Buffer); # optional
+      instanceData = default(Buffer);
       instanceOffset: DeviceSize;
       update: Bool32;
       dst: AccelerationStructureKHR;
-      src = default(AccelerationStructureKHR); # optional
+      src = default(AccelerationStructureKHR);
       scratch: Buffer;
       scratchOffset: DeviceSize;
     ): void {.cdecl, lazyload("vkCmdBuildAccelerationStructureNV", DeviceLevel).}
@@ -539,13 +539,13 @@ proc cmdTraceRaysNV*(
       commandBuffer: CommandBuffer;
       raygenShaderBindingTableBuffer: Buffer;
       raygenShaderBindingOffset: DeviceSize;
-      missShaderBindingTableBuffer = default(Buffer); # optional
+      missShaderBindingTableBuffer = default(Buffer);
       missShaderBindingOffset: DeviceSize;
       missShaderBindingStride: DeviceSize;
-      hitShaderBindingTableBuffer = default(Buffer); # optional
+      hitShaderBindingTableBuffer = default(Buffer);
       hitShaderBindingOffset: DeviceSize;
       hitShaderBindingStride: DeviceSize;
-      callableShaderBindingTableBuffer = default(Buffer); # optional
+      callableShaderBindingTableBuffer = default(Buffer);
       callableShaderBindingOffset: DeviceSize;
       callableShaderBindingStride: DeviceSize;
       width: uint32;
@@ -554,18 +554,18 @@ proc cmdTraceRaysNV*(
     ): void {.cdecl, lazyload("vkCmdTraceRaysNV", DeviceLevel).}
 proc createRayTracingPipelinesNV*(
       device: Device;
-      pipelineCache = default(PipelineCache); # optional
+      pipelineCache = default(PipelineCache);
       createInfoCount: uint32;
-      pCreateInfos: ptr RayTracingPipelineCreateInfoNV;
-      pAllocator = default(ptr AllocationCallbacks); # optional
-      pPipelines: ptr Pipeline;
+      pCreateInfos {.length: createInfoCount.}: ptr RayTracingPipelineCreateInfoNV;
+      pAllocator = default(ptr AllocationCallbacks);
+      pPipelines {.length: createInfoCount.}: ptr Pipeline;
     ): Result {.cdecl, lazyload("vkCreateRayTracingPipelinesNV", DeviceLevel).}
 const getRayTracingShaderGroupHandlesNV* = getRayTracingShaderGroupHandlesKHR
 proc getAccelerationStructureHandleNV*(
       device: Device;
       accelerationStructure: AccelerationStructureKHR;
       dataSize: uint;
-      pData: pointer;
+      pData {.length: dataSize.}: pointer;
     ): Result {.cdecl, lazyload("vkGetAccelerationStructureHandleNV", DeviceLevel).}
 const cmdWriteAccelerationStructuresPropertiesNV* = cmdWriteAccelerationStructuresPropertiesKHR
 proc compileDeferredNV*(
