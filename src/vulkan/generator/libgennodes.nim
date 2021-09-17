@@ -159,10 +159,10 @@ proc render*(handle: NodeHandle): string =
   of nkbrNormal:
     case handle.handleKind
     of HandleKind.Handle:
-      "Ht{name} = object of HandleType\n".fmt &
+      "Ht{name}* = object of HandleType\n".fmt &
       "{name}* = Handle[Ht{name}]".fmt
     of HandleKind.NonDispatchableHandle:
-      "Ht{name} = object of HandleType\n".fmt &
+      "Ht{name}* = object of HandleType\n".fmt &
       "{name}* = NonDispatchableHandle[Ht{name}]".fmt
   of nkbrAlias:
     let alias = handle.alias.replaceBasicTypes

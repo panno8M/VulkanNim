@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:49:56Z
+# Generated at 2021-09-17T11:40:23Z
 # VK_INTEL_performance_query
 
 
@@ -64,7 +64,7 @@ type
     sType* {.constant: (StructureType.performanceConfigurationAcquireInfoIntel).}: StructureType
     pNext* {.optional.}: pointer
     theType*: PerformanceConfigurationTypeINTEL
-  HtPerformanceConfigurationINTEL = object of HandleType
+  HtPerformanceConfigurationINTEL* = object of HandleType
   PerformanceConfigurationINTEL* = NonDispatchableHandle[HtPerformanceConfigurationINTEL]
 
 proc initializePerformanceApiINTEL*(

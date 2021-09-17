@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T08:32:06Z
+# Generated at 2021-09-17T11:40:23Z
 # VK_EXT_debug_report
 
 
@@ -58,7 +58,7 @@ type # enums and bitmasks
     accelerationStructureKhrExt = 1000165000
 
 type
-  HtDebugReportCallbackEXT = object of HandleType
+  HtDebugReportCallbackEXT* = object of HandleType
   DebugReportCallbackEXT* = NonDispatchableHandle[HtDebugReportCallbackEXT]
   PFN_DebugReportCallbackEXT* = proc(
       flags: DebugReportFlagsEXT;

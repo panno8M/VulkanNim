@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:49:56Z
+# Generated at 2021-09-17T11:40:23Z
 # VK_NV_device_generated_commands
 
 
@@ -71,7 +71,7 @@ type
     stride*: uint32
   SetStateFlagsIndirectCommandNV* = object
     data*: uint32
-  HtIndirectCommandsLayoutNV = object of HandleType
+  HtIndirectCommandsLayoutNV* = object of HandleType
   IndirectCommandsLayoutNV* = NonDispatchableHandle[HtIndirectCommandsLayoutNV]
   IndirectCommandsStreamNV* = object
     buffer*: Buffer

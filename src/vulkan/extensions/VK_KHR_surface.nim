@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T08:32:06Z
+# Generated at 2021-09-17T11:40:23Z
 # VK_KHR_surface
 # VK_KHR_display
 
@@ -83,7 +83,7 @@ type # enums and bitmasks
   SurfaceTransformFlagsKHR* = Flags[SurfaceTransformFlagBitsKHR]
 
 type
-  HtSurfaceKHR = object of HandleType
+  HtSurfaceKHR* = object of HandleType
   SurfaceKHR* = NonDispatchableHandle[HtSurfaceKHR]
   SurfaceCapabilitiesKHR* = object
     minImageCount*: uint32
@@ -100,14 +100,14 @@ type
     format*: Format
     colorSpace*: ColorSpaceKHR
 
-  HtDisplayKHR = object of HandleType
+  HtDisplayKHR* = object of HandleType
   DisplayKHR* = NonDispatchableHandle[HtDisplayKHR]
   DisplayModeCreateInfoKHR* = object
     sType* {.constant: (StructureType.displayModeCreateInfoKhr).}: StructureType
     pNext* {.optional.}: pointer
     flags* {.optional.}: DisplayModeCreateFlagsKHR
     parameters*: DisplayModeParametersKHR
-  HtDisplayModeKHR = object of HandleType
+  HtDisplayModeKHR* = object of HandleType
   DisplayModeKHR* = NonDispatchableHandle[HtDisplayModeKHR]
   DisplayModeParametersKHR* = object
     visibleRegion*: Extent2D

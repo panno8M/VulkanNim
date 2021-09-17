@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T08:32:06Z
+# Generated at 2021-09-17T11:40:23Z
 # VK_KHR_ray_tracing
 # VK_NV_ray_tracing
 # Explicit sort order to require processing after VK_NV_ray_tracing
@@ -197,7 +197,7 @@ type
     maxGeometryCount* {.optional.}: uint32
     pGeometryInfos*: ptr AccelerationStructureCreateGeometryTypeInfoKHR
     deviceAddress* {.optional.}: DeviceAddress
-  HtAccelerationStructureKHR = object of HandleType
+  HtAccelerationStructureKHR* = object of HandleType
   AccelerationStructureKHR* = NonDispatchableHandle[HtAccelerationStructureKHR]
   BindAccelerationStructureMemoryInfoKHR* = object
     sType* {.constant: (StructureType.bindAccelerationStructureMemoryInfoKhr).}: StructureType

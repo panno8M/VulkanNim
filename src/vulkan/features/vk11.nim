@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T08:32:06Z
+# Generated at 2021-09-17T11:40:23Z
 # vk11
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -430,12 +430,12 @@ type
     sType* {.constant: (StructureType.samplerYcbcrConversionImageFormatProperties).}: StructureType
     pNext* {.optional.}: pointer
     combinedImageSamplerDescriptorCount*: uint32
-  HtSamplerYcbcrConversion = object of HandleType
+  HtSamplerYcbcrConversion* = object of HandleType
   SamplerYcbcrConversion* = NonDispatchableHandle[HtSamplerYcbcrConversion]
 
   # Promoted from VK_KHR_descriptor_update_template
   # -----------------------------------------------
-  HtDescriptorUpdateTemplate = object of HandleType
+  HtDescriptorUpdateTemplate* = object of HandleType
   DescriptorUpdateTemplate* = NonDispatchableHandle[HtDescriptorUpdateTemplate]
   DescriptorUpdateTemplateEntry* = object
     dstBinding*: uint32

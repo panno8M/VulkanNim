@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T08:32:06Z
+# Generated at 2021-09-17T11:40:23Z
 # VK_EXT_validation_cache
 
 
@@ -15,7 +15,7 @@ type # enums and bitmasks
   ValidationCacheCreateFlagsEXT* = Flags[distinct UnusedEnum]
 
 type
-  HtValidationCacheEXT = object of HandleType
+  HtValidationCacheEXT* = object of HandleType
   ValidationCacheEXT* = NonDispatchableHandle[HtValidationCacheEXT]
   ValidationCacheCreateInfoEXT* = object
     sType* {.constant: (StructureType.validationCacheCreateInfoExt).}: StructureType

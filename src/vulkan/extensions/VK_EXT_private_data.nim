@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:49:56Z
+# Generated at 2021-09-17T11:40:23Z
 # VK_EXT_private_data
 
 
@@ -26,7 +26,7 @@ type
     sType* {.constant: (StructureType.privateDataSlotCreateInfoExt).}: StructureType
     pNext* {.optional.}: pointer
     flags*: PrivateDataSlotCreateFlagsEXT
-  HtPrivateDataSlotEXT = object of HandleType
+  HtPrivateDataSlotEXT* = object of HandleType
   PrivateDataSlotEXT* = NonDispatchableHandle[HtPrivateDataSlotEXT]
 
 proc createPrivateDataSlotEXT*(

@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T08:45:19Z
+# Generated at 2021-09-17T11:40:23Z
 # vk10
 # Vulkan core API interface definitions
 # =====================================
@@ -2464,7 +2464,7 @@ type
     maxArrayLayers*: uint32
     sampleCounts* {.optional.}: SampleCountFlags
     maxResourceSize*: DeviceSize
-  HtInstance = object of HandleType
+  HtInstance* = object of HandleType
   Instance* = Handle[HtInstance]
   InstanceCreateInfo* = object
     sType* {.constant: (StructureType.instanceCreateInfo).}: StructureType
@@ -2481,7 +2481,7 @@ type
   MemoryType* = object
     propertyFlags* {.optional.}: MemoryPropertyFlags
     heapIndex*: uint32
-  HtPhysicalDevice = object of HandleType
+  HtPhysicalDevice* = object of HandleType
   PhysicalDevice* = Handle[HtPhysicalDevice]
   PhysicalDeviceFeatures* = object
     robustBufferAccess*: Bool32
@@ -2675,7 +2675,7 @@ type
 
   # Device commands
   # ---------------
-  HtDevice = object of HandleType
+  HtDevice* = object of HandleType
   Device* = Handle[HtDevice]
   DeviceCreateInfo* = object
     sType* {.constant: (StructureType.deviceCreateInfo).}: StructureType
@@ -2712,7 +2712,7 @@ type
 
   # Queue commands
   # --------------
-  HtQueue = object of HandleType
+  HtQueue* = object of HandleType
   Queue* = Handle[HtQueue]
   SubmitInfo* = object
     sType* {.constant: (StructureType.submitInfo).}: StructureType
@@ -2741,7 +2741,7 @@ type
 
   # Memory management API commands
   # ------------------------------
-  HtDeviceMemory = object of HandleType
+  HtDeviceMemory* = object of HandleType
   DeviceMemory* = NonDispatchableHandle[HtDeviceMemory]
   MemoryRequirements* = object
     size*: DeviceSize
@@ -2805,7 +2805,7 @@ type
 
   # Fence commands
   # --------------
-  HtFence = object of HandleType
+  HtFence* = object of HandleType
   Fence* = NonDispatchableHandle[HtFence]
   FenceCreateInfo* = object
     sType* {.constant: (StructureType.fenceCreateInfo).}: StructureType
@@ -2814,7 +2814,7 @@ type
 
   # Queue semaphore commands
   # ------------------------
-  HtSemaphore = object of HandleType
+  HtSemaphore* = object of HandleType
   Semaphore* = NonDispatchableHandle[HtSemaphore]
   SemaphoreCreateInfo* = object
     sType* {.constant: (StructureType.semaphoreCreateInfo).}: StructureType
@@ -2823,7 +2823,7 @@ type
 
   # Event commands
   # --------------
-  HtEvent = object of HandleType
+  HtEvent* = object of HandleType
   Event* = NonDispatchableHandle[HtEvent]
   EventCreateInfo* = object
     sType* {.constant: (StructureType.eventCreateInfo).}: StructureType
@@ -2832,7 +2832,7 @@ type
 
   # Query commands
   # --------------
-  HtQueryPool = object of HandleType
+  HtQueryPool* = object of HandleType
   QueryPool* = NonDispatchableHandle[HtQueryPool]
   QueryPoolCreateInfo* = object
     sType* {.constant: (StructureType.queryPoolCreateInfo).}: StructureType
@@ -2844,7 +2844,7 @@ type
 
   # Buffer commands
   # ---------------
-  HtBuffer = object of HandleType
+  HtBuffer* = object of HandleType
   Buffer* = NonDispatchableHandle[HtBuffer]
   BufferCreateInfo* = object
     sType* {.constant: (StructureType.bufferCreateInfo).}: StructureType
@@ -2858,7 +2858,7 @@ type
 
   # Buffer view commands
   # --------------------
-  HtBufferView = object of HandleType
+  HtBufferView* = object of HandleType
   BufferView* = NonDispatchableHandle[HtBufferView]
   BufferViewCreateInfo* = object
     sType* {.constant: (StructureType.bufferViewCreateInfo).}: StructureType
@@ -2871,7 +2871,7 @@ type
 
   # Image commands
   # --------------
-  HtImage = object of HandleType
+  HtImage* = object of HandleType
   Image* = NonDispatchableHandle[HtImage]
   ImageCreateInfo* = object
     sType* {.constant: (StructureType.imageCreateInfo).}: StructureType
@@ -2909,7 +2909,7 @@ type
     levelCount*: uint32
     baseArrayLayer*: uint32
     layerCount*: uint32
-  HtImageView = object of HandleType
+  HtImageView* = object of HandleType
   ImageView* = NonDispatchableHandle[HtImageView]
   ImageViewCreateInfo* = object
     sType* {.constant: (StructureType.imageViewCreateInfo).}: StructureType
@@ -2923,7 +2923,7 @@ type
 
   # Shader commands
   # ---------------
-  HtShaderModule = object of HandleType
+  HtShaderModule* = object of HandleType
   ShaderModule* = NonDispatchableHandle[HtShaderModule]
   ShaderModuleCreateInfo* = object
     sType* {.constant: (StructureType.shaderModuleCreateInfo).}: StructureType
@@ -2934,7 +2934,7 @@ type
 
   # Pipeline Cache commands
   # -----------------------
-  HtPipelineCache = object of HandleType
+  HtPipelineCache* = object of HandleType
   PipelineCache* = NonDispatchableHandle[HtPipelineCache]
   PipelineCacheCreateInfo* = object
     sType* {.constant: (StructureType.pipelineCacheCreateInfo).}: StructureType
@@ -2973,7 +2973,7 @@ type
     subpass*: uint32
     basePipelineHandle* {.optional.}: Pipeline
     basePipelineIndex*: int32
-  HtPipeline = object of HandleType
+  HtPipeline* = object of HandleType
   Pipeline* = NonDispatchableHandle[HtPipeline]
   PipelineColorBlendAttachmentState* = object
     blendEnable*: Bool32
@@ -3107,7 +3107,7 @@ type
 
   # Pipeline layout commands
   # ------------------------
-  HtPipelineLayout = object of HandleType
+  HtPipelineLayout* = object of HandleType
   PipelineLayout* = NonDispatchableHandle[HtPipelineLayout]
   PipelineLayoutCreateInfo* = object
     sType* {.constant: (StructureType.pipelineLayoutCreateInfo).}: StructureType
@@ -3124,7 +3124,7 @@ type
 
   # Sampler commands
   # ----------------
-  HtSampler = object of HandleType
+  HtSampler* = object of HandleType
   Sampler* = NonDispatchableHandle[HtSampler]
   SamplerCreateInfo* = object
     sType* {.constant: (StructureType.samplerCreateInfo).}: StructureType
@@ -3166,7 +3166,7 @@ type
     sampler*: Sampler
     imageView*: ImageView
     imageLayout*: ImageLayout
-  HtDescriptorPool = object of HandleType
+  HtDescriptorPool* = object of HandleType
   DescriptorPool* = NonDispatchableHandle[HtDescriptorPool]
   DescriptorPoolCreateInfo* = object
     sType* {.constant: (StructureType.descriptorPoolCreateInfo).}: StructureType
@@ -3178,7 +3178,7 @@ type
   DescriptorPoolSize* = object
     theType*: DescriptorType
     descriptorCount*: uint32
-  HtDescriptorSet = object of HandleType
+  HtDescriptorSet* = object of HandleType
   DescriptorSet* = NonDispatchableHandle[HtDescriptorSet]
   DescriptorSetAllocateInfo* = object
     sType* {.constant: (StructureType.descriptorSetAllocateInfo).}: StructureType
@@ -3186,7 +3186,7 @@ type
     descriptorPool*: DescriptorPool
     descriptorSetCount*: uint32
     pSetLayouts*: ptr DescriptorSetLayout
-  HtDescriptorSetLayout = object of HandleType
+  HtDescriptorSetLayout* = object of HandleType
   DescriptorSetLayout* = NonDispatchableHandle[HtDescriptorSetLayout]
   DescriptorSetLayoutBinding* = object
     binding*: uint32
@@ -3227,7 +3227,7 @@ type
   AttachmentReference* = object
     attachment*: uint32
     layout*: ImageLayout
-  HtFramebuffer = object of HandleType
+  HtFramebuffer* = object of HandleType
   Framebuffer* = NonDispatchableHandle[HtFramebuffer]
   FramebufferCreateInfo* = object
     sType* {.constant: (StructureType.framebufferCreateInfo).}: StructureType
@@ -3239,7 +3239,7 @@ type
     width*: uint32
     height*: uint32
     layers*: uint32
-  HtRenderPass = object of HandleType
+  HtRenderPass* = object of HandleType
   RenderPass* = NonDispatchableHandle[HtRenderPass]
   RenderPassCreateInfo* = object
     sType* {.constant: (StructureType.renderPassCreateInfo).}: StructureType
@@ -3273,7 +3273,7 @@ type
 
   # Command pool commands
   # ---------------------
-  HtCommandPool = object of HandleType
+  HtCommandPool* = object of HandleType
   CommandPool* = NonDispatchableHandle[HtCommandPool]
   CommandPoolCreateInfo* = object
     sType* {.constant: (StructureType.commandPoolCreateInfo).}: StructureType
@@ -3283,7 +3283,7 @@ type
 
   # Command buffer commands
   # -----------------------
-  HtCommandBuffer = object of HandleType
+  HtCommandBuffer* = object of HandleType
   CommandBuffer* = Handle[HtCommandBuffer]
   CommandBufferAllocateInfo* = object
     sType* {.constant: (StructureType.commandBufferAllocateInfo).}: StructureType
