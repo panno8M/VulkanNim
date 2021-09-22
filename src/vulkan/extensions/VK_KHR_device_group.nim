@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T08:32:06Z
+# Generated at 2021-09-23T04:24:54Z
 # VK_KHR_device_group
 
 
@@ -70,7 +70,7 @@ type
     sType* {.constant: (StructureType.deviceGroupPresentInfoKhr).}: StructureType
     pNext* {.optional.}: pointer
     swapchainCount* {.optional.}: uint32
-    pDeviceMasks*: ptr uint32
+    pDeviceMasks* {.length: swapchainCount.}: arrPtr[uint32]
     mode*: DeviceGroupPresentModeFlagBitsKHR
   DeviceGroupSwapchainCreateInfoKHR* = object
     sType* {.constant: (StructureType.deviceGroupSwapchainCreateInfoKhr).}: StructureType
@@ -127,7 +127,7 @@ proc getPhysicalDevicePresentRectanglesKHR*(
       physicalDevice: PhysicalDevice;
       surface: SurfaceKHR;
       pRectCount: ptr uint32;
-      pRects {.length: pRectCount.} = default(ptr Rect2D);
+      pRects {.length: pRectCount.} = default(arrPtr[Rect2D]);
     ): Result {.cdecl, lazyload("vkGetPhysicalDevicePresentRectanglesKHR", InstanceLevel).}
 
 

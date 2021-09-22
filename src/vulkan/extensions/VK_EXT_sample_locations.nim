@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-22T15:02:54Z
 # VK_EXT_sample_locations
 
 
@@ -21,7 +21,7 @@ type
     sampleLocationsPerPixel* {.optional.}: SampleCountFlagBits
     sampleLocationGridSize*: Extent2D
     sampleLocationsCount* {.optional.}: uint32
-    pSampleLocations*: ptr SampleLocationEXT
+    pSampleLocations* {.length: sampleLocationsCount.}: arrPtr[SampleLocationEXT]
   AttachmentSampleLocationsEXT* = object
     attachmentIndex*: uint32
     sampleLocationsInfo*: SampleLocationsInfoEXT
@@ -32,9 +32,9 @@ type
     sType* {.constant: (StructureType.renderPassSampleLocationsBeginInfoExt).}: StructureType
     pNext* {.optional.}: pointer
     attachmentInitialSampleLocationsCount* {.optional.}: uint32
-    pAttachmentInitialSampleLocations*: ptr AttachmentSampleLocationsEXT
+    pAttachmentInitialSampleLocations* {.length: attachmentInitialSampleLocationsCount.}: arrPtr[AttachmentSampleLocationsEXT]
     postSubpassSampleLocationsCount* {.optional.}: uint32
-    pPostSubpassSampleLocations*: ptr SubpassSampleLocationsEXT
+    pPostSubpassSampleLocations* {.length: postSubpassSampleLocationsCount.}: arrPtr[SubpassSampleLocationsEXT]
   PipelineSampleLocationsStateCreateInfoEXT* = object
     sType* {.constant: (StructureType.pipelineSampleLocationsStateCreateInfoExt).}: StructureType
     pNext* {.optional.}: pointer

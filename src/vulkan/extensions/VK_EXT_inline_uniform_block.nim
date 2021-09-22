@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-22T15:05:56Z
 # VK_EXT_inline_uniform_block
 
 
@@ -31,7 +31,7 @@ type
     sType* {.constant: (StructureType.writeDescriptorSetInlineUniformBlockExt).}: StructureType
     pNext* {.optional.}: pointer
     dataSize*: uint32
-    pData*: pointer
+    pData* {.length: dataSize.}: pointer
   DescriptorPoolInlineUniformBlockCreateInfoEXT* = object
     sType* {.constant: (StructureType.descriptorPoolInlineUniformBlockCreateInfoExt).}: StructureType
     pNext* {.optional.}: pointer

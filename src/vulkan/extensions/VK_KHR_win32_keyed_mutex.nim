@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-22T15:02:54Z
 # VK_KHR_win32_keyed_mutex
 
 
@@ -16,12 +16,12 @@ type
     sType* {.constant: (StructureType.win32KeyedMutexAcquireReleaseInfoKhr).}: StructureType
     pNext* {.optional.}: pointer
     acquireCount* {.optional.}: uint32
-    pAcquireSyncs*: ptr DeviceMemory
-    pAcquireKeys*: ptr uint64
-    pAcquireTimeouts*: ptr uint32
+    pAcquireSyncs* {.length: acquireCount.}: arrPtr[DeviceMemory]
+    pAcquireKeys* {.length: acquireCount.}: arrPtr[uint64]
+    pAcquireTimeouts* {.length: acquireCount.}: arrPtr[uint32]
     releaseCount* {.optional.}: uint32
-    pReleaseSyncs*: ptr DeviceMemory
-    pReleaseKeys*: ptr uint64
+    pReleaseSyncs* {.length: releaseCount.}: arrPtr[DeviceMemory]
+    pReleaseKeys* {.length: releaseCount.}: arrPtr[uint64]
 
 
 

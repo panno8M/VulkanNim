@@ -1,4 +1,4 @@
-# Generated at 2021-09-17T11:40:23Z
+# Generated at 2021-09-23T04:24:54Z
 # VK_KHR_swapchain
 
 
@@ -44,7 +44,7 @@ type
     imageUsage*: ImageUsageFlags
     imageSharingMode*: SharingMode
     queueFamilyIndexCount* {.optional.}: uint32
-    pQueueFamilyIndices*: ptr uint32
+    pQueueFamilyIndices* {.length: queueFamilyIndexCount.}: arrPtr[uint32]
     preTransform*: SurfaceTransformFlagBitsKHR
     compositeAlpha*: CompositeAlphaFlagBitsKHR
     presentMode*: PresentModeKHR
@@ -56,11 +56,11 @@ type
     sType* {.constant: (StructureType.presentInfoKhr).}: StructureType
     pNext* {.optional.}: pointer
     waitSemaphoreCount* {.optional.}: uint32
-    pWaitSemaphores*: ptr Semaphore
+    pWaitSemaphores* {.length: waitSemaphoreCount.}: arrPtr[Semaphore]
     swapchainCount*: uint32
-    pSwapchains*: ptr SwapchainKHR
-    pImageIndices*: ptr uint32
-    pResults* {.optional.}: ptr Result
+    pSwapchains* {.length: swapchainCount.}: arrPtr[SwapchainKHR]
+    pImageIndices* {.length: swapchainCount.}: arrPtr[uint32]
+    pResults* {.optional, length: swapchainCount.}: arrPtr[Result]
 
   ImageSwapchainCreateInfoKHR* = object
     sType* {.constant: (StructureType.imageSwapchainCreateInfoKhr).}: StructureType
@@ -88,7 +88,7 @@ type
     sType* {.constant: (StructureType.deviceGroupPresentInfoKhr).}: StructureType
     pNext* {.optional.}: pointer
     swapchainCount* {.optional.}: uint32
-    pDeviceMasks*: ptr uint32
+    pDeviceMasks* {.length: swapchainCount.}: arrPtr[uint32]
     mode*: DeviceGroupPresentModeFlagBitsKHR
   DeviceGroupSwapchainCreateInfoKHR* = object
     sType* {.constant: (StructureType.deviceGroupSwapchainCreateInfoKhr).}: StructureType
@@ -110,7 +110,7 @@ proc getSwapchainImagesKHR*(
       device: Device;
       swapchain: SwapchainKHR;
       pSwapchainImageCount: ptr uint32;
-      pSwapchainImages {.length: pSwapchainImageCount.} = default(ptr Image);
+      pSwapchainImages {.length: pSwapchainImageCount.} = default(arrPtr[Image]);
     ): Result {.cdecl, lazyload("vkGetSwapchainImagesKHR", DeviceLevel).}
 proc acquireNextImageKHR*(
       device: Device;
@@ -139,7 +139,7 @@ proc getPhysicalDevicePresentRectanglesKHR*(
       physicalDevice: PhysicalDevice;
       surface: SurfaceKHR;
       pRectCount: ptr uint32;
-      pRects {.length: pRectCount.} = default(ptr Rect2D);
+      pRects {.length: pRectCount.} = default(arrPtr[Rect2D]);
     ): Result {.cdecl, lazyload("vkGetPhysicalDevicePresentRectanglesKHR", InstanceLevel).}
 proc acquireNextImage2KHR*(
       device: Device;

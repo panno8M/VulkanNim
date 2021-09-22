@@ -1,4 +1,4 @@
-# Generated at 2021-09-17T11:40:23Z
+# Generated at 2021-09-22T15:05:56Z
 # VK_EXT_debug_utils
 
 
@@ -44,11 +44,11 @@ type
     messageIdNumber* {.optional.}: int32
     pMessage*: cstring
     queueLabelCount* {.optional.}: uint32
-    pQueueLabels*: ptr DebugUtilsLabelEXT
+    pQueueLabels* {.length: queueLabelCount.}: arrPtr[DebugUtilsLabelEXT]
     cmdBufLabelCount* {.optional.}: uint32
-    pCmdBufLabels*: ptr DebugUtilsLabelEXT
+    pCmdBufLabels* {.length: cmdBufLabelCount.}: arrPtr[DebugUtilsLabelEXT]
     objectCount* {.optional.}: uint32
-    pObjects*: ptr DebugUtilsObjectNameInfoEXT
+    pObjects* {.length: objectCount.}: arrPtr[DebugUtilsObjectNameInfoEXT]
   DebugUtilsMessengerCreateInfoEXT* = object
     sType* {.constant: (StructureType.debugUtilsMessengerCreateInfoExt).}: StructureType
     pNext* {.optional.}: pointer
@@ -72,7 +72,7 @@ type
     objectHandle*: uint64
     tagName*: uint64
     tagSize*: uint
-    pTag*: pointer
+    pTag* {.length: tagSize.}: pointer
 
 proc setDebugUtilsObjectNameEXT*(
       device: Device;

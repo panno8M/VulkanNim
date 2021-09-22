@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T08:32:06Z
+# Generated at 2021-09-23T04:24:54Z
 # VK_KHR_get_display_properties2
 
 
@@ -37,18 +37,18 @@ type
 proc getPhysicalDeviceDisplayProperties2KHR*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
-      pProperties {.length: pPropertyCount.} = default(ptr DisplayProperties2KHR);
+      pProperties {.length: pPropertyCount.} = default(arrPtr[DisplayProperties2KHR]);
     ): Result {.cdecl, lazyload("vkGetPhysicalDeviceDisplayProperties2KHR", InstanceLevel).}
 proc getPhysicalDeviceDisplayPlaneProperties2KHR*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
-      pProperties {.length: pPropertyCount.} = default(ptr DisplayPlaneProperties2KHR);
+      pProperties {.length: pPropertyCount.} = default(arrPtr[DisplayPlaneProperties2KHR]);
     ): Result {.cdecl, lazyload("vkGetPhysicalDeviceDisplayPlaneProperties2KHR", InstanceLevel).}
 proc getDisplayModeProperties2KHR*(
       physicalDevice: PhysicalDevice;
       display: DisplayKHR;
       pPropertyCount: ptr uint32;
-      pProperties {.length: pPropertyCount.} = default(ptr DisplayModeProperties2KHR);
+      pProperties {.length: pPropertyCount.} = default(arrPtr[DisplayModeProperties2KHR]);
     ): Result {.cdecl, lazyload("vkGetDisplayModeProperties2KHR", InstanceLevel).}
 proc getDisplayPlaneCapabilities2KHR*(
       physicalDevice: PhysicalDevice;

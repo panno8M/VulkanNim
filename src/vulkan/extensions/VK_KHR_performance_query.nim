@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T08:32:06Z
+# Generated at 2021-09-23T04:24:54Z
 # VK_KHR_performance_query
 
 
@@ -73,7 +73,7 @@ type
     pNext* {.optional.}: pointer
     queueFamilyIndex*: uint32
     counterIndexCount*: uint32
-    pCounterIndices*: ptr uint32
+    pCounterIndices* {.length: counterIndexCount.}: arrPtr[uint32]
   # Union of all the possible return types a counter result could return
   PerformanceCounterResultKHR* {.union.} = object
     int32*: int32
@@ -101,8 +101,8 @@ proc enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR*(
       physicalDevice: PhysicalDevice;
       queueFamilyIndex: uint32;
       pCounterCount: ptr uint32;
-      pCounters {.length: pCounterCount.} = default(ptr PerformanceCounterKHR);
-      pCounterDescriptions {.length: pCounterCount.} = default(ptr PerformanceCounterDescriptionKHR);
+      pCounters {.length: pCounterCount.} = default(arrPtr[PerformanceCounterKHR]);
+      pCounterDescriptions {.length: pCounterCount.} = default(arrPtr[PerformanceCounterDescriptionKHR]);
     ): Result {.cdecl, lazyload("vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR", InstanceLevel).}
 proc getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR*(
       physicalDevice: PhysicalDevice;

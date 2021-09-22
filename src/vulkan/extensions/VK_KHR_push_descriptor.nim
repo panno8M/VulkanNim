@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T08:32:06Z
+# Generated at 2021-09-23T04:24:54Z
 # VK_KHR_push_descriptor
 
 
@@ -27,7 +27,7 @@ proc cmdPushDescriptorSetKHR*(
       layout: PipelineLayout;
       set: uint32;
       descriptorWriteCount: uint32;
-      pDescriptorWrites {.length: descriptorWriteCount.}: ptr WriteDescriptorSet;
+      pDescriptorWrites {.length: descriptorWriteCount.}: arrPtr[WriteDescriptorSet];
     ): void {.cdecl, lazyload("vkCmdPushDescriptorSetKHR", DeviceLevel).}
 
 

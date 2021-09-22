@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T08:32:06Z
+# Generated at 2021-09-23T04:24:54Z
 # VK_EXT_full_screen_exclusive
 
 
@@ -47,7 +47,7 @@ proc getPhysicalDeviceSurfacePresentModes2EXT*(
       physicalDevice: PhysicalDevice;
       pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR;
       pPresentModeCount: ptr uint32;
-      pPresentModes {.length: pPresentModeCount.} = default(ptr PresentModeKHR);
+      pPresentModes {.length: pPresentModeCount.} = default(arrPtr[PresentModeKHR]);
     ): Result {.cdecl, lazyload("vkGetPhysicalDeviceSurfacePresentModes2EXT", InstanceLevel).}
 proc acquireFullScreenExclusiveModeEXT*(
       device: Device;

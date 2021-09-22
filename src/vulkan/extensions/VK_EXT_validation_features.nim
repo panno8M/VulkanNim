@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-22T15:02:54Z
 # VK_EXT_validation_features
 
 
@@ -30,9 +30,9 @@ type
     sType* {.constant: (StructureType.validationFeaturesExt).}: StructureType
     pNext* {.optional.}: pointer
     enabledValidationFeatureCount* {.optional.}: uint32
-    pEnabledValidationFeatures*: ptr ValidationFeatureEnableEXT
+    pEnabledValidationFeatures* {.length: enabledValidationFeatureCount.}: arrPtr[ValidationFeatureEnableEXT]
     disabledValidationFeatureCount* {.optional.}: uint32
-    pDisabledValidationFeatures*: ptr ValidationFeatureDisableEXT
+    pDisabledValidationFeatures* {.length: disabledValidationFeatureCount.}: arrPtr[ValidationFeatureDisableEXT]
 
 
 

@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T08:32:06Z
+# Generated at 2021-09-23T04:24:54Z
 # VK_NV_shading_rate_image
 
 
@@ -34,13 +34,13 @@ type # enums and bitmasks
 type
   ShadingRatePaletteNV* = object
     shadingRatePaletteEntryCount*: uint32
-    pShadingRatePaletteEntries*: ptr ShadingRatePaletteEntryNV
+    pShadingRatePaletteEntries* {.length: shadingRatePaletteEntryCount.}: arrPtr[ShadingRatePaletteEntryNV]
   PipelineViewportShadingRateImageStateCreateInfoNV* = object
     sType* {.constant: (StructureType.pipelineViewportShadingRateImageStateCreateInfoNv).}: StructureType
     pNext* {.optional.}: pointer
     shadingRateImageEnable*: Bool32
     viewportCount*: uint32
-    pShadingRatePalettes*: ptr ShadingRatePaletteNV
+    pShadingRatePalettes* {.length: viewportCount.}: arrPtr[ShadingRatePaletteNV]
   PhysicalDeviceShadingRateImageFeaturesNV* = object
     sType* {.constant: (StructureType.physicalDeviceShadingRateImageFeaturesNv).}: StructureType
     pNext* {.optional.}: pointer
@@ -60,13 +60,13 @@ type
     shadingRate*: ShadingRatePaletteEntryNV
     sampleCount*: uint32
     sampleLocationCount*: uint32
-    pSampleLocations*: ptr CoarseSampleLocationNV
+    pSampleLocations* {.length: sampleLocationCount.}: arrPtr[CoarseSampleLocationNV]
   PipelineViewportCoarseSampleOrderStateCreateInfoNV* = object
     sType* {.constant: (StructureType.pipelineViewportCoarseSampleOrderStateCreateInfoNv).}: StructureType
     pNext* {.optional.}: pointer
     sampleOrderType*: CoarseSampleOrderTypeNV
     customSampleOrderCount* {.optional.}: uint32
-    pCustomSampleOrders*: ptr CoarseSampleOrderCustomNV
+    pCustomSampleOrders* {.length: customSampleOrderCount.}: arrPtr[CoarseSampleOrderCustomNV]
 
 proc cmdBindShadingRateImageNV*(
       commandBuffer: CommandBuffer;
@@ -77,13 +77,13 @@ proc cmdSetViewportShadingRatePaletteNV*(
       commandBuffer: CommandBuffer;
       firstViewport: uint32;
       viewportCount: uint32;
-      pShadingRatePalettes {.length: viewportCount.}: ptr ShadingRatePaletteNV;
+      pShadingRatePalettes {.length: viewportCount.}: arrPtr[ShadingRatePaletteNV];
     ): void {.cdecl, lazyload("vkCmdSetViewportShadingRatePaletteNV", DeviceLevel).}
 proc cmdSetCoarseSampleOrderNV*(
       commandBuffer: CommandBuffer;
       sampleOrderType: CoarseSampleOrderTypeNV;
       customSampleOrderCount = default(uint32);
-      pCustomSampleOrders {.length: customSampleOrderCount.}: ptr CoarseSampleOrderCustomNV;
+      pCustomSampleOrders {.length: customSampleOrderCount.}: arrPtr[CoarseSampleOrderCustomNV];
     ): void {.cdecl, lazyload("vkCmdSetCoarseSampleOrderNV", DeviceLevel).}
 
 proc loadAllVK_NV_shading_rate_image*(instance: Instance) =

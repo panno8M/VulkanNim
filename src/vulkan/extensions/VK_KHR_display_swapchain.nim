@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T08:32:06Z
+# Generated at 2021-09-23T04:24:54Z
 # VK_KHR_display_swapchain
 
 
@@ -24,9 +24,9 @@ type
 proc createSharedSwapchainsKHR*(
       device: Device;
       swapchainCount: uint32;
-      pCreateInfos {.length: swapchainCount.}: ptr SwapchainCreateInfoKHR;
+      pCreateInfos {.length: swapchainCount.}: arrPtr[SwapchainCreateInfoKHR];
       pAllocator = default(ptr AllocationCallbacks);
-      pSwapchains {.length: swapchainCount.}: ptr SwapchainKHR;
+      pSwapchains {.length: swapchainCount.}: arrPtr[SwapchainKHR];
     ): Result {.cdecl, lazyload("vkCreateSharedSwapchainsKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_display_swapchain*(instance: Instance) =

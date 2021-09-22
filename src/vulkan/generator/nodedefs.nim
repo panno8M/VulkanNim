@@ -90,19 +90,28 @@ type
   NodeDefine* = ref object
     name*: string
     str*: string
-  NodeArrayLength* = ref object
+  NodeArrayDimention* = ref object
     case useConst*: bool
     of true:
       name*: string
     of false:
       value*: Natural
+  NodeArrayStyle* = enum
+   nasNotArray
+   nasFix
+   nasPtr
   NodeStructMember* = ref object
     name*: string
     theType*: string
-    ptrLv*: Natural
-    length*: seq[NodeArrayLength]
     optional*: bool
     values*: Option[string]
+    case arrayStyle*: NodeArrayStyle
+    of nasNotArray:
+      ptrLv*: Natural
+    of nasFix:
+      dim*: seq[NodeArrayDimention]
+    of nasPtr:
+      ptrLen*: seq[ #[ length annotation ]# Option[string]]
   NodeStruct* = ref object
     isUnion*: bool
     name*: string
@@ -129,9 +138,13 @@ type
   NodeCommandParam* = ref object
     name*: string
     theType*: string
-    ptrLv*: Natural
     optional*: bool
-    arrlen*: Option[string]
+    case arrayStyle*: NodeArrayStyle
+    of nasPtr:
+      ptrLen*: seq[Option[string]]
+    of nasNotArray:
+      ptrLv*: Natural
+    else: discard
   NodeCommand* = ref object
     name*: string
     case kind*: NodeKindBasicResource

@@ -255,13 +255,21 @@ proc parseParamName*(str: string): string =
   of "object": "`object`"
   else: str
 
-proc parseTypeName*(str: string; ptrLv: Natural = 0; arrayLen: seq[NodeArrayLength] = @[]): string =
-  ("ptr ".repeat(ptrLv) & str)
+proc parseTypeName*(str: string): string =
+  str
     .replaceBasicTypes
     .replacePtrTypes
-    .pipe(x => arrayLen
-      .mapIt( if it.useConst: it.name.parseVariableNameFromSnake
-              else: $it.value)
+proc parseTypeName*(str: string; ptrLv: Natural): string =
+  ("ptr ".repeat(ptrLv) & str).parseTypeName
+proc parseTypeName*(str: string; ptrLen: seq[Option[string]]): string =
+  result = str.parseTypeName(ptrLen.len)
+  let newPtrlv = result.count("ptr ")
+  return "arrPtr[".repeat(newPtrlv) & result.replace("ptr ", "") & "]".repeat(newPtrlv)
+proc parseTypeName*(str: string; dim: seq[NodeArrayDimention]): string =
+  str.parseTypeName()
+    .pipe(x => dim.mapIt(
+        if it.useConst: it.name.parseVariableNameFromSnake
+        else: $it.value)
       .concat(@[x])
       .foldr("array[{a}, {b}]".fmt))
 

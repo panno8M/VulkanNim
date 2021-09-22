@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T08:32:06Z
+# Generated at 2021-09-23T04:24:54Z
 # VK_KHR_pipeline_executable_properties
 
 
@@ -59,25 +59,25 @@ type
     description*: array[MaxDescriptionSize, char]
     isText*: Bool32
     dataSize* {.optional.}: uint
-    pData* {.optional.}: pointer
+    pData* {.optional, length: dataSize.}: pointer
 
 proc getPipelineExecutablePropertiesKHR*(
       device: Device;
       pPipelineInfo: ptr PipelineInfoKHR;
       pExecutableCount: ptr uint32;
-      pProperties {.length: pExecutableCount.} = default(ptr PipelineExecutablePropertiesKHR);
+      pProperties {.length: pExecutableCount.} = default(arrPtr[PipelineExecutablePropertiesKHR]);
     ): Result {.cdecl, lazyload("vkGetPipelineExecutablePropertiesKHR", DeviceLevel).}
 proc getPipelineExecutableStatisticsKHR*(
       device: Device;
       pExecutableInfo: ptr PipelineExecutableInfoKHR;
       pStatisticCount: ptr uint32;
-      pStatistics {.length: pStatisticCount.} = default(ptr PipelineExecutableStatisticKHR);
+      pStatistics {.length: pStatisticCount.} = default(arrPtr[PipelineExecutableStatisticKHR]);
     ): Result {.cdecl, lazyload("vkGetPipelineExecutableStatisticsKHR", DeviceLevel).}
 proc getPipelineExecutableInternalRepresentationsKHR*(
       device: Device;
       pExecutableInfo: ptr PipelineExecutableInfoKHR;
       pInternalRepresentationCount: ptr uint32;
-      pInternalRepresentations {.length: pInternalRepresentationCount.} = default(ptr PipelineExecutableInternalRepresentationKHR);
+      pInternalRepresentations {.length: pInternalRepresentationCount.} = default(arrPtr[PipelineExecutableInternalRepresentationKHR]);
     ): Result {.cdecl, lazyload("vkGetPipelineExecutableInternalRepresentationsKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_pipeline_executable_properties*(instance: Instance) =

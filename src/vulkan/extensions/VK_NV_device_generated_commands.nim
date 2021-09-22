@@ -1,4 +1,4 @@
-# Generated at 2021-09-17T11:40:23Z
+# Generated at 2021-09-22T15:02:54Z
 # VK_NV_device_generated_commands
 
 
@@ -49,16 +49,16 @@ type
     sType* {.constant: (StructureType.graphicsShaderGroupCreateInfoNv).}: StructureType
     pNext* {.optional.}: pointer
     stageCount*: uint32
-    pStages*: ptr PipelineShaderStageCreateInfo
+    pStages* {.length: stageCount.}: arrPtr[PipelineShaderStageCreateInfo]
     pVertexInputState* {.optional.}: ptr PipelineVertexInputStateCreateInfo
     pTessellationState* {.optional.}: ptr PipelineTessellationStateCreateInfo
   GraphicsPipelineShaderGroupsCreateInfoNV* = object
     sType* {.constant: (StructureType.graphicsPipelineShaderGroupsCreateInfoNv).}: StructureType
     pNext* {.optional.}: pointer
     groupCount*: uint32
-    pGroups*: ptr GraphicsShaderGroupCreateInfoNV
+    pGroups* {.length: groupCount.}: arrPtr[GraphicsShaderGroupCreateInfoNV]
     pipelineCount* {.optional.}: uint32
-    pPipelines*: ptr Pipeline
+    pPipelines* {.length: pipelineCount.}: arrPtr[Pipeline]
   BindShaderGroupIndirectCommandNV* = object
     groupIndex*: uint32
   BindIndexBufferIndirectCommandNV* = object
@@ -90,17 +90,17 @@ type
     pushconstantSize*: uint32
     indirectStateFlags* {.optional.}: IndirectStateFlagsNV
     indexTypeCount* {.optional.}: uint32
-    pIndexTypes*: ptr IndexType
-    pIndexTypeValues*: ptr uint32
+    pIndexTypes* {.length: indexTypeCount.}: arrPtr[IndexType]
+    pIndexTypeValues* {.length: indexTypeCount.}: arrPtr[uint32]
   IndirectCommandsLayoutCreateInfoNV* = object
     sType* {.constant: (StructureType.indirectCommandsLayoutCreateInfoNv).}: StructureType
     pNext* {.optional.}: pointer
     flags*: IndirectCommandsLayoutUsageFlagsNV
     pipelineBindPoint*: PipelineBindPoint
     tokenCount*: uint32
-    pTokens*: ptr IndirectCommandsLayoutTokenNV
+    pTokens* {.length: tokenCount.}: arrPtr[IndirectCommandsLayoutTokenNV]
     streamCount*: uint32
-    pStreamStrides*: ptr uint32
+    pStreamStrides* {.length: streamCount.}: arrPtr[uint32]
   GeneratedCommandsInfoNV* = object
     sType* {.constant: (StructureType.generatedCommandsInfoNv).}: StructureType
     pNext* {.optional.}: pointer
@@ -108,7 +108,7 @@ type
     pipeline*: Pipeline
     indirectCommandsLayout*: IndirectCommandsLayoutNV
     streamCount*: uint32
-    pStreams*: ptr IndirectCommandsStreamNV
+    pStreams* {.length: streamCount.}: arrPtr[IndirectCommandsStreamNV]
     sequencesCount*: uint32
     preprocessBuffer*: Buffer
     preprocessOffset*: DeviceSize

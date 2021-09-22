@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-22T15:02:54Z
 # VK_NV_viewport_swizzle
 
 
@@ -32,7 +32,7 @@ type
     pNext* {.optional.}: pointer
     flags* {.optional.}: PipelineViewportSwizzleStateCreateFlagsNV
     viewportCount*: uint32
-    pViewportSwizzles*: ptr ViewportSwizzleNV
+    pViewportSwizzles* {.length: viewportCount.}: arrPtr[ViewportSwizzleNV]
 
 
 

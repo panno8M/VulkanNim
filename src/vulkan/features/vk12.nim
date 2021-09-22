@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:49:56Z
+# Generated at 2021-09-22T15:02:54Z
 # vk12
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -222,7 +222,7 @@ type
     sType* {.constant: (StructureType.imageFormatListCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
     viewFormatCount* {.optional.}: uint32
-    pViewFormats*: ptr Format
+    pViewFormats* {.length: viewFormatCount.}: arrPtr[Format]
 
   # Promoted from VK_KHR_create_renderpass2 (extension 110)
   # -------------------------------------------------------
@@ -231,13 +231,13 @@ type
     pNext* {.optional.}: pointer
     flags* {.optional.}: RenderPassCreateFlags
     attachmentCount* {.optional.}: uint32
-    pAttachments*: ptr AttachmentDescription2
+    pAttachments* {.length: attachmentCount.}: arrPtr[AttachmentDescription2]
     subpassCount*: uint32
-    pSubpasses*: ptr SubpassDescription2
+    pSubpasses* {.length: subpassCount.}: arrPtr[SubpassDescription2]
     dependencyCount* {.optional.}: uint32
-    pDependencies*: ptr SubpassDependency2
+    pDependencies* {.length: dependencyCount.}: arrPtr[SubpassDependency2]
     correlatedViewMaskCount* {.optional.}: uint32
-    pCorrelatedViewMasks*: ptr uint32
+    pCorrelatedViewMasks* {.length: correlatedViewMaskCount.}: arrPtr[uint32]
   AttachmentDescription2* = object
     sType* {.constant: (StructureType.attachmentDescription2).}: StructureType
     pNext* {.optional.}: pointer
@@ -263,13 +263,13 @@ type
     pipelineBindPoint*: PipelineBindPoint
     viewMask*: uint32
     inputAttachmentCount* {.optional.}: uint32
-    pInputAttachments*: ptr AttachmentReference2
+    pInputAttachments* {.length: inputAttachmentCount.}: arrPtr[AttachmentReference2]
     colorAttachmentCount* {.optional.}: uint32
-    pColorAttachments*: ptr AttachmentReference2
-    pResolveAttachments* {.optional.}: ptr AttachmentReference2
+    pColorAttachments* {.length: colorAttachmentCount.}: arrPtr[AttachmentReference2]
+    pResolveAttachments* {.optional, length: colorAttachmentCount.}: arrPtr[AttachmentReference2]
     pDepthStencilAttachment* {.optional.}: ptr AttachmentReference2
     preserveAttachmentCount* {.optional.}: uint32
-    pPreserveAttachments*: ptr uint32
+    pPreserveAttachments* {.length: preserveAttachmentCount.}: arrPtr[uint32]
   SubpassDependency2* = object
     sType* {.constant: (StructureType.subpassDependency2).}: StructureType
     pNext* {.optional.}: pointer
@@ -358,7 +358,7 @@ type
     sType* {.constant: (StructureType.descriptorSetLayoutBindingFlagsCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
     bindingCount* {.optional.}: uint32
-    pBindingFlags*: ptr DescriptorBindingFlags
+    pBindingFlags* {.length: bindingCount.}: arrPtr[DescriptorBindingFlags]
   PhysicalDeviceDescriptorIndexingFeatures* = object
     sType* {.constant: (StructureType.physicalDeviceDescriptorIndexingFeatures).}: StructureType
     pNext* {.optional.}: pointer
@@ -412,7 +412,7 @@ type
     sType* {.constant: (StructureType.descriptorSetVariableDescriptorCountAllocateInfo).}: StructureType
     pNext* {.optional.}: pointer
     descriptorSetCount* {.optional.}: uint32
-    pDescriptorCounts*: ptr uint32
+    pDescriptorCounts* {.length: descriptorSetCount.}: arrPtr[uint32]
   DescriptorSetVariableDescriptorCountLayoutSupport* = object
     sType* {.constant: (StructureType.descriptorSetVariableDescriptorCountLayoutSupport).}: StructureType
     pNext* {.optional.}: pointer
@@ -479,7 +479,7 @@ type
     sType* {.constant: (StructureType.framebufferAttachmentsCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
     attachmentImageInfoCount* {.optional.}: uint32
-    pAttachmentImageInfos*: ptr FramebufferAttachmentImageInfo
+    pAttachmentImageInfos* {.length: attachmentImageInfoCount.}: arrPtr[FramebufferAttachmentImageInfo]
   FramebufferAttachmentImageInfo* = object
     sType* {.constant: (StructureType.framebufferAttachmentImageInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -489,12 +489,12 @@ type
     height*: uint32
     layerCount*: uint32
     viewFormatCount* {.optional.}: uint32
-    pViewFormats*: ptr Format
+    pViewFormats* {.length: viewFormatCount.}: arrPtr[Format]
   RenderPassAttachmentBeginInfo* = object
     sType* {.constant: (StructureType.renderPassAttachmentBeginInfo).}: StructureType
     pNext* {.optional.}: pointer
     attachmentCount* {.optional.}: uint32
-    pAttachments*: ptr ImageView
+    pAttachments* {.length: attachmentCount.}: arrPtr[ImageView]
 
   # Promoted from VK_KHR_uniform_buffer_standard_layout (extension 254)
   # -------------------------------------------------------------------
@@ -552,16 +552,16 @@ type
     sType* {.constant: (StructureType.timelineSemaphoreSubmitInfo).}: StructureType
     pNext* {.optional.}: pointer
     waitSemaphoreValueCount* {.optional.}: uint32
-    pWaitSemaphoreValues* {.optional.}: ptr uint64
+    pWaitSemaphoreValues* {.optional, length: waitSemaphoreValueCount.}: arrPtr[uint64]
     signalSemaphoreValueCount* {.optional.}: uint32
-    pSignalSemaphoreValues* {.optional.}: ptr uint64
+    pSignalSemaphoreValues* {.optional, length: signalSemaphoreValueCount.}: arrPtr[uint64]
   SemaphoreWaitInfo* = object
     sType* {.constant: (StructureType.semaphoreWaitInfo).}: StructureType
     pNext* {.optional.}: pointer
     flags* {.optional.}: SemaphoreWaitFlags
     semaphoreCount*: uint32
-    pSemaphores*: ptr Semaphore
-    pValues*: ptr uint64
+    pSemaphores* {.length: semaphoreCount.}: arrPtr[Semaphore]
+    pValues* {.length: semaphoreCount.}: arrPtr[uint64]
   SemaphoreSignalInfo* = object
     sType* {.constant: (StructureType.semaphoreSignalInfo).}: StructureType
     pNext* {.optional.}: pointer

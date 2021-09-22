@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-22T15:02:54Z
 # VK_KHR_external_semaphore_win32
 
 
@@ -30,9 +30,9 @@ type
     sType* {.constant: (StructureType.d3d12FenceSubmitInfoKhr).}: StructureType
     pNext* {.optional.}: pointer
     waitSemaphoreValuesCount* {.optional.}: uint32
-    pWaitSemaphoreValues* {.optional.}: ptr uint64
+    pWaitSemaphoreValues* {.optional, length: waitSemaphoreValuesCount.}: arrPtr[uint64]
     signalSemaphoreValuesCount* {.optional.}: uint32
-    pSignalSemaphoreValues* {.optional.}: ptr uint64
+    pSignalSemaphoreValues* {.optional, length: signalSemaphoreValuesCount.}: arrPtr[uint64]
   SemaphoreGetWin32HandleInfoKHR* = object
     sType* {.constant: (StructureType.semaphoreGetWin32HandleInfoKhr).}: StructureType
     pNext* {.optional.}: pointer

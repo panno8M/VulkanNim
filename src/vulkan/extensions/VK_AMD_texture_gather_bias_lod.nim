@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-22T15:02:54Z
 # VK_AMD_texture_gather_bias_lod
 
 

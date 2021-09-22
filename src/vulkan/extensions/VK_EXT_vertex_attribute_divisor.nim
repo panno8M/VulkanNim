@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-22T15:02:54Z
 # VK_EXT_vertex_attribute_divisor
 
 
@@ -23,7 +23,7 @@ type
     sType* {.constant: (StructureType.pipelineVertexInputDivisorStateCreateInfoExt).}: StructureType
     pNext* {.optional.}: pointer
     vertexBindingDivisorCount*: uint32
-    pVertexBindingDivisors*: ptr VertexInputBindingDivisorDescriptionEXT
+    pVertexBindingDivisors* {.length: vertexBindingDivisorCount.}: arrPtr[VertexInputBindingDivisorDescriptionEXT]
   PhysicalDeviceVertexAttributeDivisorFeaturesEXT* = object
     sType* {.constant: (StructureType.physicalDeviceVertexAttributeDivisorFeaturesExt).}: StructureType
     pNext* {.optional.}: pointer

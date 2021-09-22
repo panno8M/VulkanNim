@@ -1,4 +1,4 @@
-# Generated at 2021-09-17T11:40:23Z
+# Generated at 2021-09-23T04:24:54Z
 # VK_EXT_validation_cache
 
 
@@ -22,7 +22,7 @@ type
     pNext* {.optional.}: pointer
     flags* {.optional.}: ValidationCacheCreateFlagsEXT
     initialDataSize* {.optional.}: uint
-    pInitialData*: pointer
+    pInitialData* {.length: initialDataSize.}: pointer
   ShaderModuleValidationCacheCreateInfoEXT* = object
     sType* {.constant: (StructureType.shaderModuleValidationCacheCreateInfoExt).}: StructureType
     pNext* {.optional.}: pointer
@@ -43,7 +43,7 @@ proc mergeValidationCachesEXT*(
       device: Device;
       dstCache: ValidationCacheEXT;
       srcCacheCount: uint32;
-      pSrcCaches {.length: srcCacheCount.}: ptr ValidationCacheEXT;
+      pSrcCaches {.length: srcCacheCount.}: arrPtr[ValidationCacheEXT];
     ): Result {.cdecl, lazyload("vkMergeValidationCachesEXT", DeviceLevel).}
 proc getValidationCacheDataEXT*(
       device: Device;

@@ -1,4 +1,4 @@
-# Generated at 2021-09-17T11:40:23Z
+# Generated at 2021-09-23T01:41:46Z
 # VK_EXT_debug_report
 
 
@@ -99,8 +99,8 @@ proc debugReportMessageEXT*(
       `object`: uint64;
       location: uint;
       messageCode: int32;
-      pLayerPrefix {.length: null-terminated.}: cstring;
-      pMessage {.length: null-terminated.}: cstring;
+      pLayerPrefix: cstring;
+      pMessage: cstring;
     ): void {.cdecl, lazyload("vkDebugReportMessageEXT", InstanceLevel).}
 StructureType.defineAliases:
   debugReportCallbackCreateInfoExt as debugReportCreateInfoExt

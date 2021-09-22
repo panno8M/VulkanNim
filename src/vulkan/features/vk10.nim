@@ -1,4 +1,4 @@
-# Generated at 2021-09-17T11:40:23Z
+# Generated at 2021-09-23T04:24:54Z
 # vk10
 # Vulkan core API interface definitions
 # =====================================
@@ -2472,9 +2472,9 @@ type
     flags* {.optional.}: InstanceCreateFlags
     pApplicationInfo* {.optional.}: ptr ApplicationInfo
     enabledLayerCount* {.optional.}: uint32
-    ppEnabledLayerNames*: cstringArray
+    ppEnabledLayerNames* {.length: enabledLayerCount.}: cstringArray
     enabledExtensionCount* {.optional.}: uint32
-    ppEnabledExtensionNames*: cstringArray
+    ppEnabledExtensionNames* {.length: enabledExtensionCount.}: cstringArray
   MemoryHeap* = object
     size*: DeviceSize
     flags* {.optional.}: MemoryHeapFlags
@@ -2682,11 +2682,11 @@ type
     pNext* {.optional.}: pointer
     flags* {.optional.}: DeviceCreateFlags
     queueCreateInfoCount*: uint32
-    pQueueCreateInfos*: ptr DeviceQueueCreateInfo
+    pQueueCreateInfos* {.length: queueCreateInfoCount.}: arrPtr[DeviceQueueCreateInfo]
     enabledLayerCount* {.optional.}: uint32
-    ppEnabledLayerNames*: cstringArray
+    ppEnabledLayerNames* {.length: enabledLayerCount.}: cstringArray
     enabledExtensionCount* {.optional.}: uint32
-    ppEnabledExtensionNames*: cstringArray
+    ppEnabledExtensionNames* {.length: enabledExtensionCount.}: cstringArray
     pEnabledFeatures* {.optional.}: ptr PhysicalDeviceFeatures
   DeviceQueueCreateInfo* = object
     sType* {.constant: (StructureType.deviceQueueCreateInfo).}: StructureType
@@ -2694,7 +2694,7 @@ type
     flags* {.optional.}: DeviceQueueCreateFlags
     queueFamilyIndex*: uint32
     queueCount*: uint32
-    pQueuePriorities*: ptr float32
+    pQueuePriorities* {.length: queueCount.}: arrPtr[float32]
 
   # Extension discovery commands
   # ----------------------------
@@ -2718,12 +2718,12 @@ type
     sType* {.constant: (StructureType.submitInfo).}: StructureType
     pNext* {.optional.}: pointer
     waitSemaphoreCount* {.optional.}: uint32
-    pWaitSemaphores*: ptr Semaphore
-    pWaitDstStageMask*: ptr PipelineStageFlags
+    pWaitSemaphores* {.length: waitSemaphoreCount.}: arrPtr[Semaphore]
+    pWaitDstStageMask* {.length: waitSemaphoreCount.}: arrPtr[PipelineStageFlags]
     commandBufferCount* {.optional.}: uint32
-    pCommandBuffers*: ptr CommandBuffer
+    pCommandBuffers* {.length: commandBufferCount.}: arrPtr[CommandBuffer]
     signalSemaphoreCount* {.optional.}: uint32
-    pSignalSemaphores*: ptr Semaphore
+    pSignalSemaphores* {.length: signalSemaphoreCount.}: arrPtr[Semaphore]
 
   # Memory commands
   # ---------------
@@ -2754,15 +2754,15 @@ type
     sType* {.constant: (StructureType.bindSparseInfo).}: StructureType
     pNext* {.optional.}: pointer
     waitSemaphoreCount* {.optional.}: uint32
-    pWaitSemaphores*: ptr Semaphore
+    pWaitSemaphores* {.length: waitSemaphoreCount.}: arrPtr[Semaphore]
     bufferBindCount* {.optional.}: uint32
-    pBufferBinds*: ptr SparseBufferMemoryBindInfo
+    pBufferBinds* {.length: bufferBindCount.}: arrPtr[SparseBufferMemoryBindInfo]
     imageOpaqueBindCount* {.optional.}: uint32
-    pImageOpaqueBinds*: ptr SparseImageOpaqueMemoryBindInfo
+    pImageOpaqueBinds* {.length: imageOpaqueBindCount.}: arrPtr[SparseImageOpaqueMemoryBindInfo]
     imageBindCount* {.optional.}: uint32
-    pImageBinds*: ptr SparseImageMemoryBindInfo
+    pImageBinds* {.length: imageBindCount.}: arrPtr[SparseImageMemoryBindInfo]
     signalSemaphoreCount* {.optional.}: uint32
-    pSignalSemaphores*: ptr Semaphore
+    pSignalSemaphores* {.length: signalSemaphoreCount.}: arrPtr[Semaphore]
   ImageSubresource* = object
     aspectMask*: ImageAspectFlags
     mipLevel*: uint32
@@ -2770,7 +2770,7 @@ type
   SparseBufferMemoryBindInfo* = object
     buffer*: Buffer
     bindCount*: uint32
-    pBinds*: ptr SparseMemoryBind
+    pBinds* {.length: bindCount.}: arrPtr[SparseMemoryBind]
   SparseImageFormatProperties* = object
     aspectMask* {.optional.}: ImageAspectFlags
     imageGranularity*: Extent3D
@@ -2785,7 +2785,7 @@ type
   SparseImageMemoryBindInfo* = object
     image*: Image
     bindCount*: uint32
-    pBinds*: ptr SparseImageMemoryBind
+    pBinds* {.length: bindCount.}: arrPtr[SparseImageMemoryBind]
   SparseImageMemoryRequirements* = object
     formatProperties*: SparseImageFormatProperties
     imageMipTailFirstLod*: uint32
@@ -2795,7 +2795,7 @@ type
   SparseImageOpaqueMemoryBindInfo* = object
     image*: Image
     bindCount*: uint32
-    pBinds*: ptr SparseMemoryBind
+    pBinds* {.length: bindCount.}: arrPtr[SparseMemoryBind]
   SparseMemoryBind* = object
     resourceOffset*: DeviceSize
     size*: DeviceSize
@@ -2854,7 +2854,7 @@ type
     usage*: BufferUsageFlags
     sharingMode*: SharingMode
     queueFamilyIndexCount* {.optional.}: uint32
-    pQueueFamilyIndices*: ptr uint32
+    pQueueFamilyIndices* {.length: queueFamilyIndexCount.}: arrPtr[uint32]
 
   # Buffer view commands
   # --------------------
@@ -2887,7 +2887,7 @@ type
     usage*: ImageUsageFlags
     sharingMode*: SharingMode
     queueFamilyIndexCount* {.optional.}: uint32
-    pQueueFamilyIndices*: ptr uint32
+    pQueueFamilyIndices* {.length: queueFamilyIndexCount.}: arrPtr[uint32]
     initialLayout*: ImageLayout
   SubresourceLayout* = object
     offset*: DeviceSize
@@ -2930,7 +2930,7 @@ type
     pNext* {.optional.}: pointer
     flags* {.optional.}: ShaderModuleCreateFlags
     codeSize*: uint
-    pCode*: ptr uint32
+    pCode* {.length: codeSize / 4.}: arrPtr[uint32]
 
   # Pipeline Cache commands
   # -----------------------
@@ -2941,7 +2941,7 @@ type
     pNext* {.optional.}: pointer
     flags* {.optional.}: PipelineCacheCreateFlags
     initialDataSize* {.optional.}: uint
-    pInitialData*: pointer
+    pInitialData* {.length: initialDataSize.}: pointer
 
   # Pipeline commands
   # -----------------
@@ -2958,7 +2958,7 @@ type
     pNext* {.optional.}: pointer
     flags* {.optional.}: PipelineCreateFlags
     stageCount*: uint32
-    pStages*: ptr PipelineShaderStageCreateInfo
+    pStages* {.length: stageCount.}: arrPtr[PipelineShaderStageCreateInfo]
     pVertexInputState* {.optional.}: ptr PipelineVertexInputStateCreateInfo
     pInputAssemblyState* {.optional.}: ptr PipelineInputAssemblyStateCreateInfo
     pTessellationState* {.optional.}: ptr PipelineTessellationStateCreateInfo
@@ -2991,7 +2991,7 @@ type
     logicOpEnable*: Bool32
     logicOp*: LogicOp
     attachmentCount* {.optional.}: uint32
-    pAttachments*: ptr PipelineColorBlendAttachmentState
+    pAttachments* {.length: attachmentCount.}: arrPtr[PipelineColorBlendAttachmentState]
     blendConstants*: array[4, float32]
   PipelineDepthStencilStateCreateInfo* = object
     sType* {.constant: (StructureType.pipelineDepthStencilStateCreateInfo).}: StructureType
@@ -3011,7 +3011,7 @@ type
     pNext* {.optional.}: pointer
     flags* {.optional.}: PipelineDynamicStateCreateFlags
     dynamicStateCount* {.optional.}: uint32
-    pDynamicStates*: ptr DynamicState
+    pDynamicStates* {.length: dynamicStateCount.}: arrPtr[DynamicState]
   PipelineInputAssemblyStateCreateInfo* = object
     sType* {.constant: (StructureType.pipelineInputAssemblyStateCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -3025,7 +3025,7 @@ type
     rasterizationSamples*: SampleCountFlagBits
     sampleShadingEnable*: Bool32
     minSampleShading*: float32
-    pSampleMask* {.optional.}: ptr SampleMask
+    pSampleMask* {.optional, length: (rasterizationSamples + 31) / 32.}: arrPtr[SampleMask]
     alphaToCoverageEnable*: Bool32
     alphaToOneEnable*: Bool32
   PipelineRasterizationStateCreateInfo* = object
@@ -3060,22 +3060,22 @@ type
     pNext* {.optional.}: pointer
     flags* {.optional.}: PipelineVertexInputStateCreateFlags
     vertexBindingDescriptionCount* {.optional.}: uint32
-    pVertexBindingDescriptions*: ptr VertexInputBindingDescription
+    pVertexBindingDescriptions* {.length: vertexBindingDescriptionCount.}: arrPtr[VertexInputBindingDescription]
     vertexAttributeDescriptionCount* {.optional.}: uint32
-    pVertexAttributeDescriptions*: ptr VertexInputAttributeDescription
+    pVertexAttributeDescriptions* {.length: vertexAttributeDescriptionCount.}: arrPtr[VertexInputAttributeDescription]
   PipelineViewportStateCreateInfo* = object
     sType* {.constant: (StructureType.pipelineViewportStateCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
     flags* {.optional.}: PipelineViewportStateCreateFlags
     viewportCount* {.optional.}: uint32
-    pViewports* {.optional.}: ptr Viewport
+    pViewports* {.optional, length: viewportCount.}: arrPtr[Viewport]
     scissorCount* {.optional.}: uint32
-    pScissors* {.optional.}: ptr Rect2D
+    pScissors* {.optional, length: scissorCount.}: arrPtr[Rect2D]
   SpecializationInfo* = object
     mapEntryCount* {.optional.}: uint32
-    pMapEntries*: ptr SpecializationMapEntry
+    pMapEntries* {.length: mapEntryCount.}: arrPtr[SpecializationMapEntry]
     dataSize* {.optional.}: uint
-    pData*: pointer
+    pData* {.length: dataSize.}: pointer
   SpecializationMapEntry* = object
     constantID*: uint32
     offset*: uint32
@@ -3114,9 +3114,9 @@ type
     pNext* {.optional.}: pointer
     flags* {.optional.}: PipelineLayoutCreateFlags
     setLayoutCount* {.optional.}: uint32
-    pSetLayouts*: ptr DescriptorSetLayout
+    pSetLayouts* {.length: setLayoutCount.}: arrPtr[DescriptorSetLayout]
     pushConstantRangeCount* {.optional.}: uint32
-    pPushConstantRanges*: ptr PushConstantRange
+    pPushConstantRanges* {.length: pushConstantRangeCount.}: arrPtr[PushConstantRange]
   PushConstantRange* = object
     stageFlags*: ShaderStageFlags
     offset*: uint32
@@ -3174,7 +3174,7 @@ type
     flags* {.optional.}: DescriptorPoolCreateFlags
     maxSets*: uint32
     poolSizeCount*: uint32
-    pPoolSizes*: ptr DescriptorPoolSize
+    pPoolSizes* {.length: poolSizeCount.}: arrPtr[DescriptorPoolSize]
   DescriptorPoolSize* = object
     theType*: DescriptorType
     descriptorCount*: uint32
@@ -3185,7 +3185,7 @@ type
     pNext* {.optional.}: pointer
     descriptorPool*: DescriptorPool
     descriptorSetCount*: uint32
-    pSetLayouts*: ptr DescriptorSetLayout
+    pSetLayouts* {.length: descriptorSetCount.}: arrPtr[DescriptorSetLayout]
   HtDescriptorSetLayout* = object of HandleType
   DescriptorSetLayout* = NonDispatchableHandle[HtDescriptorSetLayout]
   DescriptorSetLayoutBinding* = object
@@ -3193,13 +3193,13 @@ type
     descriptorType*: DescriptorType
     descriptorCount* {.optional.}: uint32
     stageFlags*: ShaderStageFlags
-    pImmutableSamplers* {.optional.}: ptr Sampler
+    pImmutableSamplers* {.optional, length: descriptorCount.}: arrPtr[Sampler]
   DescriptorSetLayoutCreateInfo* = object
     sType* {.constant: (StructureType.descriptorSetLayoutCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
     flags* {.optional.}: DescriptorSetLayoutCreateFlags
     bindingCount* {.optional.}: uint32
-    pBindings*: ptr DescriptorSetLayoutBinding
+    pBindings* {.length: bindingCount.}: arrPtr[DescriptorSetLayoutBinding]
   WriteDescriptorSet* = object
     sType* {.constant: (StructureType.writeDescriptorSet).}: StructureType
     pNext* {.optional.}: pointer
@@ -3208,9 +3208,9 @@ type
     dstArrayElement*: uint32
     descriptorCount*: uint32
     descriptorType*: DescriptorType
-    pImageInfo*: ptr DescriptorImageInfo
-    pBufferInfo*: ptr DescriptorBufferInfo
-    pTexelBufferView*: ptr BufferView
+    pImageInfo* {.length: descriptorCount.}: arrPtr[DescriptorImageInfo]
+    pBufferInfo* {.length: descriptorCount.}: arrPtr[DescriptorBufferInfo]
+    pTexelBufferView* {.length: descriptorCount.}: arrPtr[BufferView]
 
   # Pass commands
   # -------------
@@ -3235,7 +3235,7 @@ type
     flags* {.optional.}: FramebufferCreateFlags
     renderPass*: RenderPass
     attachmentCount* {.optional.}: uint32
-    pAttachments*: ptr ImageView
+    pAttachments* {.length: attachmentCount.}: arrPtr[ImageView]
     width*: uint32
     height*: uint32
     layers*: uint32
@@ -3246,11 +3246,11 @@ type
     pNext* {.optional.}: pointer
     flags* {.optional.}: RenderPassCreateFlags
     attachmentCount* {.optional.}: uint32
-    pAttachments*: ptr AttachmentDescription
+    pAttachments* {.length: attachmentCount.}: arrPtr[AttachmentDescription]
     subpassCount*: uint32
-    pSubpasses*: ptr SubpassDescription
+    pSubpasses* {.length: subpassCount.}: arrPtr[SubpassDescription]
     dependencyCount* {.optional.}: uint32
-    pDependencies*: ptr SubpassDependency
+    pDependencies* {.length: dependencyCount.}: arrPtr[SubpassDependency]
   SubpassDependency* = object
     srcSubpass*: uint32
     dstSubpass*: uint32
@@ -3263,13 +3263,13 @@ type
     flags* {.optional.}: SubpassDescriptionFlags
     pipelineBindPoint*: PipelineBindPoint
     inputAttachmentCount* {.optional.}: uint32
-    pInputAttachments*: ptr AttachmentReference
+    pInputAttachments* {.length: inputAttachmentCount.}: arrPtr[AttachmentReference]
     colorAttachmentCount* {.optional.}: uint32
-    pColorAttachments*: ptr AttachmentReference
-    pResolveAttachments* {.optional.}: ptr AttachmentReference
+    pColorAttachments* {.length: colorAttachmentCount.}: arrPtr[AttachmentReference]
+    pResolveAttachments* {.optional, length: colorAttachmentCount.}: arrPtr[AttachmentReference]
     pDepthStencilAttachment* {.optional.}: ptr AttachmentReference
     preserveAttachmentCount* {.optional.}: uint32
-    pPreserveAttachments*: ptr uint32
+    pPreserveAttachments* {.length: preserveAttachmentCount.}: arrPtr[uint32]
 
   # Command pool commands
   # ---------------------
@@ -3368,7 +3368,7 @@ type
     framebuffer*: Framebuffer
     renderArea*: Rect2D
     clearValueCount* {.optional.}: uint32
-    pClearValues*: ptr ClearValue
+    pClearValues* {.length: clearValueCount.}: arrPtr[ClearValue]
 
 # Header boilerplate
 # ------------------
@@ -3421,7 +3421,7 @@ proc destroyInstance*(
 proc enumeratePhysicalDevices*(
       instance: Instance;
       pPhysicalDeviceCount: ptr uint32;
-      pPhysicalDevices {.length: pPhysicalDeviceCount.} = default(ptr PhysicalDevice);
+      pPhysicalDevices {.length: pPhysicalDeviceCount.} = default(arrPtr[PhysicalDevice]);
     ): Result {.cdecl, lazyload("vkEnumeratePhysicalDevices", InstanceLevel).}
 proc getPhysicalDeviceFeatures*(
       physicalDevice: PhysicalDevice;
@@ -3448,7 +3448,7 @@ proc getPhysicalDeviceProperties*(
 proc getPhysicalDeviceQueueFamilyProperties*(
       physicalDevice: PhysicalDevice;
       pQueueFamilyPropertyCount: ptr uint32;
-      pQueueFamilyProperties {.length: pQueueFamilyPropertyCount.} = default(ptr QueueFamilyProperties);
+      pQueueFamilyProperties {.length: pQueueFamilyPropertyCount.} = default(arrPtr[QueueFamilyProperties]);
     ): void {.cdecl, lazyload("vkGetPhysicalDeviceQueueFamilyProperties", InstanceLevel).}
 proc getPhysicalDeviceMemoryProperties*(
       physicalDevice: PhysicalDevice;
@@ -3456,11 +3456,11 @@ proc getPhysicalDeviceMemoryProperties*(
     ): void {.cdecl, lazyload("vkGetPhysicalDeviceMemoryProperties", InstanceLevel).}
 proc getInstanceProcAddr*(
       instance = default(Instance);
-      pName {.length: null-terminated.}: cstring;
+      pName: cstring;
     ): PFN_VoidFunction {.cdecl, preload("vkGetInstanceProcAddr").}
 proc getDeviceProcAddr*(
       device: Device;
-      pName {.length: null-terminated.}: cstring;
+      pName: cstring;
     ): PFN_VoidFunction {.cdecl, preload("vkGetDeviceProcAddr").}
 
 
@@ -3481,15 +3481,15 @@ proc destroyDevice*(
 # Extension discovery commands
 # ----------------------------
 proc enumerateInstanceExtensionProperties*(
-      pLayerName {.length: null-terminated.} = default(cstring);
+      pLayerName = default(cstring);
       pPropertyCount: ptr uint32;
-      pProperties {.length: pPropertyCount.} = default(ptr ExtensionProperties);
+      pProperties {.length: pPropertyCount.} = default(arrPtr[ExtensionProperties]);
     ): Result {.cdecl, preload("vkEnumerateInstanceExtensionProperties").}
 proc enumerateDeviceExtensionProperties*(
       physicalDevice: PhysicalDevice;
-      pLayerName {.length: null-terminated.} = default(cstring);
+      pLayerName = default(cstring);
       pPropertyCount: ptr uint32;
-      pProperties {.length: pPropertyCount.} = default(ptr ExtensionProperties);
+      pProperties {.length: pPropertyCount.} = default(arrPtr[ExtensionProperties]);
     ): Result {.cdecl, lazyload("vkEnumerateDeviceExtensionProperties", InstanceLevel).}
 
 
@@ -3497,12 +3497,12 @@ proc enumerateDeviceExtensionProperties*(
 # ------------------------
 proc enumerateInstanceLayerProperties*(
       pPropertyCount: ptr uint32;
-      pProperties {.length: pPropertyCount.} = default(ptr LayerProperties);
+      pProperties {.length: pPropertyCount.} = default(arrPtr[LayerProperties]);
     ): Result {.cdecl, preload("vkEnumerateInstanceLayerProperties").}
 proc enumerateDeviceLayerProperties*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
-      pProperties {.length: pPropertyCount.} = default(ptr LayerProperties);
+      pProperties {.length: pPropertyCount.} = default(arrPtr[LayerProperties]);
     ): Result {.cdecl, lazyload("vkEnumerateDeviceLayerProperties", InstanceLevel).}
 
 
@@ -3517,7 +3517,7 @@ proc getDeviceQueue*(
 proc queueSubmit*(
       queue: Queue;
       submitCount = default(uint32);
-      pSubmits {.length: submitCount.}: ptr SubmitInfo;
+      pSubmits {.length: submitCount.}: arrPtr[SubmitInfo];
       fence = default(Fence);
     ): Result {.cdecl, lazyload("vkQueueSubmit", DeviceLevel).}
 proc queueWaitIdle*(
@@ -3556,12 +3556,12 @@ proc unmapMemory*(
 proc flushMappedMemoryRanges*(
       device: Device;
       memoryRangeCount: uint32;
-      pMemoryRanges {.length: memoryRangeCount.}: ptr MappedMemoryRange;
+      pMemoryRanges {.length: memoryRangeCount.}: arrPtr[MappedMemoryRange];
     ): Result {.cdecl, lazyload("vkFlushMappedMemoryRanges", DeviceLevel).}
 proc invalidateMappedMemoryRanges*(
       device: Device;
       memoryRangeCount: uint32;
-      pMemoryRanges {.length: memoryRangeCount.}: ptr MappedMemoryRange;
+      pMemoryRanges {.length: memoryRangeCount.}: arrPtr[MappedMemoryRange];
     ): Result {.cdecl, lazyload("vkInvalidateMappedMemoryRanges", DeviceLevel).}
 proc getDeviceMemoryCommitment*(
       device: Device;
@@ -3602,7 +3602,7 @@ proc getImageSparseMemoryRequirements*(
       device: Device;
       image: Image;
       pSparseMemoryRequirementCount: ptr uint32;
-      pSparseMemoryRequirements {.length: pSparseMemoryRequirementCount.} = default(ptr SparseImageMemoryRequirements);
+      pSparseMemoryRequirements {.length: pSparseMemoryRequirementCount.} = default(arrPtr[SparseImageMemoryRequirements]);
     ): void {.cdecl, lazyload("vkGetImageSparseMemoryRequirements", DeviceLevel).}
 proc getPhysicalDeviceSparseImageFormatProperties*(
       physicalDevice: PhysicalDevice;
@@ -3612,12 +3612,12 @@ proc getPhysicalDeviceSparseImageFormatProperties*(
       usage: ImageUsageFlags;
       tiling: ImageTiling;
       pPropertyCount: ptr uint32;
-      pProperties {.length: pPropertyCount.} = default(ptr SparseImageFormatProperties);
+      pProperties {.length: pPropertyCount.} = default(arrPtr[SparseImageFormatProperties]);
     ): void {.cdecl, lazyload("vkGetPhysicalDeviceSparseImageFormatProperties", InstanceLevel).}
 proc queueBindSparse*(
       queue: Queue;
       bindInfoCount = default(uint32);
-      pBindInfo {.length: bindInfoCount.}: ptr BindSparseInfo;
+      pBindInfo {.length: bindInfoCount.}: arrPtr[BindSparseInfo];
       fence = default(Fence);
     ): Result {.cdecl, lazyload("vkQueueBindSparse", DeviceLevel).}
 
@@ -3638,7 +3638,7 @@ proc destroyFence*(
 proc resetFences*(
       device: Device;
       fenceCount: uint32;
-      pFences {.length: fenceCount.}: ptr Fence;
+      pFences {.length: fenceCount.}: arrPtr[Fence];
     ): Result {.cdecl, lazyload("vkResetFences", DeviceLevel).}
 proc getFenceStatus*(
       device: Device;
@@ -3647,7 +3647,7 @@ proc getFenceStatus*(
 proc waitForFences*(
       device: Device;
       fenceCount: uint32;
-      pFences {.length: fenceCount.}: ptr Fence;
+      pFences {.length: fenceCount.}: arrPtr[Fence];
       waitAll: Bool32;
       timeout: uint64;
     ): Result {.cdecl, lazyload("vkWaitForFences", DeviceLevel).}
@@ -3824,7 +3824,7 @@ proc mergePipelineCaches*(
       device: Device;
       dstCache: PipelineCache;
       srcCacheCount: uint32;
-      pSrcCaches {.length: srcCacheCount.}: ptr PipelineCache;
+      pSrcCaches {.length: srcCacheCount.}: arrPtr[PipelineCache];
     ): Result {.cdecl, lazyload("vkMergePipelineCaches", DeviceLevel).}
 
 
@@ -3834,17 +3834,17 @@ proc createGraphicsPipelines*(
       device: Device;
       pipelineCache = default(PipelineCache);
       createInfoCount: uint32;
-      pCreateInfos {.length: createInfoCount.}: ptr GraphicsPipelineCreateInfo;
+      pCreateInfos {.length: createInfoCount.}: arrPtr[GraphicsPipelineCreateInfo];
       pAllocator = default(ptr AllocationCallbacks);
-      pPipelines {.length: createInfoCount.}: ptr Pipeline;
+      pPipelines {.length: createInfoCount.}: arrPtr[Pipeline];
     ): Result {.cdecl, lazyload("vkCreateGraphicsPipelines", DeviceLevel).}
 proc createComputePipelines*(
       device: Device;
       pipelineCache = default(PipelineCache);
       createInfoCount: uint32;
-      pCreateInfos {.length: createInfoCount.}: ptr ComputePipelineCreateInfo;
+      pCreateInfos {.length: createInfoCount.}: arrPtr[ComputePipelineCreateInfo];
       pAllocator = default(ptr AllocationCallbacks);
-      pPipelines {.length: createInfoCount.}: ptr Pipeline;
+      pPipelines {.length: createInfoCount.}: arrPtr[Pipeline];
     ): Result {.cdecl, lazyload("vkCreateComputePipelines", DeviceLevel).}
 proc destroyPipeline*(
       device: Device;
@@ -3915,20 +3915,20 @@ proc resetDescriptorPool*(
 proc allocateDescriptorSets*(
       device: Device;
       pAllocateInfo: ptr DescriptorSetAllocateInfo;
-      pDescriptorSets {.length: pAllocateInfo.descriptorSetCount.}: ptr DescriptorSet;
+      pDescriptorSets {.length: pAllocateInfo.descriptorSetCount.}: arrPtr[DescriptorSet];
     ): Result {.cdecl, lazyload("vkAllocateDescriptorSets", DeviceLevel).}
 proc freeDescriptorSets*(
       device: Device;
       descriptorPool: DescriptorPool;
       descriptorSetCount: uint32;
-      pDescriptorSets {.length: descriptorSetCount.}: ptr DescriptorSet;
+      pDescriptorSets {.length: descriptorSetCount.}: arrPtr[DescriptorSet];
     ): Result {.cdecl, lazyload("vkFreeDescriptorSets", DeviceLevel).}
 proc updateDescriptorSets*(
       device: Device;
       descriptorWriteCount = default(uint32);
-      pDescriptorWrites {.length: descriptorWriteCount.}: ptr WriteDescriptorSet;
+      pDescriptorWrites {.length: descriptorWriteCount.}: arrPtr[WriteDescriptorSet];
       descriptorCopyCount = default(uint32);
-      pDescriptorCopies {.length: descriptorCopyCount.}: ptr CopyDescriptorSet;
+      pDescriptorCopies {.length: descriptorCopyCount.}: arrPtr[CopyDescriptorSet];
     ): void {.cdecl, lazyload("vkUpdateDescriptorSets", DeviceLevel).}
 
 
@@ -3988,13 +3988,13 @@ proc resetCommandPool*(
 proc allocateCommandBuffers*(
       device: Device;
       pAllocateInfo: ptr CommandBufferAllocateInfo;
-      pCommandBuffers {.length: pAllocateInfo.commandBufferCount.}: ptr CommandBuffer;
+      pCommandBuffers {.length: pAllocateInfo.commandBufferCount.}: arrPtr[CommandBuffer];
     ): Result {.cdecl, lazyload("vkAllocateCommandBuffers", DeviceLevel).}
 proc freeCommandBuffers*(
       device: Device;
       commandPool: CommandPool;
       commandBufferCount: uint32;
-      pCommandBuffers {.length: commandBufferCount.}: ptr CommandBuffer;
+      pCommandBuffers {.length: commandBufferCount.}: arrPtr[CommandBuffer];
     ): void {.cdecl, lazyload("vkFreeCommandBuffers", DeviceLevel).}
 proc beginCommandBuffer*(
       commandBuffer: CommandBuffer;
@@ -4023,13 +4023,13 @@ proc cmdSetViewport*(
       commandBuffer: CommandBuffer;
       firstViewport: uint32;
       viewportCount: uint32;
-      pViewports {.length: viewportCount.}: ptr Viewport;
+      pViewports {.length: viewportCount.}: arrPtr[Viewport];
     ): void {.cdecl, lazyload("vkCmdSetViewport", DeviceLevel).}
 proc cmdSetScissor*(
       commandBuffer: CommandBuffer;
       firstScissor: uint32;
       scissorCount: uint32;
-      pScissors {.length: scissorCount.}: ptr Rect2D;
+      pScissors {.length: scissorCount.}: arrPtr[Rect2D];
     ): void {.cdecl, lazyload("vkCmdSetScissor", DeviceLevel).}
 proc cmdSetLineWidth*(
       commandBuffer: CommandBuffer;
@@ -4071,9 +4071,9 @@ proc cmdBindDescriptorSets*(
       layout: PipelineLayout;
       firstSet: uint32;
       descriptorSetCount: uint32;
-      pDescriptorSets {.length: descriptorSetCount.}: ptr DescriptorSet;
+      pDescriptorSets {.length: descriptorSetCount.}: arrPtr[DescriptorSet];
       dynamicOffsetCount = default(uint32);
-      pDynamicOffsets {.length: dynamicOffsetCount.}: ptr uint32;
+      pDynamicOffsets {.length: dynamicOffsetCount.}: arrPtr[uint32];
     ): void {.cdecl, lazyload("vkCmdBindDescriptorSets", DeviceLevel).}
 proc cmdBindIndexBuffer*(
       commandBuffer: CommandBuffer;
@@ -4085,8 +4085,8 @@ proc cmdBindVertexBuffers*(
       commandBuffer: CommandBuffer;
       firstBinding: uint32;
       bindingCount: uint32;
-      pBuffers {.length: bindingCount.}: ptr Buffer;
-      pOffsets {.length: bindingCount.}: ptr DeviceSize;
+      pBuffers {.length: bindingCount.}: arrPtr[Buffer];
+      pOffsets {.length: bindingCount.}: arrPtr[DeviceSize];
     ): void {.cdecl, lazyload("vkCmdBindVertexBuffers", DeviceLevel).}
 proc cmdDraw*(
       commandBuffer: CommandBuffer;
@@ -4133,7 +4133,7 @@ proc cmdCopyBuffer*(
       srcBuffer: Buffer;
       dstBuffer: Buffer;
       regionCount: uint32;
-      pRegions {.length: regionCount.}: ptr BufferCopy;
+      pRegions {.length: regionCount.}: arrPtr[BufferCopy];
     ): void {.cdecl, lazyload("vkCmdCopyBuffer", DeviceLevel).}
 proc cmdCopyImage*(
       commandBuffer: CommandBuffer;
@@ -4142,7 +4142,7 @@ proc cmdCopyImage*(
       dstImage: Image;
       dstImageLayout: ImageLayout;
       regionCount: uint32;
-      pRegions {.length: regionCount.}: ptr ImageCopy;
+      pRegions {.length: regionCount.}: arrPtr[ImageCopy];
     ): void {.cdecl, lazyload("vkCmdCopyImage", DeviceLevel).}
 proc cmdBlitImage*(
       commandBuffer: CommandBuffer;
@@ -4151,7 +4151,7 @@ proc cmdBlitImage*(
       dstImage: Image;
       dstImageLayout: ImageLayout;
       regionCount: uint32;
-      pRegions {.length: regionCount.}: ptr ImageBlit;
+      pRegions {.length: regionCount.}: arrPtr[ImageBlit];
       filter: Filter;
     ): void {.cdecl, lazyload("vkCmdBlitImage", DeviceLevel).}
 proc cmdCopyBufferToImage*(
@@ -4160,7 +4160,7 @@ proc cmdCopyBufferToImage*(
       dstImage: Image;
       dstImageLayout: ImageLayout;
       regionCount: uint32;
-      pRegions {.length: regionCount.}: ptr BufferImageCopy;
+      pRegions {.length: regionCount.}: arrPtr[BufferImageCopy];
     ): void {.cdecl, lazyload("vkCmdCopyBufferToImage", DeviceLevel).}
 proc cmdCopyImageToBuffer*(
       commandBuffer: CommandBuffer;
@@ -4168,7 +4168,7 @@ proc cmdCopyImageToBuffer*(
       srcImageLayout: ImageLayout;
       dstBuffer: Buffer;
       regionCount: uint32;
-      pRegions {.length: regionCount.}: ptr BufferImageCopy;
+      pRegions {.length: regionCount.}: arrPtr[BufferImageCopy];
     ): void {.cdecl, lazyload("vkCmdCopyImageToBuffer", DeviceLevel).}
 proc cmdUpdateBuffer*(
       commandBuffer: CommandBuffer;
@@ -4190,7 +4190,7 @@ proc cmdClearColorImage*(
       imageLayout: ImageLayout;
       pColor: ptr ClearColorValue;
       rangeCount: uint32;
-      pRanges {.length: rangeCount.}: ptr ImageSubresourceRange;
+      pRanges {.length: rangeCount.}: arrPtr[ImageSubresourceRange];
     ): void {.cdecl, lazyload("vkCmdClearColorImage", DeviceLevel).}
 proc cmdClearDepthStencilImage*(
       commandBuffer: CommandBuffer;
@@ -4198,14 +4198,14 @@ proc cmdClearDepthStencilImage*(
       imageLayout: ImageLayout;
       pDepthStencil: ptr ClearDepthStencilValue;
       rangeCount: uint32;
-      pRanges {.length: rangeCount.}: ptr ImageSubresourceRange;
+      pRanges {.length: rangeCount.}: arrPtr[ImageSubresourceRange];
     ): void {.cdecl, lazyload("vkCmdClearDepthStencilImage", DeviceLevel).}
 proc cmdClearAttachments*(
       commandBuffer: CommandBuffer;
       attachmentCount: uint32;
-      pAttachments {.length: attachmentCount.}: ptr ClearAttachment;
+      pAttachments {.length: attachmentCount.}: arrPtr[ClearAttachment];
       rectCount: uint32;
-      pRects {.length: rectCount.}: ptr ClearRect;
+      pRects {.length: rectCount.}: arrPtr[ClearRect];
     ): void {.cdecl, lazyload("vkCmdClearAttachments", DeviceLevel).}
 proc cmdResolveImage*(
       commandBuffer: CommandBuffer;
@@ -4214,7 +4214,7 @@ proc cmdResolveImage*(
       dstImage: Image;
       dstImageLayout: ImageLayout;
       regionCount: uint32;
-      pRegions {.length: regionCount.}: ptr ImageResolve;
+      pRegions {.length: regionCount.}: arrPtr[ImageResolve];
     ): void {.cdecl, lazyload("vkCmdResolveImage", DeviceLevel).}
 proc cmdSetEvent*(
       commandBuffer: CommandBuffer;
@@ -4229,15 +4229,15 @@ proc cmdResetEvent*(
 proc cmdWaitEvents*(
       commandBuffer: CommandBuffer;
       eventCount: uint32;
-      pEvents {.length: eventCount.}: ptr Event;
+      pEvents {.length: eventCount.}: arrPtr[Event];
       srcStageMask: PipelineStageFlags;
       dstStageMask: PipelineStageFlags;
       memoryBarrierCount = default(uint32);
-      pMemoryBarriers {.length: memoryBarrierCount.}: ptr MemoryBarrier;
+      pMemoryBarriers {.length: memoryBarrierCount.}: arrPtr[MemoryBarrier];
       bufferMemoryBarrierCount = default(uint32);
-      pBufferMemoryBarriers {.length: bufferMemoryBarrierCount.}: ptr BufferMemoryBarrier;
+      pBufferMemoryBarriers {.length: bufferMemoryBarrierCount.}: arrPtr[BufferMemoryBarrier];
       imageMemoryBarrierCount = default(uint32);
-      pImageMemoryBarriers {.length: imageMemoryBarrierCount.}: ptr ImageMemoryBarrier;
+      pImageMemoryBarriers {.length: imageMemoryBarrierCount.}: arrPtr[ImageMemoryBarrier];
     ): void {.cdecl, lazyload("vkCmdWaitEvents", DeviceLevel).}
 proc cmdPipelineBarrier*(
       commandBuffer: CommandBuffer;
@@ -4245,11 +4245,11 @@ proc cmdPipelineBarrier*(
       dstStageMask: PipelineStageFlags;
       dependencyFlags = default(DependencyFlags);
       memoryBarrierCount = default(uint32);
-      pMemoryBarriers {.length: memoryBarrierCount.}: ptr MemoryBarrier;
+      pMemoryBarriers {.length: memoryBarrierCount.}: arrPtr[MemoryBarrier];
       bufferMemoryBarrierCount = default(uint32);
-      pBufferMemoryBarriers {.length: bufferMemoryBarrierCount.}: ptr BufferMemoryBarrier;
+      pBufferMemoryBarriers {.length: bufferMemoryBarrierCount.}: arrPtr[BufferMemoryBarrier];
       imageMemoryBarrierCount = default(uint32);
-      pImageMemoryBarriers {.length: imageMemoryBarrierCount.}: ptr ImageMemoryBarrier;
+      pImageMemoryBarriers {.length: imageMemoryBarrierCount.}: arrPtr[ImageMemoryBarrier];
     ): void {.cdecl, lazyload("vkCmdPipelineBarrier", DeviceLevel).}
 proc cmdBeginQuery*(
       commandBuffer: CommandBuffer;
@@ -4307,7 +4307,7 @@ proc cmdEndRenderPass*(
 proc cmdExecuteCommands*(
       commandBuffer: CommandBuffer;
       commandBufferCount: uint32;
-      pCommandBuffers {.length: commandBufferCount.}: ptr CommandBuffer;
+      pCommandBuffers {.length: commandBufferCount.}: arrPtr[CommandBuffer];
     ): void {.cdecl, lazyload("vkCmdExecuteCommands", DeviceLevel).}
 
 
@@ -4925,6 +4925,16 @@ proc `$`*(b: Bool32): string = b.toString
 
 converter toBool*(b: Bool32): bool = bool(b)
 converter toBool32*(b: bool): Bool32 = Bool32(b)
+
+# Array pointer converters
+# ========================
+converter toArrPtr*[T](x: var T): arrPtr[T] = addr x
+converter toArrPtr*[T](x: var seq[T]): arrPtr[T] =
+  if x.len == 0: nil
+  else: addr x[0]
+converter toArrPtr*[I, T](x: var array[I, T]): arrPtr[T] =
+  when x.len == 0: nil
+  else: addr x[0]
 
 
 # Struct Constructor

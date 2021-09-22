@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T08:32:06Z
+# Generated at 2021-09-23T04:24:54Z
 # VK_NV_scissor_exclusive
 
 
@@ -16,7 +16,7 @@ type
     sType* {.constant: (StructureType.pipelineViewportExclusiveScissorStateCreateInfoNv).}: StructureType
     pNext* {.optional.}: pointer
     exclusiveScissorCount* {.optional.}: uint32
-    pExclusiveScissors*: ptr Rect2D
+    pExclusiveScissors* {.length: exclusiveScissorCount.}: arrPtr[Rect2D]
   PhysicalDeviceExclusiveScissorFeaturesNV* = object
     sType* {.constant: (StructureType.physicalDeviceExclusiveScissorFeaturesNv).}: StructureType
     pNext* {.optional.}: pointer
@@ -26,7 +26,7 @@ proc cmdSetExclusiveScissorNV*(
       commandBuffer: CommandBuffer;
       firstExclusiveScissor: uint32;
       exclusiveScissorCount: uint32;
-      pExclusiveScissors {.length: exclusiveScissorCount.}: ptr Rect2D;
+      pExclusiveScissors {.length: exclusiveScissorCount.}: arrPtr[Rect2D];
     ): void {.cdecl, lazyload("vkCmdSetExclusiveScissorNV", DeviceLevel).}
 
 proc loadAllVK_NV_scissor_exclusive*(instance: Instance) =

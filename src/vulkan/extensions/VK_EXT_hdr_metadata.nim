@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T08:32:06Z
+# Generated at 2021-09-23T04:24:54Z
 # VK_EXT_hdr_metadata
 
 
@@ -31,8 +31,8 @@ type
 proc setHdrMetadataEXT*(
       device: Device;
       swapchainCount: uint32;
-      pSwapchains {.length: swapchainCount.}: ptr SwapchainKHR;
-      pMetadata {.length: swapchainCount.}: ptr HdrMetadataEXT;
+      pSwapchains {.length: swapchainCount.}: arrPtr[SwapchainKHR];
+      pMetadata {.length: swapchainCount.}: arrPtr[HdrMetadataEXT];
     ): void {.cdecl, lazyload("vkSetHdrMetadataEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_hdr_metadata*(instance: Instance) =

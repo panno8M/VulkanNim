@@ -1,4 +1,4 @@
-# Generated at 2021-09-17T11:40:23Z
+# Generated at 2021-09-23T04:24:54Z
 # VK_KHR_ray_tracing
 # VK_NV_ray_tracing
 # Explicit sort order to require processing after VK_NV_ray_tracing
@@ -113,9 +113,9 @@ type
     pNext* {.optional.}: pointer
     flags* {.optional.}: PipelineCreateFlags
     stageCount* {.optional.}: uint32
-    pStages*: ptr PipelineShaderStageCreateInfo
+    pStages* {.length: stageCount.}: arrPtr[PipelineShaderStageCreateInfo]
     groupCount* {.optional.}: uint32
-    pGroups*: ptr RayTracingShaderGroupCreateInfoKHR
+    pGroups* {.length: groupCount.}: arrPtr[RayTracingShaderGroupCreateInfoKHR]
     maxRecursionDepth*: uint32
     libraries*: PipelineLibraryCreateInfoKHR
     pLibraryInterface* {.optional.}: ptr RayTracingPipelineInterfaceCreateInfoKHR
@@ -195,7 +195,7 @@ type
     theType*: AccelerationStructureTypeKHR
     flags* {.optional.}: BuildAccelerationStructureFlagsKHR
     maxGeometryCount* {.optional.}: uint32
-    pGeometryInfos*: ptr AccelerationStructureCreateGeometryTypeInfoKHR
+    pGeometryInfos* {.length: maxGeometryCount.}: arrPtr[AccelerationStructureCreateGeometryTypeInfoKHR]
     deviceAddress* {.optional.}: DeviceAddress
   HtAccelerationStructureKHR* = object of HandleType
   AccelerationStructureKHR* = NonDispatchableHandle[HtAccelerationStructureKHR]
@@ -206,12 +206,12 @@ type
     memory*: DeviceMemory
     memoryOffset*: DeviceSize
     deviceIndexCount* {.optional.}: uint32
-    pDeviceIndices*: ptr uint32
+    pDeviceIndices* {.length: deviceIndexCount.}: arrPtr[uint32]
   WriteDescriptorSetAccelerationStructureKHR* = object
     sType* {.constant: (StructureType.writeDescriptorSetAccelerationStructureKhr).}: StructureType
     pNext* {.optional.}: pointer
     accelerationStructureCount*: uint32
-    pAccelerationStructures*: ptr AccelerationStructureKHR
+    pAccelerationStructures* {.length: accelerationStructureCount.}: arrPtr[AccelerationStructureKHR]
   AccelerationStructureMemoryRequirementsInfoKHR* = object
     sType* {.constant: (StructureType.accelerationStructureMemoryRequirementsInfoKhr).}: StructureType
     pNext* {.optional.}: pointer
@@ -249,7 +249,7 @@ type
   AccelerationStructureVersionKHR* = object
     sType* {.constant: (StructureType.accelerationStructureVersionKhr).}: StructureType
     pNext* {.optional.}: pointer
-    versionData*: ptr uint8
+    versionData* {.length: 2*VK_UUID_SIZE.}: arrPtr[arrPtr[uint8]]
   StridedBufferRegionKHR* = object
     buffer* {.optional.}: Buffer
     offset*: DeviceSize
@@ -297,9 +297,9 @@ type
     pNext* {.optional.}: pointer
     flags* {.optional.}: PipelineCreateFlags
     stageCount*: uint32
-    pStages*: ptr PipelineShaderStageCreateInfo
+    pStages* {.length: stageCount.}: arrPtr[PipelineShaderStageCreateInfo]
     groupCount*: uint32
-    pGroups*: ptr RayTracingShaderGroupCreateInfoNV
+    pGroups* {.length: groupCount.}: arrPtr[RayTracingShaderGroupCreateInfoNV]
     maxRecursionDepth*: uint32
     layout*: PipelineLayout
     basePipelineHandle* {.optional.}: Pipeline
@@ -341,7 +341,7 @@ type
     flags* {.optional.}: BuildAccelerationStructureFlagsNV
     instanceCount* {.optional.}: uint32
     geometryCount* {.optional.}: uint32
-    pGeometries*: ptr GeometryNV
+    pGeometries* {.length: geometryCount.}: arrPtr[GeometryNV]
   AccelerationStructureCreateInfoNV* = object
     sType* {.constant: (StructureType.accelerationStructureCreateInfoNv).}: StructureType
     pNext* {.optional.}: pointer
@@ -390,13 +390,13 @@ proc getAccelerationStructureMemoryRequirementsKHR*(
 proc bindAccelerationStructureMemoryKHR*(
       device: Device;
       bindInfoCount: uint32;
-      pBindInfos {.length: bindInfoCount.}: ptr BindAccelerationStructureMemoryInfoKHR;
+      pBindInfos {.length: bindInfoCount.}: arrPtr[BindAccelerationStructureMemoryInfoKHR];
     ): Result {.cdecl, lazyload("vkBindAccelerationStructureMemoryKHR", DeviceLevel).}
 proc cmdBuildAccelerationStructureKHR*(
       commandBuffer: CommandBuffer;
       infoCount: uint32;
-      pInfos {.length: infoCount.}: ptr AccelerationStructureBuildGeometryInfoKHR;
-      ppOffsetInfos {.length: infoCount.}: ptr ptr AccelerationStructureBuildOffsetInfoKHR;
+      pInfos {.length: infoCount.}: arrPtr[AccelerationStructureBuildGeometryInfoKHR];
+      ppOffsetInfos {.length: infoCount.}: arrPtr[arrPtr[AccelerationStructureBuildOffsetInfoKHR]];
     ): void {.cdecl, lazyload("vkCmdBuildAccelerationStructureKHR", DeviceLevel).}
 proc cmdBuildAccelerationStructureIndirectKHR*(
       commandBuffer: CommandBuffer;
@@ -408,8 +408,8 @@ proc cmdBuildAccelerationStructureIndirectKHR*(
 proc buildAccelerationStructureKHR*(
       device: Device;
       infoCount: uint32;
-      pInfos {.length: infoCount.}: ptr AccelerationStructureBuildGeometryInfoKHR;
-      ppOffsetInfos {.length: infoCount.}: ptr ptr AccelerationStructureBuildOffsetInfoKHR;
+      pInfos {.length: infoCount.}: arrPtr[AccelerationStructureBuildGeometryInfoKHR];
+      ppOffsetInfos {.length: infoCount.}: arrPtr[arrPtr[AccelerationStructureBuildOffsetInfoKHR]];
     ): Result {.cdecl, lazyload("vkBuildAccelerationStructureKHR", DeviceLevel).}
 proc copyAccelerationStructureKHR*(
       device: Device;
@@ -426,7 +426,7 @@ proc copyMemoryToAccelerationStructureKHR*(
 proc writeAccelerationStructuresPropertiesKHR*(
       device: Device;
       accelerationStructureCount: uint32;
-      pAccelerationStructures {.length: accelerationStructureCount.}: ptr AccelerationStructureKHR;
+      pAccelerationStructures {.length: accelerationStructureCount.}: arrPtr[AccelerationStructureKHR];
       queryType: QueryType;
       dataSize: uint;
       pData {.length: dataSize.}: pointer;
@@ -458,9 +458,9 @@ proc createRayTracingPipelinesKHR*(
       device: Device;
       pipelineCache = default(PipelineCache);
       createInfoCount: uint32;
-      pCreateInfos {.length: createInfoCount.}: ptr RayTracingPipelineCreateInfoKHR;
+      pCreateInfos {.length: createInfoCount.}: arrPtr[RayTracingPipelineCreateInfoKHR];
       pAllocator = default(ptr AllocationCallbacks);
-      pPipelines {.length: createInfoCount.}: ptr Pipeline;
+      pPipelines {.length: createInfoCount.}: arrPtr[Pipeline];
     ): Result {.cdecl, lazyload("vkCreateRayTracingPipelinesKHR", DeviceLevel).}
 proc getRayTracingShaderGroupHandlesKHR*(
       device: Device;
@@ -485,7 +485,7 @@ proc getRayTracingCaptureReplayShaderGroupHandlesKHR*(
 proc cmdWriteAccelerationStructuresPropertiesKHR*(
       commandBuffer: CommandBuffer;
       accelerationStructureCount: uint32;
-      pAccelerationStructures {.length: accelerationStructureCount.}: ptr AccelerationStructureKHR;
+      pAccelerationStructures {.length: accelerationStructureCount.}: arrPtr[AccelerationStructureKHR];
       queryType: QueryType;
       queryPool: QueryPool;
       firstQuery: uint32;
@@ -556,9 +556,9 @@ proc createRayTracingPipelinesNV*(
       device: Device;
       pipelineCache = default(PipelineCache);
       createInfoCount: uint32;
-      pCreateInfos {.length: createInfoCount.}: ptr RayTracingPipelineCreateInfoNV;
+      pCreateInfos {.length: createInfoCount.}: arrPtr[RayTracingPipelineCreateInfoNV];
       pAllocator = default(ptr AllocationCallbacks);
-      pPipelines {.length: createInfoCount.}: ptr Pipeline;
+      pPipelines {.length: createInfoCount.}: arrPtr[Pipeline];
     ): Result {.cdecl, lazyload("vkCreateRayTracingPipelinesNV", DeviceLevel).}
 const getRayTracingShaderGroupHandlesNV* = getRayTracingShaderGroupHandlesKHR
 proc getAccelerationStructureHandleNV*(

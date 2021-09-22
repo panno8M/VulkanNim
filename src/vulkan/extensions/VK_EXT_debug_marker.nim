@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-22T15:05:57Z
 # VK_EXT_debug_marker
 
 
@@ -68,7 +68,7 @@ type
     `object`*: uint64
     tagName*: uint64
     tagSize*: uint
-    pTag*: pointer
+    pTag* {.length: tagSize.}: pointer
   DebugMarkerMarkerInfoEXT* = object
     sType* {.constant: (StructureType.debugMarkerMarkerInfoExt).}: StructureType
     pNext* {.optional.}: pointer

@@ -1,4 +1,4 @@
-# Generated at 2021-09-17T11:40:23Z
+# Generated at 2021-09-23T04:24:54Z
 # vk11
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -201,7 +201,7 @@ type
     pNext* {.optional.}: pointer
     deviceMask*: uint32
     deviceRenderAreaCount* {.optional.}: uint32
-    pDeviceRenderAreas*: ptr Rect2D
+    pDeviceRenderAreas* {.length: deviceRenderAreaCount.}: arrPtr[Rect2D]
   DeviceGroupCommandBufferBeginInfo* = object
     sType* {.constant: (StructureType.deviceGroupCommandBufferBeginInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -210,11 +210,11 @@ type
     sType* {.constant: (StructureType.deviceGroupSubmitInfo).}: StructureType
     pNext* {.optional.}: pointer
     waitSemaphoreCount* {.optional.}: uint32
-    pWaitSemaphoreDeviceIndices*: ptr uint32
+    pWaitSemaphoreDeviceIndices* {.length: waitSemaphoreCount.}: arrPtr[uint32]
     commandBufferCount* {.optional.}: uint32
-    pCommandBufferDeviceMasks*: ptr uint32
+    pCommandBufferDeviceMasks* {.length: commandBufferCount.}: arrPtr[uint32]
     signalSemaphoreCount* {.optional.}: uint32
-    pSignalSemaphoreDeviceIndices*: ptr uint32
+    pSignalSemaphoreDeviceIndices* {.length: signalSemaphoreCount.}: arrPtr[uint32]
   DeviceGroupBindSparseInfo* = object
     sType* {.constant: (StructureType.deviceGroupBindSparseInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -227,14 +227,14 @@ type
     sType* {.constant: (StructureType.bindBufferMemoryDeviceGroupInfo).}: StructureType
     pNext* {.optional.}: pointer
     deviceIndexCount* {.optional.}: uint32
-    pDeviceIndices*: ptr uint32
+    pDeviceIndices* {.length: deviceIndexCount.}: arrPtr[uint32]
   BindImageMemoryDeviceGroupInfo* = object
     sType* {.constant: (StructureType.bindImageMemoryDeviceGroupInfo).}: StructureType
     pNext* {.optional.}: pointer
     deviceIndexCount* {.optional.}: uint32
-    pDeviceIndices*: ptr uint32
+    pDeviceIndices* {.length: deviceIndexCount.}: arrPtr[uint32]
     splitInstanceBindRegionCount* {.optional.}: uint32
-    pSplitInstanceBindRegions*: ptr Rect2D
+    pSplitInstanceBindRegions* {.length: splitInstanceBindRegionCount.}: arrPtr[Rect2D]
 
   # Promoted from VK_KHR_device_group_creation
   # ------------------------------------------
@@ -248,7 +248,7 @@ type
     sType* {.constant: (StructureType.deviceGroupDeviceCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
     physicalDeviceCount* {.optional.}: uint32
-    pPhysicalDevices*: ptr PhysicalDevice
+    pPhysicalDevices* {.length: physicalDeviceCount.}: arrPtr[PhysicalDevice]
 
   # Promoted from VK_KHR_get_memory_requirements2
   # ---------------------------------------------
@@ -330,7 +330,7 @@ type
     sType* {.constant: (StructureType.renderPassInputAttachmentAspectCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
     aspectReferenceCount*: uint32
-    pAspectReferences*: ptr InputAttachmentAspectReference
+    pAspectReferences* {.length: aspectReferenceCount.}: arrPtr[InputAttachmentAspectReference]
   InputAttachmentAspectReference* = object
     subpass*: uint32
     inputAttachmentIndex*: uint32
@@ -350,11 +350,11 @@ type
     sType* {.constant: (StructureType.renderPassMultiviewCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
     subpassCount* {.optional.}: uint32
-    pViewMasks*: ptr uint32
+    pViewMasks* {.length: subpassCount.}: arrPtr[uint32]
     dependencyCount* {.optional.}: uint32
-    pViewOffsets*: ptr int32
+    pViewOffsets* {.length: dependencyCount.}: arrPtr[int32]
     correlationMaskCount* {.optional.}: uint32
-    pCorrelationMasks*: ptr uint32
+    pCorrelationMasks* {.length: correlationMaskCount.}: arrPtr[uint32]
   PhysicalDeviceMultiviewFeatures* = object
     sType* {.constant: (StructureType.physicalDeviceMultiviewFeatures).}: StructureType
     pNext* {.optional.}: pointer
@@ -449,7 +449,7 @@ type
     pNext* {.optional.}: pointer
     flags* {.optional.}: DescriptorUpdateTemplateCreateFlags
     descriptorUpdateEntryCount*: uint32
-    pDescriptorUpdateEntries*: ptr DescriptorUpdateTemplateEntry
+    pDescriptorUpdateEntries* {.length: descriptorUpdateEntryCount.}: arrPtr[DescriptorUpdateTemplateEntry]
     templateType*: DescriptorUpdateTemplateType
     descriptorSetLayout*: DescriptorSetLayout
     pipelineBindPoint*: PipelineBindPoint
@@ -591,12 +591,12 @@ proc enumerateInstanceVersion*(
 proc bindBufferMemory2*(
       device: Device;
       bindInfoCount: uint32;
-      pBindInfos {.length: bindInfoCount.}: ptr BindBufferMemoryInfo;
+      pBindInfos {.length: bindInfoCount.}: arrPtr[BindBufferMemoryInfo];
     ): Result {.cdecl, lazyload("vkBindBufferMemory2", DeviceLevel).}
 proc bindImageMemory2*(
       device: Device;
       bindInfoCount: uint32;
-      pBindInfos {.length: bindInfoCount.}: ptr BindImageMemoryInfo;
+      pBindInfos {.length: bindInfoCount.}: arrPtr[BindImageMemoryInfo];
     ): Result {.cdecl, lazyload("vkBindImageMemory2", DeviceLevel).}
 
 
@@ -644,7 +644,7 @@ PipelineCreateFlagBits.defineAliases:
 proc enumeratePhysicalDeviceGroups*(
       instance: Instance;
       pPhysicalDeviceGroupCount: ptr uint32;
-      pPhysicalDeviceGroupProperties {.length: pPhysicalDeviceGroupCount.} = default(ptr PhysicalDeviceGroupProperties);
+      pPhysicalDeviceGroupProperties {.length: pPhysicalDeviceGroupCount.} = default(arrPtr[PhysicalDeviceGroupProperties]);
     ): Result {.cdecl, lazyload("vkEnumeratePhysicalDeviceGroups", InstanceLevel).}
 
 
@@ -664,7 +664,7 @@ proc getImageSparseMemoryRequirements2*(
       device: Device;
       pInfo: ptr ImageSparseMemoryRequirementsInfo2;
       pSparseMemoryRequirementCount: ptr uint32;
-      pSparseMemoryRequirements {.length: pSparseMemoryRequirementCount.} = default(ptr SparseImageMemoryRequirements2);
+      pSparseMemoryRequirements {.length: pSparseMemoryRequirementCount.} = default(arrPtr[SparseImageMemoryRequirements2]);
     ): void {.cdecl, lazyload("vkGetImageSparseMemoryRequirements2", DeviceLevel).}
 
 
@@ -691,7 +691,7 @@ proc getPhysicalDeviceImageFormatProperties2*(
 proc getPhysicalDeviceQueueFamilyProperties2*(
       physicalDevice: PhysicalDevice;
       pQueueFamilyPropertyCount: ptr uint32;
-      pQueueFamilyProperties {.length: pQueueFamilyPropertyCount.} = default(ptr QueueFamilyProperties2);
+      pQueueFamilyProperties {.length: pQueueFamilyPropertyCount.} = default(arrPtr[QueueFamilyProperties2]);
     ): void {.cdecl, lazyload("vkGetPhysicalDeviceQueueFamilyProperties2", InstanceLevel).}
 proc getPhysicalDeviceMemoryProperties2*(
       physicalDevice: PhysicalDevice;
@@ -701,7 +701,7 @@ proc getPhysicalDeviceSparseImageFormatProperties2*(
       physicalDevice: PhysicalDevice;
       pFormatInfo: ptr PhysicalDeviceSparseImageFormatInfo2;
       pPropertyCount: ptr uint32;
-      pProperties {.length: pPropertyCount.} = default(ptr SparseImageFormatProperties2);
+      pProperties {.length: pPropertyCount.} = default(arrPtr[SparseImageFormatProperties2]);
     ): void {.cdecl, lazyload("vkGetPhysicalDeviceSparseImageFormatProperties2", InstanceLevel).}
 
 

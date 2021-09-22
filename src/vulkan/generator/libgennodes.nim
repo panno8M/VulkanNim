@@ -123,19 +123,33 @@ proc render*(struct: Nodestruct): string =
     of true: "{name}* {{.union.}} = object".fmt
     of false: "{name}* = object".fmt
 
-  let members = struct.members
-    .mapIt(block:
-      let
-        theType = it.theType.parseTypeName(it.ptrLv, it.length)
-        name = it.name.parseParamName
-      if it.optional:
-        "  {name}* {{.optional.}}: {theType}".fmt
-      elif it.values.isSome:
-        # Expect that the value is single StructureType enum.
-        let value = it.values.get.parseEnumValue("vkStructureType", @[])
-        "  {name}* {{.constant: (StructureType.{value}).}}: {theType}".fmt
-      else:
-        "  {name}*: {theType}".fmt)
+  let members = struct.members.mapIt(block:
+    let
+      theType =
+        case it.arrayStyle
+        of nasPtr: it.theType.parseTypeName(ptrLen= it.ptrLen)
+        of nasFix: it.theType.parseTypeName(dim= it.dim)
+        of nasNotArray: it.theType.parseTypeName(ptrLv= it.ptrLv)
+      name = it.name.parseParamName
+      pragmas =
+        ( if it.optional: @["optional"]
+          elif it.values.isSome:
+            let value = it.values.get.parseEnumValue("vkStructureType", @[])
+            @[&"constant: (StructureType.{value})"]
+          else: newSeq[string]()
+        ).concat(
+          if it.arrayStyle == nasPtr:
+            let annotated = it.ptrLen.filterIt(it.isSome)
+            if annotated.len != 0:
+              @["length: " & annotated.mapIt(it.get).join(", ")]
+            else: newSeq[string]()
+          else: newSeq[string]()
+        )
+    if pragmas.len != 0:
+      "  {name}* {{.{pragmas.join(\", \")}.}}: {theType}".fmt
+    else:
+      "  {name}*: {theType}".fmt
+  )
   if members.len != 0:
     result.LF
     result &= members.join("\n")
@@ -178,9 +192,15 @@ proc render*(command: NodeCommand): string =
     let procParams = command.params
       .mapIt( block:
         let name = it.name.parseParamName
-        let theType = it.theType.parseTypeName(it.ptrLv)
-        let lengthAnno = if it.arrlen.isNone: ""
-          else: " {{.length: {it.arrlen.get.replace(\"->\", \".\")}.}}".fmt
+        let theType = case it.arrayStyle
+          of nasNotArray: it.theType.parseTypeName(it.ptrLv)
+          of nasPtr: it.theType.parseTypeName(it.ptrLen)
+          else: raiseAssert "arrayStyle must be NotArray or Ptr"
+        let lengthAnno =
+          if it.arrayStyle != nasPtr or it.ptrLen.allIt(it.isNone): ""
+          else:
+            let lengthAnno = it.ptrLen.filterIt(it.isSome).mapIt(it.get.replace("->", ".")).join(", ")
+            " {{.length: {lengthAnno}.}}".fmt
         if it.optional:
           "      {name}{lengthAnno} = default({theType});".fmt
         else:
@@ -707,35 +727,59 @@ func extractNodeDefine*(typeDef: XmlNode): NodeDefine {.raises: [UnexpectedXmlSt
     ))
 
 func extractNodeStructMember*(typeDef: XmlNode): (NodeStructMember, seq[string]) {.raises: [].} =
+
     result[0] = NodeStructMember(
       theType: typeDef["type"].innerText.parseWords[0],
       name: typeDef["name"].innerText.parseWords[0],
-      length: @[]
+      arrayStyle:
+        if ((?typeDef{"len"}).isSome or (?typeDef{"altlen"}).isSome):
+          nasPtr
+        elif typeDef.findAll("enum").len != 0 or typeDef.innerText.find({'[', ']'}) != -1:
+          nasFix
+        else:
+          nasNotArray
     )
+
     if (?typeDef{"values"}).isSome:
       result[0].values = some typeDef{"values"}
     else:
       result[0].optional = (typeDef{"optional"} == "true") or (result[0].name == "pNext")
 
+
+    if result[0].arrayStyle == nasPtr:
+      let ptrcnt = typedef.`$`.count("*")
+      if ptrcnt != 0:
+        result[0].ptrLen.setlen(ptrcnt)
+
+      if (?typeDef{"altlen"}).isSome:
+        result[0].ptrLen[0] = some typeDef{"altlen"}.replace("/", " /")
+      elif (?typeDef{"len"}).isSome:
+        for i, v in typeDef{"len"}.parseWords({','}):
+          if v == "null-terminated": continue
+          result[0].ptrLen[i] = some v
+
+    if result[0].arrayStyle == nasNotArray:
+      result[0].ptrLv = typedef.`$`.count("*")
+
     for m in typeDef:
-      if m.kind == xnElement:
-        if m.tag == "enum":
-          result[0].length.add NodeArrayLength(useConst: true, name: m.innerText.parseWords[0])
-          result[1].add m.innerText.parseWords[0]
+      if m.kind == xnElement and m.tag == "enum":
+        result[0].dim.add NodeArrayDimention(useConst: true, name: m.innerText.parseWords[0])
+        result[1].add m.innerText.parseWords[0]
 
       if m.kind != xnText: continue
       let words = m.text.parseWords.filterInvalidArgParams
       if words.len == 0: continue
-      result[0].ptrLv += m.text.count("*")
       #  E.g. "[3]", "[2][3]" or "[1][2][3]".
       #  Raise exception if it pattern is as "[a][b]"
       if words[0][0] == '[' and words[0][^1] == ']':
-        result[0].length.add words[0]
+        result[0].dim.add words[0]
           .parseWords({'[', ']'})
           .mapIt(try:    some it.parseInt.Natural
                  except: none Natural)
           .filterIt(it.isSome)
-          .mapIt(NodeArrayLength(useConst: false, value: it.get))
+          .mapIt(NodeArrayDimention(useConst: false, value: it.get))
+
+
 func extractNodeStruct*(typeDef: XmlNode): NodeStruct {.raises: [UnexpectedXmlStructureError].} =
   # Extract struct definition data from such as following xml:
   #
@@ -805,7 +849,7 @@ func extractNodeHandle*(typeDef: XmlNode): NodeHandle {.raises: [UnexpectedXmlSt
       ,
       parent: ?typeDef{"parent"})
 
-func extractNodeCommand*(typeDef: XmlNode): NodeCommand {.raises: [UnexpectedXmlStructureError].} =
+proc extractNodeCommand*(typeDef: XmlNode): NodeCommand {.raises: [UnexpectedXmlStructureError].} =
   # Extract command definition data from such as following xml:
   #
   # <command name="vkGetDeviceMemoryOpaqueCaptureAddressKHR"        alias="vkGetDeviceMemoryOpaqueCaptureAddress"/>
@@ -845,9 +889,22 @@ func extractNodeCommand*(typeDef: XmlNode): NodeCommand {.raises: [UnexpectedXml
       result.params.add NodeCommandParam(
         name: param["name"].innerText.parseWords[0],
         theType: param["type"].innerText.parseWords[0],
-        ptrLv: ($param).count("*"),
         optional: param{"optional"} == "true",
-        arrlen: ?param{"len"})
+        arrayStyle:
+          if param{"len"}.`?`.isSome: nasPtr
+          else: nasNotArray
+      )
+      case result.params[^1].arrayStyle
+      of nasNotArray:
+        result.params[^1].ptrLv = param.`$`.count("*")
+      of nasPtr:
+        result.params[^1].ptrLen.setLen(param.`$`.count("*"))
+        for i, x in param{"len"}.parseWords({','}):
+          if x == "null-terminated": continue
+          result.params[^1].ptrLen[i] = some x
+      else: discard
+
+
     result.loadMode =
       if result.name in preloadableProcs: lmPreload
       elif result.params[0].theType in ["VkInstance", "VkPhysicalDevice"]: lmWithInstance

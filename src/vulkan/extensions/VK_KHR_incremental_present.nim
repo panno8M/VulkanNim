@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-22T15:02:54Z
 # VK_KHR_incremental_present
 
 
@@ -16,10 +16,10 @@ type
     sType* {.constant: (StructureType.presentRegionsKhr).}: StructureType
     pNext* {.optional.}: pointer
     swapchainCount*: uint32
-    pRegions* {.optional.}: ptr PresentRegionKHR
+    pRegions* {.optional, length: swapchainCount.}: arrPtr[PresentRegionKHR]
   PresentRegionKHR* = object
     rectangleCount* {.optional.}: uint32
-    pRectangles* {.optional.}: ptr RectLayerKHR
+    pRectangles* {.optional, length: rectangleCount.}: arrPtr[RectLayerKHR]
   RectLayerKHR* = object
     offset*: Offset2D
     extent*: Extent2D

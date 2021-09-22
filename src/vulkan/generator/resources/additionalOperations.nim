@@ -169,6 +169,16 @@ proc `$`*(b: Bool32): string = b.toString
 converter toBool*(b: Bool32): bool = bool(b)
 converter toBool32*(b: bool): Bool32 = Bool32(b)
 
+# Array pointer converters
+# ========================
+converter toArrPtr*[T](x: var T): arrPtr[T] = addr x
+converter toArrPtr*[T](x: var seq[T]): arrPtr[T] =
+  if x.len == 0: nil
+  else: addr x[0]
+converter toArrPtr*[I, T](x: var array[I, T]): arrPtr[T] =
+  when x.len == 0: nil
+  else: addr x[0]
+
 
 # Struct Constructor
 # It makes it easier to understand what is optional, what is

@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T08:32:06Z
+# Generated at 2021-09-23T04:24:54Z
 # VK_EXT_extended_dynamic_state
 
 
@@ -32,21 +32,21 @@ proc cmdSetPrimitiveTopologyEXT*(
 proc cmdSetViewportWithCountEXT*(
       commandBuffer: CommandBuffer;
       viewportCount: uint32;
-      pViewports {.length: viewportCount.}: ptr Viewport;
+      pViewports {.length: viewportCount.}: arrPtr[Viewport];
     ): void {.cdecl, lazyload("vkCmdSetViewportWithCountEXT", DeviceLevel).}
 proc cmdSetScissorWithCountEXT*(
       commandBuffer: CommandBuffer;
       scissorCount: uint32;
-      pScissors {.length: scissorCount.}: ptr Rect2D;
+      pScissors {.length: scissorCount.}: arrPtr[Rect2D];
     ): void {.cdecl, lazyload("vkCmdSetScissorWithCountEXT", DeviceLevel).}
 proc cmdBindVertexBuffers2EXT*(
       commandBuffer: CommandBuffer;
       firstBinding: uint32;
       bindingCount: uint32;
-      pBuffers {.length: bindingCount.}: ptr Buffer;
-      pOffsets {.length: bindingCount.}: ptr DeviceSize;
-      pSizes {.length: bindingCount.} = default(ptr DeviceSize);
-      pStrides {.length: bindingCount.} = default(ptr DeviceSize);
+      pBuffers {.length: bindingCount.}: arrPtr[Buffer];
+      pOffsets {.length: bindingCount.}: arrPtr[DeviceSize];
+      pSizes {.length: bindingCount.} = default(arrPtr[DeviceSize]);
+      pStrides {.length: bindingCount.} = default(arrPtr[DeviceSize]);
     ): void {.cdecl, lazyload("vkCmdBindVertexBuffers2EXT", DeviceLevel).}
 proc cmdSetDepthTestEnableEXT*(
       commandBuffer: CommandBuffer;

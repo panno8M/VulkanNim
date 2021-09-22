@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T08:32:06Z
+# Generated at 2021-09-23T04:24:54Z
 # VK_ANDROID_native_buffer
 
 
@@ -53,7 +53,7 @@ proc acquireImageANDROID*(
 proc queueSignalReleaseImageANDROID*(
       queue: Queue;
       waitSemaphoreCount: uint32;
-      pWaitSemaphores {.length: waitSemaphoreCount.}: ptr Semaphore;
+      pWaitSemaphores {.length: waitSemaphoreCount.}: arrPtr[Semaphore];
       image: Image;
       pNativeFenceFd: ptr int;
     ): Result {.cdecl, lazyload("vkQueueSignalReleaseImageANDROID", DeviceLevel).}

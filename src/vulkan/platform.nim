@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T08:33:23Z
+# Generated at 2021-09-22T12:47:14Z
 # platform
 import strformat
 import macros
@@ -19,6 +19,9 @@ type
   NullHandle* = Handle[HandleType]
   Handle*[T] = distinct ptr object
   NonDispatchableHandle*[T] = distinct ptr object
+  arrPtr*[T] = ptr T
+
+type
   Display* = ptr object
   RRoutput* = ptr object
   IDirectFB* = ptr object

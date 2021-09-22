@@ -1,4 +1,4 @@
-# Generated at 2021-09-10T05:27:58Z
+# Generated at 2021-09-22T15:02:54Z
 # VK_EXT_pipeline_creation_feedback
 
 
@@ -22,7 +22,7 @@ type
     pNext* {.optional.}: pointer
     pPipelineCreationFeedback*: ptr PipelineCreationFeedbackEXT
     pipelineStageCreationFeedbackCount*: uint32
-    pPipelineStageCreationFeedbacks*: ptr PipelineCreationFeedbackEXT
+    pPipelineStageCreationFeedbacks* {.length: pipelineStageCreationFeedbackCount.}: arrPtr[arrPtr[PipelineCreationFeedbackEXT]]
   PipelineCreationFeedbackEXT* = object
     flags*: PipelineCreationFeedbackFlagsEXT
     duration*: uint64

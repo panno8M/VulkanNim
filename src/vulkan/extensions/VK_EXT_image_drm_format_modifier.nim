@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-09-22T15:02:54Z
 # VK_EXT_image_drm_format_modifier
 
 
@@ -22,7 +22,7 @@ type
     sType* {.constant: (StructureType.drmFormatModifierPropertiesListExt).}: StructureType
     pNext* {.optional.}: pointer
     drmFormatModifierCount* {.optional.}: uint32
-    pDrmFormatModifierProperties*: ptr DrmFormatModifierPropertiesEXT
+    pDrmFormatModifierProperties* {.length: drmFormatModifierCount.}: arrPtr[DrmFormatModifierPropertiesEXT]
   DrmFormatModifierPropertiesEXT* = object
     drmFormatModifier*: uint64
     drmFormatModifierPlaneCount*: uint32
@@ -33,18 +33,18 @@ type
     drmFormatModifier*: uint64
     sharingMode*: SharingMode
     queueFamilyIndexCount* {.optional.}: uint32
-    pQueueFamilyIndices*: ptr uint32
+    pQueueFamilyIndices* {.length: queueFamilyIndexCount.}: arrPtr[uint32]
   ImageDrmFormatModifierListCreateInfoEXT* = object
     sType* {.constant: (StructureType.imageDrmFormatModifierListCreateInfoExt).}: StructureType
     pNext* {.optional.}: pointer
     drmFormatModifierCount*: uint32
-    pDrmFormatModifiers*: ptr uint64
+    pDrmFormatModifiers* {.length: drmFormatModifierCount.}: arrPtr[uint64]
   ImageDrmFormatModifierExplicitCreateInfoEXT* = object
     sType* {.constant: (StructureType.imageDrmFormatModifierExplicitCreateInfoExt).}: StructureType
     pNext* {.optional.}: pointer
     drmFormatModifier*: uint64
     drmFormatModifierPlaneCount*: uint32
-    pPlaneLayouts*: ptr SubresourceLayout
+    pPlaneLayouts* {.length: drmFormatModifierPlaneCount.}: arrPtr[SubresourceLayout]
   ImageDrmFormatModifierPropertiesEXT* = object
     sType* {.constant: (StructureType.imageDrmFormatModifierPropertiesExt).}: StructureType
     pNext* {.optional.}: pointer
