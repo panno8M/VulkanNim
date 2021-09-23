@@ -1,4 +1,4 @@
-# Generated at 2021-09-23T04:24:54Z
+# Generated at 2021-09-23T06:24:11Z
 # vk10
 # Vulkan core API interface definitions
 # =====================================
@@ -4935,6 +4935,7 @@ converter toArrPtr*[T](x: var seq[T]): arrPtr[T] =
 converter toArrPtr*[I, T](x: var array[I, T]): arrPtr[T] =
   when x.len == 0: nil
   else: addr x[0]
+converter toArrPtr*[T](x: ptr T): arrPtr[T] = arrPtr[T](x)
 
 
 # Struct Constructor
