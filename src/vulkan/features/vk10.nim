@@ -1,4 +1,4 @@
-# Generated at 2021-09-23T06:24:11Z
+# Generated at 2021-09-26T01:42:03Z
 # vk10
 # Vulkan core API interface definitions
 # =====================================
@@ -4772,12 +4772,17 @@ proc `==`*[Flagbits: enum](a, b: Flags[Flagbits]): bool =
 
 macro `toFlagSets`*[Flagbits: enum](Type: typedesc[Flagbits]; bits: varargs[untyped]): HashSet[Flagbits] =
   if (repr Type).find("FlagBits") == -1:
-    macros.error("Expect the enum that has the suffix Flagbits, got " & repr Type)
-  # var resultStr = "{DebugUtilsMessageSeverityFlagBitsEXT.VerboseBitExt}"
-  var resultStr = "toHashSet(["
-  for bit in bits: resultStr.add "{repr Type}.{bit},".fmt
-  resultStr.add "])"
-  return resultStr.parseStmt
+    error("Expect the enum that has the suffix Flagbits, got " & repr Type, Type)
+
+  result = quote do:
+    toHashSet []
+
+  let setels = bits.mapIt:
+    quote do: `Type`.`it`
+
+  result[1].expectKind nnkBracket
+  result[1].add setels
+
 template `{}`*[Flagbits: enum](Type: typedesc[Flagbits]; bits: varargs[untyped]): HashSet[Flagbits] =
   Type.toFlagSets(bits)
 
