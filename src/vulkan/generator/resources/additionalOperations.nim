@@ -118,6 +118,26 @@ proc `-`*[Flagbits: enum](a: Flags[Flagbits]; b: Flagbits): Flags[Flagbits] = a 
 proc `-`*[Flagbits: enum](a: Flagbits; b: Flags[Flagbits]): Flags[Flagbits] = a and not b
 proc `-`*[Flagbits: enum](a, b: Flags[Flagbits]):           Flags[Flagbits] = a and not b
 
+proc `*=`*[Flagbits: enum](a: var Flagbits; b: Flagbits) =               a = a * b
+proc `*=`*[Flagbits: enum](a: var Flags[Flagbits]; b: Flagbits) =        a = a * b
+proc `*=`*[Flagbits: enum](a: var Flagbits; b: Flags[Flagbits]) =        a = a * b
+proc `*=`*[Flagbits: enum](a: var Flags[Flagbits]; b: Flags[Flagbits]) = a = a * b
+
+proc `+=`*[Flagbits: enum](a: var Flagbits; b: Flagbits) =               a = a + b
+proc `+=`*[Flagbits: enum](a: var Flags[Flagbits]; b: Flagbits) =        a = a + b
+proc `+=`*[Flagbits: enum](a: var Flagbits; b: Flags[Flagbits]) =        a = a + b
+proc `+=`*[Flagbits: enum](a: var Flags[Flagbits]; b: Flags[Flagbits]) = a = a + b
+
+proc `-+-=`*[Flagbits: enum](a: var Flagbits; b: Flagbits) =               a = a -+- b
+proc `-+-=`*[Flagbits: enum](a: var Flags[Flagbits]; b: Flagbits) =        a = a -+- b
+proc `-+-=`*[Flagbits: enum](a: var Flagbits; b: Flags[Flagbits]) =        a = a -+- b
+proc `-+-=`*[Flagbits: enum](a: var Flags[Flagbits]; b: Flags[Flagbits]) = a = a -+- b
+
+proc `-=`*[Flagbits: enum](a: var Flagbits; b: Flagbits) =               a = a - b
+proc `-=`*[Flagbits: enum](a: var Flags[Flagbits]; b: Flagbits) =        a = a - b
+proc `-=`*[Flagbits: enum](a: var Flagbits; b: Flags[Flagbits]) =        a = a - b
+proc `-=`*[Flagbits: enum](a: var Flags[Flagbits]; b: Flags[Flagbits]) = a = a - b
+
 proc contains*[Flagbits: enum](flags: Flags[Flagbits]; flagbits: Flagbits): bool =
   (flags and flagbits) != flags.none
 
