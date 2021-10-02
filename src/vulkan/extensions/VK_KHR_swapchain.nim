@@ -1,4 +1,4 @@
-# Generated at 2021-09-23T04:24:54Z
+# Generated at 2021-10-02T09:29:45Z
 # VK_KHR_swapchain
 
 
@@ -100,7 +100,10 @@ proc createSwapchainKHR*(
       pCreateInfo: ptr SwapchainCreateInfoKHR;
       pAllocator = default(ptr AllocationCallbacks);
       pSwapchain: ptr SwapchainKHR;
-    ): Result {.cdecl, lazyload("vkCreateSwapchainKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost, errorSurfaceLostKhr, errorNativeWindowInUseKhr, errorInitializationFailed),
+      lazyload("vkCreateSwapchainKHR", DeviceLevel).}
 proc destroySwapchainKHR*(
       device: Device;
       swapchain = default(SwapchainKHR);
@@ -111,7 +114,10 @@ proc getSwapchainImagesKHR*(
       swapchain: SwapchainKHR;
       pSwapchainImageCount: ptr uint32;
       pSwapchainImages {.length: pSwapchainImageCount.} = default(arrPtr[Image]);
-    ): Result {.cdecl, lazyload("vkGetSwapchainImagesKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, incomplete),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkGetSwapchainImagesKHR", DeviceLevel).}
 proc acquireNextImageKHR*(
       device: Device;
       swapchain: SwapchainKHR;
@@ -119,33 +125,51 @@ proc acquireNextImageKHR*(
       semaphore = default(Semaphore);
       fence = default(Fence);
       pImageIndex: ptr uint32;
-    ): Result {.cdecl, lazyload("vkAcquireNextImageKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, timeout, notReady, suboptimalKhr),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost, errorOutOfDateKhr, errorSurfaceLostKhr, errorFullScreenExclusiveModeLostExt),
+      lazyload("vkAcquireNextImageKHR", DeviceLevel).}
 proc queuePresentKHR*(
       queue: Queue;
       pPresentInfo: ptr PresentInfoKHR;
-    ): Result {.cdecl, lazyload("vkQueuePresentKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, suboptimalKhr),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost, errorOutOfDateKhr, errorSurfaceLostKhr, errorFullScreenExclusiveModeLostExt),
+      lazyload("vkQueuePresentKHR", DeviceLevel).}
 
 
 proc getDeviceGroupPresentCapabilitiesKHR*(
       device: Device;
       pDeviceGroupPresentCapabilities: ptr DeviceGroupPresentCapabilitiesKHR;
-    ): Result {.cdecl, lazyload("vkGetDeviceGroupPresentCapabilitiesKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkGetDeviceGroupPresentCapabilitiesKHR", DeviceLevel).}
 proc getDeviceGroupSurfacePresentModesKHR*(
       device: Device;
       surface: SurfaceKHR;
       pModes: ptr DeviceGroupPresentModeFlagsKHR;
-    ): Result {.cdecl, lazyload("vkGetDeviceGroupSurfacePresentModesKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorSurfaceLostKhr),
+      lazyload("vkGetDeviceGroupSurfacePresentModesKHR", DeviceLevel).}
 proc getPhysicalDevicePresentRectanglesKHR*(
       physicalDevice: PhysicalDevice;
       surface: SurfaceKHR;
       pRectCount: ptr uint32;
       pRects {.length: pRectCount.} = default(arrPtr[Rect2D]);
-    ): Result {.cdecl, lazyload("vkGetPhysicalDevicePresentRectanglesKHR", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, incomplete),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkGetPhysicalDevicePresentRectanglesKHR", InstanceLevel).}
 proc acquireNextImage2KHR*(
       device: Device;
       pAcquireInfo: ptr AcquireNextImageInfoKHR;
       pImageIndex: ptr uint32;
-    ): Result {.cdecl, lazyload("vkAcquireNextImage2KHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, timeout, notReady, suboptimalKhr),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost, errorOutOfDateKhr, errorSurfaceLostKhr, errorFullScreenExclusiveModeLostExt),
+      lazyload("vkAcquireNextImage2KHR", DeviceLevel).}
 
 proc loadAllVK_KHR_swapchain*(instance: Instance) =
   createSwapchainKHR.load(instance)

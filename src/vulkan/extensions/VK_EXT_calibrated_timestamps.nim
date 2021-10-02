@@ -1,4 +1,4 @@
-# Generated at 2021-09-23T04:24:54Z
+# Generated at 2021-10-02T09:29:44Z
 # VK_EXT_calibrated_timestamps
 
 
@@ -26,14 +26,20 @@ proc getPhysicalDeviceCalibrateableTimeDomainsEXT*(
       physicalDevice: PhysicalDevice;
       pTimeDomainCount: ptr uint32;
       pTimeDomains {.length: pTimeDomainCount.} = default(arrPtr[TimeDomainEXT]);
-    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceCalibrateableTimeDomainsEXT", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, incomplete),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkGetPhysicalDeviceCalibrateableTimeDomainsEXT", InstanceLevel).}
 proc getCalibratedTimestampsEXT*(
       device: Device;
       timestampCount: uint32;
       pTimestampInfos {.length: timestampCount.}: arrPtr[CalibratedTimestampInfoEXT];
       pTimestamps {.length: timestampCount.}: arrPtr[uint64];
       pMaxDeviation: ptr uint64;
-    ): Result {.cdecl, lazyload("vkGetCalibratedTimestampsEXT", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkGetCalibratedTimestampsEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_calibrated_timestamps*(instance: Instance) =
   getPhysicalDeviceCalibrateableTimeDomainsEXT.load(instance)

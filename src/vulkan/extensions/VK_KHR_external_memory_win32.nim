@@ -1,4 +1,4 @@
-# Generated at 2021-09-22T15:02:54Z
+# Generated at 2021-10-02T09:29:45Z
 # VK_KHR_external_memory_win32
 
 
@@ -38,13 +38,19 @@ proc getMemoryWin32HandleKHR*(
       device: Device;
       pGetWin32HandleInfo: ptr MemoryGetWin32HandleInfoKHR;
       pHandle: ptr Win32Handle;
-    ): Result {.cdecl, lazyload("vkGetMemoryWin32HandleKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorTooManyObjects, errorOutOfHostMemory),
+      lazyload("vkGetMemoryWin32HandleKHR", DeviceLevel).}
 proc getMemoryWin32HandlePropertiesKHR*(
       device: Device;
       handleType: ExternalMemoryHandleTypeFlagBits;
       handle: Win32Handle;
       pMemoryWin32HandleProperties: ptr MemoryWin32HandlePropertiesKHR;
-    ): Result {.cdecl, lazyload("vkGetMemoryWin32HandlePropertiesKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorInvalidExternalHandle),
+      lazyload("vkGetMemoryWin32HandlePropertiesKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_external_memory_win32*(instance: Instance) =
   getMemoryWin32HandleKHR.load(instance)

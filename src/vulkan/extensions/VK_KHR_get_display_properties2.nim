@@ -1,4 +1,4 @@
-# Generated at 2021-09-23T04:24:54Z
+# Generated at 2021-10-02T09:29:45Z
 # VK_KHR_get_display_properties2
 
 
@@ -38,23 +38,35 @@ proc getPhysicalDeviceDisplayProperties2KHR*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
       pProperties {.length: pPropertyCount.} = default(arrPtr[DisplayProperties2KHR]);
-    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceDisplayProperties2KHR", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, incomplete),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkGetPhysicalDeviceDisplayProperties2KHR", InstanceLevel).}
 proc getPhysicalDeviceDisplayPlaneProperties2KHR*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
       pProperties {.length: pPropertyCount.} = default(arrPtr[DisplayPlaneProperties2KHR]);
-    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceDisplayPlaneProperties2KHR", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, incomplete),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkGetPhysicalDeviceDisplayPlaneProperties2KHR", InstanceLevel).}
 proc getDisplayModeProperties2KHR*(
       physicalDevice: PhysicalDevice;
       display: DisplayKHR;
       pPropertyCount: ptr uint32;
       pProperties {.length: pPropertyCount.} = default(arrPtr[DisplayModeProperties2KHR]);
-    ): Result {.cdecl, lazyload("vkGetDisplayModeProperties2KHR", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, incomplete),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkGetDisplayModeProperties2KHR", InstanceLevel).}
 proc getDisplayPlaneCapabilities2KHR*(
       physicalDevice: PhysicalDevice;
       pDisplayPlaneInfo: ptr DisplayPlaneInfo2KHR;
       pCapabilities: ptr DisplayPlaneCapabilities2KHR;
-    ): Result {.cdecl, lazyload("vkGetDisplayPlaneCapabilities2KHR", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkGetDisplayPlaneCapabilities2KHR", InstanceLevel).}
 
 proc loadAllVK_KHR_get_display_properties2*(instance: Instance) =
   getPhysicalDeviceDisplayProperties2KHR.load(instance)

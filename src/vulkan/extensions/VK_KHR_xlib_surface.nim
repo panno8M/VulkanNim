@@ -1,4 +1,4 @@
-# Generated at 2021-09-22T15:02:54Z
+# Generated at 2021-10-02T09:29:44Z
 # VK_KHR_xlib_surface
 
 
@@ -27,7 +27,10 @@ proc createXlibSurfaceKHR*(
       pCreateInfo: ptr XlibSurfaceCreateInfoKHR;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl, lazyload("vkCreateXlibSurfaceKHR", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCreateXlibSurfaceKHR", InstanceLevel).}
 proc getPhysicalDeviceXlibPresentationSupportKHR*(
       physicalDevice: PhysicalDevice;
       queueFamilyIndex: uint32;

@@ -1,4 +1,4 @@
-# Generated at 2021-09-26T01:42:03Z
+# Generated at 2021-10-02T09:29:45Z
 # vk10
 # Vulkan core API interface definitions
 # =====================================
@@ -3413,7 +3413,10 @@ proc createInstance*(
       pCreateInfo: ptr InstanceCreateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pInstance: ptr Instance;
-    ): Result {.cdecl, preload("vkCreateInstance").}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInitializationFailed, errorLayerNotPresent, errorExtensionNotPresent, errorIncompatibleDriver),
+      preload("vkCreateInstance").}
 proc destroyInstance*(
       instance = default(Instance);
       pAllocator = default(ptr AllocationCallbacks);
@@ -3422,7 +3425,10 @@ proc enumeratePhysicalDevices*(
       instance: Instance;
       pPhysicalDeviceCount: ptr uint32;
       pPhysicalDevices {.length: pPhysicalDeviceCount.} = default(arrPtr[PhysicalDevice]);
-    ): Result {.cdecl, lazyload("vkEnumeratePhysicalDevices", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, incomplete),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInitializationFailed),
+      lazyload("vkEnumeratePhysicalDevices", InstanceLevel).}
 proc getPhysicalDeviceFeatures*(
       physicalDevice: PhysicalDevice;
       pFeatures: ptr PhysicalDeviceFeatures;
@@ -3440,7 +3446,10 @@ proc getPhysicalDeviceImageFormatProperties*(
       usage: ImageUsageFlags;
       flags = default(ImageCreateFlags);
       pImageFormatProperties: ptr ImageFormatProperties;
-    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceImageFormatProperties", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorFormatNotSupported),
+      lazyload("vkGetPhysicalDeviceImageFormatProperties", InstanceLevel).}
 proc getPhysicalDeviceProperties*(
       physicalDevice: PhysicalDevice;
       pProperties: ptr PhysicalDeviceProperties;
@@ -3471,7 +3480,10 @@ proc createDevice*(
       pCreateInfo: ptr DeviceCreateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pDevice: ptr Device;
-    ): Result {.cdecl, lazyload("vkCreateDevice", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInitializationFailed, errorExtensionNotPresent, errorFeatureNotPresent, errorTooManyObjects, errorDeviceLost),
+      lazyload("vkCreateDevice", InstanceLevel).}
 proc destroyDevice*(
       device = default(Device);
       pAllocator = default(ptr AllocationCallbacks);
@@ -3484,13 +3496,19 @@ proc enumerateInstanceExtensionProperties*(
       pLayerName = default(cstring);
       pPropertyCount: ptr uint32;
       pProperties {.length: pPropertyCount.} = default(arrPtr[ExtensionProperties]);
-    ): Result {.cdecl, preload("vkEnumerateInstanceExtensionProperties").}
+    ): Result {.cdecl,
+      successCodes(success, incomplete),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorLayerNotPresent),
+      preload("vkEnumerateInstanceExtensionProperties").}
 proc enumerateDeviceExtensionProperties*(
       physicalDevice: PhysicalDevice;
       pLayerName = default(cstring);
       pPropertyCount: ptr uint32;
       pProperties {.length: pPropertyCount.} = default(arrPtr[ExtensionProperties]);
-    ): Result {.cdecl, lazyload("vkEnumerateDeviceExtensionProperties", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, incomplete),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorLayerNotPresent),
+      lazyload("vkEnumerateDeviceExtensionProperties", InstanceLevel).}
 
 
 # Layer discovery commands
@@ -3498,12 +3516,18 @@ proc enumerateDeviceExtensionProperties*(
 proc enumerateInstanceLayerProperties*(
       pPropertyCount: ptr uint32;
       pProperties {.length: pPropertyCount.} = default(arrPtr[LayerProperties]);
-    ): Result {.cdecl, preload("vkEnumerateInstanceLayerProperties").}
+    ): Result {.cdecl,
+      successCodes(success, incomplete),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      preload("vkEnumerateInstanceLayerProperties").}
 proc enumerateDeviceLayerProperties*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
       pProperties {.length: pPropertyCount.} = default(arrPtr[LayerProperties]);
-    ): Result {.cdecl, lazyload("vkEnumerateDeviceLayerProperties", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, incomplete),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkEnumerateDeviceLayerProperties", InstanceLevel).}
 
 
 # Queue commands
@@ -3519,13 +3543,22 @@ proc queueSubmit*(
       submitCount = default(uint32);
       pSubmits {.length: submitCount.}: arrPtr[SubmitInfo];
       fence = default(Fence);
-    ): Result {.cdecl, lazyload("vkQueueSubmit", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      lazyload("vkQueueSubmit", DeviceLevel).}
 proc queueWaitIdle*(
       queue: Queue;
-    ): Result {.cdecl, lazyload("vkQueueWaitIdle", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      lazyload("vkQueueWaitIdle", DeviceLevel).}
 proc deviceWaitIdle*(
       device: Device;
-    ): Result {.cdecl, lazyload("vkDeviceWaitIdle", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      lazyload("vkDeviceWaitIdle", DeviceLevel).}
 
 
 # Memory commands
@@ -3535,7 +3568,10 @@ proc allocateMemory*(
       pAllocateInfo: ptr MemoryAllocateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pMemory: ptr DeviceMemory;
-    ): Result {.cdecl, lazyload("vkAllocateMemory", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidExternalHandle, errorInvalidOpaqueCaptureAddressKhr),
+      lazyload("vkAllocateMemory", DeviceLevel).}
 proc freeMemory*(
       device: Device;
       memory = default(DeviceMemory);
@@ -3548,7 +3584,10 @@ proc mapMemory*(
       size: DeviceSize;
       flags = default(MemoryMapFlags);
       ppData: ptr pointer;
-    ): Result {.cdecl, lazyload("vkMapMemory", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorMemoryMapFailed),
+      lazyload("vkMapMemory", DeviceLevel).}
 proc unmapMemory*(
       device: Device;
       memory: DeviceMemory;
@@ -3557,12 +3596,18 @@ proc flushMappedMemoryRanges*(
       device: Device;
       memoryRangeCount: uint32;
       pMemoryRanges {.length: memoryRangeCount.}: arrPtr[MappedMemoryRange];
-    ): Result {.cdecl, lazyload("vkFlushMappedMemoryRanges", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkFlushMappedMemoryRanges", DeviceLevel).}
 proc invalidateMappedMemoryRanges*(
       device: Device;
       memoryRangeCount: uint32;
       pMemoryRanges {.length: memoryRangeCount.}: arrPtr[MappedMemoryRange];
-    ): Result {.cdecl, lazyload("vkInvalidateMappedMemoryRanges", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkInvalidateMappedMemoryRanges", DeviceLevel).}
 proc getDeviceMemoryCommitment*(
       device: Device;
       memory: DeviceMemory;
@@ -3577,13 +3622,19 @@ proc bindBufferMemory*(
       buffer: Buffer;
       memory: DeviceMemory;
       memoryOffset: DeviceSize;
-    ): Result {.cdecl, lazyload("vkBindBufferMemory", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidOpaqueCaptureAddressKhr),
+      lazyload("vkBindBufferMemory", DeviceLevel).}
 proc bindImageMemory*(
       device: Device;
       image: Image;
       memory: DeviceMemory;
       memoryOffset: DeviceSize;
-    ): Result {.cdecl, lazyload("vkBindImageMemory", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkBindImageMemory", DeviceLevel).}
 proc getBufferMemoryRequirements*(
       device: Device;
       buffer: Buffer;
@@ -3619,7 +3670,10 @@ proc queueBindSparse*(
       bindInfoCount = default(uint32);
       pBindInfo {.length: bindInfoCount.}: arrPtr[BindSparseInfo];
       fence = default(Fence);
-    ): Result {.cdecl, lazyload("vkQueueBindSparse", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      lazyload("vkQueueBindSparse", DeviceLevel).}
 
 
 # Fence commands
@@ -3629,7 +3683,10 @@ proc createFence*(
       pCreateInfo: ptr FenceCreateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pFence: ptr Fence;
-    ): Result {.cdecl, lazyload("vkCreateFence", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCreateFence", DeviceLevel).}
 proc destroyFence*(
       device: Device;
       fence = default(Fence);
@@ -3639,18 +3696,27 @@ proc resetFences*(
       device: Device;
       fenceCount: uint32;
       pFences {.length: fenceCount.}: arrPtr[Fence];
-    ): Result {.cdecl, lazyload("vkResetFences", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfDeviceMemory),
+      lazyload("vkResetFences", DeviceLevel).}
 proc getFenceStatus*(
       device: Device;
       fence: Fence;
-    ): Result {.cdecl, lazyload("vkGetFenceStatus", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, notReady),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      lazyload("vkGetFenceStatus", DeviceLevel).}
 proc waitForFences*(
       device: Device;
       fenceCount: uint32;
       pFences {.length: fenceCount.}: arrPtr[Fence];
       waitAll: Bool32;
       timeout: uint64;
-    ): Result {.cdecl, lazyload("vkWaitForFences", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, timeout),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      lazyload("vkWaitForFences", DeviceLevel).}
 
 
 # Queue semaphore commands
@@ -3660,7 +3726,10 @@ proc createSemaphore*(
       pCreateInfo: ptr SemaphoreCreateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pSemaphore: ptr Semaphore;
-    ): Result {.cdecl, lazyload("vkCreateSemaphore", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCreateSemaphore", DeviceLevel).}
 proc destroySemaphore*(
       device: Device;
       semaphore = default(Semaphore);
@@ -3675,7 +3744,10 @@ proc createEvent*(
       pCreateInfo: ptr EventCreateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pEvent: ptr Event;
-    ): Result {.cdecl, lazyload("vkCreateEvent", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCreateEvent", DeviceLevel).}
 proc destroyEvent*(
       device: Device;
       event = default(Event);
@@ -3684,15 +3756,24 @@ proc destroyEvent*(
 proc getEventStatus*(
       device: Device;
       event: Event;
-    ): Result {.cdecl, lazyload("vkGetEventStatus", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(eventSet, eventReset),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      lazyload("vkGetEventStatus", DeviceLevel).}
 proc setEvent*(
       device: Device;
       event: Event;
-    ): Result {.cdecl, lazyload("vkSetEvent", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkSetEvent", DeviceLevel).}
 proc resetEvent*(
       device: Device;
       event: Event;
-    ): Result {.cdecl, lazyload("vkResetEvent", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfDeviceMemory),
+      lazyload("vkResetEvent", DeviceLevel).}
 
 
 # Query commands
@@ -3702,7 +3783,10 @@ proc createQueryPool*(
       pCreateInfo: ptr QueryPoolCreateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pQueryPool: ptr QueryPool;
-    ): Result {.cdecl, lazyload("vkCreateQueryPool", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCreateQueryPool", DeviceLevel).}
 proc destroyQueryPool*(
       device: Device;
       queryPool = default(QueryPool);
@@ -3717,7 +3801,10 @@ proc getQueryPoolResults*(
       pData {.length: dataSize.}: pointer;
       stride: DeviceSize;
       flags = default(QueryResultFlags);
-    ): Result {.cdecl, lazyload("vkGetQueryPoolResults", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, notReady),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      lazyload("vkGetQueryPoolResults", DeviceLevel).}
 
 
 # Buffer commands
@@ -3727,7 +3814,10 @@ proc createBuffer*(
       pCreateInfo: ptr BufferCreateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pBuffer: ptr Buffer;
-    ): Result {.cdecl, lazyload("vkCreateBuffer", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidOpaqueCaptureAddressKhr),
+      lazyload("vkCreateBuffer", DeviceLevel).}
 proc destroyBuffer*(
       device: Device;
       buffer = default(Buffer);
@@ -3742,7 +3832,10 @@ proc createBufferView*(
       pCreateInfo: ptr BufferViewCreateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pView: ptr BufferView;
-    ): Result {.cdecl, lazyload("vkCreateBufferView", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCreateBufferView", DeviceLevel).}
 proc destroyBufferView*(
       device: Device;
       bufferView = default(BufferView);
@@ -3757,7 +3850,10 @@ proc createImage*(
       pCreateInfo: ptr ImageCreateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pImage: ptr Image;
-    ): Result {.cdecl, lazyload("vkCreateImage", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCreateImage", DeviceLevel).}
 proc destroyImage*(
       device: Device;
       image = default(Image);
@@ -3778,7 +3874,10 @@ proc createImageView*(
       pCreateInfo: ptr ImageViewCreateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pView: ptr ImageView;
-    ): Result {.cdecl, lazyload("vkCreateImageView", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCreateImageView", DeviceLevel).}
 proc destroyImageView*(
       device: Device;
       imageView = default(ImageView);
@@ -3793,7 +3892,10 @@ proc createShaderModule*(
       pCreateInfo: ptr ShaderModuleCreateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pShaderModule: ptr ShaderModule;
-    ): Result {.cdecl, lazyload("vkCreateShaderModule", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidShaderNv),
+      lazyload("vkCreateShaderModule", DeviceLevel).}
 proc destroyShaderModule*(
       device: Device;
       shaderModule = default(ShaderModule);
@@ -3808,7 +3910,10 @@ proc createPipelineCache*(
       pCreateInfo: ptr PipelineCacheCreateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pPipelineCache: ptr PipelineCache;
-    ): Result {.cdecl, lazyload("vkCreatePipelineCache", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCreatePipelineCache", DeviceLevel).}
 proc destroyPipelineCache*(
       device: Device;
       pipelineCache = default(PipelineCache);
@@ -3819,13 +3924,19 @@ proc getPipelineCacheData*(
       pipelineCache: PipelineCache;
       pDataSize: ptr uint;
       pData {.length: pDataSize.} = default(pointer);
-    ): Result {.cdecl, lazyload("vkGetPipelineCacheData", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, incomplete),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkGetPipelineCacheData", DeviceLevel).}
 proc mergePipelineCaches*(
       device: Device;
       dstCache: PipelineCache;
       srcCacheCount: uint32;
       pSrcCaches {.length: srcCacheCount.}: arrPtr[PipelineCache];
-    ): Result {.cdecl, lazyload("vkMergePipelineCaches", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkMergePipelineCaches", DeviceLevel).}
 
 
 # Pipeline commands
@@ -3837,7 +3948,10 @@ proc createGraphicsPipelines*(
       pCreateInfos {.length: createInfoCount.}: arrPtr[GraphicsPipelineCreateInfo];
       pAllocator = default(ptr AllocationCallbacks);
       pPipelines {.length: createInfoCount.}: arrPtr[Pipeline];
-    ): Result {.cdecl, lazyload("vkCreateGraphicsPipelines", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, pipelineCompileRequiredExt),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidShaderNv),
+      lazyload("vkCreateGraphicsPipelines", DeviceLevel).}
 proc createComputePipelines*(
       device: Device;
       pipelineCache = default(PipelineCache);
@@ -3845,7 +3959,10 @@ proc createComputePipelines*(
       pCreateInfos {.length: createInfoCount.}: arrPtr[ComputePipelineCreateInfo];
       pAllocator = default(ptr AllocationCallbacks);
       pPipelines {.length: createInfoCount.}: arrPtr[Pipeline];
-    ): Result {.cdecl, lazyload("vkCreateComputePipelines", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, pipelineCompileRequiredExt),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidShaderNv),
+      lazyload("vkCreateComputePipelines", DeviceLevel).}
 proc destroyPipeline*(
       device: Device;
       pipeline = default(Pipeline);
@@ -3860,7 +3977,10 @@ proc createPipelineLayout*(
       pCreateInfo: ptr PipelineLayoutCreateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pPipelineLayout: ptr PipelineLayout;
-    ): Result {.cdecl, lazyload("vkCreatePipelineLayout", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCreatePipelineLayout", DeviceLevel).}
 proc destroyPipelineLayout*(
       device: Device;
       pipelineLayout = default(PipelineLayout);
@@ -3875,7 +3995,10 @@ proc createSampler*(
       pCreateInfo: ptr SamplerCreateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pSampler: ptr Sampler;
-    ): Result {.cdecl, lazyload("vkCreateSampler", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCreateSampler", DeviceLevel).}
 proc destroySampler*(
       device: Device;
       sampler = default(Sampler);
@@ -3890,7 +4013,10 @@ proc createDescriptorSetLayout*(
       pCreateInfo: ptr DescriptorSetLayoutCreateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pSetLayout: ptr DescriptorSetLayout;
-    ): Result {.cdecl, lazyload("vkCreateDescriptorSetLayout", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCreateDescriptorSetLayout", DeviceLevel).}
 proc destroyDescriptorSetLayout*(
       device: Device;
       descriptorSetLayout = default(DescriptorSetLayout);
@@ -3901,7 +4027,10 @@ proc createDescriptorPool*(
       pCreateInfo: ptr DescriptorPoolCreateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pDescriptorPool: ptr DescriptorPool;
-    ): Result {.cdecl, lazyload("vkCreateDescriptorPool", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorFragmentationExt),
+      lazyload("vkCreateDescriptorPool", DeviceLevel).}
 proc destroyDescriptorPool*(
       device: Device;
       descriptorPool = default(DescriptorPool);
@@ -3911,18 +4040,25 @@ proc resetDescriptorPool*(
       device: Device;
       descriptorPool: DescriptorPool;
       flags = default(DescriptorPoolResetFlags);
-    ): Result {.cdecl, lazyload("vkResetDescriptorPool", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      lazyload("vkResetDescriptorPool", DeviceLevel).}
 proc allocateDescriptorSets*(
       device: Device;
       pAllocateInfo: ptr DescriptorSetAllocateInfo;
       pDescriptorSets {.length: pAllocateInfo.descriptorSetCount.}: arrPtr[DescriptorSet];
-    ): Result {.cdecl, lazyload("vkAllocateDescriptorSets", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorFragmentedPool, errorOutOfPoolMemory),
+      lazyload("vkAllocateDescriptorSets", DeviceLevel).}
 proc freeDescriptorSets*(
       device: Device;
       descriptorPool: DescriptorPool;
       descriptorSetCount: uint32;
       pDescriptorSets {.length: descriptorSetCount.}: arrPtr[DescriptorSet];
-    ): Result {.cdecl, lazyload("vkFreeDescriptorSets", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      lazyload("vkFreeDescriptorSets", DeviceLevel).}
 proc updateDescriptorSets*(
       device: Device;
       descriptorWriteCount = default(uint32);
@@ -3939,7 +4075,10 @@ proc createFramebuffer*(
       pCreateInfo: ptr FramebufferCreateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pFramebuffer: ptr Framebuffer;
-    ): Result {.cdecl, lazyload("vkCreateFramebuffer", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCreateFramebuffer", DeviceLevel).}
 proc destroyFramebuffer*(
       device: Device;
       framebuffer = default(Framebuffer);
@@ -3950,7 +4089,10 @@ proc createRenderPass*(
       pCreateInfo: ptr RenderPassCreateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pRenderPass: ptr RenderPass;
-    ): Result {.cdecl, lazyload("vkCreateRenderPass", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCreateRenderPass", DeviceLevel).}
 proc destroyRenderPass*(
       device: Device;
       renderPass = default(RenderPass);
@@ -3970,7 +4112,10 @@ proc createCommandPool*(
       pCreateInfo: ptr CommandPoolCreateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pCommandPool: ptr CommandPool;
-    ): Result {.cdecl, lazyload("vkCreateCommandPool", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCreateCommandPool", DeviceLevel).}
 proc destroyCommandPool*(
       device: Device;
       commandPool = default(CommandPool);
@@ -3980,7 +4125,10 @@ proc resetCommandPool*(
       device: Device;
       commandPool: CommandPool;
       flags = default(CommandPoolResetFlags);
-    ): Result {.cdecl, lazyload("vkResetCommandPool", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfDeviceMemory),
+      lazyload("vkResetCommandPool", DeviceLevel).}
 
 
 # Command buffer commands
@@ -3989,7 +4137,10 @@ proc allocateCommandBuffers*(
       device: Device;
       pAllocateInfo: ptr CommandBufferAllocateInfo;
       pCommandBuffers {.length: pAllocateInfo.commandBufferCount.}: arrPtr[CommandBuffer];
-    ): Result {.cdecl, lazyload("vkAllocateCommandBuffers", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkAllocateCommandBuffers", DeviceLevel).}
 proc freeCommandBuffers*(
       device: Device;
       commandPool: CommandPool;
@@ -3999,14 +4150,23 @@ proc freeCommandBuffers*(
 proc beginCommandBuffer*(
       commandBuffer: CommandBuffer;
       pBeginInfo: ptr CommandBufferBeginInfo;
-    ): Result {.cdecl, lazyload("vkBeginCommandBuffer", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkBeginCommandBuffer", DeviceLevel).}
 proc endCommandBuffer*(
       commandBuffer: CommandBuffer;
-    ): Result {.cdecl, lazyload("vkEndCommandBuffer", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkEndCommandBuffer", DeviceLevel).}
 proc resetCommandBuffer*(
       commandBuffer: CommandBuffer;
       flags = default(CommandBufferResetFlags);
-    ): Result {.cdecl, lazyload("vkResetCommandBuffer", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfDeviceMemory),
+      lazyload("vkResetCommandBuffer", DeviceLevel).}
 
 
 # Command buffer building commands
@@ -4933,14 +5093,12 @@ converter toBool32*(b: bool): Bool32 = Bool32(b)
 
 # Array pointer converters
 # ========================
-converter toArrPtr*[T](x: var T): arrPtr[T] = addr x
 converter toArrPtr*[T](x: var seq[T]): arrPtr[T] =
   if x.len == 0: nil
   else: addr x[0]
 converter toArrPtr*[I, T](x: var array[I, T]): arrPtr[T] =
   when x.len == 0: nil
   else: addr x[0]
-converter toArrPtr*[T](x: ptr T): arrPtr[T] = arrPtr[T](x)
 
 
 # Struct Constructor

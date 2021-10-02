@@ -1,4 +1,4 @@
-# Generated at 2021-09-22T15:02:54Z
+# Generated at 2021-10-02T09:29:45Z
 # vk12
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -633,7 +633,10 @@ proc createRenderPass2*(
       pCreateInfo: ptr RenderPassCreateInfo2;
       pAllocator = default(ptr AllocationCallbacks);
       pRenderPass: ptr RenderPass;
-    ): Result {.cdecl, lazyload("vkCreateRenderPass2", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCreateRenderPass2", DeviceLevel).}
 proc cmdBeginRenderPass2*(
       commandBuffer: CommandBuffer;
       pRenderPassBegin: ptr RenderPassBeginInfo;
@@ -734,16 +737,25 @@ proc getSemaphoreCounterValue*(
       device: Device;
       semaphore: Semaphore;
       pValue: ptr uint64;
-    ): Result {.cdecl, lazyload("vkGetSemaphoreCounterValue", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      lazyload("vkGetSemaphoreCounterValue", DeviceLevel).}
 proc waitSemaphores*(
       device: Device;
       pWaitInfo: ptr SemaphoreWaitInfo;
       timeout: uint64;
-    ): Result {.cdecl, lazyload("vkWaitSemaphores", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, timeout),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      lazyload("vkWaitSemaphores", DeviceLevel).}
 proc signalSemaphore*(
       device: Device;
       pSignalInfo: ptr SemaphoreSignalInfo;
-    ): Result {.cdecl, lazyload("vkSignalSemaphore", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkSignalSemaphore", DeviceLevel).}
 
 
 # Promoted from VK_KHR_buffer_device_address (extension 258)

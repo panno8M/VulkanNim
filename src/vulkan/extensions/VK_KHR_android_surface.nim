@@ -1,4 +1,4 @@
-# Generated at 2021-09-22T15:02:54Z
+# Generated at 2021-10-02T09:29:45Z
 # VK_KHR_android_surface
 
 
@@ -29,7 +29,10 @@ proc createAndroidSurfaceKHR*(
       pCreateInfo: ptr AndroidSurfaceCreateInfoKHR;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl, lazyload("vkCreateAndroidSurfaceKHR", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorNativeWindowInUseKhr),
+      lazyload("vkCreateAndroidSurfaceKHR", InstanceLevel).}
 
 proc loadAllVK_KHR_android_surface*(instance: Instance) =
   createAndroidSurfaceKHR.load(instance)

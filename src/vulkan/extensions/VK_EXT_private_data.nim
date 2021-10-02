@@ -1,4 +1,4 @@
-# Generated at 2021-09-22T15:02:54Z
+# Generated at 2021-10-02T09:29:44Z
 # VK_EXT_private_data
 
 
@@ -34,7 +34,10 @@ proc createPrivateDataSlotEXT*(
       pCreateInfo: ptr PrivateDataSlotCreateInfoEXT;
       pAllocator = default(ptr AllocationCallbacks);
       pPrivateDataSlot: ptr PrivateDataSlotEXT;
-    ): Result {.cdecl, lazyload("vkCreatePrivateDataSlotEXT", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory),
+      lazyload("vkCreatePrivateDataSlotEXT", DeviceLevel).}
 proc destroyPrivateDataSlotEXT*(
       device: Device;
       privateDataSlot = default(PrivateDataSlotEXT);
@@ -46,7 +49,10 @@ proc setPrivateDataEXT*(
       objectHandle: uint64;
       privateDataSlot: PrivateDataSlotEXT;
       data: uint64;
-    ): Result {.cdecl, lazyload("vkSetPrivateDataEXT", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory),
+      lazyload("vkSetPrivateDataEXT", DeviceLevel).}
 proc getPrivateDataEXT*(
       device: Device;
       objectType: ObjectType;

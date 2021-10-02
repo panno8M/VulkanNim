@@ -1,4 +1,4 @@
-# Generated at 2021-09-22T15:02:54Z
+# Generated at 2021-10-02T09:29:45Z
 # VK_MVK_macos_surface
 
 
@@ -26,7 +26,10 @@ proc createMacOSSurfaceMVK*(
       pCreateInfo: ptr MacOSSurfaceCreateInfoMVK;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl, lazyload("vkCreateMacOSSurfaceMVK", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorNativeWindowInUseKhr),
+      lazyload("vkCreateMacOSSurfaceMVK", InstanceLevel).}
 
 proc loadAllVK_MVK_macos_surface*(instance: Instance) =
   createMacOSSurfaceMVK.load(instance)

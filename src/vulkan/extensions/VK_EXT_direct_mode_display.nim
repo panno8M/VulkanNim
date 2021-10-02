@@ -1,4 +1,4 @@
-# Generated at 2021-09-16T07:11:43Z
+# Generated at 2021-10-02T09:29:45Z
 # VK_EXT_direct_mode_display
 
 
@@ -14,7 +14,9 @@ const
 proc releaseDisplayEXT*(
       physicalDevice: PhysicalDevice;
       display: DisplayKHR;
-    ): Result {.cdecl, lazyload("vkReleaseDisplayEXT", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      lazyload("vkReleaseDisplayEXT", InstanceLevel).}
 
 proc loadAllVK_EXT_direct_mode_display*(instance: Instance) =
   releaseDisplayEXT.load(instance)

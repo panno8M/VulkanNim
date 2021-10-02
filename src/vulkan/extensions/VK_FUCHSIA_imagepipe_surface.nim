@@ -1,4 +1,4 @@
-# Generated at 2021-09-22T15:02:54Z
+# Generated at 2021-10-02T09:29:45Z
 # VK_FUCHSIA_imagepipe_surface
 
 
@@ -26,7 +26,10 @@ proc createImagePipeSurfaceFUCHSIA*(
       pCreateInfo: ptr ImagePipeSurfaceCreateInfoFUCHSIA;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl, lazyload("vkCreateImagePipeSurfaceFUCHSIA", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCreateImagePipeSurfaceFUCHSIA", InstanceLevel).}
 
 proc loadAllVK_FUCHSIA_imagepipe_surface*(instance: Instance) =
   createImagePipeSurfaceFUCHSIA.load(instance)

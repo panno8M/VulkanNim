@@ -1,4 +1,4 @@
-# Generated at 2021-09-23T04:24:54Z
+# Generated at 2021-10-02T09:29:44Z
 # VK_EXT_full_screen_exclusive
 
 
@@ -48,22 +48,34 @@ proc getPhysicalDeviceSurfacePresentModes2EXT*(
       pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR;
       pPresentModeCount: ptr uint32;
       pPresentModes {.length: pPresentModeCount.} = default(arrPtr[PresentModeKHR]);
-    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceSurfacePresentModes2EXT", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, incomplete),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorSurfaceLostKhr),
+      lazyload("vkGetPhysicalDeviceSurfacePresentModes2EXT", InstanceLevel).}
 proc acquireFullScreenExclusiveModeEXT*(
       device: Device;
       swapchain: SwapchainKHR;
-    ): Result {.cdecl, lazyload("vkAcquireFullScreenExclusiveModeEXT", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInitializationFailed, errorSurfaceLostKhr),
+      lazyload("vkAcquireFullScreenExclusiveModeEXT", DeviceLevel).}
 proc releaseFullScreenExclusiveModeEXT*(
       device: Device;
       swapchain: SwapchainKHR;
-    ): Result {.cdecl, lazyload("vkReleaseFullScreenExclusiveModeEXT", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorSurfaceLostKhr),
+      lazyload("vkReleaseFullScreenExclusiveModeEXT", DeviceLevel).}
 
 
 proc getDeviceGroupSurfacePresentModes2EXT*(
       device: Device;
       pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR;
       pModes: ptr DeviceGroupPresentModeFlagsKHR;
-    ): Result {.cdecl, lazyload("vkGetDeviceGroupSurfacePresentModes2EXT", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorSurfaceLostKhr),
+      lazyload("vkGetDeviceGroupSurfacePresentModes2EXT", DeviceLevel).}
 
 proc loadAllVK_EXT_full_screen_exclusive*(instance: Instance) =
   getPhysicalDeviceSurfacePresentModes2EXT.load(instance)

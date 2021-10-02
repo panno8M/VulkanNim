@@ -1,4 +1,4 @@
-# Generated at 2021-09-23T04:24:54Z
+# Generated at 2021-10-02T09:29:44Z
 # VK_KHR_pipeline_executable_properties
 
 
@@ -66,19 +66,28 @@ proc getPipelineExecutablePropertiesKHR*(
       pPipelineInfo: ptr PipelineInfoKHR;
       pExecutableCount: ptr uint32;
       pProperties {.length: pExecutableCount.} = default(arrPtr[PipelineExecutablePropertiesKHR]);
-    ): Result {.cdecl, lazyload("vkGetPipelineExecutablePropertiesKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, incomplete),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkGetPipelineExecutablePropertiesKHR", DeviceLevel).}
 proc getPipelineExecutableStatisticsKHR*(
       device: Device;
       pExecutableInfo: ptr PipelineExecutableInfoKHR;
       pStatisticCount: ptr uint32;
       pStatistics {.length: pStatisticCount.} = default(arrPtr[PipelineExecutableStatisticKHR]);
-    ): Result {.cdecl, lazyload("vkGetPipelineExecutableStatisticsKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, incomplete),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkGetPipelineExecutableStatisticsKHR", DeviceLevel).}
 proc getPipelineExecutableInternalRepresentationsKHR*(
       device: Device;
       pExecutableInfo: ptr PipelineExecutableInfoKHR;
       pInternalRepresentationCount: ptr uint32;
       pInternalRepresentations {.length: pInternalRepresentationCount.} = default(arrPtr[PipelineExecutableInternalRepresentationKHR]);
-    ): Result {.cdecl, lazyload("vkGetPipelineExecutableInternalRepresentationsKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, incomplete),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkGetPipelineExecutableInternalRepresentationsKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_pipeline_executable_properties*(instance: Instance) =
   getPipelineExecutablePropertiesKHR.load(instance)

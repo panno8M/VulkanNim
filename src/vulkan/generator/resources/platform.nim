@@ -17,7 +17,7 @@ type
   NullHandle* = Handle[HandleType]
   Handle*[T] = distinct ptr object
   NonDispatchableHandle*[T] = distinct ptr object
-  arrPtr*[T] = distinct ptr T
+  arrPtr*[T] = ptr T
 
 type
   Display* = ptr object
@@ -120,3 +120,6 @@ template optional*() {.pragma.}
 template constant*(v: typed) {.pragma.}
 
 template length*(v: untyped) {.pragma.}
+
+template successCodes*(v: varargs[untyped]) {.pragma.}
+template errorCodes*(v: varargs[untyped]) {.pragma.}

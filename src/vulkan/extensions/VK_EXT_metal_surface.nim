@@ -1,4 +1,4 @@
-# Generated at 2021-09-22T15:02:54Z
+# Generated at 2021-10-02T09:29:45Z
 # VK_EXT_metal_surface
 
 
@@ -29,7 +29,10 @@ proc createMetalSurfaceEXT*(
       pCreateInfo: ptr MetalSurfaceCreateInfoEXT;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl, lazyload("vkCreateMetalSurfaceEXT", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorNativeWindowInUseKhr),
+      lazyload("vkCreateMetalSurfaceEXT", InstanceLevel).}
 
 proc loadAllVK_EXT_metal_surface*(instance: Instance) =
   createMetalSurfaceEXT.load(instance)

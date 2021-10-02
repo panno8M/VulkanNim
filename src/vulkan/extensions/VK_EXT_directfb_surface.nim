@@ -1,4 +1,4 @@
-# Generated at 2021-09-22T15:02:54Z
+# Generated at 2021-10-02T09:29:45Z
 # VK_EXT_directfb_surface
 
 
@@ -27,7 +27,10 @@ proc createDirectFBSurfaceEXT*(
       pCreateInfo: ptr DirectFBSurfaceCreateInfoEXT;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl, lazyload("vkCreateDirectFBSurfaceEXT", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCreateDirectFBSurfaceEXT", InstanceLevel).}
 proc getPhysicalDeviceDirectFBPresentationSupportEXT*(
       physicalDevice: PhysicalDevice;
       queueFamilyIndex: uint32;

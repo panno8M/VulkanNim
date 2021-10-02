@@ -1,4 +1,4 @@
-# Generated at 2021-09-23T04:24:54Z
+# Generated at 2021-10-02T09:29:45Z
 # VK_KHR_display_swapchain
 
 
@@ -27,7 +27,10 @@ proc createSharedSwapchainsKHR*(
       pCreateInfos {.length: swapchainCount.}: arrPtr[SwapchainCreateInfoKHR];
       pAllocator = default(ptr AllocationCallbacks);
       pSwapchains {.length: swapchainCount.}: arrPtr[SwapchainKHR];
-    ): Result {.cdecl, lazyload("vkCreateSharedSwapchainsKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorIncompatibleDisplayKhr, errorDeviceLost, errorSurfaceLostKhr),
+      lazyload("vkCreateSharedSwapchainsKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_display_swapchain*(instance: Instance) =
   createSharedSwapchainsKHR.load(instance)

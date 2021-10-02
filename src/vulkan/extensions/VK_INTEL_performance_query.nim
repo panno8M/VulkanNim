@@ -1,4 +1,4 @@
-# Generated at 2021-09-22T15:05:57Z
+# Generated at 2021-10-02T09:29:45Z
 # VK_INTEL_performance_query
 
 
@@ -70,40 +70,64 @@ type
 proc initializePerformanceApiINTEL*(
       device: Device;
       pInitializeInfo: ptr InitializePerformanceApiInfoINTEL;
-    ): Result {.cdecl, lazyload("vkInitializePerformanceApiINTEL", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorTooManyObjects, errorOutOfHostMemory),
+      lazyload("vkInitializePerformanceApiINTEL", DeviceLevel).}
 proc uninitializePerformanceApiINTEL*(
       device: Device;
     ): void {.cdecl, lazyload("vkUninitializePerformanceApiINTEL", DeviceLevel).}
 proc cmdSetPerformanceMarkerINTEL*(
       commandBuffer: CommandBuffer;
       pMarkerInfo: ptr PerformanceMarkerInfoINTEL;
-    ): Result {.cdecl, lazyload("vkCmdSetPerformanceMarkerINTEL", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorTooManyObjects, errorOutOfHostMemory),
+      lazyload("vkCmdSetPerformanceMarkerINTEL", DeviceLevel).}
 proc cmdSetPerformanceStreamMarkerINTEL*(
       commandBuffer: CommandBuffer;
       pMarkerInfo: ptr PerformanceStreamMarkerInfoINTEL;
-    ): Result {.cdecl, lazyload("vkCmdSetPerformanceStreamMarkerINTEL", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorTooManyObjects, errorOutOfHostMemory),
+      lazyload("vkCmdSetPerformanceStreamMarkerINTEL", DeviceLevel).}
 proc cmdSetPerformanceOverrideINTEL*(
       commandBuffer: CommandBuffer;
       pOverrideInfo: ptr PerformanceOverrideInfoINTEL;
-    ): Result {.cdecl, lazyload("vkCmdSetPerformanceOverrideINTEL", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorTooManyObjects, errorOutOfHostMemory),
+      lazyload("vkCmdSetPerformanceOverrideINTEL", DeviceLevel).}
 proc acquirePerformanceConfigurationINTEL*(
       device: Device;
       pAcquireInfo: ptr PerformanceConfigurationAcquireInfoINTEL;
       pConfiguration: ptr PerformanceConfigurationINTEL;
-    ): Result {.cdecl, lazyload("vkAcquirePerformanceConfigurationINTEL", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorTooManyObjects, errorOutOfHostMemory),
+      lazyload("vkAcquirePerformanceConfigurationINTEL", DeviceLevel).}
 proc releasePerformanceConfigurationINTEL*(
       device: Device;
       configuration = default(PerformanceConfigurationINTEL);
-    ): Result {.cdecl, lazyload("vkReleasePerformanceConfigurationINTEL", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorTooManyObjects, errorOutOfHostMemory),
+      lazyload("vkReleasePerformanceConfigurationINTEL", DeviceLevel).}
 proc queueSetPerformanceConfigurationINTEL*(
       queue: Queue;
       configuration: PerformanceConfigurationINTEL;
-    ): Result {.cdecl, lazyload("vkQueueSetPerformanceConfigurationINTEL", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorTooManyObjects, errorOutOfHostMemory),
+      lazyload("vkQueueSetPerformanceConfigurationINTEL", DeviceLevel).}
 proc getPerformanceParameterINTEL*(
       device: Device;
       parameter: PerformanceParameterTypeINTEL;
       pValue: ptr PerformanceValueINTEL;
-    ): Result {.cdecl, lazyload("vkGetPerformanceParameterINTEL", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorTooManyObjects, errorOutOfHostMemory),
+      lazyload("vkGetPerformanceParameterINTEL", DeviceLevel).}
 StructureType.defineAliases:
   queryPoolPerformanceQueryCreateInfoIntel as queryPoolCreateInfoIntel
 

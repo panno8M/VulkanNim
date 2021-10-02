@@ -1,4 +1,4 @@
-# Generated at 2021-09-23T04:24:54Z
+# Generated at 2021-10-02T09:29:45Z
 # VK_AMD_shader_info
 
 
@@ -38,7 +38,10 @@ proc getShaderInfoAMD*(
       infoType: ShaderInfoTypeAMD;
       pInfoSize: ptr uint;
       pInfo {.length: pInfoSize.} = default(pointer);
-    ): Result {.cdecl, lazyload("vkGetShaderInfoAMD", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, incomplete),
+      errorCodes(errorFeatureNotPresent, errorOutOfHostMemory),
+      lazyload("vkGetShaderInfoAMD", DeviceLevel).}
 
 proc loadAllVK_AMD_shader_info*(instance: Instance) =
   getShaderInfoAMD.load(instance)

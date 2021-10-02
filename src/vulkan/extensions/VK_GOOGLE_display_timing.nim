@@ -1,4 +1,4 @@
-# Generated at 2021-09-23T04:24:54Z
+# Generated at 2021-10-02T09:29:45Z
 # VK_GOOGLE_display_timing
 
 
@@ -33,13 +33,19 @@ proc getRefreshCycleDurationGOOGLE*(
       device: Device;
       swapchain: SwapchainKHR;
       pDisplayTimingProperties: ptr RefreshCycleDurationGOOGLE;
-    ): Result {.cdecl, lazyload("vkGetRefreshCycleDurationGOOGLE", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorDeviceLost, errorSurfaceLostKhr),
+      lazyload("vkGetRefreshCycleDurationGOOGLE", DeviceLevel).}
 proc getPastPresentationTimingGOOGLE*(
       device: Device;
       swapchain: SwapchainKHR;
       pPresentationTimingCount: ptr uint32;
       pPresentationTimings {.length: pPresentationTimingCount.} = default(arrPtr[PastPresentationTimingGOOGLE]);
-    ): Result {.cdecl, lazyload("vkGetPastPresentationTimingGOOGLE", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, incomplete),
+      errorCodes(errorOutOfHostMemory, errorDeviceLost, errorOutOfDateKhr, errorSurfaceLostKhr),
+      lazyload("vkGetPastPresentationTimingGOOGLE", DeviceLevel).}
 
 proc loadAllVK_GOOGLE_display_timing*(instance: Instance) =
   getRefreshCycleDurationGOOGLE.load(instance)

@@ -1,4 +1,4 @@
-# Generated at 2021-09-22T15:02:54Z
+# Generated at 2021-10-02T09:29:45Z
 # VK_MVK_ios_surface
 
 
@@ -26,7 +26,10 @@ proc createIOSSurfaceMVK*(
       pCreateInfo: ptr IOSSurfaceCreateInfoMVK;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl, lazyload("vkCreateIOSSurfaceMVK", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorNativeWindowInUseKhr),
+      lazyload("vkCreateIOSSurfaceMVK", InstanceLevel).}
 
 proc loadAllVK_MVK_ios_surface*(instance: Instance) =
   createIOSSurfaceMVK.load(instance)

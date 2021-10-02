@@ -1,4 +1,4 @@
-# Generated at 2021-09-22T15:02:54Z
+# Generated at 2021-10-02T09:29:45Z
 # VK_KHR_external_fence_fd
 
 
@@ -28,12 +28,18 @@ type
 proc importFenceFdKHR*(
       device: Device;
       pImportFenceFdInfo: ptr ImportFenceFdInfoKHR;
-    ): Result {.cdecl, lazyload("vkImportFenceFdKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorInvalidExternalHandle),
+      lazyload("vkImportFenceFdKHR", DeviceLevel).}
 proc getFenceFdKHR*(
       device: Device;
       pGetFdInfo: ptr FenceGetFdInfoKHR;
       pFd: ptr int;
-    ): Result {.cdecl, lazyload("vkGetFenceFdKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorTooManyObjects, errorOutOfHostMemory),
+      lazyload("vkGetFenceFdKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_external_fence_fd*(instance: Instance) =
   importFenceFdKHR.load(instance)

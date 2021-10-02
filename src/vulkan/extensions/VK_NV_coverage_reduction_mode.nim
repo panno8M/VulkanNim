@@ -1,4 +1,4 @@
-# Generated at 2021-09-23T04:24:54Z
+# Generated at 2021-10-02T09:29:44Z
 # VK_NV_coverage_reduction_mode
 
 
@@ -39,7 +39,10 @@ proc getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV*(
       physicalDevice: PhysicalDevice;
       pCombinationCount: ptr uint32;
       pCombinations {.length: pCombinationCount.} = default(arrPtr[FramebufferMixedSamplesCombinationNV]);
-    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, incomplete),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV", InstanceLevel).}
 
 proc loadAllVK_NV_coverage_reduction_mode*(instance: Instance) =
   getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV.load(instance)

@@ -209,9 +209,16 @@ proc render*(command: NodeCommand): string =
       of lmPreload: "preload(\"{command.name}\")".fmt
       of lmWithInstance: "lazyload(\"{command.name}\", InstanceLevel)".fmt
       of lmWithDevice: "lazyload(\"{command.name}\", DeviceLevel)".fmt
-    let procFutter = "    ): {theType} {{.cdecl, {loadMethod}.}}".fmt
-    # let cageName = command.name
-    # let cageParams = command.params.mapIt(it.name.parseParamName)
+    let procFutter = block:
+      var futter = "    ): {theType} {{.cdecl,".fmt
+      if command.successCodes.len != 0:
+        futter.add "\n      successCodes(" & command.successCodes.mapIt(it.parseEnumValue("", @[])).join(", ") & "),"
+      if command.errorCodes.len != 0:
+        futter.add "\n      errorCodes(" & command.errorCodes.mapIt(it.parseEnumValue("", @[])).join(", ") & "),"
+      if command.successCodes.len+command.errorCodes.len != 0:
+        futter.add "\n      " & loadMethod
+      else: futter.add " " & loadMethod
+      futter & ".}"
 
     result &= procHeader
     if procParams.len != 0:

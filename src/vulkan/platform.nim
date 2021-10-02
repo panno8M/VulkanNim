@@ -1,4 +1,4 @@
-# Generated at 2021-09-23T06:24:11Z
+# Generated at 2021-10-02T10:30:48Z
 # platform
 import strformat
 import macros
@@ -19,7 +19,7 @@ type
   NullHandle* = Handle[HandleType]
   Handle*[T] = distinct ptr object
   NonDispatchableHandle*[T] = distinct ptr object
-  arrPtr*[T] = distinct ptr T
+  arrPtr*[T] = ptr T
 
 type
   Display* = ptr object
@@ -122,5 +122,8 @@ template optional*() {.pragma.}
 template constant*(v: typed) {.pragma.}
 
 template length*(v: untyped) {.pragma.}
+
+template successCodes*(v: varargs[untyped]) {.pragma.}
+template errorCodes*(v: varargs[untyped]) {.pragma.}
 
 

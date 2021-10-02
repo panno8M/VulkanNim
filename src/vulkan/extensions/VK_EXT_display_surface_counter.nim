@@ -1,4 +1,4 @@
-# Generated at 2021-09-22T15:02:54Z
+# Generated at 2021-10-02T09:29:45Z
 # VK_EXT_display_surface_counter
 
 
@@ -36,7 +36,10 @@ proc getPhysicalDeviceSurfaceCapabilities2EXT*(
       physicalDevice: PhysicalDevice;
       surface: SurfaceKHR;
       pSurfaceCapabilities: ptr SurfaceCapabilities2EXT;
-    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceSurfaceCapabilities2EXT", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorSurfaceLostKhr),
+      lazyload("vkGetPhysicalDeviceSurfaceCapabilities2EXT", InstanceLevel).}
 StructureType.defineAliases:
   surfaceCapabilities2Ext as surfaceCapabilities2Ext
 

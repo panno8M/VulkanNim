@@ -1,4 +1,4 @@
-# Generated at 2021-09-22T15:02:54Z
+# Generated at 2021-10-02T09:29:45Z
 # VK_EXT_display_control
 
 
@@ -45,26 +45,38 @@ proc displayPowerControlEXT*(
       device: Device;
       display: DisplayKHR;
       pDisplayPowerInfo: ptr DisplayPowerInfoEXT;
-    ): Result {.cdecl, lazyload("vkDisplayPowerControlEXT", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory),
+      lazyload("vkDisplayPowerControlEXT", DeviceLevel).}
 proc registerDeviceEventEXT*(
       device: Device;
       pDeviceEventInfo: ptr DeviceEventInfoEXT;
       pAllocator = default(ptr AllocationCallbacks);
       pFence: ptr Fence;
-    ): Result {.cdecl, lazyload("vkRegisterDeviceEventEXT", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory),
+      lazyload("vkRegisterDeviceEventEXT", DeviceLevel).}
 proc registerDisplayEventEXT*(
       device: Device;
       display: DisplayKHR;
       pDisplayEventInfo: ptr DisplayEventInfoEXT;
       pAllocator = default(ptr AllocationCallbacks);
       pFence: ptr Fence;
-    ): Result {.cdecl, lazyload("vkRegisterDisplayEventEXT", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory),
+      lazyload("vkRegisterDisplayEventEXT", DeviceLevel).}
 proc getSwapchainCounterEXT*(
       device: Device;
       swapchain: SwapchainKHR;
       counter: SurfaceCounterFlagBitsEXT;
       pCounterValue: ptr uint64;
-    ): Result {.cdecl, lazyload("vkGetSwapchainCounterEXT", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorDeviceLost, errorOutOfDateKhr),
+      lazyload("vkGetSwapchainCounterEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_display_control*(instance: Instance) =
   displayPowerControlEXT.load(instance)

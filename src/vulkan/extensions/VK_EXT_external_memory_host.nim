@@ -1,4 +1,4 @@
-# Generated at 2021-09-22T15:02:54Z
+# Generated at 2021-10-02T09:29:45Z
 # VK_EXT_external_memory_host
 
 
@@ -31,7 +31,10 @@ proc getMemoryHostPointerPropertiesEXT*(
       handleType: ExternalMemoryHandleTypeFlagBits;
       pHostPointer: pointer;
       pMemoryHostPointerProperties: ptr MemoryHostPointerPropertiesEXT;
-    ): Result {.cdecl, lazyload("vkGetMemoryHostPointerPropertiesEXT", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorInvalidExternalHandle),
+      lazyload("vkGetMemoryHostPointerPropertiesEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_external_memory_host*(instance: Instance) =
   getMemoryHostPointerPropertiesEXT.load(instance)

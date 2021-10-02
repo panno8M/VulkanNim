@@ -1,4 +1,4 @@
-# Generated at 2021-09-23T04:24:54Z
+# Generated at 2021-10-02T09:29:44Z
 # VK_KHR_ray_tracing
 # VK_NV_ray_tracing
 # Explicit sort order to require processing after VK_NV_ray_tracing
@@ -376,7 +376,10 @@ proc createAccelerationStructureKHR*(
       pCreateInfo: ptr AccelerationStructureCreateInfoKHR;
       pAllocator = default(ptr AllocationCallbacks);
       pAccelerationStructure: ptr AccelerationStructureKHR;
-    ): Result {.cdecl, lazyload("vkCreateAccelerationStructureKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorInvalidOpaqueCaptureAddressKhr),
+      lazyload("vkCreateAccelerationStructureKHR", DeviceLevel).}
 proc destroyAccelerationStructureKHR*(
       device: Device;
       accelerationStructure = default(AccelerationStructureKHR);
@@ -391,7 +394,10 @@ proc bindAccelerationStructureMemoryKHR*(
       device: Device;
       bindInfoCount: uint32;
       pBindInfos {.length: bindInfoCount.}: arrPtr[BindAccelerationStructureMemoryInfoKHR];
-    ): Result {.cdecl, lazyload("vkBindAccelerationStructureMemoryKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkBindAccelerationStructureMemoryKHR", DeviceLevel).}
 proc cmdBuildAccelerationStructureKHR*(
       commandBuffer: CommandBuffer;
       infoCount: uint32;
@@ -410,19 +416,31 @@ proc buildAccelerationStructureKHR*(
       infoCount: uint32;
       pInfos {.length: infoCount.}: arrPtr[AccelerationStructureBuildGeometryInfoKHR];
       ppOffsetInfos {.length: infoCount.}: arrPtr[arrPtr[AccelerationStructureBuildOffsetInfoKHR]];
-    ): Result {.cdecl, lazyload("vkBuildAccelerationStructureKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, operationDeferredKhr, operationNotDeferredKhr),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkBuildAccelerationStructureKHR", DeviceLevel).}
 proc copyAccelerationStructureKHR*(
       device: Device;
       pInfo: ptr CopyAccelerationStructureInfoKHR;
-    ): Result {.cdecl, lazyload("vkCopyAccelerationStructureKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, operationDeferredKhr, operationNotDeferredKhr),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCopyAccelerationStructureKHR", DeviceLevel).}
 proc copyAccelerationStructureToMemoryKHR*(
       device: Device;
       pInfo: ptr CopyAccelerationStructureToMemoryInfoKHR;
-    ): Result {.cdecl, lazyload("vkCopyAccelerationStructureToMemoryKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, operationDeferredKhr, operationNotDeferredKhr),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCopyAccelerationStructureToMemoryKHR", DeviceLevel).}
 proc copyMemoryToAccelerationStructureKHR*(
       device: Device;
       pInfo: ptr CopyMemoryToAccelerationStructureInfoKHR;
-    ): Result {.cdecl, lazyload("vkCopyMemoryToAccelerationStructureKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, operationDeferredKhr, operationNotDeferredKhr),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCopyMemoryToAccelerationStructureKHR", DeviceLevel).}
 proc writeAccelerationStructuresPropertiesKHR*(
       device: Device;
       accelerationStructureCount: uint32;
@@ -431,7 +449,10 @@ proc writeAccelerationStructuresPropertiesKHR*(
       dataSize: uint;
       pData {.length: dataSize.}: pointer;
       stride: uint;
-    ): Result {.cdecl, lazyload("vkWriteAccelerationStructuresPropertiesKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkWriteAccelerationStructuresPropertiesKHR", DeviceLevel).}
 proc cmdCopyAccelerationStructureKHR*(
       commandBuffer: CommandBuffer;
       pInfo: ptr CopyAccelerationStructureInfoKHR;
@@ -461,7 +482,10 @@ proc createRayTracingPipelinesKHR*(
       pCreateInfos {.length: createInfoCount.}: arrPtr[RayTracingPipelineCreateInfoKHR];
       pAllocator = default(ptr AllocationCallbacks);
       pPipelines {.length: createInfoCount.}: arrPtr[Pipeline];
-    ): Result {.cdecl, lazyload("vkCreateRayTracingPipelinesKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, operationDeferredKhr, operationNotDeferredKhr, pipelineCompileRequiredExt),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidOpaqueCaptureAddress),
+      lazyload("vkCreateRayTracingPipelinesKHR", DeviceLevel).}
 proc getRayTracingShaderGroupHandlesKHR*(
       device: Device;
       pipeline: Pipeline;
@@ -469,7 +493,10 @@ proc getRayTracingShaderGroupHandlesKHR*(
       groupCount: uint32;
       dataSize: uint;
       pData {.length: dataSize.}: pointer;
-    ): Result {.cdecl, lazyload("vkGetRayTracingShaderGroupHandlesKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkGetRayTracingShaderGroupHandlesKHR", DeviceLevel).}
 proc getAccelerationStructureDeviceAddressKHR*(
       device: Device;
       pInfo: ptr AccelerationStructureDeviceAddressInfoKHR;
@@ -481,7 +508,10 @@ proc getRayTracingCaptureReplayShaderGroupHandlesKHR*(
       groupCount: uint32;
       dataSize: uint;
       pData {.length: dataSize.}: pointer;
-    ): Result {.cdecl, lazyload("vkGetRayTracingCaptureReplayShaderGroupHandlesKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkGetRayTracingCaptureReplayShaderGroupHandlesKHR", DeviceLevel).}
 proc cmdWriteAccelerationStructuresPropertiesKHR*(
       commandBuffer: CommandBuffer;
       accelerationStructureCount: uint32;
@@ -502,7 +532,10 @@ proc cmdTraceRaysIndirectKHR*(
 proc getDeviceAccelerationStructureCompatibilityKHR*(
       device: Device;
       version: ptr AccelerationStructureVersionKHR;
-    ): Result {.cdecl, lazyload("vkGetDeviceAccelerationStructureCompatibilityKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorIncompatibleVersionKhr),
+      lazyload("vkGetDeviceAccelerationStructureCompatibilityKHR", DeviceLevel).}
 
 
 proc createAccelerationStructureNV*(
@@ -510,7 +543,10 @@ proc createAccelerationStructureNV*(
       pCreateInfo: ptr AccelerationStructureCreateInfoNV;
       pAllocator = default(ptr AllocationCallbacks);
       pAccelerationStructure: ptr AccelerationStructureNV;
-    ): Result {.cdecl, lazyload("vkCreateAccelerationStructureNV", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory),
+      lazyload("vkCreateAccelerationStructureNV", DeviceLevel).}
 const destroyAccelerationStructureNV* = destroyAccelerationStructureKHR
 proc getAccelerationStructureMemoryRequirementsNV*(
       device: Device;
@@ -559,20 +595,29 @@ proc createRayTracingPipelinesNV*(
       pCreateInfos {.length: createInfoCount.}: arrPtr[RayTracingPipelineCreateInfoNV];
       pAllocator = default(ptr AllocationCallbacks);
       pPipelines {.length: createInfoCount.}: arrPtr[Pipeline];
-    ): Result {.cdecl, lazyload("vkCreateRayTracingPipelinesNV", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, pipelineCompileRequiredExt),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidShaderNv),
+      lazyload("vkCreateRayTracingPipelinesNV", DeviceLevel).}
 const getRayTracingShaderGroupHandlesNV* = getRayTracingShaderGroupHandlesKHR
 proc getAccelerationStructureHandleNV*(
       device: Device;
       accelerationStructure: AccelerationStructureKHR;
       dataSize: uint;
       pData {.length: dataSize.}: pointer;
-    ): Result {.cdecl, lazyload("vkGetAccelerationStructureHandleNV", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkGetAccelerationStructureHandleNV", DeviceLevel).}
 const cmdWriteAccelerationStructuresPropertiesNV* = cmdWriteAccelerationStructuresPropertiesKHR
 proc compileDeferredNV*(
       device: Device;
       pipeline: Pipeline;
       shader: uint32;
-    ): Result {.cdecl, lazyload("vkCompileDeferredNV", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCompileDeferredNV", DeviceLevel).}
 PipelineStageFlagBits.defineAliases:
   rayTracingShaderKhr as rayTracingShaderNv
   accelerationStructureBuildKhr as accelerationStructureBuildNv

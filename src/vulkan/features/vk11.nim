@@ -1,4 +1,4 @@
-# Generated at 2021-09-23T04:24:54Z
+# Generated at 2021-10-02T09:29:44Z
 # vk11
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -571,7 +571,10 @@ template apiVersion11*(): untyped = makeVersion(1, 1, 0)
 # ---------------------
 proc enumerateInstanceVersion*(
       pApiVersion: ptr uint32;
-    ): Result {.cdecl, preload("vkEnumerateInstanceVersion").}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory),
+      preload("vkEnumerateInstanceVersion").}
 
 
 # Promoted from VK_KHR_relaxed_block_layout, which has no API
@@ -592,12 +595,18 @@ proc bindBufferMemory2*(
       device: Device;
       bindInfoCount: uint32;
       pBindInfos {.length: bindInfoCount.}: arrPtr[BindBufferMemoryInfo];
-    ): Result {.cdecl, lazyload("vkBindBufferMemory2", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidOpaqueCaptureAddressKhr),
+      lazyload("vkBindBufferMemory2", DeviceLevel).}
 proc bindImageMemory2*(
       device: Device;
       bindInfoCount: uint32;
       pBindInfos {.length: bindInfoCount.}: arrPtr[BindImageMemoryInfo];
-    ): Result {.cdecl, lazyload("vkBindImageMemory2", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkBindImageMemory2", DeviceLevel).}
 
 
 # Promoted from VK_KHR_16bit_storage
@@ -645,7 +654,10 @@ proc enumeratePhysicalDeviceGroups*(
       instance: Instance;
       pPhysicalDeviceGroupCount: ptr uint32;
       pPhysicalDeviceGroupProperties {.length: pPhysicalDeviceGroupCount.} = default(arrPtr[PhysicalDeviceGroupProperties]);
-    ): Result {.cdecl, lazyload("vkEnumeratePhysicalDeviceGroups", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success, incomplete),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInitializationFailed),
+      lazyload("vkEnumeratePhysicalDeviceGroups", InstanceLevel).}
 
 
 # Promoted from VK_KHR_get_memory_requirements2
@@ -687,7 +699,10 @@ proc getPhysicalDeviceImageFormatProperties2*(
       physicalDevice: PhysicalDevice;
       pImageFormatInfo: ptr PhysicalDeviceImageFormatInfo2;
       pImageFormatProperties: ptr ImageFormatProperties2;
-    ): Result {.cdecl, lazyload("vkGetPhysicalDeviceImageFormatProperties2", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorFormatNotSupported),
+      lazyload("vkGetPhysicalDeviceImageFormatProperties2", InstanceLevel).}
 proc getPhysicalDeviceQueueFamilyProperties2*(
       physicalDevice: PhysicalDevice;
       pQueueFamilyPropertyCount: ptr uint32;
@@ -745,7 +760,10 @@ proc createSamplerYcbcrConversion*(
       pCreateInfo: ptr SamplerYcbcrConversionCreateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pYcbcrConversion: ptr SamplerYcbcrConversion;
-    ): Result {.cdecl, lazyload("vkCreateSamplerYcbcrConversion", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCreateSamplerYcbcrConversion", DeviceLevel).}
 proc destroySamplerYcbcrConversion*(
       device: Device;
       ycbcrConversion = default(SamplerYcbcrConversion);
@@ -760,7 +778,10 @@ proc createDescriptorUpdateTemplate*(
       pCreateInfo: ptr DescriptorUpdateTemplateCreateInfo;
       pAllocator = default(ptr AllocationCallbacks);
       pDescriptorUpdateTemplate: ptr DescriptorUpdateTemplate;
-    ): Result {.cdecl, lazyload("vkCreateDescriptorUpdateTemplate", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkCreateDescriptorUpdateTemplate", DeviceLevel).}
 proc destroyDescriptorUpdateTemplate*(
       device: Device;
       descriptorUpdateTemplate = default(DescriptorUpdateTemplate);

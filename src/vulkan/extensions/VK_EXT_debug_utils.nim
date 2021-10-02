@@ -1,4 +1,4 @@
-# Generated at 2021-09-22T15:05:56Z
+# Generated at 2021-10-02T09:29:44Z
 # VK_EXT_debug_utils
 
 
@@ -77,11 +77,17 @@ type
 proc setDebugUtilsObjectNameEXT*(
       device: Device;
       pNameInfo: ptr DebugUtilsObjectNameInfoEXT;
-    ): Result {.cdecl, lazyload("vkSetDebugUtilsObjectNameEXT", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkSetDebugUtilsObjectNameEXT", DeviceLevel).}
 proc setDebugUtilsObjectTagEXT*(
       device: Device;
       pTagInfo: ptr DebugUtilsObjectTagInfoEXT;
-    ): Result {.cdecl, lazyload("vkSetDebugUtilsObjectTagEXT", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      lazyload("vkSetDebugUtilsObjectTagEXT", DeviceLevel).}
 proc queueBeginDebugUtilsLabelEXT*(
       queue: Queue;
       pLabelInfo: ptr DebugUtilsLabelEXT;
@@ -109,7 +115,10 @@ proc createDebugUtilsMessengerEXT*(
       pCreateInfo: ptr DebugUtilsMessengerCreateInfoEXT;
       pAllocator = default(ptr AllocationCallbacks);
       pMessenger: ptr DebugUtilsMessengerEXT;
-    ): Result {.cdecl, lazyload("vkCreateDebugUtilsMessengerEXT", InstanceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory),
+      lazyload("vkCreateDebugUtilsMessengerEXT", InstanceLevel).}
 proc destroyDebugUtilsMessengerEXT*(
       instance: Instance;
       messenger = default(DebugUtilsMessengerEXT);

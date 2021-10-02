@@ -1,4 +1,4 @@
-# Generated at 2021-09-22T15:02:54Z
+# Generated at 2021-10-02T09:29:44Z
 # VK_KHR_external_fence_win32
 
 
@@ -35,12 +35,18 @@ type
 proc importFenceWin32HandleKHR*(
       device: Device;
       pImportFenceWin32HandleInfo: ptr ImportFenceWin32HandleInfoKHR;
-    ): Result {.cdecl, lazyload("vkImportFenceWin32HandleKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorOutOfHostMemory, errorInvalidExternalHandle),
+      lazyload("vkImportFenceWin32HandleKHR", DeviceLevel).}
 proc getFenceWin32HandleKHR*(
       device: Device;
       pGetWin32HandleInfo: ptr FenceGetWin32HandleInfoKHR;
       pHandle: ptr Win32Handle;
-    ): Result {.cdecl, lazyload("vkGetFenceWin32HandleKHR", DeviceLevel).}
+    ): Result {.cdecl,
+      successCodes(success),
+      errorCodes(errorTooManyObjects, errorOutOfHostMemory),
+      lazyload("vkGetFenceWin32HandleKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_external_fence_win32*(instance: Instance) =
   importFenceWin32HandleKHR.load(instance)
