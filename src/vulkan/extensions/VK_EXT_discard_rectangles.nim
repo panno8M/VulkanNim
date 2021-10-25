@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_discard_rectangles
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
 export VK_KHR_get_physical_device_properties2
+
+prepareVulkanLibDef()
 
 const
   ExtDiscardRectanglesSpecVersion* = 1
@@ -38,8 +39,8 @@ proc cmdSetDiscardRectangleEXT*(
     ): void {.cdecl, lazyload("vkCmdSetDiscardRectangleEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_discard_rectangles*(instance: Instance) =
-  cmdSetDiscardRectangleEXT.load(instance)
+  instance.loadCommand cmdSetDiscardRectangleEXT
 
 proc loadVK_EXT_discard_rectangles*(device: Device) =
-  cmdSetDiscardRectangleEXT.load(device)
+  device.loadCommand cmdSetDiscardRectangleEXT
 

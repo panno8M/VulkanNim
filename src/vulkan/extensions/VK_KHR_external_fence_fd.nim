@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_KHR_external_fence_fd
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_external_fence
 export VK_KHR_external_fence
+
+prepareVulkanLibDef()
 
 const
   KhrExternalFenceFdSpecVersion* = 1
@@ -42,10 +43,10 @@ proc getFenceFdKHR*(
       lazyload("vkGetFenceFdKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_external_fence_fd*(instance: Instance) =
-  importFenceFdKHR.load(instance)
-  getFenceFdKHR.load(instance)
+  instance.loadCommand importFenceFdKHR
+  instance.loadCommand getFenceFdKHR
 
 proc loadVK_KHR_external_fence_fd*(device: Device) =
-  importFenceFdKHR.load(device)
-  getFenceFdKHR.load(device)
+  device.loadCommand importFenceFdKHR
+  device.loadCommand getFenceFdKHR
 

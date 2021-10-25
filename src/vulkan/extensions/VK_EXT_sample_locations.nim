@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_sample_locations
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
 export VK_KHR_get_physical_device_properties2
+
+prepareVulkanLibDef()
 
 const
   ExtSampleLocationsSpecVersion* = 1
@@ -64,12 +65,12 @@ proc getPhysicalDeviceMultisamplePropertiesEXT*(
     ): void {.cdecl, lazyload("vkGetPhysicalDeviceMultisamplePropertiesEXT", InstanceLevel).}
 
 proc loadAllVK_EXT_sample_locations*(instance: Instance) =
-  cmdSetSampleLocationsEXT.load(instance)
-  getPhysicalDeviceMultisamplePropertiesEXT.load(instance)
+  instance.loadCommand cmdSetSampleLocationsEXT
+  instance.loadCommand getPhysicalDeviceMultisamplePropertiesEXT
 
 proc loadVK_EXT_sample_locations*(instance: Instance) =
-  getPhysicalDeviceMultisamplePropertiesEXT.load(instance)
+  instance.loadCommand getPhysicalDeviceMultisamplePropertiesEXT
 
 proc loadVK_EXT_sample_locations*(device: Device) =
-  cmdSetSampleLocationsEXT.load(device)
+  device.loadCommand cmdSetSampleLocationsEXT
 

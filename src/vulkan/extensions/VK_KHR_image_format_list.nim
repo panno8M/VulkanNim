@@ -1,10 +1,11 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-10-24T02:03:03Z
 # VK_KHR_image_format_list
-
 
 import ../platform
 import ../features/vk10
 import ../features/vk12
+
+prepareVulkanLibDef()
 
 const
   KhrImageFormatListSpecVersion* = 1

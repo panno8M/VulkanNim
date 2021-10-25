@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_KHR_xlib_surface
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
 export VK_KHR_surface
+
+prepareVulkanLibDef()
 
 const
   KhrXlibSurfaceSpecVersion* = 6
@@ -39,10 +40,10 @@ proc getPhysicalDeviceXlibPresentationSupportKHR*(
     ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceXlibPresentationSupportKHR", InstanceLevel).}
 
 proc loadAllVK_KHR_xlib_surface*(instance: Instance) =
-  createXlibSurfaceKHR.load(instance)
-  getPhysicalDeviceXlibPresentationSupportKHR.load(instance)
+  instance.loadCommand createXlibSurfaceKHR
+  instance.loadCommand getPhysicalDeviceXlibPresentationSupportKHR
 
 proc loadVK_KHR_xlib_surface*(instance: Instance) =
-  createXlibSurfaceKHR.load(instance)
-  getPhysicalDeviceXlibPresentationSupportKHR.load(instance)
+  instance.loadCommand createXlibSurfaceKHR
+  instance.loadCommand getPhysicalDeviceXlibPresentationSupportKHR
 

@@ -1,6 +1,5 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_KHR_display_swapchain
-
 
 import ../platform
 import ../features/vk10
@@ -8,6 +7,8 @@ import ./VK_KHR_swapchain
 import ./VK_KHR_surface
 export VK_KHR_swapchain
 export VK_KHR_surface
+
+prepareVulkanLibDef()
 
 const
   KhrDisplaySwapchainSpecVersion* = 10
@@ -33,8 +34,8 @@ proc createSharedSwapchainsKHR*(
       lazyload("vkCreateSharedSwapchainsKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_display_swapchain*(instance: Instance) =
-  createSharedSwapchainsKHR.load(instance)
+  instance.loadCommand createSharedSwapchainsKHR
 
 proc loadVK_KHR_display_swapchain*(device: Device) =
-  createSharedSwapchainsKHR.load(device)
+  device.loadCommand createSharedSwapchainsKHR
 

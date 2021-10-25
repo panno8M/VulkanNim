@@ -1,6 +1,7 @@
 import strformat
 import macros
 import sequtils
+import options
 export macros.hasCustomPragma, macros.getCustomPragmaVal
 
 const vkDllPath =
@@ -71,13 +72,14 @@ const InstanceLevel* = {LoadWith.Instance}
 const DeviceLevel* = {LoadWith.Instance, LoadWith.Device}
 
 template loadable*(loadFrom: string, with = InstanceLevel) {.pragma.}
+template loadInto*[T: proc](cage: var Option[T]) {.pragma.}
 
 macro preload*(loadFrom: string, def: untyped): untyped =
   def.expectKind nnkProcDef
   if def.body.kind != nnkEmpty: error("the body must be empty")
-  def.addPragma ident("discardable")
-  def.addPragma ident("dynlib").newCall(newStrLitNode(vkDllPath))
-  def.addPragma ident("importc").newCall(newStrLitNode($loadFrom))
+  def.addPragma ident"discardable"
+  def.addPragma ident"dynlib".newCall(newStrLitNode(vkDllPath))
+  def.addPragma ident"importc".newCall(newStrLitNode($loadFrom))
   return def
 macro lazyload*(loadFrom: string; with = InstanceLevel; def: untyped): untyped =
   ## The proc expands to something like:
@@ -85,36 +87,48 @@ macro lazyload*(loadFrom: string; with = InstanceLevel; def: untyped): untyped =
   ## var procName: procDef {.[procPragma], loadable(loadFrom, with).}
   ##
   ## As you can see the proc pointer has loadable pragma so, you can use load macro to dynamic load.
+  
+  proc isExported(n: NimNode): bool =
+    n.kind == nnkPostfix and n[0].eqIdent "*"
 
   def.expectKind nnkProcDef
   if def.body.kind != nnkEmpty: error("the body must be empty")
 
   let
-    pragma = newNimNode(nnkPragma).add(concat(
+    procTyPragma = newNimNode(nnkPragma).add(concat(
       def.pragma[0..^1],
-      @[ident("loadable").newCall(loadFrom, with)],
+      @[ident"loadable".newCall(loadFrom, with)],
     ))
     procTy = newNimNode(nnkProcTy).add(
       def.params,
-      pragma)
+      procTyPragma)
 
-  let typeDef = newNimNode(nnkTypeSection).add(newNimNode(nnkTypeDef).add(
-    if def[0].kind == nnkPostfix and def[0][0].eqIdent "*":
-      ident("PFN_" & $def.name).postfix("*")
-    else: ident("PFN_" & $def.name),
-    newEmptyNode(),
-    procTy,
-  ))
-  let cageDef = newNimNode(nnkVarSection).add(newIdentDefs(
-      def[0], # def.name
-      ident("PFN_" & $def.name),
-      newEmptyNode()
-    ))
+    typeName = ident(&"PFN_{def.name}")
+    cageName = ident(&"{def.name}_CAGE")
+    exportableTypeName =
+      if def[0].isExported: typeName.postfix("*")
+      else: typeName
 
-  return newStmtList(
-    typeDef,
-    cageDef,
-  )
+    typeDef = quote do:
+      type `exportableTypeName` = `procTy`
+
+    cageDef = quote do:
+      var `cageName`: Option[`typeName`]
+
+    accessorDef = newProc(
+      name= def[0],
+      params= def.params[0..^1],
+      body= ident"get".newCall(cageName).newCall def.params[1..^1].mapIt( if it[0].kind == nnkPragmaExpr: it[0][0] else: it[0] ),
+      pragmas= newNimNode(nnkPragma).add(
+        ident"loadInto".newCall(cageName),
+        ident"discardable"
+      )
+    )
+
+  quote do:
+    `typeDef`
+    `cageDef`
+    `accessorDef`
 
 template optional*() {.pragma.}
 template constant*(v: typed) {.pragma.}
@@ -123,3 +137,6 @@ template length*(v: untyped) {.pragma.}
 
 template successCodes*(v: varargs[untyped]) {.pragma.}
 template errorCodes*(v: varargs[untyped]) {.pragma.}
+
+template prepareVulkanLibDef*(): untyped =
+  import Options

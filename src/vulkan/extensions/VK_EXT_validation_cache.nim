@@ -1,9 +1,10 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:16Z
 # VK_EXT_validation_cache
-
 
 import ../platform
 import ../features/vk10
+
+prepareVulkanLibDef()
 
 const
   ExtValidationCacheSpecVersion* = 1
@@ -62,14 +63,14 @@ proc getValidationCacheDataEXT*(
       lazyload("vkGetValidationCacheDataEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_validation_cache*(instance: Instance) =
-  createValidationCacheEXT.load(instance)
-  destroyValidationCacheEXT.load(instance)
-  mergeValidationCachesEXT.load(instance)
-  getValidationCacheDataEXT.load(instance)
+  instance.loadCommand createValidationCacheEXT
+  instance.loadCommand destroyValidationCacheEXT
+  instance.loadCommand mergeValidationCachesEXT
+  instance.loadCommand getValidationCacheDataEXT
 
 proc loadVK_EXT_validation_cache*(device: Device) =
-  createValidationCacheEXT.load(device)
-  destroyValidationCacheEXT.load(device)
-  mergeValidationCachesEXT.load(device)
-  getValidationCacheDataEXT.load(device)
+  device.loadCommand createValidationCacheEXT
+  device.loadCommand destroyValidationCacheEXT
+  device.loadCommand mergeValidationCachesEXT
+  device.loadCommand getValidationCacheDataEXT
 

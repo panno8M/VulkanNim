@@ -1,12 +1,13 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-10-24T02:03:04Z
 # VK_KHR_external_fence
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_external_fence_capabilities
 import ../features/vk11
 export VK_KHR_external_fence_capabilities
+
+prepareVulkanLibDef()
 
 const
   KhrExternalFenceSpecVersion* = 1

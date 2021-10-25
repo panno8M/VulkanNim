@@ -1,9 +1,10 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_AMD_shader_info
-
 
 import ../platform
 import ../features/vk10
+
+prepareVulkanLibDef()
 
 const
   AmdShaderInfoSpecVersion* = 1
@@ -44,8 +45,8 @@ proc getShaderInfoAMD*(
       lazyload("vkGetShaderInfoAMD", DeviceLevel).}
 
 proc loadAllVK_AMD_shader_info*(instance: Instance) =
-  getShaderInfoAMD.load(instance)
+  instance.loadCommand getShaderInfoAMD
 
 proc loadVK_AMD_shader_info*(device: Device) =
-  getShaderInfoAMD.load(device)
+  device.loadCommand getShaderInfoAMD
 

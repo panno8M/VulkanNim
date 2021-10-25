@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_KHR_get_surface_capabilities2
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
 export VK_KHR_surface
+
+prepareVulkanLibDef()
 
 const
   KhrGetSurfaceCapabilities2SpecVersion* = 1
@@ -44,10 +45,10 @@ proc getPhysicalDeviceSurfaceFormats2KHR*(
       lazyload("vkGetPhysicalDeviceSurfaceFormats2KHR", InstanceLevel).}
 
 proc loadAllVK_KHR_get_surface_capabilities2*(instance: Instance) =
-  getPhysicalDeviceSurfaceCapabilities2KHR.load(instance)
-  getPhysicalDeviceSurfaceFormats2KHR.load(instance)
+  instance.loadCommand getPhysicalDeviceSurfaceCapabilities2KHR
+  instance.loadCommand getPhysicalDeviceSurfaceFormats2KHR
 
 proc loadVK_KHR_get_surface_capabilities2*(instance: Instance) =
-  getPhysicalDeviceSurfaceCapabilities2KHR.load(instance)
-  getPhysicalDeviceSurfaceFormats2KHR.load(instance)
+  instance.loadCommand getPhysicalDeviceSurfaceCapabilities2KHR
+  instance.loadCommand getPhysicalDeviceSurfaceFormats2KHR
 

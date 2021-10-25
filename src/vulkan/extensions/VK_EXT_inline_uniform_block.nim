@@ -1,6 +1,5 @@
-# Generated at 2021-09-22T15:05:56Z
+# Generated at 2021-10-24T02:03:03Z
 # VK_EXT_inline_uniform_block
-
 
 import ../platform
 import ../features/vk10
@@ -8,6 +7,8 @@ import ./VK_KHR_get_physical_device_properties2
 import ./VK_KHR_maintenance1
 export VK_KHR_get_physical_device_properties2
 export VK_KHR_maintenance1
+
+prepareVulkanLibDef()
 
 const
   ExtInlineUniformBlockSpecVersion* = 1

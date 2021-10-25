@@ -1,11 +1,12 @@
-# Generated at 2021-09-22T15:02:54Z
+# Generated at 2021-10-24T02:03:04Z
 # VK_KHR_incremental_present
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_swapchain
 export VK_KHR_swapchain
+
+prepareVulkanLibDef()
 
 const
   KhrIncrementalPresentSpecVersion* = 1

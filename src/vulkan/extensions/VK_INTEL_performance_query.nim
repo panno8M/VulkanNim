@@ -1,9 +1,10 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_INTEL_performance_query
-
 
 import ../platform
 import ../features/vk10
+
+prepareVulkanLibDef()
 
 const
   IntelPerformanceQuerySpecVersion* = 2
@@ -133,24 +134,24 @@ StructureType.defineAliases:
 
 
 proc loadAllVK_INTEL_performance_query*(instance: Instance) =
-  initializePerformanceApiINTEL.load(instance)
-  uninitializePerformanceApiINTEL.load(instance)
-  cmdSetPerformanceMarkerINTEL.load(instance)
-  cmdSetPerformanceStreamMarkerINTEL.load(instance)
-  cmdSetPerformanceOverrideINTEL.load(instance)
-  acquirePerformanceConfigurationINTEL.load(instance)
-  releasePerformanceConfigurationINTEL.load(instance)
-  queueSetPerformanceConfigurationINTEL.load(instance)
-  getPerformanceParameterINTEL.load(instance)
+  instance.loadCommand initializePerformanceApiINTEL
+  instance.loadCommand uninitializePerformanceApiINTEL
+  instance.loadCommand cmdSetPerformanceMarkerINTEL
+  instance.loadCommand cmdSetPerformanceStreamMarkerINTEL
+  instance.loadCommand cmdSetPerformanceOverrideINTEL
+  instance.loadCommand acquirePerformanceConfigurationINTEL
+  instance.loadCommand releasePerformanceConfigurationINTEL
+  instance.loadCommand queueSetPerformanceConfigurationINTEL
+  instance.loadCommand getPerformanceParameterINTEL
 
 proc loadVK_INTEL_performance_query*(device: Device) =
-  initializePerformanceApiINTEL.load(device)
-  uninitializePerformanceApiINTEL.load(device)
-  cmdSetPerformanceMarkerINTEL.load(device)
-  cmdSetPerformanceStreamMarkerINTEL.load(device)
-  cmdSetPerformanceOverrideINTEL.load(device)
-  acquirePerformanceConfigurationINTEL.load(device)
-  releasePerformanceConfigurationINTEL.load(device)
-  queueSetPerformanceConfigurationINTEL.load(device)
-  getPerformanceParameterINTEL.load(device)
+  device.loadCommand initializePerformanceApiINTEL
+  device.loadCommand uninitializePerformanceApiINTEL
+  device.loadCommand cmdSetPerformanceMarkerINTEL
+  device.loadCommand cmdSetPerformanceStreamMarkerINTEL
+  device.loadCommand cmdSetPerformanceOverrideINTEL
+  device.loadCommand acquirePerformanceConfigurationINTEL
+  device.loadCommand releasePerformanceConfigurationINTEL
+  device.loadCommand queueSetPerformanceConfigurationINTEL
+  device.loadCommand getPerformanceParameterINTEL
 

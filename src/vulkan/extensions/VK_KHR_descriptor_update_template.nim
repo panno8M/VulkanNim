@@ -1,6 +1,5 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_KHR_descriptor_update_template
-
 
 import ../platform
 import ../features/vk10
@@ -9,6 +8,8 @@ import ./VK_KHR_push_descriptor
 import ./VK_EXT_debug_report
 export VK_KHR_push_descriptor
 export VK_EXT_debug_report
+
+prepareVulkanLibDef()
 
 const
   KhrDescriptorUpdateTemplateSpecVersion* = 1
@@ -53,8 +54,8 @@ DebugReportObjectTypeEXT.defineAliases:
 
 
 proc loadAllVK_KHR_descriptor_update_template*(instance: Instance) =
-  cmdPushDescriptorSetWithTemplateKHR.load(instance)
+  instance.loadCommand cmdPushDescriptorSetWithTemplateKHR
 
 proc loadVK_KHR_descriptor_update_template*(device: Device) =
-  cmdPushDescriptorSetWithTemplateKHR.load(device)
+  device.loadCommand cmdPushDescriptorSetWithTemplateKHR
 

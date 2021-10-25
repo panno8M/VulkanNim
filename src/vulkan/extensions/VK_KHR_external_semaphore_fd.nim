@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_KHR_external_semaphore_fd
-
 
 import ../platform
 import ../features/vk11
 import ./VK_KHR_external_semaphore
 export VK_KHR_external_semaphore
+
+prepareVulkanLibDef()
 
 const
   KhrExternalSemaphoreFdSpecVersion* = 1
@@ -42,10 +43,10 @@ proc getSemaphoreFdKHR*(
       lazyload("vkGetSemaphoreFdKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_external_semaphore_fd*(instance: Instance) =
-  importSemaphoreFdKHR.load(instance)
-  getSemaphoreFdKHR.load(instance)
+  instance.loadCommand importSemaphoreFdKHR
+  instance.loadCommand getSemaphoreFdKHR
 
 proc loadVK_KHR_external_semaphore_fd*(device: Device) =
-  importSemaphoreFdKHR.load(device)
-  getSemaphoreFdKHR.load(device)
+  device.loadCommand importSemaphoreFdKHR
+  device.loadCommand getSemaphoreFdKHR
 

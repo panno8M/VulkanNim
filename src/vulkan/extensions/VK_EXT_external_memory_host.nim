@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_external_memory_host
-
 
 import ../platform
 import ../features/vk11
 import ./VK_KHR_external_memory
 export VK_KHR_external_memory
+
+prepareVulkanLibDef()
 
 const
   ExtExternalMemoryHostSpecVersion* = 1
@@ -37,8 +38,8 @@ proc getMemoryHostPointerPropertiesEXT*(
       lazyload("vkGetMemoryHostPointerPropertiesEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_external_memory_host*(instance: Instance) =
-  getMemoryHostPointerPropertiesEXT.load(instance)
+  instance.loadCommand getMemoryHostPointerPropertiesEXT
 
 proc loadVK_EXT_external_memory_host*(device: Device) =
-  getMemoryHostPointerPropertiesEXT.load(device)
+  device.loadCommand getMemoryHostPointerPropertiesEXT
 

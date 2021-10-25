@@ -1,6 +1,5 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_debug_marker
-
 
 import ../platform
 import ../features/vk10
@@ -8,6 +7,8 @@ import ./VK_EXT_debug_report
 import ./VK_EXT_debug_utils
 export VK_EXT_debug_report
 export VK_EXT_debug_utils
+
+prepareVulkanLibDef()
 
 const
   ExtDebugMarkerSpecVersion* = 4
@@ -106,16 +107,16 @@ proc cmdDebugMarkerInsertEXT*(
     ): void {.cdecl, lazyload("vkCmdDebugMarkerInsertEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_debug_marker*(instance: Instance) =
-  debugMarkerSetObjectTagEXT.load(instance)
-  debugMarkerSetObjectNameEXT.load(instance)
-  cmdDebugMarkerBeginEXT.load(instance)
-  cmdDebugMarkerEndEXT.load(instance)
-  cmdDebugMarkerInsertEXT.load(instance)
+  instance.loadCommand debugMarkerSetObjectTagEXT
+  instance.loadCommand debugMarkerSetObjectNameEXT
+  instance.loadCommand cmdDebugMarkerBeginEXT
+  instance.loadCommand cmdDebugMarkerEndEXT
+  instance.loadCommand cmdDebugMarkerInsertEXT
 
 proc loadVK_EXT_debug_marker*(device: Device) =
-  debugMarkerSetObjectTagEXT.load(device)
-  debugMarkerSetObjectNameEXT.load(device)
-  cmdDebugMarkerBeginEXT.load(device)
-  cmdDebugMarkerEndEXT.load(device)
-  cmdDebugMarkerInsertEXT.load(device)
+  device.loadCommand debugMarkerSetObjectTagEXT
+  device.loadCommand debugMarkerSetObjectNameEXT
+  device.loadCommand cmdDebugMarkerBeginEXT
+  device.loadCommand cmdDebugMarkerEndEXT
+  device.loadCommand cmdDebugMarkerInsertEXT
 

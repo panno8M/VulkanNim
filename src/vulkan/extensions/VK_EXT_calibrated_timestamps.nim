@@ -1,9 +1,10 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_calibrated_timestamps
-
 
 import ../platform
 import ../features/vk10
+
+prepareVulkanLibDef()
 
 const
   ExtCalibratedTimestampsSpecVersion* = 1
@@ -42,12 +43,12 @@ proc getCalibratedTimestampsEXT*(
       lazyload("vkGetCalibratedTimestampsEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_calibrated_timestamps*(instance: Instance) =
-  getPhysicalDeviceCalibrateableTimeDomainsEXT.load(instance)
-  getCalibratedTimestampsEXT.load(instance)
+  instance.loadCommand getPhysicalDeviceCalibrateableTimeDomainsEXT
+  instance.loadCommand getCalibratedTimestampsEXT
 
 proc loadVK_EXT_calibrated_timestamps*(instance: Instance) =
-  getPhysicalDeviceCalibrateableTimeDomainsEXT.load(instance)
+  instance.loadCommand getPhysicalDeviceCalibrateableTimeDomainsEXT
 
 proc loadVK_EXT_calibrated_timestamps*(device: Device) =
-  getCalibratedTimestampsEXT.load(device)
+  device.loadCommand getCalibratedTimestampsEXT
 

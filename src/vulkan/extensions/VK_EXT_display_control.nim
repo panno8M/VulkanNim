@@ -1,6 +1,5 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_display_control
-
 
 import ../platform
 import ../features/vk10
@@ -8,6 +7,8 @@ import ./VK_EXT_display_surface_counter
 import ./VK_KHR_swapchain
 export VK_EXT_display_surface_counter
 export VK_KHR_swapchain
+
+prepareVulkanLibDef()
 
 const
   ExtDisplayControlSpecVersion* = 1
@@ -79,14 +80,14 @@ proc getSwapchainCounterEXT*(
       lazyload("vkGetSwapchainCounterEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_display_control*(instance: Instance) =
-  displayPowerControlEXT.load(instance)
-  registerDeviceEventEXT.load(instance)
-  registerDisplayEventEXT.load(instance)
-  getSwapchainCounterEXT.load(instance)
+  instance.loadCommand displayPowerControlEXT
+  instance.loadCommand registerDeviceEventEXT
+  instance.loadCommand registerDisplayEventEXT
+  instance.loadCommand getSwapchainCounterEXT
 
 proc loadVK_EXT_display_control*(device: Device) =
-  displayPowerControlEXT.load(device)
-  registerDeviceEventEXT.load(device)
-  registerDisplayEventEXT.load(device)
-  getSwapchainCounterEXT.load(device)
+  device.loadCommand displayPowerControlEXT
+  device.loadCommand registerDeviceEventEXT
+  device.loadCommand registerDisplayEventEXT
+  device.loadCommand getSwapchainCounterEXT
 

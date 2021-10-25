@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_hdr_metadata
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_swapchain
 export VK_KHR_swapchain
+
+prepareVulkanLibDef()
 
 const
   ExtHdrMetadataSpecVersion* = 2
@@ -36,8 +37,8 @@ proc setHdrMetadataEXT*(
     ): void {.cdecl, lazyload("vkSetHdrMetadataEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_hdr_metadata*(instance: Instance) =
-  setHdrMetadataEXT.load(instance)
+  instance.loadCommand setHdrMetadataEXT
 
 proc loadVK_EXT_hdr_metadata*(device: Device) =
-  setHdrMetadataEXT.load(device)
+  device.loadCommand setHdrMetadataEXT
 

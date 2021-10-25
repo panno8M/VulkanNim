@@ -1,11 +1,12 @@
-# Generated at 2021-09-22T15:02:54Z
+# Generated at 2021-10-24T02:03:03Z
 # VK_EXT_conservative_rasterization
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
 export VK_KHR_get_physical_device_properties2
+
+prepareVulkanLibDef()
 
 const
   ExtConservativeRasterizationSpecVersion* = 1

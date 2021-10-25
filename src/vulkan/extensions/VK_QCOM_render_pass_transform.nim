@@ -1,6 +1,5 @@
-# Generated at 2021-09-22T15:02:54Z
+# Generated at 2021-10-24T02:03:03Z
 # VK_QCOM_render_pass_transform
-
 
 import ../platform
 import ../features/vk10
@@ -8,6 +7,8 @@ import ./VK_KHR_swapchain
 import ./VK_KHR_surface
 export VK_KHR_swapchain
 export VK_KHR_surface
+
+prepareVulkanLibDef()
 
 const
   QcomRenderPassTransformSpecVersion* = 1

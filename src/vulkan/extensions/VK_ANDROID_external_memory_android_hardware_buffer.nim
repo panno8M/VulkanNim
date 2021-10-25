@@ -1,6 +1,5 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_ANDROID_external_memory_android_hardware_buffer
-
 
 import ../platform
 import ../features/vk11
@@ -12,6 +11,8 @@ export VK_KHR_sampler_ycbcr_conversion
 export VK_KHR_external_memory
 export VK_EXT_queue_family_foreign
 export VK_KHR_dedicated_allocation
+
+prepareVulkanLibDef()
 
 type # basetypes
   AHardwareBuffer* = distinct object
@@ -72,10 +73,10 @@ proc getMemoryAndroidHardwareBufferANDROID*(
       lazyload("vkGetMemoryAndroidHardwareBufferANDROID", DeviceLevel).}
 
 proc loadAllVK_ANDROID_external_memory_android_hardware_buffer*(instance: Instance) =
-  getAndroidHardwareBufferPropertiesANDROID.load(instance)
-  getMemoryAndroidHardwareBufferANDROID.load(instance)
+  instance.loadCommand getAndroidHardwareBufferPropertiesANDROID
+  instance.loadCommand getMemoryAndroidHardwareBufferANDROID
 
 proc loadVK_ANDROID_external_memory_android_hardware_buffer*(device: Device) =
-  getAndroidHardwareBufferPropertiesANDROID.load(device)
-  getMemoryAndroidHardwareBufferANDROID.load(device)
+  device.loadCommand getAndroidHardwareBufferPropertiesANDROID
+  device.loadCommand getMemoryAndroidHardwareBufferANDROID
 

@@ -1,9 +1,10 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_private_data
-
 
 import ../platform
 import ../features/vk10
+
+prepareVulkanLibDef()
 
 const
   ExtPrivateDataSpecVersion* = 1
@@ -62,14 +63,14 @@ proc getPrivateDataEXT*(
     ): void {.cdecl, lazyload("vkGetPrivateDataEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_private_data*(instance: Instance) =
-  createPrivateDataSlotEXT.load(instance)
-  destroyPrivateDataSlotEXT.load(instance)
-  setPrivateDataEXT.load(instance)
-  getPrivateDataEXT.load(instance)
+  instance.loadCommand createPrivateDataSlotEXT
+  instance.loadCommand destroyPrivateDataSlotEXT
+  instance.loadCommand setPrivateDataEXT
+  instance.loadCommand getPrivateDataEXT
 
 proc loadVK_EXT_private_data*(device: Device) =
-  createPrivateDataSlotEXT.load(device)
-  destroyPrivateDataSlotEXT.load(device)
-  setPrivateDataEXT.load(device)
-  getPrivateDataEXT.load(device)
+  device.loadCommand createPrivateDataSlotEXT
+  device.loadCommand destroyPrivateDataSlotEXT
+  device.loadCommand setPrivateDataEXT
+  device.loadCommand getPrivateDataEXT
 

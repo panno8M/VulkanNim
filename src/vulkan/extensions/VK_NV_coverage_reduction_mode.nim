@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_NV_coverage_reduction_mode
-
 
 import ../platform
 import ../features/vk10
 import ./VK_NV_framebuffer_mixed_samples
 export VK_NV_framebuffer_mixed_samples
+
+prepareVulkanLibDef()
 
 const
   NvCoverageReductionModeSpecVersion* = 1
@@ -45,8 +46,8 @@ proc getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV*(
       lazyload("vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV", InstanceLevel).}
 
 proc loadAllVK_NV_coverage_reduction_mode*(instance: Instance) =
-  getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV.load(instance)
+  instance.loadCommand getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV
 
 proc loadVK_NV_coverage_reduction_mode*(instance: Instance) =
-  getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV.load(instance)
+  instance.loadCommand getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV
 

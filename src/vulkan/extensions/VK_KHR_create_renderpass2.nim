@@ -1,6 +1,5 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-10-24T02:03:03Z
 # VK_KHR_create_renderpass2
-
 
 import ../platform
 import ../features/vk10
@@ -9,6 +8,8 @@ import ./VK_KHR_maintenance2
 import ../features/vk12
 export VK_KHR_multiview
 export VK_KHR_maintenance2
+
+prepareVulkanLibDef()
 
 const
   KhrCreateRenderpass2SpecVersion* = 1

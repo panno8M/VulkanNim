@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_headless_surface
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
 export VK_KHR_surface
+
+prepareVulkanLibDef()
 
 const
   ExtHeadlessSurfaceSpecVersion* = 1
@@ -31,8 +32,8 @@ proc createHeadlessSurfaceEXT*(
       lazyload("vkCreateHeadlessSurfaceEXT", InstanceLevel).}
 
 proc loadAllVK_EXT_headless_surface*(instance: Instance) =
-  createHeadlessSurfaceEXT.load(instance)
+  instance.loadCommand createHeadlessSurfaceEXT
 
 proc loadVK_EXT_headless_surface*(instance: Instance) =
-  createHeadlessSurfaceEXT.load(instance)
+  instance.loadCommand createHeadlessSurfaceEXT
 

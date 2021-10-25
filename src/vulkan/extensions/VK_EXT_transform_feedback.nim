@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_transform_feedback
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
 export VK_KHR_get_physical_device_properties2
+
+prepareVulkanLibDef()
 
 const
   ExtTransformFeedbackSpecVersion* = 1
@@ -85,18 +86,18 @@ proc cmdDrawIndirectByteCountEXT*(
     ): void {.cdecl, lazyload("vkCmdDrawIndirectByteCountEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_transform_feedback*(instance: Instance) =
-  cmdBindTransformFeedbackBuffersEXT.load(instance)
-  cmdBeginTransformFeedbackEXT.load(instance)
-  cmdEndTransformFeedbackEXT.load(instance)
-  cmdBeginQueryIndexedEXT.load(instance)
-  cmdEndQueryIndexedEXT.load(instance)
-  cmdDrawIndirectByteCountEXT.load(instance)
+  instance.loadCommand cmdBindTransformFeedbackBuffersEXT
+  instance.loadCommand cmdBeginTransformFeedbackEXT
+  instance.loadCommand cmdEndTransformFeedbackEXT
+  instance.loadCommand cmdBeginQueryIndexedEXT
+  instance.loadCommand cmdEndQueryIndexedEXT
+  instance.loadCommand cmdDrawIndirectByteCountEXT
 
 proc loadVK_EXT_transform_feedback*(device: Device) =
-  cmdBindTransformFeedbackBuffersEXT.load(device)
-  cmdBeginTransformFeedbackEXT.load(device)
-  cmdEndTransformFeedbackEXT.load(device)
-  cmdBeginQueryIndexedEXT.load(device)
-  cmdEndQueryIndexedEXT.load(device)
-  cmdDrawIndirectByteCountEXT.load(device)
+  device.loadCommand cmdBindTransformFeedbackBuffersEXT
+  device.loadCommand cmdBeginTransformFeedbackEXT
+  device.loadCommand cmdEndTransformFeedbackEXT
+  device.loadCommand cmdBeginQueryIndexedEXT
+  device.loadCommand cmdEndQueryIndexedEXT
+  device.loadCommand cmdDrawIndirectByteCountEXT
 

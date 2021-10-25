@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_KHR_get_display_properties2
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
 export VK_KHR_surface
+
+prepareVulkanLibDef()
 
 const
   KhrGetDisplayProperties2SpecVersion* = 1
@@ -69,14 +70,14 @@ proc getDisplayPlaneCapabilities2KHR*(
       lazyload("vkGetDisplayPlaneCapabilities2KHR", InstanceLevel).}
 
 proc loadAllVK_KHR_get_display_properties2*(instance: Instance) =
-  getPhysicalDeviceDisplayProperties2KHR.load(instance)
-  getPhysicalDeviceDisplayPlaneProperties2KHR.load(instance)
-  getDisplayModeProperties2KHR.load(instance)
-  getDisplayPlaneCapabilities2KHR.load(instance)
+  instance.loadCommand getPhysicalDeviceDisplayProperties2KHR
+  instance.loadCommand getPhysicalDeviceDisplayPlaneProperties2KHR
+  instance.loadCommand getDisplayModeProperties2KHR
+  instance.loadCommand getDisplayPlaneCapabilities2KHR
 
 proc loadVK_KHR_get_display_properties2*(instance: Instance) =
-  getPhysicalDeviceDisplayProperties2KHR.load(instance)
-  getPhysicalDeviceDisplayPlaneProperties2KHR.load(instance)
-  getDisplayModeProperties2KHR.load(instance)
-  getDisplayPlaneCapabilities2KHR.load(instance)
+  instance.loadCommand getPhysicalDeviceDisplayProperties2KHR
+  instance.loadCommand getPhysicalDeviceDisplayPlaneProperties2KHR
+  instance.loadCommand getDisplayModeProperties2KHR
+  instance.loadCommand getDisplayPlaneCapabilities2KHR
 

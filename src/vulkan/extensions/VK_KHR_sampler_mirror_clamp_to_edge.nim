@@ -1,10 +1,11 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-10-24T02:03:03Z
 # VK_KHR_sampler_mirror_clamp_to_edge
-
 
 import ../platform
 import ../features/vk10
 import ../features/vk12
+
+prepareVulkanLibDef()
 
 const
   KhrSamplerMirrorClampToEdgeSpecVersion* = 3

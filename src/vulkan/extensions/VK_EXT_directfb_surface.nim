@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_directfb_surface
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
 export VK_KHR_surface
+
+prepareVulkanLibDef()
 
 const
   ExtDirectfbSurfaceSpecVersion* = 1
@@ -38,10 +39,10 @@ proc getPhysicalDeviceDirectFBPresentationSupportEXT*(
     ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceDirectFBPresentationSupportEXT", InstanceLevel).}
 
 proc loadAllVK_EXT_directfb_surface*(instance: Instance) =
-  createDirectFBSurfaceEXT.load(instance)
-  getPhysicalDeviceDirectFBPresentationSupportEXT.load(instance)
+  instance.loadCommand createDirectFBSurfaceEXT
+  instance.loadCommand getPhysicalDeviceDirectFBPresentationSupportEXT
 
 proc loadVK_EXT_directfb_surface*(instance: Instance) =
-  createDirectFBSurfaceEXT.load(instance)
-  getPhysicalDeviceDirectFBPresentationSupportEXT.load(instance)
+  instance.loadCommand createDirectFBSurfaceEXT
+  instance.loadCommand getPhysicalDeviceDirectFBPresentationSupportEXT
 

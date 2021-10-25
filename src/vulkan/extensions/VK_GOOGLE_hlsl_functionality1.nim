@@ -1,9 +1,10 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-10-24T02:03:03Z
 # VK_GOOGLE_hlsl_functionality1
-
 
 import ../platform
 import ../features/vk10
+
+prepareVulkanLibDef()
 
 const
   GoogleHlslFunctionality1SpecVersion* = 1

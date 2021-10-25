@@ -1,9 +1,10 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_NV_external_memory_capabilities
-
 
 import ../platform
 import ../features/vk10
+
+prepareVulkanLibDef()
 
 const
   NvExternalMemoryCapabilitiesSpecVersion* = 1
@@ -44,8 +45,8 @@ proc getPhysicalDeviceExternalImageFormatPropertiesNV*(
       lazyload("vkGetPhysicalDeviceExternalImageFormatPropertiesNV", InstanceLevel).}
 
 proc loadAllVK_NV_external_memory_capabilities*(instance: Instance) =
-  getPhysicalDeviceExternalImageFormatPropertiesNV.load(instance)
+  instance.loadCommand getPhysicalDeviceExternalImageFormatPropertiesNV
 
 proc loadVK_NV_external_memory_capabilities*(instance: Instance) =
-  getPhysicalDeviceExternalImageFormatPropertiesNV.load(instance)
+  instance.loadCommand getPhysicalDeviceExternalImageFormatPropertiesNV
 

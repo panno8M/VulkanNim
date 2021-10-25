@@ -1,9 +1,10 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_debug_utils
-
 
 import ../platform
 import ../features/vk10
+
+prepareVulkanLibDef()
 
 const
   ExtDebugUtilsSpecVersion* = 2
@@ -132,30 +133,30 @@ proc submitDebugUtilsMessageEXT*(
     ): void {.cdecl, lazyload("vkSubmitDebugUtilsMessageEXT", InstanceLevel).}
 
 proc loadAllVK_EXT_debug_utils*(instance: Instance) =
-  setDebugUtilsObjectNameEXT.load(instance)
-  setDebugUtilsObjectTagEXT.load(instance)
-  queueBeginDebugUtilsLabelEXT.load(instance)
-  queueEndDebugUtilsLabelEXT.load(instance)
-  queueInsertDebugUtilsLabelEXT.load(instance)
-  cmdBeginDebugUtilsLabelEXT.load(instance)
-  cmdEndDebugUtilsLabelEXT.load(instance)
-  cmdInsertDebugUtilsLabelEXT.load(instance)
-  createDebugUtilsMessengerEXT.load(instance)
-  destroyDebugUtilsMessengerEXT.load(instance)
-  submitDebugUtilsMessageEXT.load(instance)
+  instance.loadCommand setDebugUtilsObjectNameEXT
+  instance.loadCommand setDebugUtilsObjectTagEXT
+  instance.loadCommand queueBeginDebugUtilsLabelEXT
+  instance.loadCommand queueEndDebugUtilsLabelEXT
+  instance.loadCommand queueInsertDebugUtilsLabelEXT
+  instance.loadCommand cmdBeginDebugUtilsLabelEXT
+  instance.loadCommand cmdEndDebugUtilsLabelEXT
+  instance.loadCommand cmdInsertDebugUtilsLabelEXT
+  instance.loadCommand createDebugUtilsMessengerEXT
+  instance.loadCommand destroyDebugUtilsMessengerEXT
+  instance.loadCommand submitDebugUtilsMessageEXT
 
 proc loadVK_EXT_debug_utils*(instance: Instance) =
-  createDebugUtilsMessengerEXT.load(instance)
-  destroyDebugUtilsMessengerEXT.load(instance)
-  submitDebugUtilsMessageEXT.load(instance)
+  instance.loadCommand createDebugUtilsMessengerEXT
+  instance.loadCommand destroyDebugUtilsMessengerEXT
+  instance.loadCommand submitDebugUtilsMessageEXT
 
 proc loadVK_EXT_debug_utils*(device: Device) =
-  setDebugUtilsObjectNameEXT.load(device)
-  setDebugUtilsObjectTagEXT.load(device)
-  queueBeginDebugUtilsLabelEXT.load(device)
-  queueEndDebugUtilsLabelEXT.load(device)
-  queueInsertDebugUtilsLabelEXT.load(device)
-  cmdBeginDebugUtilsLabelEXT.load(device)
-  cmdEndDebugUtilsLabelEXT.load(device)
-  cmdInsertDebugUtilsLabelEXT.load(device)
+  device.loadCommand setDebugUtilsObjectNameEXT
+  device.loadCommand setDebugUtilsObjectTagEXT
+  device.loadCommand queueBeginDebugUtilsLabelEXT
+  device.loadCommand queueEndDebugUtilsLabelEXT
+  device.loadCommand queueInsertDebugUtilsLabelEXT
+  device.loadCommand cmdBeginDebugUtilsLabelEXT
+  device.loadCommand cmdEndDebugUtilsLabelEXT
+  device.loadCommand cmdInsertDebugUtilsLabelEXT
 

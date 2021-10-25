@@ -1,10 +1,11 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:16Z
 # VK_KHR_surface
 # VK_KHR_display
 
-
 import ../platform
 import ../features/vk10
+
+prepareVulkanLibDef()
 
 const
   KhrSurfaceSpecVersion* = 25
@@ -257,34 +258,34 @@ proc createDisplayPlaneSurfaceKHR*(
       lazyload("vkCreateDisplayPlaneSurfaceKHR", InstanceLevel).}
 
 proc loadAllVK_KHR_surface*(instance: Instance) =
-  destroySurfaceKHR.load(instance)
-  getPhysicalDeviceSurfaceSupportKHR.load(instance)
-  getPhysicalDeviceSurfaceCapabilitiesKHR.load(instance)
-  getPhysicalDeviceSurfaceFormatsKHR.load(instance)
-  getPhysicalDeviceSurfacePresentModesKHR.load(instance)
+  instance.loadCommand destroySurfaceKHR
+  instance.loadCommand getPhysicalDeviceSurfaceSupportKHR
+  instance.loadCommand getPhysicalDeviceSurfaceCapabilitiesKHR
+  instance.loadCommand getPhysicalDeviceSurfaceFormatsKHR
+  instance.loadCommand getPhysicalDeviceSurfacePresentModesKHR
 
 proc loadAllVK_KHR_display*(instance: Instance) =
-  getPhysicalDeviceDisplayPropertiesKHR.load(instance)
-  getPhysicalDeviceDisplayPlanePropertiesKHR.load(instance)
-  getDisplayPlaneSupportedDisplaysKHR.load(instance)
-  getDisplayModePropertiesKHR.load(instance)
-  createDisplayModeKHR.load(instance)
-  getDisplayPlaneCapabilitiesKHR.load(instance)
-  createDisplayPlaneSurfaceKHR.load(instance)
+  instance.loadCommand getPhysicalDeviceDisplayPropertiesKHR
+  instance.loadCommand getPhysicalDeviceDisplayPlanePropertiesKHR
+  instance.loadCommand getDisplayPlaneSupportedDisplaysKHR
+  instance.loadCommand getDisplayModePropertiesKHR
+  instance.loadCommand createDisplayModeKHR
+  instance.loadCommand getDisplayPlaneCapabilitiesKHR
+  instance.loadCommand createDisplayPlaneSurfaceKHR
 
 proc loadVK_KHR_surface*(instance: Instance) =
-  destroySurfaceKHR.load(instance)
-  getPhysicalDeviceSurfaceSupportKHR.load(instance)
-  getPhysicalDeviceSurfaceCapabilitiesKHR.load(instance)
-  getPhysicalDeviceSurfaceFormatsKHR.load(instance)
-  getPhysicalDeviceSurfacePresentModesKHR.load(instance)
+  instance.loadCommand destroySurfaceKHR
+  instance.loadCommand getPhysicalDeviceSurfaceSupportKHR
+  instance.loadCommand getPhysicalDeviceSurfaceCapabilitiesKHR
+  instance.loadCommand getPhysicalDeviceSurfaceFormatsKHR
+  instance.loadCommand getPhysicalDeviceSurfacePresentModesKHR
 
 proc loadVK_KHR_display*(instance: Instance) =
-  getPhysicalDeviceDisplayPropertiesKHR.load(instance)
-  getPhysicalDeviceDisplayPlanePropertiesKHR.load(instance)
-  getDisplayPlaneSupportedDisplaysKHR.load(instance)
-  getDisplayModePropertiesKHR.load(instance)
-  createDisplayModeKHR.load(instance)
-  getDisplayPlaneCapabilitiesKHR.load(instance)
-  createDisplayPlaneSurfaceKHR.load(instance)
+  instance.loadCommand getPhysicalDeviceDisplayPropertiesKHR
+  instance.loadCommand getPhysicalDeviceDisplayPlanePropertiesKHR
+  instance.loadCommand getDisplayPlaneSupportedDisplaysKHR
+  instance.loadCommand getDisplayModePropertiesKHR
+  instance.loadCommand createDisplayModeKHR
+  instance.loadCommand getDisplayPlaneCapabilitiesKHR
+  instance.loadCommand createDisplayPlaneSurfaceKHR
 

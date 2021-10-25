@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_NV_device_diagnostic_checkpoints
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
 export VK_KHR_get_physical_device_properties2
+
+prepareVulkanLibDef()
 
 const
   NvDeviceDiagnosticCheckpointsSpecVersion* = 2
@@ -33,10 +34,10 @@ proc getQueueCheckpointDataNV*(
     ): void {.cdecl, lazyload("vkGetQueueCheckpointDataNV", DeviceLevel).}
 
 proc loadAllVK_NV_device_diagnostic_checkpoints*(instance: Instance) =
-  cmdSetCheckpointNV.load(instance)
-  getQueueCheckpointDataNV.load(instance)
+  instance.loadCommand cmdSetCheckpointNV
+  instance.loadCommand getQueueCheckpointDataNV
 
 proc loadVK_NV_device_diagnostic_checkpoints*(device: Device) =
-  cmdSetCheckpointNV.load(device)
-  getQueueCheckpointDataNV.load(device)
+  device.loadCommand cmdSetCheckpointNV
+  device.loadCommand getQueueCheckpointDataNV
 

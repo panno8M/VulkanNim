@@ -1,9 +1,8 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_KHR_ray_tracing
 # VK_NV_ray_tracing
 # Explicit sort order to require processing after VK_NV_ray_tracing
 # =================================================================
-
 
 import ../platform
 import ../features/vk11
@@ -21,6 +20,8 @@ export VK_EXT_descriptor_indexing
 export VK_KHR_buffer_device_address
 export VK_KHR_deferred_host_operations
 export VK_KHR_pipeline_library
+
+prepareVulkanLibDef()
 
 const
   KhrRayTracingSpecVersion* = 8
@@ -700,70 +701,70 @@ IndexType.defineAliases:
 
 
 proc loadAllVK_KHR_ray_tracing*(instance: Instance) =
-  createAccelerationStructureKHR.load(instance)
-  destroyAccelerationStructureKHR.load(instance)
-  getAccelerationStructureMemoryRequirementsKHR.load(instance)
-  bindAccelerationStructureMemoryKHR.load(instance)
-  cmdBuildAccelerationStructureKHR.load(instance)
-  cmdBuildAccelerationStructureIndirectKHR.load(instance)
-  buildAccelerationStructureKHR.load(instance)
-  copyAccelerationStructureKHR.load(instance)
-  copyAccelerationStructureToMemoryKHR.load(instance)
-  copyMemoryToAccelerationStructureKHR.load(instance)
-  writeAccelerationStructuresPropertiesKHR.load(instance)
-  cmdCopyAccelerationStructureKHR.load(instance)
-  cmdCopyAccelerationStructureToMemoryKHR.load(instance)
-  cmdCopyMemoryToAccelerationStructureKHR.load(instance)
-  cmdTraceRaysKHR.load(instance)
-  createRayTracingPipelinesKHR.load(instance)
-  getRayTracingShaderGroupHandlesKHR.load(instance)
-  getAccelerationStructureDeviceAddressKHR.load(instance)
-  getRayTracingCaptureReplayShaderGroupHandlesKHR.load(instance)
-  cmdWriteAccelerationStructuresPropertiesKHR.load(instance)
-  cmdTraceRaysIndirectKHR.load(instance)
-  getDeviceAccelerationStructureCompatibilityKHR.load(instance)
+  instance.loadCommand createAccelerationStructureKHR
+  instance.loadCommand destroyAccelerationStructureKHR
+  instance.loadCommand getAccelerationStructureMemoryRequirementsKHR
+  instance.loadCommand bindAccelerationStructureMemoryKHR
+  instance.loadCommand cmdBuildAccelerationStructureKHR
+  instance.loadCommand cmdBuildAccelerationStructureIndirectKHR
+  instance.loadCommand buildAccelerationStructureKHR
+  instance.loadCommand copyAccelerationStructureKHR
+  instance.loadCommand copyAccelerationStructureToMemoryKHR
+  instance.loadCommand copyMemoryToAccelerationStructureKHR
+  instance.loadCommand writeAccelerationStructuresPropertiesKHR
+  instance.loadCommand cmdCopyAccelerationStructureKHR
+  instance.loadCommand cmdCopyAccelerationStructureToMemoryKHR
+  instance.loadCommand cmdCopyMemoryToAccelerationStructureKHR
+  instance.loadCommand cmdTraceRaysKHR
+  instance.loadCommand createRayTracingPipelinesKHR
+  instance.loadCommand getRayTracingShaderGroupHandlesKHR
+  instance.loadCommand getAccelerationStructureDeviceAddressKHR
+  instance.loadCommand getRayTracingCaptureReplayShaderGroupHandlesKHR
+  instance.loadCommand cmdWriteAccelerationStructuresPropertiesKHR
+  instance.loadCommand cmdTraceRaysIndirectKHR
+  instance.loadCommand getDeviceAccelerationStructureCompatibilityKHR
 
 proc loadAllVK_NV_ray_tracing*(instance: Instance) =
-  createAccelerationStructureNV.load(instance)
-  getAccelerationStructureMemoryRequirementsNV.load(instance)
-  cmdBuildAccelerationStructureNV.load(instance)
-  cmdCopyAccelerationStructureNV.load(instance)
-  cmdTraceRaysNV.load(instance)
-  createRayTracingPipelinesNV.load(instance)
-  getAccelerationStructureHandleNV.load(instance)
-  compileDeferredNV.load(instance)
+  instance.loadCommand createAccelerationStructureNV
+  instance.loadCommand getAccelerationStructureMemoryRequirementsNV
+  instance.loadCommand cmdBuildAccelerationStructureNV
+  instance.loadCommand cmdCopyAccelerationStructureNV
+  instance.loadCommand cmdTraceRaysNV
+  instance.loadCommand createRayTracingPipelinesNV
+  instance.loadCommand getAccelerationStructureHandleNV
+  instance.loadCommand compileDeferredNV
 
 proc loadVK_KHR_ray_tracing*(device: Device) =
-  createAccelerationStructureKHR.load(device)
-  destroyAccelerationStructureKHR.load(device)
-  getAccelerationStructureMemoryRequirementsKHR.load(device)
-  bindAccelerationStructureMemoryKHR.load(device)
-  cmdBuildAccelerationStructureKHR.load(device)
-  cmdBuildAccelerationStructureIndirectKHR.load(device)
-  buildAccelerationStructureKHR.load(device)
-  copyAccelerationStructureKHR.load(device)
-  copyAccelerationStructureToMemoryKHR.load(device)
-  copyMemoryToAccelerationStructureKHR.load(device)
-  writeAccelerationStructuresPropertiesKHR.load(device)
-  cmdCopyAccelerationStructureKHR.load(device)
-  cmdCopyAccelerationStructureToMemoryKHR.load(device)
-  cmdCopyMemoryToAccelerationStructureKHR.load(device)
-  cmdTraceRaysKHR.load(device)
-  createRayTracingPipelinesKHR.load(device)
-  getRayTracingShaderGroupHandlesKHR.load(device)
-  getAccelerationStructureDeviceAddressKHR.load(device)
-  getRayTracingCaptureReplayShaderGroupHandlesKHR.load(device)
-  cmdWriteAccelerationStructuresPropertiesKHR.load(device)
-  cmdTraceRaysIndirectKHR.load(device)
-  getDeviceAccelerationStructureCompatibilityKHR.load(device)
+  device.loadCommand createAccelerationStructureKHR
+  device.loadCommand destroyAccelerationStructureKHR
+  device.loadCommand getAccelerationStructureMemoryRequirementsKHR
+  device.loadCommand bindAccelerationStructureMemoryKHR
+  device.loadCommand cmdBuildAccelerationStructureKHR
+  device.loadCommand cmdBuildAccelerationStructureIndirectKHR
+  device.loadCommand buildAccelerationStructureKHR
+  device.loadCommand copyAccelerationStructureKHR
+  device.loadCommand copyAccelerationStructureToMemoryKHR
+  device.loadCommand copyMemoryToAccelerationStructureKHR
+  device.loadCommand writeAccelerationStructuresPropertiesKHR
+  device.loadCommand cmdCopyAccelerationStructureKHR
+  device.loadCommand cmdCopyAccelerationStructureToMemoryKHR
+  device.loadCommand cmdCopyMemoryToAccelerationStructureKHR
+  device.loadCommand cmdTraceRaysKHR
+  device.loadCommand createRayTracingPipelinesKHR
+  device.loadCommand getRayTracingShaderGroupHandlesKHR
+  device.loadCommand getAccelerationStructureDeviceAddressKHR
+  device.loadCommand getRayTracingCaptureReplayShaderGroupHandlesKHR
+  device.loadCommand cmdWriteAccelerationStructuresPropertiesKHR
+  device.loadCommand cmdTraceRaysIndirectKHR
+  device.loadCommand getDeviceAccelerationStructureCompatibilityKHR
 
 proc loadVK_NV_ray_tracing*(device: Device) =
-  createAccelerationStructureNV.load(device)
-  getAccelerationStructureMemoryRequirementsNV.load(device)
-  cmdBuildAccelerationStructureNV.load(device)
-  cmdCopyAccelerationStructureNV.load(device)
-  cmdTraceRaysNV.load(device)
-  createRayTracingPipelinesNV.load(device)
-  getAccelerationStructureHandleNV.load(device)
-  compileDeferredNV.load(device)
+  device.loadCommand createAccelerationStructureNV
+  device.loadCommand getAccelerationStructureMemoryRequirementsNV
+  device.loadCommand cmdBuildAccelerationStructureNV
+  device.loadCommand cmdCopyAccelerationStructureNV
+  device.loadCommand cmdTraceRaysNV
+  device.loadCommand createRayTracingPipelinesNV
+  device.loadCommand getAccelerationStructureHandleNV
+  device.loadCommand compileDeferredNV
 

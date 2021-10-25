@@ -1,9 +1,10 @@
-# Generated at 2021-09-22T15:02:54Z
+# Generated at 2021-10-24T02:03:04Z
 # VK_NV_framebuffer_mixed_samples
-
 
 import ../platform
 import ../features/vk10
+
+prepareVulkanLibDef()
 
 const
   NvFramebufferMixedSamplesSpecVersion* = 1

@@ -1,6 +1,5 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_image_drm_format_modifier
-
 
 import ../platform
 import ../features/vk10
@@ -12,6 +11,8 @@ export VK_KHR_bind_memory2
 export VK_KHR_get_physical_device_properties2
 export VK_KHR_image_format_list
 export VK_KHR_sampler_ycbcr_conversion
+
+prepareVulkanLibDef()
 
 const
   ExtImageDrmFormatModifierSpecVersion* = 1
@@ -60,8 +61,8 @@ proc getImageDrmFormatModifierPropertiesEXT*(
       lazyload("vkGetImageDrmFormatModifierPropertiesEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_image_drm_format_modifier*(instance: Instance) =
-  getImageDrmFormatModifierPropertiesEXT.load(instance)
+  instance.loadCommand getImageDrmFormatModifierPropertiesEXT
 
 proc loadVK_EXT_image_drm_format_modifier*(device: Device) =
-  getImageDrmFormatModifierPropertiesEXT.load(device)
+  device.loadCommand getImageDrmFormatModifierPropertiesEXT
 

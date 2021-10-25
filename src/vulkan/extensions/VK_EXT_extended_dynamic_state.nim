@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_extended_dynamic_state
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
 export VK_KHR_get_physical_device_properties2
+
+prepareVulkanLibDef()
 
 const
   ExtExtendedDynamicStateSpecVersion* = 1
@@ -78,30 +79,30 @@ proc cmdSetStencilOpEXT*(
     ): void {.cdecl, lazyload("vkCmdSetStencilOpEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_extended_dynamic_state*(instance: Instance) =
-  cmdSetCullModeEXT.load(instance)
-  cmdSetFrontFaceEXT.load(instance)
-  cmdSetPrimitiveTopologyEXT.load(instance)
-  cmdSetViewportWithCountEXT.load(instance)
-  cmdSetScissorWithCountEXT.load(instance)
-  cmdBindVertexBuffers2EXT.load(instance)
-  cmdSetDepthTestEnableEXT.load(instance)
-  cmdSetDepthWriteEnableEXT.load(instance)
-  cmdSetDepthCompareOpEXT.load(instance)
-  cmdSetDepthBoundsTestEnableEXT.load(instance)
-  cmdSetStencilTestEnableEXT.load(instance)
-  cmdSetStencilOpEXT.load(instance)
+  instance.loadCommand cmdSetCullModeEXT
+  instance.loadCommand cmdSetFrontFaceEXT
+  instance.loadCommand cmdSetPrimitiveTopologyEXT
+  instance.loadCommand cmdSetViewportWithCountEXT
+  instance.loadCommand cmdSetScissorWithCountEXT
+  instance.loadCommand cmdBindVertexBuffers2EXT
+  instance.loadCommand cmdSetDepthTestEnableEXT
+  instance.loadCommand cmdSetDepthWriteEnableEXT
+  instance.loadCommand cmdSetDepthCompareOpEXT
+  instance.loadCommand cmdSetDepthBoundsTestEnableEXT
+  instance.loadCommand cmdSetStencilTestEnableEXT
+  instance.loadCommand cmdSetStencilOpEXT
 
 proc loadVK_EXT_extended_dynamic_state*(device: Device) =
-  cmdSetCullModeEXT.load(device)
-  cmdSetFrontFaceEXT.load(device)
-  cmdSetPrimitiveTopologyEXT.load(device)
-  cmdSetViewportWithCountEXT.load(device)
-  cmdSetScissorWithCountEXT.load(device)
-  cmdBindVertexBuffers2EXT.load(device)
-  cmdSetDepthTestEnableEXT.load(device)
-  cmdSetDepthWriteEnableEXT.load(device)
-  cmdSetDepthCompareOpEXT.load(device)
-  cmdSetDepthBoundsTestEnableEXT.load(device)
-  cmdSetStencilTestEnableEXT.load(device)
-  cmdSetStencilOpEXT.load(device)
+  device.loadCommand cmdSetCullModeEXT
+  device.loadCommand cmdSetFrontFaceEXT
+  device.loadCommand cmdSetPrimitiveTopologyEXT
+  device.loadCommand cmdSetViewportWithCountEXT
+  device.loadCommand cmdSetScissorWithCountEXT
+  device.loadCommand cmdBindVertexBuffers2EXT
+  device.loadCommand cmdSetDepthTestEnableEXT
+  device.loadCommand cmdSetDepthWriteEnableEXT
+  device.loadCommand cmdSetDepthCompareOpEXT
+  device.loadCommand cmdSetDepthBoundsTestEnableEXT
+  device.loadCommand cmdSetStencilTestEnableEXT
+  device.loadCommand cmdSetStencilOpEXT
 

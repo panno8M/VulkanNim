@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_KHR_performance_query
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
 export VK_KHR_get_physical_device_properties2
+
+prepareVulkanLibDef()
 
 const
   KhrPerformanceQuerySpecVersion* = 1
@@ -124,16 +125,16 @@ proc releaseProfilingLockKHR*(
     ): void {.cdecl, lazyload("vkReleaseProfilingLockKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_performance_query*(instance: Instance) =
-  enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR.load(instance)
-  getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR.load(instance)
-  acquireProfilingLockKHR.load(instance)
-  releaseProfilingLockKHR.load(instance)
+  instance.loadCommand enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR
+  instance.loadCommand getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR
+  instance.loadCommand acquireProfilingLockKHR
+  instance.loadCommand releaseProfilingLockKHR
 
 proc loadVK_KHR_performance_query*(instance: Instance) =
-  enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR.load(instance)
-  getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR.load(instance)
+  instance.loadCommand enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR
+  instance.loadCommand getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR
 
 proc loadVK_KHR_performance_query*(device: Device) =
-  acquireProfilingLockKHR.load(device)
-  releaseProfilingLockKHR.load(device)
+  device.loadCommand acquireProfilingLockKHR
+  device.loadCommand releaseProfilingLockKHR
 

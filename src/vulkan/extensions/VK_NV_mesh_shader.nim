@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_NV_mesh_shader
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
 export VK_KHR_get_physical_device_properties2
+
+prepareVulkanLibDef()
 
 const
   NvMeshShaderSpecVersion* = 1
@@ -60,12 +61,12 @@ proc cmdDrawMeshTasksIndirectCountNV*(
     ): void {.cdecl, lazyload("vkCmdDrawMeshTasksIndirectCountNV", DeviceLevel).}
 
 proc loadAllVK_NV_mesh_shader*(instance: Instance) =
-  cmdDrawMeshTasksNV.load(instance)
-  cmdDrawMeshTasksIndirectNV.load(instance)
-  cmdDrawMeshTasksIndirectCountNV.load(instance)
+  instance.loadCommand cmdDrawMeshTasksNV
+  instance.loadCommand cmdDrawMeshTasksIndirectNV
+  instance.loadCommand cmdDrawMeshTasksIndirectCountNV
 
 proc loadVK_NV_mesh_shader*(device: Device) =
-  cmdDrawMeshTasksNV.load(device)
-  cmdDrawMeshTasksIndirectNV.load(device)
-  cmdDrawMeshTasksIndirectCountNV.load(device)
+  device.loadCommand cmdDrawMeshTasksNV
+  device.loadCommand cmdDrawMeshTasksIndirectNV
+  device.loadCommand cmdDrawMeshTasksIndirectCountNV
 

@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_metal_surface
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
 export VK_KHR_surface
+
+prepareVulkanLibDef()
 
 type # basetypes
   CAMetalLayer* = distinct object
@@ -35,8 +36,8 @@ proc createMetalSurfaceEXT*(
       lazyload("vkCreateMetalSurfaceEXT", InstanceLevel).}
 
 proc loadAllVK_EXT_metal_surface*(instance: Instance) =
-  createMetalSurfaceEXT.load(instance)
+  instance.loadCommand createMetalSurfaceEXT
 
 proc loadVK_EXT_metal_surface*(instance: Instance) =
-  createMetalSurfaceEXT.load(instance)
+  instance.loadCommand createMetalSurfaceEXT
 

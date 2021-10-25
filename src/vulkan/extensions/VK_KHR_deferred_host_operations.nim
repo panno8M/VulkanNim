@@ -1,9 +1,10 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_KHR_deferred_host_operations
-
 
 import ../platform
 import ../features/vk10
+
+prepareVulkanLibDef()
 
 const
   KhrDeferredHostOperationsSpecVersion* = 3
@@ -49,16 +50,16 @@ proc deferredOperationJoinKHR*(
       lazyload("vkDeferredOperationJoinKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_deferred_host_operations*(instance: Instance) =
-  createDeferredOperationKHR.load(instance)
-  destroyDeferredOperationKHR.load(instance)
-  getDeferredOperationMaxConcurrencyKHR.load(instance)
-  getDeferredOperationResultKHR.load(instance)
-  deferredOperationJoinKHR.load(instance)
+  instance.loadCommand createDeferredOperationKHR
+  instance.loadCommand destroyDeferredOperationKHR
+  instance.loadCommand getDeferredOperationMaxConcurrencyKHR
+  instance.loadCommand getDeferredOperationResultKHR
+  instance.loadCommand deferredOperationJoinKHR
 
 proc loadVK_KHR_deferred_host_operations*(device: Device) =
-  createDeferredOperationKHR.load(device)
-  destroyDeferredOperationKHR.load(device)
-  getDeferredOperationMaxConcurrencyKHR.load(device)
-  getDeferredOperationResultKHR.load(device)
-  deferredOperationJoinKHR.load(device)
+  device.loadCommand createDeferredOperationKHR
+  device.loadCommand destroyDeferredOperationKHR
+  device.loadCommand getDeferredOperationMaxConcurrencyKHR
+  device.loadCommand getDeferredOperationResultKHR
+  device.loadCommand deferredOperationJoinKHR
 

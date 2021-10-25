@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_KHR_external_semaphore_win32
-
 
 import ../platform
 import ../features/vk11
 import ./VK_KHR_external_semaphore
 export VK_KHR_external_semaphore
+
+prepareVulkanLibDef()
 
 const
   KhrExternalSemaphoreWin32SpecVersion* = 1
@@ -56,10 +57,10 @@ proc getSemaphoreWin32HandleKHR*(
       lazyload("vkGetSemaphoreWin32HandleKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_external_semaphore_win32*(instance: Instance) =
-  importSemaphoreWin32HandleKHR.load(instance)
-  getSemaphoreWin32HandleKHR.load(instance)
+  instance.loadCommand importSemaphoreWin32HandleKHR
+  instance.loadCommand getSemaphoreWin32HandleKHR
 
 proc loadVK_KHR_external_semaphore_win32*(device: Device) =
-  importSemaphoreWin32HandleKHR.load(device)
-  getSemaphoreWin32HandleKHR.load(device)
+  device.loadCommand importSemaphoreWin32HandleKHR
+  device.loadCommand getSemaphoreWin32HandleKHR
 

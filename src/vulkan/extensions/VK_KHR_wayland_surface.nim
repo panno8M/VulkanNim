@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_KHR_wayland_surface
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
 export VK_KHR_surface
+
+prepareVulkanLibDef()
 
 const
   KhrWaylandSurfaceSpecVersion* = 6
@@ -38,10 +39,10 @@ proc getPhysicalDeviceWaylandPresentationSupportKHR*(
     ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceWaylandPresentationSupportKHR", InstanceLevel).}
 
 proc loadAllVK_KHR_wayland_surface*(instance: Instance) =
-  createWaylandSurfaceKHR.load(instance)
-  getPhysicalDeviceWaylandPresentationSupportKHR.load(instance)
+  instance.loadCommand createWaylandSurfaceKHR
+  instance.loadCommand getPhysicalDeviceWaylandPresentationSupportKHR
 
 proc loadVK_KHR_wayland_surface*(instance: Instance) =
-  createWaylandSurfaceKHR.load(instance)
-  getPhysicalDeviceWaylandPresentationSupportKHR.load(instance)
+  instance.loadCommand createWaylandSurfaceKHR
+  instance.loadCommand getPhysicalDeviceWaylandPresentationSupportKHR
 

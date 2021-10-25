@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_NN_vi_surface
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
 export VK_KHR_surface
+
+prepareVulkanLibDef()
 
 const
   NnViSurfaceSpecVersion* = 1
@@ -32,8 +33,8 @@ proc createViSurfaceNN*(
       lazyload("vkCreateViSurfaceNN", InstanceLevel).}
 
 proc loadAllVK_NN_vi_surface*(instance: Instance) =
-  createViSurfaceNN.load(instance)
+  instance.loadCommand createViSurfaceNN
 
 proc loadVK_NN_vi_surface*(instance: Instance) =
-  createViSurfaceNN.load(instance)
+  instance.loadCommand createViSurfaceNN
 

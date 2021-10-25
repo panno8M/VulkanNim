@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_NV_shading_rate_image
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
 export VK_KHR_get_physical_device_properties2
+
+prepareVulkanLibDef()
 
 const
   NvShadingRateImageSpecVersion* = 3
@@ -87,12 +88,12 @@ proc cmdSetCoarseSampleOrderNV*(
     ): void {.cdecl, lazyload("vkCmdSetCoarseSampleOrderNV", DeviceLevel).}
 
 proc loadAllVK_NV_shading_rate_image*(instance: Instance) =
-  cmdBindShadingRateImageNV.load(instance)
-  cmdSetViewportShadingRatePaletteNV.load(instance)
-  cmdSetCoarseSampleOrderNV.load(instance)
+  instance.loadCommand cmdBindShadingRateImageNV
+  instance.loadCommand cmdSetViewportShadingRatePaletteNV
+  instance.loadCommand cmdSetCoarseSampleOrderNV
 
 proc loadVK_NV_shading_rate_image*(device: Device) =
-  cmdBindShadingRateImageNV.load(device)
-  cmdSetViewportShadingRatePaletteNV.load(device)
-  cmdSetCoarseSampleOrderNV.load(device)
+  device.loadCommand cmdBindShadingRateImageNV
+  device.loadCommand cmdSetViewportShadingRatePaletteNV
+  device.loadCommand cmdSetCoarseSampleOrderNV
 

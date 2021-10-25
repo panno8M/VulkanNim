@@ -1,9 +1,10 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_NV_clip_space_w_scaling
-
 
 import ../platform
 import ../features/vk10
+
+prepareVulkanLibDef()
 
 const
   NvClipSpaceWScalingSpecVersion* = 1
@@ -28,8 +29,8 @@ proc cmdSetViewportWScalingNV*(
     ): void {.cdecl, lazyload("vkCmdSetViewportWScalingNV", DeviceLevel).}
 
 proc loadAllVK_NV_clip_space_w_scaling*(instance: Instance) =
-  cmdSetViewportWScalingNV.load(instance)
+  instance.loadCommand cmdSetViewportWScalingNV
 
 proc loadVK_NV_clip_space_w_scaling*(device: Device) =
-  cmdSetViewportWScalingNV.load(device)
+  device.loadCommand cmdSetViewportWScalingNV
 

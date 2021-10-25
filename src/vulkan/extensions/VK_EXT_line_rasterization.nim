@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_line_rasterization
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
 export VK_KHR_get_physical_device_properties2
+
+prepareVulkanLibDef()
 
 const
   ExtLineRasterizationSpecVersion* = 1
@@ -47,8 +48,8 @@ proc cmdSetLineStippleEXT*(
     ): void {.cdecl, lazyload("vkCmdSetLineStippleEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_line_rasterization*(instance: Instance) =
-  cmdSetLineStippleEXT.load(instance)
+  instance.loadCommand cmdSetLineStippleEXT
 
 proc loadVK_EXT_line_rasterization*(device: Device) =
-  cmdSetLineStippleEXT.load(device)
+  device.loadCommand cmdSetLineStippleEXT
 

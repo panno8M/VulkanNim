@@ -1,6 +1,5 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_KHR_device_group
-
 
 import ../platform
 import ../features/vk10
@@ -13,6 +12,8 @@ export VK_KHR_device_group_creation
 export VK_KHR_bind_memory2
 export VK_KHR_surface
 export VK_KHR_swapchain
+
+prepareVulkanLibDef()
 
 const
   KhrDeviceGroupSpecVersion* = 4
@@ -150,18 +151,18 @@ proc acquireNextImage2KHR*(
       lazyload("vkAcquireNextImage2KHR", DeviceLevel).}
 
 proc loadAllVK_KHR_device_group*(instance: Instance) =
-  getDeviceGroupPresentCapabilitiesKHR.load(instance)
-  getDeviceGroupSurfacePresentModesKHR.load(instance)
-  getPhysicalDevicePresentRectanglesKHR.load(instance)
+  instance.loadCommand getDeviceGroupPresentCapabilitiesKHR
+  instance.loadCommand getDeviceGroupSurfacePresentModesKHR
+  instance.loadCommand getPhysicalDevicePresentRectanglesKHR
 
-  acquireNextImage2KHR.load(instance)
+  instance.loadCommand acquireNextImage2KHR
 
 proc loadVK_KHR_device_group*(instance: Instance) =
-  getPhysicalDevicePresentRectanglesKHR.load(instance)
+  instance.loadCommand getPhysicalDevicePresentRectanglesKHR
 
 proc loadVK_KHR_device_group*(device: Device) =
-  getDeviceGroupPresentCapabilitiesKHR.load(device)
-  getDeviceGroupSurfacePresentModesKHR.load(device)
+  device.loadCommand getDeviceGroupPresentCapabilitiesKHR
+  device.loadCommand getDeviceGroupSurfacePresentModesKHR
 
-  acquireNextImage2KHR.load(device)
+  device.loadCommand acquireNextImage2KHR
 

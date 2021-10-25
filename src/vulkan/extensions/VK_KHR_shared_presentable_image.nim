@@ -1,6 +1,5 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_KHR_shared_presentable_image
-
 
 import ../platform
 import ../features/vk10
@@ -10,6 +9,8 @@ import ./VK_KHR_get_surface_capabilities2
 export VK_KHR_swapchain
 export VK_KHR_get_physical_device_properties2
 export VK_KHR_get_surface_capabilities2
+
+prepareVulkanLibDef()
 
 const
   KhrSharedPresentableImageSpecVersion* = 1
@@ -30,8 +31,8 @@ proc getSwapchainStatusKHR*(
       lazyload("vkGetSwapchainStatusKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_shared_presentable_image*(instance: Instance) =
-  getSwapchainStatusKHR.load(instance)
+  instance.loadCommand getSwapchainStatusKHR
 
 proc loadVK_KHR_shared_presentable_image*(device: Device) =
-  getSwapchainStatusKHR.load(device)
+  device.loadCommand getSwapchainStatusKHR
 

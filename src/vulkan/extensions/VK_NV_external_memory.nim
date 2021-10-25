@@ -1,11 +1,12 @@
-# Generated at 2021-09-22T15:02:54Z
+# Generated at 2021-10-24T02:03:03Z
 # VK_NV_external_memory
-
 
 import ../platform
 import ../features/vk10
 import ./VK_NV_external_memory_capabilities
 export VK_NV_external_memory_capabilities
+
+prepareVulkanLibDef()
 
 const
   NvExternalMemorySpecVersion* = 1

@@ -1,9 +1,10 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_NVX_image_view_handle
-
 
 import ../platform
 import ../features/vk10
+
+prepareVulkanLibDef()
 
 const
   NvxImageViewHandleSpecVersion* = 2
@@ -36,10 +37,10 @@ proc getImageViewAddressNVX*(
       lazyload("vkGetImageViewAddressNVX", DeviceLevel).}
 
 proc loadAllVK_NVX_image_view_handle*(instance: Instance) =
-  getImageViewHandleNVX.load(instance)
-  getImageViewAddressNVX.load(instance)
+  instance.loadCommand getImageViewHandleNVX
+  instance.loadCommand getImageViewAddressNVX
 
 proc loadVK_NVX_image_view_handle*(device: Device) =
-  getImageViewHandleNVX.load(device)
-  getImageViewAddressNVX.load(device)
+  device.loadCommand getImageViewHandleNVX
+  device.loadCommand getImageViewAddressNVX
 

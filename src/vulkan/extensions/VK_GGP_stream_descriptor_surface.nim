@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_GGP_stream_descriptor_surface
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
 export VK_KHR_surface
+
+prepareVulkanLibDef()
 
 const
   GgpStreamDescriptorSurfaceSpecVersion* = 1
@@ -32,8 +33,8 @@ proc createStreamDescriptorSurfaceGGP*(
       lazyload("vkCreateStreamDescriptorSurfaceGGP", InstanceLevel).}
 
 proc loadAllVK_GGP_stream_descriptor_surface*(instance: Instance) =
-  createStreamDescriptorSurfaceGGP.load(instance)
+  instance.loadCommand createStreamDescriptorSurfaceGGP
 
 proc loadVK_GGP_stream_descriptor_surface*(instance: Instance) =
-  createStreamDescriptorSurfaceGGP.load(instance)
+  instance.loadCommand createStreamDescriptorSurfaceGGP
 

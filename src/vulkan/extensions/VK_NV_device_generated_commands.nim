@@ -1,9 +1,10 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_NV_device_generated_commands
-
 
 import ../platform
 import ../features/vk11
+
+prepareVulkanLibDef()
 
 const
   NvDeviceGeneratedCommandsSpecVersion* = 3
@@ -161,18 +162,18 @@ proc destroyIndirectCommandsLayoutNV*(
     ): void {.cdecl, lazyload("vkDestroyIndirectCommandsLayoutNV", DeviceLevel).}
 
 proc loadAllVK_NV_device_generated_commands*(instance: Instance) =
-  getGeneratedCommandsMemoryRequirementsNV.load(instance)
-  cmdPreprocessGeneratedCommandsNV.load(instance)
-  cmdExecuteGeneratedCommandsNV.load(instance)
-  cmdBindPipelineShaderGroupNV.load(instance)
-  createIndirectCommandsLayoutNV.load(instance)
-  destroyIndirectCommandsLayoutNV.load(instance)
+  instance.loadCommand getGeneratedCommandsMemoryRequirementsNV
+  instance.loadCommand cmdPreprocessGeneratedCommandsNV
+  instance.loadCommand cmdExecuteGeneratedCommandsNV
+  instance.loadCommand cmdBindPipelineShaderGroupNV
+  instance.loadCommand createIndirectCommandsLayoutNV
+  instance.loadCommand destroyIndirectCommandsLayoutNV
 
 proc loadVK_NV_device_generated_commands*(device: Device) =
-  getGeneratedCommandsMemoryRequirementsNV.load(device)
-  cmdPreprocessGeneratedCommandsNV.load(device)
-  cmdExecuteGeneratedCommandsNV.load(device)
-  cmdBindPipelineShaderGroupNV.load(device)
-  createIndirectCommandsLayoutNV.load(device)
-  destroyIndirectCommandsLayoutNV.load(device)
+  device.loadCommand getGeneratedCommandsMemoryRequirementsNV
+  device.loadCommand cmdPreprocessGeneratedCommandsNV
+  device.loadCommand cmdExecuteGeneratedCommandsNV
+  device.loadCommand cmdBindPipelineShaderGroupNV
+  device.loadCommand createIndirectCommandsLayoutNV
+  device.loadCommand destroyIndirectCommandsLayoutNV
 

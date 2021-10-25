@@ -1,9 +1,10 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_debug_report
-
 
 import ../platform
 import ../features/vk10
+
+prepareVulkanLibDef()
 
 const
   ExtDebugReportSpecVersion* = 9
@@ -110,12 +111,12 @@ StructureType.defineAliases:
 
 
 proc loadAllVK_EXT_debug_report*(instance: Instance) =
-  createDebugReportCallbackEXT.load(instance)
-  destroyDebugReportCallbackEXT.load(instance)
-  debugReportMessageEXT.load(instance)
+  instance.loadCommand createDebugReportCallbackEXT
+  instance.loadCommand destroyDebugReportCallbackEXT
+  instance.loadCommand debugReportMessageEXT
 
 proc loadVK_EXT_debug_report*(instance: Instance) =
-  createDebugReportCallbackEXT.load(instance)
-  destroyDebugReportCallbackEXT.load(instance)
-  debugReportMessageEXT.load(instance)
+  instance.loadCommand createDebugReportCallbackEXT
+  instance.loadCommand destroyDebugReportCallbackEXT
+  instance.loadCommand debugReportMessageEXT
 

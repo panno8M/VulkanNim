@@ -1,6 +1,5 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_AMD_display_native_hdr
-
 
 import ../platform
 import ../features/vk10
@@ -10,6 +9,8 @@ import ./VK_KHR_swapchain
 export VK_KHR_get_physical_device_properties2
 export VK_KHR_get_surface_capabilities2
 export VK_KHR_swapchain
+
+prepareVulkanLibDef()
 
 const
   AmdDisplayNativeHdrSpecVersion* = 1
@@ -32,8 +33,8 @@ proc setLocalDimmingAMD*(
     ): void {.cdecl, lazyload("vkSetLocalDimmingAMD", DeviceLevel).}
 
 proc loadAllVK_AMD_display_native_hdr*(instance: Instance) =
-  setLocalDimmingAMD.load(instance)
+  instance.loadCommand setLocalDimmingAMD
 
 proc loadVK_AMD_display_native_hdr*(device: Device) =
-  setLocalDimmingAMD.load(device)
+  device.loadCommand setLocalDimmingAMD
 

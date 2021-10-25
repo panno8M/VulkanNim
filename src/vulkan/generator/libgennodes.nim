@@ -259,12 +259,12 @@ proc renderCommandLoaderComponent*(require: NodeRequire; resources: Resources; c
     commandLoaderDef.add case commandRenderingMode
       of crmInstance:
         if command.loadMode != lmWithInstance: continue
-        "{req.name.parseCommandname}.load(instance)".fmt
+        "instance.loadCommand {req.name.parseCommandname}".fmt
       of crmDevice:
         if command.loadMode != lmWithDevice: continue
-        "{req.name.parseCommandname}.load(device)".fmt
+        "device.loadCommand {req.name.parseCommandname}".fmt
       of crmAll:
-        "{req.name.parseCommandname}.load(instance)".fmt
+        "instance.loadCommand {req.name.parseCommandname}".fmt
 
   if require.comment.isSome and commandLoaderDef.len != 0:
     commandLoaderDef.insert(require.comment.get.commentify, 0)
@@ -323,7 +323,6 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
     result.LF
 
   result.LF
-  result.LF
 
   let dependencies = libFile
     .deps
@@ -343,6 +342,8 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
         .mapIt("export {it.fileName.splitFile.name}".fmt)
         .join("\n").LF
     result.LF
+
+  result &= "prepareVulkanLibDef()\n\n"
 
   block Solve_basetypes:
     var typeDefs: seq[seq[string]]

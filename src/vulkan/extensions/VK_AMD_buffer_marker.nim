@@ -1,9 +1,10 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_AMD_buffer_marker
-
 
 import ../platform
 import ../features/vk10
+
+prepareVulkanLibDef()
 
 const
   AmdBufferMarkerSpecVersion* = 1
@@ -18,8 +19,8 @@ proc cmdWriteBufferMarkerAMD*(
     ): void {.cdecl, lazyload("vkCmdWriteBufferMarkerAMD", DeviceLevel).}
 
 proc loadAllVK_AMD_buffer_marker*(instance: Instance) =
-  cmdWriteBufferMarkerAMD.load(instance)
+  instance.loadCommand cmdWriteBufferMarkerAMD
 
 proc loadVK_AMD_buffer_marker*(device: Device) =
-  cmdWriteBufferMarkerAMD.load(device)
+  device.loadCommand cmdWriteBufferMarkerAMD
 

@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_KHR_swapchain
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
 export VK_KHR_surface
+
+prepareVulkanLibDef()
 
 const
   KhrSwapchainSpecVersion* = 70
@@ -172,28 +173,28 @@ proc acquireNextImage2KHR*(
       lazyload("vkAcquireNextImage2KHR", DeviceLevel).}
 
 proc loadAllVK_KHR_swapchain*(instance: Instance) =
-  createSwapchainKHR.load(instance)
-  destroySwapchainKHR.load(instance)
-  getSwapchainImagesKHR.load(instance)
-  acquireNextImageKHR.load(instance)
-  queuePresentKHR.load(instance)
+  instance.loadCommand createSwapchainKHR
+  instance.loadCommand destroySwapchainKHR
+  instance.loadCommand getSwapchainImagesKHR
+  instance.loadCommand acquireNextImageKHR
+  instance.loadCommand queuePresentKHR
 
-  getDeviceGroupPresentCapabilitiesKHR.load(instance)
-  getDeviceGroupSurfacePresentModesKHR.load(instance)
-  getPhysicalDevicePresentRectanglesKHR.load(instance)
-  acquireNextImage2KHR.load(instance)
+  instance.loadCommand getDeviceGroupPresentCapabilitiesKHR
+  instance.loadCommand getDeviceGroupSurfacePresentModesKHR
+  instance.loadCommand getPhysicalDevicePresentRectanglesKHR
+  instance.loadCommand acquireNextImage2KHR
 
 proc loadVK_KHR_swapchain*(instance: Instance) =
-  getPhysicalDevicePresentRectanglesKHR.load(instance)
+  instance.loadCommand getPhysicalDevicePresentRectanglesKHR
 
 proc loadVK_KHR_swapchain*(device: Device) =
-  createSwapchainKHR.load(device)
-  destroySwapchainKHR.load(device)
-  getSwapchainImagesKHR.load(device)
-  acquireNextImageKHR.load(device)
-  queuePresentKHR.load(device)
+  device.loadCommand createSwapchainKHR
+  device.loadCommand destroySwapchainKHR
+  device.loadCommand getSwapchainImagesKHR
+  device.loadCommand acquireNextImageKHR
+  device.loadCommand queuePresentKHR
 
-  getDeviceGroupPresentCapabilitiesKHR.load(device)
-  getDeviceGroupSurfacePresentModesKHR.load(device)
-  acquireNextImage2KHR.load(device)
+  device.loadCommand getDeviceGroupPresentCapabilitiesKHR
+  device.loadCommand getDeviceGroupSurfacePresentModesKHR
+  device.loadCommand acquireNextImage2KHR
 

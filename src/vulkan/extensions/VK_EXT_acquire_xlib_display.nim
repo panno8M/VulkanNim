@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_acquire_xlib_display
-
 
 import ../platform
 import ../features/vk10
 import ./VK_EXT_direct_mode_display
 export VK_EXT_direct_mode_display
+
+prepareVulkanLibDef()
 
 const
   ExtAcquireXlibDisplaySpecVersion* = 1
@@ -30,10 +31,10 @@ proc getRandROutputDisplayEXT*(
       lazyload("vkGetRandROutputDisplayEXT", InstanceLevel).}
 
 proc loadAllVK_EXT_acquire_xlib_display*(instance: Instance) =
-  acquireXlibDisplayEXT.load(instance)
-  getRandROutputDisplayEXT.load(instance)
+  instance.loadCommand acquireXlibDisplayEXT
+  instance.loadCommand getRandROutputDisplayEXT
 
 proc loadVK_EXT_acquire_xlib_display*(instance: Instance) =
-  acquireXlibDisplayEXT.load(instance)
-  getRandROutputDisplayEXT.load(instance)
+  instance.loadCommand acquireXlibDisplayEXT
+  instance.loadCommand getRandROutputDisplayEXT
 

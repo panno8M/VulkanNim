@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_NV_external_memory_win32
-
 
 import ../platform
 import ../features/vk10
 import ./VK_NV_external_memory
 export VK_NV_external_memory
+
+prepareVulkanLibDef()
 
 const
   NvExternalMemoryWin32SpecVersion* = 1
@@ -34,8 +35,8 @@ proc getMemoryWin32HandleNV*(
       lazyload("vkGetMemoryWin32HandleNV", DeviceLevel).}
 
 proc loadAllVK_NV_external_memory_win32*(instance: Instance) =
-  getMemoryWin32HandleNV.load(instance)
+  instance.loadCommand getMemoryWin32HandleNV
 
 proc loadVK_NV_external_memory_win32*(device: Device) =
-  getMemoryWin32HandleNV.load(device)
+  device.loadCommand getMemoryWin32HandleNV
 

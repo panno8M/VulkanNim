@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_KHR_external_memory_fd
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_external_memory
 export VK_KHR_external_memory
+
+prepareVulkanLibDef()
 
 const
   KhrExternalMemoryFdSpecVersion* = 1
@@ -46,10 +47,10 @@ proc getMemoryFdPropertiesKHR*(
       lazyload("vkGetMemoryFdPropertiesKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_external_memory_fd*(instance: Instance) =
-  getMemoryFdKHR.load(instance)
-  getMemoryFdPropertiesKHR.load(instance)
+  instance.loadCommand getMemoryFdKHR
+  instance.loadCommand getMemoryFdPropertiesKHR
 
 proc loadVK_KHR_external_memory_fd*(device: Device) =
-  getMemoryFdKHR.load(device)
-  getMemoryFdPropertiesKHR.load(device)
+  device.loadCommand getMemoryFdKHR
+  device.loadCommand getMemoryFdPropertiesKHR
 

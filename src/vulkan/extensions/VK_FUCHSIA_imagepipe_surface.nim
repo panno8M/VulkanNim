@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_FUCHSIA_imagepipe_surface
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
 export VK_KHR_surface
+
+prepareVulkanLibDef()
 
 const
   FuchsiaImagepipeSurfaceSpecVersion* = 1
@@ -32,8 +33,8 @@ proc createImagePipeSurfaceFUCHSIA*(
       lazyload("vkCreateImagePipeSurfaceFUCHSIA", InstanceLevel).}
 
 proc loadAllVK_FUCHSIA_imagepipe_surface*(instance: Instance) =
-  createImagePipeSurfaceFUCHSIA.load(instance)
+  instance.loadCommand createImagePipeSurfaceFUCHSIA
 
 proc loadVK_FUCHSIA_imagepipe_surface*(instance: Instance) =
-  createImagePipeSurfaceFUCHSIA.load(instance)
+  instance.loadCommand createImagePipeSurfaceFUCHSIA
 

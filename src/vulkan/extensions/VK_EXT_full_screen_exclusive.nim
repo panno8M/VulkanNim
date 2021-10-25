@@ -1,6 +1,5 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_full_screen_exclusive
-
 
 import ../platform
 import ../features/vk10
@@ -16,6 +15,8 @@ export VK_KHR_get_surface_capabilities2
 export VK_KHR_swapchain
 export VK_KHR_win32_surface
 export VK_KHR_device_group
+
+prepareVulkanLibDef()
 
 const
   ExtFullScreenExclusiveSpecVersion* = 4
@@ -78,22 +79,22 @@ proc getDeviceGroupSurfacePresentModes2EXT*(
       lazyload("vkGetDeviceGroupSurfacePresentModes2EXT", DeviceLevel).}
 
 proc loadAllVK_EXT_full_screen_exclusive*(instance: Instance) =
-  getPhysicalDeviceSurfacePresentModes2EXT.load(instance)
-  acquireFullScreenExclusiveModeEXT.load(instance)
-  releaseFullScreenExclusiveModeEXT.load(instance)
+  instance.loadCommand getPhysicalDeviceSurfacePresentModes2EXT
+  instance.loadCommand acquireFullScreenExclusiveModeEXT
+  instance.loadCommand releaseFullScreenExclusiveModeEXT
 
-  getDeviceGroupSurfacePresentModes2EXT.load(instance)
+  instance.loadCommand getDeviceGroupSurfacePresentModes2EXT
 
-  getDeviceGroupSurfacePresentModes2EXT.load(instance)
+  instance.loadCommand getDeviceGroupSurfacePresentModes2EXT
 
 proc loadVK_EXT_full_screen_exclusive*(instance: Instance) =
-  getPhysicalDeviceSurfacePresentModes2EXT.load(instance)
+  instance.loadCommand getPhysicalDeviceSurfacePresentModes2EXT
 
 proc loadVK_EXT_full_screen_exclusive*(device: Device) =
-  acquireFullScreenExclusiveModeEXT.load(device)
-  releaseFullScreenExclusiveModeEXT.load(device)
+  device.loadCommand acquireFullScreenExclusiveModeEXT
+  device.loadCommand releaseFullScreenExclusiveModeEXT
 
-  getDeviceGroupSurfacePresentModes2EXT.load(device)
+  device.loadCommand getDeviceGroupSurfacePresentModes2EXT
 
-  getDeviceGroupSurfacePresentModes2EXT.load(device)
+  device.loadCommand getDeviceGroupSurfacePresentModes2EXT
 

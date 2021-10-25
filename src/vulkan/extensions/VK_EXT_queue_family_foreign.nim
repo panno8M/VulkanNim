@@ -1,11 +1,12 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-10-24T02:03:03Z
 # VK_EXT_queue_family_foreign
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_external_memory
 export VK_KHR_external_memory
+
+prepareVulkanLibDef()
 
 const
   ExtQueueFamilyForeignSpecVersion* = 1

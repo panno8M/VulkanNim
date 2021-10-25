@@ -1,6 +1,5 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_KHR_push_descriptor
-
 
 import ../platform
 import ../features/vk11
@@ -8,6 +7,8 @@ import ./VK_KHR_get_physical_device_properties2
 import ./VK_KHR_descriptor_update_template
 export VK_KHR_get_physical_device_properties2
 export VK_KHR_descriptor_update_template
+
+prepareVulkanLibDef()
 
 const
   KhrPushDescriptorSpecVersion* = 2
@@ -40,16 +41,16 @@ proc cmdPushDescriptorSetWithTemplateKHR*(
     ): void {.cdecl, lazyload("vkCmdPushDescriptorSetWithTemplateKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_push_descriptor*(instance: Instance) =
-  cmdPushDescriptorSetKHR.load(instance)
+  instance.loadCommand cmdPushDescriptorSetKHR
 
-  cmdPushDescriptorSetWithTemplateKHR.load(instance)
+  instance.loadCommand cmdPushDescriptorSetWithTemplateKHR
 
-  cmdPushDescriptorSetWithTemplateKHR.load(instance)
+  instance.loadCommand cmdPushDescriptorSetWithTemplateKHR
 
 proc loadVK_KHR_push_descriptor*(device: Device) =
-  cmdPushDescriptorSetKHR.load(device)
+  device.loadCommand cmdPushDescriptorSetKHR
 
-  cmdPushDescriptorSetWithTemplateKHR.load(device)
+  device.loadCommand cmdPushDescriptorSetWithTemplateKHR
 
-  cmdPushDescriptorSetWithTemplateKHR.load(device)
+  device.loadCommand cmdPushDescriptorSetWithTemplateKHR
 

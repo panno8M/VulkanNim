@@ -1,12 +1,13 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # vk11
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
 
-
 import ../platform
 import ./vk10
 export vk10
+
+prepareVulkanLibDef()
 
 const
   # Promoted from VK_KHR_device_group_creation
@@ -854,110 +855,110 @@ StructureType.defineAliases:
 
 proc loadAllVk11*(instance: Instance) =
   # Promoted from VK_KHR_bind_memory2
-  bindBufferMemory2.load(instance)
-  bindImageMemory2.load(instance)
+  instance.loadCommand bindBufferMemory2
+  instance.loadCommand bindImageMemory2
 
   # Promoted from VK_KHR_device_group
-  getDeviceGroupPeerMemoryFeatures.load(instance)
-  cmdSetDeviceMask.load(instance)
-  cmdDispatchBase.load(instance)
+  instance.loadCommand getDeviceGroupPeerMemoryFeatures
+  instance.loadCommand cmdSetDeviceMask
+  instance.loadCommand cmdDispatchBase
 
   # Promoted from VK_KHR_device_group_creation
-  enumeratePhysicalDeviceGroups.load(instance)
+  instance.loadCommand enumeratePhysicalDeviceGroups
 
   # Promoted from VK_KHR_get_memory_requirements2
-  getImageMemoryRequirements2.load(instance)
-  getBufferMemoryRequirements2.load(instance)
-  getImageSparseMemoryRequirements2.load(instance)
+  instance.loadCommand getImageMemoryRequirements2
+  instance.loadCommand getBufferMemoryRequirements2
+  instance.loadCommand getImageSparseMemoryRequirements2
 
   # Promoted from VK_KHR_get_physical_device_properties2
-  getPhysicalDeviceFeatures2.load(instance)
-  getPhysicalDeviceProperties2.load(instance)
-  getPhysicalDeviceFormatProperties2.load(instance)
-  getPhysicalDeviceImageFormatProperties2.load(instance)
-  getPhysicalDeviceQueueFamilyProperties2.load(instance)
-  getPhysicalDeviceMemoryProperties2.load(instance)
-  getPhysicalDeviceSparseImageFormatProperties2.load(instance)
+  instance.loadCommand getPhysicalDeviceFeatures2
+  instance.loadCommand getPhysicalDeviceProperties2
+  instance.loadCommand getPhysicalDeviceFormatProperties2
+  instance.loadCommand getPhysicalDeviceImageFormatProperties2
+  instance.loadCommand getPhysicalDeviceQueueFamilyProperties2
+  instance.loadCommand getPhysicalDeviceMemoryProperties2
+  instance.loadCommand getPhysicalDeviceSparseImageFormatProperties2
 
   # Promoted from VK_KHR_maintenance1
-  trimCommandPool.load(instance)
+  instance.loadCommand trimCommandPool
 
   # Originally based on VK_KHR_protected_memory (extension 146), which was never published; thus the mystifying large value= numbers below. These are not aliased since they weren't actually promoted from an extension.
-  getDeviceQueue2.load(instance)
+  instance.loadCommand getDeviceQueue2
 
   # Promoted from VK_KHR_sampler_ycbcr_conversion
-  createSamplerYcbcrConversion.load(instance)
-  destroySamplerYcbcrConversion.load(instance)
+  instance.loadCommand createSamplerYcbcrConversion
+  instance.loadCommand destroySamplerYcbcrConversion
 
   # Promoted from VK_KHR_descriptor_update_template
-  createDescriptorUpdateTemplate.load(instance)
-  destroyDescriptorUpdateTemplate.load(instance)
-  updateDescriptorSetWithTemplate.load(instance)
+  instance.loadCommand createDescriptorUpdateTemplate
+  instance.loadCommand destroyDescriptorUpdateTemplate
+  instance.loadCommand updateDescriptorSetWithTemplate
 
   # Promoted from VK_KHR_external_memory_capabilities
-  getPhysicalDeviceExternalBufferProperties.load(instance)
+  instance.loadCommand getPhysicalDeviceExternalBufferProperties
 
   # Promoted from VK_KHR_external_fence_capabilities
-  getPhysicalDeviceExternalFenceProperties.load(instance)
+  instance.loadCommand getPhysicalDeviceExternalFenceProperties
 
   # Promoted from VK_KHR_external_semaphore_capabilities
-  getPhysicalDeviceExternalSemaphoreProperties.load(instance)
+  instance.loadCommand getPhysicalDeviceExternalSemaphoreProperties
 
   # Promoted from VK_KHR_maintenance3
-  getDescriptorSetLayoutSupport.load(instance)
+  instance.loadCommand getDescriptorSetLayoutSupport
 
 proc loadVk11*(instance: Instance) =
   # Promoted from VK_KHR_device_group_creation
-  enumeratePhysicalDeviceGroups.load(instance)
+  instance.loadCommand enumeratePhysicalDeviceGroups
 
   # Promoted from VK_KHR_get_physical_device_properties2
-  getPhysicalDeviceFeatures2.load(instance)
-  getPhysicalDeviceProperties2.load(instance)
-  getPhysicalDeviceFormatProperties2.load(instance)
-  getPhysicalDeviceImageFormatProperties2.load(instance)
-  getPhysicalDeviceQueueFamilyProperties2.load(instance)
-  getPhysicalDeviceMemoryProperties2.load(instance)
-  getPhysicalDeviceSparseImageFormatProperties2.load(instance)
+  instance.loadCommand getPhysicalDeviceFeatures2
+  instance.loadCommand getPhysicalDeviceProperties2
+  instance.loadCommand getPhysicalDeviceFormatProperties2
+  instance.loadCommand getPhysicalDeviceImageFormatProperties2
+  instance.loadCommand getPhysicalDeviceQueueFamilyProperties2
+  instance.loadCommand getPhysicalDeviceMemoryProperties2
+  instance.loadCommand getPhysicalDeviceSparseImageFormatProperties2
 
   # Promoted from VK_KHR_external_memory_capabilities
-  getPhysicalDeviceExternalBufferProperties.load(instance)
+  instance.loadCommand getPhysicalDeviceExternalBufferProperties
 
   # Promoted from VK_KHR_external_fence_capabilities
-  getPhysicalDeviceExternalFenceProperties.load(instance)
+  instance.loadCommand getPhysicalDeviceExternalFenceProperties
 
   # Promoted from VK_KHR_external_semaphore_capabilities
-  getPhysicalDeviceExternalSemaphoreProperties.load(instance)
+  instance.loadCommand getPhysicalDeviceExternalSemaphoreProperties
 
 proc loadVk11*(device: Device) =
   # Promoted from VK_KHR_bind_memory2
-  bindBufferMemory2.load(device)
-  bindImageMemory2.load(device)
+  device.loadCommand bindBufferMemory2
+  device.loadCommand bindImageMemory2
 
   # Promoted from VK_KHR_device_group
-  getDeviceGroupPeerMemoryFeatures.load(device)
-  cmdSetDeviceMask.load(device)
-  cmdDispatchBase.load(device)
+  device.loadCommand getDeviceGroupPeerMemoryFeatures
+  device.loadCommand cmdSetDeviceMask
+  device.loadCommand cmdDispatchBase
 
   # Promoted from VK_KHR_get_memory_requirements2
-  getImageMemoryRequirements2.load(device)
-  getBufferMemoryRequirements2.load(device)
-  getImageSparseMemoryRequirements2.load(device)
+  device.loadCommand getImageMemoryRequirements2
+  device.loadCommand getBufferMemoryRequirements2
+  device.loadCommand getImageSparseMemoryRequirements2
 
   # Promoted from VK_KHR_maintenance1
-  trimCommandPool.load(device)
+  device.loadCommand trimCommandPool
 
   # Originally based on VK_KHR_protected_memory (extension 146), which was never published; thus the mystifying large value= numbers below. These are not aliased since they weren't actually promoted from an extension.
-  getDeviceQueue2.load(device)
+  device.loadCommand getDeviceQueue2
 
   # Promoted from VK_KHR_sampler_ycbcr_conversion
-  createSamplerYcbcrConversion.load(device)
-  destroySamplerYcbcrConversion.load(device)
+  device.loadCommand createSamplerYcbcrConversion
+  device.loadCommand destroySamplerYcbcrConversion
 
   # Promoted from VK_KHR_descriptor_update_template
-  createDescriptorUpdateTemplate.load(device)
-  destroyDescriptorUpdateTemplate.load(device)
-  updateDescriptorSetWithTemplate.load(device)
+  device.loadCommand createDescriptorUpdateTemplate
+  device.loadCommand destroyDescriptorUpdateTemplate
+  device.loadCommand updateDescriptorSetWithTemplate
 
   # Promoted from VK_KHR_maintenance3
-  getDescriptorSetLayoutSupport.load(device)
+  device.loadCommand getDescriptorSetLayoutSupport
 

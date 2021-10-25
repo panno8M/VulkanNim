@@ -1,9 +1,10 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_conditional_rendering
-
 
 import ../platform
 import ../features/vk10
+
+prepareVulkanLibDef()
 
 const
   ExtConditionalRenderingSpecVersion* = 2
@@ -40,10 +41,10 @@ proc cmdEndConditionalRenderingEXT*(
     ): void {.cdecl, lazyload("vkCmdEndConditionalRenderingEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_conditional_rendering*(instance: Instance) =
-  cmdBeginConditionalRenderingEXT.load(instance)
-  cmdEndConditionalRenderingEXT.load(instance)
+  instance.loadCommand cmdBeginConditionalRenderingEXT
+  instance.loadCommand cmdEndConditionalRenderingEXT
 
 proc loadVK_EXT_conditional_rendering*(device: Device) =
-  cmdBeginConditionalRenderingEXT.load(device)
-  cmdEndConditionalRenderingEXT.load(device)
+  device.loadCommand cmdBeginConditionalRenderingEXT
+  device.loadCommand cmdEndConditionalRenderingEXT
 

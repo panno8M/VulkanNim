@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_MVK_ios_surface
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
 export VK_KHR_surface
+
+prepareVulkanLibDef()
 
 const
   MiosSurfaceSpecVersion* = 3
@@ -32,8 +33,8 @@ proc createIOSSurfaceMVK*(
       lazyload("vkCreateIOSSurfaceMVK", InstanceLevel).}
 
 proc loadAllVK_MVK_ios_surface*(instance: Instance) =
-  createIOSSurfaceMVK.load(instance)
+  instance.loadCommand createIOSSurfaceMVK
 
 proc loadVK_MVK_ios_surface*(instance: Instance) =
-  createIOSSurfaceMVK.load(instance)
+  instance.loadCommand createIOSSurfaceMVK
 

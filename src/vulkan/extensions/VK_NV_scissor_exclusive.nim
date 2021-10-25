@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_NV_scissor_exclusive
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
 export VK_KHR_get_physical_device_properties2
+
+prepareVulkanLibDef()
 
 const
   NvScissorExclusiveSpecVersion* = 1
@@ -30,8 +31,8 @@ proc cmdSetExclusiveScissorNV*(
     ): void {.cdecl, lazyload("vkCmdSetExclusiveScissorNV", DeviceLevel).}
 
 proc loadAllVK_NV_scissor_exclusive*(instance: Instance) =
-  cmdSetExclusiveScissorNV.load(instance)
+  instance.loadCommand cmdSetExclusiveScissorNV
 
 proc loadVK_NV_scissor_exclusive*(device: Device) =
-  cmdSetExclusiveScissorNV.load(device)
+  device.loadCommand cmdSetExclusiveScissorNV
 

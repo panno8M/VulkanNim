@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_KHR_pipeline_executable_properties
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
 export VK_KHR_get_physical_device_properties2
+
+prepareVulkanLibDef()
 
 const
   KhrPipelineExecutablePropertiesSpecVersion* = 1
@@ -90,12 +91,12 @@ proc getPipelineExecutableInternalRepresentationsKHR*(
       lazyload("vkGetPipelineExecutableInternalRepresentationsKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_pipeline_executable_properties*(instance: Instance) =
-  getPipelineExecutablePropertiesKHR.load(instance)
-  getPipelineExecutableStatisticsKHR.load(instance)
-  getPipelineExecutableInternalRepresentationsKHR.load(instance)
+  instance.loadCommand getPipelineExecutablePropertiesKHR
+  instance.loadCommand getPipelineExecutableStatisticsKHR
+  instance.loadCommand getPipelineExecutableInternalRepresentationsKHR
 
 proc loadVK_KHR_pipeline_executable_properties*(device: Device) =
-  getPipelineExecutablePropertiesKHR.load(device)
-  getPipelineExecutableStatisticsKHR.load(device)
-  getPipelineExecutableInternalRepresentationsKHR.load(device)
+  device.loadCommand getPipelineExecutablePropertiesKHR
+  device.loadCommand getPipelineExecutableStatisticsKHR
+  device.loadCommand getPipelineExecutableInternalRepresentationsKHR
 

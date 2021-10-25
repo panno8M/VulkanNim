@@ -1,12 +1,13 @@
-# Generated at 2021-09-09T01:49:36Z
+# Generated at 2021-10-24T02:03:03Z
 # VK_KHR_dedicated_allocation
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_memory_requirements2
 import ../features/vk11
 export VK_KHR_get_memory_requirements2
+
+prepareVulkanLibDef()
 
 const
   KhrDedicatedAllocationSpecVersion* = 3

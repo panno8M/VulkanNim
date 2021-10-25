@@ -1,12 +1,13 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # vk12
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
 
-
 import ../platform
 import ./vk11
 export vk11
+
+prepareVulkanLibDef()
 
 const
   StructureTypePhysicalDeviceVulkan11Features* = 49
@@ -775,49 +776,49 @@ proc getDeviceMemoryOpaqueCaptureAddress*(
 
 proc loadAllVk12*(instance: Instance) =
   # Promoted from VK_KHR_draw_indirect_count (extension 170)
-  cmdDrawIndirectCount.load(instance)
-  cmdDrawIndexedIndirectCount.load(instance)
+  instance.loadCommand cmdDrawIndirectCount
+  instance.loadCommand cmdDrawIndexedIndirectCount
 
   # Promoted from VK_KHR_create_renderpass2 (extension 110)
-  createRenderPass2.load(instance)
-  cmdBeginRenderPass2.load(instance)
-  cmdNextSubpass2.load(instance)
-  cmdEndRenderPass2.load(instance)
+  instance.loadCommand createRenderPass2
+  instance.loadCommand cmdBeginRenderPass2
+  instance.loadCommand cmdNextSubpass2
+  instance.loadCommand cmdEndRenderPass2
 
   # Promoted from VK_EXT_host_query_reset (extension 262)
-  resetQueryPool.load(instance)
+  instance.loadCommand resetQueryPool
 
   # Promoted from VK_KHR_timeline_semaphore (extension 208)
-  getSemaphoreCounterValue.load(instance)
-  waitSemaphores.load(instance)
-  signalSemaphore.load(instance)
+  instance.loadCommand getSemaphoreCounterValue
+  instance.loadCommand waitSemaphores
+  instance.loadCommand signalSemaphore
 
   # Promoted from VK_KHR_buffer_device_address (extension 258)
-  getBufferDeviceAddress.load(instance)
-  getBufferOpaqueCaptureAddress.load(instance)
-  getDeviceMemoryOpaqueCaptureAddress.load(instance)
+  instance.loadCommand getBufferDeviceAddress
+  instance.loadCommand getBufferOpaqueCaptureAddress
+  instance.loadCommand getDeviceMemoryOpaqueCaptureAddress
 
 proc loadVk12*(device: Device) =
   # Promoted from VK_KHR_draw_indirect_count (extension 170)
-  cmdDrawIndirectCount.load(device)
-  cmdDrawIndexedIndirectCount.load(device)
+  device.loadCommand cmdDrawIndirectCount
+  device.loadCommand cmdDrawIndexedIndirectCount
 
   # Promoted from VK_KHR_create_renderpass2 (extension 110)
-  createRenderPass2.load(device)
-  cmdBeginRenderPass2.load(device)
-  cmdNextSubpass2.load(device)
-  cmdEndRenderPass2.load(device)
+  device.loadCommand createRenderPass2
+  device.loadCommand cmdBeginRenderPass2
+  device.loadCommand cmdNextSubpass2
+  device.loadCommand cmdEndRenderPass2
 
   # Promoted from VK_EXT_host_query_reset (extension 262)
-  resetQueryPool.load(device)
+  device.loadCommand resetQueryPool
 
   # Promoted from VK_KHR_timeline_semaphore (extension 208)
-  getSemaphoreCounterValue.load(device)
-  waitSemaphores.load(device)
-  signalSemaphore.load(device)
+  device.loadCommand getSemaphoreCounterValue
+  device.loadCommand waitSemaphores
+  device.loadCommand signalSemaphore
 
   # Promoted from VK_KHR_buffer_device_address (extension 258)
-  getBufferDeviceAddress.load(device)
-  getBufferOpaqueCaptureAddress.load(device)
-  getDeviceMemoryOpaqueCaptureAddress.load(device)
+  device.loadCommand getBufferDeviceAddress
+  device.loadCommand getBufferOpaqueCaptureAddress
+  device.loadCommand getDeviceMemoryOpaqueCaptureAddress
 

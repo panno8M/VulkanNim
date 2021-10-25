@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_GOOGLE_display_timing
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_swapchain
 export VK_KHR_swapchain
+
+prepareVulkanLibDef()
 
 const
   GoogleDisplayTimingSpecVersion* = 1
@@ -48,10 +49,10 @@ proc getPastPresentationTimingGOOGLE*(
       lazyload("vkGetPastPresentationTimingGOOGLE", DeviceLevel).}
 
 proc loadAllVK_GOOGLE_display_timing*(instance: Instance) =
-  getRefreshCycleDurationGOOGLE.load(instance)
-  getPastPresentationTimingGOOGLE.load(instance)
+  instance.loadCommand getRefreshCycleDurationGOOGLE
+  instance.loadCommand getPastPresentationTimingGOOGLE
 
 proc loadVK_GOOGLE_display_timing*(device: Device) =
-  getRefreshCycleDurationGOOGLE.load(device)
-  getPastPresentationTimingGOOGLE.load(device)
+  device.loadCommand getRefreshCycleDurationGOOGLE
+  device.loadCommand getPastPresentationTimingGOOGLE
 

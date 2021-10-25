@@ -1,9 +1,10 @@
-# Generated at 2021-10-02T09:29:44Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_ANDROID_native_buffer
-
 
 import ../platform
 import ../features/vk10
+
+prepareVulkanLibDef()
 
 const
   AndroidNativeBufferSpecVersion* = 8
@@ -67,14 +68,14 @@ proc getSwapchainGrallocUsage2ANDROID*(
     ): Result {.cdecl, lazyload("vkGetSwapchainGrallocUsage2ANDROID", DeviceLevel).}
 
 proc loadAllVK_ANDROID_native_buffer*(instance: Instance) =
-  getSwapchainGrallocUsageANDROID.load(instance)
-  acquireImageANDROID.load(instance)
-  queueSignalReleaseImageANDROID.load(instance)
-  getSwapchainGrallocUsage2ANDROID.load(instance)
+  instance.loadCommand getSwapchainGrallocUsageANDROID
+  instance.loadCommand acquireImageANDROID
+  instance.loadCommand queueSignalReleaseImageANDROID
+  instance.loadCommand getSwapchainGrallocUsage2ANDROID
 
 proc loadVK_ANDROID_native_buffer*(device: Device) =
-  getSwapchainGrallocUsageANDROID.load(device)
-  acquireImageANDROID.load(device)
-  queueSignalReleaseImageANDROID.load(device)
-  getSwapchainGrallocUsage2ANDROID.load(device)
+  device.loadCommand getSwapchainGrallocUsageANDROID
+  device.loadCommand acquireImageANDROID
+  device.loadCommand queueSignalReleaseImageANDROID
+  device.loadCommand getSwapchainGrallocUsage2ANDROID
 

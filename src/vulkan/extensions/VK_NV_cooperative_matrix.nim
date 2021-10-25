@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_NV_cooperative_matrix
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_get_physical_device_properties2
 export VK_KHR_get_physical_device_properties2
+
+prepareVulkanLibDef()
 
 const
   NvCooperativeMatrixSpecVersion* = 1
@@ -62,8 +63,8 @@ proc getPhysicalDeviceCooperativeMatrixPropertiesNV*(
       lazyload("vkGetPhysicalDeviceCooperativeMatrixPropertiesNV", InstanceLevel).}
 
 proc loadAllVK_NV_cooperative_matrix*(instance: Instance) =
-  getPhysicalDeviceCooperativeMatrixPropertiesNV.load(instance)
+  instance.loadCommand getPhysicalDeviceCooperativeMatrixPropertiesNV
 
 proc loadVK_NV_cooperative_matrix*(instance: Instance) =
-  getPhysicalDeviceCooperativeMatrixPropertiesNV.load(instance)
+  instance.loadCommand getPhysicalDeviceCooperativeMatrixPropertiesNV
 

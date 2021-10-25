@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_direct_mode_display
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
 export VK_KHR_surface
+
+prepareVulkanLibDef()
 
 const
   ExtDirectModeDisplaySpecVersion* = 1
@@ -19,8 +20,8 @@ proc releaseDisplayEXT*(
       lazyload("vkReleaseDisplayEXT", InstanceLevel).}
 
 proc loadAllVK_EXT_direct_mode_display*(instance: Instance) =
-  releaseDisplayEXT.load(instance)
+  instance.loadCommand releaseDisplayEXT
 
 proc loadVK_EXT_direct_mode_display*(instance: Instance) =
-  releaseDisplayEXT.load(instance)
+  instance.loadCommand releaseDisplayEXT
 

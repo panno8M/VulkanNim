@@ -1,6 +1,5 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_EXT_tooling_info
-
 
 import ../platform
 import ../features/vk10
@@ -10,6 +9,8 @@ import ./VK_EXT_debug_utils
 export VK_EXT_debug_report
 export VK_EXT_debug_marker
 export VK_EXT_debug_utils
+
+prepareVulkanLibDef()
 
 const
   ExtToolingInfoSpecVersion* = 1
@@ -50,8 +51,8 @@ proc getPhysicalDeviceToolPropertiesEXT*(
       lazyload("vkGetPhysicalDeviceToolPropertiesEXT", InstanceLevel).}
 
 proc loadAllVK_EXT_tooling_info*(instance: Instance) =
-  getPhysicalDeviceToolPropertiesEXT.load(instance)
+  instance.loadCommand getPhysicalDeviceToolPropertiesEXT
 
 proc loadVK_EXT_tooling_info*(instance: Instance) =
-  getPhysicalDeviceToolPropertiesEXT.load(instance)
+  instance.loadCommand getPhysicalDeviceToolPropertiesEXT
 

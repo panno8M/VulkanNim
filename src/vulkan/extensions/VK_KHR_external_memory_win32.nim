@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_KHR_external_memory_win32
-
 
 import ../platform
 import ../features/vk11
 import ./VK_KHR_external_memory
 export VK_KHR_external_memory
+
+prepareVulkanLibDef()
 
 const
   KhrExternalMemoryWin32SpecVersion* = 1
@@ -53,10 +54,10 @@ proc getMemoryWin32HandlePropertiesKHR*(
       lazyload("vkGetMemoryWin32HandlePropertiesKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_external_memory_win32*(instance: Instance) =
-  getMemoryWin32HandleKHR.load(instance)
-  getMemoryWin32HandlePropertiesKHR.load(instance)
+  instance.loadCommand getMemoryWin32HandleKHR
+  instance.loadCommand getMemoryWin32HandlePropertiesKHR
 
 proc loadVK_KHR_external_memory_win32*(device: Device) =
-  getMemoryWin32HandleKHR.load(device)
-  getMemoryWin32HandlePropertiesKHR.load(device)
+  device.loadCommand getMemoryWin32HandleKHR
+  device.loadCommand getMemoryWin32HandlePropertiesKHR
 

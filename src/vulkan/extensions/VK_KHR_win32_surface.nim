@@ -1,11 +1,12 @@
-# Generated at 2021-10-02T09:29:45Z
+# Generated at 2021-10-24T09:33:17Z
 # VK_KHR_win32_surface
-
 
 import ../platform
 import ../features/vk10
 import ./VK_KHR_surface
 export VK_KHR_surface
+
+prepareVulkanLibDef()
 
 const
   KhrWin32SurfaceSpecVersion* = 6
@@ -37,10 +38,10 @@ proc getPhysicalDeviceWin32PresentationSupportKHR*(
     ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceWin32PresentationSupportKHR", InstanceLevel).}
 
 proc loadAllVK_KHR_win32_surface*(instance: Instance) =
-  createWin32SurfaceKHR.load(instance)
-  getPhysicalDeviceWin32PresentationSupportKHR.load(instance)
+  instance.loadCommand createWin32SurfaceKHR
+  instance.loadCommand getPhysicalDeviceWin32PresentationSupportKHR
 
 proc loadVK_KHR_win32_surface*(instance: Instance) =
-  createWin32SurfaceKHR.load(instance)
-  getPhysicalDeviceWin32PresentationSupportKHR.load(instance)
+  instance.loadCommand createWin32SurfaceKHR
+  instance.loadCommand getPhysicalDeviceWin32PresentationSupportKHR
 
