@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T09:33:17Z
+# Generated at 2021-10-31T06:50:41Z
 # vk12
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -615,7 +615,7 @@ proc cmdDrawIndirectCount*(
       countBufferOffset: DeviceSize;
       maxDrawCount: uint32;
       stride: uint32;
-    ): void {.cdecl, lazyload("vkCmdDrawIndirectCount", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdDrawIndirectCount").}
 proc cmdDrawIndexedIndirectCount*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
@@ -624,7 +624,7 @@ proc cmdDrawIndexedIndirectCount*(
       countBufferOffset: DeviceSize;
       maxDrawCount: uint32;
       stride: uint32;
-    ): void {.cdecl, lazyload("vkCmdDrawIndexedIndirectCount", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdDrawIndexedIndirectCount").}
 
 
 # Promoted from VK_KHR_create_renderpass2 (extension 110)
@@ -729,7 +729,7 @@ proc resetQueryPool*(
       queryPool: QueryPool;
       firstQuery: uint32;
       queryCount: uint32;
-    ): void {.cdecl, lazyload("vkResetQueryPool", DeviceLevel).}
+    ): void {.cdecl, preload("vkResetQueryPool").}
 
 
 # Promoted from VK_KHR_timeline_semaphore (extension 208)
@@ -741,7 +741,7 @@ proc getSemaphoreCounterValue*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
-      lazyload("vkGetSemaphoreCounterValue", DeviceLevel).}
+      preload("vkGetSemaphoreCounterValue").}
 proc waitSemaphores*(
       device: Device;
       pWaitInfo: ptr SemaphoreWaitInfo;
@@ -749,14 +749,14 @@ proc waitSemaphores*(
     ): Result {.cdecl,
       successCodes(success, timeout),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
-      lazyload("vkWaitSemaphores", DeviceLevel).}
+      preload("vkWaitSemaphores").}
 proc signalSemaphore*(
       device: Device;
       pSignalInfo: ptr SemaphoreSignalInfo;
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkSignalSemaphore", DeviceLevel).}
+      preload("vkSignalSemaphore").}
 
 
 # Promoted from VK_KHR_buffer_device_address (extension 258)
@@ -764,61 +764,27 @@ proc signalSemaphore*(
 proc getBufferDeviceAddress*(
       device: Device;
       pInfo: ptr BufferDeviceAddressInfo;
-    ): DeviceAddress {.cdecl, lazyload("vkGetBufferDeviceAddress", DeviceLevel).}
+    ): DeviceAddress {.cdecl, preload("vkGetBufferDeviceAddress").}
 proc getBufferOpaqueCaptureAddress*(
       device: Device;
       pInfo: ptr BufferDeviceAddressInfo;
-    ): uint64 {.cdecl, lazyload("vkGetBufferOpaqueCaptureAddress", DeviceLevel).}
+    ): uint64 {.cdecl, preload("vkGetBufferOpaqueCaptureAddress").}
 proc getDeviceMemoryOpaqueCaptureAddress*(
       device: Device;
       pInfo: ptr DeviceMemoryOpaqueCaptureAddressInfo;
-    ): uint64 {.cdecl, lazyload("vkGetDeviceMemoryOpaqueCaptureAddress", DeviceLevel).}
+    ): uint64 {.cdecl, preload("vkGetDeviceMemoryOpaqueCaptureAddress").}
 
 proc loadAllVk12*(instance: Instance) =
-  # Promoted from VK_KHR_draw_indirect_count (extension 170)
-  instance.loadCommand cmdDrawIndirectCount
-  instance.loadCommand cmdDrawIndexedIndirectCount
-
   # Promoted from VK_KHR_create_renderpass2 (extension 110)
   instance.loadCommand createRenderPass2
   instance.loadCommand cmdBeginRenderPass2
   instance.loadCommand cmdNextSubpass2
   instance.loadCommand cmdEndRenderPass2
 
-  # Promoted from VK_EXT_host_query_reset (extension 262)
-  instance.loadCommand resetQueryPool
-
-  # Promoted from VK_KHR_timeline_semaphore (extension 208)
-  instance.loadCommand getSemaphoreCounterValue
-  instance.loadCommand waitSemaphores
-  instance.loadCommand signalSemaphore
-
-  # Promoted from VK_KHR_buffer_device_address (extension 258)
-  instance.loadCommand getBufferDeviceAddress
-  instance.loadCommand getBufferOpaqueCaptureAddress
-  instance.loadCommand getDeviceMemoryOpaqueCaptureAddress
-
 proc loadVk12*(device: Device) =
-  # Promoted from VK_KHR_draw_indirect_count (extension 170)
-  device.loadCommand cmdDrawIndirectCount
-  device.loadCommand cmdDrawIndexedIndirectCount
-
   # Promoted from VK_KHR_create_renderpass2 (extension 110)
   device.loadCommand createRenderPass2
   device.loadCommand cmdBeginRenderPass2
   device.loadCommand cmdNextSubpass2
   device.loadCommand cmdEndRenderPass2
-
-  # Promoted from VK_EXT_host_query_reset (extension 262)
-  device.loadCommand resetQueryPool
-
-  # Promoted from VK_KHR_timeline_semaphore (extension 208)
-  device.loadCommand getSemaphoreCounterValue
-  device.loadCommand waitSemaphores
-  device.loadCommand signalSemaphore
-
-  # Promoted from VK_KHR_buffer_device_address (extension 258)
-  device.loadCommand getBufferDeviceAddress
-  device.loadCommand getBufferOpaqueCaptureAddress
-  device.loadCommand getDeviceMemoryOpaqueCaptureAddress
 

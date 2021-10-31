@@ -914,7 +914,8 @@ proc extractNodeCommand*(typeDef: XmlNode): NodeCommand {.raises: [UnexpectedXml
 
 
     result.loadMode =
-      if result.name in preloadableProcs: lmPreload
+      # All of commands provided by extensions has vendor suffix and that is upper case.
+      if result.name[^1].isLowerAscii or result.name in preloadableProcs: lmPreload
       elif result.params[0].theType in ["VkInstance", "VkPhysicalDevice"]: lmWithInstance
       else: lmWithDevice
 

@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T09:33:17Z
+# Generated at 2021-10-31T06:50:40Z
 # vk11
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -626,11 +626,11 @@ proc getDeviceGroupPeerMemoryFeatures*(
       localDeviceIndex: uint32;
       remoteDeviceIndex: uint32;
       pPeerMemoryFeatures: ptr PeerMemoryFeatureFlags;
-    ): void {.cdecl, lazyload("vkGetDeviceGroupPeerMemoryFeatures", DeviceLevel).}
+    ): void {.cdecl, preload("vkGetDeviceGroupPeerMemoryFeatures").}
 proc cmdSetDeviceMask*(
       commandBuffer: CommandBuffer;
       deviceMask: uint32;
-    ): void {.cdecl, lazyload("vkCmdSetDeviceMask", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdSetDeviceMask").}
 proc cmdDispatchBase*(
       commandBuffer: CommandBuffer;
       baseGroupX: uint32;
@@ -639,7 +639,7 @@ proc cmdDispatchBase*(
       groupCountX: uint32;
       groupCountY: uint32;
       groupCountZ: uint32;
-    ): void {.cdecl, lazyload("vkCmdDispatchBase", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdDispatchBase").}
 PipelineCreateFlagBits.defineAliases:
   dispatchBase as dispatchBase
 
@@ -658,7 +658,7 @@ proc enumeratePhysicalDeviceGroups*(
     ): Result {.cdecl,
       successCodes(success, incomplete),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInitializationFailed),
-      lazyload("vkEnumeratePhysicalDeviceGroups", InstanceLevel).}
+      preload("vkEnumeratePhysicalDeviceGroups").}
 
 
 # Promoted from VK_KHR_get_memory_requirements2
@@ -727,7 +727,7 @@ proc trimCommandPool*(
       device: Device;
       commandPool: CommandPool;
       flags = default(CommandPoolTrimFlags);
-    ): void {.cdecl, lazyload("vkTrimCommandPool", DeviceLevel).}
+    ): void {.cdecl, preload("vkTrimCommandPool").}
 
 
 # Promoted from VK_KHR_maintenance2
@@ -764,12 +764,12 @@ proc createSamplerYcbcrConversion*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkCreateSamplerYcbcrConversion", DeviceLevel).}
+      preload("vkCreateSamplerYcbcrConversion").}
 proc destroySamplerYcbcrConversion*(
       device: Device;
       ycbcrConversion = default(SamplerYcbcrConversion);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroySamplerYcbcrConversion", DeviceLevel).}
+    ): void {.cdecl, preload("vkDestroySamplerYcbcrConversion").}
 
 
 # Promoted from VK_KHR_descriptor_update_template
@@ -782,18 +782,18 @@ proc createDescriptorUpdateTemplate*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkCreateDescriptorUpdateTemplate", DeviceLevel).}
+      preload("vkCreateDescriptorUpdateTemplate").}
 proc destroyDescriptorUpdateTemplate*(
       device: Device;
       descriptorUpdateTemplate = default(DescriptorUpdateTemplate);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyDescriptorUpdateTemplate", DeviceLevel).}
+    ): void {.cdecl, preload("vkDestroyDescriptorUpdateTemplate").}
 proc updateDescriptorSetWithTemplate*(
       device: Device;
       descriptorSet: DescriptorSet;
       descriptorUpdateTemplate: DescriptorUpdateTemplate;
       pData: pointer;
-    ): void {.cdecl, lazyload("vkUpdateDescriptorSetWithTemplate", DeviceLevel).}
+    ): void {.cdecl, preload("vkUpdateDescriptorSetWithTemplate").}
 
 
 # Promoted from VK_KHR_external_memory_capabilities
@@ -802,7 +802,7 @@ proc getPhysicalDeviceExternalBufferProperties*(
       physicalDevice: PhysicalDevice;
       pExternalBufferInfo: ptr PhysicalDeviceExternalBufferInfo;
       pExternalBufferProperties: ptr ExternalBufferProperties;
-    ): void {.cdecl, lazyload("vkGetPhysicalDeviceExternalBufferProperties", InstanceLevel).}
+    ): void {.cdecl, preload("vkGetPhysicalDeviceExternalBufferProperties").}
 
 
 # Promoted from VK_KHR_external_memory
@@ -815,7 +815,7 @@ proc getPhysicalDeviceExternalFenceProperties*(
       physicalDevice: PhysicalDevice;
       pExternalFenceInfo: ptr PhysicalDeviceExternalFenceInfo;
       pExternalFenceProperties: ptr ExternalFenceProperties;
-    ): void {.cdecl, lazyload("vkGetPhysicalDeviceExternalFenceProperties", InstanceLevel).}
+    ): void {.cdecl, preload("vkGetPhysicalDeviceExternalFenceProperties").}
 
 
 # Promoted from VK_KHR_external_fence
@@ -835,7 +835,7 @@ proc getPhysicalDeviceExternalSemaphoreProperties*(
       physicalDevice: PhysicalDevice;
       pExternalSemaphoreInfo: ptr PhysicalDeviceExternalSemaphoreInfo;
       pExternalSemaphoreProperties: ptr ExternalSemaphoreProperties;
-    ): void {.cdecl, lazyload("vkGetPhysicalDeviceExternalSemaphoreProperties", InstanceLevel).}
+    ): void {.cdecl, preload("vkGetPhysicalDeviceExternalSemaphoreProperties").}
 
 
 # Promoted from VK_KHR_maintenance3
@@ -844,7 +844,7 @@ proc getDescriptorSetLayoutSupport*(
       device: Device;
       pCreateInfo: ptr DescriptorSetLayoutCreateInfo;
       pSupport: ptr DescriptorSetLayoutSupport;
-    ): void {.cdecl, lazyload("vkGetDescriptorSetLayoutSupport", DeviceLevel).}
+    ): void {.cdecl, preload("vkGetDescriptorSetLayoutSupport").}
 
 
 # Promoted from VK_KHR_shader_draw_parameters, with a feature support query added
@@ -857,14 +857,6 @@ proc loadAllVk11*(instance: Instance) =
   # Promoted from VK_KHR_bind_memory2
   instance.loadCommand bindBufferMemory2
   instance.loadCommand bindImageMemory2
-
-  # Promoted from VK_KHR_device_group
-  instance.loadCommand getDeviceGroupPeerMemoryFeatures
-  instance.loadCommand cmdSetDeviceMask
-  instance.loadCommand cmdDispatchBase
-
-  # Promoted from VK_KHR_device_group_creation
-  instance.loadCommand enumeratePhysicalDeviceGroups
 
   # Promoted from VK_KHR_get_memory_requirements2
   instance.loadCommand getImageMemoryRequirements2
@@ -880,37 +872,10 @@ proc loadAllVk11*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceMemoryProperties2
   instance.loadCommand getPhysicalDeviceSparseImageFormatProperties2
 
-  # Promoted from VK_KHR_maintenance1
-  instance.loadCommand trimCommandPool
-
   # Originally based on VK_KHR_protected_memory (extension 146), which was never published; thus the mystifying large value= numbers below. These are not aliased since they weren't actually promoted from an extension.
   instance.loadCommand getDeviceQueue2
 
-  # Promoted from VK_KHR_sampler_ycbcr_conversion
-  instance.loadCommand createSamplerYcbcrConversion
-  instance.loadCommand destroySamplerYcbcrConversion
-
-  # Promoted from VK_KHR_descriptor_update_template
-  instance.loadCommand createDescriptorUpdateTemplate
-  instance.loadCommand destroyDescriptorUpdateTemplate
-  instance.loadCommand updateDescriptorSetWithTemplate
-
-  # Promoted from VK_KHR_external_memory_capabilities
-  instance.loadCommand getPhysicalDeviceExternalBufferProperties
-
-  # Promoted from VK_KHR_external_fence_capabilities
-  instance.loadCommand getPhysicalDeviceExternalFenceProperties
-
-  # Promoted from VK_KHR_external_semaphore_capabilities
-  instance.loadCommand getPhysicalDeviceExternalSemaphoreProperties
-
-  # Promoted from VK_KHR_maintenance3
-  instance.loadCommand getDescriptorSetLayoutSupport
-
 proc loadVk11*(instance: Instance) =
-  # Promoted from VK_KHR_device_group_creation
-  instance.loadCommand enumeratePhysicalDeviceGroups
-
   # Promoted from VK_KHR_get_physical_device_properties2
   instance.loadCommand getPhysicalDeviceFeatures2
   instance.loadCommand getPhysicalDeviceProperties2
@@ -920,45 +885,16 @@ proc loadVk11*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceMemoryProperties2
   instance.loadCommand getPhysicalDeviceSparseImageFormatProperties2
 
-  # Promoted from VK_KHR_external_memory_capabilities
-  instance.loadCommand getPhysicalDeviceExternalBufferProperties
-
-  # Promoted from VK_KHR_external_fence_capabilities
-  instance.loadCommand getPhysicalDeviceExternalFenceProperties
-
-  # Promoted from VK_KHR_external_semaphore_capabilities
-  instance.loadCommand getPhysicalDeviceExternalSemaphoreProperties
-
 proc loadVk11*(device: Device) =
   # Promoted from VK_KHR_bind_memory2
   device.loadCommand bindBufferMemory2
   device.loadCommand bindImageMemory2
-
-  # Promoted from VK_KHR_device_group
-  device.loadCommand getDeviceGroupPeerMemoryFeatures
-  device.loadCommand cmdSetDeviceMask
-  device.loadCommand cmdDispatchBase
 
   # Promoted from VK_KHR_get_memory_requirements2
   device.loadCommand getImageMemoryRequirements2
   device.loadCommand getBufferMemoryRequirements2
   device.loadCommand getImageSparseMemoryRequirements2
 
-  # Promoted from VK_KHR_maintenance1
-  device.loadCommand trimCommandPool
-
   # Originally based on VK_KHR_protected_memory (extension 146), which was never published; thus the mystifying large value= numbers below. These are not aliased since they weren't actually promoted from an extension.
   device.loadCommand getDeviceQueue2
-
-  # Promoted from VK_KHR_sampler_ycbcr_conversion
-  device.loadCommand createSamplerYcbcrConversion
-  device.loadCommand destroySamplerYcbcrConversion
-
-  # Promoted from VK_KHR_descriptor_update_template
-  device.loadCommand createDescriptorUpdateTemplate
-  device.loadCommand destroyDescriptorUpdateTemplate
-  device.loadCommand updateDescriptorSetWithTemplate
-
-  # Promoted from VK_KHR_maintenance3
-  device.loadCommand getDescriptorSetLayoutSupport
 

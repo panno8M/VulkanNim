@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T09:33:17Z
+# Generated at 2021-10-31T06:50:41Z
 # vk10
 # Vulkan core API interface definitions
 # =====================================
@@ -3421,7 +3421,7 @@ proc createInstance*(
 proc destroyInstance*(
       instance = default(Instance);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyInstance", InstanceLevel).}
+    ): void {.cdecl, preload("vkDestroyInstance").}
 proc enumeratePhysicalDevices*(
       instance: Instance;
       pPhysicalDeviceCount: ptr uint32;
@@ -3429,16 +3429,16 @@ proc enumeratePhysicalDevices*(
     ): Result {.cdecl,
       successCodes(success, incomplete),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInitializationFailed),
-      lazyload("vkEnumeratePhysicalDevices", InstanceLevel).}
+      preload("vkEnumeratePhysicalDevices").}
 proc getPhysicalDeviceFeatures*(
       physicalDevice: PhysicalDevice;
       pFeatures: ptr PhysicalDeviceFeatures;
-    ): void {.cdecl, lazyload("vkGetPhysicalDeviceFeatures", InstanceLevel).}
+    ): void {.cdecl, preload("vkGetPhysicalDeviceFeatures").}
 proc getPhysicalDeviceFormatProperties*(
       physicalDevice: PhysicalDevice;
       format: Format;
       pFormatProperties: ptr FormatProperties;
-    ): void {.cdecl, lazyload("vkGetPhysicalDeviceFormatProperties", InstanceLevel).}
+    ): void {.cdecl, preload("vkGetPhysicalDeviceFormatProperties").}
 proc getPhysicalDeviceImageFormatProperties*(
       physicalDevice: PhysicalDevice;
       format: Format;
@@ -3450,20 +3450,20 @@ proc getPhysicalDeviceImageFormatProperties*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorFormatNotSupported),
-      lazyload("vkGetPhysicalDeviceImageFormatProperties", InstanceLevel).}
+      preload("vkGetPhysicalDeviceImageFormatProperties").}
 proc getPhysicalDeviceProperties*(
       physicalDevice: PhysicalDevice;
       pProperties: ptr PhysicalDeviceProperties;
-    ): void {.cdecl, lazyload("vkGetPhysicalDeviceProperties", InstanceLevel).}
+    ): void {.cdecl, preload("vkGetPhysicalDeviceProperties").}
 proc getPhysicalDeviceQueueFamilyProperties*(
       physicalDevice: PhysicalDevice;
       pQueueFamilyPropertyCount: ptr uint32;
       pQueueFamilyProperties {.length: pQueueFamilyPropertyCount.} = default(arrPtr[QueueFamilyProperties]);
-    ): void {.cdecl, lazyload("vkGetPhysicalDeviceQueueFamilyProperties", InstanceLevel).}
+    ): void {.cdecl, preload("vkGetPhysicalDeviceQueueFamilyProperties").}
 proc getPhysicalDeviceMemoryProperties*(
       physicalDevice: PhysicalDevice;
       pMemoryProperties: ptr PhysicalDeviceMemoryProperties;
-    ): void {.cdecl, lazyload("vkGetPhysicalDeviceMemoryProperties", InstanceLevel).}
+    ): void {.cdecl, preload("vkGetPhysicalDeviceMemoryProperties").}
 proc getInstanceProcAddr*(
       instance = default(Instance);
       pName: cstring;
@@ -3484,11 +3484,11 @@ proc createDevice*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInitializationFailed, errorExtensionNotPresent, errorFeatureNotPresent, errorTooManyObjects, errorDeviceLost),
-      lazyload("vkCreateDevice", InstanceLevel).}
+      preload("vkCreateDevice").}
 proc destroyDevice*(
       device = default(Device);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyDevice", DeviceLevel).}
+    ): void {.cdecl, preload("vkDestroyDevice").}
 
 
 # Extension discovery commands
@@ -3509,7 +3509,7 @@ proc enumerateDeviceExtensionProperties*(
     ): Result {.cdecl,
       successCodes(success, incomplete),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorLayerNotPresent),
-      lazyload("vkEnumerateDeviceExtensionProperties", InstanceLevel).}
+      preload("vkEnumerateDeviceExtensionProperties").}
 
 
 # Layer discovery commands
@@ -3528,7 +3528,7 @@ proc enumerateDeviceLayerProperties*(
     ): Result {.cdecl,
       successCodes(success, incomplete),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkEnumerateDeviceLayerProperties", InstanceLevel).}
+      preload("vkEnumerateDeviceLayerProperties").}
 
 
 # Queue commands
@@ -3538,7 +3538,7 @@ proc getDeviceQueue*(
       queueFamilyIndex: uint32;
       queueIndex: uint32;
       pQueue: ptr Queue;
-    ): void {.cdecl, lazyload("vkGetDeviceQueue", DeviceLevel).}
+    ): void {.cdecl, preload("vkGetDeviceQueue").}
 proc queueSubmit*(
       queue: Queue;
       submitCount = default(uint32);
@@ -3547,19 +3547,19 @@ proc queueSubmit*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
-      lazyload("vkQueueSubmit", DeviceLevel).}
+      preload("vkQueueSubmit").}
 proc queueWaitIdle*(
       queue: Queue;
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
-      lazyload("vkQueueWaitIdle", DeviceLevel).}
+      preload("vkQueueWaitIdle").}
 proc deviceWaitIdle*(
       device: Device;
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
-      lazyload("vkDeviceWaitIdle", DeviceLevel).}
+      preload("vkDeviceWaitIdle").}
 
 
 # Memory commands
@@ -3572,12 +3572,12 @@ proc allocateMemory*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidExternalHandle, errorInvalidOpaqueCaptureAddressKhr),
-      lazyload("vkAllocateMemory", DeviceLevel).}
+      preload("vkAllocateMemory").}
 proc freeMemory*(
       device: Device;
       memory = default(DeviceMemory);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkFreeMemory", DeviceLevel).}
+    ): void {.cdecl, preload("vkFreeMemory").}
 proc mapMemory*(
       device: Device;
       memory: DeviceMemory;
@@ -3588,11 +3588,11 @@ proc mapMemory*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorMemoryMapFailed),
-      lazyload("vkMapMemory", DeviceLevel).}
+      preload("vkMapMemory").}
 proc unmapMemory*(
       device: Device;
       memory: DeviceMemory;
-    ): void {.cdecl, lazyload("vkUnmapMemory", DeviceLevel).}
+    ): void {.cdecl, preload("vkUnmapMemory").}
 proc flushMappedMemoryRanges*(
       device: Device;
       memoryRangeCount: uint32;
@@ -3600,7 +3600,7 @@ proc flushMappedMemoryRanges*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkFlushMappedMemoryRanges", DeviceLevel).}
+      preload("vkFlushMappedMemoryRanges").}
 proc invalidateMappedMemoryRanges*(
       device: Device;
       memoryRangeCount: uint32;
@@ -3608,12 +3608,12 @@ proc invalidateMappedMemoryRanges*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkInvalidateMappedMemoryRanges", DeviceLevel).}
+      preload("vkInvalidateMappedMemoryRanges").}
 proc getDeviceMemoryCommitment*(
       device: Device;
       memory: DeviceMemory;
       pCommittedMemoryInBytes: ptr DeviceSize;
-    ): void {.cdecl, lazyload("vkGetDeviceMemoryCommitment", DeviceLevel).}
+    ): void {.cdecl, preload("vkGetDeviceMemoryCommitment").}
 
 
 # Memory management API commands
@@ -3626,7 +3626,7 @@ proc bindBufferMemory*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidOpaqueCaptureAddressKhr),
-      lazyload("vkBindBufferMemory", DeviceLevel).}
+      preload("vkBindBufferMemory").}
 proc bindImageMemory*(
       device: Device;
       image: Image;
@@ -3635,17 +3635,17 @@ proc bindImageMemory*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkBindImageMemory", DeviceLevel).}
+      preload("vkBindImageMemory").}
 proc getBufferMemoryRequirements*(
       device: Device;
       buffer: Buffer;
       pMemoryRequirements: ptr MemoryRequirements;
-    ): void {.cdecl, lazyload("vkGetBufferMemoryRequirements", DeviceLevel).}
+    ): void {.cdecl, preload("vkGetBufferMemoryRequirements").}
 proc getImageMemoryRequirements*(
       device: Device;
       image: Image;
       pMemoryRequirements: ptr MemoryRequirements;
-    ): void {.cdecl, lazyload("vkGetImageMemoryRequirements", DeviceLevel).}
+    ): void {.cdecl, preload("vkGetImageMemoryRequirements").}
 
 
 # Sparse resource memory management API commands
@@ -3655,7 +3655,7 @@ proc getImageSparseMemoryRequirements*(
       image: Image;
       pSparseMemoryRequirementCount: ptr uint32;
       pSparseMemoryRequirements {.length: pSparseMemoryRequirementCount.} = default(arrPtr[SparseImageMemoryRequirements]);
-    ): void {.cdecl, lazyload("vkGetImageSparseMemoryRequirements", DeviceLevel).}
+    ): void {.cdecl, preload("vkGetImageSparseMemoryRequirements").}
 proc getPhysicalDeviceSparseImageFormatProperties*(
       physicalDevice: PhysicalDevice;
       format: Format;
@@ -3665,7 +3665,7 @@ proc getPhysicalDeviceSparseImageFormatProperties*(
       tiling: ImageTiling;
       pPropertyCount: ptr uint32;
       pProperties {.length: pPropertyCount.} = default(arrPtr[SparseImageFormatProperties]);
-    ): void {.cdecl, lazyload("vkGetPhysicalDeviceSparseImageFormatProperties", InstanceLevel).}
+    ): void {.cdecl, preload("vkGetPhysicalDeviceSparseImageFormatProperties").}
 proc queueBindSparse*(
       queue: Queue;
       bindInfoCount = default(uint32);
@@ -3674,7 +3674,7 @@ proc queueBindSparse*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
-      lazyload("vkQueueBindSparse", DeviceLevel).}
+      preload("vkQueueBindSparse").}
 
 
 # Fence commands
@@ -3687,12 +3687,12 @@ proc createFence*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkCreateFence", DeviceLevel).}
+      preload("vkCreateFence").}
 proc destroyFence*(
       device: Device;
       fence = default(Fence);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyFence", DeviceLevel).}
+    ): void {.cdecl, preload("vkDestroyFence").}
 proc resetFences*(
       device: Device;
       fenceCount: uint32;
@@ -3700,14 +3700,14 @@ proc resetFences*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfDeviceMemory),
-      lazyload("vkResetFences", DeviceLevel).}
+      preload("vkResetFences").}
 proc getFenceStatus*(
       device: Device;
       fence: Fence;
     ): Result {.cdecl,
       successCodes(success, notReady),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
-      lazyload("vkGetFenceStatus", DeviceLevel).}
+      preload("vkGetFenceStatus").}
 proc waitForFences*(
       device: Device;
       fenceCount: uint32;
@@ -3717,7 +3717,7 @@ proc waitForFences*(
     ): Result {.cdecl,
       successCodes(success, timeout),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
-      lazyload("vkWaitForFences", DeviceLevel).}
+      preload("vkWaitForFences").}
 
 
 # Queue semaphore commands
@@ -3730,12 +3730,12 @@ proc createSemaphore*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkCreateSemaphore", DeviceLevel).}
+      preload("vkCreateSemaphore").}
 proc destroySemaphore*(
       device: Device;
       semaphore = default(Semaphore);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroySemaphore", DeviceLevel).}
+    ): void {.cdecl, preload("vkDestroySemaphore").}
 
 
 # Event commands
@@ -3748,33 +3748,33 @@ proc createEvent*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkCreateEvent", DeviceLevel).}
+      preload("vkCreateEvent").}
 proc destroyEvent*(
       device: Device;
       event = default(Event);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyEvent", DeviceLevel).}
+    ): void {.cdecl, preload("vkDestroyEvent").}
 proc getEventStatus*(
       device: Device;
       event: Event;
     ): Result {.cdecl,
       successCodes(eventSet, eventReset),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
-      lazyload("vkGetEventStatus", DeviceLevel).}
+      preload("vkGetEventStatus").}
 proc setEvent*(
       device: Device;
       event: Event;
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkSetEvent", DeviceLevel).}
+      preload("vkSetEvent").}
 proc resetEvent*(
       device: Device;
       event: Event;
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfDeviceMemory),
-      lazyload("vkResetEvent", DeviceLevel).}
+      preload("vkResetEvent").}
 
 
 # Query commands
@@ -3787,12 +3787,12 @@ proc createQueryPool*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkCreateQueryPool", DeviceLevel).}
+      preload("vkCreateQueryPool").}
 proc destroyQueryPool*(
       device: Device;
       queryPool = default(QueryPool);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyQueryPool", DeviceLevel).}
+    ): void {.cdecl, preload("vkDestroyQueryPool").}
 proc getQueryPoolResults*(
       device: Device;
       queryPool: QueryPool;
@@ -3805,7 +3805,7 @@ proc getQueryPoolResults*(
     ): Result {.cdecl,
       successCodes(success, notReady),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
-      lazyload("vkGetQueryPoolResults", DeviceLevel).}
+      preload("vkGetQueryPoolResults").}
 
 
 # Buffer commands
@@ -3818,12 +3818,12 @@ proc createBuffer*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidOpaqueCaptureAddressKhr),
-      lazyload("vkCreateBuffer", DeviceLevel).}
+      preload("vkCreateBuffer").}
 proc destroyBuffer*(
       device: Device;
       buffer = default(Buffer);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyBuffer", DeviceLevel).}
+    ): void {.cdecl, preload("vkDestroyBuffer").}
 
 
 # Buffer view commands
@@ -3836,12 +3836,12 @@ proc createBufferView*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkCreateBufferView", DeviceLevel).}
+      preload("vkCreateBufferView").}
 proc destroyBufferView*(
       device: Device;
       bufferView = default(BufferView);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyBufferView", DeviceLevel).}
+    ): void {.cdecl, preload("vkDestroyBufferView").}
 
 
 # Image commands
@@ -3854,18 +3854,18 @@ proc createImage*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkCreateImage", DeviceLevel).}
+      preload("vkCreateImage").}
 proc destroyImage*(
       device: Device;
       image = default(Image);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyImage", DeviceLevel).}
+    ): void {.cdecl, preload("vkDestroyImage").}
 proc getImageSubresourceLayout*(
       device: Device;
       image: Image;
       pSubresource: ptr ImageSubresource;
       pLayout: ptr SubresourceLayout;
-    ): void {.cdecl, lazyload("vkGetImageSubresourceLayout", DeviceLevel).}
+    ): void {.cdecl, preload("vkGetImageSubresourceLayout").}
 
 
 # Image view commands
@@ -3878,12 +3878,12 @@ proc createImageView*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkCreateImageView", DeviceLevel).}
+      preload("vkCreateImageView").}
 proc destroyImageView*(
       device: Device;
       imageView = default(ImageView);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyImageView", DeviceLevel).}
+    ): void {.cdecl, preload("vkDestroyImageView").}
 
 
 # Shader commands
@@ -3896,12 +3896,12 @@ proc createShaderModule*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidShaderNv),
-      lazyload("vkCreateShaderModule", DeviceLevel).}
+      preload("vkCreateShaderModule").}
 proc destroyShaderModule*(
       device: Device;
       shaderModule = default(ShaderModule);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyShaderModule", DeviceLevel).}
+    ): void {.cdecl, preload("vkDestroyShaderModule").}
 
 
 # Pipeline Cache commands
@@ -3914,12 +3914,12 @@ proc createPipelineCache*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkCreatePipelineCache", DeviceLevel).}
+      preload("vkCreatePipelineCache").}
 proc destroyPipelineCache*(
       device: Device;
       pipelineCache = default(PipelineCache);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyPipelineCache", DeviceLevel).}
+    ): void {.cdecl, preload("vkDestroyPipelineCache").}
 proc getPipelineCacheData*(
       device: Device;
       pipelineCache: PipelineCache;
@@ -3928,7 +3928,7 @@ proc getPipelineCacheData*(
     ): Result {.cdecl,
       successCodes(success, incomplete),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkGetPipelineCacheData", DeviceLevel).}
+      preload("vkGetPipelineCacheData").}
 proc mergePipelineCaches*(
       device: Device;
       dstCache: PipelineCache;
@@ -3937,7 +3937,7 @@ proc mergePipelineCaches*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkMergePipelineCaches", DeviceLevel).}
+      preload("vkMergePipelineCaches").}
 
 
 # Pipeline commands
@@ -3952,7 +3952,7 @@ proc createGraphicsPipelines*(
     ): Result {.cdecl,
       successCodes(success, pipelineCompileRequiredExt),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidShaderNv),
-      lazyload("vkCreateGraphicsPipelines", DeviceLevel).}
+      preload("vkCreateGraphicsPipelines").}
 proc createComputePipelines*(
       device: Device;
       pipelineCache = default(PipelineCache);
@@ -3963,12 +3963,12 @@ proc createComputePipelines*(
     ): Result {.cdecl,
       successCodes(success, pipelineCompileRequiredExt),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidShaderNv),
-      lazyload("vkCreateComputePipelines", DeviceLevel).}
+      preload("vkCreateComputePipelines").}
 proc destroyPipeline*(
       device: Device;
       pipeline = default(Pipeline);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyPipeline", DeviceLevel).}
+    ): void {.cdecl, preload("vkDestroyPipeline").}
 
 
 # Pipeline layout commands
@@ -3981,12 +3981,12 @@ proc createPipelineLayout*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkCreatePipelineLayout", DeviceLevel).}
+      preload("vkCreatePipelineLayout").}
 proc destroyPipelineLayout*(
       device: Device;
       pipelineLayout = default(PipelineLayout);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyPipelineLayout", DeviceLevel).}
+    ): void {.cdecl, preload("vkDestroyPipelineLayout").}
 
 
 # Sampler commands
@@ -3999,12 +3999,12 @@ proc createSampler*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkCreateSampler", DeviceLevel).}
+      preload("vkCreateSampler").}
 proc destroySampler*(
       device: Device;
       sampler = default(Sampler);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroySampler", DeviceLevel).}
+    ): void {.cdecl, preload("vkDestroySampler").}
 
 
 # Descriptor set commands
@@ -4017,12 +4017,12 @@ proc createDescriptorSetLayout*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkCreateDescriptorSetLayout", DeviceLevel).}
+      preload("vkCreateDescriptorSetLayout").}
 proc destroyDescriptorSetLayout*(
       device: Device;
       descriptorSetLayout = default(DescriptorSetLayout);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyDescriptorSetLayout", DeviceLevel).}
+    ): void {.cdecl, preload("vkDestroyDescriptorSetLayout").}
 proc createDescriptorPool*(
       device: Device;
       pCreateInfo: ptr DescriptorPoolCreateInfo;
@@ -4031,19 +4031,19 @@ proc createDescriptorPool*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorFragmentationExt),
-      lazyload("vkCreateDescriptorPool", DeviceLevel).}
+      preload("vkCreateDescriptorPool").}
 proc destroyDescriptorPool*(
       device: Device;
       descriptorPool = default(DescriptorPool);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyDescriptorPool", DeviceLevel).}
+    ): void {.cdecl, preload("vkDestroyDescriptorPool").}
 proc resetDescriptorPool*(
       device: Device;
       descriptorPool: DescriptorPool;
       flags = default(DescriptorPoolResetFlags);
     ): Result {.cdecl,
       successCodes(success),
-      lazyload("vkResetDescriptorPool", DeviceLevel).}
+      preload("vkResetDescriptorPool").}
 proc allocateDescriptorSets*(
       device: Device;
       pAllocateInfo: ptr DescriptorSetAllocateInfo;
@@ -4051,7 +4051,7 @@ proc allocateDescriptorSets*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorFragmentedPool, errorOutOfPoolMemory),
-      lazyload("vkAllocateDescriptorSets", DeviceLevel).}
+      preload("vkAllocateDescriptorSets").}
 proc freeDescriptorSets*(
       device: Device;
       descriptorPool: DescriptorPool;
@@ -4059,14 +4059,14 @@ proc freeDescriptorSets*(
       pDescriptorSets {.length: descriptorSetCount.}: arrPtr[DescriptorSet];
     ): Result {.cdecl,
       successCodes(success),
-      lazyload("vkFreeDescriptorSets", DeviceLevel).}
+      preload("vkFreeDescriptorSets").}
 proc updateDescriptorSets*(
       device: Device;
       descriptorWriteCount = default(uint32);
       pDescriptorWrites {.length: descriptorWriteCount.}: arrPtr[WriteDescriptorSet];
       descriptorCopyCount = default(uint32);
       pDescriptorCopies {.length: descriptorCopyCount.}: arrPtr[CopyDescriptorSet];
-    ): void {.cdecl, lazyload("vkUpdateDescriptorSets", DeviceLevel).}
+    ): void {.cdecl, preload("vkUpdateDescriptorSets").}
 
 
 # Pass commands
@@ -4079,12 +4079,12 @@ proc createFramebuffer*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkCreateFramebuffer", DeviceLevel).}
+      preload("vkCreateFramebuffer").}
 proc destroyFramebuffer*(
       device: Device;
       framebuffer = default(Framebuffer);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyFramebuffer", DeviceLevel).}
+    ): void {.cdecl, preload("vkDestroyFramebuffer").}
 proc createRenderPass*(
       device: Device;
       pCreateInfo: ptr RenderPassCreateInfo;
@@ -4093,17 +4093,17 @@ proc createRenderPass*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkCreateRenderPass", DeviceLevel).}
+      preload("vkCreateRenderPass").}
 proc destroyRenderPass*(
       device: Device;
       renderPass = default(RenderPass);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyRenderPass", DeviceLevel).}
+    ): void {.cdecl, preload("vkDestroyRenderPass").}
 proc getRenderAreaGranularity*(
       device: Device;
       renderPass: RenderPass;
       pGranularity: ptr Extent2D;
-    ): void {.cdecl, lazyload("vkGetRenderAreaGranularity", DeviceLevel).}
+    ): void {.cdecl, preload("vkGetRenderAreaGranularity").}
 
 
 # Command pool commands
@@ -4116,12 +4116,12 @@ proc createCommandPool*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkCreateCommandPool", DeviceLevel).}
+      preload("vkCreateCommandPool").}
 proc destroyCommandPool*(
       device: Device;
       commandPool = default(CommandPool);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyCommandPool", DeviceLevel).}
+    ): void {.cdecl, preload("vkDestroyCommandPool").}
 proc resetCommandPool*(
       device: Device;
       commandPool: CommandPool;
@@ -4129,7 +4129,7 @@ proc resetCommandPool*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfDeviceMemory),
-      lazyload("vkResetCommandPool", DeviceLevel).}
+      preload("vkResetCommandPool").}
 
 
 # Command buffer commands
@@ -4141,33 +4141,33 @@ proc allocateCommandBuffers*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkAllocateCommandBuffers", DeviceLevel).}
+      preload("vkAllocateCommandBuffers").}
 proc freeCommandBuffers*(
       device: Device;
       commandPool: CommandPool;
       commandBufferCount: uint32;
       pCommandBuffers {.length: commandBufferCount.}: arrPtr[CommandBuffer];
-    ): void {.cdecl, lazyload("vkFreeCommandBuffers", DeviceLevel).}
+    ): void {.cdecl, preload("vkFreeCommandBuffers").}
 proc beginCommandBuffer*(
       commandBuffer: CommandBuffer;
       pBeginInfo: ptr CommandBufferBeginInfo;
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkBeginCommandBuffer", DeviceLevel).}
+      preload("vkBeginCommandBuffer").}
 proc endCommandBuffer*(
       commandBuffer: CommandBuffer;
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkEndCommandBuffer", DeviceLevel).}
+      preload("vkEndCommandBuffer").}
 proc resetCommandBuffer*(
       commandBuffer: CommandBuffer;
       flags = default(CommandBufferResetFlags);
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfDeviceMemory),
-      lazyload("vkResetCommandBuffer", DeviceLevel).}
+      preload("vkResetCommandBuffer").}
 
 
 # Command buffer building commands
@@ -4179,53 +4179,53 @@ proc cmdBindPipeline*(
       commandBuffer: CommandBuffer;
       pipelineBindPoint: PipelineBindPoint;
       pipeline: Pipeline;
-    ): void {.cdecl, lazyload("vkCmdBindPipeline", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdBindPipeline").}
 proc cmdSetViewport*(
       commandBuffer: CommandBuffer;
       firstViewport: uint32;
       viewportCount: uint32;
       pViewports {.length: viewportCount.}: arrPtr[Viewport];
-    ): void {.cdecl, lazyload("vkCmdSetViewport", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdSetViewport").}
 proc cmdSetScissor*(
       commandBuffer: CommandBuffer;
       firstScissor: uint32;
       scissorCount: uint32;
       pScissors {.length: scissorCount.}: arrPtr[Rect2D];
-    ): void {.cdecl, lazyload("vkCmdSetScissor", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdSetScissor").}
 proc cmdSetLineWidth*(
       commandBuffer: CommandBuffer;
       lineWidth: float32;
-    ): void {.cdecl, lazyload("vkCmdSetLineWidth", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdSetLineWidth").}
 proc cmdSetDepthBias*(
       commandBuffer: CommandBuffer;
       depthBiasConstantFactor: float32;
       depthBiasClamp: float32;
       depthBiasSlopeFactor: float32;
-    ): void {.cdecl, lazyload("vkCmdSetDepthBias", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdSetDepthBias").}
 proc cmdSetBlendConstants*(
       commandBuffer: CommandBuffer;
       blendConstants: float32;
-    ): void {.cdecl, lazyload("vkCmdSetBlendConstants", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdSetBlendConstants").}
 proc cmdSetDepthBounds*(
       commandBuffer: CommandBuffer;
       minDepthBounds: float32;
       maxDepthBounds: float32;
-    ): void {.cdecl, lazyload("vkCmdSetDepthBounds", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdSetDepthBounds").}
 proc cmdSetStencilCompareMask*(
       commandBuffer: CommandBuffer;
       faceMask: StencilFaceFlags;
       compareMask: uint32;
-    ): void {.cdecl, lazyload("vkCmdSetStencilCompareMask", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdSetStencilCompareMask").}
 proc cmdSetStencilWriteMask*(
       commandBuffer: CommandBuffer;
       faceMask: StencilFaceFlags;
       writeMask: uint32;
-    ): void {.cdecl, lazyload("vkCmdSetStencilWriteMask", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdSetStencilWriteMask").}
 proc cmdSetStencilReference*(
       commandBuffer: CommandBuffer;
       faceMask: StencilFaceFlags;
       reference: uint32;
-    ): void {.cdecl, lazyload("vkCmdSetStencilReference", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdSetStencilReference").}
 proc cmdBindDescriptorSets*(
       commandBuffer: CommandBuffer;
       pipelineBindPoint: PipelineBindPoint;
@@ -4235,27 +4235,27 @@ proc cmdBindDescriptorSets*(
       pDescriptorSets {.length: descriptorSetCount.}: arrPtr[DescriptorSet];
       dynamicOffsetCount = default(uint32);
       pDynamicOffsets {.length: dynamicOffsetCount.}: arrPtr[uint32];
-    ): void {.cdecl, lazyload("vkCmdBindDescriptorSets", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdBindDescriptorSets").}
 proc cmdBindIndexBuffer*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
       offset: DeviceSize;
       indexType: IndexType;
-    ): void {.cdecl, lazyload("vkCmdBindIndexBuffer", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdBindIndexBuffer").}
 proc cmdBindVertexBuffers*(
       commandBuffer: CommandBuffer;
       firstBinding: uint32;
       bindingCount: uint32;
       pBuffers {.length: bindingCount.}: arrPtr[Buffer];
       pOffsets {.length: bindingCount.}: arrPtr[DeviceSize];
-    ): void {.cdecl, lazyload("vkCmdBindVertexBuffers", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdBindVertexBuffers").}
 proc cmdDraw*(
       commandBuffer: CommandBuffer;
       vertexCount: uint32;
       instanceCount: uint32;
       firstVertex: uint32;
       firstInstance: uint32;
-    ): void {.cdecl, lazyload("vkCmdDraw", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdDraw").}
 proc cmdDrawIndexed*(
       commandBuffer: CommandBuffer;
       indexCount: uint32;
@@ -4263,39 +4263,39 @@ proc cmdDrawIndexed*(
       firstIndex: uint32;
       vertexOffset: int32;
       firstInstance: uint32;
-    ): void {.cdecl, lazyload("vkCmdDrawIndexed", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdDrawIndexed").}
 proc cmdDrawIndirect*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
       offset: DeviceSize;
       drawCount: uint32;
       stride: uint32;
-    ): void {.cdecl, lazyload("vkCmdDrawIndirect", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdDrawIndirect").}
 proc cmdDrawIndexedIndirect*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
       offset: DeviceSize;
       drawCount: uint32;
       stride: uint32;
-    ): void {.cdecl, lazyload("vkCmdDrawIndexedIndirect", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdDrawIndexedIndirect").}
 proc cmdDispatch*(
       commandBuffer: CommandBuffer;
       groupCountX: uint32;
       groupCountY: uint32;
       groupCountZ: uint32;
-    ): void {.cdecl, lazyload("vkCmdDispatch", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdDispatch").}
 proc cmdDispatchIndirect*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
       offset: DeviceSize;
-    ): void {.cdecl, lazyload("vkCmdDispatchIndirect", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdDispatchIndirect").}
 proc cmdCopyBuffer*(
       commandBuffer: CommandBuffer;
       srcBuffer: Buffer;
       dstBuffer: Buffer;
       regionCount: uint32;
       pRegions {.length: regionCount.}: arrPtr[BufferCopy];
-    ): void {.cdecl, lazyload("vkCmdCopyBuffer", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdCopyBuffer").}
 proc cmdCopyImage*(
       commandBuffer: CommandBuffer;
       srcImage: Image;
@@ -4304,7 +4304,7 @@ proc cmdCopyImage*(
       dstImageLayout: ImageLayout;
       regionCount: uint32;
       pRegions {.length: regionCount.}: arrPtr[ImageCopy];
-    ): void {.cdecl, lazyload("vkCmdCopyImage", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdCopyImage").}
 proc cmdBlitImage*(
       commandBuffer: CommandBuffer;
       srcImage: Image;
@@ -4314,7 +4314,7 @@ proc cmdBlitImage*(
       regionCount: uint32;
       pRegions {.length: regionCount.}: arrPtr[ImageBlit];
       filter: Filter;
-    ): void {.cdecl, lazyload("vkCmdBlitImage", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdBlitImage").}
 proc cmdCopyBufferToImage*(
       commandBuffer: CommandBuffer;
       srcBuffer: Buffer;
@@ -4322,7 +4322,7 @@ proc cmdCopyBufferToImage*(
       dstImageLayout: ImageLayout;
       regionCount: uint32;
       pRegions {.length: regionCount.}: arrPtr[BufferImageCopy];
-    ): void {.cdecl, lazyload("vkCmdCopyBufferToImage", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdCopyBufferToImage").}
 proc cmdCopyImageToBuffer*(
       commandBuffer: CommandBuffer;
       srcImage: Image;
@@ -4330,21 +4330,21 @@ proc cmdCopyImageToBuffer*(
       dstBuffer: Buffer;
       regionCount: uint32;
       pRegions {.length: regionCount.}: arrPtr[BufferImageCopy];
-    ): void {.cdecl, lazyload("vkCmdCopyImageToBuffer", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdCopyImageToBuffer").}
 proc cmdUpdateBuffer*(
       commandBuffer: CommandBuffer;
       dstBuffer: Buffer;
       dstOffset: DeviceSize;
       dataSize: DeviceSize;
       pData {.length: dataSize.}: pointer;
-    ): void {.cdecl, lazyload("vkCmdUpdateBuffer", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdUpdateBuffer").}
 proc cmdFillBuffer*(
       commandBuffer: CommandBuffer;
       dstBuffer: Buffer;
       dstOffset: DeviceSize;
       size: DeviceSize;
       data: uint32;
-    ): void {.cdecl, lazyload("vkCmdFillBuffer", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdFillBuffer").}
 proc cmdClearColorImage*(
       commandBuffer: CommandBuffer;
       image: Image;
@@ -4352,7 +4352,7 @@ proc cmdClearColorImage*(
       pColor: ptr ClearColorValue;
       rangeCount: uint32;
       pRanges {.length: rangeCount.}: arrPtr[ImageSubresourceRange];
-    ): void {.cdecl, lazyload("vkCmdClearColorImage", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdClearColorImage").}
 proc cmdClearDepthStencilImage*(
       commandBuffer: CommandBuffer;
       image: Image;
@@ -4360,14 +4360,14 @@ proc cmdClearDepthStencilImage*(
       pDepthStencil: ptr ClearDepthStencilValue;
       rangeCount: uint32;
       pRanges {.length: rangeCount.}: arrPtr[ImageSubresourceRange];
-    ): void {.cdecl, lazyload("vkCmdClearDepthStencilImage", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdClearDepthStencilImage").}
 proc cmdClearAttachments*(
       commandBuffer: CommandBuffer;
       attachmentCount: uint32;
       pAttachments {.length: attachmentCount.}: arrPtr[ClearAttachment];
       rectCount: uint32;
       pRects {.length: rectCount.}: arrPtr[ClearRect];
-    ): void {.cdecl, lazyload("vkCmdClearAttachments", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdClearAttachments").}
 proc cmdResolveImage*(
       commandBuffer: CommandBuffer;
       srcImage: Image;
@@ -4376,17 +4376,17 @@ proc cmdResolveImage*(
       dstImageLayout: ImageLayout;
       regionCount: uint32;
       pRegions {.length: regionCount.}: arrPtr[ImageResolve];
-    ): void {.cdecl, lazyload("vkCmdResolveImage", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdResolveImage").}
 proc cmdSetEvent*(
       commandBuffer: CommandBuffer;
       event: Event;
       stageMask: PipelineStageFlags;
-    ): void {.cdecl, lazyload("vkCmdSetEvent", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdSetEvent").}
 proc cmdResetEvent*(
       commandBuffer: CommandBuffer;
       event: Event;
       stageMask: PipelineStageFlags;
-    ): void {.cdecl, lazyload("vkCmdResetEvent", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdResetEvent").}
 proc cmdWaitEvents*(
       commandBuffer: CommandBuffer;
       eventCount: uint32;
@@ -4399,7 +4399,7 @@ proc cmdWaitEvents*(
       pBufferMemoryBarriers {.length: bufferMemoryBarrierCount.}: arrPtr[BufferMemoryBarrier];
       imageMemoryBarrierCount = default(uint32);
       pImageMemoryBarriers {.length: imageMemoryBarrierCount.}: arrPtr[ImageMemoryBarrier];
-    ): void {.cdecl, lazyload("vkCmdWaitEvents", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdWaitEvents").}
 proc cmdPipelineBarrier*(
       commandBuffer: CommandBuffer;
       srcStageMask: PipelineStageFlags;
@@ -4411,30 +4411,30 @@ proc cmdPipelineBarrier*(
       pBufferMemoryBarriers {.length: bufferMemoryBarrierCount.}: arrPtr[BufferMemoryBarrier];
       imageMemoryBarrierCount = default(uint32);
       pImageMemoryBarriers {.length: imageMemoryBarrierCount.}: arrPtr[ImageMemoryBarrier];
-    ): void {.cdecl, lazyload("vkCmdPipelineBarrier", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdPipelineBarrier").}
 proc cmdBeginQuery*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
       query: uint32;
       flags = default(QueryControlFlags);
-    ): void {.cdecl, lazyload("vkCmdBeginQuery", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdBeginQuery").}
 proc cmdEndQuery*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
       query: uint32;
-    ): void {.cdecl, lazyload("vkCmdEndQuery", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdEndQuery").}
 proc cmdResetQueryPool*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
       firstQuery: uint32;
       queryCount: uint32;
-    ): void {.cdecl, lazyload("vkCmdResetQueryPool", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdResetQueryPool").}
 proc cmdWriteTimestamp*(
       commandBuffer: CommandBuffer;
       pipelineStage: PipelineStageFlagBits;
       queryPool: QueryPool;
       query: uint32;
-    ): void {.cdecl, lazyload("vkCmdWriteTimestamp", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdWriteTimestamp").}
 proc cmdCopyQueryPoolResults*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
@@ -4444,7 +4444,7 @@ proc cmdCopyQueryPoolResults*(
       dstOffset: DeviceSize;
       stride: DeviceSize;
       flags = default(QueryResultFlags);
-    ): void {.cdecl, lazyload("vkCmdCopyQueryPoolResults", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdCopyQueryPoolResults").}
 proc cmdPushConstants*(
       commandBuffer: CommandBuffer;
       layout: PipelineLayout;
@@ -4452,24 +4452,24 @@ proc cmdPushConstants*(
       offset: uint32;
       size: uint32;
       pValues {.length: size.}: pointer;
-    ): void {.cdecl, lazyload("vkCmdPushConstants", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdPushConstants").}
 proc cmdBeginRenderPass*(
       commandBuffer: CommandBuffer;
       pRenderPassBegin: ptr RenderPassBeginInfo;
       contents: SubpassContents;
-    ): void {.cdecl, lazyload("vkCmdBeginRenderPass", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdBeginRenderPass").}
 proc cmdNextSubpass*(
       commandBuffer: CommandBuffer;
       contents: SubpassContents;
-    ): void {.cdecl, lazyload("vkCmdNextSubpass", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdNextSubpass").}
 proc cmdEndRenderPass*(
       commandBuffer: CommandBuffer;
-    ): void {.cdecl, lazyload("vkCmdEndRenderPass", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdEndRenderPass").}
 proc cmdExecuteCommands*(
       commandBuffer: CommandBuffer;
       commandBufferCount: uint32;
       pCommandBuffers {.length: commandBufferCount.}: arrPtr[CommandBuffer];
-    ): void {.cdecl, lazyload("vkCmdExecuteCommands", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdExecuteCommands").}
 
 
 # ========================= #
@@ -4544,381 +4544,6 @@ template withLoad*[T: proc](procAccessor: T; handle: Instance or Device): T =
 #      LOADER TEMPLATE      #
 # ========================= #
 
-
-proc loadAllVk10*(instance: Instance) =
-  # Device initialization
-  instance.loadCommand destroyInstance
-  instance.loadCommand enumeratePhysicalDevices
-  instance.loadCommand getPhysicalDeviceFeatures
-  instance.loadCommand getPhysicalDeviceFormatProperties
-  instance.loadCommand getPhysicalDeviceImageFormatProperties
-  instance.loadCommand getPhysicalDeviceProperties
-  instance.loadCommand getPhysicalDeviceQueueFamilyProperties
-  instance.loadCommand getPhysicalDeviceMemoryProperties
-
-  # Device commands
-  instance.loadCommand createDevice
-  instance.loadCommand destroyDevice
-
-  # Extension discovery commands
-  instance.loadCommand enumerateDeviceExtensionProperties
-
-  # Layer discovery commands
-  instance.loadCommand enumerateDeviceLayerProperties
-
-  # Queue commands
-  instance.loadCommand getDeviceQueue
-  instance.loadCommand queueSubmit
-  instance.loadCommand queueWaitIdle
-  instance.loadCommand deviceWaitIdle
-
-  # Memory commands
-  instance.loadCommand allocateMemory
-  instance.loadCommand freeMemory
-  instance.loadCommand mapMemory
-  instance.loadCommand unmapMemory
-  instance.loadCommand flushMappedMemoryRanges
-  instance.loadCommand invalidateMappedMemoryRanges
-  instance.loadCommand getDeviceMemoryCommitment
-
-  # Memory management API commands
-  instance.loadCommand bindBufferMemory
-  instance.loadCommand bindImageMemory
-  instance.loadCommand getBufferMemoryRequirements
-  instance.loadCommand getImageMemoryRequirements
-
-  # Sparse resource memory management API commands
-  instance.loadCommand getImageSparseMemoryRequirements
-  instance.loadCommand getPhysicalDeviceSparseImageFormatProperties
-  instance.loadCommand queueBindSparse
-
-  # Fence commands
-  instance.loadCommand createFence
-  instance.loadCommand destroyFence
-  instance.loadCommand resetFences
-  instance.loadCommand getFenceStatus
-  instance.loadCommand waitForFences
-
-  # Queue semaphore commands
-  instance.loadCommand createSemaphore
-  instance.loadCommand destroySemaphore
-
-  # Event commands
-  instance.loadCommand createEvent
-  instance.loadCommand destroyEvent
-  instance.loadCommand getEventStatus
-  instance.loadCommand setEvent
-  instance.loadCommand resetEvent
-
-  # Query commands
-  instance.loadCommand createQueryPool
-  instance.loadCommand destroyQueryPool
-  instance.loadCommand getQueryPoolResults
-
-  # Buffer commands
-  instance.loadCommand createBuffer
-  instance.loadCommand destroyBuffer
-
-  # Buffer view commands
-  instance.loadCommand createBufferView
-  instance.loadCommand destroyBufferView
-
-  # Image commands
-  instance.loadCommand createImage
-  instance.loadCommand destroyImage
-  instance.loadCommand getImageSubresourceLayout
-
-  # Image view commands
-  instance.loadCommand createImageView
-  instance.loadCommand destroyImageView
-
-  # Shader commands
-  instance.loadCommand createShaderModule
-  instance.loadCommand destroyShaderModule
-
-  # Pipeline Cache commands
-  instance.loadCommand createPipelineCache
-  instance.loadCommand destroyPipelineCache
-  instance.loadCommand getPipelineCacheData
-  instance.loadCommand mergePipelineCaches
-
-  # Pipeline commands
-  instance.loadCommand createGraphicsPipelines
-  instance.loadCommand createComputePipelines
-  instance.loadCommand destroyPipeline
-
-  # Pipeline layout commands
-  instance.loadCommand createPipelineLayout
-  instance.loadCommand destroyPipelineLayout
-
-  # Sampler commands
-  instance.loadCommand createSampler
-  instance.loadCommand destroySampler
-
-  # Descriptor set commands
-  instance.loadCommand createDescriptorSetLayout
-  instance.loadCommand destroyDescriptorSetLayout
-  instance.loadCommand createDescriptorPool
-  instance.loadCommand destroyDescriptorPool
-  instance.loadCommand resetDescriptorPool
-  instance.loadCommand allocateDescriptorSets
-  instance.loadCommand freeDescriptorSets
-  instance.loadCommand updateDescriptorSets
-
-  # Pass commands
-  instance.loadCommand createFramebuffer
-  instance.loadCommand destroyFramebuffer
-  instance.loadCommand createRenderPass
-  instance.loadCommand destroyRenderPass
-  instance.loadCommand getRenderAreaGranularity
-
-  # Command pool commands
-  instance.loadCommand createCommandPool
-  instance.loadCommand destroyCommandPool
-  instance.loadCommand resetCommandPool
-
-  # Command buffer commands
-  instance.loadCommand allocateCommandBuffers
-  instance.loadCommand freeCommandBuffers
-  instance.loadCommand beginCommandBuffer
-  instance.loadCommand endCommandBuffer
-  instance.loadCommand resetCommandBuffer
-
-  # Command buffer building commands
-  instance.loadCommand cmdBindPipeline
-  instance.loadCommand cmdSetViewport
-  instance.loadCommand cmdSetScissor
-  instance.loadCommand cmdSetLineWidth
-  instance.loadCommand cmdSetDepthBias
-  instance.loadCommand cmdSetBlendConstants
-  instance.loadCommand cmdSetDepthBounds
-  instance.loadCommand cmdSetStencilCompareMask
-  instance.loadCommand cmdSetStencilWriteMask
-  instance.loadCommand cmdSetStencilReference
-  instance.loadCommand cmdBindDescriptorSets
-  instance.loadCommand cmdBindIndexBuffer
-  instance.loadCommand cmdBindVertexBuffers
-  instance.loadCommand cmdDraw
-  instance.loadCommand cmdDrawIndexed
-  instance.loadCommand cmdDrawIndirect
-  instance.loadCommand cmdDrawIndexedIndirect
-  instance.loadCommand cmdDispatch
-  instance.loadCommand cmdDispatchIndirect
-  instance.loadCommand cmdCopyBuffer
-  instance.loadCommand cmdCopyImage
-  instance.loadCommand cmdBlitImage
-  instance.loadCommand cmdCopyBufferToImage
-  instance.loadCommand cmdCopyImageToBuffer
-  instance.loadCommand cmdUpdateBuffer
-  instance.loadCommand cmdFillBuffer
-  instance.loadCommand cmdClearColorImage
-  instance.loadCommand cmdClearDepthStencilImage
-  instance.loadCommand cmdClearAttachments
-  instance.loadCommand cmdResolveImage
-  instance.loadCommand cmdSetEvent
-  instance.loadCommand cmdResetEvent
-  instance.loadCommand cmdWaitEvents
-  instance.loadCommand cmdPipelineBarrier
-  instance.loadCommand cmdBeginQuery
-  instance.loadCommand cmdEndQuery
-  instance.loadCommand cmdResetQueryPool
-  instance.loadCommand cmdWriteTimestamp
-  instance.loadCommand cmdCopyQueryPoolResults
-  instance.loadCommand cmdPushConstants
-  instance.loadCommand cmdBeginRenderPass
-  instance.loadCommand cmdNextSubpass
-  instance.loadCommand cmdEndRenderPass
-  instance.loadCommand cmdExecuteCommands
-
-proc loadVk10*(instance: Instance) =
-  # Device initialization
-  instance.loadCommand destroyInstance
-  instance.loadCommand enumeratePhysicalDevices
-  instance.loadCommand getPhysicalDeviceFeatures
-  instance.loadCommand getPhysicalDeviceFormatProperties
-  instance.loadCommand getPhysicalDeviceImageFormatProperties
-  instance.loadCommand getPhysicalDeviceProperties
-  instance.loadCommand getPhysicalDeviceQueueFamilyProperties
-  instance.loadCommand getPhysicalDeviceMemoryProperties
-
-  # Device commands
-  instance.loadCommand createDevice
-
-  # Extension discovery commands
-  instance.loadCommand enumerateDeviceExtensionProperties
-
-  # Layer discovery commands
-  instance.loadCommand enumerateDeviceLayerProperties
-
-  # Sparse resource memory management API commands
-  instance.loadCommand getPhysicalDeviceSparseImageFormatProperties
-
-proc loadVk10*(device: Device) =
-  # Device commands
-  device.loadCommand destroyDevice
-
-  # Queue commands
-  device.loadCommand getDeviceQueue
-  device.loadCommand queueSubmit
-  device.loadCommand queueWaitIdle
-  device.loadCommand deviceWaitIdle
-
-  # Memory commands
-  device.loadCommand allocateMemory
-  device.loadCommand freeMemory
-  device.loadCommand mapMemory
-  device.loadCommand unmapMemory
-  device.loadCommand flushMappedMemoryRanges
-  device.loadCommand invalidateMappedMemoryRanges
-  device.loadCommand getDeviceMemoryCommitment
-
-  # Memory management API commands
-  device.loadCommand bindBufferMemory
-  device.loadCommand bindImageMemory
-  device.loadCommand getBufferMemoryRequirements
-  device.loadCommand getImageMemoryRequirements
-
-  # Sparse resource memory management API commands
-  device.loadCommand getImageSparseMemoryRequirements
-  device.loadCommand queueBindSparse
-
-  # Fence commands
-  device.loadCommand createFence
-  device.loadCommand destroyFence
-  device.loadCommand resetFences
-  device.loadCommand getFenceStatus
-  device.loadCommand waitForFences
-
-  # Queue semaphore commands
-  device.loadCommand createSemaphore
-  device.loadCommand destroySemaphore
-
-  # Event commands
-  device.loadCommand createEvent
-  device.loadCommand destroyEvent
-  device.loadCommand getEventStatus
-  device.loadCommand setEvent
-  device.loadCommand resetEvent
-
-  # Query commands
-  device.loadCommand createQueryPool
-  device.loadCommand destroyQueryPool
-  device.loadCommand getQueryPoolResults
-
-  # Buffer commands
-  device.loadCommand createBuffer
-  device.loadCommand destroyBuffer
-
-  # Buffer view commands
-  device.loadCommand createBufferView
-  device.loadCommand destroyBufferView
-
-  # Image commands
-  device.loadCommand createImage
-  device.loadCommand destroyImage
-  device.loadCommand getImageSubresourceLayout
-
-  # Image view commands
-  device.loadCommand createImageView
-  device.loadCommand destroyImageView
-
-  # Shader commands
-  device.loadCommand createShaderModule
-  device.loadCommand destroyShaderModule
-
-  # Pipeline Cache commands
-  device.loadCommand createPipelineCache
-  device.loadCommand destroyPipelineCache
-  device.loadCommand getPipelineCacheData
-  device.loadCommand mergePipelineCaches
-
-  # Pipeline commands
-  device.loadCommand createGraphicsPipelines
-  device.loadCommand createComputePipelines
-  device.loadCommand destroyPipeline
-
-  # Pipeline layout commands
-  device.loadCommand createPipelineLayout
-  device.loadCommand destroyPipelineLayout
-
-  # Sampler commands
-  device.loadCommand createSampler
-  device.loadCommand destroySampler
-
-  # Descriptor set commands
-  device.loadCommand createDescriptorSetLayout
-  device.loadCommand destroyDescriptorSetLayout
-  device.loadCommand createDescriptorPool
-  device.loadCommand destroyDescriptorPool
-  device.loadCommand resetDescriptorPool
-  device.loadCommand allocateDescriptorSets
-  device.loadCommand freeDescriptorSets
-  device.loadCommand updateDescriptorSets
-
-  # Pass commands
-  device.loadCommand createFramebuffer
-  device.loadCommand destroyFramebuffer
-  device.loadCommand createRenderPass
-  device.loadCommand destroyRenderPass
-  device.loadCommand getRenderAreaGranularity
-
-  # Command pool commands
-  device.loadCommand createCommandPool
-  device.loadCommand destroyCommandPool
-  device.loadCommand resetCommandPool
-
-  # Command buffer commands
-  device.loadCommand allocateCommandBuffers
-  device.loadCommand freeCommandBuffers
-  device.loadCommand beginCommandBuffer
-  device.loadCommand endCommandBuffer
-  device.loadCommand resetCommandBuffer
-
-  # Command buffer building commands
-  device.loadCommand cmdBindPipeline
-  device.loadCommand cmdSetViewport
-  device.loadCommand cmdSetScissor
-  device.loadCommand cmdSetLineWidth
-  device.loadCommand cmdSetDepthBias
-  device.loadCommand cmdSetBlendConstants
-  device.loadCommand cmdSetDepthBounds
-  device.loadCommand cmdSetStencilCompareMask
-  device.loadCommand cmdSetStencilWriteMask
-  device.loadCommand cmdSetStencilReference
-  device.loadCommand cmdBindDescriptorSets
-  device.loadCommand cmdBindIndexBuffer
-  device.loadCommand cmdBindVertexBuffers
-  device.loadCommand cmdDraw
-  device.loadCommand cmdDrawIndexed
-  device.loadCommand cmdDrawIndirect
-  device.loadCommand cmdDrawIndexedIndirect
-  device.loadCommand cmdDispatch
-  device.loadCommand cmdDispatchIndirect
-  device.loadCommand cmdCopyBuffer
-  device.loadCommand cmdCopyImage
-  device.loadCommand cmdBlitImage
-  device.loadCommand cmdCopyBufferToImage
-  device.loadCommand cmdCopyImageToBuffer
-  device.loadCommand cmdUpdateBuffer
-  device.loadCommand cmdFillBuffer
-  device.loadCommand cmdClearColorImage
-  device.loadCommand cmdClearDepthStencilImage
-  device.loadCommand cmdClearAttachments
-  device.loadCommand cmdResolveImage
-  device.loadCommand cmdSetEvent
-  device.loadCommand cmdResetEvent
-  device.loadCommand cmdWaitEvents
-  device.loadCommand cmdPipelineBarrier
-  device.loadCommand cmdBeginQuery
-  device.loadCommand cmdEndQuery
-  device.loadCommand cmdResetQueryPool
-  device.loadCommand cmdWriteTimestamp
-  device.loadCommand cmdCopyQueryPoolResults
-  device.loadCommand cmdPushConstants
-  device.loadCommand cmdBeginRenderPass
-  device.loadCommand cmdNextSubpass
-  device.loadCommand cmdEndRenderPass
-  device.loadCommand cmdExecuteCommands
 
 
 
