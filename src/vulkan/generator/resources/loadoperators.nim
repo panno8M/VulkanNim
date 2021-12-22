@@ -4,9 +4,8 @@
 # ========================= #
 
 # You can use these templates to load Vulkan proc dynamically and individually.
-import macros
+import macros {.all.}
 import sequtils
-import options
 
 macro loadCommand*[T: proc](handle: Instance or Device; procType: typedesc[T]): T =
   let (loadFrom, loadWith) = block:
@@ -58,7 +57,8 @@ macro loadCommand*[T: proc](handle: Instance or Device; procType: typedesc[T]): 
   else: error "Type of the handle must be Instance or Device", procType
 
 macro loadCommand*[T: proc](handle: Instance or Device; procAccessor: T) =
-  let cageName = procAccessor.getCustomPragmaNodes("loadInto")[0][1]
+  let cageName = procAccessor.customPragmaNode()
+    .findChild(it.len > 0 and it[0].repr == "loadinto")[0][1]
   quote do:
     `cageName` = option `handle`.loadCommand(`cageName`.unsafeGet.typeof)
 

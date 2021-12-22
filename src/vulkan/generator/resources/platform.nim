@@ -4,6 +4,8 @@ import sequtils
 import options
 export macros.hasCustomPragma, macros.getCustomPragmaVal
 
+import xcb/xcb
+
 const vkDllPath =
   when defined(windows):
     "vulkan-1.dll"
@@ -15,9 +17,8 @@ const vkDllPath =
 type
   UnusedEnum* = object ## Reserved for future use
   HandleType* = object of RootObj
-  NullHandle* = Handle[HandleType]
-  Handle*[T] = distinct ptr object
-  NonDispatchableHandle*[T] = distinct ptr object
+  Handle*[T] = distinct uint64
+  NonDispatchableHandle*[T] = distinct uint64
   arrPtr*[T] = ptr T
 
 type
@@ -37,11 +38,11 @@ type
   DWORD* = ptr object
   HINSTANCE* = ptr object
   HWND* = ptr object
-  xcb_connection_t* = ptr object
-  xcb_window_t* = ptr object
-  xcb_visualid_t* = ptr object
   Window* = ptr object
   VisualID* = ptr object
+export XcbConnection
+export XcbWindow
+export XcbVisualid
 
 template defineAlias*(TEnum: typedesc; original, alias: untyped): untyped =
   template alias*(tEnum: typedesc[TEnum]): TEnum =
@@ -139,4 +140,4 @@ template successCodes*(v: varargs[untyped]) {.pragma.}
 template errorCodes*(v: varargs[untyped]) {.pragma.}
 
 template prepareVulkanLibDef*(): untyped =
-  import Options
+  import options

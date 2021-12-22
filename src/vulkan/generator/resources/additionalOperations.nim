@@ -3,12 +3,8 @@
 # Utility for bitmask operation added independently
 # =================================================
 
-import macros
-import strformat
 import strutils
-import sequtils
 import sets
-import options
 import sugar
 
 proc `==`*[Flagbits: enum](a, b: Flags[Flagbits]): bool =
@@ -175,16 +171,21 @@ proc `carefulNot`*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
 # Utility for handle operation added independently
 # ================================================
 
-proc `==`*[T](a, b: Handle[T]): bool = a.pointer == b.pointer
-proc `==`*[T](a: Handle[T]; b: Handle[HandleType]): bool = a.pointer == b.pointer
+proc `==`*[T](a, b: Handle[T]): bool = a.uint64 == b.uint64
+proc `==`*[T](a: Handle[T]; b: Handle[HandleType]): bool = a.uint64 == b.uint64
 template `==`*[T](a: Handle[HandleType]; b: Handle[T]): bool = b == a
-proc `==`*(a, b: Handle[HandleType]): bool = a.pointer == b.pointer
+proc `==`*(a, b: Handle[HandleType]): bool = a.uint64 == b.uint64
 
-proc `==`*[T](a, b: NonDispatchableHandle[T]): bool = a.pointer == b.pointer
-proc `==`*[T](a: NonDispatchableHandle[T]; b: NonDispatchableHandle[HandleType]): bool = a.pointer == b.pointer
+proc `==`*[T](a, b: NonDispatchableHandle[T]): bool = a.uint64 == b.uint64
+proc `==`*[T](a: NonDispatchableHandle[T]; b: NonDispatchableHandle[HandleType]): bool = a.uint64 == b.uint64
 template `==`*[T](a: NonDispatchableHandle[HandleType]; b: NonDispatchableHandle[T]): bool = b == a
-proc `==`*(a, b: NonDispatchableHandle[HandleType]): bool = a.pointer == b.pointer
+proc `==`*(a, b: NonDispatchableHandle[HandleType]): bool = a.uint64 == b.uint64
 
+proc isValid*[T](h: Handle[T]): bool = a.uint64 != 0
+proc isValid*[T](h: NonDispatchableHandle[T]): bool = a.uint64 != 0
+
+proc nullHandle*[T](H: typedesc[Handle[T]]): Handle[T] = H(0)
+proc nullHandle*[T](H: typedesc[NonDispatchableHandle[T]]): NonDispatchableHandle[T] = H(0)
 
 # Bool32 operations
 # =================
@@ -262,7 +263,7 @@ macro `{}`*[T: object](Struct: typedesc[T]; args: varargs[untyped]): T =
         error "\"" & $arg[0] & "\" is marked as constant so cannot fill it manuary", arg
     for argneed in argsNeedFill:
       if not args.anyIt(eqIdent(it[0], argneed.name)):
-        error "\"" & $argneed.name & ": " & $argneed.kind & "\" is not optional. must be filled", Struct
+        error "\"" & argneed.name.repr & ": " & argneed.kind.repr & "\" is not optional. must be filled", Struct
 
   newNimNode(nnkObjConstr)
     .add(Struct)

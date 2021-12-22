@@ -329,8 +329,12 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
     .mapIt( block:
       let (idir, iname, iext) = library[it.fileName].fileName.splitFile
       let (ldir, lname, lext) = libFile.fileName.splitFile
-      if idir == ldir: (fileName: "."/iname, exportit: it.exportit)
+      if libFile.fileName == "extensions/VK_EXT_debug_marker" and
+         iname == "VK_EXT_debug_report":
+        (fileName: "", exportit: false)
+      elif idir == ldir: (fileName: "."/iname, exportit: it.exportit)
       else: (fileName: ".."/idir/iname, exportit: it.exportit))
+    .filterIt(not it.fileName.isEmptyOrWhitespace)
     .deduplicate
   if dependencies.len != 0:
     result &= dependencies
@@ -343,7 +347,8 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
         .join("\n").LF
     result.LF
 
-  result &= "prepareVulkanLibDef()\n\n"
+  if libFile.fileName != "platform":
+    result &= "prepareVulkanLibDef()\n\n"
 
   block Solve_basetypes:
     var typeDefs: seq[seq[string]]

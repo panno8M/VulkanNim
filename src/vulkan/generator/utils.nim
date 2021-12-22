@@ -227,6 +227,9 @@ proc replaceBasicTypes*(str: string): string =
     .replace("float", "float32")
     .replace("double", "float64")
     .replace("double", "float64")
+    .replace("xcb_window_t", "XcbWindow")
+    .replace("xcb_connection_t", "XcbConnection")
+    .replace("xcb_visualid_t", "XcbVisualid")
 
 proc replacePtrTypes*(str: string): string =
   str

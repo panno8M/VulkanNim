@@ -1,11 +1,9 @@
-# Generated at 2021-10-24T09:33:17Z
+# Generated at 2021-11-04T06:56:59Z
 # VK_EXT_debug_marker
 
 import ../platform
 import ../features/vk10
-import ./VK_EXT_debug_report
 import ./VK_EXT_debug_utils
-export VK_EXT_debug_report
 export VK_EXT_debug_utils
 
 prepareVulkanLibDef()

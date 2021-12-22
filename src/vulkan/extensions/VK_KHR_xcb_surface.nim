@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T09:33:16Z
+# Generated at 2021-11-04T09:33:02Z
 # VK_KHR_xcb_surface
 
 import ../platform
@@ -20,8 +20,8 @@ type
     sType* {.constant: (StructureType.xcbSurfaceCreateInfoKhr).}: StructureType
     pNext* {.optional.}: pointer
     flags* {.optional.}: XcbSurfaceCreateFlagsKHR
-    connection*: ptr xcb_connection_t
-    window*: xcb_window_t
+    connection*: ptr XcbConnection
+    window*: XcbWindow
 
 proc createXcbSurfaceKHR*(
       instance: Instance;
@@ -35,8 +35,8 @@ proc createXcbSurfaceKHR*(
 proc getPhysicalDeviceXcbPresentationSupportKHR*(
       physicalDevice: PhysicalDevice;
       queueFamilyIndex: uint32;
-      connection: ptr xcb_connection_t;
-      visual_id: xcb_visualid_t;
+      connection: ptr XcbConnection;
+      visual_id: XcbVisualid;
     ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceXcbPresentationSupportKHR", InstanceLevel).}
 
 proc loadAllVK_KHR_xcb_surface*(instance: Instance) =
