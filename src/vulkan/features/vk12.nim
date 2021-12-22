@@ -1,4 +1,4 @@
-# Generated at 2021-10-31T06:50:41Z
+# Generated at 2021-12-22T13:50:06Z
 # vk12
 # Vulkan 1.2 core API interface definitions.
 # ==========================================

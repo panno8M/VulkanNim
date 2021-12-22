@@ -1,4 +1,4 @@
-# Generated at 2021-11-04T06:56:59Z
+# Generated at 2021-12-22T13:50:05Z
 # VK_EXT_debug_marker
 
 import ../platform
@@ -48,7 +48,6 @@ type # enums and bitmasks
     validationCacheExtExt = 33
     # Provided by VK_EXT_debug_report
     descriptorUpdateTemplateExt = 1000085000
-    # Provided by VK_EXT_debug_report
     samplerYcbcrConversionExt = 1000156000
     # Provided by VK_KHR_ray_tracing
     accelerationStructureKhrExt = 1000165000

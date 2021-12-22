@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T09:33:17Z
+# Generated at 2021-12-22T13:50:05Z
 # VK_EXT_tooling_info
 
 import ../platform
@@ -27,7 +27,6 @@ type # enums and bitmasks
     modifyingFeaturesExt = 0x00000010
     # Provided by VK_EXT_tooling_info
     debugReportingExt = 0x00000020
-    # Provided by VK_EXT_tooling_info
     debugMarkersExt = 0x00000040
   ToolPurposeFlagsEXT* = Flags[ToolPurposeFlagBitsEXT]
 

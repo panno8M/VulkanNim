@@ -10,8 +10,10 @@ import os
 
 import ./utils
 import ./nodedefs
-import ./libgennodes
 import ./liblogger
+import ./extraction
+import ./rendering
+import ./libfiles
 
 
 # let logger = newMyLogger(open("log", fmWrite), fmtStr="[$time] - \x1b[32m$levelname\x1b[0m ")

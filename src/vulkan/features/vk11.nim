@@ -1,4 +1,4 @@
-# Generated at 2021-10-31T06:50:40Z
+# Generated at 2021-12-22T13:50:05Z
 # vk11
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -47,7 +47,6 @@ type # enums and bitmasks
     deviceMask = 0x00000001 # Force allocation on specific devices
     # Provided by VK_VERSION_1_2
     deviceAddress = 0x00000002
-    # Provided by VK_VERSION_1_2
     deviceAddressCaptureReplay = 0x00000004
 
   # Promoted from VK_KHR_maintenance1
@@ -94,7 +93,6 @@ type # enums and bitmasks
     d3d12Resource = 0x00000040
     # Provided by VK_EXT_external_memory_host
     hostAllocationExt = 0x00000080
-    # Provided by VK_EXT_external_memory_host
     hostMappedForeignMemoryExt = 0x00000100
     # Provided by VK_EXT_external_memory_dma_buf
     dmaBufExt = 0x00000200

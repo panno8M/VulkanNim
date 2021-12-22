@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T09:33:17Z
+# Generated at 2021-12-22T13:50:05Z
 # VK_KHR_swapchain
 
 import ../platform
@@ -18,7 +18,6 @@ type # enums and bitmasks
   SwapchainCreateFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
     # Provided by VK_KHR_swapchain
     splitInstanceBindRegionsKhr = 0x00000001 # Allow images with VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT
-    # Provided by VK_KHR_swapchain
     protectedKhr = 0x00000002 # Swapchain is protected
     # Provided by VK_KHR_swapchain_mutable_format
     mutableFormatKhr = 0x00000004

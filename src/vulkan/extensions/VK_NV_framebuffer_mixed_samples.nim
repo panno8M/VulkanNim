@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T02:03:04Z
+# Generated at 2021-12-22T13:50:06Z
 # VK_NV_framebuffer_mixed_samples
 
 import ../platform

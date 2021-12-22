@@ -1,4 +1,4 @@
-# Generated at 2021-12-12T13:37:36Z
+# Generated at 2021-12-22T13:50:05Z
 # vk10
 # Vulkan core API interface definitions
 # =====================================
@@ -66,11 +66,9 @@ type # enums and bitmasks
     incomplete = 5 # A return array was too small for the result
     # Provided by VK_KHR_surface
     errorSurfaceLostKhr = 1000000000
-    # Provided by VK_KHR_surface
     errorNativeWindowInUseKhr = 1000000001
     # Provided by VK_KHR_swapchain
     suboptimalKhr = 1000001003
-    # Provided by VK_KHR_swapchain
     errorOutOfDateKhr = 1000001004
     # Provided by VK_KHR_display_swapchain
     errorIncompatibleDisplayKhr = 1000003001
@@ -80,7 +78,6 @@ type # enums and bitmasks
     errorInvalidShaderNv = 1000012000
     # Provided by VK_VERSION_1_1
     errorOutOfPoolMemory = 1000069000
-    # Provided by VK_VERSION_1_1
     errorInvalidExternalHandle = 1000072003
     # Provided by VK_KHR_ray_tracing
     errorIncompatibleVersionKhr = 1000150000
@@ -96,11 +93,8 @@ type # enums and bitmasks
     errorInvalidOpaqueCaptureAddress = 1000257000
     # Provided by VK_KHR_deferred_host_operations
     threadIdleKhr = 1000268000
-    # Provided by VK_KHR_deferred_host_operations
     threadDoneKhr = 1000268001
-    # Provided by VK_KHR_deferred_host_operations
     operationDeferredKhr = 1000268002
-    # Provided by VK_KHR_deferred_host_operations
     operationNotDeferredKhr = 1000268003
     # Provided by VK_EXT_pipeline_creation_cache_control
     pipelineCompileRequiredExt = 1000297000
@@ -157,19 +151,14 @@ type # enums and bitmasks
     loaderDeviceCreateInfo = 48 # Reserved for internal use by the loader, layers, and ICDs
     # Provided by VK_VERSION_1_2
     physicalDeviceVulkan11Features = 49
-    # Provided by VK_VERSION_1_2
     physicalDeviceVulkan11Properties = 50
-    # Provided by VK_VERSION_1_2
     physicalDeviceVulkan12Features = 51
-    # Provided by VK_VERSION_1_2
     physicalDeviceVulkan12Properties = 52
     # Provided by VK_KHR_swapchain
     swapchainCreateInfoKhr = 1000001000
-    # Provided by VK_KHR_swapchain
     presentInfoKhr = 1000001001
     # Provided by VK_KHR_display
     displayModeCreateInfoKhr = 1000002000
-    # Provided by VK_KHR_display
     displaySurfaceCreateInfoKhr = 1000002001
     # Provided by VK_KHR_display_swapchain
     displayPresentInfoKhr = 1000003000
@@ -185,9 +174,7 @@ type # enums and bitmasks
     win32SurfaceCreateInfoKhr = 1000009000
     # Provided by VK_ANDROID_native_buffer
     nativeBufferAndroid = 1000010000
-    # Provided by VK_ANDROID_native_buffer
     swapchainImageCreateInfoAndroid = 1000010001
-    # Provided by VK_ANDROID_native_buffer
     physicalDevicePresentationPropertiesAndroid = 1000010002
     # Provided by VK_EXT_debug_report
     debugReportCallbackCreateInfoExt = 1000011000
@@ -195,25 +182,18 @@ type # enums and bitmasks
     pipelineRasterizationStateRasterizationOrderAmd = 1000018000
     # Provided by VK_EXT_debug_marker
     debugMarkerObjectNameInfoExt = 1000022000
-    # Provided by VK_EXT_debug_marker
     debugMarkerObjectTagInfoExt = 1000022001
-    # Provided by VK_EXT_debug_marker
     debugMarkerMarkerInfoExt = 1000022002
     # Provided by VK_NV_dedicated_allocation
     dedicatedAllocationImageCreateInfoNv = 1000026000
-    # Provided by VK_NV_dedicated_allocation
     dedicatedAllocationBufferCreateInfoNv = 1000026001
-    # Provided by VK_NV_dedicated_allocation
     dedicatedAllocationMemoryAllocateInfoNv = 1000026002
     # Provided by VK_EXT_transform_feedback
     physicalDeviceTransformFeedbackFeaturesExt = 1000028000
-    # Provided by VK_EXT_transform_feedback
     physicalDeviceTransformFeedbackPropertiesExt = 1000028001
-    # Provided by VK_EXT_transform_feedback
     pipelineRasterizationStateStreamCreateInfoExt = 1000028002
     # Provided by VK_NVX_image_view_handle
     imageViewHandleInfoNvx = 1000030000
-    # Provided by VK_NVX_image_view_handle
     imageViewAddressPropertiesNvx = 1000030001
     # Provided by VK_AMD_texture_gather_bias_lod
     textureLodGatherFormatPropertiesAmd = 1000041000
@@ -223,63 +203,40 @@ type # enums and bitmasks
     physicalDeviceCornerSampledImageFeaturesNv = 1000050000
     # Provided by VK_VERSION_1_1
     renderPassMultiviewCreateInfo = 1000053000
-    # Provided by VK_VERSION_1_1
     physicalDeviceMultiviewFeatures = 1000053001
-    # Provided by VK_VERSION_1_1
     physicalDeviceMultiviewProperties = 1000053002
     # Provided by VK_NV_external_memory
     externalMemoryImageCreateInfoNv = 1000056000
-    # Provided by VK_NV_external_memory
     exportMemoryAllocateInfoNv = 1000056001
     # Provided by VK_NV_external_memory_win32
     importMemoryWin32HandleInfoNv = 1000057000
-    # Provided by VK_NV_external_memory_win32
     exportMemoryWin32HandleInfoNv = 1000057001
     # Provided by VK_NV_win32_keyed_mutex
     win32KeyedMutexAcquireReleaseInfoNv = 1000058000
     # Provided by VK_VERSION_1_1
     physicalDeviceFeatures2 = 1000059000
-    # Provided by VK_VERSION_1_1
     physicalDeviceProperties2 = 1000059001
-    # Provided by VK_VERSION_1_1
     formatProperties2 = 1000059002
-    # Provided by VK_VERSION_1_1
     imageFormatProperties2 = 1000059003
-    # Provided by VK_VERSION_1_1
     physicalDeviceImageFormatInfo2 = 1000059004
-    # Provided by VK_VERSION_1_1
     queueFamilyProperties2 = 1000059005
-    # Provided by VK_VERSION_1_1
     physicalDeviceMemoryProperties2 = 1000059006
-    # Provided by VK_VERSION_1_1
     sparseImageFormatProperties2 = 1000059007
-    # Provided by VK_VERSION_1_1
     physicalDeviceSparseImageFormatInfo2 = 1000059008
-    # Provided by VK_VERSION_1_1
     memoryAllocateFlagsInfo = 1000060000
-    # Provided by VK_VERSION_1_1
     deviceGroupRenderPassBeginInfo = 1000060003
-    # Provided by VK_VERSION_1_1
     deviceGroupCommandBufferBeginInfo = 1000060004
-    # Provided by VK_VERSION_1_1
     deviceGroupSubmitInfo = 1000060005
-    # Provided by VK_VERSION_1_1
     deviceGroupBindSparseInfo = 1000060006
     # Provided by VK_KHR_swapchain
     deviceGroupPresentCapabilitiesKhr = 1000060007
-    # Provided by VK_KHR_swapchain
     imageSwapchainCreateInfoKhr = 1000060008
-    # Provided by VK_KHR_swapchain
     bindImageMemorySwapchainInfoKhr = 1000060009
-    # Provided by VK_KHR_swapchain
     acquireNextImageInfoKhr = 1000060010
-    # Provided by VK_KHR_swapchain
     deviceGroupPresentInfoKhr = 1000060011
-    # Provided by VK_KHR_swapchain
     deviceGroupSwapchainCreateInfoKhr = 1000060012
     # Provided by VK_VERSION_1_1
     bindBufferMemoryDeviceGroupInfo = 1000060013
-    # Provided by VK_VERSION_1_1
     bindImageMemoryDeviceGroupInfo = 1000060014
     # Provided by VK_EXT_validation_flags
     validationFlagsExt = 1000061000
@@ -291,69 +248,46 @@ type # enums and bitmasks
     physicalDeviceTextureCompressionAstcHdrFeaturesExt = 1000066000
     # Provided by VK_EXT_astc_decode_mode
     imageViewAstcDecodeModeExt = 1000067000
-    # Provided by VK_EXT_astc_decode_mode
     physicalDeviceAstcDecodeFeaturesExt = 1000067001
     # Provided by VK_VERSION_1_1
     physicalDeviceGroupProperties = 1000070000
-    # Provided by VK_VERSION_1_1
     deviceGroupDeviceCreateInfo = 1000070001
-    # Provided by VK_VERSION_1_1
     physicalDeviceExternalImageFormatInfo = 1000071000
-    # Provided by VK_VERSION_1_1
     externalImageFormatProperties = 1000071001
-    # Provided by VK_VERSION_1_1
     physicalDeviceExternalBufferInfo = 1000071002
-    # Provided by VK_VERSION_1_1
     externalBufferProperties = 1000071003
-    # Provided by VK_VERSION_1_1
     physicalDeviceIdProperties = 1000071004
-    # Provided by VK_VERSION_1_1
     externalMemoryBufferCreateInfo = 1000072000
-    # Provided by VK_VERSION_1_1
     externalMemoryImageCreateInfo = 1000072001
-    # Provided by VK_VERSION_1_1
     exportMemoryAllocateInfo = 1000072002
     # Provided by VK_KHR_external_memory_win32
     importMemoryWin32HandleInfoKhr = 1000073000
-    # Provided by VK_KHR_external_memory_win32
     exportMemoryWin32HandleInfoKhr = 1000073001
-    # Provided by VK_KHR_external_memory_win32
     memoryWin32HandlePropertiesKhr = 1000073002
-    # Provided by VK_KHR_external_memory_win32
     memoryGetWin32HandleInfoKhr = 1000073003
     # Provided by VK_KHR_external_memory_fd
     importMemoryFdInfoKhr = 1000074000
-    # Provided by VK_KHR_external_memory_fd
     memoryFdPropertiesKhr = 1000074001
-    # Provided by VK_KHR_external_memory_fd
     memoryGetFdInfoKhr = 1000074002
     # Provided by VK_KHR_win32_keyed_mutex
     win32KeyedMutexAcquireReleaseInfoKhr = 1000075000
     # Provided by VK_VERSION_1_1
     physicalDeviceExternalSemaphoreInfo = 1000076000
-    # Provided by VK_VERSION_1_1
     externalSemaphoreProperties = 1000076001
-    # Provided by VK_VERSION_1_1
     exportSemaphoreCreateInfo = 1000077000
     # Provided by VK_KHR_external_semaphore_win32
     importSemaphoreWin32HandleInfoKhr = 1000078000
-    # Provided by VK_KHR_external_semaphore_win32
     exportSemaphoreWin32HandleInfoKhr = 1000078001
-    # Provided by VK_KHR_external_semaphore_win32
     d3d12FenceSubmitInfoKhr = 1000078002
-    # Provided by VK_KHR_external_semaphore_win32
     semaphoreGetWin32HandleInfoKhr = 1000078003
     # Provided by VK_KHR_external_semaphore_fd
     importSemaphoreFdInfoKhr = 1000079000
-    # Provided by VK_KHR_external_semaphore_fd
     semaphoreGetFdInfoKhr = 1000079001
     # Provided by VK_KHR_push_descriptor
     physicalDevicePushDescriptorPropertiesKhr = 1000080000
     # Provided by VK_EXT_conditional_rendering
     commandBufferInheritanceConditionalRenderingInfoExt = 1000081000
-    # Provided by VK_EXT_conditional_rendering
     physicalDeviceConditionalRenderingFeaturesExt = 1000081001
-    # Provided by VK_EXT_conditional_rendering
     conditionalRenderingBeginInfoExt = 1000081002
     # Provided by VK_VERSION_1_2
     physicalDeviceShaderFloat16Int8Features = 1000082000
@@ -369,11 +303,8 @@ type # enums and bitmasks
     surfaceCapabilities2Ext = 1000090000
     # Provided by VK_EXT_display_control
     displayPowerInfoExt = 1000091000
-    # Provided by VK_EXT_display_control
     deviceEventInfoExt = 1000091001
-    # Provided by VK_EXT_display_control
     displayEventInfoExt = 1000091002
-    # Provided by VK_EXT_display_control
     swapchainCounterCreateInfoExt = 1000091003
     # Provided by VK_GOOGLE_display_timing
     presentTimesInfoGoogle = 1000092000
@@ -385,97 +316,64 @@ type # enums and bitmasks
     pipelineViewportSwizzleStateCreateInfoNv = 1000098000
     # Provided by VK_EXT_discard_rectangles
     physicalDeviceDiscardRectanglePropertiesExt = 1000099000
-    # Provided by VK_EXT_discard_rectangles
     pipelineDiscardRectangleStateCreateInfoExt = 1000099001
     # Provided by VK_EXT_conservative_rasterization
     physicalDeviceConservativeRasterizationPropertiesExt = 1000101000
-    # Provided by VK_EXT_conservative_rasterization
     pipelineRasterizationConservativeStateCreateInfoExt = 1000101001
     # Provided by VK_EXT_depth_clip_enable
     physicalDeviceDepthClipEnableFeaturesExt = 1000102000
-    # Provided by VK_EXT_depth_clip_enable
     pipelineRasterizationDepthClipStateCreateInfoExt = 1000102001
     # Provided by VK_EXT_hdr_metadata
     hdrMetadataExt = 1000105000
     # Provided by VK_VERSION_1_2
     physicalDeviceImagelessFramebufferFeatures = 1000108000
-    # Provided by VK_VERSION_1_2
     framebufferAttachmentsCreateInfo = 1000108001
-    # Provided by VK_VERSION_1_2
     framebufferAttachmentImageInfo = 1000108002
-    # Provided by VK_VERSION_1_2
     renderPassAttachmentBeginInfo = 1000108003
-    # Provided by VK_VERSION_1_2
     attachmentDescription2 = 1000109000
-    # Provided by VK_VERSION_1_2
     attachmentReference2 = 1000109001
-    # Provided by VK_VERSION_1_2
     subpassDescription2 = 1000109002
-    # Provided by VK_VERSION_1_2
     subpassDependency2 = 1000109003
-    # Provided by VK_VERSION_1_2
     renderPassCreateInfo2 = 1000109004
-    # Provided by VK_VERSION_1_2
     subpassBeginInfo = 1000109005
-    # Provided by VK_VERSION_1_2
     subpassEndInfo = 1000109006
     # Provided by VK_KHR_shared_presentable_image
     sharedPresentSurfaceCapabilitiesKhr = 1000111000
     # Provided by VK_VERSION_1_1
     physicalDeviceExternalFenceInfo = 1000112000
-    # Provided by VK_VERSION_1_1
     externalFenceProperties = 1000112001
-    # Provided by VK_VERSION_1_1
     exportFenceCreateInfo = 1000113000
     # Provided by VK_KHR_external_fence_win32
     importFenceWin32HandleInfoKhr = 1000114000
-    # Provided by VK_KHR_external_fence_win32
     exportFenceWin32HandleInfoKhr = 1000114001
-    # Provided by VK_KHR_external_fence_win32
     fenceGetWin32HandleInfoKhr = 1000114002
     # Provided by VK_KHR_external_fence_fd
     importFenceFdInfoKhr = 1000115000
-    # Provided by VK_KHR_external_fence_fd
     fenceGetFdInfoKhr = 1000115001
     # Provided by VK_KHR_performance_query
     physicalDevicePerformanceQueryFeaturesKhr = 1000116000
-    # Provided by VK_KHR_performance_query
     physicalDevicePerformanceQueryPropertiesKhr = 1000116001
-    # Provided by VK_KHR_performance_query
     queryPoolPerformanceCreateInfoKhr = 1000116002
-    # Provided by VK_KHR_performance_query
     performanceQuerySubmitInfoKhr = 1000116003
-    # Provided by VK_KHR_performance_query
     acquireProfilingLockInfoKhr = 1000116004
-    # Provided by VK_KHR_performance_query
     performanceCounterKhr = 1000116005
-    # Provided by VK_KHR_performance_query
     performanceCounterDescriptionKhr = 1000116006
     # Provided by VK_VERSION_1_1
     physicalDevicePointClippingProperties = 1000117000
-    # Provided by VK_VERSION_1_1
     renderPassInputAttachmentAspectCreateInfo = 1000117001
-    # Provided by VK_VERSION_1_1
     imageViewUsageCreateInfo = 1000117002
-    # Provided by VK_VERSION_1_1
     pipelineTessellationDomainOriginStateCreateInfo = 1000117003
     # Provided by VK_KHR_get_surface_capabilities2
     physicalDeviceSurfaceInfo2Khr = 1000119000
-    # Provided by VK_KHR_get_surface_capabilities2
     surfaceCapabilities2Khr = 1000119001
-    # Provided by VK_KHR_get_surface_capabilities2
     surfaceFormat2Khr = 1000119002
     # Provided by VK_VERSION_1_1
     physicalDeviceVariablePointersFeatures = 1000120000
     # Provided by VK_KHR_get_display_properties2
     displayProperties2Khr = 1000121000
-    # Provided by VK_KHR_get_display_properties2
     displayPlaneProperties2Khr = 1000121001
-    # Provided by VK_KHR_get_display_properties2
     displayModeProperties2Khr = 1000121002
-    # Provided by VK_KHR_get_display_properties2
     displayPlaneInfo2Khr = 1000121003
-    # Provided by VK_KHR_get_display_properties2
     displayPlaneCapabilities2Khr = 1000121004
     # Provided by VK_MVK_ios_surface
     iosSurfaceCreateInfoM = 1000122000
@@ -483,217 +381,137 @@ type # enums and bitmasks
     macosSurfaceCreateInfoM = 1000123000
     # Provided by VK_VERSION_1_1
     memoryDedicatedRequirements = 1000127000
-    # Provided by VK_VERSION_1_1
     memoryDedicatedAllocateInfo = 1000127001
     # Provided by VK_EXT_debug_utils
     debugUtilsObjectNameInfoExt = 1000128000
-    # Provided by VK_EXT_debug_utils
     debugUtilsObjectTagInfoExt = 1000128001
-    # Provided by VK_EXT_debug_utils
     debugUtilsLabelExt = 1000128002
-    # Provided by VK_EXT_debug_utils
     debugUtilsMessengerCallbackDataExt = 1000128003
-    # Provided by VK_EXT_debug_utils
     debugUtilsMessengerCreateInfoExt = 1000128004
     # Provided by VK_ANDROID_external_memory_android_hardware_buffer
     androidHardwareBufferUsageAndroid = 1000129000
-    # Provided by VK_ANDROID_external_memory_android_hardware_buffer
     androidHardwareBufferPropertiesAndroid = 1000129001
-    # Provided by VK_ANDROID_external_memory_android_hardware_buffer
     androidHardwareBufferFormatPropertiesAndroid = 1000129002
-    # Provided by VK_ANDROID_external_memory_android_hardware_buffer
     importAndroidHardwareBufferInfoAndroid = 1000129003
-    # Provided by VK_ANDROID_external_memory_android_hardware_buffer
     memoryGetAndroidHardwareBufferInfoAndroid = 1000129004
-    # Provided by VK_ANDROID_external_memory_android_hardware_buffer
     externalFormatAndroid = 1000129005
     # Provided by VK_VERSION_1_2
     physicalDeviceSamplerFilterMinmaxProperties = 1000130000
-    # Provided by VK_VERSION_1_2
     samplerReductionModeCreateInfo = 1000130001
     # Provided by VK_EXT_inline_uniform_block
     physicalDeviceInlineUniformBlockFeaturesExt = 1000138000
-    # Provided by VK_EXT_inline_uniform_block
     physicalDeviceInlineUniformBlockPropertiesExt = 1000138001
-    # Provided by VK_EXT_inline_uniform_block
     writeDescriptorSetInlineUniformBlockExt = 1000138002
-    # Provided by VK_EXT_inline_uniform_block
     descriptorPoolInlineUniformBlockCreateInfoExt = 1000138003
     # Provided by VK_EXT_sample_locations
     sampleLocationsInfoExt = 1000143000
-    # Provided by VK_EXT_sample_locations
     renderPassSampleLocationsBeginInfoExt = 1000143001
-    # Provided by VK_EXT_sample_locations
     pipelineSampleLocationsStateCreateInfoExt = 1000143002
-    # Provided by VK_EXT_sample_locations
     physicalDeviceSampleLocationsPropertiesExt = 1000143003
-    # Provided by VK_EXT_sample_locations
     multisamplePropertiesExt = 1000143004
     # Provided by VK_VERSION_1_1
     protectedSubmitInfo = 1000145000
-    # Provided by VK_VERSION_1_1
     physicalDeviceProtectedMemoryFeatures = 1000145001
-    # Provided by VK_VERSION_1_1
     physicalDeviceProtectedMemoryProperties = 1000145002
-    # Provided by VK_VERSION_1_1
     deviceQueueInfo2 = 1000145003
-    # Provided by VK_VERSION_1_1
     bufferMemoryRequirementsInfo2 = 1000146000
-    # Provided by VK_VERSION_1_1
     imageMemoryRequirementsInfo2 = 1000146001
-    # Provided by VK_VERSION_1_1
     imageSparseMemoryRequirementsInfo2 = 1000146002
-    # Provided by VK_VERSION_1_1
     memoryRequirements2 = 1000146003
-    # Provided by VK_VERSION_1_1
     sparseImageMemoryRequirements2 = 1000146004
     # Provided by VK_VERSION_1_2
     imageFormatListCreateInfo = 1000147000
     # Provided by VK_EXT_blend_operation_advanced
     physicalDeviceBlendOperationAdvancedFeaturesExt = 1000148000
-    # Provided by VK_EXT_blend_operation_advanced
     physicalDeviceBlendOperationAdvancedPropertiesExt = 1000148001
-    # Provided by VK_EXT_blend_operation_advanced
     pipelineColorBlendAdvancedStateCreateInfoExt = 1000148002
     # Provided by VK_NV_fragment_coverage_to_color
     pipelineCoverageToColorStateCreateInfoNv = 1000149000
     # Provided by VK_KHR_ray_tracing
     accelerationStructureBuildGeometryInfoKhr = 1000150000
-    # Provided by VK_KHR_ray_tracing
     accelerationStructureCreateGeometryTypeInfoKhr = 1000150001
-    # Provided by VK_KHR_ray_tracing
     accelerationStructureDeviceAddressInfoKhr = 1000150002
-    # Provided by VK_KHR_ray_tracing
     accelerationStructureGeometryAabbsDataKhr = 1000150003
-    # Provided by VK_KHR_ray_tracing
     accelerationStructureGeometryInstancesDataKhr = 1000150004
-    # Provided by VK_KHR_ray_tracing
     accelerationStructureGeometryTrianglesDataKhr = 1000150005
-    # Provided by VK_KHR_ray_tracing
     accelerationStructureGeometryKhr = 1000150006
-    # Provided by VK_KHR_ray_tracing
     accelerationStructureMemoryRequirementsInfoKhr = 1000150008
-    # Provided by VK_KHR_ray_tracing
     accelerationStructureVersionKhr = 1000150009
-    # Provided by VK_KHR_ray_tracing
     copyAccelerationStructureInfoKhr = 1000150010
-    # Provided by VK_KHR_ray_tracing
     copyAccelerationStructureToMemoryInfoKhr = 1000150011
-    # Provided by VK_KHR_ray_tracing
     copyMemoryToAccelerationStructureInfoKhr = 1000150012
-    # Provided by VK_KHR_ray_tracing
     physicalDeviceRayTracingFeaturesKhr = 1000150013
-    # Provided by VK_KHR_ray_tracing
     physicalDeviceRayTracingPropertiesKhr = 1000150014
-    # Provided by VK_KHR_ray_tracing
     rayTracingPipelineCreateInfoKhr = 1000150015
-    # Provided by VK_KHR_ray_tracing
     rayTracingShaderGroupCreateInfoKhr = 1000150016
-    # Provided by VK_KHR_ray_tracing
     accelerationStructureCreateInfoKhr = 1000150017
-    # Provided by VK_KHR_ray_tracing
     rayTracingPipelineInterfaceCreateInfoKhr = 1000150018
     # Provided by VK_NV_framebuffer_mixed_samples
     pipelineCoverageModulationStateCreateInfoNv = 1000152000
     # Provided by VK_NV_shader_sm_builtins
     physicalDeviceShaderSmBuiltinsFeaturesNv = 1000154000
-    # Provided by VK_NV_shader_sm_builtins
     physicalDeviceShaderSmBuiltinsPropertiesNv = 1000154001
     # Provided by VK_VERSION_1_1
     samplerYcbcrConversionCreateInfo = 1000156000
-    # Provided by VK_VERSION_1_1
     samplerYcbcrConversionInfo = 1000156001
-    # Provided by VK_VERSION_1_1
     bindImagePlaneMemoryInfo = 1000156002
-    # Provided by VK_VERSION_1_1
     imagePlaneMemoryRequirementsInfo = 1000156003
-    # Provided by VK_VERSION_1_1
     physicalDeviceSamplerYcbcrConversionFeatures = 1000156004
-    # Provided by VK_VERSION_1_1
     samplerYcbcrConversionImageFormatProperties = 1000156005
-    # Provided by VK_VERSION_1_1
     bindBufferMemoryInfo = 1000157000
-    # Provided by VK_VERSION_1_1
     bindImageMemoryInfo = 1000157001
     # Provided by VK_EXT_image_drm_format_modifier
     drmFormatModifierPropertiesListExt = 1000158000
-    # Provided by VK_EXT_image_drm_format_modifier
     drmFormatModifierPropertiesExt = 1000158001
-    # Provided by VK_EXT_image_drm_format_modifier
     physicalDeviceImageDrmFormatModifierInfoExt = 1000158002
-    # Provided by VK_EXT_image_drm_format_modifier
     imageDrmFormatModifierListCreateInfoExt = 1000158003
-    # Provided by VK_EXT_image_drm_format_modifier
     imageDrmFormatModifierExplicitCreateInfoExt = 1000158004
-    # Provided by VK_EXT_image_drm_format_modifier
     imageDrmFormatModifierPropertiesExt = 1000158005
     # Provided by VK_EXT_validation_cache
     validationCacheCreateInfoExt = 1000160000
-    # Provided by VK_EXT_validation_cache
     shaderModuleValidationCacheCreateInfoExt = 1000160001
     # Provided by VK_VERSION_1_2
     descriptorSetLayoutBindingFlagsCreateInfo = 1000161000
-    # Provided by VK_VERSION_1_2
     physicalDeviceDescriptorIndexingFeatures = 1000161001
-    # Provided by VK_VERSION_1_2
     physicalDeviceDescriptorIndexingProperties = 1000161002
-    # Provided by VK_VERSION_1_2
     descriptorSetVariableDescriptorCountAllocateInfo = 1000161003
-    # Provided by VK_VERSION_1_2
     descriptorSetVariableDescriptorCountLayoutSupport = 1000161004
     # Provided by VK_NV_shading_rate_image
     pipelineViewportShadingRateImageStateCreateInfoNv = 1000164000
-    # Provided by VK_NV_shading_rate_image
     physicalDeviceShadingRateImageFeaturesNv = 1000164001
-    # Provided by VK_NV_shading_rate_image
     physicalDeviceShadingRateImagePropertiesNv = 1000164002
-    # Provided by VK_NV_shading_rate_image
     pipelineViewportCoarseSampleOrderStateCreateInfoNv = 1000164005
     # Provided by VK_NV_ray_tracing
     rayTracingPipelineCreateInfoNv = 1000165000
-    # Provided by VK_NV_ray_tracing
     accelerationStructureCreateInfoNv = 1000165001
-    # Provided by VK_NV_ray_tracing
     geometryNv = 1000165003
-    # Provided by VK_NV_ray_tracing
     geometryTrianglesNv = 1000165004
-    # Provided by VK_NV_ray_tracing
     geometryAabbNv = 1000165005
     # Provided by VK_KHR_ray_tracing
     bindAccelerationStructureMemoryInfoKhr = 1000165006
-    # Provided by VK_KHR_ray_tracing
     writeDescriptorSetAccelerationStructureKhr = 1000165007
     # Provided by VK_NV_ray_tracing
     accelerationStructureMemoryRequirementsInfoNv = 1000165008
-    # Provided by VK_NV_ray_tracing
     physicalDeviceRayTracingPropertiesNv = 1000165009
-    # Provided by VK_NV_ray_tracing
     rayTracingShaderGroupCreateInfoNv = 1000165011
-    # Provided by VK_NV_ray_tracing
     accelerationStructureInfoNv = 1000165012
     # Provided by VK_NV_representative_fragment_test
     physicalDeviceRepresentativeFragmentTestFeaturesNv = 1000166000
-    # Provided by VK_NV_representative_fragment_test
     pipelineRepresentativeFragmentTestStateCreateInfoNv = 1000166001
     # Provided by VK_VERSION_1_1
     physicalDeviceMaintenance3Properties = 1000168000
-    # Provided by VK_VERSION_1_1
     descriptorSetLayoutSupport = 1000168001
     # Provided by VK_EXT_filter_cubic
     physicalDeviceImageViewImageFormatInfoExt = 1000170000
-    # Provided by VK_EXT_filter_cubic
     filterCubicImageViewImageFormatPropertiesExt = 1000170001
     # Provided by VK_EXT_global_priority
     deviceQueueGlobalPriorityCreateInfoExt = 1000174000
     # Provided by VK_VERSION_1_2
     physicalDeviceShaderSubgroupExtendedTypesFeatures = 1000175000
-    # Provided by VK_VERSION_1_2
     physicalDevice8bitStorageFeatures = 1000177000
     # Provided by VK_EXT_external_memory_host
     importMemoryHostPointerInfoExt = 1000178000
-    # Provided by VK_EXT_external_memory_host
     memoryHostPointerPropertiesExt = 1000178001
-    # Provided by VK_EXT_external_memory_host
     physicalDeviceExternalMemoryHostPropertiesExt = 1000178002
     # Provided by VK_VERSION_1_2
     physicalDeviceShaderAtomicInt64Features = 1000180000
@@ -709,9 +527,7 @@ type # enums and bitmasks
     deviceMemoryOverallocationCreateInfoAmd = 1000189000
     # Provided by VK_EXT_vertex_attribute_divisor
     physicalDeviceVertexAttributeDivisorPropertiesExt = 1000190000
-    # Provided by VK_EXT_vertex_attribute_divisor
     pipelineVertexInputDivisorStateCreateInfoExt = 1000190001
-    # Provided by VK_EXT_vertex_attribute_divisor
     physicalDeviceVertexAttributeDivisorFeaturesExt = 1000190002
     # Provided by VK_GGP_frame_token
     presentFrameTokenGgp = 1000191000
@@ -719,17 +535,13 @@ type # enums and bitmasks
     pipelineCreationFeedbackCreateInfoExt = 1000192000
     # Provided by VK_VERSION_1_2
     physicalDeviceDriverProperties = 1000196000
-    # Provided by VK_VERSION_1_2
     physicalDeviceFloatControlsProperties = 1000197000
-    # Provided by VK_VERSION_1_2
     physicalDeviceDepthStencilResolveProperties = 1000199000
-    # Provided by VK_VERSION_1_2
     subpassDescriptionDepthStencilResolve = 1000199001
     # Provided by VK_NV_compute_shader_derivatives
     physicalDeviceComputeShaderDerivativesFeaturesNv = 1000201000
     # Provided by VK_NV_mesh_shader
     physicalDeviceMeshShaderFeaturesNv = 1000202000
-    # Provided by VK_NV_mesh_shader
     physicalDeviceMeshShaderPropertiesNv = 1000202001
     # Provided by VK_NV_fragment_shader_barycentric
     physicalDeviceFragmentShaderBarycentricFeaturesNv = 1000203000
@@ -737,37 +549,25 @@ type # enums and bitmasks
     physicalDeviceShaderImageFootprintFeaturesNv = 1000204000
     # Provided by VK_NV_scissor_exclusive
     pipelineViewportExclusiveScissorStateCreateInfoNv = 1000205000
-    # Provided by VK_NV_scissor_exclusive
     physicalDeviceExclusiveScissorFeaturesNv = 1000205002
     # Provided by VK_NV_device_diagnostic_checkpoints
     checkpointDataNv = 1000206000
-    # Provided by VK_NV_device_diagnostic_checkpoints
     queueFamilyCheckpointPropertiesNv = 1000206001
     # Provided by VK_VERSION_1_2
     physicalDeviceTimelineSemaphoreFeatures = 1000207000
-    # Provided by VK_VERSION_1_2
     physicalDeviceTimelineSemaphoreProperties = 1000207001
-    # Provided by VK_VERSION_1_2
     semaphoreTypeCreateInfo = 1000207002
-    # Provided by VK_VERSION_1_2
     timelineSemaphoreSubmitInfo = 1000207003
-    # Provided by VK_VERSION_1_2
     semaphoreWaitInfo = 1000207004
-    # Provided by VK_VERSION_1_2
     semaphoreSignalInfo = 1000207005
     # Provided by VK_INTEL_shader_integer_functions2
     physicalDeviceShaderIntegerFunctions2FeaturesIntel = 1000209000
     # Provided by VK_INTEL_performance_query
     queryPoolPerformanceQueryCreateInfoIntel = 1000210000
-    # Provided by VK_INTEL_performance_query
     initializePerformanceApiInfoIntel = 1000210001
-    # Provided by VK_INTEL_performance_query
     performanceMarkerInfoIntel = 1000210002
-    # Provided by VK_INTEL_performance_query
     performanceStreamMarkerInfoIntel = 1000210003
-    # Provided by VK_INTEL_performance_query
     performanceOverrideInfoIntel = 1000210004
-    # Provided by VK_INTEL_performance_query
     performanceConfigurationAcquireInfoIntel = 1000210005
     # Provided by VK_VERSION_1_2
     physicalDeviceVulkanMemoryModelFeatures = 1000211000
@@ -775,7 +575,6 @@ type # enums and bitmasks
     physicalDevicePciBusInfoPropertiesExt = 1000212000
     # Provided by VK_AMD_display_native_hdr
     displayNativeHdrSurfaceCapabilitiesAmd = 1000213000
-    # Provided by VK_AMD_display_native_hdr
     swapchainDisplayNativeHdrCreateInfoAmd = 1000213001
     # Provided by VK_FUCHSIA_imagepipe_surface
     imagepipeSurfaceCreateInfoFuchsia = 1000214000
@@ -783,17 +582,13 @@ type # enums and bitmasks
     metalSurfaceCreateInfoExt = 1000217000
     # Provided by VK_EXT_fragment_density_map
     physicalDeviceFragmentDensityMapFeaturesExt = 1000218000
-    # Provided by VK_EXT_fragment_density_map
     physicalDeviceFragmentDensityMapPropertiesExt = 1000218001
-    # Provided by VK_EXT_fragment_density_map
     renderPassFragmentDensityMapCreateInfoExt = 1000218002
     # Provided by VK_VERSION_1_2
     physicalDeviceScalarBlockLayoutFeatures = 1000221000
     # Provided by VK_EXT_subgroup_size_control
     physicalDeviceSubgroupSizeControlPropertiesExt = 1000225000
-    # Provided by VK_EXT_subgroup_size_control
     pipelineShaderStageRequiredSubgroupSizeCreateInfoExt = 1000225001
-    # Provided by VK_EXT_subgroup_size_control
     physicalDeviceSubgroupSizeControlFeaturesExt = 1000225002
     # Provided by VK_AMD_shader_core_properties2
     physicalDeviceShaderCoreProperties2Amd = 1000227000
@@ -803,7 +598,6 @@ type # enums and bitmasks
     physicalDeviceMemoryBudgetPropertiesExt = 1000237000
     # Provided by VK_EXT_memory_priority
     physicalDeviceMemoryPriorityFeaturesExt = 1000238000
-    # Provided by VK_EXT_memory_priority
     memoryPriorityAllocateInfoExt = 1000238001
     # Provided by VK_KHR_surface_protected_capabilities
     surfaceProtectedCapabilitiesKhr = 1000239000
@@ -811,9 +605,7 @@ type # enums and bitmasks
     physicalDeviceDedicatedAllocationImageAliasingFeaturesNv = 1000240000
     # Provided by VK_VERSION_1_2
     physicalDeviceSeparateDepthStencilLayoutsFeatures = 1000241000
-    # Provided by VK_VERSION_1_2
     attachmentReferenceStencilLayout = 1000241001
-    # Provided by VK_VERSION_1_2
     attachmentDescriptionStencilLayout = 1000241002
     # Provided by VK_EXT_buffer_device_address
     physicalDeviceBufferDeviceAddressFeaturesExt = 1000244000
@@ -829,15 +621,11 @@ type # enums and bitmasks
     validationFeaturesExt = 1000247000
     # Provided by VK_NV_cooperative_matrix
     physicalDeviceCooperativeMatrixFeaturesNv = 1000249000
-    # Provided by VK_NV_cooperative_matrix
     cooperativeMatrixPropertiesNv = 1000249001
-    # Provided by VK_NV_cooperative_matrix
     physicalDeviceCooperativeMatrixPropertiesNv = 1000249002
     # Provided by VK_NV_coverage_reduction_mode
     physicalDeviceCoverageReductionModeFeaturesNv = 1000250000
-    # Provided by VK_NV_coverage_reduction_mode
     pipelineCoverageReductionStateCreateInfoNv = 1000250001
-    # Provided by VK_NV_coverage_reduction_mode
     framebufferMixedSamplesCombinationNv = 1000250002
     # Provided by VK_EXT_fragment_shader_interlock
     physicalDeviceFragmentShaderInterlockFeaturesExt = 1000251000
@@ -847,25 +635,18 @@ type # enums and bitmasks
     physicalDeviceUniformBufferStandardLayoutFeatures = 1000253000
     # Provided by VK_EXT_full_screen_exclusive
     surfaceFullScreenExclusiveInfoExt = 1000255000
-    # Provided by VK_EXT_full_screen_exclusive
     surfaceFullScreenExclusiveWin32InfoExt = 1000255001
-    # Provided by VK_EXT_full_screen_exclusive
     surfaceCapabilitiesFullScreenExclusiveExt = 1000255002
     # Provided by VK_EXT_headless_surface
     headlessSurfaceCreateInfoExt = 1000256000
     # Provided by VK_VERSION_1_2
     physicalDeviceBufferDeviceAddressFeatures = 1000257000
-    # Provided by VK_VERSION_1_2
     bufferOpaqueCaptureAddressCreateInfo = 1000257002
-    # Provided by VK_VERSION_1_2
     memoryOpaqueCaptureAddressAllocateInfo = 1000257003
-    # Provided by VK_VERSION_1_2
     deviceMemoryOpaqueCaptureAddressInfo = 1000257004
     # Provided by VK_EXT_line_rasterization
     physicalDeviceLineRasterizationFeaturesExt = 1000259000
-    # Provided by VK_EXT_line_rasterization
     pipelineRasterizationLineStateCreateInfoExt = 1000259001
-    # Provided by VK_EXT_line_rasterization
     physicalDeviceLineRasterizationPropertiesExt = 1000259002
     # Provided by VK_EXT_shader_atomic_float
     physicalDeviceShaderAtomicFloatFeaturesExt = 1000260000
@@ -879,71 +660,50 @@ type # enums and bitmasks
     deferredOperationInfoKhr = 1000268000
     # Provided by VK_KHR_pipeline_executable_properties
     physicalDevicePipelineExecutablePropertiesFeaturesKhr = 1000269000
-    # Provided by VK_KHR_pipeline_executable_properties
     pipelineInfoKhr = 1000269001
-    # Provided by VK_KHR_pipeline_executable_properties
     pipelineExecutablePropertiesKhr = 1000269002
-    # Provided by VK_KHR_pipeline_executable_properties
     pipelineExecutableInfoKhr = 1000269003
-    # Provided by VK_KHR_pipeline_executable_properties
     pipelineExecutableStatisticKhr = 1000269004
-    # Provided by VK_KHR_pipeline_executable_properties
     pipelineExecutableInternalRepresentationKhr = 1000269005
     # Provided by VK_EXT_shader_demote_to_helper_invocation
     physicalDeviceShaderDemoteToHelperInvocationFeaturesExt = 1000276000
     # Provided by VK_NV_device_generated_commands
     physicalDeviceDeviceGeneratedCommandsPropertiesNv = 1000277000
-    # Provided by VK_NV_device_generated_commands
     graphicsShaderGroupCreateInfoNv = 1000277001
-    # Provided by VK_NV_device_generated_commands
     graphicsPipelineShaderGroupsCreateInfoNv = 1000277002
-    # Provided by VK_NV_device_generated_commands
     indirectCommandsLayoutTokenNv = 1000277003
-    # Provided by VK_NV_device_generated_commands
     indirectCommandsLayoutCreateInfoNv = 1000277004
-    # Provided by VK_NV_device_generated_commands
     generatedCommandsInfoNv = 1000277005
-    # Provided by VK_NV_device_generated_commands
     generatedCommandsMemoryRequirementsInfoNv = 1000277006
-    # Provided by VK_NV_device_generated_commands
     physicalDeviceDeviceGeneratedCommandsFeaturesNv = 1000277007
     # Provided by VK_EXT_texel_buffer_alignment
     physicalDeviceTexelBufferAlignmentFeaturesExt = 1000281000
-    # Provided by VK_EXT_texel_buffer_alignment
     physicalDeviceTexelBufferAlignmentPropertiesExt = 1000281001
     # Provided by VK_QCOM_render_pass_transform
     commandBufferInheritanceRenderPassTransformInfoQcom = 1000282000
-    # Provided by VK_QCOM_render_pass_transform
     renderPassTransformBeginInfoQcom = 1000282001
     # Provided by VK_EXT_robustness2
     physicalDeviceRobustness2FeaturesExt = 1000286000
-    # Provided by VK_EXT_robustness2
     physicalDeviceRobustness2PropertiesExt = 1000286001
     # Provided by VK_EXT_custom_border_color
     samplerCustomBorderColorCreateInfoExt = 1000287000
-    # Provided by VK_EXT_custom_border_color
     physicalDeviceCustomBorderColorPropertiesExt = 1000287001
-    # Provided by VK_EXT_custom_border_color
     physicalDeviceCustomBorderColorFeaturesExt = 1000287002
     # Provided by VK_KHR_pipeline_library
     pipelineLibraryCreateInfoKhr = 1000290000
     # Provided by VK_EXT_private_data
     physicalDevicePrivateDataFeaturesExt = 1000295000
-    # Provided by VK_EXT_private_data
     devicePrivateDataCreateInfoExt = 1000295001
-    # Provided by VK_EXT_private_data
     privateDataSlotCreateInfoExt = 1000295002
     # Provided by VK_EXT_pipeline_creation_cache_control
     physicalDevicePipelineCreationCacheControlFeaturesExt = 1000297000
     # Provided by VK_NV_device_diagnostics_config
     physicalDeviceDiagnosticsConfigFeaturesNv = 1000300000
-    # Provided by VK_NV_device_diagnostics_config
     deviceDiagnosticsConfigCreateInfoNv = 1000300001
     # Provided by VK_QCOM_extension_310
     reservedQcom = 1000309000
     # Provided by VK_EXT_fragment_density_map2
     physicalDeviceFragmentDensityMap2FeaturesExt = 1000332000
-    # Provided by VK_EXT_fragment_density_map2
     physicalDeviceFragmentDensityMap2PropertiesExt = 1000332001
     # Provided by VK_EXT_image_robustness
     physicalDeviceImageRobustnessFeaturesExt = 1000335000
@@ -987,7 +747,6 @@ type # enums and bitmasks
     swapchainKhr = 1000001000 # VkSwapchainKHR
     # Provided by VK_KHR_display
     displayKhr = 1000002000 # VkDisplayKHR
-    # Provided by VK_KHR_display
     displayModeKhr = 1000002001 # VkDisplayModeKHR
     # Provided by VK_EXT_debug_report
     debugReportCallbackExt = 1000011000 # VkDebugReportCallbackEXT
@@ -1210,179 +969,96 @@ type # enums and bitmasks
     astc12x12SrgbBlock = 184
     # Provided by VK_IMG_format_pvrtc
     pvrtc12bppUnormBlockImg = 1000054000
-    # Provided by VK_IMG_format_pvrtc
     pvrtc14bppUnormBlockImg = 1000054001
-    # Provided by VK_IMG_format_pvrtc
     pvrtc22bppUnormBlockImg = 1000054002
-    # Provided by VK_IMG_format_pvrtc
     pvrtc24bppUnormBlockImg = 1000054003
-    # Provided by VK_IMG_format_pvrtc
     pvrtc12bppSrgbBlockImg = 1000054004
-    # Provided by VK_IMG_format_pvrtc
     pvrtc14bppSrgbBlockImg = 1000054005
-    # Provided by VK_IMG_format_pvrtc
     pvrtc22bppSrgbBlockImg = 1000054006
-    # Provided by VK_IMG_format_pvrtc
     pvrtc24bppSrgbBlockImg = 1000054007
     # Provided by VK_EXT_texture_compression_astc_hdr
     astc4x4SfloatBlockExt = 1000066000
-    # Provided by VK_EXT_texture_compression_astc_hdr
     astc5x4SfloatBlockExt = 1000066001
-    # Provided by VK_EXT_texture_compression_astc_hdr
     astc5x5SfloatBlockExt = 1000066002
-    # Provided by VK_EXT_texture_compression_astc_hdr
     astc6x5SfloatBlockExt = 1000066003
-    # Provided by VK_EXT_texture_compression_astc_hdr
     astc6x6SfloatBlockExt = 1000066004
-    # Provided by VK_EXT_texture_compression_astc_hdr
     astc8x5SfloatBlockExt = 1000066005
-    # Provided by VK_EXT_texture_compression_astc_hdr
     astc8x6SfloatBlockExt = 1000066006
-    # Provided by VK_EXT_texture_compression_astc_hdr
     astc8x8SfloatBlockExt = 1000066007
-    # Provided by VK_EXT_texture_compression_astc_hdr
     astc10x5SfloatBlockExt = 1000066008
-    # Provided by VK_EXT_texture_compression_astc_hdr
     astc10x6SfloatBlockExt = 1000066009
-    # Provided by VK_EXT_texture_compression_astc_hdr
     astc10x8SfloatBlockExt = 1000066010
-    # Provided by VK_EXT_texture_compression_astc_hdr
     astc10x10SfloatBlockExt = 1000066011
-    # Provided by VK_EXT_texture_compression_astc_hdr
     astc12x10SfloatBlockExt = 1000066012
-    # Provided by VK_EXT_texture_compression_astc_hdr
     astc12x12SfloatBlockExt = 1000066013
     # Provided by VK_VERSION_1_1
     g8b8g8r8422Unorm = 1000156000
-    # Provided by VK_VERSION_1_1
     b8g8r8g8422Unorm = 1000156001
-    # Provided by VK_VERSION_1_1
     g8B8R83plane420Unorm = 1000156002
-    # Provided by VK_VERSION_1_1
     g8B8r82plane420Unorm = 1000156003
-    # Provided by VK_VERSION_1_1
     g8B8R83plane422Unorm = 1000156004
-    # Provided by VK_VERSION_1_1
     g8B8r82plane422Unorm = 1000156005
-    # Provided by VK_VERSION_1_1
     g8B8R83plane444Unorm = 1000156006
-    # Provided by VK_VERSION_1_1
     r10x6UnormPack16 = 1000156007
-    # Provided by VK_VERSION_1_1
     r10x6g10x6Unorm2pack16 = 1000156008
-    # Provided by VK_VERSION_1_1
     r10x6g10x6b10x6a10x6Unorm4pack16 = 1000156009
-    # Provided by VK_VERSION_1_1
     g10x6b10x6g10x6r10x6422Unorm4pack16 = 1000156010
-    # Provided by VK_VERSION_1_1
     b10x6g10x6r10x6g10x6422Unorm4pack16 = 1000156011
-    # Provided by VK_VERSION_1_1
     g10x6B10x6R10x63plane420Unorm3pack16 = 1000156012
-    # Provided by VK_VERSION_1_1
     g10x6B10x6r10x62plane420Unorm3pack16 = 1000156013
-    # Provided by VK_VERSION_1_1
     g10x6B10x6R10x63plane422Unorm3pack16 = 1000156014
-    # Provided by VK_VERSION_1_1
     g10x6B10x6r10x62plane422Unorm3pack16 = 1000156015
-    # Provided by VK_VERSION_1_1
     g10x6B10x6R10x63plane444Unorm3pack16 = 1000156016
-    # Provided by VK_VERSION_1_1
     r12x4UnormPack16 = 1000156017
-    # Provided by VK_VERSION_1_1
     r12x4g12x4Unorm2pack16 = 1000156018
-    # Provided by VK_VERSION_1_1
     r12x4g12x4b12x4a12x4Unorm4pack16 = 1000156019
-    # Provided by VK_VERSION_1_1
     g12x4b12x4g12x4r12x4422Unorm4pack16 = 1000156020
-    # Provided by VK_VERSION_1_1
     b12x4g12x4r12x4g12x4422Unorm4pack16 = 1000156021
-    # Provided by VK_VERSION_1_1
     g12x4B12x4R12x43plane420Unorm3pack16 = 1000156022
-    # Provided by VK_VERSION_1_1
     g12x4B12x4r12x42plane420Unorm3pack16 = 1000156023
-    # Provided by VK_VERSION_1_1
     g12x4B12x4R12x43plane422Unorm3pack16 = 1000156024
-    # Provided by VK_VERSION_1_1
     g12x4B12x4r12x42plane422Unorm3pack16 = 1000156025
-    # Provided by VK_VERSION_1_1
     g12x4B12x4R12x43plane444Unorm3pack16 = 1000156026
-    # Provided by VK_VERSION_1_1
     g16b16g16r16422Unorm = 1000156027
-    # Provided by VK_VERSION_1_1
     b16g16r16g16422Unorm = 1000156028
-    # Provided by VK_VERSION_1_1
     g16B16R163plane420Unorm = 1000156029
-    # Provided by VK_VERSION_1_1
     g16B16r162plane420Unorm = 1000156030
-    # Provided by VK_VERSION_1_1
     g16B16R163plane422Unorm = 1000156031
-    # Provided by VK_VERSION_1_1
     g16B16r162plane422Unorm = 1000156032
-    # Provided by VK_VERSION_1_1
     g16B16R163plane444Unorm = 1000156033
     # Provided by VK_EXT_extension_289
     astc3x3x3UnormBlockExt = 1000288000
-    # Provided by VK_EXT_extension_289
     astc3x3x3SrgbBlockExt = 1000288001
-    # Provided by VK_EXT_extension_289
     astc3x3x3SfloatBlockExt = 1000288002
-    # Provided by VK_EXT_extension_289
     astc4x3x3UnormBlockExt = 1000288003
-    # Provided by VK_EXT_extension_289
     astc4x3x3SrgbBlockExt = 1000288004
-    # Provided by VK_EXT_extension_289
     astc4x3x3SfloatBlockExt = 1000288005
-    # Provided by VK_EXT_extension_289
     astc4x4x3UnormBlockExt = 1000288006
-    # Provided by VK_EXT_extension_289
     astc4x4x3SrgbBlockExt = 1000288007
-    # Provided by VK_EXT_extension_289
     astc4x4x3SfloatBlockExt = 1000288008
-    # Provided by VK_EXT_extension_289
     astc4x4x4UnormBlockExt = 1000288009
-    # Provided by VK_EXT_extension_289
     astc4x4x4SrgbBlockExt = 1000288010
-    # Provided by VK_EXT_extension_289
     astc4x4x4SfloatBlockExt = 1000288011
-    # Provided by VK_EXT_extension_289
     astc5x4x4UnormBlockExt = 1000288012
-    # Provided by VK_EXT_extension_289
     astc5x4x4SrgbBlockExt = 1000288013
-    # Provided by VK_EXT_extension_289
     astc5x4x4SfloatBlockExt = 1000288014
-    # Provided by VK_EXT_extension_289
     astc5x5x4UnormBlockExt = 1000288015
-    # Provided by VK_EXT_extension_289
     astc5x5x4SrgbBlockExt = 1000288016
-    # Provided by VK_EXT_extension_289
     astc5x5x4SfloatBlockExt = 1000288017
-    # Provided by VK_EXT_extension_289
     astc5x5x5UnormBlockExt = 1000288018
-    # Provided by VK_EXT_extension_289
     astc5x5x5SrgbBlockExt = 1000288019
-    # Provided by VK_EXT_extension_289
     astc5x5x5SfloatBlockExt = 1000288020
-    # Provided by VK_EXT_extension_289
     astc6x5x5UnormBlockExt = 1000288021
-    # Provided by VK_EXT_extension_289
     astc6x5x5SrgbBlockExt = 1000288022
-    # Provided by VK_EXT_extension_289
     astc6x5x5SfloatBlockExt = 1000288023
-    # Provided by VK_EXT_extension_289
     astc6x6x5UnormBlockExt = 1000288024
-    # Provided by VK_EXT_extension_289
     astc6x6x5SrgbBlockExt = 1000288025
-    # Provided by VK_EXT_extension_289
     astc6x6x5SfloatBlockExt = 1000288026
-    # Provided by VK_EXT_extension_289
     astc6x6x6UnormBlockExt = 1000288027
-    # Provided by VK_EXT_extension_289
     astc6x6x6SrgbBlockExt = 1000288028
-    # Provided by VK_EXT_extension_289
     astc6x6x6SfloatBlockExt = 1000288029
     # Provided by VK_EXT_4444_formats
     a4r4g4b4UnormPack16Ext = 1000340000
-    # Provided by VK_EXT_4444_formats
     a4b4g4r4UnormPack16Ext = 1000340001
   FormatFeatureFlagBits* {.size: sizeof(int32), pure.} = enum
     sampledImage = 0x00000001 # Format can be used for sampled images (SAMPLED_IMAGE and COMBINED_IMAGE_SAMPLER descriptor types)
@@ -1402,33 +1078,24 @@ type # enums and bitmasks
     sampledImageFilterCubicImg = 0x00002000 # Format can be filtered with VK_FILTER_CUBIC_IMG when being sampled
     # Provided by VK_VERSION_1_1
     transferSrc = 0x00004000 # Format can be used as the source image of image transfer commands
-    # Provided by VK_VERSION_1_1
     transferDst = 0x00008000 # Format can be used as the destination image of image transfer commands
     # Provided by VK_VERSION_1_2
     sampledImageFilterMinmax = 0x00010000 # Format can be used with min/max reduction filtering
     # Provided by VK_VERSION_1_1
     midpointChromaSamples = 0x00020000 # Format can have midpoint rather than cosited chroma samples
-    # Provided by VK_VERSION_1_1
     sampledImageYcbcrConversionLinearFilter = 0x00040000 # Format can be used with linear filtering whilst color conversion is enabled
-    # Provided by VK_VERSION_1_1
     sampledImageYcbcrConversionSeparateReconstructionFilter = 0x00080000 # Format can have different chroma, min and mag filters
-    # Provided by VK_VERSION_1_1
     sampledImageYcbcrConversionChromaReconstructionExplicit = 0x00100000
-    # Provided by VK_VERSION_1_1
     sampledImageYcbcrConversionChromaReconstructionExplicitForceable = 0x00200000
-    # Provided by VK_VERSION_1_1
     disjoint = 0x00400000 # Format supports disjoint planes
-    # Provided by VK_VERSION_1_1
     cositedChromaSamples = 0x00800000 # Format can have cosited rather than midpoint chroma samples
     # Provided by VK_EXT_fragment_density_map
     fragmentDensityMapExt = 0x01000000
     # Provided by VK_AMD_extension_25
     reserved25Khr = 0x02000000
-    # Provided by VK_AMD_extension_25
     reserved26Khr = 0x04000000
     # Provided by VK_AMD_extension_24
     reserved27Khr = 0x08000000
-    # Provided by VK_AMD_extension_24
     reserved28Khr = 0x10000000
     # Provided by VK_KHR_ray_tracing
     accelerationStructureVertexBufferKhr = 0x20000000
@@ -1443,17 +1110,11 @@ type # enums and bitmasks
     cubeCompatible = 0x00000010 # Allows creating image views with cube type from the created image
     # Provided by VK_VERSION_1_1
     e2dArrayCompatible = 0x00000020 # The 3D image can be viewed as a 2D or 2D array image
-    # Provided by VK_VERSION_1_1
     splitInstanceBindRegions = 0x00000040 # Allows using VkBindImageMemoryDeviceGroupInfo::pSplitInstanceBindRegions when binding memory to the image
-    # Provided by VK_VERSION_1_1
     blockTexelViewCompatible = 0x00000080
-    # Provided by VK_VERSION_1_1
     extendedUsage = 0x00000100
-    # Provided by VK_VERSION_1_1
     disjoint = 0x00000200
-    # Provided by VK_VERSION_1_1
     alias = 0x00000400
-    # Provided by VK_VERSION_1_1
     protected = 0x00000800 # Image requires protected memory
     # Provided by VK_EXT_sample_locations
     sampleLocationsCompatibleDepthExt = 0x00001000
@@ -1486,19 +1147,14 @@ type # enums and bitmasks
     fragmentDensityMapExt = 0x00000200
     # Provided by VK_AMD_extension_25
     reserved10Khr = 0x00000400
-    # Provided by VK_AMD_extension_25
     reserved11Khr = 0x00000800
-    # Provided by VK_AMD_extension_25
     reserved12Khr = 0x00001000
     # Provided by VK_AMD_extension_24
     reserved13Khr = 0x00002000
-    # Provided by VK_AMD_extension_24
     reserved14Khr = 0x00004000
-    # Provided by VK_AMD_extension_24
     reserved15Khr = 0x00008000
     # Provided by VK_QCOM_extension_173
     reserved16Qcom = 0x00010000
-    # Provided by VK_QCOM_extension_173
     reserved17Qcom = 0x00020000
   ImageUsageFlags* = Flags[ImageUsageFlagBits]
   InstanceCreateFlags* = Flags[distinct UnusedEnum]
@@ -1521,7 +1177,6 @@ type # enums and bitmasks
     protected = 0x00000020 # Memory is protected
     # Provided by VK_AMD_device_coherent_memory
     deviceCoherentAmd = 0x00000040
-    # Provided by VK_AMD_device_coherent_memory
     deviceUncachedAmd = 0x00000080
   MemoryPropertyFlags* = Flags[MemoryPropertyFlagBits]
   PhysicalDeviceType* {.size: sizeof(int32), pure.} = enum
@@ -1590,7 +1245,6 @@ type # enums and bitmasks
     conditionalRenderingExt = 0x00040000 # A pipeline stage for conditional rendering predicate fetch
     # Provided by VK_NV_mesh_shader
     taskShaderNv = 0x00080000
-    # Provided by VK_NV_mesh_shader
     meshShaderNv = 0x00100000
     # Provided by VK_KHR_ray_tracing
     rayTracingShaderKhr = 0x00200000
@@ -1619,17 +1273,12 @@ type # enums and bitmasks
     metadata = 0x00000008
     # Provided by VK_VERSION_1_1
     plane0 = 0x00000010
-    # Provided by VK_VERSION_1_1
     plane1 = 0x00000020
-    # Provided by VK_VERSION_1_1
     plane2 = 0x00000040
     # Provided by VK_EXT_image_drm_format_modifier
     memoryPlane0Ext = 0x00000080
-    # Provided by VK_EXT_image_drm_format_modifier
     memoryPlane1Ext = 0x00000100
-    # Provided by VK_EXT_image_drm_format_modifier
     memoryPlane2Ext = 0x00000200
-    # Provided by VK_EXT_image_drm_format_modifier
     memoryPlane3Ext = 0x00000400
   ImageAspectFlags* = Flags[ImageAspectFlagBits]
   SparseImageFormatFlagBits* {.size: sizeof(int32), pure.} = enum
@@ -1687,7 +1336,6 @@ type # enums and bitmasks
     performanceQueryKhr = 1000116000
     # Provided by VK_KHR_ray_tracing
     accelerationStructureSerializationSizeKhr = 1000150000
-    # Provided by VK_KHR_ray_tracing
     accelerationStructureCompactedSizeKhr = 1000165000
     # Provided by VK_INTEL_performance_query
     performanceQueryIntel = 1000210000
@@ -1718,15 +1366,12 @@ type # enums and bitmasks
     rayTracingKhr = 0x00000400
     # Provided by VK_EXT_transform_feedback
     transformFeedbackBufferExt = 0x00000800
-    # Provided by VK_EXT_transform_feedback
     transformFeedbackCounterBufferExt = 0x00001000
     # Provided by VK_AMD_extension_25
     reserved13Khr = 0x00002000
-    # Provided by VK_AMD_extension_25
     reserved14Khr = 0x00004000
     # Provided by VK_AMD_extension_24
     reserved15Khr = 0x00008000
-    # Provided by VK_AMD_extension_24
     reserved16Khr = 0x00010000
     # Provided by VK_VERSION_1_2
     shaderDeviceAddress = 0x00020000
@@ -1734,7 +1379,6 @@ type # enums and bitmasks
     reserved18Qcom = 0x00040000
     # Provided by VK_NV_extension_168
     reserved19Khr = 0x00080000
-    # Provided by VK_NV_extension_168
     reserved20Khr = 0x00100000
   BufferUsageFlags* = Flags[BufferUsageFlagBits]
   SharingMode* {.size: sizeof(int32), pure.} = enum
@@ -1761,7 +1405,6 @@ type # enums and bitmasks
     sharedPresentKhr = 1000111000
     # Provided by VK_VERSION_1_1
     depthReadOnlyStencilAttachmentOptimal = 1000117000
-    # Provided by VK_VERSION_1_1
     depthAttachmentStencilReadOnlyOptimal = 1000117001
     # Provided by VK_NV_shading_rate_image
     shadingRateOptimalNv = 1000164003
@@ -1769,11 +1412,8 @@ type # enums and bitmasks
     fragmentDensityMapOptimalExt = 1000218000
     # Provided by VK_VERSION_1_2
     depthAttachmentOptimal = 1000241000
-    # Provided by VK_VERSION_1_2
     depthReadOnlyOptimal = 1000241001
-    # Provided by VK_VERSION_1_2
     stencilAttachmentOptimal = 1000241002
-    # Provided by VK_VERSION_1_2
     stencilReadOnlyOptimal = 1000241003
 
   # Image view commands
@@ -1843,95 +1483,50 @@ type # enums and bitmasks
     max = 4
     # Provided by VK_EXT_blend_operation_advanced
     zeroExt = 1000148000
-    # Provided by VK_EXT_blend_operation_advanced
     srcExt = 1000148001
-    # Provided by VK_EXT_blend_operation_advanced
     dstExt = 1000148002
-    # Provided by VK_EXT_blend_operation_advanced
     srcOverExt = 1000148003
-    # Provided by VK_EXT_blend_operation_advanced
     dstOverExt = 1000148004
-    # Provided by VK_EXT_blend_operation_advanced
     srcInExt = 1000148005
-    # Provided by VK_EXT_blend_operation_advanced
     dstInExt = 1000148006
-    # Provided by VK_EXT_blend_operation_advanced
     srcOutExt = 1000148007
-    # Provided by VK_EXT_blend_operation_advanced
     dstOutExt = 1000148008
-    # Provided by VK_EXT_blend_operation_advanced
     srcAtopExt = 1000148009
-    # Provided by VK_EXT_blend_operation_advanced
     dstAtopExt = 1000148010
-    # Provided by VK_EXT_blend_operation_advanced
     xorExt = 1000148011
-    # Provided by VK_EXT_blend_operation_advanced
     multiplyExt = 1000148012
-    # Provided by VK_EXT_blend_operation_advanced
     screenExt = 1000148013
-    # Provided by VK_EXT_blend_operation_advanced
     overlayExt = 1000148014
-    # Provided by VK_EXT_blend_operation_advanced
     darkenExt = 1000148015
-    # Provided by VK_EXT_blend_operation_advanced
     lightenExt = 1000148016
-    # Provided by VK_EXT_blend_operation_advanced
     colordodgeExt = 1000148017
-    # Provided by VK_EXT_blend_operation_advanced
     colorburnExt = 1000148018
-    # Provided by VK_EXT_blend_operation_advanced
     hardlightExt = 1000148019
-    # Provided by VK_EXT_blend_operation_advanced
     softlightExt = 1000148020
-    # Provided by VK_EXT_blend_operation_advanced
     differenceExt = 1000148021
-    # Provided by VK_EXT_blend_operation_advanced
     exclusionExt = 1000148022
-    # Provided by VK_EXT_blend_operation_advanced
     invertExt = 1000148023
-    # Provided by VK_EXT_blend_operation_advanced
     invertRgbExt = 1000148024
-    # Provided by VK_EXT_blend_operation_advanced
     lineardodgeExt = 1000148025
-    # Provided by VK_EXT_blend_operation_advanced
     linearburnExt = 1000148026
-    # Provided by VK_EXT_blend_operation_advanced
     vividlightExt = 1000148027
-    # Provided by VK_EXT_blend_operation_advanced
     linearlightExt = 1000148028
-    # Provided by VK_EXT_blend_operation_advanced
     pinlightExt = 1000148029
-    # Provided by VK_EXT_blend_operation_advanced
     hardmixExt = 1000148030
-    # Provided by VK_EXT_blend_operation_advanced
     hslHueExt = 1000148031
-    # Provided by VK_EXT_blend_operation_advanced
     hslSaturationExt = 1000148032
-    # Provided by VK_EXT_blend_operation_advanced
     hslColorExt = 1000148033
-    # Provided by VK_EXT_blend_operation_advanced
     hslLuminosityExt = 1000148034
-    # Provided by VK_EXT_blend_operation_advanced
     plusExt = 1000148035
-    # Provided by VK_EXT_blend_operation_advanced
     plusClampedExt = 1000148036
-    # Provided by VK_EXT_blend_operation_advanced
     plusClampedAlphaExt = 1000148037
-    # Provided by VK_EXT_blend_operation_advanced
     plusDarkerExt = 1000148038
-    # Provided by VK_EXT_blend_operation_advanced
     minusExt = 1000148039
-    # Provided by VK_EXT_blend_operation_advanced
     minusClampedExt = 1000148040
-    # Provided by VK_EXT_blend_operation_advanced
     contrastExt = 1000148041
-    # Provided by VK_EXT_blend_operation_advanced
     invertOvgExt = 1000148042
-    # Provided by VK_EXT_blend_operation_advanced
     redExt = 1000148043
-    # Provided by VK_EXT_blend_operation_advanced
     greenExt = 1000148044
-    # Provided by VK_EXT_blend_operation_advanced
     blueExt = 1000148045
   ColorComponentFlagBits* {.size: sizeof(int32), pure.} = enum
     r = 0x00000001
@@ -1972,7 +1567,6 @@ type # enums and bitmasks
     sampleLocationsExt = 1000143000
     # Provided by VK_NV_shading_rate_image
     viewportShadingRatePaletteNv = 1000164004
-    # Provided by VK_NV_shading_rate_image
     viewportCoarseSampleOrderNv = 1000164006
     # Provided by VK_NV_scissor_exclusive
     exclusiveScissorNv = 1000205001
@@ -1980,27 +1574,16 @@ type # enums and bitmasks
     lineStippleExt = 1000259000
     # Provided by VK_EXT_extended_dynamic_state
     cullModeExt = 1000267000
-    # Provided by VK_EXT_extended_dynamic_state
     frontFaceExt = 1000267001
-    # Provided by VK_EXT_extended_dynamic_state
     primitiveTopologyExt = 1000267002
-    # Provided by VK_EXT_extended_dynamic_state
     viewportWithCountExt = 1000267003
-    # Provided by VK_EXT_extended_dynamic_state
     scissorWithCountExt = 1000267004
-    # Provided by VK_EXT_extended_dynamic_state
     vertexInputBindingStrideExt = 1000267005
-    # Provided by VK_EXT_extended_dynamic_state
     depthTestEnableExt = 1000267006
-    # Provided by VK_EXT_extended_dynamic_state
     depthWriteEnableExt = 1000267007
-    # Provided by VK_EXT_extended_dynamic_state
     depthCompareOpExt = 1000267008
-    # Provided by VK_EXT_extended_dynamic_state
     depthBoundsTestEnableExt = 1000267009
-    # Provided by VK_EXT_extended_dynamic_state
     stencilTestEnableExt = 1000267010
-    # Provided by VK_EXT_extended_dynamic_state
     stencilOpExt = 1000267011
   FrontFace* {.size: sizeof(int32), pure.} = enum
     counterClockwise = 0
@@ -2029,31 +1612,23 @@ type # enums and bitmasks
     derivative = 0x00000004
     # Provided by VK_VERSION_1_1
     viewIndexFromDeviceIndex = 0x00000008
-    # Provided by VK_VERSION_1_1
     dispatchBase = 0x00000010
     # Provided by VK_NV_ray_tracing
     deferCompileNv = 0x00000020
     # Provided by VK_KHR_pipeline_executable_properties
     captureStatisticsKhr = 0x00000040
-    # Provided by VK_KHR_pipeline_executable_properties
     captureInternalRepresentationsKhr = 0x00000080
     # Provided by VK_EXT_pipeline_creation_cache_control
     failOnPipelineCompileRequiredExt = 0x00000100
-    # Provided by VK_EXT_pipeline_creation_cache_control
     earlyReturnOnFailureExt = 0x00000200
     # Provided by VK_KHR_pipeline_library
     libraryKhr = 0x00000800
     # Provided by VK_KHR_ray_tracing
     rayTracingSkipTrianglesKhr = 0x00001000
-    # Provided by VK_KHR_ray_tracing
     rayTracingSkipAabbsKhr = 0x00002000
-    # Provided by VK_KHR_ray_tracing
     rayTracingNoNullAnyHitShadersKhr = 0x00004000
-    # Provided by VK_KHR_ray_tracing
     rayTracingNoNullClosestHitShadersKhr = 0x00008000
-    # Provided by VK_KHR_ray_tracing
     rayTracingNoNullMissShadersKhr = 0x00010000
-    # Provided by VK_KHR_ray_tracing
     rayTracingNoNullIntersectionShadersKhr = 0x00020000
     # Provided by VK_NV_device_generated_commands
     indirectBindableNv = 0x00040000
@@ -2069,7 +1644,6 @@ type # enums and bitmasks
   PipelineShaderStageCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     # Provided by VK_EXT_subgroup_size_control
     allowVaryingSubgroupSizeExt = 0x00000001
-    # Provided by VK_EXT_subgroup_size_control
     requireFullSubgroupsExt = 0x00000002
     # Provided by VK_NV_extension_52
     reserved2Nv = 0x00000004
@@ -2107,19 +1681,13 @@ type # enums and bitmasks
     compute = 0x00000020
     # Provided by VK_NV_mesh_shader
     taskNv = 0x00000040
-    # Provided by VK_NV_mesh_shader
     meshNv = 0x00000080
     # Provided by VK_KHR_ray_tracing
     raygenKhr = 0x00000100
-    # Provided by VK_KHR_ray_tracing
     anyHitKhr = 0x00000200
-    # Provided by VK_KHR_ray_tracing
     closestHitKhr = 0x00000400
-    # Provided by VK_KHR_ray_tracing
     missKhr = 0x00000800
-    # Provided by VK_KHR_ray_tracing
     intersectionKhr = 0x00001000
-    # Provided by VK_KHR_ray_tracing
     callableKhr = 0x00002000
     all = 0x7FFFFFFF
   ShaderStageFlags* = Flags[ShaderStageFlagBits]
@@ -2146,7 +1714,6 @@ type # enums and bitmasks
     intOpaqueWhite = 5
     # Provided by VK_EXT_custom_border_color
     floatCustomExt = 1000287003
-    # Provided by VK_EXT_custom_border_color
     intCustomExt = 1000287004
   Filter* {.size: sizeof(int32), pure.} = enum
     nearest = 0
@@ -2163,7 +1730,6 @@ type # enums and bitmasks
   SamplerCreateFlagBits* {.size: sizeof(int32), pure.} = enum
     # Provided by VK_EXT_fragment_density_map
     subsampledExt = 0x00000001
-    # Provided by VK_EXT_fragment_density_map
     subsampledCoarseReconstructionExt = 0x00000002
   SamplerCreateFlags* = Flags[SamplerCreateFlagBits]
   SamplerMipmapMode* {.size: sizeof(int32), pure.} = enum
@@ -2221,7 +1787,6 @@ type # enums and bitmasks
     memoryWrite = 0x00010000 # Controls coherency of memory writes
     # Provided by VK_NV_device_generated_commands
     commandPreprocessReadNv = 0x00020000
-    # Provided by VK_NV_device_generated_commands
     commandPreprocessWriteNv = 0x00040000
     # Provided by VK_EXT_blend_operation_advanced
     colorAttachmentReadNoncoherentExt = 0x00080000
@@ -2229,7 +1794,6 @@ type # enums and bitmasks
     conditionalRenderingReadExt = 0x00100000 # read access flag for reading conditional rendering predicate
     # Provided by VK_KHR_ray_tracing
     accelerationStructureReadKhr = 0x00200000
-    # Provided by VK_KHR_ray_tracing
     accelerationStructureWriteKhr = 0x00400000
     # Provided by VK_NV_shading_rate_image
     shadingRateImageReadNv = 0x00800000
@@ -2237,13 +1801,10 @@ type # enums and bitmasks
     fragmentDensityMapReadExt = 0x01000000
     # Provided by VK_EXT_transform_feedback
     transformFeedbackWriteExt = 0x02000000
-    # Provided by VK_EXT_transform_feedback
     transformFeedbackCounterReadExt = 0x04000000
-    # Provided by VK_EXT_transform_feedback
     transformFeedbackCounterWriteExt = 0x08000000
     # Provided by VK_AMD_extension_25
     reserved28Khr = 0x10000000
-    # Provided by VK_AMD_extension_25
     reserved29Khr = 0x20000000
     # Provided by VK_AMD_extension_24
     reserved30Khr = 0x40000000
@@ -2264,7 +1825,6 @@ type # enums and bitmasks
     byRegion = 0x00000001 # Dependency is per pixel region
     # Provided by VK_VERSION_1_1
     viewLocal = 0x00000002
-    # Provided by VK_VERSION_1_1
     deviceGroup = 0x00000004 # Dependency is across devices
   DependencyFlags* = Flags[DependencyFlagBits]
   FramebufferCreateFlagBits* {.size: sizeof(int32), pure.} = enum
@@ -2285,11 +1845,9 @@ type # enums and bitmasks
   SubpassDescriptionFlagBits* {.size: sizeof(int32), pure.} = enum
     # Provided by VK_NVX_multiview_per_view_attributes
     perViewAttributesNvx = 0x00000001
-    # Provided by VK_NVX_multiview_per_view_attributes
     perViewPositionXOnlyNvx = 0x00000002
     # Provided by VK_QCOM_render_pass_shader_resolve
     fragmentRegionQcom = 0x00000004
-    # Provided by VK_QCOM_render_pass_shader_resolve
     shaderResolveQcom = 0x00000008
   SubpassDescriptionFlags* = Flags[SubpassDescriptionFlagBits]
 

@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T09:33:17Z
+# Generated at 2021-12-22T13:50:06Z
 # VK_AMD_shader_info
 
 import ../platform

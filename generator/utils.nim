@@ -5,8 +5,6 @@ import xmltree
 import xmlparser
 import sugar
 import os
-import osproc
-import streams
 import options
 
 import ./nodedefs
@@ -146,13 +144,7 @@ proc newSbt*[T](): Sbt[T] =
 # ----------------------------------------------------------------------
 # specialization =======================================================
 
-proc getVulkanXML*(): XmlNode =
-  if not os.fileExists("vk.xml"):
-    discard execCmd "curl https://raw.githubusercontent.com/KhronosGroup/Vulkan-Docs/master/xml/vk.xml > vk.xml"
-
-  let file = newFileStream("vk.xml", fmRead)
-  defer: file.close()
-  file.parseXml()
+proc getVulkanXML*(): XmlNode {.inline.} = readFile("vk.xml").parseXml()
 
 proc toUpperCamel*(str: string): string =
   str.split('_').mapIt(it.toLowerAscii().capitalizeAscii()).join()

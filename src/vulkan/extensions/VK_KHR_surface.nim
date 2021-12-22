@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T09:33:16Z
+# Generated at 2021-12-22T13:50:05Z
 # VK_KHR_surface
 # VK_KHR_display
 
@@ -32,37 +32,23 @@ type # enums and bitmasks
     fifoRelaxedKhr = 3
     # Provided by VK_KHR_shared_presentable_image
     sharedDemandRefreshKhr = 1000111000
-    # Provided by VK_KHR_shared_presentable_image
     sharedContinuousRefreshKhr = 1000111001
   ColorSpaceKHR* {.size: sizeof(int32), pure.} = enum
     srgbNonlinearKhr = 0
     # Provided by VK_EXT_swapchain_colorspace
     displayP3NonlinearExt = 1000104001
-    # Provided by VK_EXT_swapchain_colorspace
     extendedSrgbLinearExt = 1000104002
-    # Provided by VK_EXT_swapchain_colorspace
     displayP3LinearExt = 1000104003
-    # Provided by VK_EXT_swapchain_colorspace
     dciP3NonlinearExt = 1000104004
-    # Provided by VK_EXT_swapchain_colorspace
     bt709LinearExt = 1000104005
-    # Provided by VK_EXT_swapchain_colorspace
     bt709NonlinearExt = 1000104006
-    # Provided by VK_EXT_swapchain_colorspace
     bt2020LinearExt = 1000104007
-    # Provided by VK_EXT_swapchain_colorspace
     hdr10St2084Ext = 1000104008
-    # Provided by VK_EXT_swapchain_colorspace
     dolbyvisionExt = 1000104009
-    # Provided by VK_EXT_swapchain_colorspace
     hdr10HlgExt = 1000104010
-    # Provided by VK_EXT_swapchain_colorspace
     adobergbLinearExt = 1000104011
-    # Provided by VK_EXT_swapchain_colorspace
     adobergbNonlinearExt = 1000104012
-    # Provided by VK_EXT_swapchain_colorspace
     passThroughExt = 1000104013
-    # Provided by VK_EXT_swapchain_colorspace
     extendedSrgbNonlinearExt = 1000104014
     # Provided by VK_AMD_display_native_hdr
     displayNativeAmd = 1000213000
