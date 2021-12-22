@@ -168,11 +168,11 @@ type
 
   NodeKindRequire* = enum
     nkrCommand
-    nkrApiConst
-    nkrConst
-    nkrConstAlias
+    nkrApiConst        # -> resource.const or resource.constAlias
+    nkrConst           # -> const
+    nkrConstAlias      # -> constAlias
     nkrEnumExtendAlias
-    nkrType
+    nkrType            # -> resource.baseType
   NodeRequireVal* = object
     name*: string
     case kind*: NodeKindRequire

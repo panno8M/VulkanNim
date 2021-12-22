@@ -10,6 +10,7 @@ import std/times
 import ./utils
 import ./nodedefs
 import ./rendering
+import ./structuredstring
 
 type CommandRenderingMode = enum
   crmAll
@@ -197,7 +198,7 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
             typeDef.add resources.bitmasks[req.name].render
             renderedNodes.add req.name
           elif resources.enums.hasKey(req.name):
-            typeDef.add resources.enums[req.name].render(resources.vendorTags)
+            typeDef.add $resources.enums[req.name].render(resources.vendorTags)
             if resources.enumAliases.hasKey(req.name):
               enumAliasesRequired.add resources.enumAliases[req.name]
             renderedNodes.add req.name

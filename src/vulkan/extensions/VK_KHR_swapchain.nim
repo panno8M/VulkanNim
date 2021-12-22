@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T13:50:05Z
+# Generated at 2021-12-22T15:11:00Z
 # VK_KHR_swapchain
 
 import ../platform
@@ -11,8 +11,6 @@ prepareVulkanLibDef()
 const
   KhrSwapchainSpecVersion* = 70
   KhrSwapchainExtensionName* = "VK_KHR_swapchain"
-
-  MaxDeviceGroupSize* = 32
 
 type # enums and bitmasks
   SwapchainCreateFlagBitsKHR* {.size: sizeof(int32), pure.} = enum

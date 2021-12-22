@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T02:03:03Z
+# Generated at 2021-12-22T14:43:49Z
 # VK_KHR_timeline_semaphore
 
 import ../platform

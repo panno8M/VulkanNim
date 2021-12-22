@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T13:50:06Z
+# Generated at 2021-12-22T15:11:00Z
 # VK_KHR_device_group
 
 import ../platform
@@ -18,8 +18,6 @@ prepareVulkanLibDef()
 const
   KhrDeviceGroupSpecVersion* = 4
   KhrDeviceGroupExtensionName* = "VK_KHR_device_group"
-
-  MaxDeviceGroupSize* = 32
 
 type # enums and bitmasks
   PeerMemoryFeatureFlagsKHR* = PeerMemoryFeatureFlags

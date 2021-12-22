@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T09:33:17Z
+# Generated at 2021-12-22T14:45:57Z
 # VK_KHR_descriptor_update_template
 
 import ../platform

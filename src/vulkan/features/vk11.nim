@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T13:50:05Z
+# Generated at 2021-12-22T15:10:59Z
 # vk11
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -15,7 +15,6 @@ const
 
   # Promoted from VK_KHR_external_memory_capabilities
   LuidSize* = 8
-  UuidSize* = 16
 
   # Promoted from VK_KHR_external_memory
   QueueFamilyExternal* = (uint32.high-1)

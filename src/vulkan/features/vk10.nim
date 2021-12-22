@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T13:50:05Z
+# Generated at 2021-12-22T15:10:59Z
 # vk10
 # Vulkan core API interface definitions
 # =====================================
@@ -28,18 +28,6 @@ const
   SubpassExternal* = (uint32.high)
   True* = Bool32(1)
   WholeSize* = (uint64.high)
-
-  # Device initialization
-  MaxMemoryTypes* = 32
-  MaxMemoryHeaps* = 16 # The maximum number of unique memory heaps, each of which supporting 1 or more memory types
-  MaxPhysicalDeviceNameSize* = 256
-  UuidSize* = 16
-
-  # Extension discovery commands
-  MaxExtensionNameSize* = 256
-
-  # Layer discovery commands
-  MaxDescriptionSize* = 256
 
 type # enums and bitmasks
   # Fundamental types used by many commands and structures

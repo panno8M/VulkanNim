@@ -19,11 +19,10 @@ func cmp(a, b: NodeEnumVal): int =
       of nkeValue:  cmp(1.shl(a.bitpos), b.value)
       of nkeBitpos: cmp(1.shl(a.bitpos), 1.shl(b.bitpos))
 
-proc render*(enumVal: NodeEnumVal; vendorTags: VendorTags; enumsName: string): sstring =
-  result = sstring()
+proc render*(enumVal: NodeEnumVal; vendorTags: VendorTags; enumsName: string): string =
   let name = enumVal.name.parseEnumValue(enumsName, vendorTags)
 
-  result.add `%` do:
+  result.add  do:
     case enumVal.kind
     of nkeValue:
       if enumVal.isHex: "{name} = 0x{enumVal.value.toHex(8)}".fmt
@@ -32,28 +31,30 @@ proc render*(enumVal: NodeEnumVal; vendorTags: VendorTags; enumsName: string): s
       "{name} = 0x{1.shl(enumVal.bitpos).toHex(8)}".fmt
 
   if enumVal.comment.isSome:
-    result[^1] &= " # " & enumVal.comment.get
+    result.add " # " & enumVal.comment.get
 
 
-proc render*(enums: NodeEnum; vendorTags: VendorTags): string =
+proc render*(enums: NodeEnum; vendorTags: VendorTags): sstring =
+  result = sstring(kind: skBlock)
   let name = enums.name.removeVkPrefix
 
   if enums.comment.isSome:
-    result = "# {enums.comment.get}\n".fmt
+    result.add comment enums.comment.get
 
   if enums.enumVals.len == 0:
-    return result & "{name}* = distinct UnusedEnum".fmt
+    result.add %"{name}* = distinct UnusedEnum".fmt
+    return
 
-  result.add "{name}* {enumPragma} = enum".fmt
+  result.add sstring(kind: skBlock,
+    title: "{name}* {enumPragma} = enum".fmt
+  )
 
   var lastExt = ""
   for field in enums.enumvals.sorted(cmp):
-    result.add do:
-      if field.isExtended and field.providedBy != lastExt:
-        lastExt = field.providedBy
-        "\n  # Provided by {lastExt}".fmt &
-          $field.render(vendorTags, name)
-      else: $field.render(vendorTags, name)
+    if field.isExtended and field.providedBy != lastExt:
+      lastExt = field.providedBy
+      result[^1].add comment "Provided by " & lastExt
+    result[^1].add %field.render(vendorTags, name)
 
 
 proc render*(enumAlias: NodeEnumAlias; vendorTags: VendorTags; enumName: string): string =

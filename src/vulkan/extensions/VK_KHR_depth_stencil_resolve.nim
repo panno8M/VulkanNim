@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T02:03:03Z
+# Generated at 2021-12-22T14:45:57Z
 # VK_KHR_depth_stencil_resolve
 
 import ../platform

@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T13:50:05Z
+# Generated at 2021-12-22T14:50:02Z
 # VK_EXT_conditional_rendering
 
 import ../platform

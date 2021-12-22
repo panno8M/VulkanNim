@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T02:03:04Z
+# Generated at 2021-12-22T14:45:57Z
 # VK_KHR_sampler_ycbcr_conversion
 
 import ../platform

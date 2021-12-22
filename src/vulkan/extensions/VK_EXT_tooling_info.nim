@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T13:50:05Z
+# Generated at 2021-12-22T15:11:00Z
 # VK_EXT_tooling_info
 
 import ../platform
@@ -15,8 +15,6 @@ prepareVulkanLibDef()
 const
   ExtToolingInfoSpecVersion* = 1
   ExtToolingInfoExtensionName* = "VK_EXT_tooling_info"
-  MaxExtensionNameSize* = 256
-  MaxDescriptionSize* = 256
 
 type # enums and bitmasks
   ToolPurposeFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
