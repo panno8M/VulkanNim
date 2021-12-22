@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T14:50:02Z
+# Generated at 2021-12-22T15:37:51Z
 # VK_EXT_display_control
 
 import ../platform

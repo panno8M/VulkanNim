@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T14:50:01Z
+# Generated at 2021-12-22T15:37:51Z
 # VK_EXT_pipeline_creation_feedback
 
 import ../platform
@@ -11,7 +11,7 @@ const
   ExtPipelineCreationFeedbackExtensionName* = "VK_EXT_pipeline_creation_feedback"
 
 type # enums and bitmasks
-  PipelineCreationFeedbackFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
+  PipelineCreationFeedbackFlagBitsEXT* {.size: sizeof(int32), pure, flagbits.} = enum
     validExt = 0x00000001
     applicationPipelineCacheHitExt = 0x00000002
     basePipelineAccelerationExt = 0x00000004

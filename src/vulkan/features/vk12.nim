@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:11:00Z
+# Generated at 2021-12-22T15:37:52Z
 # vk12
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -14,13 +14,13 @@ const
   StructureTypePhysicalDeviceVulkan11Properties* = 50
   StructureTypePhysicalDeviceVulkan12Features* = 51
   StructureTypePhysicalDeviceVulkan12Properties* = 52
+  UuidSize* = 16
+  LuidSize* = 8
+  MaxDriverNameSize* = 256
+  MaxDriverInfoSize* = 256
 
   # Promoted from VK_KHR_sampler_mirror_clamp_to_edge (extension 15)
   SamplerAddressModeMirrorClampToEdge* = 4
-
-  # Promoted from VK_KHR_driver_properties (extension 197)
-  MaxDriverNameSize* = 256
-  MaxDriverInfoSize* = 256
 
 type # enums and bitmasks
   # Promoted from VK_KHR_driver_properties (extension 197)
@@ -47,7 +47,7 @@ type # enums and bitmasks
     none = 2
 
   # Promoted from VK_EXT_descriptor_indexing (extension 162)
-  DescriptorBindingFlagBits* {.size: sizeof(int32), pure.} = enum
+  DescriptorBindingFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     updateAfterBind = 0x00000001
     updateUnusedWhilePending = 0x00000002
     partiallyBound = 0x00000004
@@ -55,7 +55,7 @@ type # enums and bitmasks
   DescriptorBindingFlags* = Flags[DescriptorBindingFlagBits]
 
   # Promoted from VK_KHR_depth_stencil_resolve (extension 200)
-  ResolveModeFlagBits* {.size: sizeof(int32), pure.} = enum
+  ResolveModeFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     none = 0
     sampleZero = 0x00000001
     average = 0x00000002
@@ -73,7 +73,7 @@ type # enums and bitmasks
   SemaphoreType* {.size: sizeof(int32), pure.} = enum
     binary = 0
     timeline = 1
-  SemaphoreWaitFlagBits* {.size: sizeof(int32), pure.} = enum
+  SemaphoreWaitFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     any = 0x00000001
   SemaphoreWaitFlags* = Flags[SemaphoreWaitFlagBits]
 

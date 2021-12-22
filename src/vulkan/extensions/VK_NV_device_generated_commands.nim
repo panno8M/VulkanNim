@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T14:50:02Z
+# Generated at 2021-12-22T15:37:51Z
 # VK_NV_device_generated_commands
 
 import ../platform
@@ -11,7 +11,7 @@ const
   NvDeviceGeneratedCommandsExtensionName* = "VK_NV_device_generated_commands"
 
 type # enums and bitmasks
-  IndirectStateFlagBitsNV* {.size: sizeof(int32), pure.} = enum
+  IndirectStateFlagBitsNV* {.size: sizeof(int32), pure, flagbits.} = enum
     flagFrontfaceNv = 0x00000001
   IndirectStateFlagsNV* = Flags[IndirectStateFlagBitsNV]
   IndirectCommandsTokenTypeNV* {.size: sizeof(int32), pure.} = enum
@@ -23,7 +23,7 @@ type # enums and bitmasks
     drawIndexedNv = 5
     drawNv = 6
     drawTasksNv = 7
-  IndirectCommandsLayoutUsageFlagBitsNV* {.size: sizeof(int32), pure.} = enum
+  IndirectCommandsLayoutUsageFlagBitsNV* {.size: sizeof(int32), pure, flagbits.} = enum
     explicitPreprocessNv = 0x00000001
     indexedSequencesNv = 0x00000002
     unorderedSequencesNv = 0x00000004

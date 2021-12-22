@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:11:00Z
+# Generated at 2021-12-22T15:37:51Z
 # VK_KHR_performance_query
 
 import ../platform
@@ -11,10 +11,12 @@ prepareVulkanLibDef()
 const
   KhrPerformanceQuerySpecVersion* = 1
   KhrPerformanceQueryExtensionName* = "VK_KHR_performance_query"
+  UuidSize* = 16
+  MaxDescriptionSize* = 256
 
 type # enums and bitmasks
   PerformanceCounterDescriptionFlagsKHR* = Flags[PerformanceCounterDescriptionFlagBitsKHR]
-  PerformanceCounterDescriptionFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+  PerformanceCounterDescriptionFlagBitsKHR* {.size: sizeof(int32), pure, flagbits.} = enum
     performanceImpactingKhr = 0x00000001
     concurrentlyImpactedKhr = 0x00000002
   PerformanceCounterScopeKHR* {.size: sizeof(int32), pure.} = enum

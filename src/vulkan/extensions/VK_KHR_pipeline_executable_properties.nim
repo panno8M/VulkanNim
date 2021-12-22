@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:10:59Z
+# Generated at 2021-12-22T15:37:51Z
 # VK_KHR_pipeline_executable_properties
 
 import ../platform
@@ -11,6 +11,7 @@ prepareVulkanLibDef()
 const
   KhrPipelineExecutablePropertiesSpecVersion* = 1
   KhrPipelineExecutablePropertiesExtensionName* = "VK_KHR_pipeline_executable_properties"
+  MaxDescriptionSize* = 256
 
 type # enums and bitmasks
   PipelineExecutableStatisticFormatKHR* {.size: sizeof(int32), pure.} = enum

@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T14:52:51Z
+# Generated at 2021-12-22T15:37:51Z
 # VK_KHR_ray_tracing
 # VK_NV_ray_tracing
 # Explicit sort order to require processing after VK_NV_ray_tracing
@@ -46,15 +46,15 @@ type # enums and bitmasks
     hostOrDeviceKhr = 2
   GeometryFlagsKHR* = Flags[GeometryFlagBitsKHR]
   GeometryInstanceFlagsKHR* = Flags[GeometryInstanceFlagBitsKHR]
-  GeometryFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+  GeometryFlagBitsKHR* {.size: sizeof(int32), pure, flagbits.} = enum
     opaqueKhr = 0x00000001
     noDuplicateAnyHitInvocationKhr = 0x00000002
-  GeometryInstanceFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+  GeometryInstanceFlagBitsKHR* {.size: sizeof(int32), pure, flagbits.} = enum
     triangleFacingCullDisableKhr = 0x00000001
     triangleFrontCounterclockwiseKhr = 0x00000002
     forceOpaqueKhr = 0x00000004
     forceNoOpaqueKhr = 0x00000008
-  BuildAccelerationStructureFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+  BuildAccelerationStructureFlagBitsKHR* {.size: sizeof(int32), pure, flagbits.} = enum
     allowUpdateKhr = 0x00000001
     allowCompactionKhr = 0x00000002
     preferFastTraceKhr = 0x00000004

@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T14:50:02Z
+# Generated at 2021-12-22T15:37:51Z
 # VK_EXT_conditional_rendering
 
 import ../platform
@@ -12,7 +12,7 @@ const
 
 type # enums and bitmasks
   ConditionalRenderingFlagsEXT* = Flags[ConditionalRenderingFlagBitsEXT]
-  ConditionalRenderingFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
+  ConditionalRenderingFlagBitsEXT* {.size: sizeof(int32), pure, flagbits.} = enum
     invertedExt = 0x00000001
 
 type

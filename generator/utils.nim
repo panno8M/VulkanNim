@@ -298,5 +298,6 @@ template `?`*(str: string): Option[string] =
 
 const
   enumPragma* = "{.size: sizeof(int32), pure.}"
+  flagbitsPragma* = "{.size: sizeof(int32), pure, flagbits.}"
   commandPragma* = "{.cdecl.}"
   discardableCommandPragma* = "{.cdecl, discardable.}"

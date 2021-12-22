@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T14:52:51Z
+# Generated at 2021-12-22T15:37:51Z
 # VK_EXT_debug_report
 
 import ../platform
@@ -11,7 +11,7 @@ const
   ExtDebugReportExtensionName* = "VK_EXT_debug_report"
 
 type # enums and bitmasks
-  DebugReportFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
+  DebugReportFlagBitsEXT* {.size: sizeof(int32), pure, flagbits.} = enum
     informationExt = 0x00000001
     warningExt = 0x00000002
     performanceWarningExt = 0x00000004

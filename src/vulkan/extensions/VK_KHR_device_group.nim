@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:11:00Z
+# Generated at 2021-12-22T15:37:52Z
 # VK_KHR_device_group
 
 import ../platform
@@ -19,13 +19,15 @@ const
   KhrDeviceGroupSpecVersion* = 4
   KhrDeviceGroupExtensionName* = "VK_KHR_device_group"
 
+  MaxDeviceGroupSize* = 32
+
 type # enums and bitmasks
   PeerMemoryFeatureFlagsKHR* = PeerMemoryFeatureFlags
   PeerMemoryFeatureFlagBitsKHR* = distinct UnusedEnum
   MemoryAllocateFlagsKHR* = MemoryAllocateFlags
   MemoryAllocateFlagBitsKHR* = distinct UnusedEnum
 
-  DeviceGroupPresentModeFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+  DeviceGroupPresentModeFlagBitsKHR* {.size: sizeof(int32), pure, flagbits.} = enum
     localKhr = 0x00000001 # Present from local memory
     remoteKhr = 0x00000002 # Present from remote memory
     sumKhr = 0x00000004 # Present sum of local and/or remote memory

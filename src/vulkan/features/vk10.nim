@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:10:59Z
+# Generated at 2021-12-22T16:09:29Z
 # vk10
 # Vulkan core API interface definitions
 # =====================================
@@ -28,6 +28,18 @@ const
   SubpassExternal* = (uint32.high)
   True* = Bool32(1)
   WholeSize* = (uint64.high)
+
+  # Device initialization
+  MaxMemoryTypes* = 32
+  MaxMemoryHeaps* = 16 # The maximum number of unique memory heaps, each of which supporting 1 or more memory types
+  MaxPhysicalDeviceNameSize* = 256
+  UuidSize* = 16
+
+  # Extension discovery commands
+  MaxExtensionNameSize* = 256
+
+  # Layer discovery commands
+  MaxDescriptionSize* = 256
 
 type # enums and bitmasks
   # Fundamental types used by many commands and structures
@@ -1048,7 +1060,7 @@ type # enums and bitmasks
     # Provided by VK_EXT_4444_formats
     a4r4g4b4UnormPack16Ext = 1000340000
     a4b4g4r4UnormPack16Ext = 1000340001
-  FormatFeatureFlagBits* {.size: sizeof(int32), pure.} = enum
+  FormatFeatureFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     sampledImage = 0x00000001 # Format can be used for sampled images (SAMPLED_IMAGE and COMBINED_IMAGE_SAMPLER descriptor types)
     storageImage = 0x00000002 # Format can be used for storage images (STORAGE_IMAGE descriptor type)
     storageImageAtomic = 0x00000004 # Format supports atomic operations in case it is used for storage images
@@ -1090,7 +1102,7 @@ type # enums and bitmasks
     # Provided by VK_AMD_extension_227
     amdReserved30 = 0x40000000
   FormatFeatureFlags* = Flags[FormatFeatureFlagBits]
-  ImageCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+  ImageCreateFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     sparseBinding = 0x00000001 # Image should support sparse backing
     sparseResidency = 0x00000002 # Image should support sparse backing with partial residency
     sparseAliased = 0x00000004 # Image should support constent data access to physical memory ranges mapped into multiple locations of sparse images
@@ -1120,7 +1132,7 @@ type # enums and bitmasks
     e1d = 0
     e2d = 1
     e3d = 2
-  ImageUsageFlagBits* {.size: sizeof(int32), pure.} = enum
+  ImageUsageFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     transferSrc = 0x00000001 # Can be used as a source of transfer operations
     transferDst = 0x00000002 # Can be used as a destination of transfer operations
     sampled = 0x00000004 # Can be sampled from (SAMPLED_IMAGE and COMBINED_IMAGE_SAMPLER descriptor types)
@@ -1148,14 +1160,14 @@ type # enums and bitmasks
   InstanceCreateFlags* = Flags[distinct UnusedEnum]
   InternalAllocationType* {.size: sizeof(int32), pure.} = enum
     executable = 0
-  MemoryHeapFlagBits* {.size: sizeof(int32), pure.} = enum
+  MemoryHeapFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     deviceLocal = 0x00000001 # If set, heap represents device memory
     # Provided by VK_VERSION_1_1
     multiInstance = 0x00000002 # If set, heap allocations allocate multiple instances by default
     # Provided by VK_KHR_extension_309
     reserved2Khr = 0x00000004
   MemoryHeapFlags* = Flags[MemoryHeapFlagBits]
-  MemoryPropertyFlagBits* {.size: sizeof(int32), pure.} = enum
+  MemoryPropertyFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     deviceLocal = 0x00000001 # If otherwise stated, then allocate memory on device
     hostVisible = 0x00000002 # Memory is mappable by host
     hostCoherent = 0x00000004 # Memory will have i/o coherency. If not set, application may need to use vkFlushMappedMemoryRanges and vkInvalidateMappedMemoryRanges to flush/invalidate host cache
@@ -1173,7 +1185,7 @@ type # enums and bitmasks
     discreteGpu = 2
     virtualGpu = 3
     cpu = 4
-  QueueFlagBits* {.size: sizeof(int32), pure.} = enum
+  QueueFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     graphics = 0x00000001 # Queue supports graphics operations
     compute = 0x00000002 # Queue supports compute operations
     transfer = 0x00000004 # Queue supports transfer operations
@@ -1185,7 +1197,7 @@ type # enums and bitmasks
     # Provided by VK_AMD_extension_24
     reserved6Khr = 0x00000040
   QueueFlags* = Flags[QueueFlagBits]
-  SampleCountFlagBits* {.size: sizeof(int32), pure.} = enum
+  SampleCountFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     e1 = 0x00000001 # Sample count 1 supported
     e2 = 0x00000002 # Sample count 2 supported
     e4 = 0x00000004 # Sample count 4 supported
@@ -1203,13 +1215,13 @@ type # enums and bitmasks
 
   # Device commands
   DeviceCreateFlags* = Flags[distinct UnusedEnum]
-  DeviceQueueCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+  DeviceQueueCreateFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     # Provided by VK_VERSION_1_1
     protected = 0x00000001 # Queue is a protected-capable device queue
   DeviceQueueCreateFlags* = Flags[DeviceQueueCreateFlagBits]
 
   # Queue commands
-  PipelineStageFlagBits* {.size: sizeof(int32), pure.} = enum
+  PipelineStageFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     topOfPipe = 0x00000001 # Before subsequent commands are processed
     drawIndirect = 0x00000002 # Draw/DispatchIndirect command fetch
     vertexInput = 0x00000004 # Vertex/index fetch
@@ -1254,7 +1266,7 @@ type # enums and bitmasks
   MemoryMapFlags* = Flags[distinct UnusedEnum]
 
   # Sparse resource memory management API commands
-  ImageAspectFlagBits* {.size: sizeof(int32), pure.} = enum
+  ImageAspectFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     color = 0x00000001
     depth = 0x00000002
     stencil = 0x00000004
@@ -1269,17 +1281,17 @@ type # enums and bitmasks
     memoryPlane2Ext = 0x00000200
     memoryPlane3Ext = 0x00000400
   ImageAspectFlags* = Flags[ImageAspectFlagBits]
-  SparseImageFormatFlagBits* {.size: sizeof(int32), pure.} = enum
+  SparseImageFormatFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     singleMiptail = 0x00000001 # Image uses a single mip tail region for all array layers
     alignedMipSize = 0x00000002 # Image requires mip level dimensions to be an integer multiple of the sparse image block dimensions for non-tail mip levels.
     nonstandardBlockSize = 0x00000004 # Image uses a non-standard sparse image block dimensions
   SparseImageFormatFlags* = Flags[SparseImageFormatFlagBits]
-  SparseMemoryBindFlagBits* {.size: sizeof(int32), pure.} = enum
+  SparseMemoryBindFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     metadata = 0x00000001 # Operation binds resource metadata to memory
   SparseMemoryBindFlags* = Flags[SparseMemoryBindFlagBits]
 
   # Fence commands
-  FenceCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+  FenceCreateFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     signaled = 0x00000001
   FenceCreateFlags* = Flags[FenceCreateFlagBits]
 
@@ -1290,7 +1302,7 @@ type # enums and bitmasks
   EventCreateFlags* = Flags[distinct UnusedEnum]
 
   # Query commands
-  QueryPipelineStatisticFlagBits* {.size: sizeof(int32), pure.} = enum
+  QueryPipelineStatisticFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     inputAssemblyVertices = 0x00000001 # Optional
     inputAssemblyPrimitives = 0x00000002 # Optional
     vertexShaderInvocations = 0x00000004 # Optional
@@ -1304,7 +1316,7 @@ type # enums and bitmasks
     computeShaderInvocations = 0x00000400 # Optional
   QueryPipelineStatisticFlags* = Flags[QueryPipelineStatisticFlagBits]
   QueryPoolCreateFlags* = Flags[distinct UnusedEnum]
-  QueryResultFlagBits* {.size: sizeof(int32), pure.} = enum
+  QueryResultFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     e64 = 0x00000001 # Results of the queries are written to the destination buffer as 64-bit values
     wait = 0x00000002 # Results of the queries are waited on before proceeding with the result copy
     withAvailability = 0x00000004 # Besides the results of the query, the availability of the results is also written
@@ -1329,7 +1341,7 @@ type # enums and bitmasks
     performanceQueryIntel = 1000210000
 
   # Buffer commands
-  BufferCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+  BufferCreateFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     sparseBinding = 0x00000001 # Buffer should support sparse backing
     sparseResidency = 0x00000002 # Buffer should support sparse backing with partial residency
     sparseAliased = 0x00000004 # Buffer should support constent data access to physical memory ranges mapped into multiple locations of sparse buffers
@@ -1338,7 +1350,7 @@ type # enums and bitmasks
     # Provided by VK_VERSION_1_2
     deviceAddressCaptureReplay = 0x00000010
   BufferCreateFlags* = Flags[BufferCreateFlagBits]
-  BufferUsageFlagBits* {.size: sizeof(int32), pure.} = enum
+  BufferUsageFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     transferSrc = 0x00000001 # Can be used as a source of transfer operations
     transferDst = 0x00000002 # Can be used as a destination of transfer operations
     uniformTexelBuffer = 0x00000004 # Can be used as TBO
@@ -1413,7 +1425,7 @@ type # enums and bitmasks
     g = 4
     b = 5
     a = 6
-  ImageViewCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+  ImageViewCreateFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     # Provided by VK_EXT_fragment_density_map
     fragmentDensityMapDynamicExt = 0x00000001
     # Provided by VK_EXT_fragment_density_map2
@@ -1429,13 +1441,13 @@ type # enums and bitmasks
     cubeArray = 6
 
   # Shader commands
-  ShaderModuleCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+  ShaderModuleCreateFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     # Provided by VK_NV_extension_52
     reserved0Nv = 0x00000001
   ShaderModuleCreateFlags* = Flags[ShaderModuleCreateFlagBits]
 
   # Pipeline Cache commands
-  PipelineCacheCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+  PipelineCacheCreateFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     # Provided by VK_EXT_pipeline_creation_cache_control
     externallySynchronizedExt = 0x00000001
     # Provided by VK_GOOGLE_extension_196
@@ -1516,7 +1528,7 @@ type # enums and bitmasks
     redExt = 1000148043
     greenExt = 1000148044
     blueExt = 1000148045
-  ColorComponentFlagBits* {.size: sizeof(int32), pure.} = enum
+  ColorComponentFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     r = 0x00000001
     g = 0x00000002
     b = 0x00000004
@@ -1531,7 +1543,7 @@ type # enums and bitmasks
     notEqual = 5
     greaterOrEqual = 6
     always = 7
-  CullModeFlagBits* {.size: sizeof(int32), pure.} = enum
+  CullModeFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     none = 0
     front = 0x00000001
     back = 0x00000002
@@ -1594,7 +1606,7 @@ type # enums and bitmasks
     nand = 14
     set = 15
   PipelineColorBlendStateCreateFlags* = Flags[distinct UnusedEnum]
-  PipelineCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+  PipelineCreateFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     disableOptimization = 0x00000001
     allowDerivatives = 0x00000002
     derivative = 0x00000004
@@ -1629,7 +1641,7 @@ type # enums and bitmasks
   PipelineLayoutCreateFlags* = Flags[distinct UnusedEnum]
   PipelineMultisampleStateCreateFlags* = Flags[distinct UnusedEnum]
   PipelineRasterizationStateCreateFlags* = Flags[distinct UnusedEnum]
-  PipelineShaderStageCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+  PipelineShaderStageCreateFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     # Provided by VK_EXT_subgroup_size_control
     allowVaryingSubgroupSizeExt = 0x00000001
     requireFullSubgroupsExt = 0x00000002
@@ -1659,7 +1671,7 @@ type # enums and bitmasks
     triangleListWithAdjacency = 8
     triangleStripWithAdjacency = 9
     patchList = 10
-  ShaderStageFlagBits* {.size: sizeof(int32), pure.} = enum
+  ShaderStageFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     vertex = 0x00000001
     tessellationControl = 0x00000002
     tessellationEvaluation = 0x00000004
@@ -1715,7 +1727,7 @@ type # enums and bitmasks
     clampToBorder = 3
     # Provided by VK_VERSION_1_2
     mirrorClampToEdge = 4 # No need to add an extnumber attribute, since this uses a core enum value
-  SamplerCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+  SamplerCreateFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     # Provided by VK_EXT_fragment_density_map
     subsampledExt = 0x00000001
     subsampledCoarseReconstructionExt = 0x00000002
@@ -1725,13 +1737,13 @@ type # enums and bitmasks
     linear = 1 # Linear filter between mip levels
 
   # Descriptor set commands
-  DescriptorPoolCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+  DescriptorPoolCreateFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     freeDescriptorSet = 0x00000001 # Descriptor sets may be freed individually
     # Provided by VK_VERSION_1_2
     updateAfterBind = 0x00000002
   DescriptorPoolCreateFlags* = Flags[DescriptorPoolCreateFlagBits]
   DescriptorPoolResetFlags* = Flags[distinct UnusedEnum]
-  DescriptorSetLayoutCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+  DescriptorSetLayoutCreateFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     # Provided by VK_KHR_push_descriptor
     pushDescriptorKhr = 0x00000001 # Descriptors are pushed via flink:vkCmdPushDescriptorSetKHR
     # Provided by VK_VERSION_1_2
@@ -1755,7 +1767,7 @@ type # enums and bitmasks
     accelerationStructureKhr = 1000165000
 
   # Pass commands
-  AccessFlagBits* {.size: sizeof(int32), pure.} = enum
+  AccessFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     indirectCommandRead = 0x00000001 # Controls coherency of indirect command reads
     indexRead = 0x00000002 # Controls coherency of index reads
     vertexAttributeRead = 0x00000004 # Controls coherency of vertex attribute reads
@@ -1797,7 +1809,7 @@ type # enums and bitmasks
     # Provided by VK_AMD_extension_24
     reserved30Khr = 0x40000000
   AccessFlags* = Flags[AccessFlagBits]
-  AttachmentDescriptionFlagBits* {.size: sizeof(int32), pure.} = enum
+  AttachmentDescriptionFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     mayAlias = 0x00000001 # The attachment may alias physical memory of another attachment in the same render pass
   AttachmentDescriptionFlags* = Flags[AttachmentDescriptionFlagBits]
   AttachmentLoadOp* {.size: sizeof(int32), pure.} = enum
@@ -1809,13 +1821,13 @@ type # enums and bitmasks
     dontCare = 1
     # Provided by VK_QCOM_render_pass_store_ops
     noneQcom = 1000301000
-  DependencyFlagBits* {.size: sizeof(int32), pure.} = enum
+  DependencyFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     byRegion = 0x00000001 # Dependency is per pixel region
     # Provided by VK_VERSION_1_1
     viewLocal = 0x00000002
     deviceGroup = 0x00000004 # Dependency is across devices
   DependencyFlags* = Flags[DependencyFlagBits]
-  FramebufferCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+  FramebufferCreateFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     # Provided by VK_VERSION_1_2
     imageless = 0x00000001
   FramebufferCreateFlags* = Flags[FramebufferCreateFlagBits]
@@ -1824,13 +1836,13 @@ type # enums and bitmasks
     compute = 1
     # Provided by VK_KHR_ray_tracing
     rayTracingKhr = 1000165000
-  RenderPassCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+  RenderPassCreateFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     # Provided by VK_KHR_extension_221
     reserved0Khr = 0x00000001
     # Provided by VK_QCOM_render_pass_transform
     transformQcom = 0x00000002
   RenderPassCreateFlags* = Flags[RenderPassCreateFlagBits]
-  SubpassDescriptionFlagBits* {.size: sizeof(int32), pure.} = enum
+  SubpassDescriptionFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     # Provided by VK_NVX_multiview_per_view_attributes
     perViewAttributesNvx = 0x00000001
     perViewPositionXOnlyNvx = 0x00000002
@@ -1840,13 +1852,13 @@ type # enums and bitmasks
   SubpassDescriptionFlags* = Flags[SubpassDescriptionFlagBits]
 
   # Command pool commands
-  CommandPoolCreateFlagBits* {.size: sizeof(int32), pure.} = enum
+  CommandPoolCreateFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     transient = 0x00000001 # Command buffers have a short lifetime
     resetCommandBuffer = 0x00000002 # Command buffers may release their memory individually
     # Provided by VK_VERSION_1_1
     protected = 0x00000004 # Command buffers allocated from pool are protected command buffers
   CommandPoolCreateFlags* = Flags[CommandPoolCreateFlagBits]
-  CommandPoolResetFlagBits* {.size: sizeof(int32), pure.} = enum
+  CommandPoolResetFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     releaseResources = 0x00000001 # Release resources owned by the pool
   CommandPoolResetFlags* = Flags[CommandPoolResetFlagBits]
 
@@ -1854,15 +1866,15 @@ type # enums and bitmasks
   CommandBufferLevel* {.size: sizeof(int32), pure.} = enum
     primary = 0
     secondary = 1
-  CommandBufferResetFlagBits* {.size: sizeof(int32), pure.} = enum
+  CommandBufferResetFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     releaseResources = 0x00000001 # Release resources owned by the buffer
   CommandBufferResetFlags* = Flags[CommandBufferResetFlagBits]
-  CommandBufferUsageFlagBits* {.size: sizeof(int32), pure.} = enum
+  CommandBufferUsageFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     oneTimeSubmit = 0x00000001
     renderPassContinue = 0x00000002
     simultaneousUse = 0x00000004 # Command buffer may be submitted/executed more than once simultaneously
   CommandBufferUsageFlags* = Flags[CommandBufferUsageFlagBits]
-  QueryControlFlagBits* {.size: sizeof(int32), pure.} = enum
+  QueryControlFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     precise = 0x00000001 # Require precise results to be collected by the query
   QueryControlFlags* = Flags[QueryControlFlagBits]
 
@@ -1874,7 +1886,7 @@ type # enums and bitmasks
     noneKhr = 1000165000
     # Provided by VK_EXT_index_type_uint8
     uint8Ext = 1000265000
-  StencilFaceFlagBits* {.size: sizeof(int32), pure.} = enum
+  StencilFaceFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     front = 0x00000001 # Front face
     back = 0x00000002 # Back face
     frontAndBack = 0x00000003 # Front and back faces
@@ -4105,17 +4117,16 @@ proc `==`*[Flagbits: enum](a, b: Flags[Flagbits]): bool =
   a.uint32 == b.uint32
 
 macro `toFlagSets`*[Flagbits: enum](Type: typedesc[Flagbits]; bits: varargs[untyped]): HashSet[Flagbits] =
-  if (repr Type).find("FlagBits") == -1:
-    error("Expect the enum that has the suffix Flagbits, got " & repr Type, Type)
+  if Type.customPragmaNode().findChild(it.repr == "flagbits") == nil:
+    error("Expect the enum that has Flagbits pragma", Type)
 
   result = quote do:
     toHashSet []
 
-  let setels = bits.mapIt:
-    quote do: `Type`.`it`
-
   result[1].expectKind nnkBracket
-  result[1].add setels
+  result[1].add do:
+    bits.mapIt:
+      quote do: `Type`.`it`
 
 template `{}`*[Flagbits: enum](Type: typedesc[Flagbits]; bits: varargs[untyped]): HashSet[Flagbits] =
   Type.toFlagSets(bits)

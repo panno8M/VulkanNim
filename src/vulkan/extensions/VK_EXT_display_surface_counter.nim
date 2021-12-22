@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T14:50:02Z
+# Generated at 2021-12-22T15:37:51Z
 # VK_EXT_display_surface_counter
 
 import ../platform
@@ -14,7 +14,7 @@ const
 
 type # enums and bitmasks
   SurfaceCounterFlagsEXT* = Flags[SurfaceCounterFlagBitsEXT]
-  SurfaceCounterFlagBitsEXT* {.size: sizeof(int32), pure.} = enum
+  SurfaceCounterFlagBitsEXT* {.size: sizeof(int32), pure, flagbits.} = enum
     vblankExt = 0x00000001
 
 type

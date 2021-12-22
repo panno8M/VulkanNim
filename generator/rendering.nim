@@ -46,7 +46,11 @@ proc render*(enums: NodeEnum; vendorTags: VendorTags): sstring =
     return
 
   result.add sstring(kind: skBlock,
-    title: "{name}* {enumPragma} = enum".fmt
+    title:
+      if name.find("FlagBits") == -1:
+        "{name}* {enumPragma} = enum".fmt
+      else:
+        "{name}* {flagbitsPragma} = enum".fmt
   )
 
   var lastExt = ""

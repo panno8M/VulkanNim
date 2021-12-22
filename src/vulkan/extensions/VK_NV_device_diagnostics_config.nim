@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T14:50:01Z
+# Generated at 2021-12-22T15:37:51Z
 # VK_NV_device_diagnostics_config
 
 import ../platform
@@ -14,7 +14,7 @@ const
 
 type # enums and bitmasks
   DeviceDiagnosticsConfigFlagsNV* = Flags[DeviceDiagnosticsConfigFlagBitsNV]
-  DeviceDiagnosticsConfigFlagBitsNV* {.size: sizeof(int32), pure.} = enum
+  DeviceDiagnosticsConfigFlagBitsNV* {.size: sizeof(int32), pure, flagbits.} = enum
     enableShaderDebugInfoNv = 0x00000001
     enableResourceTrackingNv = 0x00000002
     enableAutomaticCheckpointsNv = 0x00000004

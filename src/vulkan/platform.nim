@@ -1,4 +1,4 @@
-# Generated at 2021-12-12T13:43:53Z
+# Generated at 2021-12-22T15:40:44Z
 # platform
 import strformat
 import macros
@@ -133,14 +133,16 @@ macro lazyload*(loadFrom: string; with = InstanceLevel; def: untyped): untyped =
     `cageDef`
     `accessorDef`
 
-template optional*() {.pragma.}
+template optional* {.pragma.}
 template constant*(v: typed) {.pragma.}
+
+template flagbits* {.pragma.}
 
 template length*(v: untyped) {.pragma.}
 
 template successCodes*(v: varargs[untyped]) {.pragma.}
 template errorCodes*(v: varargs[untyped]) {.pragma.}
 
-template prepareVulkanLibDef*(): untyped =
+template prepareVulkanLibDef* =
   import options
 

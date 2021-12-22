@@ -11,17 +11,16 @@ proc `==`*[Flagbits: enum](a, b: Flags[Flagbits]): bool =
   a.uint32 == b.uint32
 
 macro `toFlagSets`*[Flagbits: enum](Type: typedesc[Flagbits]; bits: varargs[untyped]): HashSet[Flagbits] =
-  if (repr Type).find("FlagBits") == -1:
-    error("Expect the enum that has the suffix Flagbits, got " & repr Type, Type)
+  if Type.customPragmaNode().findChild(it.repr == "flagbits") == nil:
+    error("Expect the enum that has Flagbits pragma", Type)
 
   result = quote do:
     toHashSet []
 
-  let setels = bits.mapIt:
-    quote do: `Type`.`it`
-
   result[1].expectKind nnkBracket
-  result[1].add setels
+  result[1].add do:
+    bits.mapIt:
+      quote do: `Type`.`it`
 
 template `{}`*[Flagbits: enum](Type: typedesc[Flagbits]; bits: varargs[untyped]): HashSet[Flagbits] =
   Type.toFlagSets(bits)

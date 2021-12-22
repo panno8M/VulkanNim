@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T14:52:51Z
+# Generated at 2021-12-22T15:37:51Z
 # VK_KHR_surface
 # VK_KHR_display
 
@@ -15,7 +15,7 @@ const
   KhrDisplayExtensionName* = "VK_KHR_display"
 
 type # enums and bitmasks
-  SurfaceTransformFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+  SurfaceTransformFlagBitsKHR* {.size: sizeof(int32), pure, flagbits.} = enum
     identityKhr = 0x00000001
     rotate90Khr = 0x00000002
     rotate180Khr = 0x00000004
@@ -52,7 +52,7 @@ type # enums and bitmasks
     extendedSrgbNonlinearExt = 1000104014
     # Provided by VK_AMD_display_native_hdr
     displayNativeAmd = 1000213000
-  CompositeAlphaFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+  CompositeAlphaFlagBitsKHR* {.size: sizeof(int32), pure, flagbits.} = enum
     opaqueKhr = 0x00000001
     preMultipliedKhr = 0x00000002
     postMultipliedKhr = 0x00000004
@@ -60,7 +60,7 @@ type # enums and bitmasks
   CompositeAlphaFlagsKHR* = Flags[CompositeAlphaFlagBitsKHR]
 
   DisplayModeCreateFlagsKHR* = Flags[distinct UnusedEnum]
-  DisplayPlaneAlphaFlagBitsKHR* {.size: sizeof(int32), pure.} = enum
+  DisplayPlaneAlphaFlagBitsKHR* {.size: sizeof(int32), pure, flagbits.} = enum
     opaqueKhr = 0x00000001
     globalKhr = 0x00000002
     perPixelKhr = 0x00000004

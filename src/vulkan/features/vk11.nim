@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:10:59Z
+# Generated at 2021-12-22T15:37:51Z
 # vk11
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -15,6 +15,7 @@ const
 
   # Promoted from VK_KHR_external_memory_capabilities
   LuidSize* = 8
+  UuidSize* = 16
 
   # Promoted from VK_KHR_external_memory
   QueueFamilyExternal* = (uint32.high-1)
@@ -22,7 +23,7 @@ const
 type # enums and bitmasks
   # Originally based on VK_KHR_subgroup (extension 94), but the actual enum block used was, incorrectly, that of extension 95
   SubgroupFeatureFlags* = Flags[SubgroupFeatureFlagBits]
-  SubgroupFeatureFlagBits* {.size: sizeof(int32), pure.} = enum
+  SubgroupFeatureFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     basic = 0x00000001 # Basic subgroup operations
     vote = 0x00000002 # Vote subgroup operations
     arithmetic = 0x00000004 # Arithmetic subgroup operations
@@ -36,13 +37,13 @@ type # enums and bitmasks
 
   # Promoted from VK_KHR_device_group
   PeerMemoryFeatureFlags* = Flags[PeerMemoryFeatureFlagBits]
-  PeerMemoryFeatureFlagBits* {.size: sizeof(int32), pure.} = enum
+  PeerMemoryFeatureFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     copySrc = 0x00000001 # Can read with vkCmdCopy commands
     copyDst = 0x00000002 # Can write with vkCmdCopy commands
     genericSrc = 0x00000004 # Can read with any access type/command
     genericDst = 0x00000008 # Can write with and access type/command
   MemoryAllocateFlags* = Flags[MemoryAllocateFlagBits]
-  MemoryAllocateFlagBits* {.size: sizeof(int32), pure.} = enum
+  MemoryAllocateFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     deviceMask = 0x00000001 # Force allocation on specific devices
     # Provided by VK_VERSION_1_2
     deviceAddress = 0x00000002
@@ -82,7 +83,7 @@ type # enums and bitmasks
 
   # Promoted from VK_KHR_external_memory_capabilities
   ExternalMemoryHandleTypeFlags* = Flags[ExternalMemoryHandleTypeFlagBits]
-  ExternalMemoryHandleTypeFlagBits* {.size: sizeof(int32), pure.} = enum
+  ExternalMemoryHandleTypeFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     opaqueFd = 0x00000001
     opaqueWin32 = 0x00000002
     opaqueWin32Kmt = 0x00000004
@@ -98,43 +99,43 @@ type # enums and bitmasks
     # Provided by VK_ANDROID_external_memory_android_hardware_buffer
     androidHardwareBufferAndroid = 0x00000400
   ExternalMemoryFeatureFlags* = Flags[ExternalMemoryFeatureFlagBits]
-  ExternalMemoryFeatureFlagBits* {.size: sizeof(int32), pure.} = enum
+  ExternalMemoryFeatureFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     dedicatedOnly = 0x00000001
     exportable = 0x00000002
     importable = 0x00000004
 
   # Promoted from VK_KHR_external_fence_capabilities
   ExternalFenceHandleTypeFlags* = Flags[ExternalFenceHandleTypeFlagBits]
-  ExternalFenceHandleTypeFlagBits* {.size: sizeof(int32), pure.} = enum
+  ExternalFenceHandleTypeFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     opaqueFd = 0x00000001
     opaqueWin32 = 0x00000002
     opaqueWin32Kmt = 0x00000004
     syncFd = 0x00000008
   ExternalFenceFeatureFlags* = Flags[ExternalFenceFeatureFlagBits]
-  ExternalFenceFeatureFlagBits* {.size: sizeof(int32), pure.} = enum
+  ExternalFenceFeatureFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     exportable = 0x00000001
     importable = 0x00000002
 
   # Promoted from VK_KHR_external_fence
   FenceImportFlags* = Flags[FenceImportFlagBits]
-  FenceImportFlagBits* {.size: sizeof(int32), pure.} = enum
+  FenceImportFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     temporary = 0x00000001
 
   # Promoted from VK_KHR_external_semaphore
   SemaphoreImportFlags* = Flags[SemaphoreImportFlagBits]
-  SemaphoreImportFlagBits* {.size: sizeof(int32), pure.} = enum
+  SemaphoreImportFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     temporary = 0x00000001
 
   # Promoted from VK_KHR_external_semaphore_capabilities
   ExternalSemaphoreHandleTypeFlags* = Flags[ExternalSemaphoreHandleTypeFlagBits]
-  ExternalSemaphoreHandleTypeFlagBits* {.size: sizeof(int32), pure.} = enum
+  ExternalSemaphoreHandleTypeFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     opaqueFd = 0x00000001
     opaqueWin32 = 0x00000002
     opaqueWin32Kmt = 0x00000004
     d3d12Fence = 0x00000008
     syncFd = 0x00000010
   ExternalSemaphoreFeatureFlags* = Flags[ExternalSemaphoreFeatureFlagBits]
-  ExternalSemaphoreFeatureFlagBits* {.size: sizeof(int32), pure.} = enum
+  ExternalSemaphoreFeatureFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
     exportable = 0x00000001
     importable = 0x00000002
 
