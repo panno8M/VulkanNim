@@ -5,8 +5,6 @@ author      = "Panno"
 description = "Vulkan bindings for Nim"
 license     = "MIT"
 srcDir      = "src"
-bin         = @["vulkan"]
-installExt  = @["nim"]
 
 # Dependencies
 
@@ -20,4 +18,10 @@ task watch, "":
 task sandbox, "":
   exec """
   ./watch.sh tests/sandbox.nim 'nim c -r tests/sandbox'
+  """
+
+task generate, "":
+  exec """
+  nim c -r generator/libgen
+  rm -f generator/libgen
   """

@@ -3,8 +3,3 @@
 # export vk10
 # export vk11
 # export vk12
-
-when isMainModule:
-  import ./vulkan/generator/libGen
-
-  libGen.generate()

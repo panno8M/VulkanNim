@@ -536,7 +536,7 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
       result.LF
 
   if libFile.fileName == "features/vk10":
-    result &= readFile("src/vulkan/generator/resources/loadoperators.nim")
+    result &= readFile("generator/resources/loadoperators.nim")
     result.LF
     result.LF
 

@@ -5,7 +5,6 @@ import sequtils
 import parseutils
 import tables
 import logging
-import times
 import options
 import os
 
@@ -29,7 +28,7 @@ let dependencies = newTable [
 proc generate*() =
   var updatedFiles: seq[string]
   var library = [
-    ("platform", LibFile(fileName: "platform", fileHeader: "src/vulkan/generator/resources/platform.nim".readFile))
+    ("platform", LibFile(fileName: "platform", fileHeader: "generator/resources/platform.nim".readFile))
   ].newTable
   let fileGroup = [
     ("extensions/VK_KHR_surface", @["extensions/VK_KHR_display", #["extensions/VK_KHR_swapchain"]#]),
@@ -53,7 +52,7 @@ proc generate*() =
           deps: dependencies[name]
         )
     if libFile.fileName == "features/vk10":
-      libFile.fileFooter = "src/vulkan/generator/resources/additionalOperations.nim".readFile
+      libFile.fileFooter = "generator/resources/additionalOperations.nim".readFile
 
     if (?comment).isSome:
       libFile.fileHeader &= comment.underline('=').commentify
@@ -141,3 +140,6 @@ proc generate*() =
   else:
     notice title"Generate Complate! Following API files have been updated:":
       updatedFiles.join("\n").indent(2)
+
+when isMainModule:
+  generate()
