@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T07:50:19Z
+# Generated at 2021-12-25T14:19:30Z
 # VK_KHR_get_display_properties2
 
 import ../platform

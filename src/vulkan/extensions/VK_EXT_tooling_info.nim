@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T07:50:19Z
+# Generated at 2021-12-25T14:19:39Z
 # VK_EXT_tooling_info
 
 import ../platform
@@ -15,8 +15,6 @@ prepareVulkanLibDef()
 const
   ExtToolingInfoSpecVersion* = 1
   ExtToolingInfoExtensionName* = "VK_EXT_tooling_info"
-  MaxExtensionNameSize* = 256
-  MaxDescriptionSize* = 256
 
 type
   PhysicalDeviceToolPropertiesEXT* = object

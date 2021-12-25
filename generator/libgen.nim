@@ -51,6 +51,15 @@ proc genBaseTypes*() =
       file.write val.render
       file.write "\n"
 
+  file.write "\n"
+
+  var consts = sstring(kind: skBlock, title: "const")
+  consts.add %"# == Constants == #"
+  for key, val in resources.consts      : consts.add %val.render()
+  consts.add %"# == Aliases == #"
+  for key, val in resources.constAliases: consts.add %val.render()
+  file.write $consts
+
 proc genEnums*() =
   var rendered: seq[string]
   let file = open("src/vulkan/enums.nim", fmWrite)

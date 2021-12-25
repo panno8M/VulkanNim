@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T07:50:19Z
+# Generated at 2021-12-25T14:21:16Z
 # vk10
 # Vulkan core API interface definitions
 # =====================================
@@ -6,40 +6,6 @@
 import ../platform
 
 prepareVulkanLibDef()
-
-type # basetypes
-  # Fundamental types used by many commands and structures
-  Bool32* = distinct uint32
-  DeviceAddress* = distinct uint64
-  DeviceSize* = distinct uint64
-  Flags*[Flagbits] = distinct uint32
-
-  # Pipeline commands
-  SampleMask* = distinct uint32
-
-const
-  # API constants
-  AttachmentUnused* = (uint32.high)
-  False* = Bool32(0)
-  LodClampNone* = 1000.0f
-  QueueFamilyIgnored* = (uint32.high)
-  RemainingArrayLayers* = (uint32.high)
-  RemainingMipLevels* = (uint32.high)
-  SubpassExternal* = (uint32.high)
-  True* = Bool32(1)
-  WholeSize* = (uint64.high)
-
-  # Device initialization
-  MaxMemoryTypes* = 32
-  MaxMemoryHeaps* = 16 # The maximum number of unique memory heaps, each of which supporting 1 or more memory types
-  MaxPhysicalDeviceNameSize* = 256
-  UuidSize* = 16
-
-  # Extension discovery commands
-  MaxExtensionNameSize* = 256
-
-  # Layer discovery commands
-  MaxDescriptionSize* = 256
 
 type
   # Fundamental types used by many commands and structures
@@ -2232,7 +2198,7 @@ macro loadCommand*[T: proc](handle: Instance or Device; procType: typedesc[T]): 
 
 macro loadCommand*[T: proc](handle: Instance or Device; procAccessor: T) =
   let cageName = procAccessor.customPragmaNode()
-    .findChild(it.len > 0 and it[0].repr == "loadinto")[0][1]
+    .findChild(it.len > 0 and it[0].repr == "loadInto")[1]
   quote do:
     `cageName` = option `handle`.loadCommand(`cageName`.unsafeGet.typeof)
 

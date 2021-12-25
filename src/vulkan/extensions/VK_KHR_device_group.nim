@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T07:50:19Z
+# Generated at 2021-12-25T14:19:39Z
 # VK_KHR_device_group
 
 import ../platform
@@ -18,8 +18,6 @@ prepareVulkanLibDef()
 const
   KhrDeviceGroupSpecVersion* = 4
   KhrDeviceGroupExtensionName* = "VK_KHR_device_group"
-
-  MaxDeviceGroupSize* = 32
 
 type
   MemoryAllocateFlagsInfoKHR* = object

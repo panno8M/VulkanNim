@@ -106,31 +106,6 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
   if libFile.fileName != "platform":
     result &= "prepareVulkanLibDef()\n\n"
 
-  block Solve_basetypes:
-    var typeDefs: seq[seq[string]]
-    for fileRequire in libFile.requires:
-      for require in fileRequire:
-        let typeTargets = require.targets.filterIt(it.kind in {nkrType})
-        if typeTargets.len == 0: continue
-
-        var typeDef: seq[string]
-
-        for req in typeTargets:
-          if req.name in renderedNodes: continue
-
-          if resources.basetypes.hasKey(req.name):
-            typeDef.add resources.basetypes[req.name].render
-            renderedNodes.add req.name
-
-        if typeDef.len != 0:
-          typeDefs.add case require.comment.isSome
-            of true: concat(@[require.comment.get.commentify], typeDef)
-            of false: typeDef
-
-    if typeDefs.len != 0:
-      result.add "type # basetypes\n"
-      result &= typeDefs.mapIt(it.join("\n").indent(2)).join("\n\n").LF.LF
-
   block Solve_consts:
     var reqDefs: seq[seq[string]]
     for fileRequire in libFile.requires:
@@ -149,24 +124,6 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
             reqDef.add NodeConstAlias(name: req.name, alias: req.alias).render
             renderedNodes.add req.name
 
-          of nkrApiConst:
-            if resources.consts.hasKey(req.name):
-              reqDef.add resources.consts[req.name].render
-              renderedNodes.add req.name
-
-            elif resources.constAliases.hasKey(req.name):
-              reqDef.add resources.constAliases[req.name].render
-              renderedNodes.add req.name
-
-          of nkrType:
-            if resources.structs.hasKey(req.name):
-              let struct = resources.structs[req.name]
-              if struct.requiredConstNames.len == 0: continue
-              for reqConst in struct.requiredConstNames:
-                if reqConst in renderedNodes: continue
-                if resources.consts.hasKey(reqConst):
-                  reqDef.add resources.consts[reqConst].render
-                  renderedNodes.add reqConst
 
           else: discard
         if reqDef.len != 0:

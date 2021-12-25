@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T07:50:19Z
+# Generated at 2021-12-25T14:21:16Z
 # VK_KHR_external_memory_capabilities
 
 import ../platform
@@ -12,7 +12,6 @@ prepareVulkanLibDef()
 const
   KhrExternalMemoryCapabilitiesSpecVersion* = 1
   KhrExternalMemoryCapabilitiesExtensionName* = "VK_KHR_external_memory_capabilities"
-  LuidSizeKhr* = LuidSize
 
 type
   ExternalMemoryPropertiesKHR* = object

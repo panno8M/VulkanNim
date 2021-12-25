@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T07:50:19Z
+# Generated at 2021-12-25T14:21:16Z
 # VK_KHR_driver_properties
 
 import ../platform
@@ -12,8 +12,6 @@ prepareVulkanLibDef()
 const
   KhrDriverPropertiesSpecVersion* = 1
   KhrDriverPropertiesExtensionName* = "VK_KHR_driver_properties"
-  MaxDriverNameSizeKhr* = MaxDriverNameSize
-  MaxDriverInfoSizeKhr* = MaxDriverInfoSize
 
 type
   ConformanceVersionKHR* = object

@@ -10,3 +10,35 @@ type
   SampleMask* = distinct uint32
   ANativeWindow* = distinct object
   DeviceAddress* = distinct uint64
+
+const
+  # == Constants == #
+  MaxDriverInfoSize* = 256
+  ShaderUnusedKhr* = (uint32.high)
+  QueueFamilyExternal* = (uint32.high-1)
+  QueueFamilyForeignExt* = (uint32.high-2)
+  LodClampNone* = 1000.0f
+  QueueFamilyIgnored* = (uint32.high)
+  RemainingArrayLayers* = (uint32.high)
+  RemainingMipLevels* = (uint32.high)
+  MaxExtensionNameSize* = 256
+  UuidSize* = 16
+  MaxDescriptionSize* = 256
+  True* = Bool32(1)
+  MaxMemoryHeaps* = 16 # The maximum number of unique memory heaps, each of which supporting 1 or more memory types
+  SubpassExternal* = (uint32.high)
+  AttachmentUnused* = (uint32.high)
+  MaxDriverNameSize* = 256
+  LuidSize* = 8
+  MaxMemoryTypes* = 32
+  False* = Bool32(0)
+  WholeSize* = (uint64.high)
+  MaxDeviceGroupSize* = 32
+  MaxPhysicalDeviceNameSize* = 256
+  # == Aliases == #
+  MaxDriverInfoSizeKhr* = MaxDriverInfoSize
+  MaxDriverNameSizeKhr* = MaxDriverNameSize
+  LuidSizeKhr* = LuidSize
+  MaxDeviceGroupSizeKhr* = MaxDeviceGroupSize
+  QueueFamilyExternalKhr* = QueueFamilyExternal
+  ShaderUnusedNv* = ShaderUnusedKhr

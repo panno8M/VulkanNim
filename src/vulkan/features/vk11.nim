@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T07:50:19Z
+# Generated at 2021-12-25T14:21:16Z
 # vk11
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -8,17 +8,6 @@ import ./vk10
 export vk10
 
 prepareVulkanLibDef()
-
-const
-  # Promoted from VK_KHR_device_group_creation
-  MaxDeviceGroupSize* = 32
-
-  # Promoted from VK_KHR_external_memory_capabilities
-  LuidSize* = 8
-  UuidSize* = 16
-
-  # Promoted from VK_KHR_external_memory
-  QueueFamilyExternal* = (uint32.high-1)
 
 type
   # Originally based on VK_KHR_subgroup (extension 94), but the actual enum block used was, incorrectly, that of extension 95

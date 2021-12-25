@@ -58,7 +58,7 @@ macro loadCommand*[T: proc](handle: Instance or Device; procType: typedesc[T]): 
 
 macro loadCommand*[T: proc](handle: Instance or Device; procAccessor: T) =
   let cageName = procAccessor.customPragmaNode()
-    .findChild(it.len > 0 and it[0].repr == "loadinto")[0][1]
+    .findChild(it.len > 0 and it[0].repr == "loadInto")[1]
   quote do:
     `cageName` = option `handle`.loadCommand(`cageName`.unsafeGet.typeof)
 

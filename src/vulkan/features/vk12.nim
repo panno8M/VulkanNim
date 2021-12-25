@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T07:50:19Z
+# Generated at 2021-12-25T14:21:16Z
 # vk12
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -14,10 +14,6 @@ const
   StructureTypePhysicalDeviceVulkan11Properties* = 50
   StructureTypePhysicalDeviceVulkan12Features* = 51
   StructureTypePhysicalDeviceVulkan12Properties* = 52
-  UuidSize* = 16
-  LuidSize* = 8
-  MaxDriverNameSize* = 256
-  MaxDriverInfoSize* = 256
 
   # Promoted from VK_KHR_sampler_mirror_clamp_to_edge (extension 15)
   SamplerAddressModeMirrorClampToEdge* = 4

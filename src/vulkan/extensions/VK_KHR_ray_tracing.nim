@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T07:50:19Z
+# Generated at 2021-12-25T14:21:16Z
 # VK_KHR_ray_tracing
 # VK_NV_ray_tracing
 # Explicit sort order to require processing after VK_NV_ray_tracing
@@ -26,11 +26,9 @@ prepareVulkanLibDef()
 const
   KhrRayTracingSpecVersion* = 8
   KhrRayTracingExtensionName* = "VK_KHR_ray_tracing"
-  ShaderUnusedKhr* = (uint32.high)
 
   NvRayTracingSpecVersion* = 3
   NvRayTracingExtensionName* = "VK_NV_ray_tracing"
-  ShaderUnusedNv* = ShaderUnusedKhr
 
 type
   DeviceOrHostAddressKHR* {.union.} = object

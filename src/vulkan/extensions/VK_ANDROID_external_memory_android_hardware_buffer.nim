@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T07:50:19Z
+# Generated at 2021-12-25T14:19:30Z
 # VK_ANDROID_external_memory_android_hardware_buffer
 
 import ../platform
@@ -13,9 +13,6 @@ export VK_EXT_queue_family_foreign
 export VK_KHR_dedicated_allocation
 
 prepareVulkanLibDef()
-
-type # basetypes
-  AHardwareBuffer* = distinct object
 
 const
   AndroidExternalMemoryAndroidHardwareBufferSpecVersion* = 3

@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T07:50:19Z
+# Generated at 2021-12-25T14:19:39Z
 # VK_EXT_memory_budget
 
 import ../platform
@@ -11,7 +11,6 @@ prepareVulkanLibDef()
 const
   ExtMemoryBudgetSpecVersion* = 1
   ExtMemoryBudgetExtensionName* = "VK_EXT_memory_budget"
-  MaxMemoryHeaps* = 16 # The maximum number of unique memory heaps, each of which supporting 1 or more memory types
 
 type
   PhysicalDeviceMemoryBudgetPropertiesEXT* = object

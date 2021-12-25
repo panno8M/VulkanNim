@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T07:50:19Z
+# Generated at 2021-12-25T14:19:39Z
 # VK_KHR_performance_query
 
 import ../platform
@@ -11,8 +11,6 @@ prepareVulkanLibDef()
 const
   KhrPerformanceQuerySpecVersion* = 1
   KhrPerformanceQueryExtensionName* = "VK_KHR_performance_query"
-  UuidSize* = 16
-  MaxDescriptionSize* = 256
 
 type
   PhysicalDevicePerformanceQueryFeaturesKHR* = object

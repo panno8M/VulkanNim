@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T07:50:19Z
+# Generated at 2021-12-25T14:21:16Z
 # VK_KHR_device_group_creation
 
 import ../platform
@@ -10,7 +10,6 @@ prepareVulkanLibDef()
 const
   KhrDeviceGroupCreationSpecVersion* = 1
   KhrDeviceGroupCreationExtensionName* = "VK_KHR_device_group_creation"
-  MaxDeviceGroupSizeKhr* = MaxDeviceGroupSize
 
 type
   PhysicalDeviceGroupPropertiesKHR* = object

@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T07:50:19Z
+# Generated at 2021-12-25T14:21:16Z
 # VK_EXT_queue_family_foreign
 
 import ../platform
@@ -11,7 +11,6 @@ prepareVulkanLibDef()
 const
   ExtQueueFamilyForeignSpecVersion* = 1
   ExtQueueFamilyForeignExtensionName* = "VK_EXT_queue_family_foreign"
-  QueueFamilyForeignExt* = (uint32.high-2)
 
 
 

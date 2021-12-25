@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T07:50:19Z
+# Generated at 2021-12-25T14:19:39Z
 # VK_KHR_pipeline_executable_properties
 
 import ../platform
@@ -11,7 +11,6 @@ prepareVulkanLibDef()
 const
   KhrPipelineExecutablePropertiesSpecVersion* = 1
   KhrPipelineExecutablePropertiesExtensionName* = "VK_KHR_pipeline_executable_properties"
-  MaxDescriptionSize* = 256
 
 type
   PhysicalDevicePipelineExecutablePropertiesFeaturesKHR* = object
