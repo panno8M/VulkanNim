@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T14:45:57Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_EXT_sampler_filter_minmax
 
 import ../platform
@@ -13,23 +13,9 @@ const
   ExtSamplerFilterMinmaxSpecVersion* = 2
   ExtSamplerFilterMinmaxExtensionName* = "VK_EXT_sampler_filter_minmax"
 
-type # enums and bitmasks
-  SamplerReductionModeEXT* = distinct UnusedEnum
-
 type
   SamplerReductionModeCreateInfoEXT* = object
   PhysicalDeviceSamplerFilterMinmaxPropertiesEXT* = object
 
-FormatFeatureFlagBits.defineAliases:
-  sampledImageFilterMinmax as sampledImageFilterMinmaxExt
-
-StructureType.defineAliases:
-  physicalDeviceSamplerFilterMinmaxProperties as physicalDeviceSamplerFilterMinmaxPropertiesExt
-  samplerReductionModeCreateInfo as samplerReductionModeCreateInfoExt
-
-SamplerReductionMode.defineAliases:
-  weightedAverage as weightedAverageExt
-  min as minExt
-  max as maxExt
 
 

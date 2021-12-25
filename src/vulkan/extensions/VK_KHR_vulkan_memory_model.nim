@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T02:03:04Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_KHR_vulkan_memory_model
 
 import ../platform
@@ -14,7 +14,5 @@ const
 type
   PhysicalDeviceVulkanMemoryModelFeaturesKHR* = object
 
-StructureType.defineAliases:
-  physicalDeviceVulkanMemoryModelFeatures as physicalDeviceVulkanMemoryModelFeaturesKhr
 
 

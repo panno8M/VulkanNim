@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T02:03:04Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_KHR_shader_float16_int8
 
 import ../platform
@@ -17,8 +17,5 @@ type
   PhysicalDeviceShaderFloat16Int8FeaturesKHR* = object
   PhysicalDeviceFloat16Int8FeaturesKHR* = object
 
-StructureType.defineAliases:
-  physicalDeviceShaderFloat16Int8Features as physicalDeviceShaderFloat16Int8FeaturesKhr
-  physicalDeviceShaderFloat16Int8Features as physicalDeviceFloat16Int8FeaturesKhr
 
 

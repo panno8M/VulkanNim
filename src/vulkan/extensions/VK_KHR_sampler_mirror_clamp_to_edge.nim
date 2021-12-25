@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T02:03:03Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_KHR_sampler_mirror_clamp_to_edge
 
 import ../platform
@@ -12,7 +12,5 @@ const
   KhrSamplerMirrorClampToEdgeExtensionName* = "VK_KHR_sampler_mirror_clamp_to_edge"
   SamplerAddressModeMirrorClampToEdge* = 4
 
-SamplerAddressMode.defineAliases:
-  mirrorClampToEdge as mirrorClampToEdgeKhr
 
 

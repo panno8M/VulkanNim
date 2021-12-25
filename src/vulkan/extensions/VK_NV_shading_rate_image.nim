@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_NV_shading_rate_image
 
 import ../platform
@@ -11,26 +11,6 @@ prepareVulkanLibDef()
 const
   NvShadingRateImageSpecVersion* = 3
   NvShadingRateImageExtensionName* = "VK_NV_shading_rate_image"
-
-type # enums and bitmasks
-  ShadingRatePaletteEntryNV* {.size: sizeof(int32), pure.} = enum
-    noInvocationsNv = 0
-    e16InvocationsPerPixelNv = 1
-    e8InvocationsPerPixelNv = 2
-    e4InvocationsPerPixelNv = 3
-    e2InvocationsPerPixelNv = 4
-    e1InvocationPerPixelNv = 5
-    e1InvocationPer2x1PixelsNv = 6
-    e1InvocationPer1x2PixelsNv = 7
-    e1InvocationPer2x2PixelsNv = 8
-    e1InvocationPer4x2PixelsNv = 9
-    e1InvocationPer2x4PixelsNv = 10
-    e1InvocationPer4x4PixelsNv = 11
-  CoarseSampleOrderTypeNV* {.size: sizeof(int32), pure.} = enum
-    defaultNv = 0
-    customNv = 1
-    pixelMajorNv = 2
-    sampleMajorNv = 3
 
 type
   ShadingRatePaletteNV* = object

@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_INTEL_performance_query
 
 import ../platform
@@ -9,24 +9,6 @@ prepareVulkanLibDef()
 const
   IntelPerformanceQuerySpecVersion* = 2
   IntelPerformanceQueryExtensionName* = "VK_INTEL_performance_query"
-
-type # enums and bitmasks
-  PerformanceConfigurationTypeINTEL* {.size: sizeof(int32), pure.} = enum
-    commandQueueMetricsDiscoveryActivatedIntel = 0
-  QueryPoolSamplingModeINTEL* {.size: sizeof(int32), pure.} = enum
-    manualIntel = 0
-  PerformanceOverrideTypeINTEL* {.size: sizeof(int32), pure.} = enum
-    nullHardwareIntel = 0
-    flushGpuCachesIntel = 1
-  PerformanceParameterTypeINTEL* {.size: sizeof(int32), pure.} = enum
-    hwCountersSupportedIntel = 0
-    streamMarkerValidsIntel = 1
-  PerformanceValueTypeINTEL* {.size: sizeof(int32), pure.} = enum
-    uint32Intel = 0
-    uint64Intel = 1
-    floatIntel = 2
-    boolIntel = 3
-    stringIntel = 4
 
 type
   PerformanceValueDataINTEL* {.union.} = object
@@ -129,9 +111,6 @@ proc getPerformanceParameterINTEL*(
       successCodes(success),
       errorCodes(errorTooManyObjects, errorOutOfHostMemory),
       lazyload("vkGetPerformanceParameterINTEL", DeviceLevel).}
-StructureType.defineAliases:
-  queryPoolPerformanceQueryCreateInfoIntel as queryPoolCreateInfoIntel
-
 
 proc loadAllVK_INTEL_performance_query*(instance: Instance) =
   instance.loadCommand initializePerformanceApiINTEL

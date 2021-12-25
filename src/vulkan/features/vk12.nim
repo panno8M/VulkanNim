@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:52Z
+# Generated at 2021-12-25T07:50:19Z
 # vk12
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -21,61 +21,6 @@ const
 
   # Promoted from VK_KHR_sampler_mirror_clamp_to_edge (extension 15)
   SamplerAddressModeMirrorClampToEdge* = 4
-
-type # enums and bitmasks
-  # Promoted from VK_KHR_driver_properties (extension 197)
-  DriverId* {.size: sizeof(int32), pure.} = enum
-    amdProprietary = 1 # Advanced Micro Devices, Inc.
-    amdOpenSource = 2 # Advanced Micro Devices, Inc.
-    mesaRadv = 3 # Mesa open source project
-    nvidiaProprietary = 4 # NVIDIA Corporation
-    intelProprietaryWindows = 5 # Intel Corporation
-    intelOpenSourceMesa = 6 # Intel Corporation
-    imaginationProprietary = 7 # Imagination Technologies
-    qualcommProprietary = 8 # Qualcomm Technologies, Inc.
-    armProprietary = 9 # Arm Limited
-    googleSwiftshader = 10 # Google LLC
-    ggpProprietary = 11 # Google LLC
-    broadcomProprietary = 12 # Broadcom Inc.
-    mesaLlvmpipe = 13 # Mesa
-    molten = 14 # MoltenVK
-
-  # Promoted from VK_KHR_shader_float_controls (extension 198)
-  ShaderFloatControlsIndependence* {.size: sizeof(int32), pure.} = enum
-    e32Only = 0
-    all = 1
-    none = 2
-
-  # Promoted from VK_EXT_descriptor_indexing (extension 162)
-  DescriptorBindingFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
-    updateAfterBind = 0x00000001
-    updateUnusedWhilePending = 0x00000002
-    partiallyBound = 0x00000004
-    variableDescriptorCount = 0x00000008
-  DescriptorBindingFlags* = Flags[DescriptorBindingFlagBits]
-
-  # Promoted from VK_KHR_depth_stencil_resolve (extension 200)
-  ResolveModeFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
-    none = 0
-    sampleZero = 0x00000001
-    average = 0x00000002
-    min = 0x00000004
-    max = 0x00000008
-  ResolveModeFlags* = Flags[ResolveModeFlagBits]
-
-  # Promoted from VK_EXT_sampler_filter_minmax (extension 131)
-  SamplerReductionMode* {.size: sizeof(int32), pure.} = enum
-    weightedAverage = 0
-    min = 1
-    max = 2
-
-  # Promoted from VK_KHR_timeline_semaphore (extension 208)
-  SemaphoreType* {.size: sizeof(int32), pure.} = enum
-    binary = 0
-    timeline = 1
-  SemaphoreWaitFlagBits* {.size: sizeof(int32), pure, flagbits.} = enum
-    any = 0x00000001
-  SemaphoreWaitFlags* = Flags[SemaphoreWaitFlagBits]
 
 type
   PhysicalDeviceVulkan11Features* = object

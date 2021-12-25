@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_NV_coverage_reduction_mode
 
 import ../platform
@@ -11,12 +11,6 @@ prepareVulkanLibDef()
 const
   NvCoverageReductionModeSpecVersion* = 1
   NvCoverageReductionModeExtensionName* = "VK_NV_coverage_reduction_mode"
-
-type # enums and bitmasks
-  PipelineCoverageReductionStateCreateFlagsNV* = Flags[distinct UnusedEnum]
-  CoverageReductionModeNV* {.size: sizeof(int32), pure.} = enum
-    mergeNv = 0
-    truncateNv = 1
 
 type
   PhysicalDeviceCoverageReductionModeFeaturesNV* = object

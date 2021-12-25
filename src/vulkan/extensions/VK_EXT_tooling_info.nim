@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_EXT_tooling_info
 
 import ../platform
@@ -17,18 +17,6 @@ const
   ExtToolingInfoExtensionName* = "VK_EXT_tooling_info"
   MaxExtensionNameSize* = 256
   MaxDescriptionSize* = 256
-
-type # enums and bitmasks
-  ToolPurposeFlagBitsEXT* {.size: sizeof(int32), pure, flagbits.} = enum
-    validationExt = 0x00000001
-    profilingExt = 0x00000002
-    tracingExt = 0x00000004
-    additionalFeaturesExt = 0x00000008
-    modifyingFeaturesExt = 0x00000010
-    # Provided by VK_EXT_tooling_info
-    debugReportingExt = 0x00000020
-    debugMarkersExt = 0x00000040
-  ToolPurposeFlagsEXT* = Flags[ToolPurposeFlagBitsEXT]
 
 type
   PhysicalDeviceToolPropertiesEXT* = object

@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T02:03:03Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_KHR_device_group_creation
 
 import ../platform
@@ -17,11 +17,4 @@ type
   DeviceGroupDeviceCreateInfoKHR* = object
 
 const enumeratePhysicalDeviceGroupsKHR* = enumeratePhysicalDeviceGroups
-StructureType.defineAliases:
-  physicalDeviceGroupProperties as physicalDeviceGroupPropertiesKhr
-  deviceGroupDeviceCreateInfo as deviceGroupDeviceCreateInfoKhr
-
-MemoryHeapFlagBits.defineAliases:
-  multiInstance as multiInstanceKhr
-
 

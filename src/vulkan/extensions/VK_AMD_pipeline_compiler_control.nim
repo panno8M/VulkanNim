@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T14:45:56Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_AMD_pipeline_compiler_control
 
 import ../platform
@@ -9,10 +9,6 @@ prepareVulkanLibDef()
 const
   AmdPipelineCompilerControlSpecVersion* = 1
   AmdPipelineCompilerControlExtensionName* = "VK_AMD_pipeline_compiler_control"
-
-type # enums and bitmasks
-  PipelineCompilerControlFlagBitsAMD* = distinct UnusedEnum
-  PipelineCompilerControlFlagsAMD* = Flags[PipelineCompilerControlFlagBitsAMD]
 
 type
   PipelineCompilerControlCreateInfoAMD* = object

@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_KHR_performance_query
 
 import ../platform
@@ -13,37 +13,6 @@ const
   KhrPerformanceQueryExtensionName* = "VK_KHR_performance_query"
   UuidSize* = 16
   MaxDescriptionSize* = 256
-
-type # enums and bitmasks
-  PerformanceCounterDescriptionFlagsKHR* = Flags[PerformanceCounterDescriptionFlagBitsKHR]
-  PerformanceCounterDescriptionFlagBitsKHR* {.size: sizeof(int32), pure, flagbits.} = enum
-    performanceImpactingKhr = 0x00000001
-    concurrentlyImpactedKhr = 0x00000002
-  PerformanceCounterScopeKHR* {.size: sizeof(int32), pure.} = enum
-    commandBufferKhr = 0
-    renderPassKhr = 1
-    commandKhr = 2
-  PerformanceCounterStorageKHR* {.size: sizeof(int32), pure.} = enum
-    int32Khr = 0
-    int64Khr = 1
-    uint32Khr = 2
-    uint64Khr = 3
-    float32Khr = 4
-    float64Khr = 5
-  PerformanceCounterUnitKHR* {.size: sizeof(int32), pure.} = enum
-    genericKhr = 0
-    percentageKhr = 1
-    nanosecondsKhr = 2
-    bytesKhr = 3
-    bytesPerSecondKhr = 4
-    kelvinKhr = 5
-    wattsKhr = 6
-    voltsKhr = 7
-    ampsKhr = 8
-    hertzKhr = 9
-    cyclesKhr = 10
-  AcquireProfilingLockFlagsKHR* = Flags[AcquireProfilingLockFlagBitsKHR]
-  AcquireProfilingLockFlagBitsKHR* = distinct UnusedEnum
 
 type
   PhysicalDevicePerformanceQueryFeaturesKHR* = object
@@ -92,11 +61,6 @@ type
     sType* {.constant: (StructureType.performanceQuerySubmitInfoKhr).}: StructureType
     pNext* {.optional.}: pointer
     counterPassIndex*: uint32
-
-PerformanceCounterScopeKHR.defineAliases:
-  commandBufferKhr as queryScopeCommandBufferKhr
-  renderPassKhr as queryScopeRenderPassKhr
-  commandKhr as queryScopeCommandKhr
 
 proc enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR*(
       physicalDevice: PhysicalDevice;

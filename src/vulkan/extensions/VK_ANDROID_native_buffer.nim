@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_ANDROID_native_buffer
 
 import ../platform
@@ -11,11 +11,6 @@ const
   AndroidNativeBufferNumber* = 11
   AndroidNativeBufferName* = "VK_ANDROID_native_buffer"
   AndroidNativeBufferExtensionName* = AndroidNativeBufferName
-
-type # enums and bitmasks
-  SwapchainImageUsageFlagBitsANDROID* {.size: sizeof(int32), pure, flagbits.} = enum
-    sharedAndroid = 0x00000001
-  SwapchainImageUsageFlagsANDROID* = Flags[SwapchainImageUsageFlagBitsANDROID]
 
 type
   NativeBufferANDROID* = object

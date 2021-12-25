@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_KHR_ray_tracing
 # VK_NV_ray_tracing
 # Explicit sort order to require processing after VK_NV_ray_tracing
@@ -31,62 +31,6 @@ const
   NvRayTracingSpecVersion* = 3
   NvRayTracingExtensionName* = "VK_NV_ray_tracing"
   ShaderUnusedNv* = ShaderUnusedKhr
-
-type # enums and bitmasks
-  AccelerationStructureTypeKHR* {.size: sizeof(int32), pure.} = enum
-    topLevelKhr = 0
-    bottomLevelKhr = 1
-  RayTracingShaderGroupTypeKHR* {.size: sizeof(int32), pure.} = enum
-    generalKhr = 0
-    trianglesHitGroupKhr = 1
-    proceduralHitGroupKhr = 2
-  AccelerationStructureBuildTypeKHR* {.size: sizeof(int32), pure.} = enum
-    hostKhr = 0
-    deviceKhr = 1
-    hostOrDeviceKhr = 2
-  GeometryFlagsKHR* = Flags[GeometryFlagBitsKHR]
-  GeometryInstanceFlagsKHR* = Flags[GeometryInstanceFlagBitsKHR]
-  GeometryFlagBitsKHR* {.size: sizeof(int32), pure, flagbits.} = enum
-    opaqueKhr = 0x00000001
-    noDuplicateAnyHitInvocationKhr = 0x00000002
-  GeometryInstanceFlagBitsKHR* {.size: sizeof(int32), pure, flagbits.} = enum
-    triangleFacingCullDisableKhr = 0x00000001
-    triangleFrontCounterclockwiseKhr = 0x00000002
-    forceOpaqueKhr = 0x00000004
-    forceNoOpaqueKhr = 0x00000008
-  BuildAccelerationStructureFlagBitsKHR* {.size: sizeof(int32), pure, flagbits.} = enum
-    allowUpdateKhr = 0x00000001
-    allowCompactionKhr = 0x00000002
-    preferFastTraceKhr = 0x00000004
-    preferFastBuildKhr = 0x00000008
-    lowMemoryKhr = 0x00000010
-  BuildAccelerationStructureFlagsKHR* = Flags[BuildAccelerationStructureFlagBitsKHR]
-  CopyAccelerationStructureModeKHR* {.size: sizeof(int32), pure.} = enum
-    cloneKhr = 0
-    compactKhr = 1
-    serializeKhr = 2
-    deserializeKhr = 3
-  GeometryTypeKHR* {.size: sizeof(int32), pure.} = enum
-    trianglesKhr = 0
-    aabbsKhr = 1
-    # Provided by VK_KHR_ray_tracing
-    instancesKhr = 1000150000
-  AccelerationStructureMemoryRequirementsTypeKHR* {.size: sizeof(int32), pure.} = enum
-    objectKhr = 0
-    buildScratchKhr = 1
-    updateScratchKhr = 2
-
-  RayTracingShaderGroupTypeNV* = distinct UnusedEnum
-  GeometryTypeNV* = distinct UnusedEnum
-  AccelerationStructureTypeNV* = distinct UnusedEnum
-  GeometryFlagsNV* = GeometryFlagsKHR
-  GeometryFlagBitsNV* = distinct UnusedEnum
-  GeometryInstanceFlagsNV* = GeometryInstanceFlagsKHR
-  GeometryInstanceFlagBitsNV* = distinct UnusedEnum
-  BuildAccelerationStructureFlagBitsNV* = distinct UnusedEnum
-  BuildAccelerationStructureFlagsNV* = BuildAccelerationStructureFlagsKHR
-  CopyAccelerationStructureModeNV* = distinct UnusedEnum
-  AccelerationStructureMemoryRequirementsTypeNV* = distinct UnusedEnum
 
 type
   DeviceOrHostAddressKHR* {.union.} = object
@@ -619,86 +563,6 @@ proc compileDeferredNV*(
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
       lazyload("vkCompileDeferredNV", DeviceLevel).}
-PipelineStageFlagBits.defineAliases:
-  rayTracingShaderKhr as rayTracingShaderNv
-  accelerationStructureBuildKhr as accelerationStructureBuildNv
-
-ShaderStageFlagBits.defineAliases:
-  raygenKhr as raygenNv
-  anyHitKhr as anyHitNv
-  closestHitKhr as closestHitNv
-  missKhr as missNv
-  intersectionKhr as intersectionNv
-  callableKhr as callableNv
-
-BufferUsageFlagBits.defineAliases:
-  rayTracingKhr as rayTracingNv
-
-DebugReportObjectTypeEXT.defineAliases:
-  accelerationStructureKhrExt as accelerationStructureNvExt
-
-RayTracingShaderGroupTypeKHR.defineAliases:
-  generalKhr as generalNv
-  trianglesHitGroupKhr as trianglesHitGroupNv
-  proceduralHitGroupKhr as proceduralHitGroupNv
-
-CopyAccelerationStructureModeKHR.defineAliases:
-  cloneKhr as cloneNv
-  compactKhr as compactNv
-
-AccessFlagBits.defineAliases:
-  accelerationStructureReadKhr as accelerationStructureReadNv
-  accelerationStructureWriteKhr as accelerationStructureWriteNv
-
-ObjectType.defineAliases:
-  accelerationStructureKhr as accelerationStructureNv
-
-GeometryFlagBitsKHR.defineAliases:
-  opaqueKhr as opaqueNv
-  noDuplicateAnyHitInvocationKhr as noDuplicateAnyHitInvocationNv
-
-AccelerationStructureTypeKHR.defineAliases:
-  topLevelKhr as topLevelNv
-  bottomLevelKhr as bottomLevelNv
-
-GeometryInstanceFlagBitsKHR.defineAliases:
-  triangleFacingCullDisableKhr as triangleCullDisableNv
-  triangleFrontCounterclockwiseKhr as triangleFrontCounterclockwiseNv
-  forceOpaqueKhr as forceOpaqueNv
-  forceNoOpaqueKhr as forceNoOpaqueNv
-
-DescriptorType.defineAliases:
-  accelerationStructureKhr as accelerationStructureNv
-
-StructureType.defineAliases:
-  bindAccelerationStructureMemoryInfoKhr as bindAccelerationStructureMemoryInfoNv
-  writeDescriptorSetAccelerationStructureKhr as writeDescriptorSetAccelerationStructureNv
-
-PipelineBindPoint.defineAliases:
-  rayTracingKhr as rayTracingNv
-
-QueryType.defineAliases:
-  accelerationStructureCompactedSizeKhr as accelerationStructureCompactedSizeNv
-
-AccelerationStructureMemoryRequirementsTypeKHR.defineAliases:
-  objectKhr as objectNv
-  buildScratchKhr as buildScratchNv
-  updateScratchKhr as updateScratchNv
-
-BuildAccelerationStructureFlagBitsKHR.defineAliases:
-  allowUpdateKhr as allowUpdateNv
-  allowCompactionKhr as allowCompactionNv
-  preferFastTraceKhr as preferFastTraceNv
-  preferFastBuildKhr as preferFastBuildNv
-  lowMemoryKhr as lowMemoryNv
-
-GeometryTypeKHR.defineAliases:
-  trianglesKhr as trianglesNv
-  aabbsKhr as aabbsNv
-
-IndexType.defineAliases:
-  noneKhr as noneNv
-
 
 proc loadAllVK_KHR_ray_tracing*(instance: Instance) =
   instance.loadCommand createAccelerationStructureKHR

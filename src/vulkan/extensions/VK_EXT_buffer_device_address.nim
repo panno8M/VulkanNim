@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T02:03:03Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_EXT_buffer_device_address
 
 import ../platform
@@ -27,17 +27,4 @@ type
     deviceAddress*: DeviceAddress
 
 const getBufferDeviceAddressEXT* = getBufferDeviceAddress
-BufferUsageFlagBits.defineAliases:
-  shaderDeviceAddress as shaderDeviceAddressExt
-
-Result.defineAliases:
-  errorInvalidOpaqueCaptureAddress as errorInvalidDeviceAddressExt
-
-StructureType.defineAliases:
-  physicalDeviceBufferDeviceAddressFeaturesExt as physicalDeviceBufferAddressFeaturesExt
-  bufferDeviceAddressInfo as bufferDeviceAddressInfoExt
-
-BufferCreateFlagBits.defineAliases:
-  deviceAddressCaptureReplay as deviceAddressCaptureReplayExt
-
 

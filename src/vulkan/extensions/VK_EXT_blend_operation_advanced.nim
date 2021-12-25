@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_EXT_blend_operation_advanced
 
 import ../platform
@@ -9,12 +9,6 @@ prepareVulkanLibDef()
 const
   ExtBlendOperationAdvancedSpecVersion* = 2
   ExtBlendOperationAdvancedExtensionName* = "VK_EXT_blend_operation_advanced"
-
-type # enums and bitmasks
-  BlendOverlapEXT* {.size: sizeof(int32), pure.} = enum
-    uncorrelatedExt = 0
-    disjointExt = 1
-    conjointExt = 2
 
 type
   PhysicalDeviceBlendOperationAdvancedFeaturesEXT* = object

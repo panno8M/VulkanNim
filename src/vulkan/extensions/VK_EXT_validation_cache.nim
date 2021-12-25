@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_EXT_validation_cache
 
 import ../platform
@@ -9,11 +9,6 @@ prepareVulkanLibDef()
 const
   ExtValidationCacheSpecVersion* = 1
   ExtValidationCacheExtensionName* = "VK_EXT_validation_cache"
-
-type # enums and bitmasks
-  ValidationCacheHeaderVersionEXT* {.size: sizeof(int32), pure.} = enum
-    oneExt = 1
-  ValidationCacheCreateFlagsEXT* = Flags[distinct UnusedEnum]
 
 type
   HtValidationCacheEXT* = object of HandleType

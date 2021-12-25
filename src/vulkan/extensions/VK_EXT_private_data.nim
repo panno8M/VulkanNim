@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T14:45:56Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_EXT_private_data
 
 import ../platform
@@ -9,10 +9,6 @@ prepareVulkanLibDef()
 const
   ExtPrivateDataSpecVersion* = 1
   ExtPrivateDataExtensionName* = "VK_EXT_private_data"
-
-type # enums and bitmasks
-  PrivateDataSlotCreateFlagsEXT* = Flags[PrivateDataSlotCreateFlagBitsEXT]
-  PrivateDataSlotCreateFlagBitsEXT* = distinct UnusedEnum
 
 type
   PhysicalDevicePrivateDataFeaturesEXT* = object

@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T09:33:17Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_KHR_win32_surface
 
 import ../platform
@@ -11,9 +11,6 @@ prepareVulkanLibDef()
 const
   KhrWin32SurfaceSpecVersion* = 6
   KhrWin32SurfaceExtensionName* = "VK_KHR_win32_surface"
-
-type # enums and bitmasks
-  Win32SurfaceCreateFlagsKHR* = Flags[distinct UnusedEnum]
 
 type
   Win32SurfaceCreateInfoKHR* = object

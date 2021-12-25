@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T02:03:04Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_NV_dedicated_allocation_image_aliasing
 
 import ../platform

@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T02:03:04Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_KHR_get_physical_device_properties2
 
 import ../platform
@@ -29,15 +29,4 @@ const getPhysicalDeviceImageFormatProperties2KHR* = getPhysicalDeviceImageFormat
 const getPhysicalDeviceQueueFamilyProperties2KHR* = getPhysicalDeviceQueueFamilyProperties2
 const getPhysicalDeviceMemoryProperties2KHR* = getPhysicalDeviceMemoryProperties2
 const getPhysicalDeviceSparseImageFormatProperties2KHR* = getPhysicalDeviceSparseImageFormatProperties2
-StructureType.defineAliases:
-  physicalDeviceFeatures2 as physicalDeviceFeatures2Khr
-  physicalDeviceProperties2 as physicalDeviceProperties2Khr
-  formatProperties2 as formatProperties2Khr
-  imageFormatProperties2 as imageFormatProperties2Khr
-  physicalDeviceImageFormatInfo2 as physicalDeviceImageFormatInfo2Khr
-  queueFamilyProperties2 as queueFamilyProperties2Khr
-  physicalDeviceMemoryProperties2 as physicalDeviceMemoryProperties2Khr
-  sparseImageFormatProperties2 as sparseImageFormatProperties2Khr
-  physicalDeviceSparseImageFormatInfo2 as physicalDeviceSparseImageFormatInfo2Khr
-
 

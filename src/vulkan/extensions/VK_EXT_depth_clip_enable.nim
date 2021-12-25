@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T02:03:03Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_EXT_depth_clip_enable
 
 import ../platform
@@ -9,9 +9,6 @@ prepareVulkanLibDef()
 const
   ExtDepthClipEnableSpecVersion* = 1
   ExtDepthClipEnableExtensionName* = "VK_EXT_depth_clip_enable"
-
-type # enums and bitmasks
-  PipelineRasterizationDepthClipStateCreateFlagsEXT* = Flags[distinct UnusedEnum]
 
 type
   PhysicalDeviceDepthClipEnableFeaturesEXT* = object

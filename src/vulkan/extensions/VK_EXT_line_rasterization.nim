@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_EXT_line_rasterization
 
 import ../platform
@@ -11,13 +11,6 @@ prepareVulkanLibDef()
 const
   ExtLineRasterizationSpecVersion* = 1
   ExtLineRasterizationExtensionName* = "VK_EXT_line_rasterization"
-
-type # enums and bitmasks
-  LineRasterizationModeEXT* {.size: sizeof(int32), pure.} = enum
-    defaultExt = 0
-    rectangularExt = 1
-    bresenhamExt = 2
-    rectangularSmoothExt = 3
 
 type
   PhysicalDeviceLineRasterizationFeaturesEXT* = object

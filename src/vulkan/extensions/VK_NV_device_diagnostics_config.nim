@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_NV_device_diagnostics_config
 
 import ../platform
@@ -11,13 +11,6 @@ prepareVulkanLibDef()
 const
   NvDeviceDiagnosticsConfigSpecVersion* = 1
   NvDeviceDiagnosticsConfigExtensionName* = "VK_NV_device_diagnostics_config"
-
-type # enums and bitmasks
-  DeviceDiagnosticsConfigFlagsNV* = Flags[DeviceDiagnosticsConfigFlagBitsNV]
-  DeviceDiagnosticsConfigFlagBitsNV* {.size: sizeof(int32), pure, flagbits.} = enum
-    enableShaderDebugInfoNv = 0x00000001
-    enableResourceTrackingNv = 0x00000002
-    enableAutomaticCheckpointsNv = 0x00000004
 
 type
   PhysicalDeviceDiagnosticsConfigFeaturesNV* = object

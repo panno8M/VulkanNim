@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_NV_external_memory_capabilities
 
 import ../platform
@@ -9,19 +9,6 @@ prepareVulkanLibDef()
 const
   NvExternalMemoryCapabilitiesSpecVersion* = 1
   NvExternalMemoryCapabilitiesExtensionName* = "VK_NV_external_memory_capabilities"
-
-type # enums and bitmasks
-  ExternalMemoryHandleTypeFlagsNV* = Flags[ExternalMemoryHandleTypeFlagBitsNV]
-  ExternalMemoryHandleTypeFlagBitsNV* {.size: sizeof(int32), pure, flagbits.} = enum
-    opaqueWin32Nv = 0x00000001
-    opaqueWin32KmtNv = 0x00000002
-    d3d11ImageNv = 0x00000004
-    d3d11ImageKmtNv = 0x00000008
-  ExternalMemoryFeatureFlagsNV* = Flags[ExternalMemoryFeatureFlagBitsNV]
-  ExternalMemoryFeatureFlagBitsNV* {.size: sizeof(int32), pure, flagbits.} = enum
-    dedicatedOnlyNv = 0x00000001
-    exportableNv = 0x00000002
-    importableNv = 0x00000004
 
 type
   ExternalImageFormatPropertiesNV* = object

@@ -68,7 +68,6 @@ proc renderCommandLoader*(libFile: LibFile; resources: Resources; commandRenderi
 
 proc render*(libFile: LibFile; library: Library; resources: Resources): string =
   var renderedNodes: seq[string]
-  var enumAliasesRequired: seq[NodeEnumAliases]
   result &= "# Generated at {now().utc()}\n".fmt
   result &= libFile.fileName.splitFile.name.commentify
   result.LF
@@ -182,36 +181,6 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
       result.LF
       result.LF
 
-  block Solve_enums:
-    var typeDefs: seq[seq[string]]
-    for fileRequire in libFile.requires:
-      for require in fileRequire:
-        let typeTargets = require.targets.filterIt(it.kind in {nkrType})
-        if typeTargets.len == 0: continue
-
-        var typeDef: seq[string]
-
-        for req in typeTargets:
-          if req.name in renderedNodes: continue
-
-          if resources.bitmasks.hasKey(req.name):
-            typeDef.add resources.bitmasks[req.name].render
-            renderedNodes.add req.name
-          elif resources.enums.hasKey(req.name):
-            typeDef.add $resources.enums[req.name].render(resources.vendorTags)
-            if resources.enumAliases.hasKey(req.name):
-              enumAliasesRequired.add resources.enumAliases[req.name]
-            renderedNodes.add req.name
-
-        if typeDef.len != 0:
-          typeDefs.add case require.comment.isSome
-            of true: concat(@[require.comment.get.commentify], typeDef)
-            of false: typeDef
-
-    if typeDefs.len != 0:
-      result.add "type # enums and bitmasks\n"
-      result &= typeDefs.mapIt(it.join("\n").indent(2)).join("\n\n").LF.LF
-
   block Solve_types:
     var typeDefs: seq[seq[string]]
     for fileRequire in libFile.requires:
@@ -248,7 +217,6 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
     for fileRequire in libFile.requires:
       for require in fileRequire:
         reqDefs.add @[]
-        # result &= require.render.LF
         if require.comment.isSome:
           reqDefs[^1].add require.comment.get.underline('-').commentify
 
@@ -257,8 +225,6 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
             if resources.defines.hasKey(req.name):
               reqDefs[^1].add resources.defines[req.name].render
               renderedNodes.add req.name
-          if resources.enumAliases.hasKey(req.name):
-            reqDefs[^1].add resources.enumAliases[req.name].render(resources.vendorTags)
 
         let reqCommands = require.targets.filter(x => x.kind == nkrCommand)
         if reqCommands.len != 0:
@@ -267,25 +233,6 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
             if resources.commands.hasKey(reqCommand.name):
               reqDefs[^1].add resources.commands[reqCommand.name].render
               renderedNodes.add reqCommand.name
-
-        let reqEnumExts = require.targets.filter(x => x.kind == nkrEnumExtendAlias)
-        let enumAliases = newTable[string, NodeEnumAliases]()
-        for reqEnumExt in reqEnumExts:
-          if enumAliases.hasKey(reqEnumExt.extends):
-            enumAliases[reqEnumExt.extends].aliases.add NodeEnumAlias(
-              name: reqEnumExt.name,
-              alias: reqEnumExt.enumAlias,
-            )
-          else:
-            enumAliases[reqEnumExt.extends] = NodeEnumAliases(
-              name: reqEnumExt.extends,
-              aliases: @[NodeEnumAlias(
-                name: reqEnumExt.name,
-                alias: reqEnumExt.enumAlias,
-              )]
-            )
-        for key, val in enumAliases:
-          reqDefs[^1].add val.render(resources.vendorTags)
 
     if reqDefs.len != 0:
       result &= reqDefs.mapIt(it.join("\n")).filterIt(it.len != 0).join("\n\n\n")

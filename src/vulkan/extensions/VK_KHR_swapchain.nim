@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_KHR_swapchain
 
 import ../platform
@@ -13,22 +13,6 @@ const
   KhrSwapchainExtensionName* = "VK_KHR_swapchain"
 
   MaxDeviceGroupSize* = 32
-
-type # enums and bitmasks
-  SwapchainCreateFlagBitsKHR* {.size: sizeof(int32), pure, flagbits.} = enum
-    # Provided by VK_KHR_swapchain
-    splitInstanceBindRegionsKhr = 0x00000001 # Allow images with VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT
-    protectedKhr = 0x00000002 # Swapchain is protected
-    # Provided by VK_KHR_swapchain_mutable_format
-    mutableFormatKhr = 0x00000004
-  SwapchainCreateFlagsKHR* = Flags[SwapchainCreateFlagBitsKHR]
-
-  DeviceGroupPresentModeFlagBitsKHR* {.size: sizeof(int32), pure, flagbits.} = enum
-    localKhr = 0x00000001 # Present from local memory
-    remoteKhr = 0x00000002 # Present from remote memory
-    sumKhr = 0x00000004 # Present sum of local and/or remote memory
-    localMultiDeviceKhr = 0x00000008 # Each physical device presents from local memory
-  DeviceGroupPresentModeFlagsKHR* = Flags[DeviceGroupPresentModeFlagBitsKHR]
 
 type
   SwapchainCreateInfoKHR* = object

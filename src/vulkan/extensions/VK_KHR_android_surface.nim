@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T09:33:17Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_KHR_android_surface
 
 import ../platform
@@ -14,9 +14,6 @@ type # basetypes
 const
   KhrAndroidSurfaceSpecVersion* = 6
   KhrAndroidSurfaceExtensionName* = "VK_KHR_android_surface"
-
-type # enums and bitmasks
-  AndroidSurfaceCreateFlagsKHR* = Flags[distinct UnusedEnum]
 
 type
   AndroidSurfaceCreateInfoKHR* = object

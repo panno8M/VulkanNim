@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T09:33:17Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_MVK_macos_surface
 
 import ../platform
@@ -11,9 +11,6 @@ prepareVulkanLibDef()
 const
   MmacosSurfaceSpecVersion* = 3
   MmacosSurfaceExtensionName* = "VK_MVK_macos_surface"
-
-type # enums and bitmasks
-  MacOSSurfaceCreateFlagsMVK* = Flags[distinct UnusedEnum]
 
 type
   MacOSSurfaceCreateInfoMVK* = object

@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_NV_device_generated_commands
 
 import ../platform
@@ -9,25 +9,6 @@ prepareVulkanLibDef()
 const
   NvDeviceGeneratedCommandsSpecVersion* = 3
   NvDeviceGeneratedCommandsExtensionName* = "VK_NV_device_generated_commands"
-
-type # enums and bitmasks
-  IndirectStateFlagBitsNV* {.size: sizeof(int32), pure, flagbits.} = enum
-    flagFrontfaceNv = 0x00000001
-  IndirectStateFlagsNV* = Flags[IndirectStateFlagBitsNV]
-  IndirectCommandsTokenTypeNV* {.size: sizeof(int32), pure.} = enum
-    shaderGroupNv = 0
-    stateFlagsNv = 1
-    indexBufferNv = 2
-    vertexBufferNv = 3
-    pushConstantNv = 4
-    drawIndexedNv = 5
-    drawNv = 6
-    drawTasksNv = 7
-  IndirectCommandsLayoutUsageFlagBitsNV* {.size: sizeof(int32), pure, flagbits.} = enum
-    explicitPreprocessNv = 0x00000001
-    indexedSequencesNv = 0x00000002
-    unorderedSequencesNv = 0x00000004
-  IndirectCommandsLayoutUsageFlagsNV* = Flags[IndirectCommandsLayoutUsageFlagBitsNV]
 
 type
   PhysicalDeviceDeviceGeneratedCommandsPropertiesNV* = object

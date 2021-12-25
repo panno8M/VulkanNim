@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T09:33:17Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_GGP_stream_descriptor_surface
 
 import ../platform
@@ -11,9 +11,6 @@ prepareVulkanLibDef()
 const
   GgpStreamDescriptorSurfaceSpecVersion* = 1
   GgpStreamDescriptorSurfaceExtensionName* = "VK_GGP_stream_descriptor_surface"
-
-type # enums and bitmasks
-  StreamDescriptorSurfaceCreateFlagsGGP* = Flags[distinct UnusedEnum]
 
 type
   StreamDescriptorSurfaceCreateInfoGGP* = object

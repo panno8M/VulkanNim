@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_EXT_conservative_rasterization
 
 import ../platform
@@ -11,13 +11,6 @@ prepareVulkanLibDef()
 const
   ExtConservativeRasterizationSpecVersion* = 1
   ExtConservativeRasterizationExtensionName* = "VK_EXT_conservative_rasterization"
-
-type # enums and bitmasks
-  PipelineRasterizationConservativeStateCreateFlagsEXT* = Flags[distinct UnusedEnum]
-  ConservativeRasterizationModeEXT* {.size: sizeof(int32), pure.} = enum
-    disabledExt = 0
-    overestimateExt = 1
-    underestimateExt = 2
 
 type
   PhysicalDeviceConservativeRasterizationPropertiesEXT* = object

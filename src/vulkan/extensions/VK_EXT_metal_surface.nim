@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T09:33:17Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_EXT_metal_surface
 
 import ../platform
@@ -14,9 +14,6 @@ type # basetypes
 const
   ExtMetalSurfaceSpecVersion* = 1
   ExtMetalSurfaceExtensionName* = "VK_EXT_metal_surface"
-
-type # enums and bitmasks
-  MetalSurfaceCreateFlagsEXT* = Flags[distinct UnusedEnum]
 
 type
   MetalSurfaceCreateInfoEXT* = object

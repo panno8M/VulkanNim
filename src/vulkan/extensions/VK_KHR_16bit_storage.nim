@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T02:03:03Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_KHR_16bit_storage
 
 import ../platform
@@ -18,7 +18,5 @@ const
 type
   PhysicalDevice16BitStorageFeaturesKHR* = object
 
-StructureType.defineAliases:
-  physicalDevice16bitStorageFeatures as physicalDevice16bitStorageFeaturesKhr
 
 

@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_EXT_debug_utils
 
 import ../platform
@@ -9,21 +9,6 @@ prepareVulkanLibDef()
 const
   ExtDebugUtilsSpecVersion* = 2
   ExtDebugUtilsExtensionName* = "VK_EXT_debug_utils"
-
-type # enums and bitmasks
-  DebugUtilsMessageSeverityFlagBitsEXT* {.size: sizeof(int32), pure, flagbits.} = enum
-    verboseExt = 0x00000001
-    infoExt = 0x00000010
-    warningExt = 0x00000100
-    errorExt = 0x00001000
-  DebugUtilsMessageSeverityFlagsEXT* = Flags[DebugUtilsMessageSeverityFlagBitsEXT]
-  DebugUtilsMessageTypeFlagBitsEXT* {.size: sizeof(int32), pure, flagbits.} = enum
-    generalExt = 0x00000001
-    validationExt = 0x00000002
-    performanceExt = 0x00000004
-  DebugUtilsMessageTypeFlagsEXT* = Flags[DebugUtilsMessageTypeFlagBitsEXT]
-  DebugUtilsMessengerCallbackDataFlagsEXT* = Flags[distinct UnusedEnum]
-  DebugUtilsMessengerCreateFlagsEXT* = Flags[distinct UnusedEnum]
 
 type
   PFN_DebugUtilsMessengerCallbackEXT* = proc(

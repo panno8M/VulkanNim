@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:52Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_NV_framebuffer_mixed_samples
 
 import ../platform
@@ -9,14 +9,6 @@ prepareVulkanLibDef()
 const
   NvFramebufferMixedSamplesSpecVersion* = 1
   NvFramebufferMixedSamplesExtensionName* = "VK_NV_framebuffer_mixed_samples"
-
-type # enums and bitmasks
-  PipelineCoverageModulationStateCreateFlagsNV* = Flags[distinct UnusedEnum]
-  CoverageModulationModeNV* {.size: sizeof(int32), pure.} = enum
-    noneNv = 0
-    rgbNv = 1
-    alphaNv = 2
-    rgbaNv = 3
 
 type
   PipelineCoverageModulationStateCreateInfoNV* = object

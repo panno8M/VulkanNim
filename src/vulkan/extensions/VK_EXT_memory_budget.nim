@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:18Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_EXT_memory_budget
 
 import ../platform

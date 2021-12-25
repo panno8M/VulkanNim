@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_EXT_discard_rectangles
 
 import ../platform
@@ -11,12 +11,6 @@ prepareVulkanLibDef()
 const
   ExtDiscardRectanglesSpecVersion* = 1
   ExtDiscardRectanglesExtensionName* = "VK_EXT_discard_rectangles"
-
-type # enums and bitmasks
-  PipelineDiscardRectangleStateCreateFlagsEXT* = Flags[distinct UnusedEnum]
-  DiscardRectangleModeEXT* {.size: sizeof(int32), pure.} = enum
-    inclusiveExt = 0
-    exclusiveExt = 1
 
 type
   PhysicalDeviceDiscardRectanglePropertiesEXT* = object

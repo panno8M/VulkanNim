@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T02:03:04Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_KHR_get_memory_requirements2
 
 import ../platform
@@ -21,11 +21,4 @@ type
 const getImageMemoryRequirements2KHR* = getImageMemoryRequirements2
 const getBufferMemoryRequirements2KHR* = getBufferMemoryRequirements2
 const getImageSparseMemoryRequirements2KHR* = getImageSparseMemoryRequirements2
-StructureType.defineAliases:
-  bufferMemoryRequirementsInfo2 as bufferMemoryRequirementsInfo2Khr
-  imageMemoryRequirementsInfo2 as imageMemoryRequirementsInfo2Khr
-  imageSparseMemoryRequirementsInfo2 as imageSparseMemoryRequirementsInfo2Khr
-  memoryRequirements2 as memoryRequirements2Khr
-  sparseImageMemoryRequirements2 as sparseImageMemoryRequirements2Khr
-
 

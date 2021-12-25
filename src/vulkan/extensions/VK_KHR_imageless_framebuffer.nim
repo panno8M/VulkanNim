@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T02:03:03Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_KHR_imageless_framebuffer
 
 import ../platform
@@ -21,13 +21,5 @@ type
   FramebufferAttachmentImageInfoKHR* = object
   RenderPassAttachmentBeginInfoKHR* = object
 
-StructureType.defineAliases:
-  physicalDeviceImagelessFramebufferFeatures as physicalDeviceImagelessFramebufferFeaturesKhr
-  framebufferAttachmentsCreateInfo as framebufferAttachmentsCreateInfoKhr
-  framebufferAttachmentImageInfo as framebufferAttachmentImageInfoKhr
-  renderPassAttachmentBeginInfo as renderPassAttachmentBeginInfoKhr
-
-FramebufferCreateFlagBits.defineAliases:
-  imageless as imagelessKhr
 
 

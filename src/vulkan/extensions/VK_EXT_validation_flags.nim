@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_EXT_validation_flags
 
 import ../platform
@@ -9,11 +9,6 @@ prepareVulkanLibDef()
 const
   ExtValidationFlagsSpecVersion* = 2
   ExtValidationFlagsExtensionName* = "VK_EXT_validation_flags"
-
-type # enums and bitmasks
-  ValidationCheckEXT* {.size: sizeof(int32), pure.} = enum
-    allExt = 0
-    shadersExt = 1
 
 type
   ValidationFlagsEXT* = object

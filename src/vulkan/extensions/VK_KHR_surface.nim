@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_KHR_surface
 # VK_KHR_display
 
@@ -13,61 +13,6 @@ const
 
   KhrDisplaySpecVersion* = 23
   KhrDisplayExtensionName* = "VK_KHR_display"
-
-type # enums and bitmasks
-  SurfaceTransformFlagBitsKHR* {.size: sizeof(int32), pure, flagbits.} = enum
-    identityKhr = 0x00000001
-    rotate90Khr = 0x00000002
-    rotate180Khr = 0x00000004
-    rotate270Khr = 0x00000008
-    horizontalMirrorKhr = 0x00000010
-    horizontalMirrorRotate90Khr = 0x00000020
-    horizontalMirrorRotate180Khr = 0x00000040
-    horizontalMirrorRotate270Khr = 0x00000080
-    inheritKhr = 0x00000100
-  PresentModeKHR* {.size: sizeof(int32), pure.} = enum
-    immediateKhr = 0
-    mailboxKhr = 1
-    fifoKhr = 2
-    fifoRelaxedKhr = 3
-    # Provided by VK_KHR_shared_presentable_image
-    sharedDemandRefreshKhr = 1000111000
-    sharedContinuousRefreshKhr = 1000111001
-  ColorSpaceKHR* {.size: sizeof(int32), pure.} = enum
-    srgbNonlinearKhr = 0
-    # Provided by VK_EXT_swapchain_colorspace
-    displayP3NonlinearExt = 1000104001
-    extendedSrgbLinearExt = 1000104002
-    displayP3LinearExt = 1000104003
-    dciP3NonlinearExt = 1000104004
-    bt709LinearExt = 1000104005
-    bt709NonlinearExt = 1000104006
-    bt2020LinearExt = 1000104007
-    hdr10St2084Ext = 1000104008
-    dolbyvisionExt = 1000104009
-    hdr10HlgExt = 1000104010
-    adobergbLinearExt = 1000104011
-    adobergbNonlinearExt = 1000104012
-    passThroughExt = 1000104013
-    extendedSrgbNonlinearExt = 1000104014
-    # Provided by VK_AMD_display_native_hdr
-    displayNativeAmd = 1000213000
-  CompositeAlphaFlagBitsKHR* {.size: sizeof(int32), pure, flagbits.} = enum
-    opaqueKhr = 0x00000001
-    preMultipliedKhr = 0x00000002
-    postMultipliedKhr = 0x00000004
-    inheritKhr = 0x00000008
-  CompositeAlphaFlagsKHR* = Flags[CompositeAlphaFlagBitsKHR]
-
-  DisplayModeCreateFlagsKHR* = Flags[distinct UnusedEnum]
-  DisplayPlaneAlphaFlagBitsKHR* {.size: sizeof(int32), pure, flagbits.} = enum
-    opaqueKhr = 0x00000001
-    globalKhr = 0x00000002
-    perPixelKhr = 0x00000004
-    perPixelPremultipliedKhr = 0x00000008
-  DisplayPlaneAlphaFlagsKHR* = Flags[DisplayPlaneAlphaFlagBitsKHR]
-  DisplaySurfaceCreateFlagsKHR* = Flags[distinct UnusedEnum]
-  SurfaceTransformFlagsKHR* = Flags[SurfaceTransformFlagBitsKHR]
 
 type
   HtSurfaceKHR* = object of HandleType
@@ -134,9 +79,6 @@ type
     globalAlpha*: float32
     alphaMode*: DisplayPlaneAlphaFlagBitsKHR
     imageExtent*: Extent2D
-
-ColorSpaceKHR.defineAliases:
-  srgbNonlinearKhr as colorspaceSrgbNonlinearKhr # Backwards-compatible alias containing a typo
 
 proc destroySurfaceKHR*(
       instance: Instance;

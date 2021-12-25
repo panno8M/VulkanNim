@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_KHR_pipeline_executable_properties
 
 import ../platform
@@ -12,13 +12,6 @@ const
   KhrPipelineExecutablePropertiesSpecVersion* = 1
   KhrPipelineExecutablePropertiesExtensionName* = "VK_KHR_pipeline_executable_properties"
   MaxDescriptionSize* = 256
-
-type # enums and bitmasks
-  PipelineExecutableStatisticFormatKHR* {.size: sizeof(int32), pure.} = enum
-    bool32Khr = 0
-    int64Khr = 1
-    uint64Khr = 2
-    float64Khr = 3
 
 type
   PhysicalDevicePipelineExecutablePropertiesFeaturesKHR* = object

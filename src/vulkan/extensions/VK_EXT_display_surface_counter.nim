@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_EXT_display_surface_counter
 
 import ../platform
@@ -11,11 +11,6 @@ prepareVulkanLibDef()
 const
   ExtDisplaySurfaceCounterSpecVersion* = 1
   ExtDisplaySurfaceCounterExtensionName* = "VK_EXT_display_surface_counter"
-
-type # enums and bitmasks
-  SurfaceCounterFlagsEXT* = Flags[SurfaceCounterFlagBitsEXT]
-  SurfaceCounterFlagBitsEXT* {.size: sizeof(int32), pure, flagbits.} = enum
-    vblankExt = 0x00000001
 
 type
   SurfaceCapabilities2EXT* = object
@@ -41,9 +36,6 @@ proc getPhysicalDeviceSurfaceCapabilities2EXT*(
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorSurfaceLostKhr),
       lazyload("vkGetPhysicalDeviceSurfaceCapabilities2EXT", InstanceLevel).}
-StructureType.defineAliases:
-  surfaceCapabilities2Ext as surfaceCapabilities2Ext
-
 
 proc loadAllVK_EXT_display_surface_counter*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceSurfaceCapabilities2EXT

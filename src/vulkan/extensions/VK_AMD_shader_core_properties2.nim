@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T14:45:57Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_AMD_shader_core_properties2
 
 import ../platform
@@ -11,10 +11,6 @@ prepareVulkanLibDef()
 const
   AmdShaderCoreProperties2SpecVersion* = 1
   AmdShaderCoreProperties2ExtensionName* = "VK_AMD_shader_core_properties2"
-
-type # enums and bitmasks
-  ShaderCorePropertiesFlagBitsAMD* = distinct UnusedEnum
-  ShaderCorePropertiesFlagsAMD* = Flags[ShaderCorePropertiesFlagBitsAMD]
 
 type
   PhysicalDeviceShaderCoreProperties2AMD* = object

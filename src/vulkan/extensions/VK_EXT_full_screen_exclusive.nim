@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_EXT_full_screen_exclusive
 
 import ../platform
@@ -21,13 +21,6 @@ prepareVulkanLibDef()
 const
   ExtFullScreenExclusiveSpecVersion* = 4
   ExtFullScreenExclusiveExtensionName* = "VK_EXT_full_screen_exclusive"
-
-type # enums and bitmasks
-  FullScreenExclusiveEXT* {.size: sizeof(int32), pure.} = enum
-    defaultExt = 0
-    allowedExt = 1
-    disallowedExt = 2
-    applicationControlledExt = 3
 
 type
   SurfaceFullScreenExclusiveInfoEXT* = object

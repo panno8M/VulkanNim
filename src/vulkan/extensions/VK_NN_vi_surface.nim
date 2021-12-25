@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T09:33:17Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_NN_vi_surface
 
 import ../platform
@@ -11,9 +11,6 @@ prepareVulkanLibDef()
 const
   NnViSurfaceSpecVersion* = 1
   NnViSurfaceExtensionName* = "VK_NN_vi_surface"
-
-type # enums and bitmasks
-  ViSurfaceCreateFlagsNN* = Flags[distinct UnusedEnum]
 
 type
   ViSurfaceCreateInfoNN* = object

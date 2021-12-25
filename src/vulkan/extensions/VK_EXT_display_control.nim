@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_EXT_display_control
 
 import ../platform
@@ -13,16 +13,6 @@ prepareVulkanLibDef()
 const
   ExtDisplayControlSpecVersion* = 1
   ExtDisplayControlExtensionName* = "VK_EXT_display_control"
-
-type # enums and bitmasks
-  DisplayPowerStateEXT* {.size: sizeof(int32), pure.} = enum
-    offExt = 0
-    suspendExt = 1
-    onExt = 2
-  DeviceEventTypeEXT* {.size: sizeof(int32), pure.} = enum
-    displayHotplugExt = 0
-  DisplayEventTypeEXT* {.size: sizeof(int32), pure.} = enum
-    firstPixelOutExt = 0
 
 type
   DisplayPowerInfoEXT* = object

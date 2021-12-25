@@ -48,9 +48,9 @@ proc render*(enums: NodeEnum; vendorTags: VendorTags): sstring =
   result.add sstring(kind: skBlock,
     title:
       if name.find("FlagBits") == -1:
-        "{name}* {enumPragma} = enum".fmt
+        "{name}* {{.vkEnum.}} = enum".fmt
       else:
-        "{name}* {flagbitsPragma} = enum".fmt
+        "{name}* {{.vkFlagBits.}} = enum".fmt
   )
 
   var lastExt = ""
@@ -61,14 +61,17 @@ proc render*(enums: NodeEnum; vendorTags: VendorTags): sstring =
     result[^1].add %field.render(vendorTags, name)
 
 
-proc render*(enumAlias: NodeEnumAlias; vendorTags: VendorTags; enumName: string): string =
+proc render*(enumAlias: NodeEnumAlias; vendorTags: VendorTags; enumName: string): Option[string] =
   let name = enumAlias.name.parseEnumValue(enumName, vendorTags)
   let alias = enumAlias.alias.parseEnumValue(enumName, vendorTags)
+  if name == alias: return
+  var res: string
   if enumAlias.isExtended:
-    result.add "# Provided by {enumAlias.providedBy}\n".fmt
-  result.add "{alias} as {name}".fmt
+    res.add "# Provided by {enumAlias.providedBy}\n".fmt
+  res.add "{alias} as {name}".fmt
   if enumAlias.comment.isSome:
-    result.add " # " & enumAlias.comment.get
+    res.add " # " & enumAlias.comment.get
+  return some res
 
 
 proc render*(enumAliases: NodeEnumAliases; vendorTags: VendorTags): string =
@@ -76,7 +79,9 @@ proc render*(enumAliases: NodeEnumAliases; vendorTags: VendorTags): string =
   let name = enumAliases.name.removeVkPrefix
   result.add "{name}.defineAliases:\n".fmt
   for alias in enumAliases.aliases:
-    result.add alias.render(vendorTags, name).indent(2) & "\n"
+    let elem = render(alias, vendorTags, name)
+    if elem.isSome:
+      result.add elem.get.indent(2) & "\n"
 
 
 proc render*(cons: NodeConst): string =

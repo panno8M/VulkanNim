@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_EXT_conditional_rendering
 
 import ../platform
@@ -9,11 +9,6 @@ prepareVulkanLibDef()
 const
   ExtConditionalRenderingSpecVersion* = 2
   ExtConditionalRenderingExtensionName* = "VK_EXT_conditional_rendering"
-
-type # enums and bitmasks
-  ConditionalRenderingFlagsEXT* = Flags[ConditionalRenderingFlagBitsEXT]
-  ConditionalRenderingFlagBitsEXT* {.size: sizeof(int32), pure, flagbits.} = enum
-    invertedExt = 0x00000001
 
 type
   ConditionalRenderingBeginInfoEXT* = object

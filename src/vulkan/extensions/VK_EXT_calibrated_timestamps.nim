@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:51Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_EXT_calibrated_timestamps
 
 import ../platform
@@ -9,13 +9,6 @@ prepareVulkanLibDef()
 const
   ExtCalibratedTimestampsSpecVersion* = 1
   ExtCalibratedTimestampsExtensionName* = "VK_EXT_calibrated_timestamps"
-
-type # enums and bitmasks
-  TimeDomainEXT* {.size: sizeof(int32), pure.} = enum
-    deviceExt = 0
-    clockMonotonicExt = 1
-    clockMonotonicRawExt = 2
-    queryPerformanceCounterExt = 3
 
 type
   CalibratedTimestampInfoEXT* = object

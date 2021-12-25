@@ -1,4 +1,4 @@
-# Generated at 2021-11-04T09:33:02Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_KHR_xcb_surface
 
 import ../platform
@@ -11,9 +11,6 @@ prepareVulkanLibDef()
 const
   KhrXcbSurfaceSpecVersion* = 6
   KhrXcbSurfaceExtensionName* = "VK_KHR_xcb_surface"
-
-type # enums and bitmasks
-  XcbSurfaceCreateFlagsKHR* = Flags[distinct UnusedEnum]
 
 type
   XcbSurfaceCreateInfoKHR* = object

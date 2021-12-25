@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T02:03:03Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_NV_fragment_coverage_to_color
 
 import ../platform
@@ -9,9 +9,6 @@ prepareVulkanLibDef()
 const
   NvFragmentCoverageToColorSpecVersion* = 1
   NvFragmentCoverageToColorExtensionName* = "VK_NV_fragment_coverage_to_color"
-
-type # enums and bitmasks
-  PipelineCoverageToColorStateCreateFlagsNV* = Flags[distinct UnusedEnum]
 
 type
   PipelineCoverageToColorStateCreateInfoNV* = object

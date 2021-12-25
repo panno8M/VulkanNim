@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:52Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_KHR_device_group
 
 import ../platform
@@ -20,19 +20,6 @@ const
   KhrDeviceGroupExtensionName* = "VK_KHR_device_group"
 
   MaxDeviceGroupSize* = 32
-
-type # enums and bitmasks
-  PeerMemoryFeatureFlagsKHR* = PeerMemoryFeatureFlags
-  PeerMemoryFeatureFlagBitsKHR* = distinct UnusedEnum
-  MemoryAllocateFlagsKHR* = MemoryAllocateFlags
-  MemoryAllocateFlagBitsKHR* = distinct UnusedEnum
-
-  DeviceGroupPresentModeFlagBitsKHR* {.size: sizeof(int32), pure, flagbits.} = enum
-    localKhr = 0x00000001 # Present from local memory
-    remoteKhr = 0x00000002 # Present from remote memory
-    sumKhr = 0x00000004 # Present sum of local and/or remote memory
-    localMultiDeviceKhr = 0x00000008 # Each physical device presents from local memory
-  DeviceGroupPresentModeFlagsKHR* = Flags[DeviceGroupPresentModeFlagBitsKHR]
 
 type
   MemoryAllocateFlagsInfoKHR* = object
@@ -81,38 +68,6 @@ type
 const getDeviceGroupPeerMemoryFeaturesKHR* = getDeviceGroupPeerMemoryFeatures
 const cmdSetDeviceMaskKHR* = cmdSetDeviceMask
 const cmdDispatchBaseKHR* = cmdDispatchBase
-DependencyFlagBits.defineAliases:
-  deviceGroup as deviceGroupKhr
-
-MemoryAllocateFlagBits.defineAliases:
-  deviceMask as deviceMaskKhr
-
-StructureType.defineAliases:
-  memoryAllocateFlagsInfo as memoryAllocateFlagsInfoKhr
-  deviceGroupRenderPassBeginInfo as deviceGroupRenderPassBeginInfoKhr
-  deviceGroupCommandBufferBeginInfo as deviceGroupCommandBufferBeginInfoKhr
-  deviceGroupSubmitInfo as deviceGroupSubmitInfoKhr
-  deviceGroupBindSparseInfo as deviceGroupBindSparseInfoKhr
-
-PeerMemoryFeatureFlagBits.defineAliases:
-  copySrc as copySrcKhr
-  copyDst as copyDstKhr
-  genericSrc as genericSrcKhr
-  genericDst as genericDstKhr
-
-PipelineCreateFlagBits.defineAliases:
-  viewIndexFromDeviceIndex as viewIndexFromDeviceIndexKhr
-  dispatchBase as dispatchBaseKhr
-
-
-
-StructureType.defineAliases:
-  bindBufferMemoryDeviceGroupInfo as bindBufferMemoryDeviceGroupInfoKhr
-  bindImageMemoryDeviceGroupInfo as bindImageMemoryDeviceGroupInfoKhr
-
-ImageCreateFlagBits.defineAliases:
-  splitInstanceBindRegions as splitInstanceBindRegionsKhr
-
 
 
 proc getDeviceGroupPresentCapabilitiesKHR*(

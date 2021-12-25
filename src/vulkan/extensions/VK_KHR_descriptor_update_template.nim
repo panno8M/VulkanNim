@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T14:45:57Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_KHR_descriptor_update_template
 
 import ../platform
@@ -17,10 +17,6 @@ const
 
   DescriptorUpdateTemplateTypePushDescriptorsKhr* = 1
 
-type # enums and bitmasks
-  DescriptorUpdateTemplateCreateFlagsKHR* = DescriptorUpdateTemplateCreateFlags
-  DescriptorUpdateTemplateTypeKHR* = distinct UnusedEnum
-
 type
   DescriptorUpdateTemplateKHR* = DescriptorUpdateTemplate
   DescriptorUpdateTemplateEntryKHR* = object
@@ -29,15 +25,6 @@ type
 const createDescriptorUpdateTemplateKHR* = createDescriptorUpdateTemplate
 const destroyDescriptorUpdateTemplateKHR* = destroyDescriptorUpdateTemplate
 const updateDescriptorSetWithTemplateKHR* = updateDescriptorSetWithTemplate
-ObjectType.defineAliases:
-  descriptorUpdateTemplate as descriptorUpdateTemplateKhr
-
-StructureType.defineAliases:
-  descriptorUpdateTemplateCreateInfo as descriptorUpdateTemplateCreateInfoKhr
-
-DescriptorUpdateTemplateType.defineAliases:
-  descriptorSet as descriptorSetKhr
-
 
 
 proc cmdPushDescriptorSetWithTemplateKHR*(
@@ -47,11 +34,6 @@ proc cmdPushDescriptorSetWithTemplateKHR*(
       set: uint32;
       pData: pointer;
     ): void {.cdecl, lazyload("vkCmdPushDescriptorSetWithTemplateKHR", DeviceLevel).}
-
-
-DebugReportObjectTypeEXT.defineAliases:
-  descriptorUpdateTemplateExt as descriptorUpdateTemplateKhrExt
-
 
 proc loadAllVK_KHR_descriptor_update_template*(instance: Instance) =
   instance.loadCommand cmdPushDescriptorSetWithTemplateKHR

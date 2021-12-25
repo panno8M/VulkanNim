@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T09:33:17Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_MVK_ios_surface
 
 import ../platform
@@ -11,9 +11,6 @@ prepareVulkanLibDef()
 const
   MiosSurfaceSpecVersion* = 3
   MiosSurfaceExtensionName* = "VK_MVK_ios_surface"
-
-type # enums and bitmasks
-  IOSSurfaceCreateFlagsMVK* = Flags[distinct UnusedEnum]
 
 type
   IOSSurfaceCreateInfoMVK* = object

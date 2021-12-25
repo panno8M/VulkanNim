@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T14:45:57Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_KHR_external_semaphore_capabilities
 
 import ../platform
@@ -14,32 +14,10 @@ const
   KhrExternalSemaphoreCapabilitiesExtensionName* = "VK_KHR_external_semaphore_capabilities"
   LuidSizeKhr* = LuidSize
 
-type # enums and bitmasks
-  ExternalSemaphoreHandleTypeFlagsKHR* = ExternalSemaphoreHandleTypeFlags
-  ExternalSemaphoreHandleTypeFlagBitsKHR* = distinct UnusedEnum
-  ExternalSemaphoreFeatureFlagsKHR* = ExternalSemaphoreFeatureFlags
-  ExternalSemaphoreFeatureFlagBitsKHR* = distinct UnusedEnum
-
 type
   PhysicalDeviceExternalSemaphoreInfoKHR* = object
   ExternalSemaphorePropertiesKHR* = object
   PhysicalDeviceIDPropertiesKHR* = object
 
 const getPhysicalDeviceExternalSemaphorePropertiesKHR* = getPhysicalDeviceExternalSemaphoreProperties
-ExternalSemaphoreFeatureFlagBits.defineAliases:
-  exportable as exportableKhr
-  importable as importableKhr
-
-ExternalSemaphoreHandleTypeFlagBits.defineAliases:
-  opaqueFd as opaqueFdKhr
-  opaqueWin32 as opaqueWin32Khr
-  opaqueWin32Kmt as opaqueWin32KmtKhr
-  d3d12Fence as d3d12FenceKhr
-  syncFd as syncFdKhr
-
-StructureType.defineAliases:
-  physicalDeviceExternalSemaphoreInfo as physicalDeviceExternalSemaphoreInfoKhr
-  externalSemaphoreProperties as externalSemaphorePropertiesKhr
-  physicalDeviceIdProperties as physicalDeviceIdPropertiesKhr
-
 

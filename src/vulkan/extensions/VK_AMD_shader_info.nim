@@ -1,4 +1,4 @@
-# Generated at 2021-12-22T15:37:52Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_AMD_shader_info
 
 import ../platform
@@ -9,12 +9,6 @@ prepareVulkanLibDef()
 const
   AmdShaderInfoSpecVersion* = 1
   AmdShaderInfoExtensionName* = "VK_AMD_shader_info"
-
-type # enums and bitmasks
-  ShaderInfoTypeAMD* {.size: sizeof(int32), pure.} = enum
-    statisticsAmd = 0
-    binaryAmd = 1
-    disassemblyAmd = 2
 
 type
   ShaderResourceUsageAMD* = object

@@ -1,4 +1,4 @@
-# Generated at 2021-10-24T02:03:03Z
+# Generated at 2021-12-25T07:50:19Z
 # VK_KHR_buffer_device_address
 
 import ../platform
@@ -23,24 +23,4 @@ type
 const getBufferDeviceAddressKHR* = getBufferDeviceAddress
 const getBufferOpaqueCaptureAddressKHR* = getBufferOpaqueCaptureAddress
 const getDeviceMemoryOpaqueCaptureAddressKHR* = getDeviceMemoryOpaqueCaptureAddress
-BufferUsageFlagBits.defineAliases:
-  shaderDeviceAddress as shaderDeviceAddressKhr
-
-Result.defineAliases:
-  errorInvalidOpaqueCaptureAddress as errorInvalidOpaqueCaptureAddressKhr
-
-MemoryAllocateFlagBits.defineAliases:
-  deviceAddress as deviceAddressKhr
-  deviceAddressCaptureReplay as deviceAddressCaptureReplayKhr
-
-StructureType.defineAliases:
-  physicalDeviceBufferDeviceAddressFeatures as physicalDeviceBufferDeviceAddressFeaturesKhr
-  bufferDeviceAddressInfo as bufferDeviceAddressInfoKhr
-  bufferOpaqueCaptureAddressCreateInfo as bufferOpaqueCaptureAddressCreateInfoKhr
-  memoryOpaqueCaptureAddressAllocateInfo as memoryOpaqueCaptureAddressAllocateInfoKhr
-  deviceMemoryOpaqueCaptureAddressInfo as deviceMemoryOpaqueCaptureAddressInfoKhr
-
-BufferCreateFlagBits.defineAliases:
-  deviceAddressCaptureReplay as deviceAddressCaptureReplayKhr
-
 
