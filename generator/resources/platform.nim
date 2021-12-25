@@ -142,4 +142,6 @@ template successCodes*(v: varargs[untyped]) {.pragma.}
 template errorCodes*(v: varargs[untyped]) {.pragma.}
 
 template prepareVulkanLibDef* =
-  import options
+  import std/options
+  import vulkan/basetypes
+  import vulkan/enums

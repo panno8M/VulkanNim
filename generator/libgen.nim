@@ -81,7 +81,7 @@ type
           elif resources.bitmasks.hasKey(req.name):
             results.add render( resources.bitmasks[req.name] ).indent(2)
           if resources.enumAliases.hasKey(req.name):
-            results.add render( resources.enumAliases[req.name], resources.vendorTags).indent(2)
+            enumAliases[req.name] = resources.enumAliases[req.name]
           rendered.add req.name
 
         of nkrEnumExtendAlias:

@@ -1810,9 +1810,6 @@ type
     front = 0x00000001 # Front face
     back = 0x00000002 # Back face
     frontAndBack = 0x00000003 # Front and back faces
-  StencilFaceFlagBits.defineAliases:
-    frontAndBack as stencilFrontAndBack # Alias for backwards compatibility
-  
   StencilFaceFlags* = Flags[StencilFaceFlagBits]
   SubpassContents* {.vkEnum.} = enum
     inline = 0
@@ -1912,9 +1909,6 @@ type
     opaqueWin32Kmt = 0x00000004
     d3d12Fence = 0x00000008
     syncFd = 0x00000010
-  ExternalSemaphoreHandleTypeFlagBits.defineAliases:
-    d3d12Fence as d3d11Fence
-  
   ExternalSemaphoreFeatureFlags* = Flags[ExternalSemaphoreFeatureFlagBits]
   ExternalSemaphoreFeatureFlagBits* {.vkFlagBits.} = enum
     exportable = 0x00000001
@@ -2004,9 +1998,6 @@ type
     extendedSrgbNonlinearExt = 1000104014
     # Provided by VK_AMD_display_native_hdr
     displayNativeAmd = 1000213000
-  ColorSpaceKHR.defineAliases:
-    srgbNonlinearKhr as colorspaceSrgbNonlinearKhr # Backwards-compatible alias containing a typo
-  
   CompositeAlphaFlagBitsKHR* {.vkFlagBits.} = enum
     opaqueKhr = 0x00000001
     preMultipliedKhr = 0x00000002
@@ -2115,10 +2106,6 @@ type
     samplerYcbcrConversionExt = 1000156000
     # Provided by VK_KHR_ray_tracing
     accelerationStructureKhrExt = 1000165000
-  DebugReportObjectTypeEXT.defineAliases:
-    debugReportCallbackExtExt as debugReportExt # Backwards-compatible alias containing a typo
-    validationCacheExtExt as validationCacheExt # Backwards-compatible alias containing a typo
-  
 
   # AMD rasterization order
   # -----------------------
@@ -2277,11 +2264,6 @@ type
     commandBufferKhr = 0
     renderPassKhr = 1
     commandKhr = 2
-  PerformanceCounterScopeKHR.defineAliases:
-    commandBufferKhr as queryScopeCommandBufferKhr
-    renderPassKhr as queryScopeRenderPassKhr
-    commandKhr as queryScopeCommandKhr
-  
   PerformanceCounterStorageKHR* {.vkEnum.} = enum
     int32Khr = 0
     int64Khr = 1
@@ -2676,6 +2658,8 @@ ExternalSemaphoreFeatureFlagBits.defineAliases:
   importable as importableKhr
 
 DebugReportObjectTypeEXT.defineAliases:
+  debugReportCallbackExtExt as debugReportExt # Backwards-compatible alias containing a typo
+  validationCacheExtExt as validationCacheExt # Backwards-compatible alias containing a typo
   descriptorUpdateTemplateExt as descriptorUpdateTemplateKhrExt
   samplerYcbcrConversionExt as samplerYcbcrConversionKhrExt
   accelerationStructureKhrExt as accelerationStructureNvExt
@@ -2684,6 +2668,7 @@ DescriptorPoolCreateFlagBits.defineAliases:
   updateAfterBind as updateAfterBindExt
 
 ExternalSemaphoreHandleTypeFlagBits.defineAliases:
+  d3d12Fence as d3d11Fence
   opaqueFd as opaqueFdKhr
   opaqueWin32 as opaqueWin32Khr
   opaqueWin32Kmt as opaqueWin32KmtKhr
@@ -3067,6 +3052,11 @@ QueryType.defineAliases:
 SemaphoreWaitFlagBits.defineAliases:
   any as anyKhr
 
+PerformanceCounterScopeKHR.defineAliases:
+  commandBufferKhr as queryScopeCommandBufferKhr
+  renderPassKhr as queryScopeRenderPassKhr
+  commandKhr as queryScopeCommandKhr
+
 SemaphoreImportFlagBits.defineAliases:
   temporary as temporaryKhr
 
@@ -3102,5 +3092,9 @@ SamplerYcbcrRange.defineAliases:
   ituFull as ituFullKhr
   ituNarrow as ituNarrowKhr
 
+StencilFaceFlagBits.defineAliases:
+  frontAndBack as stencilFrontAndBack # Alias for backwards compatibility
+
 ColorSpaceKHR.defineAliases:
+  srgbNonlinearKhr as colorspaceSrgbNonlinearKhr # Backwards-compatible alias containing a typo
   displayP3LinearExt as dciP3LinearExt
