@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T14:19:30Z
+# Generated at 2021-12-26T08:21:17Z
 # VK_EXT_debug_utils
 
 import ../platform
@@ -43,8 +43,6 @@ type
     messageType*: DebugUtilsMessageTypeFlagsEXT
     pfnUserCallback*: PFN_DebugUtilsMessengerCallbackEXT
     pUserData* {.optional.}: pointer
-  HtDebugUtilsMessengerEXT* = object of HandleType
-  DebugUtilsMessengerEXT* = NonDispatchableHandle[HtDebugUtilsMessengerEXT]
   DebugUtilsObjectNameInfoEXT* = object
     sType* {.constant: (StructureType.debugUtilsObjectNameInfoExt).}: StructureType
     pNext* {.optional.}: pointer

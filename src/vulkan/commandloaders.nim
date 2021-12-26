@@ -1,11 +1,10 @@
+## You can use these templates to load Vulkan proc dynamically and individually.
 
-# ========================= #
-#      LOADER TEMPLATE      #
-# ========================= #
-
-# You can use these templates to load Vulkan proc dynamically and individually.
 import macros {.all.}
 import sequtils
+
+import vulkan/handles
+import vulkan/platform
 
 macro loadCommand*[T: proc](handle: Instance or Device; procType: typedesc[T]): T =
   let (loadFrom, loadWith) = block:
@@ -65,8 +64,3 @@ macro loadCommand*[T: proc](handle: Instance or Device; procAccessor: T) =
 template withLoad*[T: proc](procAccessor: T; handle: Instance or Device): T =
   procAccessor.load(handle)
   procAccessor
-
-
-# ========================= #
-#      LOADER TEMPLATE      #
-# ========================= #

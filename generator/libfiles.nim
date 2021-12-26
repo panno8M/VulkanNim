@@ -156,9 +156,6 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
           elif resources.funcPtrs.hasKey(req.name):
             typeDef.add resources.funcPtrs[req.name].render
             renderedNodes.add req.name
-          elif resources.handles.hasKey(req.name):
-            typeDef.add resources.handles[req.name].render
-            renderedNodes.add req.name
 
         if typeDef.len != 0:
           typeDefs.add case require.comment.isSome
@@ -195,11 +192,6 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
       result &= reqDefs.mapIt(it.join("\n")).filterIt(it.len != 0).join("\n\n\n")
       result.LF
       result.LF
-
-  if libFile.fileName == "features/vk10":
-    result &= readFile("generator/resources/loadoperators.nim")
-    result.LF
-    result.LF
 
   block Render_command_loaders:
     let loadAll = libFile.renderCommandLoader(resources)

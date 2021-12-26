@@ -6,6 +6,8 @@
 import strutils
 import sets
 import sugar
+import macros {.all.}
+import sequtils
 
 proc `==`*[Flagbits: enum](a, b: Flags[Flagbits]): bool =
   a.uint32 == b.uint32
@@ -165,26 +167,6 @@ proc `carefulNot`*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
   ## Mainly used for flags with non-contiguous bits, such as the DebugUtilsMessageSeverity flag.
   carefulNot flagbits.toFlags
 
-
-# Handle operations
-# Utility for handle operation added independently
-# ================================================
-
-proc `==`*[T](a, b: Handle[T]): bool = a.uint64 == b.uint64
-proc `==`*[T](a: Handle[T]; b: Handle[HandleType]): bool = a.uint64 == b.uint64
-template `==`*[T](a: Handle[HandleType]; b: Handle[T]): bool = b == a
-proc `==`*(a, b: Handle[HandleType]): bool = a.uint64 == b.uint64
-
-proc `==`*[T](a, b: NonDispatchableHandle[T]): bool = a.uint64 == b.uint64
-proc `==`*[T](a: NonDispatchableHandle[T]; b: NonDispatchableHandle[HandleType]): bool = a.uint64 == b.uint64
-template `==`*[T](a: NonDispatchableHandle[HandleType]; b: NonDispatchableHandle[T]): bool = b == a
-proc `==`*(a, b: NonDispatchableHandle[HandleType]): bool = a.uint64 == b.uint64
-
-proc isValid*[T](h: Handle[T]): bool = a.uint64 != 0
-proc isValid*[T](h: NonDispatchableHandle[T]): bool = a.uint64 != 0
-
-proc nullHandle*[T](H: typedesc[Handle[T]]): Handle[T] = H(0)
-proc nullHandle*[T](H: typedesc[NonDispatchableHandle[T]]): NonDispatchableHandle[T] = H(0)
 
 # Bool32 operations
 # =================

@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T14:19:30Z
+# Generated at 2021-12-26T08:21:17Z
 # VK_KHR_deferred_host_operations
 
 import ../platform
@@ -11,8 +11,6 @@ const
   KhrDeferredHostOperationsExtensionName* = "VK_KHR_deferred_host_operations"
 
 type
-  HtDeferredOperationKHR* = object of HandleType
-  DeferredOperationKHR* = NonDispatchableHandle[HtDeferredOperationKHR]
   DeferredOperationInfoKHR* = object
     sType* {.constant: (StructureType.deferredOperationInfoKhr).}: StructureType
     pNext* {.optional.}: pointer

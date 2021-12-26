@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T14:19:30Z
+# Generated at 2021-12-26T08:21:17Z
 # VK_KHR_descriptor_update_template
 
 import ../platform
@@ -18,7 +18,6 @@ const
   DescriptorUpdateTemplateTypePushDescriptorsKhr* = 1
 
 type
-  DescriptorUpdateTemplateKHR* = DescriptorUpdateTemplate
   DescriptorUpdateTemplateEntryKHR* = object
   DescriptorUpdateTemplateCreateInfoKHR* = object
 

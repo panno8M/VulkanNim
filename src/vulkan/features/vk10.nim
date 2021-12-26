@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T14:21:16Z
+# Generated at 2021-12-26T09:55:04Z
 # vk10
 # Vulkan core API interface definitions
 # =====================================
@@ -135,8 +135,6 @@ type
     maxArrayLayers*: uint32
     sampleCounts* {.optional.}: SampleCountFlags
     maxResourceSize*: DeviceSize
-  HtInstance* = object of HandleType
-  Instance* = Handle[HtInstance]
   InstanceCreateInfo* = object
     sType* {.constant: (StructureType.instanceCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -152,8 +150,6 @@ type
   MemoryType* = object
     propertyFlags* {.optional.}: MemoryPropertyFlags
     heapIndex*: uint32
-  HtPhysicalDevice* = object of HandleType
-  PhysicalDevice* = Handle[HtPhysicalDevice]
   PhysicalDeviceFeatures* = object
     robustBufferAccess*: Bool32
     fullDrawIndexUint32*: Bool32
@@ -346,8 +342,6 @@ type
 
   # Device commands
   # ---------------
-  HtDevice* = object of HandleType
-  Device* = Handle[HtDevice]
   DeviceCreateInfo* = object
     sType* {.constant: (StructureType.deviceCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -383,8 +377,6 @@ type
 
   # Queue commands
   # --------------
-  HtQueue* = object of HandleType
-  Queue* = Handle[HtQueue]
   SubmitInfo* = object
     sType* {.constant: (StructureType.submitInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -412,8 +404,6 @@ type
 
   # Memory management API commands
   # ------------------------------
-  HtDeviceMemory* = object of HandleType
-  DeviceMemory* = NonDispatchableHandle[HtDeviceMemory]
   MemoryRequirements* = object
     size*: DeviceSize
     alignment*: DeviceSize
@@ -476,8 +466,6 @@ type
 
   # Fence commands
   # --------------
-  HtFence* = object of HandleType
-  Fence* = NonDispatchableHandle[HtFence]
   FenceCreateInfo* = object
     sType* {.constant: (StructureType.fenceCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -485,8 +473,6 @@ type
 
   # Queue semaphore commands
   # ------------------------
-  HtSemaphore* = object of HandleType
-  Semaphore* = NonDispatchableHandle[HtSemaphore]
   SemaphoreCreateInfo* = object
     sType* {.constant: (StructureType.semaphoreCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -494,8 +480,6 @@ type
 
   # Event commands
   # --------------
-  HtEvent* = object of HandleType
-  Event* = NonDispatchableHandle[HtEvent]
   EventCreateInfo* = object
     sType* {.constant: (StructureType.eventCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -503,8 +487,6 @@ type
 
   # Query commands
   # --------------
-  HtQueryPool* = object of HandleType
-  QueryPool* = NonDispatchableHandle[HtQueryPool]
   QueryPoolCreateInfo* = object
     sType* {.constant: (StructureType.queryPoolCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -515,8 +497,6 @@ type
 
   # Buffer commands
   # ---------------
-  HtBuffer* = object of HandleType
-  Buffer* = NonDispatchableHandle[HtBuffer]
   BufferCreateInfo* = object
     sType* {.constant: (StructureType.bufferCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -529,8 +509,6 @@ type
 
   # Buffer view commands
   # --------------------
-  HtBufferView* = object of HandleType
-  BufferView* = NonDispatchableHandle[HtBufferView]
   BufferViewCreateInfo* = object
     sType* {.constant: (StructureType.bufferViewCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -542,8 +520,6 @@ type
 
   # Image commands
   # --------------
-  HtImage* = object of HandleType
-  Image* = NonDispatchableHandle[HtImage]
   ImageCreateInfo* = object
     sType* {.constant: (StructureType.imageCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -580,8 +556,6 @@ type
     levelCount*: uint32
     baseArrayLayer*: uint32
     layerCount*: uint32
-  HtImageView* = object of HandleType
-  ImageView* = NonDispatchableHandle[HtImageView]
   ImageViewCreateInfo* = object
     sType* {.constant: (StructureType.imageViewCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -594,8 +568,6 @@ type
 
   # Shader commands
   # ---------------
-  HtShaderModule* = object of HandleType
-  ShaderModule* = NonDispatchableHandle[HtShaderModule]
   ShaderModuleCreateInfo* = object
     sType* {.constant: (StructureType.shaderModuleCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -605,8 +577,6 @@ type
 
   # Pipeline Cache commands
   # -----------------------
-  HtPipelineCache* = object of HandleType
-  PipelineCache* = NonDispatchableHandle[HtPipelineCache]
   PipelineCacheCreateInfo* = object
     sType* {.constant: (StructureType.pipelineCacheCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -644,8 +614,6 @@ type
     subpass*: uint32
     basePipelineHandle* {.optional.}: Pipeline
     basePipelineIndex*: int32
-  HtPipeline* = object of HandleType
-  Pipeline* = NonDispatchableHandle[HtPipeline]
   PipelineColorBlendAttachmentState* = object
     blendEnable*: Bool32
     srcColorBlendFactor*: BlendFactor
@@ -778,8 +746,6 @@ type
 
   # Pipeline layout commands
   # ------------------------
-  HtPipelineLayout* = object of HandleType
-  PipelineLayout* = NonDispatchableHandle[HtPipelineLayout]
   PipelineLayoutCreateInfo* = object
     sType* {.constant: (StructureType.pipelineLayoutCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -795,8 +761,6 @@ type
 
   # Sampler commands
   # ----------------
-  HtSampler* = object of HandleType
-  Sampler* = NonDispatchableHandle[HtSampler]
   SamplerCreateInfo* = object
     sType* {.constant: (StructureType.samplerCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -837,8 +801,6 @@ type
     sampler*: Sampler
     imageView*: ImageView
     imageLayout*: ImageLayout
-  HtDescriptorPool* = object of HandleType
-  DescriptorPool* = NonDispatchableHandle[HtDescriptorPool]
   DescriptorPoolCreateInfo* = object
     sType* {.constant: (StructureType.descriptorPoolCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -849,16 +811,12 @@ type
   DescriptorPoolSize* = object
     theType*: DescriptorType
     descriptorCount*: uint32
-  HtDescriptorSet* = object of HandleType
-  DescriptorSet* = NonDispatchableHandle[HtDescriptorSet]
   DescriptorSetAllocateInfo* = object
     sType* {.constant: (StructureType.descriptorSetAllocateInfo).}: StructureType
     pNext* {.optional.}: pointer
     descriptorPool*: DescriptorPool
     descriptorSetCount*: uint32
     pSetLayouts* {.length: descriptorSetCount.}: arrPtr[DescriptorSetLayout]
-  HtDescriptorSetLayout* = object of HandleType
-  DescriptorSetLayout* = NonDispatchableHandle[HtDescriptorSetLayout]
   DescriptorSetLayoutBinding* = object
     binding*: uint32
     descriptorType*: DescriptorType
@@ -898,8 +856,6 @@ type
   AttachmentReference* = object
     attachment*: uint32
     layout*: ImageLayout
-  HtFramebuffer* = object of HandleType
-  Framebuffer* = NonDispatchableHandle[HtFramebuffer]
   FramebufferCreateInfo* = object
     sType* {.constant: (StructureType.framebufferCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -910,8 +866,6 @@ type
     width*: uint32
     height*: uint32
     layers*: uint32
-  HtRenderPass* = object of HandleType
-  RenderPass* = NonDispatchableHandle[HtRenderPass]
   RenderPassCreateInfo* = object
     sType* {.constant: (StructureType.renderPassCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -944,8 +898,6 @@ type
 
   # Command pool commands
   # ---------------------
-  HtCommandPool* = object of HandleType
-  CommandPool* = NonDispatchableHandle[HtCommandPool]
   CommandPoolCreateInfo* = object
     sType* {.constant: (StructureType.commandPoolCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -954,8 +906,6 @@ type
 
   # Command buffer commands
   # -----------------------
-  HtCommandBuffer* = object of HandleType
-  CommandBuffer* = Handle[HtCommandBuffer]
   CommandBufferAllocateInfo* = object
     sType* {.constant: (StructureType.commandBufferAllocateInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -2139,80 +2089,6 @@ proc cmdExecuteCommands*(
     ): void {.cdecl, preload("vkCmdExecuteCommands").}
 
 
-# ========================= #
-#      LOADER TEMPLATE      #
-# ========================= #
-
-# You can use these templates to load Vulkan proc dynamically and individually.
-import macros {.all.}
-import sequtils
-
-macro loadCommand*[T: proc](handle: Instance or Device; procType: typedesc[T]): T =
-  let (loadFrom, loadWith) = block:
-    let procTypeDef =
-      if procType.kind == nnkSym and procType.symKind == nskType:
-        procType.getImpl[2]
-      elif procType.kind == nnkTypeOfExpr:
-        procType.getTypeImpl[1].getTypeImpl
-      else:
-        procType
-
-    if procTypeDef.kind != nnkProcTy: error "unexpected"
-
-    let procPragmas = procTypeDef.pragma
-
-    var loadablePragma: NimNode
-    for pragma in procPragmas:
-      case pragma.kind
-      of nnkCall, nnkExprColonExpr:
-        if pragma[0].kind == nnkSym and
-            pragma[0].symkind == nskTemplate and
-            $pragma[0] == "loadable":
-          loadablePragma = pragma
-          break
-      else: continue
-    if loadablePragma == nil:
-      error "The loadable pragma must be set for the proc type.", procType
-
-    (
-      loadFrom: loadablePragma[1],
-      loadWith: loadablePragma[2][0..^1].mapIt(LoadWith(it.intVal))
-    )
-
-  case handle.getTypeInst.repr
-  of Instance.getTypeInst.repr:
-    if LoadWith.Instance in loadWith:
-      return quote do:
-        cast[`procType`](`handle`.getInstanceProcAddr(`loadFrom`))
-    else:
-      error "Not available to load with instance.", handle
-
-  of Device.getTypeInst.repr:
-    if LoadWith.Device in loadWith:
-      return quote do:
-        cast[`procType`](`handle`.getDeviceProcAddr(`loadFrom`))
-    else:
-      error "Not available to load with device.", handle
-
-  else: error "Type of the handle must be Instance or Device", procType
-
-macro loadCommand*[T: proc](handle: Instance or Device; procAccessor: T) =
-  let cageName = procAccessor.customPragmaNode()
-    .findChild(it.len > 0 and it[0].repr == "loadInto")[1]
-  quote do:
-    `cageName` = option `handle`.loadCommand(`cageName`.unsafeGet.typeof)
-
-template withLoad*[T: proc](procAccessor: T; handle: Instance or Device): T =
-  procAccessor.load(handle)
-  procAccessor
-
-
-# ========================= #
-#      LOADER TEMPLATE      #
-# ========================= #
-
-
-
 
 # Bitmask operations
 # Utility for bitmask operation added independently
@@ -2221,6 +2097,8 @@ template withLoad*[T: proc](procAccessor: T; handle: Instance or Device): T =
 import strutils
 import sets
 import sugar
+import macros {.all.}
+import sequtils
 
 proc `==`*[Flagbits: enum](a, b: Flags[Flagbits]): bool =
   a.uint32 == b.uint32
@@ -2380,26 +2258,6 @@ proc `carefulNot`*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
   ## Mainly used for flags with non-contiguous bits, such as the DebugUtilsMessageSeverity flag.
   carefulNot flagbits.toFlags
 
-
-# Handle operations
-# Utility for handle operation added independently
-# ================================================
-
-proc `==`*[T](a, b: Handle[T]): bool = a.uint64 == b.uint64
-proc `==`*[T](a: Handle[T]; b: Handle[HandleType]): bool = a.uint64 == b.uint64
-template `==`*[T](a: Handle[HandleType]; b: Handle[T]): bool = b == a
-proc `==`*(a, b: Handle[HandleType]): bool = a.uint64 == b.uint64
-
-proc `==`*[T](a, b: NonDispatchableHandle[T]): bool = a.uint64 == b.uint64
-proc `==`*[T](a: NonDispatchableHandle[T]; b: NonDispatchableHandle[HandleType]): bool = a.uint64 == b.uint64
-template `==`*[T](a: NonDispatchableHandle[HandleType]; b: NonDispatchableHandle[T]): bool = b == a
-proc `==`*(a, b: NonDispatchableHandle[HandleType]): bool = a.uint64 == b.uint64
-
-proc isValid*[T](h: Handle[T]): bool = a.uint64 != 0
-proc isValid*[T](h: NonDispatchableHandle[T]): bool = a.uint64 != 0
-
-proc nullHandle*[T](H: typedesc[Handle[T]]): Handle[T] = H(0)
-proc nullHandle*[T](H: typedesc[NonDispatchableHandle[T]]): NonDispatchableHandle[T] = H(0)
 
 # Bool32 operations
 # =================

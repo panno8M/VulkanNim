@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T14:19:30Z
+# Generated at 2021-12-26T08:21:17Z
 # VK_INTEL_performance_query
 
 import ../platform
@@ -47,8 +47,6 @@ type
     sType* {.constant: (StructureType.performanceConfigurationAcquireInfoIntel).}: StructureType
     pNext* {.optional.}: pointer
     theType*: PerformanceConfigurationTypeINTEL
-  HtPerformanceConfigurationINTEL* = object of HandleType
-  PerformanceConfigurationINTEL* = NonDispatchableHandle[HtPerformanceConfigurationINTEL]
 
 proc initializePerformanceApiINTEL*(
       device: Device;

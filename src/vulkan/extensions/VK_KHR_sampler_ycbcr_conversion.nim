@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T14:19:30Z
+# Generated at 2021-12-26T08:21:17Z
 # VK_KHR_sampler_ycbcr_conversion
 
 import ../platform
@@ -28,7 +28,6 @@ type
   ImagePlaneMemoryRequirementsInfoKHR* = object
   PhysicalDeviceSamplerYcbcrConversionFeaturesKHR* = object
   SamplerYcbcrConversionImageFormatPropertiesKHR* = object
-  SamplerYcbcrConversionKHR* = SamplerYcbcrConversion
 
 const createSamplerYcbcrConversionKHR* = createSamplerYcbcrConversion
 const destroySamplerYcbcrConversionKHR* = destroySamplerYcbcrConversion

@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T14:19:30Z
+# Generated at 2021-12-26T08:21:17Z
 # VK_KHR_surface
 # VK_KHR_display
 
@@ -15,8 +15,6 @@ const
   KhrDisplayExtensionName* = "VK_KHR_display"
 
 type
-  HtSurfaceKHR* = object of HandleType
-  SurfaceKHR* = NonDispatchableHandle[HtSurfaceKHR]
   SurfaceCapabilitiesKHR* = object
     minImageCount*: uint32
     maxImageCount*: uint32
@@ -32,15 +30,11 @@ type
     format*: Format
     colorSpace*: ColorSpaceKHR
 
-  HtDisplayKHR* = object of HandleType
-  DisplayKHR* = NonDispatchableHandle[HtDisplayKHR]
   DisplayModeCreateInfoKHR* = object
     sType* {.constant: (StructureType.displayModeCreateInfoKhr).}: StructureType
     pNext* {.optional.}: pointer
     flags* {.optional.}: DisplayModeCreateFlagsKHR
     parameters*: DisplayModeParametersKHR
-  HtDisplayModeKHR* = object of HandleType
-  DisplayModeKHR* = NonDispatchableHandle[HtDisplayModeKHR]
   DisplayModeParametersKHR* = object
     visibleRegion*: Extent2D
     refreshRate*: uint32

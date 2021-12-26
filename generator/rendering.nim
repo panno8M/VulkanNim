@@ -175,16 +175,22 @@ proc render*(bitmask: NodeBitmask): string =
     "{name}* = {alias}".fmt
 
 
+proc renderHandleType*(handle: NodeHandle): Option[string] =
+  let name = handle.name.replaceBasicTypes
+  case handle.kind
+  of nkbrNormal:
+    case handle.handleKind
+    of HandleKind.Handle               : some "Ht" & name
+    of HandleKind.NonDispatchableHandle: some "Ht" & name
+  of nkbrAlias                         : none string
 proc render*(handle: NodeHandle): string =
   let name = handle.name.replaceBasicTypes
   case handle.kind
   of nkbrNormal:
     case handle.handleKind
     of HandleKind.Handle:
-      "Ht{name}* = object of HandleType\n".fmt &
       "{name}* = Handle[Ht{name}]".fmt
     of HandleKind.NonDispatchableHandle:
-      "Ht{name}* = object of HandleType\n".fmt &
       "{name}* = NonDispatchableHandle[Ht{name}]".fmt
   of nkbrAlias:
     let alias = handle.alias.replaceBasicTypes

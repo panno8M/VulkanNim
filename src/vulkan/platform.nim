@@ -1,4 +1,4 @@
-# Generated at 2021-12-25T07:54:06Z
+# Generated at 2021-12-26T08:21:06Z
 # platform
 import strformat
 import macros
@@ -146,5 +146,6 @@ template errorCodes*(v: varargs[untyped]) {.pragma.}
 template prepareVulkanLibDef* =
   import std/options
   import vulkan/basetypes
+  import vulkan/handles
   import vulkan/enums
 
