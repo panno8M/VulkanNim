@@ -293,11 +293,3 @@ template `[]`*(xmlNode: XmlNode, childStr: string): untyped =
 template `?`*(str: string): Option[string] =
   if str.isEmptyOrWhitespace: none(string)
   else: some(str)
-# template `?[]`*(xmlNode: XmlNode, attrStr: string): untyped =
-#   xmlNode.attrOrNone(attrStr)
-
-const
-  enumPragma* = "{.size: sizeof(int32), pure.}"
-  flagbitsPragma* = "{.size: sizeof(int32), pure, flagbits.}"
-  commandPragma* = "{.cdecl.}"
-  discardableCommandPragma* = "{.cdecl, discardable.}"
