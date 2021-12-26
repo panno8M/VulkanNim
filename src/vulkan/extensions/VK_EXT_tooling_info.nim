@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-26T10:42:47Z
 # VK_EXT_tooling_info
 
 import ../platform
@@ -10,7 +10,6 @@ import ./VK_EXT_debug_utils
 export VK_EXT_debug_report
 export VK_EXT_debug_marker
 export VK_EXT_debug_utils
-
 prepareVulkanLibDef()
 
 const

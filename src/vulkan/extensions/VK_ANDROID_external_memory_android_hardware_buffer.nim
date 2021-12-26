@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-26T10:42:47Z
 # VK_ANDROID_external_memory_android_hardware_buffer
 
 import ../platform
@@ -12,7 +12,6 @@ export VK_KHR_sampler_ycbcr_conversion
 export VK_KHR_external_memory
 export VK_EXT_queue_family_foreign
 export VK_KHR_dedicated_allocation
-
 prepareVulkanLibDef()
 
 const

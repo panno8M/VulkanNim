@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:15:43Z
+# Generated at 2021-12-26T10:42:47Z
 # VK_KHR_ray_tracing
 # VK_NV_ray_tracing
 # Explicit sort order to require processing after VK_NV_ray_tracing
@@ -20,7 +20,6 @@ export VK_EXT_descriptor_indexing
 export VK_KHR_buffer_device_address
 export VK_KHR_deferred_host_operations
 export VK_KHR_pipeline_library
-
 prepareVulkanLibDef()
 
 const

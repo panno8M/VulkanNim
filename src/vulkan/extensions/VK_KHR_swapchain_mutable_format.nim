@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-26T10:42:47Z
 # VK_KHR_swapchain_mutable_format
 
 import ../platform
@@ -10,7 +10,6 @@ import ./VK_KHR_image_format_list
 export VK_KHR_swapchain
 export VK_KHR_maintenance2
 export VK_KHR_image_format_list
-
 prepareVulkanLibDef()
 
 const

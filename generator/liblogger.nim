@@ -124,6 +124,6 @@ method log*(logger: MyLogger, level: Level, args: varargs[string, `$`]) =
         if args[1..^1].mapIt(it.len).foldl(a+b) == unindentMarker.len:
           return
       else:
-        args[0] &= ":"
+        args[0].add ":"
     logger.file.writeLine(substituteLog(logger.fmtStr, level, args))
     if level in {lvlError, lvlFatal}: flushFile(logger.file)

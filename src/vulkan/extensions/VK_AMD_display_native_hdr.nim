@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-26T10:42:47Z
 # VK_AMD_display_native_hdr
 
 import ../platform
@@ -10,7 +10,6 @@ import ./VK_KHR_swapchain
 export VK_KHR_get_physical_device_properties2
 export VK_KHR_get_surface_capabilities2
 export VK_KHR_swapchain
-
 prepareVulkanLibDef()
 
 const

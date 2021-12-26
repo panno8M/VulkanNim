@@ -68,17 +68,17 @@ proc renderCommandLoader*(libFile: LibFile; resources: Resources; commandRenderi
 
 proc render*(libFile: LibFile; library: Library; resources: Resources): string =
   var renderedNodes: seq[string]
-  result &= "# Generated at {now().utc()}\n".fmt
-  result &= libFile.fileName.splitFile.name.commentify
-  result.LF
+  result.add "# Generated at {now().utc()}\n".fmt
+  result.add libFile.fileName.splitFile.name.commentify
+  result.add "\n"
   if libFile.mergedFileNames.len != 0:
-    result &= libFile.mergedFileNames.mapIt(it.splitFile.name).join("\n").commentify
-    result.LF
+    result.add libFile.mergedFileNames.mapIt(it.splitFile.name).join("\n").commentify
+    result.add "\n"
   if not libFile.fileHeader.isEmptyOrWhitespace:
-    result &= libFile.fileHeader
-    result.LF
+    result.add libFile.fileHeader
+    result.add "\n"
 
-  result.LF
+  result.add "\n"
 
   let dependencies = libFile
     .deps
@@ -93,18 +93,19 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
     .filterIt(not it.fileName.isEmptyOrWhitespace)
     .deduplicate
   if dependencies.len != 0:
-    result &= dependencies
+    result.add dependencies
       .mapIt("import {it.fileName}".fmt)
-      .join("\n").LF
+      .join("\n")
+    result.add "\n"
     if dependencies.filterIt(it.exportit).len != 0:
-      result &= dependencies
+      result.add dependencies
         .filterIt(it.exportIt)
         .mapIt("export {it.fileName.splitFile.name}".fmt)
-        .join("\n").LF
-    result.LF
+        .join("\n")
+    result.add "\n"
 
   if libFile.fileName != "platform":
-    result &= "prepareVulkanLibDef()\n\n"
+    result.add "prepareVulkanLibDef()\n\n"
 
   block Solve_consts:
     var reqDefs: seq[seq[string]]
@@ -135,8 +136,8 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
       result.add reqDefs
         .mapIt(it.map(s => s.indent(2)).join("\n"))
         .join("\n\n")
-      result.LF
-      result.LF
+      result.add "\n"
+      result.add "\n"
 
   block Solve_types:
     var typeDefs: seq[seq[string]]
@@ -163,8 +164,9 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
             of false: typeDef
 
     if typeDefs.len != 0:
-      result.add "type".LF
-      result &= typeDefs.mapIt(it.join("\n").indent(2)).join("\n\n").LF.LF
+      result.add "type\n"
+      result.add typeDefs.mapIt(it.join("\n").indent(2)).join("\n\n")
+      result.add "\n\n"
 
   block Solve_others:
     var reqDefs: seq[seq[string]]
@@ -189,30 +191,26 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
               renderedNodes.add reqCommand.name
 
     if reqDefs.len != 0:
-      result &= reqDefs.mapIt(it.join("\n")).filterIt(it.len != 0).join("\n\n\n")
-      result.LF
-      result.LF
+      result.add reqDefs.mapIt(it.join("\n")).filterIt(it.len != 0).join("\n\n\n")
+      result.add "\n\n"
 
   block Render_command_loaders:
     let loadAll = libFile.renderCommandLoader(resources)
     if loadAll.len != 0:
-      result &= loadAll
-      result.LF
-      result.LF
+      result.add loadAll
+      result.add "\n\n"
     let loadInstance = libFile.renderCommandLoader(resources, crmInstance)
     if loadInstance.len != 0:
-      result &= loadInstance
-      result.LF
-      result.LF
+      result.add loadInstance
+      result.add "\n\n"
     let loadDevice = libFile.renderCommandLoader(resources, crmDevice)
     if loadDevice.len != 0:
-      result &= loadDevice
-      result.LF
-      result.LF
+      result.add loadDevice
+      result.add "\n\n"
 
   if not libFile.fileFooter.isEmptyOrWhitespace:
-    result.LF
-    result &= libFile.fileFooter
+    result.add "\n"
+    result.add libFile.fileFooter
 
 
 proc merge*(library: var Library; base: string; materials: varargs[string]) =

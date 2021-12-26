@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-26T10:42:47Z
 # VK_KHR_device_group
 
 import ../platform
@@ -13,7 +13,6 @@ export VK_KHR_device_group_creation
 export VK_KHR_bind_memory2
 export VK_KHR_surface
 export VK_KHR_swapchain
-
 prepareVulkanLibDef()
 
 const

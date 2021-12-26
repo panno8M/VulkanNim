@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:13Z
+# Generated at 2021-12-26T10:42:47Z
 # VK_EXT_descriptor_indexing
 
 import ../platform
@@ -9,7 +9,6 @@ import ./VK_KHR_maintenance3
 import ../features/vk12
 export VK_KHR_get_physical_device_properties2
 export VK_KHR_maintenance3
-
 prepareVulkanLibDef()
 
 const

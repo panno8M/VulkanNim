@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-26T10:42:47Z
 # VK_KHR_descriptor_update_template
 
 import ../platform
@@ -9,7 +9,6 @@ import ./VK_KHR_push_descriptor
 import ./VK_EXT_debug_report
 export VK_KHR_push_descriptor
 export VK_EXT_debug_report
-
 prepareVulkanLibDef()
 
 const

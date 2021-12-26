@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-26T10:42:47Z
 # VK_EXT_fragment_density_map2
 
 import ../platform
@@ -6,7 +6,6 @@ import ../platform
 import ../features/vk10
 import ./VK_EXT_fragment_density_map
 export VK_EXT_fragment_density_map
-
 prepareVulkanLibDef()
 
 const

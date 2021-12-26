@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-26T10:42:47Z
 # VK_EXT_display_control
 
 import ../platform
@@ -8,7 +8,6 @@ import ./VK_EXT_display_surface_counter
 import ./VK_KHR_swapchain
 export VK_EXT_display_surface_counter
 export VK_KHR_swapchain
-
 prepareVulkanLibDef()
 
 const

@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-26T10:42:47Z
 # VK_EXT_full_screen_exclusive
 
 import ../platform
@@ -16,7 +16,6 @@ export VK_KHR_get_surface_capabilities2
 export VK_KHR_swapchain
 export VK_KHR_win32_surface
 export VK_KHR_device_group
-
 prepareVulkanLibDef()
 
 const

@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-26T10:42:47Z
 # VK_KHR_external_memory_win32
 
 import ../platform
@@ -6,7 +6,6 @@ import ../platform
 import ../features/vk11
 import ./VK_KHR_external_memory
 export VK_KHR_external_memory
-
 prepareVulkanLibDef()
 
 const

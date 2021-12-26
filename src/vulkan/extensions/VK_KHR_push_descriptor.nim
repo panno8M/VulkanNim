@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-26T10:42:47Z
 # VK_KHR_push_descriptor
 
 import ../platform
@@ -8,7 +8,6 @@ import ./VK_KHR_get_physical_device_properties2
 import ./VK_KHR_descriptor_update_template
 export VK_KHR_get_physical_device_properties2
 export VK_KHR_descriptor_update_template
-
 prepareVulkanLibDef()
 
 const

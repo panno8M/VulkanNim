@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-26T10:42:47Z
 # VK_EXT_image_drm_format_modifier
 
 import ../platform
@@ -12,7 +12,6 @@ export VK_KHR_bind_memory2
 export VK_KHR_get_physical_device_properties2
 export VK_KHR_image_format_list
 export VK_KHR_sampler_ycbcr_conversion
-
 prepareVulkanLibDef()
 
 const

@@ -196,9 +196,9 @@ proc generate*() =
       libFile.fileFooter = "generator/resources/additionalOperations.nim".readFile
 
     if (?comment).isSome:
-      libFile.fileHeader &= comment.underline('=').commentify
+      libFile.fileHeader.add comment.underline('=').commentify
 
-    libFile.fileHeader &= "\nimport ../platform"
+    libFile.fileHeader.add "\nimport ../platform"
 
     for require in feature.findAll("require"):
       libFile.requires[^1].add require.extractNodeRequire
@@ -251,9 +251,9 @@ proc generate*() =
       libFile.deps.add promotedto.get
 
     if (?extension.comment).isSome:
-      libFile.fileHeader &= extension.comment.underline('=').commentify
+      libFile.fileHeader.add extension.comment.underline('=').commentify
 
-    libFile.fileHeader &= "\nimport ../platform"
+    libFile.fileHeader.add "\nimport ../platform"
 
     for require in extension.findAll("require"):
       if (?require{"extension"}).isSome:

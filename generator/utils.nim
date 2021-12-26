@@ -61,9 +61,6 @@ template findIt*(s, pred: untyped): untyped  =
       break
   result
 
-template LF*(str: string): string = str & "\n"
-template LF*(str: var string) = str &= "\n"
-
 proc commentify*(str: string): string =
   const commentSign = "# "
   str

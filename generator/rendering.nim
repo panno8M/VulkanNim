@@ -105,17 +105,17 @@ proc render*(consAlias: NodeConstAlias): string =
 proc render*(funcPtr: NodeFuncPtr): string =
   let name = funcPtr.name.parseTypeName
   let theType = funcPtr.theType.parseTypeName(funcPtr.ptrLv)
-  result &= "{name}* = proc(".fmt
+  result.add "{name}* = proc(".fmt
   let args = funcPtr.args
     .map( proc(arg: tuple[name, theType: string, ptrLv: Natural]): string =
       result = arg.name.parseParamName & ": "
       let theType = arg.theType.replaceBasicTypes
       result.add ("ptr ".repeat(arg.ptrLv) & theType).replacePtrTypes
-      result &= ";"
+      result.add ";"
     )
   if args.len != 0:
-    result &= "\n" & args.join("\n").indent(4) & "\n  "
-  result &= "): {theType} ".fmt & "{.cdecl.}"
+    result.add "\n" & args.join("\n").indent(4) & "\n  "
+  result.add "): {theType} ".fmt & "{.cdecl.}"
 
 
 proc render*(define: NodeDefine): string = define.str
@@ -123,7 +123,8 @@ proc render*(define: NodeDefine): string = define.str
 
 proc render*(struct: Nodestruct): string =
   if struct.comment.isSome:
-    result &= struct.comment.get.commentify.LF
+    result.add struct.comment.get.commentify
+    result.add "\n"
   let name = struct.name.removeVkPrefix
 
   result.add case struct.isUnion
@@ -158,8 +159,8 @@ proc render*(struct: Nodestruct): string =
       "  {name}*: {theType}".fmt
   )
   if members.len != 0:
-    result.LF
-    result &= members.join("\n")
+    result.add "\n"
+    result.add members.join("\n")
 
 
 proc render*(bitmask: NodeBitmask): string =
@@ -235,11 +236,11 @@ proc render*(command: NodeCommand): string =
       else: futter.add " " & loadMethod
       futter & ".}"
 
-    result &= procHeader
+    result.add procHeader
     if procParams.len != 0:
-      result &= '\n' & procParams.join("\n") & '\n'
-    result &= procFutter
-    # result &= "  {cageName}({cageParams.join(\",\")})".fmt
+      result.add '\n' & procParams.join("\n") & '\n'
+    result.add procFutter
+    # result.add "  {cageName}({cageParams.join(\",\")})".fmt
     return
   of nkbrAlias:
     let alias = command.alias.parseCommandName
