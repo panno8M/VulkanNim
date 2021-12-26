@@ -332,14 +332,6 @@ proc extractNodeCommand*(typeDef: XmlNode): NodeCommand {.raises: [UnexpectedXml
   #     <param optional="false,true"><type>uint32_t</type>* <name>pExecutableCount</name></param>
   #     <param optional="true" len="pExecutableCount"><type>VkPipelineExecutablePropertiesKHR</type>* <name>pProperties</name></param>
   # </command>
-  const preloadableProcs = [
-    "vkGetInstanceProcAddr",
-    "vkGetDeviceProcAddr",
-    "vkEnumerateInstanceVersion",
-    "vkEnumerateInstanceExtensionProperties",
-    "vkEnumerateInstanceLayerProperties",
-    "vkCreateInstance",
-  ]
   if typeDef.kind != xnElement or
      typeDef.tag != "command":
     xmlError invalidStructure("command Extraction"): $typeDef
@@ -378,7 +370,7 @@ proc extractNodeCommand*(typeDef: XmlNode): NodeCommand {.raises: [UnexpectedXml
 
     result.loadMode =
       # All of commands provided by extensions has vendor suffix and that is upper case.
-      if result.name[^1].isLowerAscii or result.name in preloadableProcs: lmPreload
+      if result.name[^1].isLowerAscii or result.name[^1].isDigit: lmPreload
       elif result.params[0].theType in ["VkInstance", "VkPhysicalDevice"]: lmWithInstance
       else: lmWithDevice
 

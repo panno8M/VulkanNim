@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:17:10Z
+# Generated at 2021-12-26T10:53:36Z
 # vk11
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -460,7 +460,7 @@ proc bindBufferMemory2*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidOpaqueCaptureAddressKhr),
-      lazyload("vkBindBufferMemory2", DeviceLevel).}
+      preload("vkBindBufferMemory2").}
 proc bindImageMemory2*(
       device: Device;
       bindInfoCount: uint32;
@@ -468,7 +468,7 @@ proc bindImageMemory2*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkBindImageMemory2", DeviceLevel).}
+      preload("vkBindImageMemory2").}
 
 
 # Promoted from VK_KHR_16bit_storage
@@ -525,18 +525,18 @@ proc getImageMemoryRequirements2*(
       device: Device;
       pInfo: ptr ImageMemoryRequirementsInfo2;
       pMemoryRequirements: ptr MemoryRequirements2;
-    ): void {.cdecl, lazyload("vkGetImageMemoryRequirements2", DeviceLevel).}
+    ): void {.cdecl, preload("vkGetImageMemoryRequirements2").}
 proc getBufferMemoryRequirements2*(
       device: Device;
       pInfo: ptr BufferMemoryRequirementsInfo2;
       pMemoryRequirements: ptr MemoryRequirements2;
-    ): void {.cdecl, lazyload("vkGetBufferMemoryRequirements2", DeviceLevel).}
+    ): void {.cdecl, preload("vkGetBufferMemoryRequirements2").}
 proc getImageSparseMemoryRequirements2*(
       device: Device;
       pInfo: ptr ImageSparseMemoryRequirementsInfo2;
       pSparseMemoryRequirementCount: ptr uint32;
       pSparseMemoryRequirements {.length: pSparseMemoryRequirementCount.} = default(arrPtr[SparseImageMemoryRequirements2]);
-    ): void {.cdecl, lazyload("vkGetImageSparseMemoryRequirements2", DeviceLevel).}
+    ): void {.cdecl, preload("vkGetImageSparseMemoryRequirements2").}
 
 
 # Promoted from VK_KHR_get_physical_device_properties2
@@ -544,16 +544,16 @@ proc getImageSparseMemoryRequirements2*(
 proc getPhysicalDeviceFeatures2*(
       physicalDevice: PhysicalDevice;
       pFeatures: ptr PhysicalDeviceFeatures2;
-    ): void {.cdecl, lazyload("vkGetPhysicalDeviceFeatures2", InstanceLevel).}
+    ): void {.cdecl, preload("vkGetPhysicalDeviceFeatures2").}
 proc getPhysicalDeviceProperties2*(
       physicalDevice: PhysicalDevice;
       pProperties: ptr PhysicalDeviceProperties2;
-    ): void {.cdecl, lazyload("vkGetPhysicalDeviceProperties2", InstanceLevel).}
+    ): void {.cdecl, preload("vkGetPhysicalDeviceProperties2").}
 proc getPhysicalDeviceFormatProperties2*(
       physicalDevice: PhysicalDevice;
       format: Format;
       pFormatProperties: ptr FormatProperties2;
-    ): void {.cdecl, lazyload("vkGetPhysicalDeviceFormatProperties2", InstanceLevel).}
+    ): void {.cdecl, preload("vkGetPhysicalDeviceFormatProperties2").}
 proc getPhysicalDeviceImageFormatProperties2*(
       physicalDevice: PhysicalDevice;
       pImageFormatInfo: ptr PhysicalDeviceImageFormatInfo2;
@@ -561,22 +561,22 @@ proc getPhysicalDeviceImageFormatProperties2*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorFormatNotSupported),
-      lazyload("vkGetPhysicalDeviceImageFormatProperties2", InstanceLevel).}
+      preload("vkGetPhysicalDeviceImageFormatProperties2").}
 proc getPhysicalDeviceQueueFamilyProperties2*(
       physicalDevice: PhysicalDevice;
       pQueueFamilyPropertyCount: ptr uint32;
       pQueueFamilyProperties {.length: pQueueFamilyPropertyCount.} = default(arrPtr[QueueFamilyProperties2]);
-    ): void {.cdecl, lazyload("vkGetPhysicalDeviceQueueFamilyProperties2", InstanceLevel).}
+    ): void {.cdecl, preload("vkGetPhysicalDeviceQueueFamilyProperties2").}
 proc getPhysicalDeviceMemoryProperties2*(
       physicalDevice: PhysicalDevice;
       pMemoryProperties: ptr PhysicalDeviceMemoryProperties2;
-    ): void {.cdecl, lazyload("vkGetPhysicalDeviceMemoryProperties2", InstanceLevel).}
+    ): void {.cdecl, preload("vkGetPhysicalDeviceMemoryProperties2").}
 proc getPhysicalDeviceSparseImageFormatProperties2*(
       physicalDevice: PhysicalDevice;
       pFormatInfo: ptr PhysicalDeviceSparseImageFormatInfo2;
       pPropertyCount: ptr uint32;
       pProperties {.length: pPropertyCount.} = default(arrPtr[SparseImageFormatProperties2]);
-    ): void {.cdecl, lazyload("vkGetPhysicalDeviceSparseImageFormatProperties2", InstanceLevel).}
+    ): void {.cdecl, preload("vkGetPhysicalDeviceSparseImageFormatProperties2").}
 
 
 # Promoted from VK_KHR_maintenance1
@@ -606,7 +606,7 @@ proc getDeviceQueue2*(
       device: Device;
       pQueueInfo: ptr DeviceQueueInfo2;
       pQueue: ptr Queue;
-    ): void {.cdecl, lazyload("vkGetDeviceQueue2", DeviceLevel).}
+    ): void {.cdecl, preload("vkGetDeviceQueue2").}
 
 
 # Promoted from VK_KHR_sampler_ycbcr_conversion
@@ -701,49 +701,4 @@ proc getDescriptorSetLayoutSupport*(
 
 # Promoted from VK_KHR_shader_draw_parameters, with a feature support query added
 # -------------------------------------------------------------------------------
-
-proc loadAllVk11*(instance: Instance) =
-  # Promoted from VK_KHR_bind_memory2
-  instance.loadCommand bindBufferMemory2
-  instance.loadCommand bindImageMemory2
-
-  # Promoted from VK_KHR_get_memory_requirements2
-  instance.loadCommand getImageMemoryRequirements2
-  instance.loadCommand getBufferMemoryRequirements2
-  instance.loadCommand getImageSparseMemoryRequirements2
-
-  # Promoted from VK_KHR_get_physical_device_properties2
-  instance.loadCommand getPhysicalDeviceFeatures2
-  instance.loadCommand getPhysicalDeviceProperties2
-  instance.loadCommand getPhysicalDeviceFormatProperties2
-  instance.loadCommand getPhysicalDeviceImageFormatProperties2
-  instance.loadCommand getPhysicalDeviceQueueFamilyProperties2
-  instance.loadCommand getPhysicalDeviceMemoryProperties2
-  instance.loadCommand getPhysicalDeviceSparseImageFormatProperties2
-
-  # Originally based on VK_KHR_protected_memory (extension 146), which was never published; thus the mystifying large value= numbers below. These are not aliased since they weren't actually promoted from an extension.
-  instance.loadCommand getDeviceQueue2
-
-proc loadVk11*(instance: Instance) =
-  # Promoted from VK_KHR_get_physical_device_properties2
-  instance.loadCommand getPhysicalDeviceFeatures2
-  instance.loadCommand getPhysicalDeviceProperties2
-  instance.loadCommand getPhysicalDeviceFormatProperties2
-  instance.loadCommand getPhysicalDeviceImageFormatProperties2
-  instance.loadCommand getPhysicalDeviceQueueFamilyProperties2
-  instance.loadCommand getPhysicalDeviceMemoryProperties2
-  instance.loadCommand getPhysicalDeviceSparseImageFormatProperties2
-
-proc loadVk11*(device: Device) =
-  # Promoted from VK_KHR_bind_memory2
-  device.loadCommand bindBufferMemory2
-  device.loadCommand bindImageMemory2
-
-  # Promoted from VK_KHR_get_memory_requirements2
-  device.loadCommand getImageMemoryRequirements2
-  device.loadCommand getBufferMemoryRequirements2
-  device.loadCommand getImageSparseMemoryRequirements2
-
-  # Originally based on VK_KHR_protected_memory (extension 146), which was never published; thus the mystifying large value= numbers below. These are not aliased since they weren't actually promoted from an extension.
-  device.loadCommand getDeviceQueue2
 

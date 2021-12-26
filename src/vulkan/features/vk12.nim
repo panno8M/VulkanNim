@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:17:10Z
+# Generated at 2021-12-26T10:53:37Z
 # vk12
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -575,21 +575,21 @@ proc createRenderPass2*(
     ): Result {.cdecl,
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
-      lazyload("vkCreateRenderPass2", DeviceLevel).}
+      preload("vkCreateRenderPass2").}
 proc cmdBeginRenderPass2*(
       commandBuffer: CommandBuffer;
       pRenderPassBegin: ptr RenderPassBeginInfo;
       pSubpassBeginInfo: ptr SubpassBeginInfo;
-    ): void {.cdecl, lazyload("vkCmdBeginRenderPass2", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdBeginRenderPass2").}
 proc cmdNextSubpass2*(
       commandBuffer: CommandBuffer;
       pSubpassBeginInfo: ptr SubpassBeginInfo;
       pSubpassEndInfo: ptr SubpassEndInfo;
-    ): void {.cdecl, lazyload("vkCmdNextSubpass2", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdNextSubpass2").}
 proc cmdEndRenderPass2*(
       commandBuffer: CommandBuffer;
       pSubpassEndInfo: ptr SubpassEndInfo;
-    ): void {.cdecl, lazyload("vkCmdEndRenderPass2", DeviceLevel).}
+    ): void {.cdecl, preload("vkCmdEndRenderPass2").}
 
 
 # Promoted from VK_KHR_8bit_storage (extension 178)
@@ -711,18 +711,4 @@ proc getDeviceMemoryOpaqueCaptureAddress*(
       device: Device;
       pInfo: ptr DeviceMemoryOpaqueCaptureAddressInfo;
     ): uint64 {.cdecl, preload("vkGetDeviceMemoryOpaqueCaptureAddress").}
-
-proc loadAllVk12*(instance: Instance) =
-  # Promoted from VK_KHR_create_renderpass2 (extension 110)
-  instance.loadCommand createRenderPass2
-  instance.loadCommand cmdBeginRenderPass2
-  instance.loadCommand cmdNextSubpass2
-  instance.loadCommand cmdEndRenderPass2
-
-proc loadVk12*(device: Device) =
-  # Promoted from VK_KHR_create_renderpass2 (extension 110)
-  device.loadCommand createRenderPass2
-  device.loadCommand cmdBeginRenderPass2
-  device.loadCommand cmdNextSubpass2
-  device.loadCommand cmdEndRenderPass2
 
