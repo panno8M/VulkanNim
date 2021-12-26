@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:53:36Z
+# Generated at 2021-12-26T12:56:20Z
 # vk11
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -439,18 +439,6 @@ proc enumerateInstanceVersion*(
       preload("vkEnumerateInstanceVersion").}
 
 
-# Promoted from VK_KHR_relaxed_block_layout, which has no API
-# -----------------------------------------------------------
-
-
-# Promoted from VK_KHR_storage_buffer_storage_class, which has no API
-# -------------------------------------------------------------------
-
-
-# Originally based on VK_KHR_subgroup (extension 94), but the actual enum block used was, incorrectly, that of extension 95
-# -------------------------------------------------------------------------------------------------------------------------
-
-
 # Promoted from VK_KHR_bind_memory2
 # ---------------------------------
 proc bindBufferMemory2*(
@@ -469,14 +457,6 @@ proc bindImageMemory2*(
       successCodes(success),
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
       preload("vkBindImageMemory2").}
-
-
-# Promoted from VK_KHR_16bit_storage
-# ----------------------------------
-
-
-# Promoted from VK_KHR_dedicated_allocation
-# -----------------------------------------
 
 
 # Promoted from VK_KHR_device_group
@@ -501,10 +481,6 @@ proc cmdDispatchBase*(
       groupCountY: uint32;
       groupCountZ: uint32;
     ): void {.cdecl, preload("vkCmdDispatchBase").}
-
-
-# Promoted from VK_KHR_device_group + VK_KHR_bind_memory2
-# -------------------------------------------------------
 
 
 # Promoted from VK_KHR_device_group_creation
@@ -588,18 +564,6 @@ proc trimCommandPool*(
     ): void {.cdecl, preload("vkTrimCommandPool").}
 
 
-# Promoted from VK_KHR_maintenance2
-# ---------------------------------
-
-
-# Promoted from VK_KHR_multiview
-# ------------------------------
-
-
-# Promoted from VK_KHR_variable_pointers
-# --------------------------------------
-
-
 # Originally based on VK_KHR_protected_memory (extension 146), which was never published; thus the mystifying large value= numbers below. These are not aliased since they weren't actually promoted from an extension.
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 proc getDeviceQueue2*(
@@ -660,10 +624,6 @@ proc getPhysicalDeviceExternalBufferProperties*(
     ): void {.cdecl, preload("vkGetPhysicalDeviceExternalBufferProperties").}
 
 
-# Promoted from VK_KHR_external_memory
-# ------------------------------------
-
-
 # Promoted from VK_KHR_external_fence_capabilities
 # ------------------------------------------------
 proc getPhysicalDeviceExternalFenceProperties*(
@@ -671,14 +631,6 @@ proc getPhysicalDeviceExternalFenceProperties*(
       pExternalFenceInfo: ptr PhysicalDeviceExternalFenceInfo;
       pExternalFenceProperties: ptr ExternalFenceProperties;
     ): void {.cdecl, preload("vkGetPhysicalDeviceExternalFenceProperties").}
-
-
-# Promoted from VK_KHR_external_fence
-# -----------------------------------
-
-
-# Promoted from VK_KHR_external_semaphore
-# ---------------------------------------
 
 
 # Promoted from VK_KHR_external_semaphore_capabilities
@@ -697,8 +649,4 @@ proc getDescriptorSetLayoutSupport*(
       pCreateInfo: ptr DescriptorSetLayoutCreateInfo;
       pSupport: ptr DescriptorSetLayoutSupport;
     ): void {.cdecl, preload("vkGetDescriptorSetLayoutSupport").}
-
-
-# Promoted from VK_KHR_shader_draw_parameters, with a feature support query added
-# -------------------------------------------------------------------------------
 

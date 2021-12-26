@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:53:37Z
+# Generated at 2021-12-26T12:56:20Z
 # vk12
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -535,14 +535,6 @@ type
 template apiVersion12*(): untyped = makeVersion(1, 2, 0)
 
 
-# Promoted from VK_KHR_image_format_list (extension 148)
-# ------------------------------------------------------
-
-
-# Promoted from VK_KHR_sampler_mirror_clamp_to_edge (extension 15)
-# ----------------------------------------------------------------
-
-
 # Promoted from VK_KHR_draw_indirect_count (extension 170)
 # --------------------------------------------------------
 proc cmdDrawIndirectCount*(
@@ -590,74 +582,6 @@ proc cmdEndRenderPass2*(
       commandBuffer: CommandBuffer;
       pSubpassEndInfo: ptr SubpassEndInfo;
     ): void {.cdecl, preload("vkCmdEndRenderPass2").}
-
-
-# Promoted from VK_KHR_8bit_storage (extension 178)
-# -------------------------------------------------
-
-
-# Promoted from VK_KHR_driver_properties (extension 197)
-# ------------------------------------------------------
-
-
-# Promoted from VK_KHR_shader_atomic_int64 (extension 181)
-# --------------------------------------------------------
-
-
-# Promoted from VK_KHR_shader_float16_int8 (extension 83)
-# -------------------------------------------------------
-
-
-# Promoted from VK_KHR_shader_float_controls (extension 198)
-# ----------------------------------------------------------
-
-
-# Promoted from VK_EXT_descriptor_indexing (extension 162)
-# --------------------------------------------------------
-
-
-# Promoted from VK_KHR_depth_stencil_resolve (extension 200)
-# ----------------------------------------------------------
-
-
-# Promoted from VK_EXT_scalar_block_layout (extension 222))
-# ---------------------------------------------------------
-
-
-# Promoted from VK_EXT_shader_viewport_index_layer, which has no API (extension 163)
-# ----------------------------------------------------------------------------------
-
-
-# Promoted from VK_EXT_separate_stencil_usage (extension 247)
-# -----------------------------------------------------------
-
-
-# Promoted from VK_EXT_sampler_filter_minmax (extension 131)
-# ----------------------------------------------------------
-
-
-# Promoted from VK_KHR_vulkan_memory_model (extension 212)
-# --------------------------------------------------------
-
-
-# Promoted from VK_KHR_imageless_framebuffer (extension 109)
-# ----------------------------------------------------------
-
-
-# Promoted from VK_KHR_uniform_buffer_standard_layout (extension 254)
-# -------------------------------------------------------------------
-
-
-# Promoted from VK_KHR_shader_subgroup_extended_types (extension 176)
-# -------------------------------------------------------------------
-
-
-# Promoted from VK_KHR_spirv_1_4 (extension 237)
-# ----------------------------------------------
-
-
-# Promoted from VK_KHR_separate_depth_stencil_layouts (extension 242)
-# -------------------------------------------------------------------
 
 
 # Promoted from VK_EXT_host_query_reset (extension 262)

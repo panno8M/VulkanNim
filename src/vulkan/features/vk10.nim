@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:17:10Z
+# Generated at 2021-12-26T12:56:20Z
 # vk10
 # Vulkan core API interface definitions
 # =====================================
@@ -998,14 +998,6 @@ template defineHandle*(ObjectName: untyped) =
 template defineNonDispatchableHandle*(ObjectName: untyped) =
   type HtObjectName* = object of HandleType
   type ObjectName* = NonDispatchableHandle[Ht`ObjectName`]
-
-
-# Fundamental types used by many commands and structures
-# ------------------------------------------------------
-
-
-# These types are part of the API, though not directly used in API commands or data structures
-# --------------------------------------------------------------------------------------------
 
 
 # API version macros

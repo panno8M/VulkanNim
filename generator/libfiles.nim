@@ -172,14 +172,12 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
     var reqDefs: seq[seq[string]]
     for fileRequire in libFile.requires:
       for require in fileRequire:
-        reqDefs.add @[]
-        if require.comment.isSome:
-          reqDefs[^1].add require.comment.get.underline('-').commentify
+        var reqDef: seq[string]
 
         for req in require.targets.filter(x => x.kind == nkrType):
           if req.name notin renderedNodes:
             if resources.defines.hasKey(req.name):
-              reqDefs[^1].add resources.defines[req.name].render
+              reqDef.add resources.defines[req.name].render
               renderedNodes.add req.name
 
         let reqCommands = require.targets.filter(x => x.kind == nkrCommand)
@@ -187,8 +185,12 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
           for reqCommand in reqCommands:
             if reqCommand.name in renderedNodes: continue
             if resources.commands.hasKey(reqCommand.name):
-              reqDefs[^1].add resources.commands[reqCommand.name].render
+              reqDef.add resources.commands[reqCommand.name].render
               renderedNodes.add reqCommand.name
+
+        if reqDef.len != 0 and require.comment.isSome:
+          reqDef.insert(require.comment.get.underline('-').commentify, 0)
+        reqDefs.add reqDef
 
     if reqDefs.len != 0:
       result.add reqDefs.mapIt(it.join("\n")).filterIt(it.len != 0).join("\n\n\n")
