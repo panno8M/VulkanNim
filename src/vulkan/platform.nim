@@ -18,9 +18,6 @@ const vkDllPath =
 
 type
   UnusedEnum* = object ## Reserved for future use
-  HandleType* = object of RootObj
-  Handle*[T] = distinct uint64
-  NonDispatchableHandle*[T] = distinct uint64
   arrPtr*[T] = ptr T
 
 type
