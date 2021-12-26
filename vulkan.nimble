@@ -22,7 +22,7 @@ task sandbox, "":
 
 task generate, "":
   if not fileExists "vk.xml":
-    exec "curl https://raw.githubusercontent.com/KhronosGroup/Vulkan-Docs/master/xml/vk.xml > vk.xml"
+    exec "curl https://raw.githubusercontent.com/KhronosGroup/Vulkan-Docs/main/xml/vk.xml > vk.xml"
 
   exec """
   nim c -r generator/libgen
