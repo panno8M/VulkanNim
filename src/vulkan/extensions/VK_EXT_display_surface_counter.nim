@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-26T16:57:02Z
 # VK_EXT_display_surface_counter
 
 import ../platform
@@ -22,10 +22,10 @@ type
     minImageExtent*: Extent2D
     maxImageExtent*: Extent2D
     maxImageArrayLayers*: uint32
-    supportedTransforms* {.optional.}: SurfaceTransformFlagsKHR
+    supportedTransforms*: SurfaceTransformFlagsKHR
     currentTransform*: SurfaceTransformFlagBitsKHR
-    supportedCompositeAlpha* {.optional.}: CompositeAlphaFlagsKHR
-    supportedUsageFlags* {.optional.}: ImageUsageFlags
+    supportedCompositeAlpha*: CompositeAlphaFlagsKHR
+    supportedUsageFlags*: ImageUsageFlags
     supportedSurfaceCounters* {.optional.}: SurfaceCounterFlagsEXT
 
 proc getPhysicalDeviceSurfaceCapabilities2EXT*(

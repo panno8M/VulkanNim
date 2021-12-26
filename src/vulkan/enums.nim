@@ -2,14 +2,8 @@
 # Note that any changes to this file will be reset by the execution of
 # the generated program.
 
-import utils/enumAliases
+import utils/enumutilities
 import basetypes
-
-{.pragma: vkEnum, size(sizeof(int32)), pure.}
-{.pragma: vkFlagBits, vkEnum, flagbits.}
-template flagbits* {.pragma.}
-
-type UnusedEnum* = object ## Reserved for future use
 
 type
   # VERSION 1 0
@@ -50,8 +44,6 @@ type
     # Provided by VK_VERSION_1_1
     errorOutOfPoolMemory = 1000069000
     errorInvalidExternalHandle = 1000072003
-    # Provided by VK_KHR_ray_tracing
-    errorIncompatibleVersionKhr = 1000150000
     # Provided by VK_EXT_image_drm_format_modifier
     errorInvalidDrmFormatModifierPlaneLayoutExt = 1000158000
     # Provided by VK_VERSION_1_2
@@ -155,6 +147,26 @@ type
     debugMarkerObjectNameInfoExt = 1000022000
     debugMarkerObjectTagInfoExt = 1000022001
     debugMarkerMarkerInfoExt = 1000022002
+    # Provided by VK_KHR_video_queue
+    videoProfileKhr = 1000023000
+    videoCapabilitiesKhr = 1000023001
+    videoPictureResourceKhr = 1000023002
+    videoGetMemoryPropertiesKhr = 1000023003
+    videoBindMemoryKhr = 1000023004
+    videoSessionCreateInfoKhr = 1000023005
+    videoSessionParametersCreateInfoKhr = 1000023006
+    videoSessionParametersUpdateInfoKhr = 1000023007
+    videoBeginCodingInfoKhr = 1000023008
+    videoEndCodingInfoKhr = 1000023009
+    videoCodingControlInfoKhr = 1000023010
+    videoReferenceSlotKhr = 1000023011
+    videoQueueFamilyProperties2Khr = 1000023012
+    videoProfilesKhr = 1000023013
+    physicalDeviceVideoFormatInfoKhr = 1000023014
+    videoFormatPropertiesKhr = 1000023015
+    queueFamilyQueryResultStatusProperties2Khr = 1000023016
+    # Provided by VK_KHR_video_decode_queue
+    videoDecodeInfoKhr = 1000024000
     # Provided by VK_NV_dedicated_allocation
     dedicatedAllocationImageCreateInfoNv = 1000026000
     dedicatedAllocationBufferCreateInfoNv = 1000026001
@@ -163,11 +175,59 @@ type
     physicalDeviceTransformFeedbackFeaturesExt = 1000028000
     physicalDeviceTransformFeedbackPropertiesExt = 1000028001
     pipelineRasterizationStateStreamCreateInfoExt = 1000028002
+    # Provided by VK_NVX_binary_import
+    cuModuleCreateInfoNvx = 1000029000
+    cuFunctionCreateInfoNvx = 1000029001
+    cuLaunchInfoNvx = 1000029002
     # Provided by VK_NVX_image_view_handle
     imageViewHandleInfoNvx = 1000030000
     imageViewAddressPropertiesNvx = 1000030001
+    # Provided by VK_EXT_video_encode_h264
+    videoEncodeH264CapabilitiesExt = 1000038000
+    videoEncodeH264SessionCreateInfoExt = 1000038001
+    videoEncodeH264SessionParametersCreateInfoExt = 1000038002
+    videoEncodeH264SessionParametersAddInfoExt = 1000038003
+    videoEncodeH264VclFrameInfoExt = 1000038004
+    videoEncodeH264DpbSlotInfoExt = 1000038005
+    videoEncodeH264NaluSliceExt = 1000038006
+    videoEncodeH264EmitPictureParametersExt = 1000038007
+    videoEncodeH264ProfileExt = 1000038008
+    videoEncodeH264RateControlInfoExt = 1000038009
+    videoEncodeH264RateControlLayerInfoExt = 1000038010
+    # Provided by VK_EXT_video_encode_h265
+    videoEncodeH265CapabilitiesExt = 1000039000
+    videoEncodeH265SessionCreateInfoExt = 1000039001
+    videoEncodeH265SessionParametersCreateInfoExt = 1000039002
+    videoEncodeH265SessionParametersAddInfoExt = 1000039003
+    videoEncodeH265VclFrameInfoExt = 1000039004
+    videoEncodeH265DpbSlotInfoExt = 1000039005
+    videoEncodeH265NaluSliceExt = 1000039006
+    videoEncodeH265EmitPictureParametersExt = 1000039007
+    videoEncodeH265ProfileExt = 1000039008
+    videoEncodeH265ReferenceListsExt = 1000039009
+    videoEncodeH265RateControlInfoExt = 1000039010
+    videoEncodeH265RateControlLayerInfoExt = 1000039011
+    # Provided by VK_EXT_video_decode_h264
+    videoDecodeH264CapabilitiesExt = 1000040000
+    videoDecodeH264SessionCreateInfoExt = 1000040001
+    videoDecodeH264PictureInfoExt = 1000040002
+    videoDecodeH264MvcExt = 1000040003
+    videoDecodeH264ProfileExt = 1000040004
+    videoDecodeH264SessionParametersCreateInfoExt = 1000040005
+    videoDecodeH264SessionParametersAddInfoExt = 1000040006
+    videoDecodeH264DpbSlotInfoExt = 1000040007
     # Provided by VK_AMD_texture_gather_bias_lod
     textureLodGatherFormatPropertiesAmd = 1000041000
+    # Provided by VK_KHR_dynamic_rendering
+    renderingInfoKhr = 1000044000
+    renderingAttachmentInfoKhr = 1000044001
+    pipelineRenderingCreateInfoKhr = 1000044002
+    physicalDeviceDynamicRenderingFeaturesKhr = 1000044003
+    commandBufferInheritanceRenderingInfoKhr = 1000044004
+    renderingFragmentShadingRateAttachmentInfoKhr = 1000044006
+    renderingFragmentDensityMapAttachmentInfoExt = 1000044007
+    attachmentSampleCountInfoAmd = 1000044008
+    multiviewPerViewAttributesInfoNvx = 1000044009
     # Provided by VK_GGP_stream_descriptor_surface
     streamDescriptorSurfaceCreateInfoGgp = 1000049000
     # Provided by VK_NV_corner_sampled_image
@@ -366,6 +426,7 @@ type
     importAndroidHardwareBufferInfoAndroid = 1000129003
     memoryGetAndroidHardwareBufferInfoAndroid = 1000129004
     externalFormatAndroid = 1000129005
+    androidHardwareBufferFormatProperties2Android = 1000129006
     # Provided by VK_VERSION_1_2
     physicalDeviceSamplerFilterMinmaxProperties = 1000130000
     samplerReductionModeCreateInfo = 1000130001
@@ -398,25 +459,29 @@ type
     pipelineColorBlendAdvancedStateCreateInfoExt = 1000148002
     # Provided by VK_NV_fragment_coverage_to_color
     pipelineCoverageToColorStateCreateInfoNv = 1000149000
-    # Provided by VK_KHR_ray_tracing
+    # Provided by VK_KHR_acceleration_structure
     accelerationStructureBuildGeometryInfoKhr = 1000150000
-    accelerationStructureCreateGeometryTypeInfoKhr = 1000150001
     accelerationStructureDeviceAddressInfoKhr = 1000150002
     accelerationStructureGeometryAabbsDataKhr = 1000150003
     accelerationStructureGeometryInstancesDataKhr = 1000150004
     accelerationStructureGeometryTrianglesDataKhr = 1000150005
     accelerationStructureGeometryKhr = 1000150006
-    accelerationStructureMemoryRequirementsInfoKhr = 1000150008
-    accelerationStructureVersionKhr = 1000150009
+    writeDescriptorSetAccelerationStructureKhr = 1000150007
+    accelerationStructureVersionInfoKhr = 1000150009
     copyAccelerationStructureInfoKhr = 1000150010
     copyAccelerationStructureToMemoryInfoKhr = 1000150011
     copyMemoryToAccelerationStructureInfoKhr = 1000150012
-    physicalDeviceRayTracingFeaturesKhr = 1000150013
-    physicalDeviceRayTracingPropertiesKhr = 1000150014
+    physicalDeviceAccelerationStructureFeaturesKhr = 1000150013
+    physicalDeviceAccelerationStructurePropertiesKhr = 1000150014
+    # Provided by VK_KHR_ray_tracing_pipeline
     rayTracingPipelineCreateInfoKhr = 1000150015
     rayTracingShaderGroupCreateInfoKhr = 1000150016
+    # Provided by VK_KHR_acceleration_structure
     accelerationStructureCreateInfoKhr = 1000150017
+    # Provided by VK_KHR_ray_tracing_pipeline
     rayTracingPipelineInterfaceCreateInfoKhr = 1000150018
+    # Provided by VK_KHR_acceleration_structure
+    accelerationStructureBuildSizesInfoKhr = 1000150020
     # Provided by VK_NV_framebuffer_mixed_samples
     pipelineCoverageModulationStateCreateInfoNv = 1000152000
     # Provided by VK_NV_shader_sm_builtins
@@ -433,11 +498,11 @@ type
     bindImageMemoryInfo = 1000157001
     # Provided by VK_EXT_image_drm_format_modifier
     drmFormatModifierPropertiesListExt = 1000158000
-    drmFormatModifierPropertiesExt = 1000158001
     physicalDeviceImageDrmFormatModifierInfoExt = 1000158002
     imageDrmFormatModifierListCreateInfoExt = 1000158003
     imageDrmFormatModifierExplicitCreateInfoExt = 1000158004
     imageDrmFormatModifierPropertiesExt = 1000158005
+    drmFormatModifierPropertiesList2Ext = 1000158006
     # Provided by VK_EXT_validation_cache
     validationCacheCreateInfoExt = 1000160000
     shaderModuleValidationCacheCreateInfoExt = 1000160001
@@ -447,6 +512,9 @@ type
     physicalDeviceDescriptorIndexingProperties = 1000161002
     descriptorSetVariableDescriptorCountAllocateInfo = 1000161003
     descriptorSetVariableDescriptorCountLayoutSupport = 1000161004
+    # Provided by VK_KHR_portability_subset
+    physicalDevicePortabilitySubsetFeaturesKhr = 1000163000
+    physicalDevicePortabilitySubsetPropertiesKhr = 1000163001
     # Provided by VK_NV_shading_rate_image
     pipelineViewportShadingRateImageStateCreateInfoNv = 1000164000
     physicalDeviceShadingRateImageFeaturesNv = 1000164001
@@ -458,10 +526,8 @@ type
     geometryNv = 1000165003
     geometryTrianglesNv = 1000165004
     geometryAabbNv = 1000165005
-    # Provided by VK_KHR_ray_tracing
-    bindAccelerationStructureMemoryInfoKhr = 1000165006
-    writeDescriptorSetAccelerationStructureKhr = 1000165007
-    # Provided by VK_NV_ray_tracing
+    bindAccelerationStructureMemoryInfoNv = 1000165006
+    writeDescriptorSetAccelerationStructureNv = 1000165007
     accelerationStructureMemoryRequirementsInfoNv = 1000165008
     physicalDeviceRayTracingPropertiesNv = 1000165009
     rayTracingShaderGroupCreateInfoNv = 1000165011
@@ -494,6 +560,14 @@ type
     calibratedTimestampInfoExt = 1000184000
     # Provided by VK_AMD_shader_core_properties
     physicalDeviceShaderCorePropertiesAmd = 1000185000
+    # Provided by VK_EXT_video_decode_h265
+    videoDecodeH265CapabilitiesExt = 1000187000
+    videoDecodeH265SessionCreateInfoExt = 1000187001
+    videoDecodeH265SessionParametersCreateInfoExt = 1000187002
+    videoDecodeH265SessionParametersAddInfoExt = 1000187003
+    videoDecodeH265ProfileExt = 1000187004
+    videoDecodeH265PictureInfoExt = 1000187005
+    videoDecodeH265DpbSlotInfoExt = 1000187006
     # Provided by VK_AMD_memory_overallocation_behavior
     deviceMemoryOverallocationCreateInfoAmd = 1000189000
     # Provided by VK_EXT_vertex_attribute_divisor
@@ -549,6 +623,8 @@ type
     swapchainDisplayNativeHdrCreateInfoAmd = 1000213001
     # Provided by VK_FUCHSIA_imagepipe_surface
     imagepipeSurfaceCreateInfoFuchsia = 1000214000
+    # Provided by VK_KHR_shader_terminate_invocation
+    physicalDeviceShaderTerminateInvocationFeaturesKhr = 1000215000
     # Provided by VK_EXT_metal_surface
     metalSurfaceCreateInfoExt = 1000217000
     # Provided by VK_EXT_fragment_density_map
@@ -561,10 +637,18 @@ type
     physicalDeviceSubgroupSizeControlPropertiesExt = 1000225000
     pipelineShaderStageRequiredSubgroupSizeCreateInfoExt = 1000225001
     physicalDeviceSubgroupSizeControlFeaturesExt = 1000225002
+    # Provided by VK_KHR_fragment_shading_rate
+    fragmentShadingRateAttachmentInfoKhr = 1000226000
+    pipelineFragmentShadingRateStateCreateInfoKhr = 1000226001
+    physicalDeviceFragmentShadingRatePropertiesKhr = 1000226002
+    physicalDeviceFragmentShadingRateFeaturesKhr = 1000226003
+    physicalDeviceFragmentShadingRateKhr = 1000226004
     # Provided by VK_AMD_shader_core_properties2
     physicalDeviceShaderCoreProperties2Amd = 1000227000
     # Provided by VK_AMD_device_coherent_memory
     physicalDeviceCoherentMemoryFeaturesAmd = 1000229000
+    # Provided by VK_EXT_shader_image_atomic_int64
+    physicalDeviceShaderImageAtomicInt64FeaturesExt = 1000234000
     # Provided by VK_EXT_memory_budget
     physicalDeviceMemoryBudgetPropertiesExt = 1000237000
     # Provided by VK_EXT_memory_priority
@@ -590,6 +674,8 @@ type
     imageStencilUsageCreateInfo = 1000246000
     # Provided by VK_EXT_validation_features
     validationFeaturesExt = 1000247000
+    # Provided by VK_KHR_present_wait
+    physicalDevicePresentWaitFeaturesKhr = 1000248000
     # Provided by VK_NV_cooperative_matrix
     physicalDeviceCooperativeMatrixFeaturesNv = 1000249000
     cooperativeMatrixPropertiesNv = 1000249001
@@ -604,6 +690,10 @@ type
     physicalDeviceYcbcrImageArraysFeaturesExt = 1000252000
     # Provided by VK_VERSION_1_2
     physicalDeviceUniformBufferStandardLayoutFeatures = 1000253000
+    # Provided by VK_EXT_provoking_vertex
+    physicalDeviceProvokingVertexFeaturesExt = 1000254000
+    pipelineRasterizationProvokingVertexStateCreateInfoExt = 1000254001
+    physicalDeviceProvokingVertexPropertiesExt = 1000254002
     # Provided by VK_EXT_full_screen_exclusive
     surfaceFullScreenExclusiveInfoExt = 1000255000
     surfaceFullScreenExclusiveWin32InfoExt = 1000255001
@@ -627,8 +717,6 @@ type
     physicalDeviceIndexTypeUint8FeaturesExt = 1000265000
     # Provided by VK_EXT_extended_dynamic_state
     physicalDeviceExtendedDynamicStateFeaturesExt = 1000267000
-    # Provided by VK_KHR_deferred_host_operations
-    deferredOperationInfoKhr = 1000268000
     # Provided by VK_KHR_pipeline_executable_properties
     physicalDevicePipelineExecutablePropertiesFeaturesKhr = 1000269000
     pipelineInfoKhr = 1000269001
@@ -636,6 +724,8 @@ type
     pipelineExecutableInfoKhr = 1000269003
     pipelineExecutableStatisticKhr = 1000269004
     pipelineExecutableInternalRepresentationKhr = 1000269005
+    # Provided by VK_EXT_shader_atomic_float2
+    physicalDeviceShaderAtomicFloat2FeaturesExt = 1000273000
     # Provided by VK_EXT_shader_demote_to_helper_invocation
     physicalDeviceShaderDemoteToHelperInvocationFeaturesExt = 1000276000
     # Provided by VK_NV_device_generated_commands
@@ -647,12 +737,22 @@ type
     generatedCommandsInfoNv = 1000277005
     generatedCommandsMemoryRequirementsInfoNv = 1000277006
     physicalDeviceDeviceGeneratedCommandsFeaturesNv = 1000277007
+    # Provided by VK_NV_inherited_viewport_scissor
+    physicalDeviceInheritedViewportScissorFeaturesNv = 1000278000
+    commandBufferInheritanceViewportScissorInfoNv = 1000278001
+    # Provided by VK_KHR_shader_integer_dot_product
+    physicalDeviceShaderIntegerDotProductFeaturesKhr = 1000280000
+    physicalDeviceShaderIntegerDotProductPropertiesKhr = 1000280001
     # Provided by VK_EXT_texel_buffer_alignment
     physicalDeviceTexelBufferAlignmentFeaturesExt = 1000281000
     physicalDeviceTexelBufferAlignmentPropertiesExt = 1000281001
     # Provided by VK_QCOM_render_pass_transform
     commandBufferInheritanceRenderPassTransformInfoQcom = 1000282000
     renderPassTransformBeginInfoQcom = 1000282001
+    # Provided by VK_EXT_device_memory_report
+    physicalDeviceDeviceMemoryReportFeaturesExt = 1000284000
+    deviceDeviceMemoryReportCreateInfoExt = 1000284001
+    deviceMemoryReportCallbackDataExt = 1000284002
     # Provided by VK_EXT_robustness2
     physicalDeviceRobustness2FeaturesExt = 1000286000
     physicalDeviceRobustness2PropertiesExt = 1000286001
@@ -662,87 +762,230 @@ type
     physicalDeviceCustomBorderColorFeaturesExt = 1000287002
     # Provided by VK_KHR_pipeline_library
     pipelineLibraryCreateInfoKhr = 1000290000
+    # Provided by VK_KHR_present_id
+    presentIdKhr = 1000294000
+    physicalDevicePresentIdFeaturesKhr = 1000294001
     # Provided by VK_EXT_private_data
     physicalDevicePrivateDataFeaturesExt = 1000295000
     devicePrivateDataCreateInfoExt = 1000295001
     privateDataSlotCreateInfoExt = 1000295002
     # Provided by VK_EXT_pipeline_creation_cache_control
     physicalDevicePipelineCreationCacheControlFeaturesExt = 1000297000
+    # Provided by VK_KHR_video_encode_queue
+    videoEncodeInfoKhr = 1000299000
+    videoEncodeRateControlInfoKhr = 1000299001
+    videoEncodeRateControlLayerInfoKhr = 1000299002
     # Provided by VK_NV_device_diagnostics_config
     physicalDeviceDiagnosticsConfigFeaturesNv = 1000300000
     deviceDiagnosticsConfigCreateInfoNv = 1000300001
     # Provided by VK_QCOM_extension_310
     reservedQcom = 1000309000
+    # Provided by VK_KHR_synchronization2
+    memoryBarrier2Khr = 1000314000
+    bufferMemoryBarrier2Khr = 1000314001
+    imageMemoryBarrier2Khr = 1000314002
+    dependencyInfoKhr = 1000314003
+    submitInfo2Khr = 1000314004
+    semaphoreSubmitInfoKhr = 1000314005
+    commandBufferSubmitInfoKhr = 1000314006
+    physicalDeviceSynchronization2FeaturesKhr = 1000314007
+    queueFamilyCheckpointProperties2Nv = 1000314008
+    checkpointData2Nv = 1000314009
+    # Provided by VK_KHR_shader_subgroup_uniform_control_flow
+    physicalDeviceShaderSubgroupUniformControlFlowFeaturesKhr = 1000323000
+    # Provided by VK_KHR_zero_initialize_workgroup_memory
+    physicalDeviceZeroInitializeWorkgroupMemoryFeaturesKhr = 1000325000
+    # Provided by VK_NV_fragment_shading_rate_enums
+    physicalDeviceFragmentShadingRateEnumsPropertiesNv = 1000326000
+    physicalDeviceFragmentShadingRateEnumsFeaturesNv = 1000326001
+    pipelineFragmentShadingRateEnumStateCreateInfoNv = 1000326002
+    # Provided by VK_NV_ray_tracing_motion_blur
+    accelerationStructureGeometryMotionTrianglesDataNv = 1000327000
+    physicalDeviceRayTracingMotionBlurFeaturesNv = 1000327001
+    accelerationStructureMotionInfoNv = 1000327002
+    # Provided by VK_EXT_ycbcr_2plane_444_formats
+    physicalDeviceYcbcr2Plane444FormatsFeaturesExt = 1000330000
     # Provided by VK_EXT_fragment_density_map2
     physicalDeviceFragmentDensityMap2FeaturesExt = 1000332000
     physicalDeviceFragmentDensityMap2PropertiesExt = 1000332001
+    # Provided by VK_QCOM_rotated_copy_commands
+    copyCommandTransformInfoQcom = 1000333000
     # Provided by VK_EXT_image_robustness
     physicalDeviceImageRobustnessFeaturesExt = 1000335000
+    # Provided by VK_KHR_workgroup_memory_explicit_layout
+    physicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKhr = 1000336000
+    # Provided by VK_KHR_copy_commands2
+    copyBufferInfo2Khr = 1000337000
+    copyImageInfo2Khr = 1000337001
+    copyBufferToImageInfo2Khr = 1000337002
+    copyImageToBufferInfo2Khr = 1000337003
+    blitImageInfo2Khr = 1000337004
+    resolveImageInfo2Khr = 1000337005
+    bufferCopy2Khr = 1000337006
+    imageCopy2Khr = 1000337007
+    imageBlit2Khr = 1000337008
+    bufferImageCopy2Khr = 1000337009
+    imageResolve2Khr = 1000337010
     # Provided by VK_EXT_4444_formats
     physicalDevice4444FormatsFeaturesExt = 1000340000
+    # Provided by VK_ARM_rasterization_order_attachment_access
+    physicalDeviceRasterizationOrderAttachmentAccessFeaturesArm = 1000342000
+    # Provided by VK_EXT_rgba10x6_formats
+    physicalDeviceRgba10x6FormatsFeaturesExt = 1000344000
     # Provided by VK_EXT_directfb_surface
     directfbSurfaceCreateInfoExt = 1000346000
-  # Enums to track objects of various types
+    # Provided by VK_KHR_ray_tracing_pipeline
+    physicalDeviceRayTracingPipelineFeaturesKhr = 1000347000
+    physicalDeviceRayTracingPipelinePropertiesKhr = 1000347001
+    # Provided by VK_KHR_ray_query
+    physicalDeviceRayQueryFeaturesKhr = 1000348013
+    # Provided by VK_VALVE_mutable_descriptor_type
+    physicalDeviceMutableDescriptorTypeFeaturesValve = 1000351000
+    mutableDescriptorTypeCreateInfoValve = 1000351002
+    # Provided by VK_EXT_vertex_input_dynamic_state
+    physicalDeviceVertexInputDynamicStateFeaturesExt = 1000352000
+    vertexInputBindingDescription2Ext = 1000352001
+    vertexInputAttributeDescription2Ext = 1000352002
+    # Provided by VK_EXT_physical_device_drm
+    physicalDeviceDrmPropertiesExt = 1000353000
+    # Provided by VK_EXT_depth_clip_control
+    physicalDeviceDepthClipControlFeaturesExt = 1000355000
+    pipelineViewportDepthClipControlCreateInfoExt = 1000355001
+    # Provided by VK_EXT_primitive_topology_list_restart
+    physicalDevicePrimitiveTopologyListRestartFeaturesExt = 1000356000
+    # Provided by VK_KHR_format_feature_flags2
+    formatProperties3Khr = 1000360000
+    # Provided by VK_FUCHSIA_external_memory
+    importMemoryZirconHandleInfoFuchsia = 1000364000
+    memoryZirconHandlePropertiesFuchsia = 1000364001
+    memoryGetZirconHandleInfoFuchsia = 1000364002
+    # Provided by VK_FUCHSIA_external_semaphore
+    importSemaphoreZirconHandleInfoFuchsia = 1000365000
+    semaphoreGetZirconHandleInfoFuchsia = 1000365001
+    # Provided by VK_FUCHSIA_buffer_collection
+    bufferCollectionCreateInfoFuchsia = 1000366000
+    importMemoryBufferCollectionFuchsia = 1000366001
+    bufferCollectionImageCreateInfoFuchsia = 1000366002
+    bufferCollectionPropertiesFuchsia = 1000366003
+    bufferConstraintsInfoFuchsia = 1000366004
+    bufferCollectionBufferCreateInfoFuchsia = 1000366005
+    imageConstraintsInfoFuchsia = 1000366006
+    imageFormatConstraintsInfoFuchsia = 1000366007
+    sysmemColorSpaceFuchsia = 1000366008
+    bufferCollectionConstraintsInfoFuchsia = 1000366009
+    # Provided by VK_HUAWEI_subpass_shading
+    subpassShadingPipelineCreateInfoHuawei = 1000369000
+    physicalDeviceSubpassShadingFeaturesHuawei = 1000369001
+    physicalDeviceSubpassShadingPropertiesHuawei = 1000369002
+    # Provided by VK_HUAWEI_invocation_mask
+    physicalDeviceInvocationMaskFeaturesHuawei = 1000370000
+    # Provided by VK_NV_external_memory_rdma
+    memoryGetRemoteAddressInfoNv = 1000371000
+    physicalDeviceExternalMemoryRdmaFeaturesNv = 1000371001
+    # Provided by VK_EXT_extended_dynamic_state2
+    physicalDeviceExtendedDynamicState2FeaturesExt = 1000377000
+    # Provided by VK_QNX_screen_surface
+    screenSurfaceCreateInfoQnx = 1000378000
+    # Provided by VK_EXT_color_write_enable
+    physicalDeviceColorWriteEnableFeaturesExt = 1000381000
+    pipelineColorWriteCreateInfoExt = 1000381001
+    # Provided by VK_EXT_global_priority_query
+    physicalDeviceGlobalPriorityQueryFeaturesExt = 1000388000
+    queueFamilyGlobalPriorityPropertiesExt = 1000388001
+    # Provided by VK_EXT_image_view_min_lod
+    physicalDeviceImageViewMinLodFeaturesExt = 1000391000
+    imageViewMinLodCreateInfoExt = 1000391001
+    # Provided by VK_EXT_multi_draw
+    physicalDeviceMultiDrawFeaturesExt = 1000392000
+    physicalDeviceMultiDrawPropertiesExt = 1000392001
+    # Provided by VK_EXT_border_color_swizzle
+    physicalDeviceBorderColorSwizzleFeaturesExt = 1000411000
+    samplerBorderColorComponentMappingCreateInfoExt = 1000411001
+    # Provided by VK_EXT_pageable_device_local_memory
+    physicalDevicePageableDeviceLocalMemoryFeaturesExt = 1000412000
+    # Provided by VK_KHR_maintenance4
+    physicalDeviceMaintenance4FeaturesKhr = 1000413000
+    physicalDeviceMaintenance4PropertiesKhr = 1000413001
+    deviceBufferMemoryRequirementsKhr = 1000413002
+    deviceImageMemoryRequirementsKhr = 1000413003
+    # Provided by VK_QCOM_fragment_density_map_offset
+    physicalDeviceFragmentDensityMapOffsetFeaturesQcom = 1000425000
+    physicalDeviceFragmentDensityMapOffsetPropertiesQcom = 1000425001
+    subpassFragmentDensityMapOffsetEndInfoQcom = 1000425002
+    # Provided by VK_NV_linear_color_attachment
+    physicalDeviceLinearColorAttachmentFeaturesNv = 1000430000
+  # Enums to track objects of various types - also see objtypeenum attributes on type tags
   ObjectType* {.vkEnum.} = enum
     unknown = 0
-    instance = 1 # VkInstance
-    physicalDevice = 2 # VkPhysicalDevice
-    device = 3 # VkDevice
-    queue = 4 # VkQueue
-    semaphore = 5 # VkSemaphore
-    commandBuffer = 6 # VkCommandBuffer
-    fence = 7 # VkFence
-    deviceMemory = 8 # VkDeviceMemory
-    buffer = 9 # VkBuffer
-    image = 10 # VkImage
-    event = 11 # VkEvent
-    queryPool = 12 # VkQueryPool
-    bufferView = 13 # VkBufferView
-    imageView = 14 # VkImageView
-    shaderModule = 15 # VkShaderModule
-    pipelineCache = 16 # VkPipelineCache
-    pipelineLayout = 17 # VkPipelineLayout
-    renderPass = 18 # VkRenderPass
-    pipeline = 19 # VkPipeline
-    descriptorSetLayout = 20 # VkDescriptorSetLayout
-    sampler = 21 # VkSampler
-    descriptorPool = 22 # VkDescriptorPool
-    descriptorSet = 23 # VkDescriptorSet
-    framebuffer = 24 # VkFramebuffer
-    commandPool = 25 # VkCommandPool
+    instance = 1
+    physicalDevice = 2
+    device = 3
+    queue = 4
+    semaphore = 5
+    commandBuffer = 6
+    fence = 7
+    deviceMemory = 8
+    buffer = 9
+    image = 10
+    event = 11
+    queryPool = 12
+    bufferView = 13
+    imageView = 14
+    shaderModule = 15
+    pipelineCache = 16
+    pipelineLayout = 17
+    renderPass = 18
+    pipeline = 19
+    descriptorSetLayout = 20
+    sampler = 21
+    descriptorPool = 22
+    descriptorSet = 23
+    framebuffer = 24
+    commandPool = 25
     # Provided by VK_KHR_surface
-    surfaceKhr = 1000000000 # VkSurfaceKHR
+    surfaceKhr = 1000000000
     # Provided by VK_KHR_swapchain
-    swapchainKhr = 1000001000 # VkSwapchainKHR
+    swapchainKhr = 1000001000
     # Provided by VK_KHR_display
-    displayKhr = 1000002000 # VkDisplayKHR
-    displayModeKhr = 1000002001 # VkDisplayModeKHR
+    displayKhr = 1000002000
+    displayModeKhr = 1000002001
     # Provided by VK_EXT_debug_report
-    debugReportCallbackExt = 1000011000 # VkDebugReportCallbackEXT
+    debugReportCallbackExt = 1000011000
+    # Provided by VK_KHR_video_queue
+    videoSessionKhr = 1000023000 # VkVideoSessionKHR
+    videoSessionParametersKhr = 1000023001 # VkVideoSessionParametersKHR
+    # Provided by VK_NVX_binary_import
+    cuModuleNvx = 1000029000
+    cuFunctionNvx = 1000029001
     # Provided by VK_VERSION_1_1
     descriptorUpdateTemplate = 1000085000
     # Provided by VK_EXT_debug_utils
-    debugUtilsMessengerExt = 1000128000 # VkDebugUtilsMessengerEXT
+    debugUtilsMessengerExt = 1000128000
+    # Provided by VK_KHR_acceleration_structure
+    accelerationStructureKhr = 1000150000
     # Provided by VK_VERSION_1_1
     samplerYcbcrConversion = 1000156000
     # Provided by VK_EXT_validation_cache
-    validationCacheExt = 1000160000 # VkValidationCacheEXT
-    # Provided by VK_KHR_ray_tracing
-    accelerationStructureKhr = 1000165000
+    validationCacheExt = 1000160000
+    # Provided by VK_NV_ray_tracing
+    accelerationStructureNv = 1000165000
     # Provided by VK_INTEL_performance_query
     performanceConfigurationIntel = 1000210000
     # Provided by VK_KHR_deferred_host_operations
     deferredOperationKhr = 1000268000
     # Provided by VK_NV_device_generated_commands
-    indirectCommandsLayoutNv = 1000277000 # VkIndirectCommandsLayoutNV
+    indirectCommandsLayoutNv = 1000277000
     # Provided by VK_EXT_private_data
     privateDataSlotExt = 1000295000
+    # Provided by VK_FUCHSIA_buffer_collection
+    bufferCollectionFuchsia = 1000366000 # VkBufferCollectionFUCHSIA
   VendorId* {.vkEnum.} = enum
-    viv = 0x00010001 # Vivante vendor ID
-    vsi = 0x00010002 # VeriSilicon vendor ID
-    kazan = 0x00010003 # Kazan Software Renderer
-    codeplay = 0x00010004 # Codeplay Software Ltd. vendor ID
-    mesa = 0x00010005 # Mesa vendor ID
+    viv = 0x00000010001 # Vivante vendor ID
+    vsi = 0x00000010002 # VeriSilicon vendor ID
+    kazan = 0x00000010003 # Kazan Software Renderer
+    codeplay = 0x00000010004 # Codeplay Software Ltd. vendor ID
+    mesa = 0x00000010005 # Mesa vendor ID
+    pocl = 0x00000010006 # PoCL vendor ID
   PipelineCacheHeaderVersion* {.vkEnum.} = enum
     one = 1
   # Vulkan format definitions
@@ -1022,71 +1265,82 @@ type
     astc6x6x6UnormBlockExt = 1000288027
     astc6x6x6SrgbBlockExt = 1000288028
     astc6x6x6SfloatBlockExt = 1000288029
+    # Provided by VK_EXT_ycbcr_2plane_444_formats
+    g8B8r82plane444UnormExt = 1000330000
+    g10x6B10x6r10x62plane444Unorm3pack16Ext = 1000330001
+    g12x4B12x4r12x42plane444Unorm3pack16Ext = 1000330002
+    g16B16r162plane444UnormExt = 1000330003
     # Provided by VK_EXT_4444_formats
     a4r4g4b4UnormPack16Ext = 1000340000
     a4b4g4r4UnormPack16Ext = 1000340001
   FormatFeatureFlagBits* {.vkFlagBits.} = enum
-    sampledImage = 0x00000001 # Format can be used for sampled images (SAMPLED_IMAGE and COMBINED_IMAGE_SAMPLER descriptor types)
-    storageImage = 0x00000002 # Format can be used for storage images (STORAGE_IMAGE descriptor type)
-    storageImageAtomic = 0x00000004 # Format supports atomic operations in case it is used for storage images
-    uniformTexelBuffer = 0x00000008 # Format can be used for uniform texel buffers (TBOs)
-    storageTexelBuffer = 0x00000010 # Format can be used for storage texel buffers (IBOs)
-    storageTexelBufferAtomic = 0x00000020 # Format supports atomic operations in case it is used for storage texel buffers
-    vertexBuffer = 0x00000040 # Format can be used for vertex buffers (VBOs)
-    colorAttachment = 0x00000080 # Format can be used for color attachment images
-    colorAttachmentBlend = 0x00000100 # Format supports blending in case it is used for color attachment images
-    depthStencilAttachment = 0x00000200 # Format can be used for depth/stencil attachment images
-    blitSrc = 0x00000400 # Format can be used as the source image of blits with vkCmdBlitImage
-    blitDst = 0x00000800 # Format can be used as the destination image of blits with vkCmdBlitImage
-    sampledImageFilterLinear = 0x00001000 # Format can be filtered with VK_FILTER_LINEAR when being sampled
+    sampledImage = 0x00000000001 # Format can be used for sampled images (SAMPLED_IMAGE and COMBINED_IMAGE_SAMPLER descriptor types)
+    storageImage = 0x00000000002 # Format can be used for storage images (STORAGE_IMAGE descriptor type)
+    storageImageAtomic = 0x00000000004 # Format supports atomic operations in case it is used for storage images
+    uniformTexelBuffer = 0x00000000008 # Format can be used for uniform texel buffers (TBOs)
+    storageTexelBuffer = 0x00000000010 # Format can be used for storage texel buffers (IBOs)
+    storageTexelBufferAtomic = 0x00000000020 # Format supports atomic operations in case it is used for storage texel buffers
+    vertexBuffer = 0x00000000040 # Format can be used for vertex buffers (VBOs)
+    colorAttachment = 0x00000000080 # Format can be used for color attachment images
+    colorAttachmentBlend = 0x00000000100 # Format supports blending in case it is used for color attachment images
+    depthStencilAttachment = 0x00000000200 # Format can be used for depth/stencil attachment images
+    blitSrc = 0x00000000400 # Format can be used as the source image of blits with vkCmdBlitImage
+    blitDst = 0x00000000800 # Format can be used as the destination image of blits with vkCmdBlitImage
+    sampledImageFilterLinear = 0x00000001000 # Format can be filtered with VK_FILTER_LINEAR when being sampled
     # Provided by VK_IMG_filter_cubic
-    sampledImageFilterCubicImg = 0x00002000 # Format can be filtered with VK_FILTER_CUBIC_IMG when being sampled
+    sampledImageFilterCubicImg = 0x00000002000 # Format can be filtered with VK_FILTER_CUBIC_IMG when being sampled
     # Provided by VK_VERSION_1_1
-    transferSrc = 0x00004000 # Format can be used as the source image of image transfer commands
-    transferDst = 0x00008000 # Format can be used as the destination image of image transfer commands
+    transferSrc = 0x00000004000 # Format can be used as the source image of image transfer commands
+    transferDst = 0x00000008000 # Format can be used as the destination image of image transfer commands
     # Provided by VK_VERSION_1_2
-    sampledImageFilterMinmax = 0x00010000 # Format can be used with min/max reduction filtering
+    sampledImageFilterMinmax = 0x00000010000 # Format can be used with min/max reduction filtering
     # Provided by VK_VERSION_1_1
-    midpointChromaSamples = 0x00020000 # Format can have midpoint rather than cosited chroma samples
-    sampledImageYcbcrConversionLinearFilter = 0x00040000 # Format can be used with linear filtering whilst color conversion is enabled
-    sampledImageYcbcrConversionSeparateReconstructionFilter = 0x00080000 # Format can have different chroma, min and mag filters
-    sampledImageYcbcrConversionChromaReconstructionExplicit = 0x00100000
-    sampledImageYcbcrConversionChromaReconstructionExplicitForceable = 0x00200000
-    disjoint = 0x00400000 # Format supports disjoint planes
-    cositedChromaSamples = 0x00800000 # Format can have cosited rather than midpoint chroma samples
+    midpointChromaSamples = 0x00000020000 # Format can have midpoint rather than cosited chroma samples
+    sampledImageYcbcrConversionLinearFilter = 0x00000040000 # Format can be used with linear filtering whilst color conversion is enabled
+    sampledImageYcbcrConversionSeparateReconstructionFilter = 0x00000080000 # Format can have different chroma, min and mag filters
+    sampledImageYcbcrConversionChromaReconstructionExplicit = 0x00000100000
+    sampledImageYcbcrConversionChromaReconstructionExplicitForceable = 0x00000200000
+    disjoint = 0x00000400000 # Format supports disjoint planes
+    cositedChromaSamples = 0x00000800000 # Format can have cosited rather than midpoint chroma samples
     # Provided by VK_EXT_fragment_density_map
-    fragmentDensityMapExt = 0x01000000
-    # Provided by VK_AMD_extension_25
-    reserved25Khr = 0x02000000
-    reserved26Khr = 0x04000000
-    # Provided by VK_AMD_extension_24
-    reserved27Khr = 0x08000000
-    reserved28Khr = 0x10000000
-    # Provided by VK_KHR_ray_tracing
-    accelerationStructureVertexBufferKhr = 0x20000000
-    # Provided by VK_AMD_extension_227
-    amdReserved30 = 0x40000000
+    fragmentDensityMapExt = 0x00001000000
+    # Provided by VK_KHR_video_decode_queue
+    videoDecodeOutputKhr = 0x00002000000
+    videoDecodeDpbKhr = 0x00004000000
+    # Provided by VK_KHR_video_encode_queue
+    videoEncodeInputKhr = 0x00008000000
+    videoEncodeDpbKhr = 0x00010000000
+    # Provided by VK_KHR_acceleration_structure
+    accelerationStructureVertexBufferKhr = 0x00020000000
+    # Provided by VK_KHR_fragment_shading_rate
+    fragmentShadingRateAttachmentKhr = 0x00040000000
   FormatFeatureFlags* = Flags[FormatFeatureFlagBits]
   ImageCreateFlagBits* {.vkFlagBits.} = enum
-    sparseBinding = 0x00000001 # Image should support sparse backing
-    sparseResidency = 0x00000002 # Image should support sparse backing with partial residency
-    sparseAliased = 0x00000004 # Image should support constent data access to physical memory ranges mapped into multiple locations of sparse images
-    mutableFormat = 0x00000008 # Allows image views to have different format than the base image
-    cubeCompatible = 0x00000010 # Allows creating image views with cube type from the created image
+    sparseBinding = 0x00000000001 # Image should support sparse backing
+    sparseResidency = 0x00000000002 # Image should support sparse backing with partial residency
+    sparseAliased = 0x00000000004 # Image should support constant data access to physical memory ranges mapped into multiple locations of sparse images
+    mutableFormat = 0x00000000008 # Allows image views to have different format than the base image
+    cubeCompatible = 0x00000000010 # Allows creating image views with cube type from the created image
     # Provided by VK_VERSION_1_1
-    e2dArrayCompatible = 0x00000020 # The 3D image can be viewed as a 2D or 2D array image
-    splitInstanceBindRegions = 0x00000040 # Allows using VkBindImageMemoryDeviceGroupInfo::pSplitInstanceBindRegions when binding memory to the image
-    blockTexelViewCompatible = 0x00000080
-    extendedUsage = 0x00000100
-    disjoint = 0x00000200
-    alias = 0x00000400
-    protected = 0x00000800 # Image requires protected memory
+    e2dArrayCompatible = 0x00000000020 # The 3D image can be viewed as a 2D or 2D array image
+    splitInstanceBindRegions = 0x00000000040 # Allows using VkBindImageMemoryDeviceGroupInfo::pSplitInstanceBindRegions when binding memory to the image
+    blockTexelViewCompatible = 0x00000000080
+    extendedUsage = 0x00000000100
+    disjoint = 0x00000000200
+    alias = 0x00000000400
+    protected = 0x00000000800 # Image requires protected memory
     # Provided by VK_EXT_sample_locations
-    sampleLocationsCompatibleDepthExt = 0x00001000
+    sampleLocationsCompatibleDepthExt = 0x00000001000
     # Provided by VK_NV_corner_sampled_image
-    cornerSampledNv = 0x00002000
+    cornerSampledNv = 0x00000002000
     # Provided by VK_EXT_fragment_density_map
-    subsampledExt = 0x00004000
+    subsampledExt = 0x00000004000
+    # Provided by VK_QCOM_fragment_density_map_offset
+    fragmentDensityMapOffsetQcom = 0x00000008000
+    # Provided by VK_AMD_extension_317
+    reserved16Amd = 0x00000010000
+    # Provided by VK_EXT_extension_394
+    reserved394Ext = 0x00000020000
   ImageCreateFlags* = Flags[ImageCreateFlagBits]
   ImageTiling* {.vkEnum.} = enum
     optimal = 0
@@ -1098,51 +1352,60 @@ type
     e2d = 1
     e3d = 2
   ImageUsageFlagBits* {.vkFlagBits.} = enum
-    transferSrc = 0x00000001 # Can be used as a source of transfer operations
-    transferDst = 0x00000002 # Can be used as a destination of transfer operations
-    sampled = 0x00000004 # Can be sampled from (SAMPLED_IMAGE and COMBINED_IMAGE_SAMPLER descriptor types)
-    storage = 0x00000008 # Can be used as storage image (STORAGE_IMAGE descriptor type)
-    colorAttachment = 0x00000010 # Can be used as framebuffer color attachment
-    depthStencilAttachment = 0x00000020 # Can be used as framebuffer depth/stencil attachment
-    transientAttachment = 0x00000040 # Image data not needed outside of rendering
-    inputAttachment = 0x00000080 # Can be used as framebuffer input attachment
-    # Provided by VK_NV_shading_rate_image
-    shadingRateImageNv = 0x00000100
+    transferSrc = 0x00000000001 # Can be used as a source of transfer operations
+    transferDst = 0x00000000002 # Can be used as a destination of transfer operations
+    sampled = 0x00000000004 # Can be sampled from (SAMPLED_IMAGE and COMBINED_IMAGE_SAMPLER descriptor types)
+    storage = 0x00000000008 # Can be used as storage image (STORAGE_IMAGE descriptor type)
+    colorAttachment = 0x00000000010 # Can be used as framebuffer color attachment
+    depthStencilAttachment = 0x00000000020 # Can be used as framebuffer depth/stencil attachment
+    transientAttachment = 0x00000000040 # Image data not needed outside of rendering
+    inputAttachment = 0x00000000080 # Can be used as framebuffer input attachment
+    # Provided by VK_KHR_fragment_shading_rate
+    fragmentShadingRateAttachmentKhr = 0x00000000100
     # Provided by VK_EXT_fragment_density_map
-    fragmentDensityMapExt = 0x00000200
-    # Provided by VK_AMD_extension_25
-    reserved10Khr = 0x00000400
-    reserved11Khr = 0x00000800
-    reserved12Khr = 0x00001000
-    # Provided by VK_AMD_extension_24
-    reserved13Khr = 0x00002000
-    reserved14Khr = 0x00004000
-    reserved15Khr = 0x00008000
+    fragmentDensityMapExt = 0x00000000200
+    # Provided by VK_KHR_video_decode_queue
+    videoDecodeDstKhr = 0x00000000400
+    videoDecodeSrcKhr = 0x00000000800
+    videoDecodeDpbKhr = 0x00000001000
+    # Provided by VK_KHR_video_encode_queue
+    videoEncodeDstKhr = 0x00000002000
+    videoEncodeSrcKhr = 0x00000004000
+    videoEncodeDpbKhr = 0x00000008000
     # Provided by VK_QCOM_extension_173
-    reserved16Qcom = 0x00010000
-    reserved17Qcom = 0x00020000
+    reserved16Qcom = 0x00000010000
+    reserved17Qcom = 0x00000020000
+    # Provided by VK_HUAWEI_invocation_mask
+    invocationMaskHuawei = 0x00000040000
+    # Provided by VK_EXT_extension_340
+    reserved19Ext = 0x00000080000
+    # Provided by VK_QCOM_extension_441
+    reserved20Qcom = 0x00000100000
+    reserved21Qcom = 0x00000200000
   ImageUsageFlags* = Flags[ImageUsageFlagBits]
   InstanceCreateFlags* = Flags[distinct UnusedEnum]
   InternalAllocationType* {.vkEnum.} = enum
     executable = 0
   MemoryHeapFlagBits* {.vkFlagBits.} = enum
-    deviceLocal = 0x00000001 # If set, heap represents device memory
+    deviceLocal = 0x00000000001 # If set, heap represents device memory
     # Provided by VK_VERSION_1_1
-    multiInstance = 0x00000002 # If set, heap allocations allocate multiple instances by default
-    # Provided by VK_KHR_extension_309
-    reserved2Khr = 0x00000004
+    multiInstance = 0x00000000002 # If set, heap allocations allocate multiple instances by default
+    # Provided by VK_KHR_extension_299
+    reserved2Khr = 0x00000000004
   MemoryHeapFlags* = Flags[MemoryHeapFlagBits]
   MemoryPropertyFlagBits* {.vkFlagBits.} = enum
-    deviceLocal = 0x00000001 # If otherwise stated, then allocate memory on device
-    hostVisible = 0x00000002 # Memory is mappable by host
-    hostCoherent = 0x00000004 # Memory will have i/o coherency. If not set, application may need to use vkFlushMappedMemoryRanges and vkInvalidateMappedMemoryRanges to flush/invalidate host cache
-    hostCached = 0x00000008 # Memory will be cached by the host
-    lazilyAllocated = 0x00000010 # Memory may be allocated by the driver when it is required
+    deviceLocal = 0x00000000001 # If otherwise stated, then allocate memory on device
+    hostVisible = 0x00000000002 # Memory is mappable by host
+    hostCoherent = 0x00000000004 # Memory will have i/o coherency. If not set, application may need to use vkFlushMappedMemoryRanges and vkInvalidateMappedMemoryRanges to flush/invalidate host cache
+    hostCached = 0x00000000008 # Memory will be cached by the host
+    lazilyAllocated = 0x00000000010 # Memory may be allocated by the driver when it is required
     # Provided by VK_VERSION_1_1
-    protected = 0x00000020 # Memory is protected
+    protected = 0x00000000020 # Memory is protected
     # Provided by VK_AMD_device_coherent_memory
-    deviceCoherentAmd = 0x00000040
-    deviceUncachedAmd = 0x00000080
+    deviceCoherentAmd = 0x00000000040
+    deviceUncachedAmd = 0x00000000080
+    # Provided by VK_NV_external_memory_rdma
+    rdmaCapableNv = 0x00000000100
   MemoryPropertyFlags* = Flags[MemoryPropertyFlagBits]
   PhysicalDeviceType* {.vkEnum.} = enum
     other = 0
@@ -1151,25 +1414,27 @@ type
     virtualGpu = 3
     cpu = 4
   QueueFlagBits* {.vkFlagBits.} = enum
-    graphics = 0x00000001 # Queue supports graphics operations
-    compute = 0x00000002 # Queue supports compute operations
-    transfer = 0x00000004 # Queue supports transfer operations
-    sparseBinding = 0x00000008 # Queue supports sparse resource memory management operations
+    graphics = 0x00000000001 # Queue supports graphics operations
+    compute = 0x00000000002 # Queue supports compute operations
+    transfer = 0x00000000004 # Queue supports transfer operations
+    sparseBinding = 0x00000000008 # Queue supports sparse resource memory management operations
     # Provided by VK_VERSION_1_1
-    protected = 0x00000010 # Queues may support protected operations
-    # Provided by VK_AMD_extension_25
-    reserved5Khr = 0x00000020
-    # Provided by VK_AMD_extension_24
-    reserved6Khr = 0x00000040
+    protected = 0x00000000010 # Queues may support protected operations
+    # Provided by VK_KHR_video_decode_queue
+    videoDecodeKhr = 0x00000000020
+    # Provided by VK_KHR_video_encode_queue
+    videoEncodeKhr = 0x00000000040
+    # Provided by VK_QCOM_extension_440
+    reserved7Qcom = 0x00000000080
   QueueFlags* = Flags[QueueFlagBits]
   SampleCountFlagBits* {.vkFlagBits.} = enum
-    e1 = 0x00000001 # Sample count 1 supported
-    e2 = 0x00000002 # Sample count 2 supported
-    e4 = 0x00000004 # Sample count 4 supported
-    e8 = 0x00000008 # Sample count 8 supported
-    e16 = 0x00000010 # Sample count 16 supported
-    e32 = 0x00000020 # Sample count 32 supported
-    e64 = 0x00000040 # Sample count 64 supported
+    e1 = 0x00000000001 # Sample count 1 supported
+    e2 = 0x00000000002 # Sample count 2 supported
+    e4 = 0x00000000004 # Sample count 4 supported
+    e8 = 0x00000000008 # Sample count 8 supported
+    e16 = 0x00000000010 # Sample count 16 supported
+    e32 = 0x00000000020 # Sample count 32 supported
+    e64 = 0x00000000040 # Sample count 64 supported
   SampleCountFlags* = Flags[SampleCountFlagBits]
   SystemAllocationScope* {.vkEnum.} = enum
     command = 0
@@ -1178,155 +1443,164 @@ type
     device = 3
     instance = 4
   DeviceCreateFlags* = Flags[distinct UnusedEnum]
-  DeviceQueueCreateFlagBits* {.vkFlagBits.} = enum
-    # Provided by VK_VERSION_1_1
-    protected = 0x00000001 # Queue is a protected-capable device queue
   DeviceQueueCreateFlags* = Flags[DeviceQueueCreateFlagBits]
   PipelineStageFlagBits* {.vkFlagBits.} = enum
-    topOfPipe = 0x00000001 # Before subsequent commands are processed
-    drawIndirect = 0x00000002 # Draw/DispatchIndirect command fetch
-    vertexInput = 0x00000004 # Vertex/index fetch
-    vertexShader = 0x00000008 # Vertex shading
-    tessellationControlShader = 0x00000010 # Tessellation control shading
-    tessellationEvaluationShader = 0x00000020 # Tessellation evaluation shading
-    geometryShader = 0x00000040 # Geometry shading
-    fragmentShader = 0x00000080 # Fragment shading
-    earlyFragmentTests = 0x00000100 # Early fragment (depth and stencil) tests
-    lateFragmentTests = 0x00000200 # Late fragment (depth and stencil) tests
-    colorAttachmentOutput = 0x00000400 # Color attachment writes
-    computeShader = 0x00000800 # Compute shading
-    transfer = 0x00001000 # Transfer/copy operations
-    bottomOfPipe = 0x00002000 # After previous commands have completed
-    host = 0x00004000 # Indicates host (CPU) is a source/sink of the dependency
-    allGraphics = 0x00008000 # All stages of the graphics pipeline
-    allCommands = 0x00010000 # All stages supported on the queue
+    # Provided by VK_KHR_synchronization2
+    noneKhr = 0
+    topOfPipe = 0x00000000001 # Before subsequent commands are processed
+    drawIndirect = 0x00000000002 # Draw/DispatchIndirect command fetch
+    vertexInput = 0x00000000004 # Vertex/index fetch
+    vertexShader = 0x00000000008 # Vertex shading
+    tessellationControlShader = 0x00000000010 # Tessellation control shading
+    tessellationEvaluationShader = 0x00000000020 # Tessellation evaluation shading
+    geometryShader = 0x00000000040 # Geometry shading
+    fragmentShader = 0x00000000080 # Fragment shading
+    earlyFragmentTests = 0x00000000100 # Early fragment (depth and stencil) tests
+    lateFragmentTests = 0x00000000200 # Late fragment (depth and stencil) tests
+    colorAttachmentOutput = 0x00000000400 # Color attachment writes
+    computeShader = 0x00000000800 # Compute shading
+    transfer = 0x00000001000 # Transfer/copy operations
+    bottomOfPipe = 0x00000002000 # After previous commands have completed
+    host = 0x00000004000 # Indicates host (CPU) is a source/sink of the dependency
+    allGraphics = 0x00000008000 # All stages of the graphics pipeline
+    allCommands = 0x00000010000 # All stages supported on the queue
     # Provided by VK_NV_device_generated_commands
-    commandPreprocessNv = 0x00020000
+    commandPreprocessNv = 0x00000020000
     # Provided by VK_EXT_conditional_rendering
-    conditionalRenderingExt = 0x00040000 # A pipeline stage for conditional rendering predicate fetch
+    conditionalRenderingExt = 0x00000040000 # A pipeline stage for conditional rendering predicate fetch
     # Provided by VK_NV_mesh_shader
-    taskShaderNv = 0x00080000
-    meshShaderNv = 0x00100000
-    # Provided by VK_KHR_ray_tracing
-    rayTracingShaderKhr = 0x00200000
-    # Provided by VK_NV_shading_rate_image
-    shadingRateImageNv = 0x00400000
+    taskShaderNv = 0x00000080000
+    meshShaderNv = 0x00000100000
+    # Provided by VK_KHR_ray_tracing_pipeline
+    rayTracingShaderKhr = 0x00000200000
+    # Provided by VK_KHR_fragment_shading_rate
+    fragmentShadingRateAttachmentKhr = 0x00000400000
     # Provided by VK_EXT_fragment_density_map
-    fragmentDensityProcessExt = 0x00800000
+    fragmentDensityProcessExt = 0x00000800000
     # Provided by VK_EXT_transform_feedback
-    transformFeedbackExt = 0x01000000
-    # Provided by VK_KHR_ray_tracing
-    accelerationStructureBuildKhr = 0x02000000
-    # Provided by VK_AMD_extension_25
-    reserved26Khr = 0x04000000
-    # Provided by VK_AMD_extension_24
-    reserved27Khr = 0x08000000
+    transformFeedbackExt = 0x00001000000
+    # Provided by VK_KHR_acceleration_structure
+    accelerationStructureBuildKhr = 0x00002000000
   PipelineStageFlags* = Flags[PipelineStageFlagBits]
   MemoryMapFlags* = Flags[distinct UnusedEnum]
   ImageAspectFlagBits* {.vkFlagBits.} = enum
-    color = 0x00000001
-    depth = 0x00000002
-    stencil = 0x00000004
-    metadata = 0x00000008
+    # Provided by VK_KHR_maintenance4
+    noneKhr = 0
+    color = 0x00000000001
+    depth = 0x00000000002
+    stencil = 0x00000000004
+    metadata = 0x00000000008
     # Provided by VK_VERSION_1_1
-    plane0 = 0x00000010
-    plane1 = 0x00000020
-    plane2 = 0x00000040
+    plane0 = 0x00000000010
+    plane1 = 0x00000000020
+    plane2 = 0x00000000040
     # Provided by VK_EXT_image_drm_format_modifier
-    memoryPlane0Ext = 0x00000080
-    memoryPlane1Ext = 0x00000100
-    memoryPlane2Ext = 0x00000200
-    memoryPlane3Ext = 0x00000400
+    memoryPlane0Ext = 0x00000000080
+    memoryPlane1Ext = 0x00000000100
+    memoryPlane2Ext = 0x00000000200
+    memoryPlane3Ext = 0x00000000400
   ImageAspectFlags* = Flags[ImageAspectFlagBits]
   SparseImageFormatFlagBits* {.vkFlagBits.} = enum
-    singleMiptail = 0x00000001 # Image uses a single mip tail region for all array layers
-    alignedMipSize = 0x00000002 # Image requires mip level dimensions to be an integer multiple of the sparse image block dimensions for non-tail mip levels.
-    nonstandardBlockSize = 0x00000004 # Image uses a non-standard sparse image block dimensions
+    singleMiptail = 0x00000000001 # Image uses a single mip tail region for all array layers
+    alignedMipSize = 0x00000000002 # Image requires mip level dimensions to be an integer multiple of the sparse image block dimensions for non-tail mip levels.
+    nonstandardBlockSize = 0x00000000004 # Image uses a non-standard sparse image block dimensions
   SparseImageFormatFlags* = Flags[SparseImageFormatFlagBits]
   SparseMemoryBindFlagBits* {.vkFlagBits.} = enum
-    metadata = 0x00000001 # Operation binds resource metadata to memory
+    metadata = 0x00000000001 # Operation binds resource metadata to memory
   SparseMemoryBindFlags* = Flags[SparseMemoryBindFlagBits]
   FenceCreateFlagBits* {.vkFlagBits.} = enum
-    signaled = 0x00000001
+    signaled = 0x00000000001
   FenceCreateFlags* = Flags[FenceCreateFlagBits]
   SemaphoreCreateFlags* = Flags[distinct UnusedEnum]
-  EventCreateFlags* = Flags[distinct UnusedEnum]
+  EventCreateFlags* = Flags[EventCreateFlagBits]
+  EventCreateFlagBits* {.vkFlagBits.} = enum
+    # Provided by VK_KHR_synchronization2
+    deviceOnlyKhr = 0x00000000001
   QueryPipelineStatisticFlagBits* {.vkFlagBits.} = enum
-    inputAssemblyVertices = 0x00000001 # Optional
-    inputAssemblyPrimitives = 0x00000002 # Optional
-    vertexShaderInvocations = 0x00000004 # Optional
-    geometryShaderInvocations = 0x00000008 # Optional
-    geometryShaderPrimitives = 0x00000010 # Optional
-    clippingInvocations = 0x00000020 # Optional
-    clippingPrimitives = 0x00000040 # Optional
-    fragmentShaderInvocations = 0x00000080 # Optional
-    tessellationControlShaderPatches = 0x00000100 # Optional
-    tessellationEvaluationShaderInvocations = 0x00000200 # Optional
-    computeShaderInvocations = 0x00000400 # Optional
+    inputAssemblyVertices = 0x00000000001 # Optional
+    inputAssemblyPrimitives = 0x00000000002 # Optional
+    vertexShaderInvocations = 0x00000000004 # Optional
+    geometryShaderInvocations = 0x00000000008 # Optional
+    geometryShaderPrimitives = 0x00000000010 # Optional
+    clippingInvocations = 0x00000000020 # Optional
+    clippingPrimitives = 0x00000000040 # Optional
+    fragmentShaderInvocations = 0x00000000080 # Optional
+    tessellationControlShaderPatches = 0x00000000100 # Optional
+    tessellationEvaluationShaderInvocations = 0x00000000200 # Optional
+    computeShaderInvocations = 0x00000000400 # Optional
   QueryPipelineStatisticFlags* = Flags[QueryPipelineStatisticFlagBits]
   QueryPoolCreateFlags* = Flags[distinct UnusedEnum]
   QueryResultFlagBits* {.vkFlagBits.} = enum
-    e64 = 0x00000001 # Results of the queries are written to the destination buffer as 64-bit values
-    wait = 0x00000002 # Results of the queries are waited on before proceeding with the result copy
-    withAvailability = 0x00000004 # Besides the results of the query, the availability of the results is also written
-    partial = 0x00000008 # Copy the partial results of the query even if the final results are not available
+    e64 = 0x00000000001 # Results of the queries are written to the destination buffer as 64-bit values
+    wait = 0x00000000002 # Results of the queries are waited on before proceeding with the result copy
+    withAvailability = 0x00000000004 # Besides the results of the query, the availability of the results is also written
+    partial = 0x00000000008 # Copy the partial results of the query even if the final results are not available
+    # Provided by VK_KHR_video_queue
+    withStatusKhr = 0x00000000010
   QueryResultFlags* = Flags[QueryResultFlagBits]
   QueryType* {.vkEnum.} = enum
     occlusion = 0
     pipelineStatistics = 1 # Optional
     timestamp = 2
-    # Provided by VK_AMD_extension_24
-    reserved8 = 1000023008
-    # Provided by VK_AMD_extension_25
-    reserved4 = 1000024004
+    # Provided by VK_KHR_video_queue
+    resultStatusOnlyKhr = 1000023000
     # Provided by VK_EXT_transform_feedback
     transformFeedbackStreamExt = 1000028004
     # Provided by VK_KHR_performance_query
     performanceQueryKhr = 1000116000
-    # Provided by VK_KHR_ray_tracing
-    accelerationStructureSerializationSizeKhr = 1000150000
-    accelerationStructureCompactedSizeKhr = 1000165000
+    # Provided by VK_KHR_acceleration_structure
+    accelerationStructureCompactedSizeKhr = 1000150000
+    accelerationStructureSerializationSizeKhr = 1000150001
+    # Provided by VK_NV_ray_tracing
+    accelerationStructureCompactedSizeNv = 1000165000
     # Provided by VK_INTEL_performance_query
     performanceQueryIntel = 1000210000
+    # Provided by VK_KHR_video_encode_queue
+    videoEncodestreamBufferRangeKhr = 1000299000
   BufferCreateFlagBits* {.vkFlagBits.} = enum
-    sparseBinding = 0x00000001 # Buffer should support sparse backing
-    sparseResidency = 0x00000002 # Buffer should support sparse backing with partial residency
-    sparseAliased = 0x00000004 # Buffer should support constent data access to physical memory ranges mapped into multiple locations of sparse buffers
+    sparseBinding = 0x00000000001 # Buffer should support sparse backing
+    sparseResidency = 0x00000000002 # Buffer should support sparse backing with partial residency
+    sparseAliased = 0x00000000004 # Buffer should support constant data access to physical memory ranges mapped into multiple locations of sparse buffers
     # Provided by VK_VERSION_1_1
-    protected = 0x00000008 # Buffer requires protected memory
+    protected = 0x00000000008 # Buffer requires protected memory
     # Provided by VK_VERSION_1_2
-    deviceAddressCaptureReplay = 0x00000010
+    deviceAddressCaptureReplay = 0x00000000010
+    # Provided by VK_AMD_extension_317
+    reserved5Amd = 0x00000000020
   BufferCreateFlags* = Flags[BufferCreateFlagBits]
   BufferUsageFlagBits* {.vkFlagBits.} = enum
-    transferSrc = 0x00000001 # Can be used as a source of transfer operations
-    transferDst = 0x00000002 # Can be used as a destination of transfer operations
-    uniformTexelBuffer = 0x00000004 # Can be used as TBO
-    storageTexelBuffer = 0x00000008 # Can be used as IBO
-    uniformBuffer = 0x00000010 # Can be used as UBO
-    storageBuffer = 0x00000020 # Can be used as SSBO
-    indexBuffer = 0x00000040 # Can be used as source of fixed-function index fetch (index buffer)
-    vertexBuffer = 0x00000080 # Can be used as source of fixed-function vertex fetch (VBO)
-    indirectBuffer = 0x00000100 # Can be the source of indirect parameters (e.g. indirect buffer, parameter buffer)
+    transferSrc = 0x00000000001 # Can be used as a source of transfer operations
+    transferDst = 0x00000000002 # Can be used as a destination of transfer operations
+    uniformTexelBuffer = 0x00000000004 # Can be used as TBO
+    storageTexelBuffer = 0x00000000008 # Can be used as IBO
+    uniformBuffer = 0x00000000010 # Can be used as UBO
+    storageBuffer = 0x00000000020 # Can be used as SSBO
+    indexBuffer = 0x00000000040 # Can be used as source of fixed-function index fetch (index buffer)
+    vertexBuffer = 0x00000000080 # Can be used as source of fixed-function vertex fetch (VBO)
+    indirectBuffer = 0x00000000100 # Can be the source of indirect parameters (e.g. indirect buffer, parameter buffer)
     # Provided by VK_EXT_conditional_rendering
-    conditionalRenderingExt = 0x00000200 # Specifies the buffer can be used as predicate in conditional rendering
-    # Provided by VK_KHR_ray_tracing
-    rayTracingKhr = 0x00000400
+    conditionalRenderingExt = 0x00000000200 # Specifies the buffer can be used as predicate in conditional rendering
+    # Provided by VK_KHR_ray_tracing_pipeline
+    shaderBindingTableKhr = 0x00000000400
     # Provided by VK_EXT_transform_feedback
-    transformFeedbackBufferExt = 0x00000800
-    transformFeedbackCounterBufferExt = 0x00001000
-    # Provided by VK_AMD_extension_25
-    reserved13Khr = 0x00002000
-    reserved14Khr = 0x00004000
-    # Provided by VK_AMD_extension_24
-    reserved15Khr = 0x00008000
-    reserved16Khr = 0x00010000
+    transformFeedbackBufferExt = 0x00000000800
+    transformFeedbackCounterBufferExt = 0x00000001000
+    # Provided by VK_KHR_video_decode_queue
+    videoDecodeSrcKhr = 0x00000002000
+    videoDecodeDstKhr = 0x00000004000
+    # Provided by VK_KHR_video_encode_queue
+    videoEncodeDstKhr = 0x00000008000
+    videoEncodeSrcKhr = 0x00000010000
     # Provided by VK_VERSION_1_2
-    shaderDeviceAddress = 0x00020000
+    shaderDeviceAddress = 0x00000020000
     # Provided by VK_QCOM_extension_173
-    reserved18Qcom = 0x00040000
-    # Provided by VK_NV_extension_168
-    reserved19Khr = 0x00080000
-    reserved20Khr = 0x00100000
+    reserved18Qcom = 0x00000040000
+    # Provided by VK_KHR_acceleration_structure
+    accelerationStructureBuildInputReadOnlyKhr = 0x00000080000
+    accelerationStructureStorageKhr = 0x00000100000
+    # Provided by VK_AMD_extension_317
+    reserved21Amd = 0x00000200000
+    reserved22Amd = 0x00000400000
   BufferUsageFlags* = Flags[BufferUsageFlagBits]
   SharingMode* {.vkEnum.} = enum
     exclusive = 0
@@ -1344,13 +1618,17 @@ type
     preinitialized = 8 # Initial layout used when the data is populated by the CPU
     # Provided by VK_KHR_swapchain
     presentSrcKhr = 1000001002
+    # Provided by VK_KHR_video_decode_queue
+    videoDecodeDstKhr = 1000024000
+    videoDecodeSrcKhr = 1000024001
+    videoDecodeDpbKhr = 1000024002
     # Provided by VK_KHR_shared_presentable_image
     sharedPresentKhr = 1000111000
     # Provided by VK_VERSION_1_1
     depthReadOnlyStencilAttachmentOptimal = 1000117000
     depthAttachmentStencilReadOnlyOptimal = 1000117001
-    # Provided by VK_NV_shading_rate_image
-    shadingRateOptimalNv = 1000164003
+    # Provided by VK_KHR_fragment_shading_rate
+    fragmentShadingRateAttachmentOptimalKhr = 1000164003
     # Provided by VK_EXT_fragment_density_map
     fragmentDensityMapOptimalExt = 1000218000
     # Provided by VK_VERSION_1_2
@@ -1358,6 +1636,13 @@ type
     depthReadOnlyOptimal = 1000241001
     stencilAttachmentOptimal = 1000241002
     stencilReadOnlyOptimal = 1000241003
+    # Provided by VK_KHR_video_encode_queue
+    videoEncodeDstKhr = 1000299000
+    videoEncodeSrcKhr = 1000299001
+    videoEncodeDpbKhr = 1000299002
+    # Provided by VK_KHR_synchronization2
+    readOnlyOptimalKhr = 1000314000
+    attachmentOptimalKhr = 1000314001
   ComponentSwizzle* {.vkEnum.} = enum
     identity = 0
     zero = 1
@@ -1368,9 +1653,9 @@ type
     a = 6
   ImageViewCreateFlagBits* {.vkFlagBits.} = enum
     # Provided by VK_EXT_fragment_density_map
-    fragmentDensityMapDynamicExt = 0x00000001
+    fragmentDensityMapDynamicExt = 0x00000000001
     # Provided by VK_EXT_fragment_density_map2
-    fragmentDensityMapDeferredExt = 0x00000002
+    fragmentDensityMapDeferredExt = 0x00000000002
   ImageViewCreateFlags* = Flags[ImageViewCreateFlagBits]
   ImageViewType* {.vkEnum.} = enum
     e1d = 0
@@ -1380,15 +1665,7 @@ type
     e1dArray = 4
     e2dArray = 5
     cubeArray = 6
-  ShaderModuleCreateFlagBits* {.vkFlagBits.} = enum
-    # Provided by VK_NV_extension_52
-    reserved0Nv = 0x00000001
-  ShaderModuleCreateFlags* = Flags[ShaderModuleCreateFlagBits]
-  PipelineCacheCreateFlagBits* {.vkFlagBits.} = enum
-    # Provided by VK_EXT_pipeline_creation_cache_control
-    externallySynchronizedExt = 0x00000001
-    # Provided by VK_GOOGLE_extension_196
-    reserved1Ext = 0x00000002
+  ShaderModuleCreateFlags* = Flags[distinct UnusedEnum]
   PipelineCacheCreateFlags* = Flags[PipelineCacheCreateFlagBits]
   BlendFactor* {.vkEnum.} = enum
     zero = 0
@@ -1464,10 +1741,10 @@ type
     greenExt = 1000148044
     blueExt = 1000148045
   ColorComponentFlagBits* {.vkFlagBits.} = enum
-    r = 0x00000001
-    g = 0x00000002
-    b = 0x00000004
-    a = 0x00000008
+    r = 0x00000000001
+    g = 0x00000000002
+    b = 0x00000000004
+    a = 0x00000000008
   ColorComponentFlags* = Flags[ColorComponentFlagBits]
   CompareOp* {.vkEnum.} = enum
     never = 0
@@ -1480,9 +1757,9 @@ type
     always = 7
   CullModeFlagBits* {.vkFlagBits.} = enum
     none = 0
-    front = 0x00000001
-    back = 0x00000002
-    frontAndBack = 0x00000003
+    front = 0x00000000001
+    back = 0x00000000002
+    frontAndBack = 0x00000000003
   CullModeFlags* = Flags[CullModeFlagBits]
   DynamicState* {.vkEnum.} = enum
     viewport = 0
@@ -1505,6 +1782,8 @@ type
     viewportCoarseSampleOrderNv = 1000164006
     # Provided by VK_NV_scissor_exclusive
     exclusiveScissorNv = 1000205001
+    # Provided by VK_KHR_fragment_shading_rate
+    fragmentShadingRateKhr = 1000226000
     # Provided by VK_EXT_line_rasterization
     lineStippleExt = 1000259000
     # Provided by VK_EXT_extended_dynamic_state
@@ -1520,6 +1799,18 @@ type
     depthBoundsTestEnableExt = 1000267009
     stencilTestEnableExt = 1000267010
     stencilOpExt = 1000267011
+    # Provided by VK_KHR_ray_tracing_pipeline
+    rayTracingPipelineStackSizeKhr = 1000347000
+    # Provided by VK_EXT_vertex_input_dynamic_state
+    vertexInputExt = 1000352000
+    # Provided by VK_EXT_extended_dynamic_state2
+    patchControlPointsExt = 1000377000
+    rasterizerDiscardEnableExt = 1000377001
+    depthBiasEnableExt = 1000377002
+    logicOpExt = 1000377003
+    primitiveRestartEnableExt = 1000377004
+    # Provided by VK_EXT_color_write_enable
+    colorWriteEnableExt = 1000381000
   FrontFace* {.vkEnum.} = enum
     counterClockwise = 0
     clockwise = 1
@@ -1540,37 +1831,47 @@ type
     orInverted = 13
     nand = 14
     set = 15
-  PipelineColorBlendStateCreateFlags* = Flags[distinct UnusedEnum]
+  PipelineColorBlendStateCreateFlags* = Flags[PipelineColorBlendStateCreateFlagBits]
+  # Note that the gap at bitpos 10 is unused, and can be reserved
   PipelineCreateFlagBits* {.vkFlagBits.} = enum
-    disableOptimization = 0x00000001
-    allowDerivatives = 0x00000002
-    derivative = 0x00000004
+    disableOptimization = 0x00000000001
+    allowDerivatives = 0x00000000002
+    derivative = 0x00000000004
     # Provided by VK_VERSION_1_1
-    viewIndexFromDeviceIndex = 0x00000008
-    dispatchBase = 0x00000010
+    viewIndexFromDeviceIndex = 0x00000000008
+    dispatchBase = 0x00000000010
     # Provided by VK_NV_ray_tracing
-    deferCompileNv = 0x00000020
+    deferCompileNv = 0x00000000020
     # Provided by VK_KHR_pipeline_executable_properties
-    captureStatisticsKhr = 0x00000040
-    captureInternalRepresentationsKhr = 0x00000080
+    captureStatisticsKhr = 0x00000000040
+    captureInternalRepresentationsKhr = 0x00000000080
     # Provided by VK_EXT_pipeline_creation_cache_control
-    failOnPipelineCompileRequiredExt = 0x00000100
-    earlyReturnOnFailureExt = 0x00000200
+    failOnPipelineCompileRequiredExt = 0x00000000100
+    earlyReturnOnFailureExt = 0x00000000200
+    # Provided by VK_AMD_extension_321
+    reserved10Amd = 0x00000000400
     # Provided by VK_KHR_pipeline_library
-    libraryKhr = 0x00000800
-    # Provided by VK_KHR_ray_tracing
-    rayTracingSkipTrianglesKhr = 0x00001000
-    rayTracingSkipAabbsKhr = 0x00002000
-    rayTracingNoNullAnyHitShadersKhr = 0x00004000
-    rayTracingNoNullClosestHitShadersKhr = 0x00008000
-    rayTracingNoNullMissShadersKhr = 0x00010000
-    rayTracingNoNullIntersectionShadersKhr = 0x00020000
+    libraryKhr = 0x00000000800
+    # Provided by VK_KHR_ray_tracing_pipeline
+    rayTracingSkipTrianglesKhr = 0x00000001000
+    rayTracingSkipAabbsKhr = 0x00000002000
+    rayTracingNoNullAnyHitShadersKhr = 0x00000004000
+    rayTracingNoNullClosestHitShadersKhr = 0x00000008000
+    rayTracingNoNullMissShadersKhr = 0x00000010000
+    rayTracingNoNullIntersectionShadersKhr = 0x00000020000
     # Provided by VK_NV_device_generated_commands
-    indirectBindableNv = 0x00040000
-    # Provided by VK_NV_extension_168
-    reserved19Khr = 0x00080000
+    indirectBindableNv = 0x00000040000
+    # Provided by VK_KHR_ray_tracing_pipeline
+    rayTracingShaderGroupHandleCaptureReplayKhr = 0x00000080000
+    # Provided by VK_NV_ray_tracing_motion_blur
+    rayTracingAllowMotionNv = 0x00000100000
+    # Provided by VK_KHR_dynamic_rendering
+    renderingFragmentShadingRateAttachmentKhr = 0x00000200000
+    renderingFragmentDensityMapAttachmentExt = 0x00000400000
+    # Provided by VK_AMD_extension_321
+    reserved23Amd = 0x00000800000
   PipelineCreateFlags* = Flags[PipelineCreateFlagBits]
-  PipelineDepthStencilStateCreateFlags* = Flags[distinct UnusedEnum]
+  PipelineDepthStencilStateCreateFlags* = Flags[PipelineDepthStencilStateCreateFlagBits]
   PipelineDynamicStateCreateFlags* = Flags[distinct UnusedEnum]
   PipelineInputAssemblyStateCreateFlags* = Flags[distinct UnusedEnum]
   PipelineLayoutCreateFlags* = Flags[distinct UnusedEnum]
@@ -1578,12 +1879,12 @@ type
   PipelineRasterizationStateCreateFlags* = Flags[distinct UnusedEnum]
   PipelineShaderStageCreateFlagBits* {.vkFlagBits.} = enum
     # Provided by VK_EXT_subgroup_size_control
-    allowVaryingSubgroupSizeExt = 0x00000001
-    requireFullSubgroupsExt = 0x00000002
+    allowVaryingSubgroupSizeExt = 0x00000000001
+    requireFullSubgroupsExt = 0x00000000002
     # Provided by VK_NV_extension_52
-    reserved2Nv = 0x00000004
+    reserved2Nv = 0x00000000004
     # Provided by VK_KHR_extension_297
-    reserved3Khr = 0x00000008
+    reserved3Khr = 0x00000000008
   PipelineShaderStageCreateFlags* = Flags[PipelineShaderStageCreateFlagBits]
   PipelineTessellationStateCreateFlags* = Flags[distinct UnusedEnum]
   PipelineVertexInputStateCreateFlags* = Flags[distinct UnusedEnum]
@@ -1607,24 +1908,26 @@ type
     triangleStripWithAdjacency = 9
     patchList = 10
   ShaderStageFlagBits* {.vkFlagBits.} = enum
-    vertex = 0x00000001
-    tessellationControl = 0x00000002
-    tessellationEvaluation = 0x00000004
-    geometry = 0x00000008
-    fragment = 0x00000010
-    allGraphics = 0x0000001F
-    compute = 0x00000020
+    vertex = 0x00000000001
+    tessellationControl = 0x00000000002
+    tessellationEvaluation = 0x00000000004
+    geometry = 0x00000000008
+    fragment = 0x00000000010
+    allGraphics = 0x0000000001F
+    compute = 0x00000000020
     # Provided by VK_NV_mesh_shader
-    taskNv = 0x00000040
-    meshNv = 0x00000080
-    # Provided by VK_KHR_ray_tracing
-    raygenKhr = 0x00000100
-    anyHitKhr = 0x00000200
-    closestHitKhr = 0x00000400
-    missKhr = 0x00000800
-    intersectionKhr = 0x00001000
-    callableKhr = 0x00002000
-    all = 0x7FFFFFFF
+    taskNv = 0x00000000040
+    meshNv = 0x00000000080
+    # Provided by VK_KHR_ray_tracing_pipeline
+    raygenKhr = 0x00000000100
+    anyHitKhr = 0x00000000200
+    closestHitKhr = 0x00000000400
+    missKhr = 0x00000000800
+    intersectionKhr = 0x00000001000
+    callableKhr = 0x00000002000
+    # Provided by VK_HUAWEI_subpass_shading
+    subpassShadingHuawei = 0x00000004000
+    all = 0x0007FFFFFFF
   ShaderStageFlags* = Flags[ShaderStageFlagBits]
   StencilOp* {.vkEnum.} = enum
     keep = 0
@@ -1662,23 +1965,37 @@ type
     mirrorClampToEdge = 4 # No need to add an extnumber attribute, since this uses a core enum value
   SamplerCreateFlagBits* {.vkFlagBits.} = enum
     # Provided by VK_EXT_fragment_density_map
-    subsampledExt = 0x00000001
-    subsampledCoarseReconstructionExt = 0x00000002
+    subsampledExt = 0x00000000001
+    subsampledCoarseReconstructionExt = 0x00000000002
+    # Provided by VK_EXT_disable_cube_map_wrap
+    reserved2Ext = 0x00000000004
+    # Provided by VK_AMD_extension_317
+    reserved3Amd = 0x00000000008
+    # Provided by VK_QCOM_extension_441
+    imageProcessingQcom = 0x00000000010
   SamplerCreateFlags* = Flags[SamplerCreateFlagBits]
   SamplerMipmapMode* {.vkEnum.} = enum
     nearest = 0 # Choose nearest mip level
     linear = 1 # Linear filter between mip levels
   DescriptorPoolCreateFlagBits* {.vkFlagBits.} = enum
-    freeDescriptorSet = 0x00000001 # Descriptor sets may be freed individually
+    freeDescriptorSet = 0x00000000001 # Descriptor sets may be freed individually
     # Provided by VK_VERSION_1_2
-    updateAfterBind = 0x00000002
+    updateAfterBind = 0x00000000002
+    # Provided by VK_VALVE_mutable_descriptor_type
+    hostOnlyValve = 0x00000000004
   DescriptorPoolCreateFlags* = Flags[DescriptorPoolCreateFlagBits]
   DescriptorPoolResetFlags* = Flags[distinct UnusedEnum]
   DescriptorSetLayoutCreateFlagBits* {.vkFlagBits.} = enum
     # Provided by VK_KHR_push_descriptor
-    pushDescriptorKhr = 0x00000001 # Descriptors are pushed via flink:vkCmdPushDescriptorSetKHR
+    pushDescriptorKhr = 0x00000000001 # Descriptors are pushed via flink:vkCmdPushDescriptorSetKHR
     # Provided by VK_VERSION_1_2
-    updateAfterBindPool = 0x00000002
+    updateAfterBindPool = 0x00000000002
+    # Provided by VK_VALVE_mutable_descriptor_type
+    hostOnlyPoolValve = 0x00000000004
+    # Provided by VK_AMD_extension_319
+    reserved3Amd = 0x00000000008
+    # Provided by VK_AMD_extension_317
+    reserved4Amd = 0x00000000010
   DescriptorSetLayoutCreateFlags* = Flags[DescriptorSetLayoutCreateFlagBits]
   DescriptorType* {.vkEnum.} = enum
     sampler = 0
@@ -1694,156 +2011,166 @@ type
     inputAttachment = 10
     # Provided by VK_EXT_inline_uniform_block
     inlineUniformBlockExt = 1000138000
-    # Provided by VK_KHR_ray_tracing
-    accelerationStructureKhr = 1000165000
+    # Provided by VK_KHR_acceleration_structure
+    accelerationStructureKhr = 1000150000
+    # Provided by VK_NV_ray_tracing
+    accelerationStructureNv = 1000165000
+    # Provided by VK_VALVE_mutable_descriptor_type
+    mutableValve = 1000351000
   AccessFlagBits* {.vkFlagBits.} = enum
-    indirectCommandRead = 0x00000001 # Controls coherency of indirect command reads
-    indexRead = 0x00000002 # Controls coherency of index reads
-    vertexAttributeRead = 0x00000004 # Controls coherency of vertex attribute reads
-    uniformRead = 0x00000008 # Controls coherency of uniform buffer reads
-    inputAttachmentRead = 0x00000010 # Controls coherency of input attachment reads
-    shaderRead = 0x00000020 # Controls coherency of shader reads
-    shaderWrite = 0x00000040 # Controls coherency of shader writes
-    colorAttachmentRead = 0x00000080 # Controls coherency of color attachment reads
-    colorAttachmentWrite = 0x00000100 # Controls coherency of color attachment writes
-    depthStencilAttachmentRead = 0x00000200 # Controls coherency of depth/stencil attachment reads
-    depthStencilAttachmentWrite = 0x00000400 # Controls coherency of depth/stencil attachment writes
-    transferRead = 0x00000800 # Controls coherency of transfer reads
-    transferWrite = 0x00001000 # Controls coherency of transfer writes
-    hostRead = 0x00002000 # Controls coherency of host reads
-    hostWrite = 0x00004000 # Controls coherency of host writes
-    memoryRead = 0x00008000 # Controls coherency of memory reads
-    memoryWrite = 0x00010000 # Controls coherency of memory writes
+    # Provided by VK_KHR_synchronization2
+    noneKhr = 0
+    indirectCommandRead = 0x00000000001 # Controls coherency of indirect command reads
+    indexRead = 0x00000000002 # Controls coherency of index reads
+    vertexAttributeRead = 0x00000000004 # Controls coherency of vertex attribute reads
+    uniformRead = 0x00000000008 # Controls coherency of uniform buffer reads
+    inputAttachmentRead = 0x00000000010 # Controls coherency of input attachment reads
+    shaderRead = 0x00000000020 # Controls coherency of shader reads
+    shaderWrite = 0x00000000040 # Controls coherency of shader writes
+    colorAttachmentRead = 0x00000000080 # Controls coherency of color attachment reads
+    colorAttachmentWrite = 0x00000000100 # Controls coherency of color attachment writes
+    depthStencilAttachmentRead = 0x00000000200 # Controls coherency of depth/stencil attachment reads
+    depthStencilAttachmentWrite = 0x00000000400 # Controls coherency of depth/stencil attachment writes
+    transferRead = 0x00000000800 # Controls coherency of transfer reads
+    transferWrite = 0x00000001000 # Controls coherency of transfer writes
+    hostRead = 0x00000002000 # Controls coherency of host reads
+    hostWrite = 0x00000004000 # Controls coherency of host writes
+    memoryRead = 0x00000008000 # Controls coherency of memory reads
+    memoryWrite = 0x00000010000 # Controls coherency of memory writes
     # Provided by VK_NV_device_generated_commands
-    commandPreprocessReadNv = 0x00020000
-    commandPreprocessWriteNv = 0x00040000
+    commandPreprocessReadNv = 0x00000020000
+    commandPreprocessWriteNv = 0x00000040000
     # Provided by VK_EXT_blend_operation_advanced
-    colorAttachmentReadNoncoherentExt = 0x00080000
+    colorAttachmentReadNoncoherentExt = 0x00000080000
     # Provided by VK_EXT_conditional_rendering
-    conditionalRenderingReadExt = 0x00100000 # read access flag for reading conditional rendering predicate
-    # Provided by VK_KHR_ray_tracing
-    accelerationStructureReadKhr = 0x00200000
-    accelerationStructureWriteKhr = 0x00400000
-    # Provided by VK_NV_shading_rate_image
-    shadingRateImageReadNv = 0x00800000
+    conditionalRenderingReadExt = 0x00000100000 # read access flag for reading conditional rendering predicate
+    # Provided by VK_KHR_acceleration_structure
+    accelerationStructureReadKhr = 0x00000200000
+    accelerationStructureWriteKhr = 0x00000400000
+    # Provided by VK_KHR_fragment_shading_rate
+    fragmentShadingRateAttachmentReadKhr = 0x00000800000
     # Provided by VK_EXT_fragment_density_map
-    fragmentDensityMapReadExt = 0x01000000
+    fragmentDensityMapReadExt = 0x00001000000
     # Provided by VK_EXT_transform_feedback
-    transformFeedbackWriteExt = 0x02000000
-    transformFeedbackCounterReadExt = 0x04000000
-    transformFeedbackCounterWriteExt = 0x08000000
-    # Provided by VK_AMD_extension_25
-    reserved28Khr = 0x10000000
-    reserved29Khr = 0x20000000
-    # Provided by VK_AMD_extension_24
-    reserved30Khr = 0x40000000
+    transformFeedbackWriteExt = 0x00002000000
+    transformFeedbackCounterReadExt = 0x00004000000
+    transformFeedbackCounterWriteExt = 0x00008000000
   AccessFlags* = Flags[AccessFlagBits]
   AttachmentDescriptionFlagBits* {.vkFlagBits.} = enum
-    mayAlias = 0x00000001 # The attachment may alias physical memory of another attachment in the same render pass
+    mayAlias = 0x00000000001 # The attachment may alias physical memory of another attachment in the same render pass
   AttachmentDescriptionFlags* = Flags[AttachmentDescriptionFlagBits]
   AttachmentLoadOp* {.vkEnum.} = enum
     load = 0
     clear = 1
     dontCare = 2
+    # Provided by VK_EXT_load_store_op_none
+    noneExt = 1000400000
   AttachmentStoreOp* {.vkEnum.} = enum
     store = 0
     dontCare = 1
-    # Provided by VK_QCOM_render_pass_store_ops
-    noneQcom = 1000301000
+    # Provided by VK_KHR_dynamic_rendering
+    noneKhr = 1000301000
   DependencyFlagBits* {.vkFlagBits.} = enum
-    byRegion = 0x00000001 # Dependency is per pixel region
+    byRegion = 0x00000000001 # Dependency is per pixel region
     # Provided by VK_VERSION_1_1
-    viewLocal = 0x00000002
-    deviceGroup = 0x00000004 # Dependency is across devices
+    viewLocal = 0x00000000002
+    deviceGroup = 0x00000000004 # Dependency is across devices
   DependencyFlags* = Flags[DependencyFlagBits]
   FramebufferCreateFlagBits* {.vkFlagBits.} = enum
     # Provided by VK_VERSION_1_2
-    imageless = 0x00000001
+    imageless = 0x00000000001
   FramebufferCreateFlags* = Flags[FramebufferCreateFlagBits]
   PipelineBindPoint* {.vkEnum.} = enum
     graphics = 0
     compute = 1
-    # Provided by VK_KHR_ray_tracing
+    # Provided by VK_KHR_ray_tracing_pipeline
     rayTracingKhr = 1000165000
+    # Provided by VK_HUAWEI_subpass_shading
+    subpassShadingHuawei = 1000369003
   RenderPassCreateFlagBits* {.vkFlagBits.} = enum
     # Provided by VK_KHR_extension_221
-    reserved0Khr = 0x00000001
+    reserved0Khr = 0x00000000001
     # Provided by VK_QCOM_render_pass_transform
-    transformQcom = 0x00000002
+    transformQcom = 0x00000000002
   RenderPassCreateFlags* = Flags[RenderPassCreateFlagBits]
   SubpassDescriptionFlagBits* {.vkFlagBits.} = enum
     # Provided by VK_NVX_multiview_per_view_attributes
-    perViewAttributesNvx = 0x00000001
-    perViewPositionXOnlyNvx = 0x00000002
+    perViewAttributesNvx = 0x00000000001
+    perViewPositionXOnlyNvx = 0x00000000002
     # Provided by VK_QCOM_render_pass_shader_resolve
-    fragmentRegionQcom = 0x00000004
-    shaderResolveQcom = 0x00000008
+    fragmentRegionQcom = 0x00000000004
+    shaderResolveQcom = 0x00000000008
+    # Provided by VK_ARM_rasterization_order_attachment_access
+    rasterizationOrderAttachmentColorAccessArm = 0x00000000010
+    rasterizationOrderAttachmentDepthAccessArm = 0x00000000020
+    rasterizationOrderAttachmentStencilAccessArm = 0x00000000040
   SubpassDescriptionFlags* = Flags[SubpassDescriptionFlagBits]
   CommandPoolCreateFlagBits* {.vkFlagBits.} = enum
-    transient = 0x00000001 # Command buffers have a short lifetime
-    resetCommandBuffer = 0x00000002 # Command buffers may release their memory individually
+    transient = 0x00000000001 # Command buffers have a short lifetime
+    resetCommandBuffer = 0x00000000002 # Command buffers may release their memory individually
     # Provided by VK_VERSION_1_1
-    protected = 0x00000004 # Command buffers allocated from pool are protected command buffers
+    protected = 0x00000000004 # Command buffers allocated from pool are protected command buffers
   CommandPoolCreateFlags* = Flags[CommandPoolCreateFlagBits]
   CommandPoolResetFlagBits* {.vkFlagBits.} = enum
-    releaseResources = 0x00000001 # Release resources owned by the pool
+    releaseResources = 0x00000000001 # Release resources owned by the pool
+    # Provided by VK_COREAVI_extension_444
+    reserved1Coreavi = 0x00000000002
   CommandPoolResetFlags* = Flags[CommandPoolResetFlagBits]
   CommandBufferLevel* {.vkEnum.} = enum
     primary = 0
     secondary = 1
   CommandBufferResetFlagBits* {.vkFlagBits.} = enum
-    releaseResources = 0x00000001 # Release resources owned by the buffer
+    releaseResources = 0x00000000001 # Release resources owned by the buffer
   CommandBufferResetFlags* = Flags[CommandBufferResetFlagBits]
   CommandBufferUsageFlagBits* {.vkFlagBits.} = enum
-    oneTimeSubmit = 0x00000001
-    renderPassContinue = 0x00000002
-    simultaneousUse = 0x00000004 # Command buffer may be submitted/executed more than once simultaneously
+    oneTimeSubmit = 0x00000000001
+    renderPassContinue = 0x00000000002
+    simultaneousUse = 0x00000000004 # Command buffer may be submitted/executed more than once simultaneously
   CommandBufferUsageFlags* = Flags[CommandBufferUsageFlagBits]
   QueryControlFlagBits* {.vkFlagBits.} = enum
-    precise = 0x00000001 # Require precise results to be collected by the query
+    precise = 0x00000000001 # Require precise results to be collected by the query
   QueryControlFlags* = Flags[QueryControlFlagBits]
   IndexType* {.vkEnum.} = enum
     uint16 = 0
     uint32 = 1
-    # Provided by VK_KHR_ray_tracing
+    # Provided by VK_KHR_acceleration_structure
     noneKhr = 1000165000
     # Provided by VK_EXT_index_type_uint8
     uint8Ext = 1000265000
   StencilFaceFlagBits* {.vkFlagBits.} = enum
-    front = 0x00000001 # Front face
-    back = 0x00000002 # Back face
-    frontAndBack = 0x00000003 # Front and back faces
+    front = 0x00000000001 # Front face
+    back = 0x00000000002 # Back face
+    frontAndBack = 0x00000000003 # Front and back faces
   StencilFaceFlags* = Flags[StencilFaceFlagBits]
   SubpassContents* {.vkEnum.} = enum
     inline = 0
     secondaryCommandBuffers = 1
-
   # VERSION 1 1
   # -----------
   SubgroupFeatureFlags* = Flags[SubgroupFeatureFlagBits]
   SubgroupFeatureFlagBits* {.vkFlagBits.} = enum
-    basic = 0x00000001 # Basic subgroup operations
-    vote = 0x00000002 # Vote subgroup operations
-    arithmetic = 0x00000004 # Arithmetic subgroup operations
-    ballot = 0x00000008 # Ballot subgroup operations
-    shuffle = 0x00000010 # Shuffle subgroup operations
-    shuffleRelative = 0x00000020 # Shuffle relative subgroup operations
-    clustered = 0x00000040 # Clustered subgroup operations
-    quad = 0x00000080 # Quad subgroup operations
+    basic = 0x00000000001 # Basic subgroup operations
+    vote = 0x00000000002 # Vote subgroup operations
+    arithmetic = 0x00000000004 # Arithmetic subgroup operations
+    ballot = 0x00000000008 # Ballot subgroup operations
+    shuffle = 0x00000000010 # Shuffle subgroup operations
+    shuffleRelative = 0x00000000020 # Shuffle relative subgroup operations
+    clustered = 0x00000000040 # Clustered subgroup operations
+    quad = 0x00000000080 # Quad subgroup operations
     # Provided by VK_NV_shader_subgroup_partitioned
-    partitionedNv = 0x00000100
+    partitionedNv = 0x00000000100
   PeerMemoryFeatureFlags* = Flags[PeerMemoryFeatureFlagBits]
   PeerMemoryFeatureFlagBits* {.vkFlagBits.} = enum
-    copySrc = 0x00000001 # Can read with vkCmdCopy commands
-    copyDst = 0x00000002 # Can write with vkCmdCopy commands
-    genericSrc = 0x00000004 # Can read with any access type/command
-    genericDst = 0x00000008 # Can write with and access type/command
+    copySrc = 0x00000000001 # Can read with vkCmdCopy commands
+    copyDst = 0x00000000002 # Can write with vkCmdCopy commands
+    genericSrc = 0x00000000004 # Can read with any access type/command
+    genericDst = 0x00000000008 # Can write with and access type/command
   MemoryAllocateFlags* = Flags[MemoryAllocateFlagBits]
   MemoryAllocateFlagBits* {.vkFlagBits.} = enum
-    deviceMask = 0x00000001 # Force allocation on specific devices
+    deviceMask = 0x00000000001 # Force allocation on specific devices
     # Provided by VK_VERSION_1_2
-    deviceAddress = 0x00000002
-    deviceAddressCaptureReplay = 0x00000004
+    deviceAddress = 0x00000000002
+    deviceAddressCaptureReplay = 0x00000000004
   CommandPoolTrimFlags* = Flags[distinct UnusedEnum]
   PointClippingBehavior* {.vkEnum.} = enum
     allClipPlanes = 0
@@ -1851,6 +2178,11 @@ type
   TessellationDomainOrigin* {.vkEnum.} = enum
     upperLeft = 0
     lowerLeft = 1
+  DeviceQueueCreateFlagBits* {.vkFlagBits.} = enum
+    # Provided by VK_VERSION_1_1
+    protected = 0x00000000001 # Queue is a protected-capable device queue
+    # Provided by VK_QCOM_extension_440
+    reserved1Qcom = 0x00000000002
   SamplerYcbcrModelConversion* {.vkEnum.} = enum
     rgbIdentity = 0
     ycbcrIdentity = 1 # just range expansion
@@ -1870,53 +2202,66 @@ type
     pushDescriptorsKhr = 1 # Create descriptor update template for pushed descriptor updates
   ExternalMemoryHandleTypeFlags* = Flags[ExternalMemoryHandleTypeFlagBits]
   ExternalMemoryHandleTypeFlagBits* {.vkFlagBits.} = enum
-    opaqueFd = 0x00000001
-    opaqueWin32 = 0x00000002
-    opaqueWin32Kmt = 0x00000004
-    d3d11Texture = 0x00000008
-    d3d11TextureKmt = 0x00000010
-    d3d12Heap = 0x00000020
-    d3d12Resource = 0x00000040
+    opaqueFd = 0x00000000001
+    opaqueWin32 = 0x00000000002
+    opaqueWin32Kmt = 0x00000000004
+    d3d11Texture = 0x00000000008
+    d3d11TextureKmt = 0x00000000010
+    d3d12Heap = 0x00000000020
+    d3d12Resource = 0x00000000040
     # Provided by VK_EXT_external_memory_host
-    hostAllocationExt = 0x00000080
-    hostMappedForeignMemoryExt = 0x00000100
+    hostAllocationExt = 0x00000000080
+    hostMappedForeignMemoryExt = 0x00000000100
     # Provided by VK_EXT_external_memory_dma_buf
-    dmaBufExt = 0x00000200
+    dmaBufExt = 0x00000000200
     # Provided by VK_ANDROID_external_memory_android_hardware_buffer
-    androidHardwareBufferAndroid = 0x00000400
+    androidHardwareBufferAndroid = 0x00000000400
+    # Provided by VK_FUCHSIA_external_memory
+    zirconVmoFuchsia = 0x00000000800
+    # Provided by VK_NV_external_memory_rdma
+    rdmaAddressNv = 0x00000001000
+    # Provided by VK_NV_extension_375
+    reserved13Nv = 0x00000002000
   ExternalMemoryFeatureFlags* = Flags[ExternalMemoryFeatureFlagBits]
   ExternalMemoryFeatureFlagBits* {.vkFlagBits.} = enum
-    dedicatedOnly = 0x00000001
-    exportable = 0x00000002
-    importable = 0x00000004
+    dedicatedOnly = 0x00000000001
+    exportable = 0x00000000002
+    importable = 0x00000000004
   ExternalFenceHandleTypeFlags* = Flags[ExternalFenceHandleTypeFlagBits]
   ExternalFenceHandleTypeFlagBits* {.vkFlagBits.} = enum
-    opaqueFd = 0x00000001
-    opaqueWin32 = 0x00000002
-    opaqueWin32Kmt = 0x00000004
-    syncFd = 0x00000008
+    opaqueFd = 0x00000000001
+    opaqueWin32 = 0x00000000002
+    opaqueWin32Kmt = 0x00000000004
+    syncFd = 0x00000000008
+    # Provided by VK_NV_extension_374
+    reserved4Nv = 0x00000000010
+    reserved5Nv = 0x00000000020
   ExternalFenceFeatureFlags* = Flags[ExternalFenceFeatureFlagBits]
   ExternalFenceFeatureFlagBits* {.vkFlagBits.} = enum
-    exportable = 0x00000001
-    importable = 0x00000002
+    exportable = 0x00000000001
+    importable = 0x00000000002
   FenceImportFlags* = Flags[FenceImportFlagBits]
   FenceImportFlagBits* {.vkFlagBits.} = enum
-    temporary = 0x00000001
+    temporary = 0x00000000001
   SemaphoreImportFlags* = Flags[SemaphoreImportFlagBits]
   SemaphoreImportFlagBits* {.vkFlagBits.} = enum
-    temporary = 0x00000001
+    temporary = 0x00000000001
   ExternalSemaphoreHandleTypeFlags* = Flags[ExternalSemaphoreHandleTypeFlagBits]
   ExternalSemaphoreHandleTypeFlagBits* {.vkFlagBits.} = enum
-    opaqueFd = 0x00000001
-    opaqueWin32 = 0x00000002
-    opaqueWin32Kmt = 0x00000004
-    d3d12Fence = 0x00000008
-    syncFd = 0x00000010
+    opaqueFd = 0x00000000001
+    opaqueWin32 = 0x00000000002
+    opaqueWin32Kmt = 0x00000000004
+    d3d12Fence = 0x00000000008
+    syncFd = 0x00000000010
+    # Provided by VK_NV_extension_374
+    reserved5Nv = 0x00000000020
+    reserved6Nv = 0x00000000040
+    # Provided by VK_FUCHSIA_external_semaphore
+    zirconEventFuchsia = 0x00000000080
   ExternalSemaphoreFeatureFlags* = Flags[ExternalSemaphoreFeatureFlagBits]
   ExternalSemaphoreFeatureFlagBits* {.vkFlagBits.} = enum
-    exportable = 0x00000001
-    importable = 0x00000002
-
+    exportable = 0x00000000001
+    importable = 0x00000000002
   # VERSION 1 2
   # -----------
   DriverId* {.vkEnum.} = enum
@@ -1934,22 +2279,31 @@ type
     broadcomProprietary = 12 # Broadcom Inc.
     mesaLlvmpipe = 13 # Mesa
     molten = 14 # MoltenVK
+    coreaviProprietary = 15 # Core Avionics & Industrial Inc.
+    juiceProprietary = 16 # Juice Technologies, Inc.
+    verisiliconProprietary = 17 # Verisilicon, Inc.
+    mesaTurnip = 18 # Mesa open source project
+    mesaV3dv = 19 # Mesa open source project
+    mesaPan = 20 # Mesa open source project
+    samsungProprietary = 21 # Samsung Electronics Co., Ltd.
   ShaderFloatControlsIndependence* {.vkEnum.} = enum
     e32Only = 0
     all = 1
     none = 2
   DescriptorBindingFlagBits* {.vkFlagBits.} = enum
-    updateAfterBind = 0x00000001
-    updateUnusedWhilePending = 0x00000002
-    partiallyBound = 0x00000004
-    variableDescriptorCount = 0x00000008
+    updateAfterBind = 0x00000000001
+    updateUnusedWhilePending = 0x00000000002
+    partiallyBound = 0x00000000004
+    variableDescriptorCount = 0x00000000008
+    # Provided by VK_QCOM_extension_369
+    reserved4Qcom = 0x00000000010
   DescriptorBindingFlags* = Flags[DescriptorBindingFlagBits]
   ResolveModeFlagBits* {.vkFlagBits.} = enum
     none = 0
-    sampleZero = 0x00000001
-    average = 0x00000002
-    min = 0x00000004
-    max = 0x00000008
+    sampleZero = 0x00000000001
+    average = 0x00000000002
+    min = 0x00000000004
+    max = 0x00000000008
   ResolveModeFlags* = Flags[ResolveModeFlagBits]
   SamplerReductionMode* {.vkEnum.} = enum
     weightedAverage = 0
@@ -1959,21 +2313,20 @@ type
     binary = 0
     timeline = 1
   SemaphoreWaitFlagBits* {.vkFlagBits.} = enum
-    any = 0x00000001
+    any = 0x00000000001
   SemaphoreWaitFlags* = Flags[SemaphoreWaitFlagBits]
-
-  # KHR surface
-  # -----------
+  # 
+  # 
   SurfaceTransformFlagBitsKHR* {.vkFlagBits.} = enum
-    identityKhr = 0x00000001
-    rotate90Khr = 0x00000002
-    rotate180Khr = 0x00000004
-    rotate270Khr = 0x00000008
-    horizontalMirrorKhr = 0x00000010
-    horizontalMirrorRotate90Khr = 0x00000020
-    horizontalMirrorRotate180Khr = 0x00000040
-    horizontalMirrorRotate270Khr = 0x00000080
-    inheritKhr = 0x00000100
+    identityKhr = 0x00000000001
+    rotate90Khr = 0x00000000002
+    rotate180Khr = 0x00000000004
+    rotate270Khr = 0x00000000008
+    horizontalMirrorKhr = 0x00000000010
+    horizontalMirrorRotate90Khr = 0x00000000020
+    horizontalMirrorRotate180Khr = 0x00000000040
+    horizontalMirrorRotate270Khr = 0x00000000080
+    inheritKhr = 0x00000000100
   PresentModeKHR* {.vkEnum.} = enum
     immediateKhr = 0
     mailboxKhr = 1
@@ -2002,74 +2355,47 @@ type
     # Provided by VK_AMD_display_native_hdr
     displayNativeAmd = 1000213000
   CompositeAlphaFlagBitsKHR* {.vkFlagBits.} = enum
-    opaqueKhr = 0x00000001
-    preMultipliedKhr = 0x00000002
-    postMultipliedKhr = 0x00000004
-    inheritKhr = 0x00000008
+    opaqueKhr = 0x00000000001
+    preMultipliedKhr = 0x00000000002
+    postMultipliedKhr = 0x00000000004
+    inheritKhr = 0x00000000008
   CompositeAlphaFlagsKHR* = Flags[CompositeAlphaFlagBitsKHR]
-
-  # KHR swapchain
-  # -------------
   SwapchainCreateFlagBitsKHR* {.vkFlagBits.} = enum
     # Provided by VK_KHR_swapchain
-    splitInstanceBindRegionsKhr = 0x00000001 # Allow images with VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT
-    protectedKhr = 0x00000002 # Swapchain is protected
+    splitInstanceBindRegionsKhr = 0x00000000001 # Allow images with VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT
+    protectedKhr = 0x00000000002 # Swapchain is protected
     # Provided by VK_KHR_swapchain_mutable_format
-    mutableFormatKhr = 0x00000004
+    mutableFormatKhr = 0x00000000004
   SwapchainCreateFlagsKHR* = Flags[SwapchainCreateFlagBitsKHR]
   DeviceGroupPresentModeFlagBitsKHR* {.vkFlagBits.} = enum
-    localKhr = 0x00000001 # Present from local memory
-    remoteKhr = 0x00000002 # Present from remote memory
-    sumKhr = 0x00000004 # Present sum of local and/or remote memory
-    localMultiDeviceKhr = 0x00000008 # Each physical device presents from local memory
+    localKhr = 0x00000000001 # Present from local memory
+    remoteKhr = 0x00000000002 # Present from remote memory
+    sumKhr = 0x00000000004 # Present sum of local and/or remote memory
+    localMultiDeviceKhr = 0x00000000008 # Each physical device presents from local memory
   DeviceGroupPresentModeFlagsKHR* = Flags[DeviceGroupPresentModeFlagBitsKHR]
-
-  # KHR display
-  # -----------
   DisplayModeCreateFlagsKHR* = Flags[distinct UnusedEnum]
   DisplayPlaneAlphaFlagBitsKHR* {.vkFlagBits.} = enum
-    opaqueKhr = 0x00000001
-    globalKhr = 0x00000002
-    perPixelKhr = 0x00000004
-    perPixelPremultipliedKhr = 0x00000008
+    opaqueKhr = 0x00000000001
+    globalKhr = 0x00000000002
+    perPixelKhr = 0x00000000004
+    perPixelPremultipliedKhr = 0x00000000008
   DisplayPlaneAlphaFlagsKHR* = Flags[DisplayPlaneAlphaFlagBitsKHR]
   DisplaySurfaceCreateFlagsKHR* = Flags[distinct UnusedEnum]
   SurfaceTransformFlagsKHR* = Flags[SurfaceTransformFlagBitsKHR]
-
-  # KHR xlib surface
-  # ----------------
   XlibSurfaceCreateFlagsKHR* = Flags[distinct UnusedEnum]
-
-  # KHR xcb surface
-  # ---------------
   XcbSurfaceCreateFlagsKHR* = Flags[distinct UnusedEnum]
-
-  # KHR wayland surface
-  # -------------------
   WaylandSurfaceCreateFlagsKHR* = Flags[distinct UnusedEnum]
-
-  # KHR android surface
-  # -------------------
   AndroidSurfaceCreateFlagsKHR* = Flags[distinct UnusedEnum]
-
-  # KHR win32 surface
-  # -----------------
   Win32SurfaceCreateFlagsKHR* = Flags[distinct UnusedEnum]
-
-  # ANDROID native buffer
-  # ---------------------
   SwapchainImageUsageFlagBitsANDROID* {.vkFlagBits.} = enum
-    sharedAndroid = 0x00000001
+    sharedAndroid = 0x00000000001
   SwapchainImageUsageFlagsANDROID* = Flags[SwapchainImageUsageFlagBitsANDROID]
-
-  # EXT debug report
-  # ----------------
   DebugReportFlagBitsEXT* {.vkFlagBits.} = enum
-    informationExt = 0x00000001
-    warningExt = 0x00000002
-    performanceWarningExt = 0x00000004
-    errorExt = 0x00000008
-    debugExt = 0x00000010
+    informationExt = 0x00000000001
+    warningExt = 0x00000000002
+    performanceWarningExt = 0x00000000004
+    errorExt = 0x00000000008
+    debugExt = 0x00000000010
   DebugReportFlagsEXT* = Flags[DebugReportFlagBitsEXT]
   DebugReportObjectTypeEXT* {.vkEnum.} = enum
     unknownExt = 0
@@ -2104,106 +2430,185 @@ type
     displayKhrExt = 29
     displayModeKhrExt = 30
     validationCacheExtExt = 33
+    # Provided by VK_NVX_binary_import
+    cuModuleNvxExt = 1000029000
+    cuFunctionNvxExt = 1000029001
     # Provided by VK_EXT_debug_report
     descriptorUpdateTemplateExt = 1000085000
+    # Provided by VK_KHR_acceleration_structure
+    accelerationStructureKhrExt = 1000150000
+    # Provided by VK_EXT_debug_report
     samplerYcbcrConversionExt = 1000156000
-    # Provided by VK_KHR_ray_tracing
-    accelerationStructureKhrExt = 1000165000
-
-  # AMD rasterization order
-  # -----------------------
+    # Provided by VK_NV_ray_tracing
+    accelerationStructureNvExt = 1000165000
+    # Provided by VK_FUCHSIA_buffer_collection
+    bufferCollectionFuchsiaExt = 1000366000
   RasterizationOrderAMD* {.vkEnum.} = enum
     strictAmd = 0
     relaxedAmd = 1
-
-  # EXT transform feedback
-  # ----------------------
+  VideoCodecOperationFlagBitsKHR* {.vkFlagBits.} = enum
+    invalidKhr = 0
+    # Provided by VK_EXT_video_decode_h264
+    decodeH264Ext = 0x00000000001
+    # Provided by VK_EXT_video_decode_h265
+    decodeH265Ext = 0x00000000002
+    # Provided by VK_EXT_video_encode_h264
+    encodeH264Ext = 0x00000010000
+    # Provided by VK_EXT_video_encode_h265
+    encodeH265Ext = 0x00000020000
+  VideoCodecOperationFlagsKHR* = Flags[VideoCodecOperationFlagBitsKHR]
+  # Vulkan video chroma subsampling definitions
+  VideoChromaSubsamplingFlagBitsKHR* {.vkFlagBits.} = enum
+    invalidKhr = 0
+    monochromeKhr = 0x00000000001
+    e420Khr = 0x00000000002
+    e422Khr = 0x00000000004
+    e444Khr = 0x00000000008
+  VideoChromaSubsamplingFlagsKHR* = Flags[VideoChromaSubsamplingFlagBitsKHR]
+  # Vulkan video component bit depth definitions
+  VideoComponentBitDepthFlagBitsKHR* {.vkFlagBits.} = enum
+    invalidKhr = 0
+    e8Khr = 0x00000000001
+    e10Khr = 0x00000000004
+    e12Khr = 0x00000000010
+  VideoComponentBitDepthFlagsKHR* = Flags[VideoComponentBitDepthFlagBitsKHR]
+  VideoCapabilityFlagBitsKHR* {.vkFlagBits.} = enum
+    protectedContentKhr = 0x00000000001
+    separateReferenceImagesKhr = 0x00000000002
+  VideoCapabilityFlagsKHR* = Flags[VideoCapabilityFlagBitsKHR]
+  VideoSessionCreateFlagBitsKHR* {.vkFlagBits.} = enum
+    defaultKhr = 0
+    protectedContentKhr = 0x00000000001
+  VideoSessionCreateFlagsKHR* = Flags[VideoSessionCreateFlagBitsKHR]
+  VideoBeginCodingFlagsKHR* = Flags[distinct UnusedEnum]
+  VideoEndCodingFlagsKHR* = Flags[distinct UnusedEnum]
+  VideoCodingControlFlagBitsKHR* {.vkFlagBits.} = enum
+    defaultKhr = 0
+    resetKhr = 0x00000000001
+  VideoCodingControlFlagsKHR* = Flags[VideoCodingControlFlagBitsKHR]
+  VideoCodingQualityPresetFlagBitsKHR* {.vkFlagBits.} = enum
+    normalKhr = 0x00000000001
+    powerKhr = 0x00000000002
+    qualityKhr = 0x00000000004
+  VideoCodingQualityPresetFlagsKHR* = Flags[VideoCodingQualityPresetFlagBitsKHR]
+  QueryResultStatusKHR* {.vkEnum.} = enum
+    errorKhr = -1
+    notReadyKhr = 0
+    completeKhr = 1
+  VideoDecodeFlagBitsKHR* {.vkFlagBits.} = enum
+    defaultKhr = 0
+    reserved0Khr = 0x00000000001
+  VideoDecodeFlagsKHR* = Flags[VideoDecodeFlagBitsKHR]
   PipelineRasterizationStateStreamCreateFlagsEXT* = Flags[distinct UnusedEnum]
-
-  # AMD shader info
-  # ---------------
+  VideoEncodeH264CapabilityFlagBitsEXT* {.vkFlagBits.} = enum
+    cabacExt = 0x00000000001
+    cavlcExt = 0x00000000002
+    weightedBiPredImplicitExt = 0x00000000004
+    transform8x8Ext = 0x00000000008
+    chromaQpOffsetExt = 0x00000000010
+    secondChromaQpOffsetExt = 0x00000000020
+    deblockingFilterDisabledExt = 0x00000000040
+    deblockingFilterEnabledExt = 0x00000000080
+    deblockingFilterPartialExt = 0x00000000100
+    multipleSlicePerFrameExt = 0x00000000200
+    evenlyDistributedSliceSizeExt = 0x00000000400
+  VideoEncodeH264CapabilityFlagsEXT* = Flags[VideoEncodeH264CapabilityFlagBitsEXT]
+  VideoEncodeH264InputModeFlagBitsEXT* {.vkFlagBits.} = enum
+    frameExt = 0x00000000001
+    sliceExt = 0x00000000002
+    nonVclExt = 0x00000000004
+  VideoEncodeH264InputModeFlagsEXT* = Flags[VideoEncodeH264InputModeFlagBitsEXT]
+  VideoEncodeH264OutputModeFlagBitsEXT* {.vkFlagBits.} = enum
+    frameExt = 0x00000000001
+    sliceExt = 0x00000000002
+    nonVclExt = 0x00000000004
+  VideoEncodeH264OutputModeFlagsEXT* = Flags[VideoEncodeH264OutputModeFlagBitsEXT]
+  VideoEncodeH264CreateFlagBitsEXT* {.vkFlagBits.} = enum
+    defaultExt = 0
+    reserved0Ext = 0x00000000001
+  VideoEncodeH264CreateFlagsEXT* = Flags[VideoEncodeH264CreateFlagBitsEXT]
+  VideoEncodeH264RateControlStructureFlagBitsEXT* {.vkFlagBits.} = enum
+    unknownExt = 0
+    flatExt = 0x00000000001
+    dyadicExt = 0x00000000002
+  VideoEncodeH264RateControlStructureFlagsEXT* = Flags[VideoEncodeH264RateControlStructureFlagBitsEXT]
+  VideoEncodeH265CapabilityFlagsEXT* = Flags[distinct UnusedEnum]
+  VideoEncodeH265InputModeFlagBitsEXT* {.vkFlagBits.} = enum
+    frameExt = 0x00000000001
+    sliceExt = 0x00000000002
+    nonVclExt = 0x00000000004
+  VideoEncodeH265InputModeFlagsEXT* = Flags[VideoEncodeH265InputModeFlagBitsEXT]
+  VideoEncodeH265OutputModeFlagBitsEXT* {.vkFlagBits.} = enum
+    frameExt = 0x00000000001
+    sliceExt = 0x00000000002
+    nonVclExt = 0x00000000004
+  VideoEncodeH265OutputModeFlagsEXT* = Flags[VideoEncodeH265OutputModeFlagBitsEXT]
+  VideoEncodeH265CreateFlagsEXT* = Flags[distinct UnusedEnum]
+  VideoEncodeH265CtbSizeFlagBitsEXT* {.vkFlagBits.} = enum
+    e8Ext = 0x00000000001
+    e16Ext = 0x00000000002
+    e32Ext = 0x00000000004
+    e64Ext = 0x00000000008
+  VideoEncodeH265CtbSizeFlagsEXT* = Flags[VideoEncodeH265CtbSizeFlagBitsEXT]
+  VideoEncodeH265RateControlStructureFlagBitsEXT* {.vkFlagBits.} = enum
+    unknownExt = 0
+    flatExt = 0x00000000001
+    dyadicExt = 0x00000000002
+  VideoEncodeH265RateControlStructureFlagsEXT* = Flags[VideoEncodeH265RateControlStructureFlagBitsEXT]
+  VideoDecodeH264PictureLayoutFlagBitsEXT* {.vkFlagBits.} = enum
+    progressiveExt = 0
+    interlacedInterleavedLinesExt = 0x00000000001
+    interlacedSeparatePlanesExt = 0x00000000002
+  VideoDecodeH264PictureLayoutFlagsEXT* = Flags[VideoDecodeH264PictureLayoutFlagBitsEXT]
+  VideoDecodeH264CreateFlagsEXT* = Flags[distinct UnusedEnum]
   ShaderInfoTypeAMD* {.vkEnum.} = enum
     statisticsAmd = 0
     binaryAmd = 1
     disassemblyAmd = 2
-
-  # GGP stream descriptor surface
-  # -----------------------------
+  RenderingFlagsKHR* = Flags[RenderingFlagBitsKHR]
+  RenderingFlagBitsKHR* {.vkFlagBits.} = enum
+    contentsSecondaryCommandBuffersKhr = 0x00000000001
+    suspendingKhr = 0x00000000002
+    resumingKhr = 0x00000000004
   StreamDescriptorSurfaceCreateFlagsGGP* = Flags[distinct UnusedEnum]
-
-  # NV external memory capabilities
-  # -------------------------------
   ExternalMemoryHandleTypeFlagsNV* = Flags[ExternalMemoryHandleTypeFlagBitsNV]
   ExternalMemoryHandleTypeFlagBitsNV* {.vkFlagBits.} = enum
-    opaqueWin32Nv = 0x00000001
-    opaqueWin32KmtNv = 0x00000002
-    d3d11ImageNv = 0x00000004
-    d3d11ImageKmtNv = 0x00000008
+    opaqueWin32Nv = 0x00000000001
+    opaqueWin32KmtNv = 0x00000000002
+    d3d11ImageNv = 0x00000000004
+    d3d11ImageKmtNv = 0x00000000008
   ExternalMemoryFeatureFlagsNV* = Flags[ExternalMemoryFeatureFlagBitsNV]
   ExternalMemoryFeatureFlagBitsNV* {.vkFlagBits.} = enum
-    dedicatedOnlyNv = 0x00000001
-    exportableNv = 0x00000002
-    importableNv = 0x00000004
-
-  # KHR device group
-  # ----------------
+    dedicatedOnlyNv = 0x00000000001
+    exportableNv = 0x00000000002
+    importableNv = 0x00000000004
   PeerMemoryFeatureFlagsKHR* = PeerMemoryFeatureFlags
   PeerMemoryFeatureFlagBitsKHR* = distinct UnusedEnum
   MemoryAllocateFlagsKHR* = MemoryAllocateFlags
   MemoryAllocateFlagBitsKHR* = distinct UnusedEnum
-
-  # EXT validation flags
-  # --------------------
   ValidationCheckEXT* {.vkEnum.} = enum
     allExt = 0
     shadersExt = 1
-
-  # NN vi surface
-  # -------------
   ViSurfaceCreateFlagsNN* = Flags[distinct UnusedEnum]
-
-  # KHR maintenance1
-  # ----------------
   CommandPoolTrimFlagsKHR* = CommandPoolTrimFlags
-
-  # KHR external memory capabilities
-  # --------------------------------
   ExternalMemoryHandleTypeFlagsKHR* = ExternalMemoryHandleTypeFlags
   ExternalMemoryHandleTypeFlagBitsKHR* = distinct UnusedEnum
   ExternalMemoryFeatureFlagsKHR* = ExternalMemoryFeatureFlags
   ExternalMemoryFeatureFlagBitsKHR* = distinct UnusedEnum
-
-  # KHR external semaphore capabilities
-  # -----------------------------------
   ExternalSemaphoreHandleTypeFlagsKHR* = ExternalSemaphoreHandleTypeFlags
   ExternalSemaphoreHandleTypeFlagBitsKHR* = distinct UnusedEnum
   ExternalSemaphoreFeatureFlagsKHR* = ExternalSemaphoreFeatureFlags
   ExternalSemaphoreFeatureFlagBitsKHR* = distinct UnusedEnum
-
-  # KHR external semaphore
-  # ----------------------
   SemaphoreImportFlagsKHR* = SemaphoreImportFlags
   SemaphoreImportFlagBitsKHR* = distinct UnusedEnum
-
-  # EXT conditional rendering
-  # -------------------------
   ConditionalRenderingFlagsEXT* = Flags[ConditionalRenderingFlagBitsEXT]
   ConditionalRenderingFlagBitsEXT* {.vkFlagBits.} = enum
-    invertedExt = 0x00000001
-
-  # KHR descriptor update template
-  # ------------------------------
+    invertedExt = 0x00000000001
   DescriptorUpdateTemplateCreateFlagsKHR* = DescriptorUpdateTemplateCreateFlags
   DescriptorUpdateTemplateTypeKHR* = distinct UnusedEnum
-
-  # EXT display surface counter
-  # ---------------------------
   SurfaceCounterFlagsEXT* = Flags[SurfaceCounterFlagBitsEXT]
   SurfaceCounterFlagBitsEXT* {.vkFlagBits.} = enum
-    vblankExt = 0x00000001
-
-  # EXT display control
-  # -------------------
+    vblankExt = 0x00000000001
   DisplayPowerStateEXT* {.vkEnum.} = enum
     offExt = 0
     suspendExt = 1
@@ -2212,9 +2617,6 @@ type
     displayHotplugExt = 0
   DisplayEventTypeEXT* {.vkEnum.} = enum
     firstPixelOutExt = 0
-
-  # NV viewport swizzle
-  # -------------------
   ViewportCoordinateSwizzleNV* {.vkEnum.} = enum
     positiveXNv = 0
     negativeXNv = 1
@@ -2225,44 +2627,26 @@ type
     positiveWNv = 6
     negativeWNv = 7
   PipelineViewportSwizzleStateCreateFlagsNV* = Flags[distinct UnusedEnum]
-
-  # EXT discard rectangles
-  # ----------------------
   PipelineDiscardRectangleStateCreateFlagsEXT* = Flags[distinct UnusedEnum]
   DiscardRectangleModeEXT* {.vkEnum.} = enum
     inclusiveExt = 0
     exclusiveExt = 1
-
-  # EXT conservative rasterization
-  # ------------------------------
   PipelineRasterizationConservativeStateCreateFlagsEXT* = Flags[distinct UnusedEnum]
   ConservativeRasterizationModeEXT* {.vkEnum.} = enum
     disabledExt = 0
     overestimateExt = 1
     underestimateExt = 2
-
-  # EXT depth clip enable
-  # ---------------------
   PipelineRasterizationDepthClipStateCreateFlagsEXT* = Flags[distinct UnusedEnum]
-
-  # KHR external fence capabilities
-  # -------------------------------
   ExternalFenceHandleTypeFlagsKHR* = ExternalFenceHandleTypeFlags
   ExternalFenceHandleTypeFlagBitsKHR* = distinct UnusedEnum
   ExternalFenceFeatureFlagsKHR* = ExternalFenceFeatureFlags
   ExternalFenceFeatureFlagBitsKHR* = distinct UnusedEnum
-
-  # KHR external fence
-  # ------------------
   FenceImportFlagsKHR* = FenceImportFlags
   FenceImportFlagBitsKHR* = distinct UnusedEnum
-
-  # KHR performance query
-  # ---------------------
   PerformanceCounterDescriptionFlagsKHR* = Flags[PerformanceCounterDescriptionFlagBitsKHR]
   PerformanceCounterDescriptionFlagBitsKHR* {.vkFlagBits.} = enum
-    performanceImpactingKhr = 0x00000001
-    concurrentlyImpactedKhr = 0x00000002
+    performanceImpactingKhr = 0x00000000001
+    concurrentlyImpactedKhr = 0x00000000002
   PerformanceCounterScopeKHR* {.vkEnum.} = enum
     commandBufferKhr = 0
     renderPassKhr = 1
@@ -2288,60 +2672,33 @@ type
     cyclesKhr = 10
   AcquireProfilingLockFlagsKHR* = Flags[AcquireProfilingLockFlagBitsKHR]
   AcquireProfilingLockFlagBitsKHR* = distinct UnusedEnum
-
-  # KHR maintenance2
-  # ----------------
   PointClippingBehaviorKHR* = distinct UnusedEnum
   TessellationDomainOriginKHR* = distinct UnusedEnum
-
-  # Mios surface
-  # ------------
   IOSSurfaceCreateFlagsMVK* = Flags[distinct UnusedEnum]
-
-  # Mmacos surface
-  # --------------
   MacOSSurfaceCreateFlagsMVK* = Flags[distinct UnusedEnum]
-
-  # EXT debug utils
-  # ---------------
   DebugUtilsMessageSeverityFlagBitsEXT* {.vkFlagBits.} = enum
-    verboseExt = 0x00000001
-    infoExt = 0x00000010
-    warningExt = 0x00000100
-    errorExt = 0x00001000
+    verboseExt = 0x00000000001
+    infoExt = 0x00000000010
+    warningExt = 0x00000000100
+    errorExt = 0x00000001000
   DebugUtilsMessageSeverityFlagsEXT* = Flags[DebugUtilsMessageSeverityFlagBitsEXT]
   DebugUtilsMessageTypeFlagBitsEXT* {.vkFlagBits.} = enum
-    generalExt = 0x00000001
-    validationExt = 0x00000002
-    performanceExt = 0x00000004
+    generalExt = 0x00000000001
+    validationExt = 0x00000000002
+    performanceExt = 0x00000000004
   DebugUtilsMessageTypeFlagsEXT* = Flags[DebugUtilsMessageTypeFlagBitsEXT]
   DebugUtilsMessengerCallbackDataFlagsEXT* = Flags[distinct UnusedEnum]
   DebugUtilsMessengerCreateFlagsEXT* = Flags[distinct UnusedEnum]
-
-  # EXT sampler filter minmax
-  # -------------------------
   SamplerReductionModeEXT* = distinct UnusedEnum
-
-  # EXT blend operation advanced
-  # ----------------------------
   BlendOverlapEXT* {.vkEnum.} = enum
     uncorrelatedExt = 0
     disjointExt = 1
     conjointExt = 2
-
-  # NV fragment coverage to color
-  # -----------------------------
   PipelineCoverageToColorStateCreateFlagsNV* = Flags[distinct UnusedEnum]
-
-  # KHR ray tracing
-  # ---------------
   AccelerationStructureTypeKHR* {.vkEnum.} = enum
     topLevelKhr = 0
     bottomLevelKhr = 1
-  RayTracingShaderGroupTypeKHR* {.vkEnum.} = enum
-    generalKhr = 0
-    trianglesHitGroupKhr = 1
-    proceduralHitGroupKhr = 2
+    genericKhr = 2
   AccelerationStructureBuildTypeKHR* {.vkEnum.} = enum
     hostKhr = 0
     deviceKhr = 1
@@ -2349,19 +2706,21 @@ type
   GeometryFlagsKHR* = Flags[GeometryFlagBitsKHR]
   GeometryInstanceFlagsKHR* = Flags[GeometryInstanceFlagBitsKHR]
   GeometryFlagBitsKHR* {.vkFlagBits.} = enum
-    opaqueKhr = 0x00000001
-    noDuplicateAnyHitInvocationKhr = 0x00000002
+    opaqueKhr = 0x00000000001
+    noDuplicateAnyHitInvocationKhr = 0x00000000002
   GeometryInstanceFlagBitsKHR* {.vkFlagBits.} = enum
-    triangleFacingCullDisableKhr = 0x00000001
-    triangleFrontCounterclockwiseKhr = 0x00000002
-    forceOpaqueKhr = 0x00000004
-    forceNoOpaqueKhr = 0x00000008
+    triangleFacingCullDisableKhr = 0x00000000001
+    triangleFlipFacingKhr = 0x00000000002
+    forceOpaqueKhr = 0x00000000004
+    forceNoOpaqueKhr = 0x00000000008
   BuildAccelerationStructureFlagBitsKHR* {.vkFlagBits.} = enum
-    allowUpdateKhr = 0x00000001
-    allowCompactionKhr = 0x00000002
-    preferFastTraceKhr = 0x00000004
-    preferFastBuildKhr = 0x00000008
-    lowMemoryKhr = 0x00000010
+    allowUpdateKhr = 0x00000000001
+    allowCompactionKhr = 0x00000000002
+    preferFastTraceKhr = 0x00000000004
+    preferFastBuildKhr = 0x00000000008
+    lowMemoryKhr = 0x00000000010
+    # Provided by VK_NV_ray_tracing_motion_blur
+    motionNv = 0x00000000020
   BuildAccelerationStructureFlagsKHR* = Flags[BuildAccelerationStructureFlagBitsKHR]
   CopyAccelerationStructureModeKHR* {.vkEnum.} = enum
     cloneKhr = 0
@@ -2371,41 +2730,41 @@ type
   GeometryTypeKHR* {.vkEnum.} = enum
     trianglesKhr = 0
     aabbsKhr = 1
-    # Provided by VK_KHR_ray_tracing
-    instancesKhr = 1000150000
-  AccelerationStructureMemoryRequirementsTypeKHR* {.vkEnum.} = enum
-    objectKhr = 0
-    buildScratchKhr = 1
-    updateScratchKhr = 2
-
-  # NV framebuffer mixed samples
-  # ----------------------------
+    instancesKhr = 2
+  AccelerationStructureCompatibilityKHR* {.vkEnum.} = enum
+    compatibleKhr = 0
+    incompatibleKhr = 1
+  AccelerationStructureCreateFlagBitsKHR* {.vkFlagBits.} = enum
+    deviceAddressCaptureReplayKhr = 0x00000000001
+    # Provided by VK_NV_ray_tracing_motion_blur
+    motionNv = 0x00000000004
+  AccelerationStructureCreateFlagsKHR* = Flags[AccelerationStructureCreateFlagBitsKHR]
+  BuildAccelerationStructureModeKHR* {.vkEnum.} = enum
+    buildKhr = 0
+    updateKhr = 1
+  RayTracingShaderGroupTypeKHR* {.vkEnum.} = enum
+    generalKhr = 0
+    trianglesHitGroupKhr = 1
+    proceduralHitGroupKhr = 2
+  ShaderGroupShaderKHR* {.vkEnum.} = enum
+    generalKhr = 0
+    closestHitKhr = 1
+    anyHitKhr = 2
+    intersectionKhr = 3
   PipelineCoverageModulationStateCreateFlagsNV* = Flags[distinct UnusedEnum]
   CoverageModulationModeNV* {.vkEnum.} = enum
     noneNv = 0
     rgbNv = 1
     alphaNv = 2
     rgbaNv = 3
-
-  # KHR sampler ycbcr conversion
-  # ----------------------------
   SamplerYcbcrModelConversionKHR* = distinct UnusedEnum
   SamplerYcbcrRangeKHR* = distinct UnusedEnum
   ChromaLocationKHR* = distinct UnusedEnum
-
-  # EXT validation cache
-  # --------------------
   ValidationCacheHeaderVersionEXT* {.vkEnum.} = enum
     oneExt = 1
   ValidationCacheCreateFlagsEXT* = Flags[distinct UnusedEnum]
-
-  # EXT descriptor indexing
-  # -----------------------
   DescriptorBindingFlagBitsEXT* = distinct UnusedEnum
   DescriptorBindingFlagsEXT* = DescriptorBindingFlags
-
-  # NV shading rate image
-  # ---------------------
   ShadingRatePaletteEntryNV* {.vkEnum.} = enum
     noInvocationsNv = 0
     e16InvocationsPerPixelNv = 1
@@ -2424,9 +2783,6 @@ type
     customNv = 1
     pixelMajorNv = 2
     sampleMajorNv = 3
-
-  # NV ray tracing
-  # --------------
   RayTracingShaderGroupTypeNV* = distinct UnusedEnum
   GeometryTypeNV* = distinct UnusedEnum
   AccelerationStructureTypeNV* = distinct UnusedEnum
@@ -2437,65 +2793,39 @@ type
   BuildAccelerationStructureFlagBitsNV* = distinct UnusedEnum
   BuildAccelerationStructureFlagsNV* = BuildAccelerationStructureFlagsKHR
   CopyAccelerationStructureModeNV* = distinct UnusedEnum
-  AccelerationStructureMemoryRequirementsTypeNV* = distinct UnusedEnum
-
-  # EXT global priority
-  # -------------------
+  AccelerationStructureMemoryRequirementsTypeNV* {.vkEnum.} = enum
+    objectNv = 0
+    buildScratchNv = 1
+    updateScratchNv = 2
   QueueGlobalPriorityEXT* {.vkEnum.} = enum
     lowExt = 128
     mediumExt = 256
     highExt = 512
     realtimeExt = 1024
-
-  # AMD pipeline compiler control
-  # -----------------------------
   PipelineCompilerControlFlagBitsAMD* = distinct UnusedEnum
   PipelineCompilerControlFlagsAMD* = Flags[PipelineCompilerControlFlagBitsAMD]
-
-  # EXT calibrated timestamps
-  # -------------------------
   TimeDomainEXT* {.vkEnum.} = enum
     deviceExt = 0
     clockMonotonicExt = 1
     clockMonotonicRawExt = 2
     queryPerformanceCounterExt = 3
-
-  # AMD memory overallocation behavior
-  # ----------------------------------
+  VideoDecodeH265CreateFlagsEXT* = Flags[distinct UnusedEnum]
   MemoryOverallocationBehaviorAMD* {.vkEnum.} = enum
     defaultAmd = 0
     allowedAmd = 1
     disallowedAmd = 2
-
-  # EXT pipeline creation feedback
-  # ------------------------------
   PipelineCreationFeedbackFlagBitsEXT* {.vkFlagBits.} = enum
-    validExt = 0x00000001
-    applicationPipelineCacheHitExt = 0x00000002
-    basePipelineAccelerationExt = 0x00000004
+    validExt = 0x00000000001
+    applicationPipelineCacheHitExt = 0x00000000002
+    basePipelineAccelerationExt = 0x00000000004
   PipelineCreationFeedbackFlagsEXT* = Flags[PipelineCreationFeedbackFlagBitsEXT]
-
-  # KHR driver properties
-  # ---------------------
   DriverIdKHR* = distinct UnusedEnum
-
-  # KHR shader float controls
-  # -------------------------
   ShaderFloatControlsIndependenceKHR* = distinct UnusedEnum
-
-  # KHR depth stencil resolve
-  # -------------------------
   ResolveModeFlagBitsKHR* = distinct UnusedEnum
   ResolveModeFlagsKHR* = ResolveModeFlags
-
-  # KHR timeline semaphore
-  # ----------------------
   SemaphoreTypeKHR* = distinct UnusedEnum
   SemaphoreWaitFlagBitsKHR* = distinct UnusedEnum
   SemaphoreWaitFlagsKHR* = SemaphoreWaitFlags
-
-  # INTEL performance query
-  # -----------------------
   PerformanceConfigurationTypeINTEL* {.vkEnum.} = enum
     commandQueueMetricsDiscoveryActivatedIntel = 0
   QueryPoolSamplingModeINTEL* {.vkEnum.} = enum
@@ -2512,35 +2842,26 @@ type
     floatIntel = 2
     boolIntel = 3
     stringIntel = 4
-
-  # FUCHSIA imagepipe surface
-  # -------------------------
   ImagePipeSurfaceCreateFlagsFUCHSIA* = Flags[distinct UnusedEnum]
-
-  # EXT metal surface
-  # -----------------
   MetalSurfaceCreateFlagsEXT* = Flags[distinct UnusedEnum]
-
-  # AMD shader core properties2
-  # ---------------------------
+  FragmentShadingRateCombinerOpKHR* {.vkEnum.} = enum
+    keepKhr = 0
+    replaceKhr = 1
+    minKhr = 2
+    maxKhr = 3
+    mulKhr = 4
   ShaderCorePropertiesFlagBitsAMD* = distinct UnusedEnum
   ShaderCorePropertiesFlagsAMD* = Flags[ShaderCorePropertiesFlagBitsAMD]
-
-  # EXT tooling info
-  # ----------------
   ToolPurposeFlagBitsEXT* {.vkFlagBits.} = enum
-    validationExt = 0x00000001
-    profilingExt = 0x00000002
-    tracingExt = 0x00000004
-    additionalFeaturesExt = 0x00000008
-    modifyingFeaturesExt = 0x00000010
+    validationExt = 0x00000000001
+    profilingExt = 0x00000000002
+    tracingExt = 0x00000000004
+    additionalFeaturesExt = 0x00000000008
+    modifyingFeaturesExt = 0x00000000010
     # Provided by VK_EXT_tooling_info
-    debugReportingExt = 0x00000020
-    debugMarkersExt = 0x00000040
+    debugReportingExt = 0x00000000020
+    debugMarkersExt = 0x00000000040
   ToolPurposeFlagsEXT* = Flags[ToolPurposeFlagBitsEXT]
-
-  # EXT validation features
-  # -----------------------
   ValidationFeatureEnableEXT* {.vkEnum.} = enum
     gpuAssistedExt = 0
     gpuAssistedReserveBindingSlotExt = 1
@@ -2555,9 +2876,7 @@ type
     objectLifetimesExt = 4
     coreChecksExt = 5
     uniqueHandlesExt = 6
-
-  # NV cooperative matrix
-  # ---------------------
+    shaderValidationCacheExt = 7
   ScopeNV* {.vkEnum.} = enum
     deviceNv = 1
     workgroupNv = 2
@@ -2575,46 +2894,31 @@ type
     uint16Nv = 8
     uint32Nv = 9
     uint64Nv = 10
-
-  # NV coverage reduction mode
-  # --------------------------
   PipelineCoverageReductionStateCreateFlagsNV* = Flags[distinct UnusedEnum]
   CoverageReductionModeNV* {.vkEnum.} = enum
     mergeNv = 0
     truncateNv = 1
-
-  # EXT full screen exclusive
-  # -------------------------
+  ProvokingVertexModeEXT* {.vkEnum.} = enum
+    firstVertexExt = 0
+    lastVertexExt = 1
   FullScreenExclusiveEXT* {.vkEnum.} = enum
     defaultExt = 0
     allowedExt = 1
     disallowedExt = 2
     applicationControlledExt = 3
-
-  # EXT headless surface
-  # --------------------
   HeadlessSurfaceCreateFlagsEXT* = Flags[distinct UnusedEnum]
-
-  # EXT line rasterization
-  # ----------------------
   LineRasterizationModeEXT* {.vkEnum.} = enum
     defaultExt = 0
     rectangularExt = 1
     bresenhamExt = 2
     rectangularSmoothExt = 3
-
-  # KHR pipeline executable properties
-  # ----------------------------------
   PipelineExecutableStatisticFormatKHR* {.vkEnum.} = enum
     bool32Khr = 0
     int64Khr = 1
     uint64Khr = 2
     float64Khr = 3
-
-  # NV device generated commands
-  # ----------------------------
   IndirectStateFlagBitsNV* {.vkFlagBits.} = enum
-    flagFrontfaceNv = 0x00000001
+    flagFrontfaceNv = 0x00000000001
   IndirectStateFlagsNV* = Flags[IndirectStateFlagBitsNV]
   IndirectCommandsTokenTypeNV* {.vkEnum.} = enum
     shaderGroupNv = 0
@@ -2626,34 +2930,228 @@ type
     drawNv = 6
     drawTasksNv = 7
   IndirectCommandsLayoutUsageFlagBitsNV* {.vkFlagBits.} = enum
-    explicitPreprocessNv = 0x00000001
-    indexedSequencesNv = 0x00000002
-    unorderedSequencesNv = 0x00000004
+    explicitPreprocessNv = 0x00000000001
+    indexedSequencesNv = 0x00000000002
+    unorderedSequencesNv = 0x00000000004
   IndirectCommandsLayoutUsageFlagsNV* = Flags[IndirectCommandsLayoutUsageFlagBitsNV]
-
-  # EXT private data
-  # ----------------
+  DeviceMemoryReportFlagsEXT* = Flags[distinct UnusedEnum]
+  DeviceMemoryReportEventTypeEXT* {.vkEnum.} = enum
+    allocateExt = 0
+    freeExt = 1
+    importExt = 2
+    unimportExt = 3
+    allocationFailedExt = 4
   PrivateDataSlotCreateFlagsEXT* = Flags[PrivateDataSlotCreateFlagBitsEXT]
   PrivateDataSlotCreateFlagBitsEXT* = distinct UnusedEnum
-
-  # NV device diagnostics config
-  # ----------------------------
+  PipelineCacheCreateFlagBits* {.vkFlagBits.} = enum
+    # Provided by VK_EXT_pipeline_creation_cache_control
+    externallySynchronizedExt = 0x00000000001
+    # Provided by VK_GOOGLE_extension_196
+    reserved1Ext = 0x00000000002
+    # Provided by VK_KHR_extension_299
+    reserved2Khr = 0x00000000004
+  VideoEncodeFlagBitsKHR* {.vkFlagBits.} = enum
+    defaultKhr = 0
+    reserved0Khr = 0x00000000001
+  VideoEncodeFlagsKHR* = Flags[VideoEncodeFlagBitsKHR]
+  VideoEncodeRateControlFlagBitsKHR* {.vkFlagBits.} = enum
+    defaultKhr = 0
+    reserved0Khr = 0x00000000001
+  VideoEncodeRateControlFlagsKHR* = Flags[VideoEncodeRateControlFlagBitsKHR]
+  VideoEncodeRateControlModeFlagBitsKHR* {.vkFlagBits.} = enum
+    noneKhr = 0
+    cbrKhr = 1
+    vbrKhr = 2
+  VideoEncodeRateControlModeFlagsKHR* = Flags[VideoEncodeRateControlModeFlagBitsKHR]
   DeviceDiagnosticsConfigFlagsNV* = Flags[DeviceDiagnosticsConfigFlagBitsNV]
   DeviceDiagnosticsConfigFlagBitsNV* {.vkFlagBits.} = enum
-    enableShaderDebugInfoNv = 0x00000001
-    enableResourceTrackingNv = 0x00000002
-    enableAutomaticCheckpointsNv = 0x00000004
-
-  # EXT directfb surface
-  # --------------------
+    enableShaderDebugInfoNv = 0x00000000001
+    enableResourceTrackingNv = 0x00000000002
+    enableAutomaticCheckpointsNv = 0x00000000004
+  PipelineStageFlags2KHR* = Flags[distinct UnusedEnum]
+  PipelineStageFlagBits2KHR* {.vkFlagBits.} = enum
+    pipelineStage2NoneKhr = 0
+    pipelineStage2TopOfPipeKhr = 0x00000000001
+    pipelineStage2DrawIndirectKhr = 0x00000000002
+    pipelineStage2VertexInputKhr = 0x00000000004
+    pipelineStage2VertexShaderKhr = 0x00000000008
+    pipelineStage2TessellationControlShaderKhr = 0x00000000010
+    pipelineStage2TessellationEvaluationShaderKhr = 0x00000000020
+    pipelineStage2GeometryShaderKhr = 0x00000000040
+    pipelineStage2FragmentShaderKhr = 0x00000000080
+    pipelineStage2EarlyFragmentTestsKhr = 0x00000000100
+    pipelineStage2LateFragmentTestsKhr = 0x00000000200
+    pipelineStage2ColorAttachmentOutputKhr = 0x00000000400
+    pipelineStage2ComputeShaderKhr = 0x00000000800
+    pipelineStage2AllTransferKhr = 0x00000001000
+    pipelineStage2BottomOfPipeKhr = 0x00000002000
+    pipelineStage2HostKhr = 0x00000004000
+    pipelineStage2AllGraphicsKhr = 0x00000008000
+    pipelineStage2AllCommandsKhr = 0x00000010000
+    # Provided by VK_KHR_synchronization2
+    pipelineStage2CommandPreprocessNv = 0x00000020000
+    pipelineStage2ConditionalRenderingExt = 0x00000040000 # A pipeline stage for conditional rendering predicate fetch
+    pipelineStage2TaskShaderNv = 0x00000080000
+    pipelineStage2MeshShaderNv = 0x00000100000
+    pipelineStage2RayTracingShaderKhr = 0x00000200000
+    pipelineStage2FragmentShadingRateAttachmentKhr = 0x00000400000
+    pipelineStage2FragmentDensityProcessExt = 0x00000800000
+    pipelineStage2TransformFeedbackExt = 0x00001000000
+    pipelineStage2AccelerationStructureBuildKhr = 0x00002000000
+    # Provided by VK_KHR_video_decode_queue
+    pipelineStage2VideoDecodeKhr = 0x00004000000
+    # Provided by VK_KHR_video_encode_queue
+    pipelineStage2VideoEncodeKhr = 0x00008000000
+    # Provided by VK_KHR_extension_387
+    pipelineStage2Reserved387Khr = 0x00010000000
+    pipelineStage2CopyKhr = 0x00100000000
+    pipelineStage2ResolveKhr = 0x00200000000
+    pipelineStage2BlitKhr = 0x00400000000
+    pipelineStage2ClearKhr = 0x00800000000
+    pipelineStage2IndexInputKhr = 0x01000000000
+    pipelineStage2VertexAttributeInputKhr = 0x02000000000
+    pipelineStage2PreRasterizationShadersKhr = 0x04000000000
+    # Provided by VK_HUAWEI_subpass_shading
+    pipelineStage2SubpassShadingHuawei = 0x08000000000
+    # Provided by VK_HUAWEI_invocation_mask
+    pipelineStage2InvocationMaskHuawei = 0x10000000000
+  AccessFlags2KHR* = Flags[distinct UnusedEnum]
+  AccessFlagBits2KHR* {.vkFlagBits.} = enum
+    access2NoneKhr = 0
+    access2IndirectCommandReadKhr = 0x00000000001
+    access2IndexReadKhr = 0x00000000002
+    access2VertexAttributeReadKhr = 0x00000000004
+    access2UniformReadKhr = 0x00000000008
+    access2InputAttachmentReadKhr = 0x00000000010
+    access2ShaderReadKhr = 0x00000000020
+    access2ShaderWriteKhr = 0x00000000040
+    access2ColorAttachmentReadKhr = 0x00000000080
+    access2ColorAttachmentWriteKhr = 0x00000000100
+    access2DepthStencilAttachmentReadKhr = 0x00000000200
+    access2DepthStencilAttachmentWriteKhr = 0x00000000400
+    access2TransferReadKhr = 0x00000000800
+    access2TransferWriteKhr = 0x00000001000
+    access2HostReadKhr = 0x00000002000
+    access2HostWriteKhr = 0x00000004000
+    access2MemoryReadKhr = 0x00000008000
+    access2MemoryWriteKhr = 0x00000010000
+    # Provided by VK_KHR_synchronization2
+    access2CommandPreprocessReadNv = 0x00000020000
+    access2CommandPreprocessWriteNv = 0x00000040000
+    access2ColorAttachmentReadNoncoherentExt = 0x00000080000
+    access2ConditionalRenderingReadExt = 0x00000100000 # read access flag for reading conditional rendering predicate
+    access2AccelerationStructureReadKhr = 0x00000200000
+    access2AccelerationStructureWriteKhr = 0x00000400000
+    access2FragmentShadingRateAttachmentReadKhr = 0x00000800000
+    access2FragmentDensityMapReadExt = 0x00001000000
+    access2TransformFeedbackWriteExt = 0x00002000000
+    access2TransformFeedbackCounterReadExt = 0x00004000000
+    access2TransformFeedbackCounterWriteExt = 0x00008000000
+    access2ShaderSampledReadKhr = 0x00100000000
+    access2ShaderStorageReadKhr = 0x00200000000
+    access2ShaderStorageWriteKhr = 0x00400000000
+    # Provided by VK_KHR_video_decode_queue
+    access2VideoDecodeReadKhr = 0x00800000000
+    access2VideoDecodeWriteKhr = 0x01000000000
+    # Provided by VK_KHR_video_encode_queue
+    access2VideoEncodeReadKhr = 0x02000000000
+    access2VideoEncodeWriteKhr = 0x04000000000
+    # Provided by VK_HUAWEI_invocation_mask
+    access2InvocationMaskReadHuawei = 0x08000000000
+    # Provided by VK_KHR_extension_387
+    access2Reserved387Khr = 0x10000000000
+    # Provided by VK_AMD_extension_317
+    access2Reserved41Amd = 0x20000000000
+  SubmitFlagBitsKHR* {.vkFlagBits.} = enum
+    protectedKhr = 0x00000000001
+  SubmitFlagsKHR* = Flags[SubmitFlagBitsKHR]
+  FragmentShadingRateNV* {.vkEnum.} = enum
+    e1InvocationPerPixelNv = 0
+    e1InvocationPer1x2PixelsNv = 1
+    e1InvocationPer2x1PixelsNv = 4
+    e1InvocationPer2x2PixelsNv = 5
+    e1InvocationPer2x4PixelsNv = 6
+    e1InvocationPer4x2PixelsNv = 9
+    e1InvocationPer4x4PixelsNv = 10
+    e2InvocationsPerPixelNv = 11
+    e4InvocationsPerPixelNv = 12
+    e8InvocationsPerPixelNv = 13
+    e16InvocationsPerPixelNv = 14
+    noInvocationsNv = 15
+  FragmentShadingRateTypeNV* {.vkEnum.} = enum
+    fragmentSizeNv = 0
+    enumsNv = 1
+  AccelerationStructureMotionInstanceTypeNV* {.vkEnum.} = enum
+    staticNv = 0
+    matrixMotionNv = 1
+    srtMotionNv = 2
+  AccelerationStructureMotionInfoFlagsNV* = Flags[distinct UnusedEnum]
+  AccelerationStructureMotionInstanceFlagsNV* = Flags[distinct UnusedEnum]
+  PipelineColorBlendStateCreateFlagBits* {.vkFlagBits.} = enum
+    # Provided by VK_ARM_rasterization_order_attachment_access
+    rasterizationOrderAttachmentAccessArm = 0x00000000001
+  PipelineDepthStencilStateCreateFlagBits* {.vkFlagBits.} = enum
+    # Provided by VK_ARM_rasterization_order_attachment_access
+    rasterizationOrderAttachmentDepthAccessArm = 0x00000000001
+    rasterizationOrderAttachmentStencilAccessArm = 0x00000000002
   DirectFBSurfaceCreateFlagsEXT* = Flags[distinct UnusedEnum]
-
-
-
-
-# ======================================================== #
-#                         aliases                          #
-# ======================================================== #
+  FormatFeatureFlags2KHR* = Flags[distinct UnusedEnum]
+  FormatFeatureFlagBits2KHR* {.vkFlagBits.} = enum
+    formatFeature2SampledImageKhr = 0x00000000001
+    formatFeature2StorageImageKhr = 0x00000000002
+    formatFeature2StorageImageAtomicKhr = 0x00000000004
+    formatFeature2UniformTexelBufferKhr = 0x00000000008
+    formatFeature2StorageTexelBufferKhr = 0x00000000010
+    formatFeature2StorageTexelBufferAtomicKhr = 0x00000000020
+    formatFeature2VertexBufferKhr = 0x00000000040
+    formatFeature2ColorAttachmentKhr = 0x00000000080
+    formatFeature2ColorAttachmentBlendKhr = 0x00000000100
+    formatFeature2DepthStencilAttachmentKhr = 0x00000000200
+    formatFeature2BlitSrcKhr = 0x00000000400
+    formatFeature2BlitDstKhr = 0x00000000800
+    formatFeature2SampledImageFilterLinearKhr = 0x00000001000
+    formatFeature2SampledImageFilterCubicExt = 0x00000002000
+    formatFeature2TransferSrcKhr = 0x00000004000
+    formatFeature2TransferDstKhr = 0x00000008000
+    formatFeature2SampledImageFilterMinmaxKhr = 0x00000010000
+    formatFeature2MidpointChromaSamplesKhr = 0x00000020000
+    formatFeature2SampledImageYcbcrConversionLinearFilterKhr = 0x00000040000
+    formatFeature2SampledImageYcbcrConversionSeparateReconstructionFilterKhr = 0x00000080000
+    formatFeature2SampledImageYcbcrConversionChromaReconstructionExplicitKhr = 0x00000100000
+    formatFeature2SampledImageYcbcrConversionChromaReconstructionExplicitForceableKhr = 0x00000200000
+    formatFeature2DisjointKhr = 0x00000400000
+    formatFeature2CositedChromaSamplesKhr = 0x00000800000
+    # Provided by VK_EXT_fragment_density_map
+    formatFeature2FragmentDensityMapExt = 0x00001000000
+    # Provided by VK_KHR_video_decode_queue
+    formatFeature2VideoDecodeOutputKhr = 0x00002000000
+    formatFeature2VideoDecodeDpbKhr = 0x00004000000
+    # Provided by VK_KHR_video_encode_queue
+    formatFeature2VideoEncodeInputKhr = 0x00008000000
+    formatFeature2VideoEncodeDpbKhr = 0x00010000000
+    # Provided by VK_KHR_acceleration_structure
+    formatFeature2AccelerationStructureVertexBufferKhr = 0x00020000000
+    # Provided by VK_KHR_fragment_shading_rate
+    formatFeature2FragmentShadingRateAttachmentKhr = 0x00040000000
+    formatFeature2StorageReadWithoutFormatKhr = 0x00080000000
+    formatFeature2StorageWriteWithoutFormatKhr = 0x00100000000
+    formatFeature2SampledImageDepthComparisonKhr = 0x00200000000
+    # Provided by VK_QCOM_extension_441
+    formatFeature2Reserved34Qcom = 0x00400000000
+    formatFeature2Reserved35Qcom = 0x00800000000
+    formatFeature2Reserved36Qcom = 0x01000000000
+    formatFeature2Reserved37Qcom = 0x02000000000
+    # Provided by VK_NV_linear_color_attachment
+    formatFeature2LinearColorAttachmentNv = 0x04000000000 # Format support linear image as render target, it cannot be mixed with non linear attachment
+  ImageFormatConstraintsFlagsFUCHSIA* = Flags[distinct UnusedEnum]
+  ImageConstraintsInfoFlagBitsFUCHSIA* {.vkFlagBits.} = enum
+    cpuReadRarelyFuchsia = 0x00000000001
+    cpuReadOftenFuchsia = 0x00000000002
+    cpuWriteRarelyFuchsia = 0x00000000004
+    cpuWriteOftenFuchsia = 0x00000000008
+    protectedOptionalFuchsia = 0x00000000010
+  ImageConstraintsInfoFlagsFUCHSIA* = Flags[ImageConstraintsInfoFlagBitsFUCHSIA]
+  ScreenSurfaceCreateFlagsQNX* = Flags[distinct UnusedEnum]
 
 
 ExternalSemaphoreFeatureFlagBits.defineAliases:
@@ -2665,7 +3163,6 @@ DebugReportObjectTypeEXT.defineAliases:
   validationCacheExtExt as validationCacheExt # Backwards-compatible alias containing a typo
   descriptorUpdateTemplateExt as descriptorUpdateTemplateKhrExt
   samplerYcbcrConversionExt as samplerYcbcrConversionKhrExt
-  accelerationStructureKhrExt as accelerationStructureNvExt
 
 DescriptorPoolCreateFlagBits.defineAliases:
   updateAfterBind as updateAfterBindExt
@@ -2681,14 +3178,13 @@ ExternalSemaphoreHandleTypeFlagBits.defineAliases:
 ObjectType.defineAliases:
   descriptorUpdateTemplate as descriptorUpdateTemplateKhr
   samplerYcbcrConversion as samplerYcbcrConversionKhr
-  accelerationStructureKhr as accelerationStructureNv
 
 GeometryFlagBitsKHR.defineAliases:
   opaqueKhr as opaqueNv
   noDuplicateAnyHitInvocationKhr as noDuplicateAnyHitInvocationNv
 
-DescriptorType.defineAliases:
-  accelerationStructureKhr as accelerationStructureNv
+ImageUsageFlagBits.defineAliases:
+  fragmentShadingRateAttachmentKhr as shadingRateImageNv
 
 FormatFeatureFlagBits.defineAliases:
   transferSrc as transferSrcKhr
@@ -2702,6 +3198,12 @@ FormatFeatureFlagBits.defineAliases:
   disjoint as disjointKhr
   cositedChromaSamples as cositedChromaSamplesKhr
   sampledImageFilterCubicImg as sampledImageFilterCubicExt
+
+PipelineStageFlagBits2KHR.defineAliases:
+  pipelineStage2AllTransferKhr as pipelineStage2TransferKhr
+  pipelineStage2FragmentShadingRateAttachmentKhr as pipelineStage2ShadingRateImageNv
+  pipelineStage2RayTracingShaderKhr as pipelineStage2RayTracingShaderNv
+  pipelineStage2AccelerationStructureBuildKhr as pipelineStage2AccelerationStructureBuildNv
 
 DescriptorBindingFlagBits.defineAliases:
   updateAfterBind as updateAfterBindExt
@@ -2757,12 +3259,15 @@ ExternalMemoryHandleTypeFlagBits.defineAliases:
   d3d12Resource as d3d12ResourceKhr
 
 PipelineCreateFlagBits.defineAliases:
+  renderingFragmentShadingRateAttachmentKhr as pipelineRasterizationStateCreateFragmentShadingRateAttachmentKhr
+  renderingFragmentDensityMapAttachmentExt as pipelineRasterizationStateCreateFragmentDensityMapAttachmentExt
   viewIndexFromDeviceIndex as viewIndexFromDeviceIndexKhr
   dispatchBase as dispatchBaseKhr
 
 ImageLayout.defineAliases:
   depthReadOnlyStencilAttachmentOptimal as depthReadOnlyStencilAttachmentOptimalKhr
   depthAttachmentStencilReadOnlyOptimal as depthAttachmentStencilReadOnlyOptimalKhr
+  fragmentShadingRateAttachmentOptimalKhr as shadingRateOptimalNv
   depthAttachmentOptimal as depthAttachmentOptimalKhr
   depthReadOnlyOptimal as depthReadOnlyOptimalKhr
   stencilAttachmentOptimal as stencilAttachmentOptimalKhr
@@ -2787,11 +3292,15 @@ BuildAccelerationStructureFlagBitsKHR.defineAliases:
 IndexType.defineAliases:
   noneKhr as noneNv
 
+PipelineCacheCreateFlagBits.defineAliases:
+  reserved1Ext as reserved1Khr
+
 DependencyFlagBits.defineAliases:
   viewLocal as viewLocalKhr
   deviceGroup as deviceGroupKhr
 
 PipelineStageFlagBits.defineAliases:
+  fragmentShadingRateAttachmentKhr as shadingRateImageNv
   rayTracingShaderKhr as rayTracingShaderNv
   accelerationStructureBuildKhr as accelerationStructureBuildNv
 
@@ -2804,7 +3313,7 @@ ShaderStageFlagBits.defineAliases:
   callableKhr as callableNv
 
 BufferUsageFlagBits.defineAliases:
-  rayTracingKhr as rayTracingNv
+  shaderBindingTableKhr as rayTracingNv
   shaderDeviceAddress as shaderDeviceAddressExt
   shaderDeviceAddress as shaderDeviceAddressKhr
 
@@ -2818,6 +3327,7 @@ CopyAccelerationStructureModeKHR.defineAliases:
   compactKhr as compactNv
 
 AccessFlagBits.defineAliases:
+  fragmentShadingRateAttachmentReadKhr as shadingRateImageReadNv
   accelerationStructureReadKhr as accelerationStructureReadNv
   accelerationStructureWriteKhr as accelerationStructureWriteNv
 
@@ -2859,15 +3369,16 @@ Result.defineAliases:
   errorInvalidOpaqueCaptureAddress as errorInvalidOpaqueCaptureAddressKhr
   pipelineCompileRequiredExt as errorPipelineCompileRequiredExt
 
-AccelerationStructureTypeKHR.defineAliases:
-  topLevelKhr as topLevelNv
-  bottomLevelKhr as bottomLevelNv
-
 GeometryInstanceFlagBitsKHR.defineAliases:
+  triangleFlipFacingKhr as triangleFrontCounterclockwiseKhr
   triangleFacingCullDisableKhr as triangleCullDisableNv
   triangleFrontCounterclockwiseKhr as triangleFrontCounterclockwiseNv
   forceOpaqueKhr as forceOpaqueNv
   forceNoOpaqueKhr as forceNoOpaqueNv
+
+AccelerationStructureTypeKHR.defineAliases:
+  topLevelKhr as topLevelNv
+  bottomLevelKhr as bottomLevelNv
 
 ResolveModeFlagBits.defineAliases:
   none as noneKhr
@@ -2925,6 +3436,7 @@ StructureType.defineAliases:
   physicalDeviceVariablePointersFeatures as physicalDeviceVariablePointerFeatures
   physicalDeviceShaderDrawParametersFeatures as physicalDeviceShaderDrawParameterFeatures
   debugReportCallbackCreateInfoExt as debugReportCreateInfoExt
+  attachmentSampleCountInfoAmd as attachmentSampleCountInfoNv
   renderPassMultiviewCreateInfo as renderPassMultiviewCreateInfoKhr
   physicalDeviceMultiviewFeatures as physicalDeviceMultiviewFeaturesKhr
   physicalDeviceMultiviewProperties as physicalDeviceMultiviewPropertiesKhr
@@ -3006,8 +3518,6 @@ StructureType.defineAliases:
   physicalDeviceDescriptorIndexingProperties as physicalDeviceDescriptorIndexingPropertiesExt
   descriptorSetVariableDescriptorCountAllocateInfo as descriptorSetVariableDescriptorCountAllocateInfoExt
   descriptorSetVariableDescriptorCountLayoutSupport as descriptorSetVariableDescriptorCountLayoutSupportExt
-  bindAccelerationStructureMemoryInfoKhr as bindAccelerationStructureMemoryInfoNv
-  writeDescriptorSetAccelerationStructureKhr as writeDescriptorSetAccelerationStructureNv
   physicalDeviceMaintenance3Properties as physicalDeviceMaintenance3PropertiesKhr
   descriptorSetLayoutSupport as descriptorSetLayoutSupportKhr
   physicalDeviceShaderSubgroupExtendedTypesFeatures as physicalDeviceShaderSubgroupExtendedTypesFeaturesKhr
@@ -3049,16 +3559,17 @@ PipelineBindPoint.defineAliases:
 FenceImportFlagBits.defineAliases:
   temporary as temporaryKhr
 
-QueryType.defineAliases:
-  accelerationStructureCompactedSizeKhr as accelerationStructureCompactedSizeNv
+AttachmentStoreOp.defineAliases:
+  noneKhr as noneQcom
+  noneKhr as noneExt
 
 SemaphoreWaitFlagBits.defineAliases:
   any as anyKhr
 
 PerformanceCounterScopeKHR.defineAliases:
-  commandBufferKhr as queryScopeCommandBufferKhr
-  renderPassKhr as queryScopeRenderPassKhr
-  commandKhr as queryScopeCommandKhr
+  commandBufferKhr as queryScopeCommandBufferKhr # Backwards-compatible alias containing a typo
+  renderPassKhr as queryScopeRenderPassKhr # Backwards-compatible alias containing a typo
+  commandKhr as queryScopeCommandKhr # Backwards-compatible alias containing a typo
 
 SemaphoreImportFlagBits.defineAliases:
   temporary as temporaryKhr
@@ -3079,11 +3590,6 @@ SamplerReductionMode.defineAliases:
   min as minExt
   max as maxExt
 
-AccelerationStructureMemoryRequirementsTypeKHR.defineAliases:
-  objectKhr as objectNv
-  buildScratchKhr as buildScratchNv
-  updateScratchKhr as updateScratchNv
-
 DescriptorUpdateTemplateType.defineAliases:
   descriptorSet as descriptorSetKhr
 
@@ -3095,8 +3601,13 @@ SamplerYcbcrRange.defineAliases:
   ituFull as ituFullKhr
   ituNarrow as ituNarrowKhr
 
+AccessFlagBits2KHR.defineAliases:
+  access2FragmentShadingRateAttachmentReadKhr as access2ShadingRateImageReadNv
+  access2AccelerationStructureReadKhr as access2AccelerationStructureReadNv
+  access2AccelerationStructureWriteKhr as access2AccelerationStructureWriteNv
+
 StencilFaceFlagBits.defineAliases:
-  frontAndBack as stencilFrontAndBack # Alias for backwards compatibility
+  frontAndBack as stencilFrontAndBack # Backwards-compatible alias containing a typo
 
 ColorSpaceKHR.defineAliases:
   srgbNonlinearKhr as colorspaceSrgbNonlinearKhr # Backwards-compatible alias containing a typo

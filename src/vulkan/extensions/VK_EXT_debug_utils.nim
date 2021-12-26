@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:13Z
+# Generated at 2021-12-26T16:57:01Z
 # VK_EXT_debug_utils
 
 import ../platform
@@ -22,13 +22,13 @@ type
     sType* {.constant: (StructureType.debugUtilsLabelExt).}: StructureType
     pNext* {.optional.}: pointer
     pLabelName*: cstring
-    color* {.optional.}: array[4, float32]
+    color*: array[4, float32]
   DebugUtilsMessengerCallbackDataEXT* = object
     sType* {.constant: (StructureType.debugUtilsMessengerCallbackDataExt).}: StructureType
     pNext* {.optional.}: pointer
     flags* {.optional.}: DebugUtilsMessengerCallbackDataFlagsEXT
     pMessageIdName* {.optional.}: cstring
-    messageIdNumber* {.optional.}: int32
+    messageIdNumber*: int32
     pMessage*: cstring
     queueLabelCount* {.optional.}: uint32
     pQueueLabels* {.length: queueLabelCount.}: arrPtr[DebugUtilsLabelEXT]

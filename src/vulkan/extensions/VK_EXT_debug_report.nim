@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-26T16:57:02Z
 # VK_EXT_debug_report
 
 import ../platform
@@ -8,7 +8,7 @@ import ../features/vk10
 prepareVulkanLibDef()
 
 const
-  ExtDebugReportSpecVersion* = 9
+  ExtDebugReportSpecVersion* = 10
   ExtDebugReportExtensionName* = "VK_EXT_debug_report"
 
 type

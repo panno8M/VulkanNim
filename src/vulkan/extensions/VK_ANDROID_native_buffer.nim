@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-26T16:57:01Z
 # VK_ANDROID_native_buffer
 
 import ../platform
@@ -10,8 +10,8 @@ prepareVulkanLibDef()
 const
   AndroidNativeBufferSpecVersion* = 8
   AndroidNativeBufferNumber* = 11
-  AndroidNativeBufferName* = "VK_ANDROID_native_buffer"
-  AndroidNativeBufferExtensionName* = AndroidNativeBufferName
+  AndroidNativeBufferExtensionName* = "VK_ANDROID_native_buffer"
+  AndroidNativeBufferName* = AndroidNativeBufferExtensionName
 
 type
   NativeBufferANDROID* = object

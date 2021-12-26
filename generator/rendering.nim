@@ -25,10 +25,10 @@ proc render*(enumVal: NodeEnumVal; vendorTags: VendorTags; enumsName: string): s
   result.add  do:
     case enumVal.kind
     of nkeValue:
-      if enumVal.isHex: "{name} = 0x{enumVal.value.toHex(8)}".fmt
+      if enumVal.isHex: "{name} = 0x{enumVal.value.toHex(11)}".fmt
       else: "{name} = {enumVal.value}".fmt
     of nkeBitpos:
-      "{name} = 0x{1.shl(enumVal.bitpos).toHex(8)}".fmt
+      "{name} = 0x{1.shl(enumVal.bitpos).toHex(11)}".fmt
 
   if enumVal.comment.isSome:
     result.add " # " & enumVal.comment.get

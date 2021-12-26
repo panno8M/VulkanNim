@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T12:56:20Z
+# Generated at 2021-12-26T17:28:39Z
 # vk12
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -214,12 +214,12 @@ type
     pNext* {.optional.}: pointer
     srcSubpass*: uint32
     dstSubpass*: uint32
-    srcStageMask*: PipelineStageFlags
-    dstStageMask*: PipelineStageFlags
+    srcStageMask* {.optional.}: PipelineStageFlags
+    dstStageMask* {.optional.}: PipelineStageFlags
     srcAccessMask* {.optional.}: AccessFlags
     dstAccessMask* {.optional.}: AccessFlags
     dependencyFlags* {.optional.}: DependencyFlags
-    viewOffset* {.optional.}: int32
+    viewOffset*: int32
   SubpassBeginInfo* = object
     sType* {.constant: (StructureType.subpassBeginInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -532,7 +532,7 @@ type
     pNext* {.optional.}: pointer
     memory*: DeviceMemory
 
-template apiVersion12*(): untyped = makeVersion(1, 2, 0)
+template apiVersion12*(): untyped = makeApiVersion(0, 1, 2, 0)
 
 
 # Promoted from VK_KHR_draw_indirect_count (extension 170)

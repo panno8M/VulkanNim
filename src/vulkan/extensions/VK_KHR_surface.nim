@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:13Z
+# Generated at 2021-12-26T16:57:01Z
 # VK_KHR_surface
 # VK_KHR_display
 
@@ -23,10 +23,10 @@ type
     minImageExtent*: Extent2D
     maxImageExtent*: Extent2D
     maxImageArrayLayers*: uint32
-    supportedTransforms* {.optional.}: SurfaceTransformFlagsKHR
+    supportedTransforms*: SurfaceTransformFlagsKHR
     currentTransform*: SurfaceTransformFlagBitsKHR
-    supportedCompositeAlpha* {.optional.}: CompositeAlphaFlagsKHR
-    supportedUsageFlags* {.optional.}: ImageUsageFlags
+    supportedCompositeAlpha*: CompositeAlphaFlagsKHR
+    supportedUsageFlags*: ImageUsageFlags
   SurfaceFormatKHR* = object
     format*: Format
     colorSpace*: ColorSpaceKHR
@@ -99,7 +99,7 @@ proc getPhysicalDeviceSurfaceCapabilitiesKHR*(
       lazyload("vkGetPhysicalDeviceSurfaceCapabilitiesKHR", InstanceLevel).}
 proc getPhysicalDeviceSurfaceFormatsKHR*(
       physicalDevice: PhysicalDevice;
-      surface: SurfaceKHR;
+      surface = default(SurfaceKHR);
       pSurfaceFormatCount: ptr uint32;
       pSurfaceFormats {.length: pSurfaceFormatCount.} = default(arrPtr[SurfaceFormatKHR]);
     ): Result {.cdecl,
@@ -108,7 +108,7 @@ proc getPhysicalDeviceSurfaceFormatsKHR*(
       lazyload("vkGetPhysicalDeviceSurfaceFormatsKHR", InstanceLevel).}
 proc getPhysicalDeviceSurfacePresentModesKHR*(
       physicalDevice: PhysicalDevice;
-      surface: SurfaceKHR;
+      surface = default(SurfaceKHR);
       pPresentModeCount: ptr uint32;
       pPresentModes {.length: pPresentModeCount.} = default(arrPtr[PresentModeKHR]);
     ): Result {.cdecl,

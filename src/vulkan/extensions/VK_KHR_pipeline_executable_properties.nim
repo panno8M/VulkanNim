@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-26T16:57:01Z
 # VK_KHR_pipeline_executable_properties
 
 import ../platform
@@ -51,7 +51,7 @@ type
     name*: array[MaxDescriptionSize, char]
     description*: array[MaxDescriptionSize, char]
     isText*: Bool32
-    dataSize* {.optional.}: uint
+    dataSize*: uint
     pData* {.optional, length: dataSize.}: pointer
 
 proc getPipelineExecutablePropertiesKHR*(

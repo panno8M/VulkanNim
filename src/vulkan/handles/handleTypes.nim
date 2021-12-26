@@ -20,19 +20,23 @@ type HandleTypes* = enum
   HtBufferView
   HtDebugUtilsMessengerEXT
   HtCommandPool
+  HtBufferCollectionFUCHSIA
   HtQueryPool
   HtImage
   HtDeviceMemory
   HtFramebuffer
+  HtCuModuleNVX
   HtPerformanceConfigurationINTEL
   HtIndirectCommandsLayoutNV
   HtDeferredOperationKHR
+  HtVideoSessionKHR
   HtQueue
   HtSampler
   HtRenderPass
   HtImageView
   HtPrivateDataSlotEXT
   HtSamplerYcbcrConversion
+  HtVideoSessionParametersKHR
   HtInstance
   HtDescriptorUpdateTemplate
   HtPhysicalDevice
@@ -41,4 +45,6 @@ type HandleTypes* = enum
   HtDescriptorSet
   HtEvent
   HtValidationCacheEXT
+  HtCuFunctionNVX
+  HtAccelerationStructureNV
   HtFence

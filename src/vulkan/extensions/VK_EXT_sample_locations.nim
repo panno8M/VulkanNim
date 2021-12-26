@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-26T16:57:01Z
 # VK_EXT_sample_locations
 
 import ../platform
@@ -19,7 +19,7 @@ type
   SampleLocationsInfoEXT* = object
     sType* {.constant: (StructureType.sampleLocationsInfoExt).}: StructureType
     pNext* {.optional.}: pointer
-    sampleLocationsPerPixel* {.optional.}: SampleCountFlagBits
+    sampleLocationsPerPixel*: SampleCountFlagBits
     sampleLocationGridSize*: Extent2D
     sampleLocationsCount* {.optional.}: uint32
     pSampleLocations* {.length: sampleLocationsCount.}: arrPtr[SampleLocationEXT]

@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-26T16:57:01Z
 # VK_KHR_maintenance3
 
 import ../platform
@@ -12,6 +12,8 @@ prepareVulkanLibDef()
 const
   KhrMaintenance3SpecVersion* = 1
   KhrMaintenance3ExtensionName* = "VK_KHR_maintenance3"
+  KhrMaintenance3SpecVersion* = KhrMaintenance3SpecVersion
+  KhrMaintenance3ExtensionName* = KhrMaintenance3ExtensionName
 
 type
   PhysicalDeviceMaintenance3PropertiesKHR* = object

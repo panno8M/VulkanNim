@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-26T16:57:01Z
 # VK_KHR_external_fence_win32
 
 import ../platform
@@ -18,7 +18,7 @@ type
     pNext* {.optional.}: pointer
     fence*: Fence
     flags* {.optional.}: FenceImportFlags
-    handleType* {.optional.}: ExternalFenceHandleTypeFlagBits
+    handleType*: ExternalFenceHandleTypeFlagBits
     handle* {.optional.}: Win32Handle
     name* {.optional.}: LPCWSTR
   ExportFenceWin32HandleInfoKHR* = object

@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-26T16:57:02Z
 # VK_KHR_incremental_present
 
 import ../platform
@@ -9,7 +9,7 @@ export VK_KHR_swapchain
 prepareVulkanLibDef()
 
 const
-  KhrIncrementalPresentSpecVersion* = 1
+  KhrIncrementalPresentSpecVersion* = 2
   KhrIncrementalPresentExtensionName* = "VK_KHR_incremental_present"
 
 type

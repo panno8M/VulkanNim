@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-26T16:57:02Z
 # VK_NV_shading_rate_image
 
 import ../platform
@@ -20,7 +20,7 @@ type
     sType* {.constant: (StructureType.pipelineViewportShadingRateImageStateCreateInfoNv).}: StructureType
     pNext* {.optional.}: pointer
     shadingRateImageEnable*: Bool32
-    viewportCount*: uint32
+    viewportCount* {.optional.}: uint32
     pShadingRatePalettes* {.length: viewportCount.}: arrPtr[ShadingRatePaletteNV]
   PhysicalDeviceShadingRateImageFeaturesNV* = object
     sType* {.constant: (StructureType.physicalDeviceShadingRateImageFeaturesNv).}: StructureType

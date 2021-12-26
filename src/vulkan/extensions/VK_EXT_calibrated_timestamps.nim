@@ -1,14 +1,15 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-26T16:57:01Z
 # VK_EXT_calibrated_timestamps
 
 import ../platform
 
 import ../features/vk10
-
+import ./VK_KHR_get_physical_device_properties2
+export VK_KHR_get_physical_device_properties2
 prepareVulkanLibDef()
 
 const
-  ExtCalibratedTimestampsSpecVersion* = 1
+  ExtCalibratedTimestampsSpecVersion* = 2
   ExtCalibratedTimestampsExtensionName* = "VK_EXT_calibrated_timestamps"
 
 type

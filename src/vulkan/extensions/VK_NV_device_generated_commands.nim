@@ -1,10 +1,11 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-26T16:57:02Z
 # VK_NV_device_generated_commands
 
 import ../platform
 
 import ../features/vk11
-
+import ./VK_KHR_buffer_device_address
+export VK_KHR_buffer_device_address
 prepareVulkanLibDef()
 
 const
@@ -76,7 +77,7 @@ type
   IndirectCommandsLayoutCreateInfoNV* = object
     sType* {.constant: (StructureType.indirectCommandsLayoutCreateInfoNv).}: StructureType
     pNext* {.optional.}: pointer
-    flags*: IndirectCommandsLayoutUsageFlagsNV
+    flags* {.optional.}: IndirectCommandsLayoutUsageFlagsNV
     pipelineBindPoint*: PipelineBindPoint
     tokenCount*: uint32
     pTokens* {.length: tokenCount.}: arrPtr[IndirectCommandsLayoutTokenNV]
@@ -95,9 +96,9 @@ type
     preprocessOffset*: DeviceSize
     preprocessSize*: DeviceSize
     sequencesCountBuffer* {.optional.}: Buffer
-    sequencesCountOffset* {.optional.}: DeviceSize
+    sequencesCountOffset*: DeviceSize
     sequencesIndexBuffer* {.optional.}: Buffer
-    sequencesIndexOffset* {.optional.}: DeviceSize
+    sequencesIndexOffset*: DeviceSize
   GeneratedCommandsMemoryRequirementsInfoNV* = object
     sType* {.constant: (StructureType.generatedCommandsMemoryRequirementsInfoNv).}: StructureType
     pNext* {.optional.}: pointer

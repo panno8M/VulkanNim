@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-26T16:57:02Z
 # VK_KHR_external_semaphore_win32
 
 import ../platform
@@ -18,7 +18,7 @@ type
     pNext* {.optional.}: pointer
     semaphore*: Semaphore
     flags* {.optional.}: SemaphoreImportFlags
-    handleType* {.optional.}: ExternalSemaphoreHandleTypeFlagBits
+    handleType*: ExternalSemaphoreHandleTypeFlagBits
     handle* {.optional.}: Win32Handle
     name* {.optional.}: LPCWSTR
   ExportSemaphoreWin32HandleInfoKHR* = object

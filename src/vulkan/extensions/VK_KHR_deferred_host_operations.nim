@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-26T16:57:02Z
 # VK_KHR_deferred_host_operations
 
 import ../platform
@@ -8,14 +8,8 @@ import ../features/vk10
 prepareVulkanLibDef()
 
 const
-  KhrDeferredHostOperationsSpecVersion* = 3
+  KhrDeferredHostOperationsSpecVersion* = 4
   KhrDeferredHostOperationsExtensionName* = "VK_KHR_deferred_host_operations"
-
-type
-  DeferredOperationInfoKHR* = object
-    sType* {.constant: (StructureType.deferredOperationInfoKhr).}: StructureType
-    pNext* {.optional.}: pointer
-    operationHandle*: DeferredOperationKHR
 
 proc createDeferredOperationKHR*(
       device: Device;

@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-26T16:57:01Z
 # VK_KHR_get_surface_capabilities2
 
 import ../platform
@@ -16,7 +16,7 @@ type
   PhysicalDeviceSurfaceInfo2KHR* = object
     sType* {.constant: (StructureType.physicalDeviceSurfaceInfo2Khr).}: StructureType
     pNext* {.optional.}: pointer
-    surface*: SurfaceKHR
+    surface* {.optional.}: SurfaceKHR
   SurfaceCapabilities2KHR* = object
     sType* {.constant: (StructureType.surfaceCapabilities2Khr).}: StructureType
     pNext* {.optional.}: pointer

@@ -169,7 +169,7 @@ proc genEnums*() =
     return none sstring
 
   block:
-    openFile( "src/vulkan/enum_features.nim" )
+    openFile( "src/vulkan/enums.nim" )
     file.write """
 
 import utils/enumutilities
@@ -180,6 +180,8 @@ import basetypes
     var results = sstring(kind: skBlock, title: "type")
     for x in xml.findAll("feature"):
       results.add renderComponent(x, enumAliases, rendered)
+    for x in xml.findAll("extensions"):
+      results.add renderComponent(x, enumAliases, rendered)
     
     file.write results
     file.write "\n\n\n"
@@ -189,30 +191,6 @@ import basetypes
       results.add val.render(resources.vendorTags)
 
     file.write $results
-
-  block:
-    openFile( "src/vulkan/enum_extensions.nim" )
-    file.write """
-
-import utils/enumutilities
-import basetypes
-import enum_features
-
-"""
-    var enumAliases = newTable[string, NodeEnumAliases]()
-    var results = sstring(kind: skBlock, title: "type")
-    for x in xml.findAll("extension"):
-      results.add renderComponent(x, enumAliases, rendered)
-    
-    file.write $results
-    file.write "\n\n\n"
-
-    results = sstring(kind: skBlock)
-    for key, val in enumAliases:
-      results.add val.render(resources.vendorTags)
-
-    file.write $results
-
 
 proc generate*() =
   var updatedFiles: seq[string]

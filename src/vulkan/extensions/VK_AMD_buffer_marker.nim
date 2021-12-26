@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-26T16:57:02Z
 # VK_AMD_buffer_marker
 
 import ../platform
@@ -13,7 +13,7 @@ const
 
 proc cmdWriteBufferMarkerAMD*(
       commandBuffer: CommandBuffer;
-      pipelineStage: PipelineStageFlagBits;
+      pipelineStage = default(PipelineStageFlagBits);
       dstBuffer: Buffer;
       dstOffset: DeviceSize;
       marker: uint32;

@@ -3,13 +3,15 @@
 # the generated program.
 type
   AHardwareBuffer* = distinct object
+  RemoteAddressNV* = distinct void
+  SampleMask* = distinct uint32
+  ANativeWindow* = distinct object
+  Flags64* = distinct uint64
+  DeviceAddress* = distinct uint64
   Bool32* = distinct uint32
   Flags*[Flagbits] = distinct uint32
   CAMetalLayer* = distinct object
   DeviceSize* = distinct uint64
-  SampleMask* = distinct uint32
-  ANativeWindow* = distinct object
-  DeviceAddress* = distinct uint64
 
 const
   # == Constants == #
@@ -17,8 +19,9 @@ const
   ShaderUnusedKhr* = (uint32.high)
   QueueFamilyExternal* = (uint32.high-1)
   QueueFamilyForeignExt* = (uint32.high-2)
-  LodClampNone* = 1000.0f
+  LodClampNone* = 1000.0F
   QueueFamilyIgnored* = (uint32.high)
+  MaxGlobalPrioritySizeExt* = 16
   RemainingArrayLayers* = (uint32.high)
   RemainingMipLevels* = (uint32.high)
   MaxExtensionNameSize* = 256

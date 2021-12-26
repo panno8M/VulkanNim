@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-26T16:57:01Z
 # VK_EXT_line_rasterization
 
 import ../platform
@@ -31,8 +31,8 @@ type
     pNext* {.optional.}: pointer
     lineRasterizationMode*: LineRasterizationModeEXT
     stippledLineEnable*: Bool32
-    lineStippleFactor* {.optional.}: uint32
-    lineStipplePattern* {.optional.}: uint16
+    lineStippleFactor*: uint32
+    lineStipplePattern*: uint16
 
 proc cmdSetLineStippleEXT*(
       commandBuffer: CommandBuffer;

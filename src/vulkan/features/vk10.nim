@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T13:08:32Z
+# Generated at 2021-12-26T17:37:10Z
 # vk10
 # Vulkan core API interface definitions
 # =====================================
@@ -76,6 +76,12 @@ type
     pNext* {.optional.}: pointer
     srcAccessMask* {.optional.}: AccessFlags
     dstAccessMask* {.optional.}: AccessFlags
+  PipelineCacheHeaderVersionOne* = object
+    headerSize*: uint32
+    headerVersion*: PipelineCacheHeaderVersion
+    vendorID*: uint32
+    deviceID*: uint32
+    pipelineCacheUUID*: array[UuidSize, uint8]
 
   # Device initialization
   # ---------------------
@@ -609,7 +615,7 @@ type
     pColorBlendState* {.optional.}: ptr PipelineColorBlendStateCreateInfo
     pDynamicState* {.optional.}: ptr PipelineDynamicStateCreateInfo
     layout*: PipelineLayout
-    renderPass*: RenderPass
+    renderPass* {.optional.}: RenderPass
     subpass*: uint32
     basePipelineHandle* {.optional.}: Pipeline
     basePipelineIndex*: int32
@@ -878,8 +884,8 @@ type
   SubpassDependency* = object
     srcSubpass*: uint32
     dstSubpass*: uint32
-    srcStageMask*: PipelineStageFlags
-    dstStageMask*: PipelineStageFlags
+    srcStageMask* {.optional.}: PipelineStageFlags
+    dstStageMask* {.optional.}: PipelineStageFlags
     srcAccessMask* {.optional.}: AccessFlags
     dstAccessMask* {.optional.}: AccessFlags
     dependencyFlags* {.optional.}: DependencyFlags
@@ -992,31 +998,37 @@ type
 
 # Header boilerplate
 # ------------------
-template defineHandle*(ObjectName: untyped) =
+template defineHandle*(ObjectName: untyped): untyped =
   type HtObjectName* = object of HandleType
   type ObjectName* = Handle[Ht`ObjectName`]
-template defineNonDispatchableHandle*(ObjectName: untyped) =
+
+template defineNonDispatchableHandle*(ObjectName: untyped): untyped =
   type HtObjectName* = object of HandleType
   type ObjectName* = NonDispatchableHandle[Ht`ObjectName`]
+template nullHandle*(): untyped = ( cast[Handle[HtNil]](0) )
 
 
 # API version macros
 # ------------------
-template apiVersion*(): untyped = makeVersion(1, 0, 0)
-template apiVersion10*(): untyped = makeVersion(1, 0, 0)
-template headerVersion*(): untyped = 152
+template apiVersion*(): untyped {.deprecated.} = makeVersion(1, 0, 0)
+template apiVersion10*(): untyped = makeApiVersion(0, 1, 0, 0)
+template headerVersion*(): untyped = 203
 template headerVersionComplete*(): untyped =
-  makeVersion(1, 2, headerVersion)
-template makeVersion*(major, minor, patch: uint32): untyped =
+  makeApiVersion(0, 1, 2, headerVersion())
+template makeVersion*(major, minor, patch: uint32): untyped {.deprecated: "makeApiVersion should be used instead.".} =
   ( (major shl 22) or (minor shl 12) or patch )
-template versionMajor*(major: uint32): untyped = ( major shl 22 )
-template versionMajor*(minor: uint32): untyped = ( minor shl 12 )
-template versionPatch*(patch: uint32): untyped = ( patch )
-
-
-# API constants
-# -------------
-template nullHandle*(): untyped = ( cast[NullHandle](0) )
+template versionMajor*(version: uint32): untyped {.deprecated: "apiVersionMajor should be used instead.".} =
+  (version shl 22)
+template versionMajor*(version: uint32): untyped {.deprecated: "apiVersionMinor should be used instead.".} = 
+  (version shl 12) and 0x3ffu
+template versionPatch*(version: uint32): untyped {.deprecated: "apiVersionPatch should be used instead.".} = 
+  (version) and 0xfffu
+template makeApiVersion*(variant, major, minor, patch: uint32): untyped =
+  (variant shl 29) or (major shl 22) or (minor shl 12) or patch
+template apiVersionVariant*(version: uint32): untyped = version shl 29
+template apiVersionMajor*(version: uint32): untyped = (version shl 22) and 0x7fu
+template apiVersionMinor*(version: uint32): untyped = (version shl 12) and 0x3ffu
+template apiVersionMinor*(version: uint32): untyped = (version) and 0xfffu
 
 
 # Device initialization
@@ -1988,19 +2000,19 @@ proc cmdResolveImage*(
 proc cmdSetEvent*(
       commandBuffer: CommandBuffer;
       event: Event;
-      stageMask: PipelineStageFlags;
+      stageMask = default(PipelineStageFlags);
     ): void {.cdecl, preload("vkCmdSetEvent").}
 proc cmdResetEvent*(
       commandBuffer: CommandBuffer;
       event: Event;
-      stageMask: PipelineStageFlags;
+      stageMask = default(PipelineStageFlags);
     ): void {.cdecl, preload("vkCmdResetEvent").}
 proc cmdWaitEvents*(
       commandBuffer: CommandBuffer;
       eventCount: uint32;
       pEvents {.length: eventCount.}: arrPtr[Event];
-      srcStageMask: PipelineStageFlags;
-      dstStageMask: PipelineStageFlags;
+      srcStageMask = default(PipelineStageFlags);
+      dstStageMask = default(PipelineStageFlags);
       memoryBarrierCount = default(uint32);
       pMemoryBarriers {.length: memoryBarrierCount.}: arrPtr[MemoryBarrier];
       bufferMemoryBarrierCount = default(uint32);
@@ -2010,8 +2022,8 @@ proc cmdWaitEvents*(
     ): void {.cdecl, preload("vkCmdWaitEvents").}
 proc cmdPipelineBarrier*(
       commandBuffer: CommandBuffer;
-      srcStageMask: PipelineStageFlags;
-      dstStageMask: PipelineStageFlags;
+      srcStageMask = default(PipelineStageFlags);
+      dstStageMask = default(PipelineStageFlags);
       dependencyFlags = default(DependencyFlags);
       memoryBarrierCount = default(uint32);
       pMemoryBarriers {.length: memoryBarrierCount.}: arrPtr[MemoryBarrier];

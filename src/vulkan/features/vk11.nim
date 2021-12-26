@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T12:56:20Z
+# Generated at 2021-12-26T17:28:39Z
 # vk11
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -242,8 +242,8 @@ type
     variablePointersStorageBuffer*: Bool32
     variablePointers*: Bool32
 
-  # Originally based on VK_KHR_protected_memory (extension 146), which was never published; thus the mystifying large value= numbers below. These are not aliased since they weren't actually promoted from an extension.
-  # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  # Originally based on VK_KHR_protected_memory (extension 146), which was never published; thus the mystifying large value= numbers below. These are not aliased since they were not actually promoted from an extension.
+  # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   PhysicalDeviceProtectedMemoryFeatures* = object
     sType* {.constant: (StructureType.physicalDeviceProtectedMemoryFeatures).}: StructureType
     pNext* {.optional.}: pointer
@@ -356,7 +356,7 @@ type
   ExternalMemoryImageCreateInfo* = object
     sType* {.constant: (StructureType.externalMemoryImageCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
-    handleTypes*: ExternalMemoryHandleTypeFlags
+    handleTypes* {.optional.}: ExternalMemoryHandleTypeFlags
   ExternalMemoryBufferCreateInfo* = object
     sType* {.constant: (StructureType.externalMemoryBufferCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
@@ -426,7 +426,7 @@ type
     pNext* {.optional.}: pointer
     shaderDrawParameters*: Bool32
 
-template apiVersion11*(): untyped = makeVersion(1, 1, 0)
+template apiVersion11*(): untyped = makeApiVersion(0, 1, 1, 0)
 
 
 # Device Initialization
@@ -564,8 +564,8 @@ proc trimCommandPool*(
     ): void {.cdecl, preload("vkTrimCommandPool").}
 
 
-# Originally based on VK_KHR_protected_memory (extension 146), which was never published; thus the mystifying large value= numbers below. These are not aliased since they weren't actually promoted from an extension.
-# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Originally based on VK_KHR_protected_memory (extension 146), which was never published; thus the mystifying large value= numbers below. These are not aliased since they were not actually promoted from an extension.
+# ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 proc getDeviceQueue2*(
       device: Device;
       pQueueInfo: ptr DeviceQueueInfo2;

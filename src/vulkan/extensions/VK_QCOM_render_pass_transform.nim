@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-26T16:57:01Z
 # VK_QCOM_render_pass_transform
 
 import ../platform
@@ -11,7 +11,7 @@ export VK_KHR_surface
 prepareVulkanLibDef()
 
 const
-  QcomRenderPassTransformSpecVersion* = 1
+  QcomRenderPassTransformSpecVersion* = 2
   QcomRenderPassTransformExtensionName* = "VK_QCOM_render_pass_transform"
 
 type

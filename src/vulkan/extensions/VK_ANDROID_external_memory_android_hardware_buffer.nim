@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-26T16:57:02Z
 # VK_ANDROID_external_memory_android_hardware_buffer
 
 import ../platform
@@ -8,14 +8,16 @@ import ./VK_KHR_sampler_ycbcr_conversion
 import ./VK_KHR_external_memory
 import ./VK_EXT_queue_family_foreign
 import ./VK_KHR_dedicated_allocation
+import ./VK_KHR_format_feature_flags2
 export VK_KHR_sampler_ycbcr_conversion
 export VK_KHR_external_memory
 export VK_EXT_queue_family_foreign
 export VK_KHR_dedicated_allocation
+export VK_KHR_format_feature_flags2
 prepareVulkanLibDef()
 
 const
-  AndroidExternalMemoryAndroidHardwareBufferSpecVersion* = 3
+  AndroidExternalMemoryAndroidHardwareBufferSpecVersion* = 4
   AndroidExternalMemoryAndroidHardwareBufferExtensionName* = "VK_ANDROID_external_memory_android_hardware_buffer"
 
 type
@@ -51,6 +53,18 @@ type
     sType* {.constant: (StructureType.externalFormatAndroid).}: StructureType
     pNext* {.optional.}: pointer
     externalFormat*: uint64
+
+  AndroidHardwareBufferFormatProperties2ANDROID* = object
+    sType* {.constant: (StructureType.androidHardwareBufferFormatProperties2Android).}: StructureType
+    pNext* {.optional.}: pointer
+    format*: Format
+    externalFormat*: uint64
+    formatFeatures*: FormatFeatureFlags2KHR
+    samplerYcbcrConversionComponents*: ComponentMapping
+    suggestedYcbcrModel*: SamplerYcbcrModelConversion
+    suggestedYcbcrRange*: SamplerYcbcrRange
+    suggestedXChromaOffset*: ChromaLocation
+    suggestedYChromaOffset*: ChromaLocation
 
 proc getAndroidHardwareBufferPropertiesANDROID*(
       device: Device;

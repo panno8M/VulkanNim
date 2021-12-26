@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-26T16:57:02Z
 # VK_EXT_debug_marker
 
 import ../platform
@@ -31,7 +31,7 @@ type
     sType* {.constant: (StructureType.debugMarkerMarkerInfoExt).}: StructureType
     pNext* {.optional.}: pointer
     pMarkerName*: cstring
-    color* {.optional.}: array[4, float32]
+    color*: array[4, float32]
 
 proc debugMarkerSetObjectTagEXT*(
       device: Device;
