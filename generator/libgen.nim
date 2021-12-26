@@ -192,8 +192,6 @@ proc generate*() =
           requires: @[newSeq[NodeRequire]()],
           fileName: name.parseFileName,
         )
-    if libFile.fileName == "features/vk10":
-      libFile.fileFooter = "generator/resources/additionalOperations.nim".readFile
 
     if (?comment).isSome:
       libFile.fileHeader.add comment.underline('=').commentify

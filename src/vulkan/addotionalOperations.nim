@@ -1,13 +1,16 @@
+import std/strutils
+import std/sequtils
+import std/options
+import std/sets
+import std/sugar
+import std/macros {.all.}
+
+import platform
+import basetypes
 
 # Bitmask operations
 # Utility for bitmask operation added independently
 # =================================================
-
-import strutils
-import sets
-import sugar
-import macros {.all.}
-import sequtils
 
 proc `==`*[Flagbits: enum](a, b: Flags[Flagbits]): bool =
   a.uint32 == b.uint32
