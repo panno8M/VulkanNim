@@ -45,6 +45,10 @@ proc `|>`*[T](arg: T; op: proc(arg: T)) =
     doAssert res == 30
   op(arg)
 
+proc add*[T](x: var seq[T], y: Option[T]) {.noSideEffect.} =
+  if y.isSome:
+    x.add y.get
+
 proc attrOrNone*(node: XmlNode; attrName: string): Option[string] =
   let attribute = node.attr(attrName)
   if not attribute.isEmptyOrWhitespace:

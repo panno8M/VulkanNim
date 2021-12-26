@@ -74,14 +74,20 @@ proc render*(enumAlias: NodeEnumAlias; vendorTags: VendorTags; enumName: string)
   return some res
 
 
-proc render*(enumAliases: NodeEnumAliases; vendorTags: VendorTags): string =
+proc render*(enumAliases: NodeEnumAliases; vendorTags: VendorTags): Option[string] =
   if enumAliases.aliases.len == 0: return
   let name = enumAliases.name.removeVkPrefix
-  result.add "{name}.defineAliases:\n".fmt
+  var res: string
+  var hasAny: bool
+  res.add "{name}.defineAliases:\n".fmt
   for alias in enumAliases.aliases:
     let elem = render(alias, vendorTags, name)
     if elem.isSome:
-      result.add elem.get.indent(2) & "\n"
+      res.add elem.get.indent(2) & "\n"
+      hasAny = true
+  
+  if hasAny: some res
+  else: none string
 
 
 proc render*(cons: NodeConst): string =

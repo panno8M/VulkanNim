@@ -23,3 +23,22 @@ macro defineAliases*(TEnum: typedesc; body: untyped): untyped =
     result = newStmtList()
     for alias in aliases:
       result.add "defineAlias({repr TEnum}, {alias.original}, {alias.alias})".fmt.parseStmt
+
+
+
+template flagbits* {.pragma.}
+type UnusedEnum* = object ## Reserved for future use
+
+macro vkEnum*(body) =
+  let pragma = body[0][1]
+  pragma.expectKind nnkPragma
+  pragma.add quote do: size(sizeof int32)
+  pragma.add quote do: pure
+  body
+
+macro vkFlagBits*(body) =
+  let pragma = body[0][1]
+  pragma.expectKind nnkPragma
+  pragma.add quote do: vkEnum
+  pragma.add quote do: flagbits
+  body

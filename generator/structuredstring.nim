@@ -1,5 +1,6 @@
 import std/sequtils
 import std/strutils
+import std/options
 type StrKind* = enum
   skLeaf
   skBlock
@@ -12,8 +13,20 @@ type sstring* = ref object
     title*: string
     sons*: seq[sstring]
 
+proc `%`*(str: string): sstring =
+  sstring(kind: skLeaf, item: str)
+
+proc comment*(str: string): sstring =
+  sstring(kind: skComment, item: str)
+
 proc add*(ss: sstring; item: sstring) =
   ss.sons.add item
+proc add*(ss: sstring; item: Option[sstring]) =
+  if item.isSome: ss.add item.get
+proc add*(ss: sstring; item: string) =
+  ss.add %item
+proc add*(ss: sstring; item: Option[string]) =
+  if item.isSome: ss.add item.get
 
 proc `&=`*(ss: sstring; item: string) =
   ss.item.add item
@@ -24,12 +37,6 @@ proc `[]`*(ss: sstring; index: int): sstring =
   ss.sons[index]
 
 proc get*(ss: sstring): var string = ss.item
-
-proc `%`*(str: string): sstring =
-  sstring(kind: skLeaf, item: str)
-
-proc comment*(str: string): sstring =
-  sstring(kind: skComment, item: str)
 
 proc `$`*(ss: sstring): string =
   case ss.kind

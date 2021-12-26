@@ -22,11 +22,6 @@ let logger = newMyLogger(open("log", fmWrite), fmtStr="[$time] - $levelname ".fm
 addHandler(logger)
 
 const libRoot = "src/vulkan"
-let dependencies = newTable [
-  ("VK_VERSION_1_0", @[("platform", false), ]),
-  ("VK_VERSION_1_1", @[("platform", false), ("features/vk10", true)]),
-  ("VK_VERSION_1_2", @[("platform", false), ("features/vk11", true)]),
-]
 
 let
   xml = getVulkanXML()
@@ -37,6 +32,38 @@ const warningText = """
 # Note that any changes to this file will be reset by the execution of
 # the generated program.
 """
+
+let components = newTable [
+  ("android", @[
+    "VK_ANDROID_external_memory_android_hardware_buffer",
+    "VK_ANDROID_native_buffer",
+    "VK_KHR_android_surface"]),
+  ("wayland", @[
+    "VK_KHR_wayland_surface"]),
+  ("win32", @[
+    "VK_KHR_win32_surface"]),
+  ("xcb", @[
+    "VK_KHR_xcb_surface"]),
+  ("xlib", @[
+    "VK_KHR_xlib_surface"]),
+  ("ios", @[
+    "VK_MVK_ios_surface"]),
+  ("macos", @[
+    "VK_MVK_macos_surface"]),
+  ("vi", @[
+    "VK_NN_vi_surface"]),
+  ("mir", @[
+    "VK_KHR_mir_surface"]),
+  ("ggp", @[
+    "VK_GGP_stream_descriptor_surface"]),
+  ("directfb", @[
+    "VK_EXT_directfb_surface"]),
+  ("metal", @[
+    "VK_EXT_metal_surface"]),
+  ("fuchsia", @[
+    "VK_FUCHSIA_imagepipe_surface"]),
+]
+
 
 proc genBaseTypes*() =
   let file = open("src/vulkan/basetypes.nim", fmWrite)
@@ -70,7 +97,7 @@ proc genHandles* =
     handleTypes.add %"HtNil"
     for key, val in resources.handles:
       let str = val.renderHandleType()
-      if str.isSome: handleTypes.add %str.get
+      handleTypes.add str
     file.write $handleTypes
 
   block Handles:
@@ -91,36 +118,25 @@ import handleOperations
 
 proc genEnums*() =
   var rendered: seq[string]
-  let file = open("src/vulkan/enums.nim", fmWrite)
-  defer: close file
-  file.write warningText
-  file.write """
 
-import utils/enumAliases
-import basetypes
+  template openFile(filePath: string) =
+    let file {.inject.} = filePath.open(fmWrite)
+    defer: close file
+    file.write warningText
 
-{.pragma: vkEnum, size(sizeof(int32)), pure.}
-{.pragma: vkFlagBits, vkEnum, flagbits.}
-template flagbits* {.pragma.}
 
-type UnusedEnum* = object ## Reserved for future use
-
-type
-"""
-  var enumAliases = newTable[string, NodeEnumAliases]()
-
-  template renderEnums =
-    var results: seq[string]
-    for requiresXml in x.findAll("require"):
+  proc renderComponent(feature: XmlNode, enumAliases: TableRef[string, NodeEnumAliases], rendered: var seq[string]): Option[sstring] =
+    var res = sstring(kind: skBlock)
+    for requiresXml in feature.findAll("require"):
       for req in requiresXml.extractNodeRequire.targets:
         if req.name in rendered: continue
         case req.kind
 
         of nkrType:
           if resources.enums.haskey(req.name):
-            results.add render( resources.enums[req.name], resources.vendorTags ).`$`.indent(2)
+            res.add render( resources.enums[req.name], resources.vendorTags )
           elif resources.bitmasks.hasKey(req.name):
-            results.add render( resources.bitmasks[req.name] ).indent(2)
+            res.add render( resources.bitmasks[req.name] )
           if resources.enumAliases.hasKey(req.name):
             enumAliases[req.name] = resources.enumAliases[req.name]
           rendered.add req.name
@@ -142,35 +158,61 @@ type
 
         else: discard
 
-    if results.len > 0:
-      file.write x{"name"}
+    if res.sons.len > 0:
+      res.sons.insert( %feature{"name"}
         .removeVkPrefix
         .replace("_", " ")
         .underline('-')
-        .commentify
-        .indent(2) & "\n"
-      file.write results.join("\n")
-      file.write "\n\n"
+        .commentify,
+        0)
+      return some res
+    return none sstring
 
-  for x in xml.findAll("feature"): renderEnums
-  for x in xml.findAll("extension"): renderEnums
+  block:
+    openFile( "src/vulkan/enum_features.nim" )
+    file.write """
 
-  file.write """
-
-
-
-# ======================================================== #
-#                         aliases                          #
-# ======================================================== #
-
+import utils/enumutilities
+import basetypes
 
 """
+    var enumAliases = newTable[string, NodeEnumAliases]()
+    var results = sstring(kind: skBlock, title: "type")
+    for x in xml.findAll("feature"):
+      results.add renderComponent(x, enumAliases, rendered)
+    
+    file.write results
+    file.write "\n\n\n"
 
-  var results: seq[string]
-  for key, val in enumAliases:
-    results.add val.render(resources.vendorTags)
+    results = sstring(kind: skBlock)
+    for key, val in enumAliases:
+      results.add val.render(resources.vendorTags)
 
-  file.write results.join("\n")
+    file.write $results
+
+  block:
+    openFile( "src/vulkan/enum_extensions.nim" )
+    file.write """
+
+import utils/enumutilities
+import basetypes
+import enum_features
+
+"""
+    var enumAliases = newTable[string, NodeEnumAliases]()
+    var results = sstring(kind: skBlock, title: "type")
+    for x in xml.findAll("extension"):
+      results.add renderComponent(x, enumAliases, rendered)
+    
+    file.write $results
+    file.write "\n\n\n"
+
+    results = sstring(kind: skBlock)
+    for key, val in enumAliases:
+      results.add val.render(resources.vendorTags)
+
+    file.write $results
+
 
 proc generate*() =
   var updatedFiles: seq[string]
