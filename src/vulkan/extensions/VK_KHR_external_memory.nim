@@ -1,7 +1,8 @@
-# Generated at 2021-12-25T14:21:16Z
+# Generated at 2021-12-26T10:16:14Z
 # VK_KHR_external_memory
 
 import ../platform
+
 import ../features/vk10
 import ./VK_KHR_external_memory_capabilities
 import ../features/vk11

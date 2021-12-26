@@ -1,8 +1,7 @@
-# Generated at 2021-12-26T09:55:04Z
+# Generated at 2021-12-26T10:17:10Z
 # vk10
 # Vulkan core API interface definitions
 # =====================================
-
 import ../platform
 
 prepareVulkanLibDef()

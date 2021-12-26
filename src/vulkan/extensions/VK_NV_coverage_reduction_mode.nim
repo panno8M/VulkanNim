@@ -1,7 +1,8 @@
-# Generated at 2021-12-25T14:19:30Z
+# Generated at 2021-12-26T10:16:14Z
 # VK_NV_coverage_reduction_mode
 
 import ../platform
+
 import ../features/vk10
 import ./VK_NV_framebuffer_mixed_samples
 export VK_NV_framebuffer_mixed_samples

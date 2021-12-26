@@ -1,7 +1,8 @@
-# Generated at 2021-12-26T08:21:17Z
+# Generated at 2021-12-26T10:16:14Z
 # VK_NV_device_generated_commands
 
 import ../platform
+
 import ../features/vk11
 
 prepareVulkanLibDef()

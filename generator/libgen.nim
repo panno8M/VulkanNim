@@ -171,9 +171,7 @@ type
 
 proc generate*() =
   var updatedFiles: seq[string]
-  var library = [
-    ("platform", LibFile(fileName: "platform", fileHeader: "generator/resources/platform.nim".readFile))
-  ].newTable
+  var library = new Library
   let fileGroup = [
     ("extensions/VK_KHR_surface", @["extensions/VK_KHR_display", #["extensions/VK_KHR_swapchain"]#]),
     ("extensions/VK_KHR_draw_indirect_count", @["extensions/VK_AMD_draw_indirect_count",]),
@@ -190,7 +188,6 @@ proc generate*() =
       libFile = LibFile(
           requires: @[newSeq[NodeRequire]()],
           fileName: name.parseFileName,
-          deps: dependencies[name]
         )
     if libFile.fileName == "features/vk10":
       libFile.fileFooter = "generator/resources/additionalOperations.nim".readFile
@@ -198,12 +195,13 @@ proc generate*() =
     if (?comment).isSome:
       libFile.fileHeader &= comment.underline('=').commentify
 
+    libFile.fileHeader &= "\nimport ../platform"
+
     for require in feature.findAll("require"):
       libFile.requires[^1].add require.extractNodeRequire
 
     library[libFile.fileName] = libFile
 
-  let dependenciesBasic = @[("platform", false)]
   let customFeature = [
     ("extensions/VK_ANDROID_external_memory_android_hardware_buffer", "features/vk11"),
     ("extensions/VK_EXT_external_memory_host", "features/vk11"),
@@ -239,7 +237,6 @@ proc generate*() =
       libFile = LibFile(
         requires: @[newSeq[NodeRequire]()],
         fileName: name.parseFileName,
-        deps: dependenciesBasic
       )
     if customFeature.hasKey(libFile.fileName):
       libFile.deps.add (customFeature[libFile.fileName], false)
@@ -252,6 +249,8 @@ proc generate*() =
 
     if (?extension.comment).isSome:
       libFile.fileHeader &= extension.comment.underline('=').commentify
+
+    libFile.fileHeader &= "\nimport ../platform"
 
     for require in extension.findAll("require"):
       if (?require{"extension"}).isSome:

@@ -1,7 +1,8 @@
-# Generated at 2021-12-25T14:19:39Z
+# Generated at 2021-12-26T10:16:14Z
 # VK_KHR_device_group
 
 import ../platform
+
 import ../features/vk10
 import ./VK_KHR_device_group_creation
 import ../features/vk11

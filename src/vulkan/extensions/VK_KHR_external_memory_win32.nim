@@ -1,7 +1,8 @@
-# Generated at 2021-12-25T14:19:30Z
+# Generated at 2021-12-26T10:16:14Z
 # VK_KHR_external_memory_win32
 
 import ../platform
+
 import ../features/vk11
 import ./VK_KHR_external_memory
 export VK_KHR_external_memory
