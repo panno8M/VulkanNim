@@ -2,11 +2,14 @@
 # Note that any changes to this file will be reset by the execution of
 # the generated program.
 
-import platform
+import utils/enumAliases
 import basetypes
 
 {.pragma: vkEnum, size(sizeof(int32)), pure.}
 {.pragma: vkFlagBits, vkEnum, flagbits.}
+template flagbits* {.pragma.}
+
+type UnusedEnum* = object ## Reserved for future use
 
 type
   # VERSION 1 0

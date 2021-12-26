@@ -96,11 +96,14 @@ proc genEnums*() =
   file.write warningText
   file.write """
 
-import platform
+import utils/enumAliases
 import basetypes
 
 {.pragma: vkEnum, size(sizeof(int32)), pure.}
 {.pragma: vkFlagBits, vkEnum, flagbits.}
+template flagbits* {.pragma.}
+
+type UnusedEnum* = object ## Reserved for future use
 
 type
 """
