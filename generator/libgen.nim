@@ -217,6 +217,11 @@ proc generate*() =
       libFile.fileHeader.add comment.underline('=').commentify
 
     libFile.fileHeader.add "\nimport ../platform"
+    case libFile.filename
+    of "features/vk10": discard
+    of "features/vk11": libFile.fileHeader.add "\nimport vk10\nexport vk10"
+    of "features/vk12": libFile.fileHeader.add "\nimport vk11\nexport vk11"
+    else: discard
 
     for require in feature.findAll("require"):
       libFile.requires[^1].add require.extractNodeRequire
