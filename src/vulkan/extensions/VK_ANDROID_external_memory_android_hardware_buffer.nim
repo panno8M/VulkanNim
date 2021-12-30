@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_ANDROID_external_memory_android_hardware_buffer
 
 import ../platform
@@ -86,8 +86,6 @@ proc getMemoryAndroidHardwareBufferANDROID*(
 proc loadAllVK_ANDROID_external_memory_android_hardware_buffer*(instance: Instance) =
   instance.loadCommand getAndroidHardwareBufferPropertiesANDROID
   instance.loadCommand getMemoryAndroidHardwareBufferANDROID
-
 proc loadVK_ANDROID_external_memory_android_hardware_buffer*(device: Device) =
   device.loadCommand getAndroidHardwareBufferPropertiesANDROID
   device.loadCommand getMemoryAndroidHardwareBufferANDROID
-

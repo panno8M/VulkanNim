@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_wayland_surface
 
 import ../platform
@@ -38,8 +38,6 @@ proc getPhysicalDeviceWaylandPresentationSupportKHR*(
 proc loadAllVK_KHR_wayland_surface*(instance: Instance) =
   instance.loadCommand createWaylandSurfaceKHR
   instance.loadCommand getPhysicalDeviceWaylandPresentationSupportKHR
-
 proc loadVK_KHR_wayland_surface*(instance: Instance) =
   instance.loadCommand createWaylandSurfaceKHR
   instance.loadCommand getPhysicalDeviceWaylandPresentationSupportKHR
-

@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_NV_device_generated_commands
 
 import ../platform
@@ -149,7 +149,6 @@ proc loadAllVK_NV_device_generated_commands*(instance: Instance) =
   instance.loadCommand cmdBindPipelineShaderGroupNV
   instance.loadCommand createIndirectCommandsLayoutNV
   instance.loadCommand destroyIndirectCommandsLayoutNV
-
 proc loadVK_NV_device_generated_commands*(device: Device) =
   device.loadCommand getGeneratedCommandsMemoryRequirementsNV
   device.loadCommand cmdPreprocessGeneratedCommandsNV
@@ -157,4 +156,3 @@ proc loadVK_NV_device_generated_commands*(device: Device) =
   device.loadCommand cmdBindPipelineShaderGroupNV
   device.loadCommand createIndirectCommandsLayoutNV
   device.loadCommand destroyIndirectCommandsLayoutNV
-

@@ -192,8 +192,17 @@ import basetypes
 
     file.write $results
 
+
+proc isChanged*(newText, oldPath: string): bool =
+  let oldText =
+    if oldPath.fileExists: oldPath.readFile
+    else: return true
+  let
+    newStart = newText.skipUntil('\n')
+    oldStart = oldText.skipUntil('\n')
+  newText[newStart..^1] != oldText[oldStart..^1]
+
 proc generate*() =
-  var updatedFiles: seq[string]
   var library = new Library
   let fileGroup = [
     ("extensions/VK_KHR_surface", @["extensions/VK_KHR_display", #["extensions/VK_KHR_swapchain"]#]),
@@ -286,17 +295,13 @@ proc generate*() =
   for fileName, mergeMaterials in fileGroup:
     library.merge(fileName, mergeMaterials)
 
+  var updatedFiles: seq[string]
   for fileName, libFile in library:
     if libFile.isNil: continue
     let
-      filePath = libRoot/libFile.fileName & ".nim"
       res = libFile.render(library, resources)
-      resStart = res.skipUntil('\n')
-      store =
-        if filePath.fileExists: filePath.readFile
-        else: ""
-      storeStart = store.skipUntil('\n')
-    if res[resStart..^1] != store[storeStart..^1]:
+      filePath = &"{libRoot/libFile.fileName}.nim"
+    if res.isChanged(filePath):
       filePath.writeFile res
       updatedFiles.add filePath
 

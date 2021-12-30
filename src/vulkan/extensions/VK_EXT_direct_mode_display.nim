@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_direct_mode_display
 
 import ../platform
@@ -21,7 +21,5 @@ proc releaseDisplayEXT*(
 
 proc loadAllVK_EXT_direct_mode_display*(instance: Instance) =
   instance.loadCommand releaseDisplayEXT
-
 proc loadVK_EXT_direct_mode_display*(instance: Instance) =
   instance.loadCommand releaseDisplayEXT
-

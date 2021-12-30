@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_display_surface_counter
 
 import ../platform
@@ -39,7 +39,5 @@ proc getPhysicalDeviceSurfaceCapabilities2EXT*(
 
 proc loadAllVK_EXT_display_surface_counter*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceSurfaceCapabilities2EXT
-
 proc loadVK_EXT_display_surface_counter*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceSurfaceCapabilities2EXT
-

@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:01Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_line_rasterization
 
 import ../platform
@@ -42,7 +42,5 @@ proc cmdSetLineStippleEXT*(
 
 proc loadAllVK_EXT_line_rasterization*(instance: Instance) =
   instance.loadCommand cmdSetLineStippleEXT
-
 proc loadVK_EXT_line_rasterization*(device: Device) =
   device.loadCommand cmdSetLineStippleEXT
-

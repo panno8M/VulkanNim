@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_GGP_stream_descriptor_surface
 
 import ../platform
@@ -31,7 +31,5 @@ proc createStreamDescriptorSurfaceGGP*(
 
 proc loadAllVK_GGP_stream_descriptor_surface*(instance: Instance) =
   instance.loadCommand createStreamDescriptorSurfaceGGP
-
 proc loadVK_GGP_stream_descriptor_surface*(instance: Instance) =
   instance.loadCommand createStreamDescriptorSurfaceGGP
-

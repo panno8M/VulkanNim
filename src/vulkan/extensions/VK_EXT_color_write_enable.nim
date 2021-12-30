@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:01Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_color_write_enable
 
 import ../platform
@@ -31,7 +31,5 @@ proc cmdSetColorWriteEnableEXT*(
 
 proc loadAllVK_EXT_color_write_enable*(instance: Instance) =
   instance.loadCommand cmdSetColorWriteEnableEXT
-
 proc loadVK_EXT_color_write_enable*(device: Device) =
   device.loadCommand cmdSetColorWriteEnableEXT
-

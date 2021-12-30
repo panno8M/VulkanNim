@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:01Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_surface
 # VK_KHR_display
 
@@ -186,7 +186,6 @@ proc loadAllVK_KHR_surface*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceSurfaceCapabilitiesKHR
   instance.loadCommand getPhysicalDeviceSurfaceFormatsKHR
   instance.loadCommand getPhysicalDeviceSurfacePresentModesKHR
-
 proc loadAllVK_KHR_display*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceDisplayPropertiesKHR
   instance.loadCommand getPhysicalDeviceDisplayPlanePropertiesKHR
@@ -195,14 +194,12 @@ proc loadAllVK_KHR_display*(instance: Instance) =
   instance.loadCommand createDisplayModeKHR
   instance.loadCommand getDisplayPlaneCapabilitiesKHR
   instance.loadCommand createDisplayPlaneSurfaceKHR
-
 proc loadVK_KHR_surface*(instance: Instance) =
   instance.loadCommand destroySurfaceKHR
   instance.loadCommand getPhysicalDeviceSurfaceSupportKHR
   instance.loadCommand getPhysicalDeviceSurfaceCapabilitiesKHR
   instance.loadCommand getPhysicalDeviceSurfaceFormatsKHR
   instance.loadCommand getPhysicalDeviceSurfacePresentModesKHR
-
 proc loadVK_KHR_display*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceDisplayPropertiesKHR
   instance.loadCommand getPhysicalDeviceDisplayPlanePropertiesKHR
@@ -211,4 +208,3 @@ proc loadVK_KHR_display*(instance: Instance) =
   instance.loadCommand createDisplayModeKHR
   instance.loadCommand getDisplayPlaneCapabilitiesKHR
   instance.loadCommand createDisplayPlaneSurfaceKHR
-

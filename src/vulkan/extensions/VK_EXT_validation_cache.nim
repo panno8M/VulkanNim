@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:13Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_validation_cache
 
 import ../platform
@@ -61,10 +61,8 @@ proc loadAllVK_EXT_validation_cache*(instance: Instance) =
   instance.loadCommand destroyValidationCacheEXT
   instance.loadCommand mergeValidationCachesEXT
   instance.loadCommand getValidationCacheDataEXT
-
 proc loadVK_EXT_validation_cache*(device: Device) =
   device.loadCommand createValidationCacheEXT
   device.loadCommand destroyValidationCacheEXT
   device.loadCommand mergeValidationCachesEXT
   device.loadCommand getValidationCacheDataEXT
-

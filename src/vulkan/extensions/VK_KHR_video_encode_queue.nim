@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_video_encode_queue
 
 import ../platform
@@ -55,7 +55,5 @@ proc cmdEncodeVideoKHR*(
 
 proc loadAllVK_KHR_video_encode_queue*(instance: Instance) =
   instance.loadCommand cmdEncodeVideoKHR
-
 proc loadVK_KHR_video_encode_queue*(device: Device) =
   device.loadCommand cmdEncodeVideoKHR
-

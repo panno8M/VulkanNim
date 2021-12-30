@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_conditional_rendering
 
 import ../platform
@@ -39,8 +39,6 @@ proc cmdEndConditionalRenderingEXT*(
 proc loadAllVK_EXT_conditional_rendering*(instance: Instance) =
   instance.loadCommand cmdBeginConditionalRenderingEXT
   instance.loadCommand cmdEndConditionalRenderingEXT
-
 proc loadVK_EXT_conditional_rendering*(device: Device) =
   device.loadCommand cmdBeginConditionalRenderingEXT
   device.loadCommand cmdEndConditionalRenderingEXT
-

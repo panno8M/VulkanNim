@@ -17,54 +17,55 @@ type CommandRenderingMode = enum
   crmInstance
   crmDevice
 
-proc renderCommandLoaderComponent*(require: NodeRequire; resources: Resources; commandRenderingMode = crmAll): string =
+proc renderCommandLoaderComponent*(require: NodeRequire; resources: Resources; commandRenderingMode = crmAll): Option[string] =
+  template needsLoader(command: NodeCommand): bool =
+    command.kind != nkbrAlias and command.loadMode != lmPreload
+
   if require.targets.filterIt(it.kind == nkrCommand).len == 0: return
   var commandLoaderDef = newSeq[string]()
 
   for req in require.targets.filter(x => x.kind == nkrCommand):
-    if not resources.commands.hasKey(req.name): continue
-    let command = resources.commands[req.name]
-    if command.kind == nkbrAlias or
-       command.loadMode == lmPreload: continue
+    try:
+      let command = resources.commands[req.name]
+      if not command.needsLoader: continue
 
-    commandLoaderDef.add case commandRenderingMode
-      of crmInstance:
-        if command.loadMode != lmWithInstance: continue
-        "instance.loadCommand {req.name.parseCommandname}".fmt
-      of crmDevice:
-        if command.loadMode != lmWithDevice: continue
-        "device.loadCommand {req.name.parseCommandname}".fmt
-      of crmAll:
-        "instance.loadCommand {req.name.parseCommandname}".fmt
+      commandLoaderDef.add case commandRenderingMode
+        of crmInstance:
+          if command.loadMode != lmWithInstance: continue
+          "instance.loadCommand {req.name.parseCommandname}".fmt
+        of crmDevice:
+          if command.loadMode != lmWithDevice: continue
+          "device.loadCommand {req.name.parseCommandname}".fmt
+        of crmAll:
+          "instance.loadCommand {req.name.parseCommandname}".fmt
+    except KeyError: discard
 
-  if require.comment.isSome and commandLoaderDef.len != 0:
-    commandLoaderDef.insert(require.comment.get.commentify, 0)
+  if commandLoaderDef.len != 0:
+    if require.comment.isSome:
+      commandLoaderDef.insert(require.comment.get.commentify, 0)
+    return some commandLoaderDef.join("\n")
 
-  return commandLoaderDef.join("\n")
 
 
-proc renderCommandLoader*(libFile: LibFile; resources: Resources; commandRenderingMode = crmAll): string =
-  var resultDefs: seq[string]
+proc renderCommandLoader*(libFile: LibFile; resources: Resources; commandRenderingMode = crmAll): Option[string] =
+  var resultDefs = sstring(kind: skBlock)
+  let loaderNames = concat(@[libFile.fileName], libFile.mergedFileNames)
+    .mapIt(it.splitFile.name.capitalizeAscii)
 
   for i, fileRequire in libFile.requires:
-    let loaderName = @[libFile.fileName].concat(libFile.mergedFileNames)[i].splitFile.name.capitalizeAscii
-    var commandLoaderDefs = newSeq[string]()
-    for require in fileRequire:
-      let def = require.renderCommandLoaderComponent(resources, commandRenderingMode)
-      if not def.isEmptyOrWhitespace:
-        commandLoaderDefs.add def
+    let loaderName = loaderNames[i]
+    var commandLoaderDefs = sstring(kind: skBlock, title: case commandRenderingMode
+      of crmAll: "proc loadAll{loaderName}*(instance: Instance) =".fmt
+      of crmInstance: "proc load{loaderName}*(instance: Instance) =".fmt
+      of crmDevice: "proc load{loaderName}*(device: Device) =".fmt)
+    for require in fileRequire: commandLoaderDefs.add do:
+      require.renderCommandLoaderComponent(resources, commandRenderingMode)
 
-    if commandLoaderDefs.len != 0:
-      let loaderHeader = case commandRenderingMode
-        of crmAll: "proc loadAll{loaderName}*(instance: Instance) =\n".fmt
-        of crmInstance: "proc load{loaderName}*(instance: Instance) =\n".fmt
-        of crmDevice: "proc load{loaderName}*(device: Device) =\n".fmt
-
-      resultDefs.add(
-        loaderHeader &
-        commandLoaderDefs.mapIt(it.indent(2)).join("\n\n")
-      )
-  resultDefs.join("\n\n")
+    if commandLoaderDefs.sons.len != 0:
+      # commandLoaderDefs.add ""
+      resultDefs.add commandLoaderDefs
+  if resultDefs.sons.len != 0:
+    return some $resultDefs
 
 proc render*(libFile: LibFile; library: Library; resources: Resources): string =
   var renderedNodes: seq[string]
@@ -196,19 +197,11 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
       result.add reqDefs.mapIt(it.join("\n")).filterIt(it.len != 0).join("\n\n\n")
       result.add "\n\n"
 
-  block Render_command_loaders:
-    let loadAll = libFile.renderCommandLoader(resources)
-    if loadAll.len != 0:
-      result.add loadAll
-      result.add "\n\n"
-    let loadInstance = libFile.renderCommandLoader(resources, crmInstance)
-    if loadInstance.len != 0:
-      result.add loadInstance
-      result.add "\n\n"
-    let loadDevice = libFile.renderCommandLoader(resources, crmDevice)
-    if loadDevice.len != 0:
-      result.add loadDevice
-      result.add "\n\n"
+  for renderingMode in CommandRenderingMode:
+    let rendered = libFile.renderCommandLoader(resources, renderingMode)
+    if rendered.isSome:
+      result.add rendered.get
+      result.add "\n"
 
   if not libFile.fileFooter.isEmptyOrWhitespace:
     result.add "\n"

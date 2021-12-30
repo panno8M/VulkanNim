@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_FUCHSIA_buffer_collection
 
 import ../platform
@@ -128,11 +128,9 @@ proc loadAllVK_FUCHSIA_buffer_collection*(instance: Instance) =
   instance.loadCommand setBufferCollectionBufferConstraintsFUCHSIA
   instance.loadCommand destroyBufferCollectionFUCHSIA
   instance.loadCommand getBufferCollectionPropertiesFUCHSIA
-
 proc loadVK_FUCHSIA_buffer_collection*(device: Device) =
   device.loadCommand createBufferCollectionFUCHSIA
   device.loadCommand setBufferCollectionImageConstraintsFUCHSIA
   device.loadCommand setBufferCollectionBufferConstraintsFUCHSIA
   device.loadCommand destroyBufferCollectionFUCHSIA
   device.loadCommand getBufferCollectionPropertiesFUCHSIA
-

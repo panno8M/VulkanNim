@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_performance_query
 
 import ../platform
@@ -91,12 +91,9 @@ proc loadAllVK_KHR_performance_query*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR
   instance.loadCommand acquireProfilingLockKHR
   instance.loadCommand releaseProfilingLockKHR
-
 proc loadVK_KHR_performance_query*(instance: Instance) =
   instance.loadCommand enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR
   instance.loadCommand getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR
-
 proc loadVK_KHR_performance_query*(device: Device) =
   device.loadCommand acquireProfilingLockKHR
   device.loadCommand releaseProfilingLockKHR
-

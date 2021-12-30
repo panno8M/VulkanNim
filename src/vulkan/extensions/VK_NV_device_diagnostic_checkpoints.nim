@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_NV_device_diagnostic_checkpoints
 
 import ../platform
@@ -36,8 +36,6 @@ proc getQueueCheckpointDataNV*(
 proc loadAllVK_NV_device_diagnostic_checkpoints*(instance: Instance) =
   instance.loadCommand cmdSetCheckpointNV
   instance.loadCommand getQueueCheckpointDataNV
-
 proc loadVK_NV_device_diagnostic_checkpoints*(device: Device) =
   device.loadCommand cmdSetCheckpointNV
   device.loadCommand getQueueCheckpointDataNV
-

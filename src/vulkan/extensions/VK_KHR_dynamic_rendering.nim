@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:01Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_dynamic_rendering
 
 import ../platform
@@ -107,8 +107,6 @@ proc cmdEndRenderingKHR*(
 proc loadAllVK_KHR_dynamic_rendering*(instance: Instance) =
   instance.loadCommand cmdBeginRenderingKHR
   instance.loadCommand cmdEndRenderingKHR
-
 proc loadVK_KHR_dynamic_rendering*(device: Device) =
   device.loadCommand cmdBeginRenderingKHR
   device.loadCommand cmdEndRenderingKHR
-

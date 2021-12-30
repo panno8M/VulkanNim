@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_push_descriptor
 
 import ../platform
@@ -42,15 +42,9 @@ proc cmdPushDescriptorSetWithTemplateKHR*(
 
 proc loadAllVK_KHR_push_descriptor*(instance: Instance) =
   instance.loadCommand cmdPushDescriptorSetKHR
-
   instance.loadCommand cmdPushDescriptorSetWithTemplateKHR
-
   instance.loadCommand cmdPushDescriptorSetWithTemplateKHR
-
 proc loadVK_KHR_push_descriptor*(device: Device) =
   device.loadCommand cmdPushDescriptorSetKHR
-
   device.loadCommand cmdPushDescriptorSetWithTemplateKHR
-
   device.loadCommand cmdPushDescriptorSetWithTemplateKHR
-

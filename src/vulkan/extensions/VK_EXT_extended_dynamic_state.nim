@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_extended_dynamic_state
 
 import ../platform
@@ -91,7 +91,6 @@ proc loadAllVK_EXT_extended_dynamic_state*(instance: Instance) =
   instance.loadCommand cmdSetDepthBoundsTestEnableEXT
   instance.loadCommand cmdSetStencilTestEnableEXT
   instance.loadCommand cmdSetStencilOpEXT
-
 proc loadVK_EXT_extended_dynamic_state*(device: Device) =
   device.loadCommand cmdSetCullModeEXT
   device.loadCommand cmdSetFrontFaceEXT
@@ -105,4 +104,3 @@ proc loadVK_EXT_extended_dynamic_state*(device: Device) =
   device.loadCommand cmdSetDepthBoundsTestEnableEXT
   device.loadCommand cmdSetStencilTestEnableEXT
   device.loadCommand cmdSetStencilOpEXT
-

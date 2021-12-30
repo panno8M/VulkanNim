@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_NV_mesh_shader
 
 import ../platform
@@ -64,9 +64,7 @@ proc loadAllVK_NV_mesh_shader*(instance: Instance) =
   instance.loadCommand cmdDrawMeshTasksNV
   instance.loadCommand cmdDrawMeshTasksIndirectNV
   instance.loadCommand cmdDrawMeshTasksIndirectCountNV
-
 proc loadVK_NV_mesh_shader*(device: Device) =
   device.loadCommand cmdDrawMeshTasksNV
   device.loadCommand cmdDrawMeshTasksIndirectNV
   device.loadCommand cmdDrawMeshTasksIndirectCountNV
-

@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:42Z
 # VK_NV_cooperative_matrix
 
 import ../platform
@@ -45,7 +45,5 @@ proc getPhysicalDeviceCooperativeMatrixPropertiesNV*(
 
 proc loadAllVK_NV_cooperative_matrix*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceCooperativeMatrixPropertiesNV
-
 proc loadVK_NV_cooperative_matrix*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceCooperativeMatrixPropertiesNV
-

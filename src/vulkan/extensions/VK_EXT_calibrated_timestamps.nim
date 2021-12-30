@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:01Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_calibrated_timestamps
 
 import ../platform
@@ -40,10 +40,7 @@ proc getCalibratedTimestampsEXT*(
 proc loadAllVK_EXT_calibrated_timestamps*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceCalibrateableTimeDomainsEXT
   instance.loadCommand getCalibratedTimestampsEXT
-
 proc loadVK_EXT_calibrated_timestamps*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceCalibrateableTimeDomainsEXT
-
 proc loadVK_EXT_calibrated_timestamps*(device: Device) =
   device.loadCommand getCalibratedTimestampsEXT
-

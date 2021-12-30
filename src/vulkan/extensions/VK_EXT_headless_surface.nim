@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_headless_surface
 
 import ../platform
@@ -30,7 +30,5 @@ proc createHeadlessSurfaceEXT*(
 
 proc loadAllVK_EXT_headless_surface*(instance: Instance) =
   instance.loadCommand createHeadlessSurfaceEXT
-
 proc loadVK_EXT_headless_surface*(instance: Instance) =
   instance.loadCommand createHeadlessSurfaceEXT
-

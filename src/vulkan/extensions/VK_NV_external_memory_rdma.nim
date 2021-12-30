@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_NV_external_memory_rdma
 
 import ../platform
@@ -34,7 +34,5 @@ proc getMemoryRemoteAddressNV*(
 
 proc loadAllVK_NV_external_memory_rdma*(instance: Instance) =
   instance.loadCommand getMemoryRemoteAddressNV
-
 proc loadVK_NV_external_memory_rdma*(device: Device) =
   device.loadCommand getMemoryRemoteAddressNV
-

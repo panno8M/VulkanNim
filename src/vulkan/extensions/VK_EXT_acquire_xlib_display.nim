@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_acquire_xlib_display
 
 import ../platform
@@ -33,8 +33,6 @@ proc getRandROutputDisplayEXT*(
 proc loadAllVK_EXT_acquire_xlib_display*(instance: Instance) =
   instance.loadCommand acquireXlibDisplayEXT
   instance.loadCommand getRandROutputDisplayEXT
-
 proc loadVK_EXT_acquire_xlib_display*(instance: Instance) =
   instance.loadCommand acquireXlibDisplayEXT
   instance.loadCommand getRandROutputDisplayEXT
-

@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_AMD_shader_info
 
 import ../platform
@@ -41,7 +41,5 @@ proc getShaderInfoAMD*(
 
 proc loadAllVK_AMD_shader_info*(instance: Instance) =
   instance.loadCommand getShaderInfoAMD
-
 proc loadVK_AMD_shader_info*(device: Device) =
   device.loadCommand getShaderInfoAMD
-

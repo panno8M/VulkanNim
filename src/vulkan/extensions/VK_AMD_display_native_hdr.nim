@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_AMD_display_native_hdr
 
 import ../platform
@@ -34,7 +34,5 @@ proc setLocalDimmingAMD*(
 
 proc loadAllVK_AMD_display_native_hdr*(instance: Instance) =
   instance.loadCommand setLocalDimmingAMD
-
 proc loadVK_AMD_display_native_hdr*(device: Device) =
   device.loadCommand setLocalDimmingAMD
-

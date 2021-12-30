@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_fragment_shading_rate
 
 import ../platform
@@ -76,10 +76,7 @@ proc cmdSetFragmentShadingRateKHR*(
 proc loadAllVK_KHR_fragment_shading_rate*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceFragmentShadingRatesKHR
   instance.loadCommand cmdSetFragmentShadingRateKHR
-
 proc loadVK_KHR_fragment_shading_rate*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceFragmentShadingRatesKHR
-
 proc loadVK_KHR_fragment_shading_rate*(device: Device) =
   device.loadCommand cmdSetFragmentShadingRateKHR
-

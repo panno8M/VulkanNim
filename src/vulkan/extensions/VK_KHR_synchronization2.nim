@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:01Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_synchronization2
 
 import ../platform
@@ -179,11 +179,8 @@ proc loadAllVK_KHR_synchronization2*(instance: Instance) =
   instance.loadCommand cmdPipelineBarrier2KHR
   instance.loadCommand cmdWriteTimestamp2KHR
   instance.loadCommand queueSubmit2KHR
-
   instance.loadCommand cmdWriteBufferMarker2AMD
-
   instance.loadCommand getQueueCheckpointData2NV
-
 proc loadVK_KHR_synchronization2*(device: Device) =
   device.loadCommand cmdSetEvent2KHR
   device.loadCommand cmdResetEvent2KHR
@@ -191,8 +188,5 @@ proc loadVK_KHR_synchronization2*(device: Device) =
   device.loadCommand cmdPipelineBarrier2KHR
   device.loadCommand cmdWriteTimestamp2KHR
   device.loadCommand queueSubmit2KHR
-
   device.loadCommand cmdWriteBufferMarker2AMD
-
   device.loadCommand getQueueCheckpointData2NV
-

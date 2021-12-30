@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_maintenance4
 
 import ../platform
@@ -52,9 +52,7 @@ proc loadAllVK_KHR_maintenance4*(instance: Instance) =
   instance.loadCommand getDeviceBufferMemoryRequirementsKHR
   instance.loadCommand getDeviceImageMemoryRequirementsKHR
   instance.loadCommand getDeviceImageSparseMemoryRequirementsKHR
-
 proc loadVK_KHR_maintenance4*(device: Device) =
   device.loadCommand getDeviceBufferMemoryRequirementsKHR
   device.loadCommand getDeviceImageMemoryRequirementsKHR
   device.loadCommand getDeviceImageSparseMemoryRequirementsKHR
-

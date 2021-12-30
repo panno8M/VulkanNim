@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_external_memory_host
 
 import ../platform
@@ -39,7 +39,5 @@ proc getMemoryHostPointerPropertiesEXT*(
 
 proc loadAllVK_EXT_external_memory_host*(instance: Instance) =
   instance.loadCommand getMemoryHostPointerPropertiesEXT
-
 proc loadVK_EXT_external_memory_host*(device: Device) =
   device.loadCommand getMemoryHostPointerPropertiesEXT
-

@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:01Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_video_queue
 
 import ../platform
@@ -214,11 +214,9 @@ proc loadAllVK_KHR_video_queue*(instance: Instance) =
   instance.loadCommand cmdBeginVideoCodingKHR
   instance.loadCommand cmdEndVideoCodingKHR
   instance.loadCommand cmdControlVideoCodingKHR
-
 proc loadVK_KHR_video_queue*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceVideoCapabilitiesKHR
   instance.loadCommand getPhysicalDeviceVideoFormatPropertiesKHR
-
 proc loadVK_KHR_video_queue*(device: Device) =
   device.loadCommand createVideoSessionKHR
   device.loadCommand destroyVideoSessionKHR
@@ -230,4 +228,3 @@ proc loadVK_KHR_video_queue*(device: Device) =
   device.loadCommand cmdBeginVideoCodingKHR
   device.loadCommand cmdEndVideoCodingKHR
   device.loadCommand cmdControlVideoCodingKHR
-

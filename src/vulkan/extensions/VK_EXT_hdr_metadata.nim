@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_hdr_metadata
 
 import ../platform
@@ -38,7 +38,5 @@ proc setHdrMetadataEXT*(
 
 proc loadAllVK_EXT_hdr_metadata*(instance: Instance) =
   instance.loadCommand setHdrMetadataEXT
-
 proc loadVK_EXT_hdr_metadata*(device: Device) =
   device.loadCommand setHdrMetadataEXT
-

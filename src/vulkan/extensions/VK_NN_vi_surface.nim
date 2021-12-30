@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_NN_vi_surface
 
 import ../platform
@@ -31,7 +31,5 @@ proc createViSurfaceNN*(
 
 proc loadAllVK_NN_vi_surface*(instance: Instance) =
   instance.loadCommand createViSurfaceNN
-
 proc loadVK_NN_vi_surface*(instance: Instance) =
   instance.loadCommand createViSurfaceNN
-

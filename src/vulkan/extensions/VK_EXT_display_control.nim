@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_display_control
 
 import ../platform
@@ -74,10 +74,8 @@ proc loadAllVK_EXT_display_control*(instance: Instance) =
   instance.loadCommand registerDeviceEventEXT
   instance.loadCommand registerDisplayEventEXT
   instance.loadCommand getSwapchainCounterEXT
-
 proc loadVK_EXT_display_control*(device: Device) =
   device.loadCommand displayPowerControlEXT
   device.loadCommand registerDeviceEventEXT
   device.loadCommand registerDisplayEventEXT
   device.loadCommand getSwapchainCounterEXT
-

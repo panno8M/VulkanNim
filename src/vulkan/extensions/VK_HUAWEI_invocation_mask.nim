@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:01Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_HUAWEI_invocation_mask
 
 import ../platform
@@ -28,7 +28,5 @@ proc cmdBindInvocationMaskHUAWEI*(
 
 proc loadAllVK_HUAWEI_invocation_mask*(instance: Instance) =
   instance.loadCommand cmdBindInvocationMaskHUAWEI
-
 proc loadVK_HUAWEI_invocation_mask*(device: Device) =
   device.loadCommand cmdBindInvocationMaskHUAWEI
-

@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_present_wait
 
 import ../platform
@@ -32,7 +32,5 @@ proc waitForPresentKHR*(
 
 proc loadAllVK_KHR_present_wait*(instance: Instance) =
   instance.loadCommand waitForPresentKHR
-
 proc loadVK_KHR_present_wait*(device: Device) =
   device.loadCommand waitForPresentKHR
-

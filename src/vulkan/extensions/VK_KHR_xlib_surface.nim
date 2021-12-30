@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_xlib_surface
 
 import ../platform
@@ -39,8 +39,6 @@ proc getPhysicalDeviceXlibPresentationSupportKHR*(
 proc loadAllVK_KHR_xlib_surface*(instance: Instance) =
   instance.loadCommand createXlibSurfaceKHR
   instance.loadCommand getPhysicalDeviceXlibPresentationSupportKHR
-
 proc loadVK_KHR_xlib_surface*(instance: Instance) =
   instance.loadCommand createXlibSurfaceKHR
   instance.loadCommand getPhysicalDeviceXlibPresentationSupportKHR
-

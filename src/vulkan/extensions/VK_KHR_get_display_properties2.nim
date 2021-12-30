@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_get_display_properties2
 
 import ../platform
@@ -74,10 +74,8 @@ proc loadAllVK_KHR_get_display_properties2*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceDisplayPlaneProperties2KHR
   instance.loadCommand getDisplayModeProperties2KHR
   instance.loadCommand getDisplayPlaneCapabilities2KHR
-
 proc loadVK_KHR_get_display_properties2*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceDisplayProperties2KHR
   instance.loadCommand getPhysicalDeviceDisplayPlaneProperties2KHR
   instance.loadCommand getDisplayModeProperties2KHR
   instance.loadCommand getDisplayPlaneCapabilities2KHR
-

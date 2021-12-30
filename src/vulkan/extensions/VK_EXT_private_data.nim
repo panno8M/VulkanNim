@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_private_data
 
 import ../platform
@@ -62,10 +62,8 @@ proc loadAllVK_EXT_private_data*(instance: Instance) =
   instance.loadCommand destroyPrivateDataSlotEXT
   instance.loadCommand setPrivateDataEXT
   instance.loadCommand getPrivateDataEXT
-
 proc loadVK_EXT_private_data*(device: Device) =
   device.loadCommand createPrivateDataSlotEXT
   device.loadCommand destroyPrivateDataSlotEXT
   device.loadCommand setPrivateDataEXT
   device.loadCommand getPrivateDataEXT
-

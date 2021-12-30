@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_external_memory_fd
 
 import ../platform
@@ -49,8 +49,6 @@ proc getMemoryFdPropertiesKHR*(
 proc loadAllVK_KHR_external_memory_fd*(instance: Instance) =
   instance.loadCommand getMemoryFdKHR
   instance.loadCommand getMemoryFdPropertiesKHR
-
 proc loadVK_KHR_external_memory_fd*(device: Device) =
   device.loadCommand getMemoryFdKHR
   device.loadCommand getMemoryFdPropertiesKHR
-

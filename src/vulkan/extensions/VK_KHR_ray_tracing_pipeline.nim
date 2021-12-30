@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_ray_tracing_pipeline
 
 import ../platform
@@ -143,7 +143,6 @@ proc loadAllVK_KHR_ray_tracing_pipeline*(instance: Instance) =
   instance.loadCommand cmdTraceRaysIndirectKHR
   instance.loadCommand getRayTracingShaderGroupStackSizeKHR
   instance.loadCommand cmdSetRayTracingPipelineStackSizeKHR
-
 proc loadVK_KHR_ray_tracing_pipeline*(device: Device) =
   device.loadCommand cmdTraceRaysKHR
   device.loadCommand createRayTracingPipelinesKHR
@@ -152,4 +151,3 @@ proc loadVK_KHR_ray_tracing_pipeline*(device: Device) =
   device.loadCommand cmdTraceRaysIndirectKHR
   device.loadCommand getRayTracingShaderGroupStackSizeKHR
   device.loadCommand cmdSetRayTracingPipelineStackSizeKHR
-

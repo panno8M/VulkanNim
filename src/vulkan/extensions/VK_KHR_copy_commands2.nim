@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_copy_commands2
 
 import ../platform
@@ -134,7 +134,6 @@ proc loadAllVK_KHR_copy_commands2*(instance: Instance) =
   instance.loadCommand cmdCopyImageToBuffer2KHR
   instance.loadCommand cmdBlitImage2KHR
   instance.loadCommand cmdResolveImage2KHR
-
 proc loadVK_KHR_copy_commands2*(device: Device) =
   device.loadCommand cmdCopyBuffer2KHR
   device.loadCommand cmdCopyImage2KHR
@@ -142,4 +141,3 @@ proc loadVK_KHR_copy_commands2*(device: Device) =
   device.loadCommand cmdCopyImageToBuffer2KHR
   device.loadCommand cmdBlitImage2KHR
   device.loadCommand cmdResolveImage2KHR
-

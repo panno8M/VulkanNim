@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_NV_shading_rate_image
 
 import ../platform
@@ -71,9 +71,7 @@ proc loadAllVK_NV_shading_rate_image*(instance: Instance) =
   instance.loadCommand cmdBindShadingRateImageNV
   instance.loadCommand cmdSetViewportShadingRatePaletteNV
   instance.loadCommand cmdSetCoarseSampleOrderNV
-
 proc loadVK_NV_shading_rate_image*(device: Device) =
   device.loadCommand cmdBindShadingRateImageNV
   device.loadCommand cmdSetViewportShadingRatePaletteNV
   device.loadCommand cmdSetCoarseSampleOrderNV
-

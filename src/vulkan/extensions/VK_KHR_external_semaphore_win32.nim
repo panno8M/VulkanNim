@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:42Z
 # VK_KHR_external_semaphore_win32
 
 import ../platform
@@ -59,8 +59,6 @@ proc getSemaphoreWin32HandleKHR*(
 proc loadAllVK_KHR_external_semaphore_win32*(instance: Instance) =
   instance.loadCommand importSemaphoreWin32HandleKHR
   instance.loadCommand getSemaphoreWin32HandleKHR
-
 proc loadVK_KHR_external_semaphore_win32*(device: Device) =
   device.loadCommand importSemaphoreWin32HandleKHR
   device.loadCommand getSemaphoreWin32HandleKHR
-

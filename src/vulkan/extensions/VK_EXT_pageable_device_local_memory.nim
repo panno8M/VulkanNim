@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:01Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_pageable_device_local_memory
 
 import ../platform
@@ -26,7 +26,5 @@ proc setDeviceMemoryPriorityEXT*(
 
 proc loadAllVK_EXT_pageable_device_local_memory*(instance: Instance) =
   instance.loadCommand setDeviceMemoryPriorityEXT
-
 proc loadVK_EXT_pageable_device_local_memory*(device: Device) =
   device.loadCommand setDeviceMemoryPriorityEXT
-

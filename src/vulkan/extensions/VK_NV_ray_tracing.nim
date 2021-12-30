@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:01Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_NV_ray_tracing
 
 import ../platform
@@ -223,7 +223,6 @@ proc loadAllVK_NV_ray_tracing*(instance: Instance) =
   instance.loadCommand getAccelerationStructureHandleNV
   instance.loadCommand cmdWriteAccelerationStructuresPropertiesNV
   instance.loadCommand compileDeferredNV
-
 proc loadVK_NV_ray_tracing*(device: Device) =
   device.loadCommand createAccelerationStructureNV
   device.loadCommand destroyAccelerationStructureNV
@@ -236,4 +235,3 @@ proc loadVK_NV_ray_tracing*(device: Device) =
   device.loadCommand getAccelerationStructureHandleNV
   device.loadCommand cmdWriteAccelerationStructuresPropertiesNV
   device.loadCommand compileDeferredNV
-

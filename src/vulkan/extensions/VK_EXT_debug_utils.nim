@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:01Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_debug_utils
 
 import ../platform
@@ -128,12 +128,10 @@ proc loadAllVK_EXT_debug_utils*(instance: Instance) =
   instance.loadCommand createDebugUtilsMessengerEXT
   instance.loadCommand destroyDebugUtilsMessengerEXT
   instance.loadCommand submitDebugUtilsMessageEXT
-
 proc loadVK_EXT_debug_utils*(instance: Instance) =
   instance.loadCommand createDebugUtilsMessengerEXT
   instance.loadCommand destroyDebugUtilsMessengerEXT
   instance.loadCommand submitDebugUtilsMessageEXT
-
 proc loadVK_EXT_debug_utils*(device: Device) =
   device.loadCommand setDebugUtilsObjectNameEXT
   device.loadCommand setDebugUtilsObjectTagEXT
@@ -143,4 +141,3 @@ proc loadVK_EXT_debug_utils*(device: Device) =
   device.loadCommand cmdBeginDebugUtilsLabelEXT
   device.loadCommand cmdEndDebugUtilsLabelEXT
   device.loadCommand cmdInsertDebugUtilsLabelEXT
-

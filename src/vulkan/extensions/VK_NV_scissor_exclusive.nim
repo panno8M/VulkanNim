@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_NV_scissor_exclusive
 
 import ../platform
@@ -32,7 +32,5 @@ proc cmdSetExclusiveScissorNV*(
 
 proc loadAllVK_NV_scissor_exclusive*(instance: Instance) =
   instance.loadCommand cmdSetExclusiveScissorNV
-
 proc loadVK_NV_scissor_exclusive*(device: Device) =
   device.loadCommand cmdSetExclusiveScissorNV
-

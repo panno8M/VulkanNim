@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_discard_rectangles
 
 import ../platform
@@ -34,7 +34,5 @@ proc cmdSetDiscardRectangleEXT*(
 
 proc loadAllVK_EXT_discard_rectangles*(instance: Instance) =
   instance.loadCommand cmdSetDiscardRectangleEXT
-
 proc loadVK_EXT_discard_rectangles*(device: Device) =
   device.loadCommand cmdSetDiscardRectangleEXT
-

@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_device_group
 
 import ../platform
@@ -107,15 +107,10 @@ proc loadAllVK_KHR_device_group*(instance: Instance) =
   instance.loadCommand getDeviceGroupPresentCapabilitiesKHR
   instance.loadCommand getDeviceGroupSurfacePresentModesKHR
   instance.loadCommand getPhysicalDevicePresentRectanglesKHR
-
   instance.loadCommand acquireNextImage2KHR
-
 proc loadVK_KHR_device_group*(instance: Instance) =
   instance.loadCommand getPhysicalDevicePresentRectanglesKHR
-
 proc loadVK_KHR_device_group*(device: Device) =
   device.loadCommand getDeviceGroupPresentCapabilitiesKHR
   device.loadCommand getDeviceGroupSurfacePresentModesKHR
-
   device.loadCommand acquireNextImage2KHR
-

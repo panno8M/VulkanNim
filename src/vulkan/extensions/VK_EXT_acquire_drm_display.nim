@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:01Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_acquire_drm_display
 
 import ../platform
@@ -33,8 +33,6 @@ proc getDrmDisplayEXT*(
 proc loadAllVK_EXT_acquire_drm_display*(instance: Instance) =
   instance.loadCommand acquireDrmDisplayEXT
   instance.loadCommand getDrmDisplayEXT
-
 proc loadVK_EXT_acquire_drm_display*(instance: Instance) =
   instance.loadCommand acquireDrmDisplayEXT
   instance.loadCommand getDrmDisplayEXT
-

@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:01Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_FUCHSIA_external_memory
 
 import ../platform
@@ -51,8 +51,6 @@ proc getMemoryZirconHandlePropertiesFUCHSIA*(
 proc loadAllVK_FUCHSIA_external_memory*(instance: Instance) =
   instance.loadCommand getMemoryZirconHandleFUCHSIA
   instance.loadCommand getMemoryZirconHandlePropertiesFUCHSIA
-
 proc loadVK_FUCHSIA_external_memory*(device: Device) =
   device.loadCommand getMemoryZirconHandleFUCHSIA
   device.loadCommand getMemoryZirconHandlePropertiesFUCHSIA
-

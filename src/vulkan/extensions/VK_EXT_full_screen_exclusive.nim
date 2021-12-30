@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_full_screen_exclusive
 
 import ../platform
@@ -75,19 +75,12 @@ proc loadAllVK_EXT_full_screen_exclusive*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceSurfacePresentModes2EXT
   instance.loadCommand acquireFullScreenExclusiveModeEXT
   instance.loadCommand releaseFullScreenExclusiveModeEXT
-
   instance.loadCommand getDeviceGroupSurfacePresentModes2EXT
-
   instance.loadCommand getDeviceGroupSurfacePresentModes2EXT
-
 proc loadVK_EXT_full_screen_exclusive*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceSurfacePresentModes2EXT
-
 proc loadVK_EXT_full_screen_exclusive*(device: Device) =
   device.loadCommand acquireFullScreenExclusiveModeEXT
   device.loadCommand releaseFullScreenExclusiveModeEXT
-
   device.loadCommand getDeviceGroupSurfacePresentModes2EXT
-
   device.loadCommand getDeviceGroupSurfacePresentModes2EXT
-

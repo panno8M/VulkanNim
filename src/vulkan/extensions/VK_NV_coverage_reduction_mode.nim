@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_NV_coverage_reduction_mode
 
 import ../platform
@@ -41,7 +41,5 @@ proc getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV*(
 
 proc loadAllVK_NV_coverage_reduction_mode*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV
-
 proc loadVK_NV_coverage_reduction_mode*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV
-

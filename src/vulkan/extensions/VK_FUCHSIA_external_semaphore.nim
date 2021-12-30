@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_FUCHSIA_external_semaphore
 
 import ../platform
@@ -47,8 +47,6 @@ proc getSemaphoreZirconHandleFUCHSIA*(
 proc loadAllVK_FUCHSIA_external_semaphore*(instance: Instance) =
   instance.loadCommand importSemaphoreZirconHandleFUCHSIA
   instance.loadCommand getSemaphoreZirconHandleFUCHSIA
-
 proc loadVK_FUCHSIA_external_semaphore*(device: Device) =
   device.loadCommand importSemaphoreZirconHandleFUCHSIA
   device.loadCommand getSemaphoreZirconHandleFUCHSIA
-

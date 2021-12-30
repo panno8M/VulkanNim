@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_deferred_host_operations
 
 import ../platform
@@ -48,11 +48,9 @@ proc loadAllVK_KHR_deferred_host_operations*(instance: Instance) =
   instance.loadCommand getDeferredOperationMaxConcurrencyKHR
   instance.loadCommand getDeferredOperationResultKHR
   instance.loadCommand deferredOperationJoinKHR
-
 proc loadVK_KHR_deferred_host_operations*(device: Device) =
   device.loadCommand createDeferredOperationKHR
   device.loadCommand destroyDeferredOperationKHR
   device.loadCommand getDeferredOperationMaxConcurrencyKHR
   device.loadCommand getDeferredOperationResultKHR
   device.loadCommand deferredOperationJoinKHR
-

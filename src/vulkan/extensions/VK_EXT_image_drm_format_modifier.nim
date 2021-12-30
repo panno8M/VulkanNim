@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:01Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_image_drm_format_modifier
 
 import ../platform
@@ -74,7 +74,5 @@ proc getImageDrmFormatModifierPropertiesEXT*(
 
 proc loadAllVK_EXT_image_drm_format_modifier*(instance: Instance) =
   instance.loadCommand getImageDrmFormatModifierPropertiesEXT
-
 proc loadVK_EXT_image_drm_format_modifier*(device: Device) =
   device.loadCommand getImageDrmFormatModifierPropertiesEXT
-

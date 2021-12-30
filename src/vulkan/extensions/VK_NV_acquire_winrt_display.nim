@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_NV_acquire_winrt_display
 
 import ../platform
@@ -31,8 +31,6 @@ proc getWinrtDisplayNV*(
 proc loadAllVK_NV_acquire_winrt_display*(instance: Instance) =
   instance.loadCommand acquireWinrtDisplayNV
   instance.loadCommand getWinrtDisplayNV
-
 proc loadVK_NV_acquire_winrt_display*(instance: Instance) =
   instance.loadCommand acquireWinrtDisplayNV
   instance.loadCommand getWinrtDisplayNV
-

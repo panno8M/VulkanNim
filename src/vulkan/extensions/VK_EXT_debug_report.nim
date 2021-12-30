@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_debug_report
 
 import ../platform
@@ -58,9 +58,7 @@ proc loadAllVK_EXT_debug_report*(instance: Instance) =
   instance.loadCommand createDebugReportCallbackEXT
   instance.loadCommand destroyDebugReportCallbackEXT
   instance.loadCommand debugReportMessageEXT
-
 proc loadVK_EXT_debug_report*(instance: Instance) =
   instance.loadCommand createDebugReportCallbackEXT
   instance.loadCommand destroyDebugReportCallbackEXT
   instance.loadCommand debugReportMessageEXT
-

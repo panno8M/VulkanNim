@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_FUCHSIA_imagepipe_surface
 
 import ../platform
@@ -31,7 +31,5 @@ proc createImagePipeSurfaceFUCHSIA*(
 
 proc loadAllVK_FUCHSIA_imagepipe_surface*(instance: Instance) =
   instance.loadCommand createImagePipeSurfaceFUCHSIA
-
 proc loadVK_FUCHSIA_imagepipe_surface*(instance: Instance) =
   instance.loadCommand createImagePipeSurfaceFUCHSIA
-

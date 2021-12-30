@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_NV_external_memory_capabilities
 
 import ../platform
@@ -34,7 +34,5 @@ proc getPhysicalDeviceExternalImageFormatPropertiesNV*(
 
 proc loadAllVK_NV_external_memory_capabilities*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceExternalImageFormatPropertiesNV
-
 proc loadVK_NV_external_memory_capabilities*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceExternalImageFormatPropertiesNV
-

@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:01Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_ANDROID_native_buffer
 
 import ../platform
@@ -68,10 +68,8 @@ proc loadAllVK_ANDROID_native_buffer*(instance: Instance) =
   instance.loadCommand acquireImageANDROID
   instance.loadCommand queueSignalReleaseImageANDROID
   instance.loadCommand getSwapchainGrallocUsage2ANDROID
-
 proc loadVK_ANDROID_native_buffer*(device: Device) =
   device.loadCommand getSwapchainGrallocUsageANDROID
   device.loadCommand acquireImageANDROID
   device.loadCommand queueSignalReleaseImageANDROID
   device.loadCommand getSwapchainGrallocUsage2ANDROID
-

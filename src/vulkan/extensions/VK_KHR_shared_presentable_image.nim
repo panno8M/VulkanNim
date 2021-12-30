@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_shared_presentable_image
 
 import ../platform
@@ -32,7 +32,5 @@ proc getSwapchainStatusKHR*(
 
 proc loadAllVK_KHR_shared_presentable_image*(instance: Instance) =
   instance.loadCommand getSwapchainStatusKHR
-
 proc loadVK_KHR_shared_presentable_image*(device: Device) =
   device.loadCommand getSwapchainStatusKHR
-

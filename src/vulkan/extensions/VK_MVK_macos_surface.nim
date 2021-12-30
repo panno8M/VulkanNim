@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_MVK_macos_surface
 
 import ../platform
@@ -31,7 +31,5 @@ proc createMacOSSurfaceMVK*(
 
 proc loadAllVK_MVK_macos_surface*(instance: Instance) =
   instance.loadCommand createMacOSSurfaceMVK
-
 proc loadVK_MVK_macos_surface*(instance: Instance) =
   instance.loadCommand createMacOSSurfaceMVK
-

@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:01Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_sample_locations
 
 import ../platform
@@ -67,10 +67,7 @@ proc getPhysicalDeviceMultisamplePropertiesEXT*(
 proc loadAllVK_EXT_sample_locations*(instance: Instance) =
   instance.loadCommand cmdSetSampleLocationsEXT
   instance.loadCommand getPhysicalDeviceMultisamplePropertiesEXT
-
 proc loadVK_EXT_sample_locations*(instance: Instance) =
   instance.loadCommand getPhysicalDeviceMultisamplePropertiesEXT
-
 proc loadVK_EXT_sample_locations*(device: Device) =
   device.loadCommand cmdSetSampleLocationsEXT
-

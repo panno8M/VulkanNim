@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_android_surface
 
 import ../platform
@@ -31,7 +31,5 @@ proc createAndroidSurfaceKHR*(
 
 proc loadAllVK_KHR_android_surface*(instance: Instance) =
   instance.loadCommand createAndroidSurfaceKHR
-
 proc loadVK_KHR_android_surface*(instance: Instance) =
   instance.loadCommand createAndroidSurfaceKHR
-

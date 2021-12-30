@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_vertex_input_dynamic_state
 
 import ../platform
@@ -42,7 +42,5 @@ proc cmdSetVertexInputEXT*(
 
 proc loadAllVK_EXT_vertex_input_dynamic_state*(instance: Instance) =
   instance.loadCommand cmdSetVertexInputEXT
-
 proc loadVK_EXT_vertex_input_dynamic_state*(device: Device) =
   device.loadCommand cmdSetVertexInputEXT
-

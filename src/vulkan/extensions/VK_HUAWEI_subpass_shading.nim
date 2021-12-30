@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_HUAWEI_subpass_shading
 
 import ../platform
@@ -44,8 +44,6 @@ proc cmdSubpassShadingHUAWEI*(
 proc loadAllVK_HUAWEI_subpass_shading*(instance: Instance) =
   instance.loadCommand getDeviceSubpassShadingMaxWorkgroupSizeHUAWEI
   instance.loadCommand cmdSubpassShadingHUAWEI
-
 proc loadVK_HUAWEI_subpass_shading*(device: Device) =
   device.loadCommand getDeviceSubpassShadingMaxWorkgroupSizeHUAWEI
   device.loadCommand cmdSubpassShadingHUAWEI
-

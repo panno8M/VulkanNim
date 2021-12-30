@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_debug_marker
 
 import ../platform
@@ -65,11 +65,9 @@ proc loadAllVK_EXT_debug_marker*(instance: Instance) =
   instance.loadCommand cmdDebugMarkerBeginEXT
   instance.loadCommand cmdDebugMarkerEndEXT
   instance.loadCommand cmdDebugMarkerInsertEXT
-
 proc loadVK_EXT_debug_marker*(device: Device) =
   device.loadCommand debugMarkerSetObjectTagEXT
   device.loadCommand debugMarkerSetObjectNameEXT
   device.loadCommand cmdDebugMarkerBeginEXT
   device.loadCommand cmdDebugMarkerEndEXT
   device.loadCommand cmdDebugMarkerInsertEXT
-

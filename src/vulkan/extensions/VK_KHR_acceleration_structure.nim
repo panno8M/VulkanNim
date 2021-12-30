@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_acceleration_structure
 
 import ../platform
@@ -282,7 +282,6 @@ proc loadAllVK_KHR_acceleration_structure*(instance: Instance) =
   instance.loadCommand cmdWriteAccelerationStructuresPropertiesKHR
   instance.loadCommand getDeviceAccelerationStructureCompatibilityKHR
   instance.loadCommand getAccelerationStructureBuildSizesKHR
-
 proc loadVK_KHR_acceleration_structure*(device: Device) =
   device.loadCommand createAccelerationStructureKHR
   device.loadCommand destroyAccelerationStructureKHR
@@ -300,4 +299,3 @@ proc loadVK_KHR_acceleration_structure*(device: Device) =
   device.loadCommand cmdWriteAccelerationStructuresPropertiesKHR
   device.loadCommand getDeviceAccelerationStructureCompatibilityKHR
   device.loadCommand getAccelerationStructureBuildSizesKHR
-

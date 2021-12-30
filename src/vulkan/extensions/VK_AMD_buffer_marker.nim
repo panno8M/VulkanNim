@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_AMD_buffer_marker
 
 import ../platform
@@ -21,7 +21,5 @@ proc cmdWriteBufferMarkerAMD*(
 
 proc loadAllVK_AMD_buffer_marker*(instance: Instance) =
   instance.loadCommand cmdWriteBufferMarkerAMD
-
 proc loadVK_AMD_buffer_marker*(device: Device) =
   device.loadCommand cmdWriteBufferMarkerAMD
-

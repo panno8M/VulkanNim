@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:01Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_extended_dynamic_state2
 
 import ../platform
@@ -47,11 +47,9 @@ proc loadAllVK_EXT_extended_dynamic_state2*(instance: Instance) =
   instance.loadCommand cmdSetDepthBiasEnableEXT
   instance.loadCommand cmdSetLogicOpEXT
   instance.loadCommand cmdSetPrimitiveRestartEnableEXT
-
 proc loadVK_EXT_extended_dynamic_state2*(device: Device) =
   device.loadCommand cmdSetPatchControlPointsEXT
   device.loadCommand cmdSetRasterizerDiscardEnableEXT
   device.loadCommand cmdSetDepthBiasEnableEXT
   device.loadCommand cmdSetLogicOpEXT
   device.loadCommand cmdSetPrimitiveRestartEnableEXT
-

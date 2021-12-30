@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_NVX_image_view_handle
 
 import ../platform
@@ -40,8 +40,6 @@ proc getImageViewAddressNVX*(
 proc loadAllVK_NVX_image_view_handle*(instance: Instance) =
   instance.loadCommand getImageViewHandleNVX
   instance.loadCommand getImageViewAddressNVX
-
 proc loadVK_NVX_image_view_handle*(device: Device) =
   device.loadCommand getImageViewHandleNVX
   device.loadCommand getImageViewAddressNVX
-

@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_GOOGLE_display_timing
 
 import ../platform
@@ -51,8 +51,6 @@ proc getPastPresentationTimingGOOGLE*(
 proc loadAllVK_GOOGLE_display_timing*(instance: Instance) =
   instance.loadCommand getRefreshCycleDurationGOOGLE
   instance.loadCommand getPastPresentationTimingGOOGLE
-
 proc loadVK_GOOGLE_display_timing*(device: Device) =
   device.loadCommand getRefreshCycleDurationGOOGLE
   device.loadCommand getPastPresentationTimingGOOGLE
-

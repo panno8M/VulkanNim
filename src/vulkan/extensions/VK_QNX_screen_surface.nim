@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:01Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_QNX_screen_surface
 
 import ../platform
@@ -38,8 +38,6 @@ proc getPhysicalDeviceScreenPresentationSupportQNX*(
 proc loadAllVK_QNX_screen_surface*(instance: Instance) =
   instance.loadCommand createScreenSurfaceQNX
   instance.loadCommand getPhysicalDeviceScreenPresentationSupportQNX
-
 proc loadVK_QNX_screen_surface*(instance: Instance) =
   instance.loadCommand createScreenSurfaceQNX
   instance.loadCommand getPhysicalDeviceScreenPresentationSupportQNX
-

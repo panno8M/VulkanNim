@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_external_memory_win32
 
 import ../platform
@@ -56,8 +56,6 @@ proc getMemoryWin32HandlePropertiesKHR*(
 proc loadAllVK_KHR_external_memory_win32*(instance: Instance) =
   instance.loadCommand getMemoryWin32HandleKHR
   instance.loadCommand getMemoryWin32HandlePropertiesKHR
-
 proc loadVK_KHR_external_memory_win32*(device: Device) =
   device.loadCommand getMemoryWin32HandleKHR
   device.loadCommand getMemoryWin32HandlePropertiesKHR
-

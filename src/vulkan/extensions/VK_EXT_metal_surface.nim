@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_EXT_metal_surface
 
 import ../platform
@@ -31,7 +31,5 @@ proc createMetalSurfaceEXT*(
 
 proc loadAllVK_EXT_metal_surface*(instance: Instance) =
   instance.loadCommand createMetalSurfaceEXT
-
 proc loadVK_EXT_metal_surface*(instance: Instance) =
   instance.loadCommand createMetalSurfaceEXT
-

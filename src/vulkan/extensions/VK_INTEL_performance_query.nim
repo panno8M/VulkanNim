@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:16:14Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_INTEL_performance_query
 
 import ../platform
@@ -121,7 +121,6 @@ proc loadAllVK_INTEL_performance_query*(instance: Instance) =
   instance.loadCommand releasePerformanceConfigurationINTEL
   instance.loadCommand queueSetPerformanceConfigurationINTEL
   instance.loadCommand getPerformanceParameterINTEL
-
 proc loadVK_INTEL_performance_query*(device: Device) =
   device.loadCommand initializePerformanceApiINTEL
   device.loadCommand uninitializePerformanceApiINTEL
@@ -132,4 +131,3 @@ proc loadVK_INTEL_performance_query*(device: Device) =
   device.loadCommand releasePerformanceConfigurationINTEL
   device.loadCommand queueSetPerformanceConfigurationINTEL
   device.loadCommand getPerformanceParameterINTEL
-

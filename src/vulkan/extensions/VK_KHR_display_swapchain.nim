@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:42Z
 # VK_KHR_display_swapchain
 
 import ../platform
@@ -35,7 +35,5 @@ proc createSharedSwapchainsKHR*(
 
 proc loadAllVK_KHR_display_swapchain*(instance: Instance) =
   instance.loadCommand createSharedSwapchainsKHR
-
 proc loadVK_KHR_display_swapchain*(device: Device) =
   device.loadCommand createSharedSwapchainsKHR
-

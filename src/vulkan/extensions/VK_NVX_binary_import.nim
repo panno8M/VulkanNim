@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T16:57:02Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_NVX_binary_import
 
 import ../platform
@@ -77,11 +77,9 @@ proc loadAllVK_NVX_binary_import*(instance: Instance) =
   instance.loadCommand destroyCuModuleNVX
   instance.loadCommand destroyCuFunctionNVX
   instance.loadCommand cmdCuLaunchKernelNVX
-
 proc loadVK_NVX_binary_import*(device: Device) =
   device.loadCommand createCuModuleNVX
   device.loadCommand createCuFunctionNVX
   device.loadCommand destroyCuModuleNVX
   device.loadCommand destroyCuFunctionNVX
   device.loadCommand cmdCuLaunchKernelNVX
-

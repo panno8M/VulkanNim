@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T10:42:47Z
+# Generated at 2021-12-30T16:35:41Z
 # VK_KHR_descriptor_update_template
 
 import ../platform
@@ -36,7 +36,5 @@ proc cmdPushDescriptorSetWithTemplateKHR*(
 
 proc loadAllVK_KHR_descriptor_update_template*(instance: Instance) =
   instance.loadCommand cmdPushDescriptorSetWithTemplateKHR
-
 proc loadVK_KHR_descriptor_update_template*(device: Device) =
   device.loadCommand cmdPushDescriptorSetWithTemplateKHR
-
