@@ -119,4 +119,4 @@ template prepareVulkanLibDef* =
   import vulkan/basetypes
   import vulkan/handles
   import vulkan/enums
-
+  import vulkan/commandLoaders
