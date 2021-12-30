@@ -248,11 +248,8 @@ proc generate*() =
       let words = name.parseWords({'_'})
       if words.len == 4 and words[2] == "extension":
         try: discard words[3].parseInt; continue
-        except: break Invalid_Extension_Test
-      if words[0] == "RESERVED" and
-         words[1] == "DO"       and
-         words[2] == "NOT"      and
-         words[3] == "USE": continue
+        finally: discard
+      if words[1] == "RESERVED": continue
     let requires = extension{"requires"}.parseWords({','}).mapIt((it.parseFileName, it.parseFileName.splitFile.dir == "extensions"))
     let promotedto =
       if (?extension{"promotedto"}).isSome:
