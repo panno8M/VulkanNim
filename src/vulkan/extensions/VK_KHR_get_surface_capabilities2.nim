@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:10:58Z
 # VK_KHR_get_surface_capabilities2
 
 import ../platform
@@ -44,9 +44,9 @@ proc getPhysicalDeviceSurfaceFormats2KHR*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorSurfaceLostKhr),
       lazyload("vkGetPhysicalDeviceSurfaceFormats2KHR", InstanceLevel).}
 
-proc loadAllVK_KHR_get_surface_capabilities2*(instance: Instance) =
-  instance.loadCommand getPhysicalDeviceSurfaceCapabilities2KHR
-  instance.loadCommand getPhysicalDeviceSurfaceFormats2KHR
-proc loadVK_KHR_get_surface_capabilities2*(instance: Instance) =
-  instance.loadCommand getPhysicalDeviceSurfaceCapabilities2KHR
-  instance.loadCommand getPhysicalDeviceSurfaceFormats2KHR
+proc loadAllVK_KHR_get_surface_capabilities2*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceSurfaceCapabilities2KHR
+  getPhysicalDeviceSurfaceFormats2KHR
+proc loadVK_KHR_get_surface_capabilities2*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceSurfaceCapabilities2KHR
+  getPhysicalDeviceSurfaceFormats2KHR

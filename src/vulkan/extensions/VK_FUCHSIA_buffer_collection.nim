@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_FUCHSIA_buffer_collection
 
 import ../platform
@@ -122,15 +122,15 @@ proc getBufferCollectionPropertiesFUCHSIA*(
       errorCodes(errorOutOfHostMemory, errorInitializationFailed),
       lazyload("vkGetBufferCollectionPropertiesFUCHSIA", DeviceLevel).}
 
-proc loadAllVK_FUCHSIA_buffer_collection*(instance: Instance) =
-  instance.loadCommand createBufferCollectionFUCHSIA
-  instance.loadCommand setBufferCollectionImageConstraintsFUCHSIA
-  instance.loadCommand setBufferCollectionBufferConstraintsFUCHSIA
-  instance.loadCommand destroyBufferCollectionFUCHSIA
-  instance.loadCommand getBufferCollectionPropertiesFUCHSIA
-proc loadVK_FUCHSIA_buffer_collection*(device: Device) =
-  device.loadCommand createBufferCollectionFUCHSIA
-  device.loadCommand setBufferCollectionImageConstraintsFUCHSIA
-  device.loadCommand setBufferCollectionBufferConstraintsFUCHSIA
-  device.loadCommand destroyBufferCollectionFUCHSIA
-  device.loadCommand getBufferCollectionPropertiesFUCHSIA
+proc loadAllVK_FUCHSIA_buffer_collection*(instance: Instance) = instance.loadCommands:
+  createBufferCollectionFUCHSIA
+  setBufferCollectionImageConstraintsFUCHSIA
+  setBufferCollectionBufferConstraintsFUCHSIA
+  destroyBufferCollectionFUCHSIA
+  getBufferCollectionPropertiesFUCHSIA
+proc loadVK_FUCHSIA_buffer_collection*(device: Device) = device.loadCommands:
+  createBufferCollectionFUCHSIA
+  setBufferCollectionImageConstraintsFUCHSIA
+  setBufferCollectionBufferConstraintsFUCHSIA
+  destroyBufferCollectionFUCHSIA
+  getBufferCollectionPropertiesFUCHSIA

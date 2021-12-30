@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_ANDROID_external_memory_android_hardware_buffer
 
 import ../platform
@@ -83,9 +83,9 @@ proc getMemoryAndroidHardwareBufferANDROID*(
       errorCodes(errorTooManyObjects, errorOutOfHostMemory),
       lazyload("vkGetMemoryAndroidHardwareBufferANDROID", DeviceLevel).}
 
-proc loadAllVK_ANDROID_external_memory_android_hardware_buffer*(instance: Instance) =
-  instance.loadCommand getAndroidHardwareBufferPropertiesANDROID
-  instance.loadCommand getMemoryAndroidHardwareBufferANDROID
-proc loadVK_ANDROID_external_memory_android_hardware_buffer*(device: Device) =
-  device.loadCommand getAndroidHardwareBufferPropertiesANDROID
-  device.loadCommand getMemoryAndroidHardwareBufferANDROID
+proc loadAllVK_ANDROID_external_memory_android_hardware_buffer*(instance: Instance) = instance.loadCommands:
+  getAndroidHardwareBufferPropertiesANDROID
+  getMemoryAndroidHardwareBufferANDROID
+proc loadVK_ANDROID_external_memory_android_hardware_buffer*(device: Device) = device.loadCommands:
+  getAndroidHardwareBufferPropertiesANDROID
+  getMemoryAndroidHardwareBufferANDROID

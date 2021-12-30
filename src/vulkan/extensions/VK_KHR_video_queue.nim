@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_video_queue
 
 import ../platform
@@ -201,30 +201,30 @@ proc cmdControlVideoCodingKHR*(
       pCodingControlInfo: ptr VideoCodingControlInfoKHR;
     ): void {.cdecl, lazyload("vkCmdControlVideoCodingKHR", DeviceLevel).}
 
-proc loadAllVK_KHR_video_queue*(instance: Instance) =
-  instance.loadCommand getPhysicalDeviceVideoCapabilitiesKHR
-  instance.loadCommand getPhysicalDeviceVideoFormatPropertiesKHR
-  instance.loadCommand createVideoSessionKHR
-  instance.loadCommand destroyVideoSessionKHR
-  instance.loadCommand getVideoSessionMemoryRequirementsKHR
-  instance.loadCommand bindVideoSessionMemoryKHR
-  instance.loadCommand createVideoSessionParametersKHR
-  instance.loadCommand updateVideoSessionParametersKHR
-  instance.loadCommand destroyVideoSessionParametersKHR
-  instance.loadCommand cmdBeginVideoCodingKHR
-  instance.loadCommand cmdEndVideoCodingKHR
-  instance.loadCommand cmdControlVideoCodingKHR
-proc loadVK_KHR_video_queue*(instance: Instance) =
-  instance.loadCommand getPhysicalDeviceVideoCapabilitiesKHR
-  instance.loadCommand getPhysicalDeviceVideoFormatPropertiesKHR
-proc loadVK_KHR_video_queue*(device: Device) =
-  device.loadCommand createVideoSessionKHR
-  device.loadCommand destroyVideoSessionKHR
-  device.loadCommand getVideoSessionMemoryRequirementsKHR
-  device.loadCommand bindVideoSessionMemoryKHR
-  device.loadCommand createVideoSessionParametersKHR
-  device.loadCommand updateVideoSessionParametersKHR
-  device.loadCommand destroyVideoSessionParametersKHR
-  device.loadCommand cmdBeginVideoCodingKHR
-  device.loadCommand cmdEndVideoCodingKHR
-  device.loadCommand cmdControlVideoCodingKHR
+proc loadAllVK_KHR_video_queue*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceVideoCapabilitiesKHR
+  getPhysicalDeviceVideoFormatPropertiesKHR
+  createVideoSessionKHR
+  destroyVideoSessionKHR
+  getVideoSessionMemoryRequirementsKHR
+  bindVideoSessionMemoryKHR
+  createVideoSessionParametersKHR
+  updateVideoSessionParametersKHR
+  destroyVideoSessionParametersKHR
+  cmdBeginVideoCodingKHR
+  cmdEndVideoCodingKHR
+  cmdControlVideoCodingKHR
+proc loadVK_KHR_video_queue*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceVideoCapabilitiesKHR
+  getPhysicalDeviceVideoFormatPropertiesKHR
+proc loadVK_KHR_video_queue*(device: Device) = device.loadCommands:
+  createVideoSessionKHR
+  destroyVideoSessionKHR
+  getVideoSessionMemoryRequirementsKHR
+  bindVideoSessionMemoryKHR
+  createVideoSessionParametersKHR
+  updateVideoSessionParametersKHR
+  destroyVideoSessionParametersKHR
+  cmdBeginVideoCodingKHR
+  cmdEndVideoCodingKHR
+  cmdControlVideoCodingKHR

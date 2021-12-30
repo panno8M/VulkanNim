@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_ANDROID_native_buffer
 
 import ../platform
@@ -63,13 +63,13 @@ proc getSwapchainGrallocUsage2ANDROID*(
       grallocProducerUsage: ptr uint64;
     ): Result {.cdecl, lazyload("vkGetSwapchainGrallocUsage2ANDROID", DeviceLevel).}
 
-proc loadAllVK_ANDROID_native_buffer*(instance: Instance) =
-  instance.loadCommand getSwapchainGrallocUsageANDROID
-  instance.loadCommand acquireImageANDROID
-  instance.loadCommand queueSignalReleaseImageANDROID
-  instance.loadCommand getSwapchainGrallocUsage2ANDROID
-proc loadVK_ANDROID_native_buffer*(device: Device) =
-  device.loadCommand getSwapchainGrallocUsageANDROID
-  device.loadCommand acquireImageANDROID
-  device.loadCommand queueSignalReleaseImageANDROID
-  device.loadCommand getSwapchainGrallocUsage2ANDROID
+proc loadAllVK_ANDROID_native_buffer*(instance: Instance) = instance.loadCommands:
+  getSwapchainGrallocUsageANDROID
+  acquireImageANDROID
+  queueSignalReleaseImageANDROID
+  getSwapchainGrallocUsage2ANDROID
+proc loadVK_ANDROID_native_buffer*(device: Device) = device.loadCommands:
+  getSwapchainGrallocUsageANDROID
+  acquireImageANDROID
+  queueSignalReleaseImageANDROID
+  getSwapchainGrallocUsage2ANDROID

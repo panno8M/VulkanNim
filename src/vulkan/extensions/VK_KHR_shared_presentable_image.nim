@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_shared_presentable_image
 
 import ../platform
@@ -30,7 +30,7 @@ proc getSwapchainStatusKHR*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost, errorOutOfDateKhr, errorSurfaceLostKhr, errorFullScreenExclusiveModeLostExt),
       lazyload("vkGetSwapchainStatusKHR", DeviceLevel).}
 
-proc loadAllVK_KHR_shared_presentable_image*(instance: Instance) =
-  instance.loadCommand getSwapchainStatusKHR
-proc loadVK_KHR_shared_presentable_image*(device: Device) =
-  device.loadCommand getSwapchainStatusKHR
+proc loadAllVK_KHR_shared_presentable_image*(instance: Instance) = instance.loadCommands:
+  getSwapchainStatusKHR
+proc loadVK_KHR_shared_presentable_image*(device: Device) = device.loadCommands:
+  getSwapchainStatusKHR

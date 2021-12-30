@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_HUAWEI_subpass_shading
 
 import ../platform
@@ -41,9 +41,9 @@ proc cmdSubpassShadingHUAWEI*(
       commandBuffer: CommandBuffer;
     ): void {.cdecl, lazyload("vkCmdSubpassShadingHUAWEI", DeviceLevel).}
 
-proc loadAllVK_HUAWEI_subpass_shading*(instance: Instance) =
-  instance.loadCommand getDeviceSubpassShadingMaxWorkgroupSizeHUAWEI
-  instance.loadCommand cmdSubpassShadingHUAWEI
-proc loadVK_HUAWEI_subpass_shading*(device: Device) =
-  device.loadCommand getDeviceSubpassShadingMaxWorkgroupSizeHUAWEI
-  device.loadCommand cmdSubpassShadingHUAWEI
+proc loadAllVK_HUAWEI_subpass_shading*(instance: Instance) = instance.loadCommands:
+  getDeviceSubpassShadingMaxWorkgroupSizeHUAWEI
+  cmdSubpassShadingHUAWEI
+proc loadVK_HUAWEI_subpass_shading*(device: Device) = device.loadCommands:
+  getDeviceSubpassShadingMaxWorkgroupSizeHUAWEI
+  cmdSubpassShadingHUAWEI

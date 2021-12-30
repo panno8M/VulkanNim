@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_acceleration_structure
 
 import ../platform
@@ -265,37 +265,37 @@ proc getAccelerationStructureBuildSizesKHR*(
       pSizeInfo: ptr AccelerationStructureBuildSizesInfoKHR;
     ): void {.cdecl, lazyload("vkGetAccelerationStructureBuildSizesKHR", DeviceLevel).}
 
-proc loadAllVK_KHR_acceleration_structure*(instance: Instance) =
-  instance.loadCommand createAccelerationStructureKHR
-  instance.loadCommand destroyAccelerationStructureKHR
-  instance.loadCommand cmdBuildAccelerationStructuresKHR
-  instance.loadCommand cmdBuildAccelerationStructuresIndirectKHR
-  instance.loadCommand buildAccelerationStructuresKHR
-  instance.loadCommand copyAccelerationStructureKHR
-  instance.loadCommand copyAccelerationStructureToMemoryKHR
-  instance.loadCommand copyMemoryToAccelerationStructureKHR
-  instance.loadCommand writeAccelerationStructuresPropertiesKHR
-  instance.loadCommand cmdCopyAccelerationStructureKHR
-  instance.loadCommand cmdCopyAccelerationStructureToMemoryKHR
-  instance.loadCommand cmdCopyMemoryToAccelerationStructureKHR
-  instance.loadCommand getAccelerationStructureDeviceAddressKHR
-  instance.loadCommand cmdWriteAccelerationStructuresPropertiesKHR
-  instance.loadCommand getDeviceAccelerationStructureCompatibilityKHR
-  instance.loadCommand getAccelerationStructureBuildSizesKHR
-proc loadVK_KHR_acceleration_structure*(device: Device) =
-  device.loadCommand createAccelerationStructureKHR
-  device.loadCommand destroyAccelerationStructureKHR
-  device.loadCommand cmdBuildAccelerationStructuresKHR
-  device.loadCommand cmdBuildAccelerationStructuresIndirectKHR
-  device.loadCommand buildAccelerationStructuresKHR
-  device.loadCommand copyAccelerationStructureKHR
-  device.loadCommand copyAccelerationStructureToMemoryKHR
-  device.loadCommand copyMemoryToAccelerationStructureKHR
-  device.loadCommand writeAccelerationStructuresPropertiesKHR
-  device.loadCommand cmdCopyAccelerationStructureKHR
-  device.loadCommand cmdCopyAccelerationStructureToMemoryKHR
-  device.loadCommand cmdCopyMemoryToAccelerationStructureKHR
-  device.loadCommand getAccelerationStructureDeviceAddressKHR
-  device.loadCommand cmdWriteAccelerationStructuresPropertiesKHR
-  device.loadCommand getDeviceAccelerationStructureCompatibilityKHR
-  device.loadCommand getAccelerationStructureBuildSizesKHR
+proc loadAllVK_KHR_acceleration_structure*(instance: Instance) = instance.loadCommands:
+  createAccelerationStructureKHR
+  destroyAccelerationStructureKHR
+  cmdBuildAccelerationStructuresKHR
+  cmdBuildAccelerationStructuresIndirectKHR
+  buildAccelerationStructuresKHR
+  copyAccelerationStructureKHR
+  copyAccelerationStructureToMemoryKHR
+  copyMemoryToAccelerationStructureKHR
+  writeAccelerationStructuresPropertiesKHR
+  cmdCopyAccelerationStructureKHR
+  cmdCopyAccelerationStructureToMemoryKHR
+  cmdCopyMemoryToAccelerationStructureKHR
+  getAccelerationStructureDeviceAddressKHR
+  cmdWriteAccelerationStructuresPropertiesKHR
+  getDeviceAccelerationStructureCompatibilityKHR
+  getAccelerationStructureBuildSizesKHR
+proc loadVK_KHR_acceleration_structure*(device: Device) = device.loadCommands:
+  createAccelerationStructureKHR
+  destroyAccelerationStructureKHR
+  cmdBuildAccelerationStructuresKHR
+  cmdBuildAccelerationStructuresIndirectKHR
+  buildAccelerationStructuresKHR
+  copyAccelerationStructureKHR
+  copyAccelerationStructureToMemoryKHR
+  copyMemoryToAccelerationStructureKHR
+  writeAccelerationStructuresPropertiesKHR
+  cmdCopyAccelerationStructureKHR
+  cmdCopyAccelerationStructureToMemoryKHR
+  cmdCopyMemoryToAccelerationStructureKHR
+  getAccelerationStructureDeviceAddressKHR
+  cmdWriteAccelerationStructuresPropertiesKHR
+  getDeviceAccelerationStructureCompatibilityKHR
+  getAccelerationStructureBuildSizesKHR

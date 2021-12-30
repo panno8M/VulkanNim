@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_NV_shading_rate_image
 
 import ../platform
@@ -67,11 +67,11 @@ proc cmdSetCoarseSampleOrderNV*(
       pCustomSampleOrders {.length: customSampleOrderCount.}: arrPtr[CoarseSampleOrderCustomNV];
     ): void {.cdecl, lazyload("vkCmdSetCoarseSampleOrderNV", DeviceLevel).}
 
-proc loadAllVK_NV_shading_rate_image*(instance: Instance) =
-  instance.loadCommand cmdBindShadingRateImageNV
-  instance.loadCommand cmdSetViewportShadingRatePaletteNV
-  instance.loadCommand cmdSetCoarseSampleOrderNV
-proc loadVK_NV_shading_rate_image*(device: Device) =
-  device.loadCommand cmdBindShadingRateImageNV
-  device.loadCommand cmdSetViewportShadingRatePaletteNV
-  device.loadCommand cmdSetCoarseSampleOrderNV
+proc loadAllVK_NV_shading_rate_image*(instance: Instance) = instance.loadCommands:
+  cmdBindShadingRateImageNV
+  cmdSetViewportShadingRatePaletteNV
+  cmdSetCoarseSampleOrderNV
+proc loadVK_NV_shading_rate_image*(device: Device) = device.loadCommands:
+  cmdBindShadingRateImageNV
+  cmdSetViewportShadingRatePaletteNV
+  cmdSetCoarseSampleOrderNV

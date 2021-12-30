@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:10:58Z
 # VK_MVK_ios_surface
 
 import ../platform
@@ -29,7 +29,7 @@ proc createIOSSurfaceMVK*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorNativeWindowInUseKhr),
       lazyload("vkCreateIOSSurfaceMVK", InstanceLevel).}
 
-proc loadAllVK_MVK_ios_surface*(instance: Instance) =
-  instance.loadCommand createIOSSurfaceMVK
-proc loadVK_MVK_ios_surface*(instance: Instance) =
-  instance.loadCommand createIOSSurfaceMVK
+proc loadAllVK_MVK_ios_surface*(instance: Instance) = instance.loadCommands:
+  createIOSSurfaceMVK
+proc loadVK_MVK_ios_surface*(instance: Instance) = instance.loadCommands:
+  createIOSSurfaceMVK

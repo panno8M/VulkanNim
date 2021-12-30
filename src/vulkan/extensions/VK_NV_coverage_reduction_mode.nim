@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:10:58Z
 # VK_NV_coverage_reduction_mode
 
 import ../platform
@@ -39,7 +39,7 @@ proc getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
       lazyload("vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV", InstanceLevel).}
 
-proc loadAllVK_NV_coverage_reduction_mode*(instance: Instance) =
-  instance.loadCommand getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV
-proc loadVK_NV_coverage_reduction_mode*(instance: Instance) =
-  instance.loadCommand getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV
+proc loadAllVK_NV_coverage_reduction_mode*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV
+proc loadVK_NV_coverage_reduction_mode*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV

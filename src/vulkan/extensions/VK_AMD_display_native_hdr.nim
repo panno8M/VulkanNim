@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_AMD_display_native_hdr
 
 import ../platform
@@ -32,7 +32,7 @@ proc setLocalDimmingAMD*(
       localDimmingEnable: Bool32;
     ): void {.cdecl, lazyload("vkSetLocalDimmingAMD", DeviceLevel).}
 
-proc loadAllVK_AMD_display_native_hdr*(instance: Instance) =
-  instance.loadCommand setLocalDimmingAMD
-proc loadVK_AMD_display_native_hdr*(device: Device) =
-  device.loadCommand setLocalDimmingAMD
+proc loadAllVK_AMD_display_native_hdr*(instance: Instance) = instance.loadCommands:
+  setLocalDimmingAMD
+proc loadVK_AMD_display_native_hdr*(device: Device) = device.loadCommands:
+  setLocalDimmingAMD

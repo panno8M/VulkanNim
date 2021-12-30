@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_NV_clip_space_w_scaling
 
 import ../platform
@@ -29,7 +29,7 @@ proc cmdSetViewportWScalingNV*(
       pViewportWScalings {.length: viewportCount.}: arrPtr[ViewportWScalingNV];
     ): void {.cdecl, lazyload("vkCmdSetViewportWScalingNV", DeviceLevel).}
 
-proc loadAllVK_NV_clip_space_w_scaling*(instance: Instance) =
-  instance.loadCommand cmdSetViewportWScalingNV
-proc loadVK_NV_clip_space_w_scaling*(device: Device) =
-  device.loadCommand cmdSetViewportWScalingNV
+proc loadAllVK_NV_clip_space_w_scaling*(instance: Instance) = instance.loadCommands:
+  cmdSetViewportWScalingNV
+proc loadVK_NV_clip_space_w_scaling*(device: Device) = device.loadCommands:
+  cmdSetViewportWScalingNV

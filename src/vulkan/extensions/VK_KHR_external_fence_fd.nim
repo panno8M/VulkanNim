@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_external_fence_fd
 
 import ../platform
@@ -42,9 +42,9 @@ proc getFenceFdKHR*(
       errorCodes(errorTooManyObjects, errorOutOfHostMemory),
       lazyload("vkGetFenceFdKHR", DeviceLevel).}
 
-proc loadAllVK_KHR_external_fence_fd*(instance: Instance) =
-  instance.loadCommand importFenceFdKHR
-  instance.loadCommand getFenceFdKHR
-proc loadVK_KHR_external_fence_fd*(device: Device) =
-  device.loadCommand importFenceFdKHR
-  device.loadCommand getFenceFdKHR
+proc loadAllVK_KHR_external_fence_fd*(instance: Instance) = instance.loadCommands:
+  importFenceFdKHR
+  getFenceFdKHR
+proc loadVK_KHR_external_fence_fd*(device: Device) = device.loadCommands:
+  importFenceFdKHR
+  getFenceFdKHR

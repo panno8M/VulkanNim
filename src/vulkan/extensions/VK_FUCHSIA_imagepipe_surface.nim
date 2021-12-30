@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:10:58Z
 # VK_FUCHSIA_imagepipe_surface
 
 import ../platform
@@ -29,7 +29,7 @@ proc createImagePipeSurfaceFUCHSIA*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
       lazyload("vkCreateImagePipeSurfaceFUCHSIA", InstanceLevel).}
 
-proc loadAllVK_FUCHSIA_imagepipe_surface*(instance: Instance) =
-  instance.loadCommand createImagePipeSurfaceFUCHSIA
-proc loadVK_FUCHSIA_imagepipe_surface*(instance: Instance) =
-  instance.loadCommand createImagePipeSurfaceFUCHSIA
+proc loadAllVK_FUCHSIA_imagepipe_surface*(instance: Instance) = instance.loadCommands:
+  createImagePipeSurfaceFUCHSIA
+proc loadVK_FUCHSIA_imagepipe_surface*(instance: Instance) = instance.loadCommands:
+  createImagePipeSurfaceFUCHSIA

@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_AMD_shader_info
 
 import ../platform
@@ -39,7 +39,7 @@ proc getShaderInfoAMD*(
       errorCodes(errorFeatureNotPresent, errorOutOfHostMemory),
       lazyload("vkGetShaderInfoAMD", DeviceLevel).}
 
-proc loadAllVK_AMD_shader_info*(instance: Instance) =
-  instance.loadCommand getShaderInfoAMD
-proc loadVK_AMD_shader_info*(device: Device) =
-  device.loadCommand getShaderInfoAMD
+proc loadAllVK_AMD_shader_info*(instance: Instance) = instance.loadCommands:
+  getShaderInfoAMD
+proc loadVK_AMD_shader_info*(device: Device) = device.loadCommands:
+  getShaderInfoAMD

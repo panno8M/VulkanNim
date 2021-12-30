@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_FUCHSIA_external_memory
 
 import ../platform
@@ -48,9 +48,9 @@ proc getMemoryZirconHandlePropertiesFUCHSIA*(
       errorCodes(errorInvalidExternalHandle),
       lazyload("vkGetMemoryZirconHandlePropertiesFUCHSIA", DeviceLevel).}
 
-proc loadAllVK_FUCHSIA_external_memory*(instance: Instance) =
-  instance.loadCommand getMemoryZirconHandleFUCHSIA
-  instance.loadCommand getMemoryZirconHandlePropertiesFUCHSIA
-proc loadVK_FUCHSIA_external_memory*(device: Device) =
-  device.loadCommand getMemoryZirconHandleFUCHSIA
-  device.loadCommand getMemoryZirconHandlePropertiesFUCHSIA
+proc loadAllVK_FUCHSIA_external_memory*(instance: Instance) = instance.loadCommands:
+  getMemoryZirconHandleFUCHSIA
+  getMemoryZirconHandlePropertiesFUCHSIA
+proc loadVK_FUCHSIA_external_memory*(device: Device) = device.loadCommands:
+  getMemoryZirconHandleFUCHSIA
+  getMemoryZirconHandlePropertiesFUCHSIA

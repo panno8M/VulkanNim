@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_EXT_transform_feedback
 
 import ../platform
@@ -82,17 +82,17 @@ proc cmdDrawIndirectByteCountEXT*(
       vertexStride: uint32;
     ): void {.cdecl, lazyload("vkCmdDrawIndirectByteCountEXT", DeviceLevel).}
 
-proc loadAllVK_EXT_transform_feedback*(instance: Instance) =
-  instance.loadCommand cmdBindTransformFeedbackBuffersEXT
-  instance.loadCommand cmdBeginTransformFeedbackEXT
-  instance.loadCommand cmdEndTransformFeedbackEXT
-  instance.loadCommand cmdBeginQueryIndexedEXT
-  instance.loadCommand cmdEndQueryIndexedEXT
-  instance.loadCommand cmdDrawIndirectByteCountEXT
-proc loadVK_EXT_transform_feedback*(device: Device) =
-  device.loadCommand cmdBindTransformFeedbackBuffersEXT
-  device.loadCommand cmdBeginTransformFeedbackEXT
-  device.loadCommand cmdEndTransformFeedbackEXT
-  device.loadCommand cmdBeginQueryIndexedEXT
-  device.loadCommand cmdEndQueryIndexedEXT
-  device.loadCommand cmdDrawIndirectByteCountEXT
+proc loadAllVK_EXT_transform_feedback*(instance: Instance) = instance.loadCommands:
+  cmdBindTransformFeedbackBuffersEXT
+  cmdBeginTransformFeedbackEXT
+  cmdEndTransformFeedbackEXT
+  cmdBeginQueryIndexedEXT
+  cmdEndQueryIndexedEXT
+  cmdDrawIndirectByteCountEXT
+proc loadVK_EXT_transform_feedback*(device: Device) = device.loadCommands:
+  cmdBindTransformFeedbackBuffersEXT
+  cmdBeginTransformFeedbackEXT
+  cmdEndTransformFeedbackEXT
+  cmdBeginQueryIndexedEXT
+  cmdEndQueryIndexedEXT
+  cmdDrawIndirectByteCountEXT

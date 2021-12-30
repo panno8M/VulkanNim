@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_maintenance4
 
 import ../platform
@@ -48,11 +48,11 @@ proc getDeviceImageSparseMemoryRequirementsKHR*(
       pSparseMemoryRequirements {.length: pSparseMemoryRequirementCount.} = default(arrPtr[SparseImageMemoryRequirements2]);
     ): void {.cdecl, lazyload("vkGetDeviceImageSparseMemoryRequirementsKHR", DeviceLevel).}
 
-proc loadAllVK_KHR_maintenance4*(instance: Instance) =
-  instance.loadCommand getDeviceBufferMemoryRequirementsKHR
-  instance.loadCommand getDeviceImageMemoryRequirementsKHR
-  instance.loadCommand getDeviceImageSparseMemoryRequirementsKHR
-proc loadVK_KHR_maintenance4*(device: Device) =
-  device.loadCommand getDeviceBufferMemoryRequirementsKHR
-  device.loadCommand getDeviceImageMemoryRequirementsKHR
-  device.loadCommand getDeviceImageSparseMemoryRequirementsKHR
+proc loadAllVK_KHR_maintenance4*(instance: Instance) = instance.loadCommands:
+  getDeviceBufferMemoryRequirementsKHR
+  getDeviceImageMemoryRequirementsKHR
+  getDeviceImageSparseMemoryRequirementsKHR
+proc loadVK_KHR_maintenance4*(device: Device) = device.loadCommands:
+  getDeviceBufferMemoryRequirementsKHR
+  getDeviceImageMemoryRequirementsKHR
+  getDeviceImageSparseMemoryRequirementsKHR

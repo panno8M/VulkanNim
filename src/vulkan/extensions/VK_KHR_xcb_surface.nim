@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:10:58Z
 # VK_KHR_xcb_surface
 
 import ../platform
@@ -36,9 +36,9 @@ proc getPhysicalDeviceXcbPresentationSupportKHR*(
       visual_id: XcbVisualid;
     ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceXcbPresentationSupportKHR", InstanceLevel).}
 
-proc loadAllVK_KHR_xcb_surface*(instance: Instance) =
-  instance.loadCommand createXcbSurfaceKHR
-  instance.loadCommand getPhysicalDeviceXcbPresentationSupportKHR
-proc loadVK_KHR_xcb_surface*(instance: Instance) =
-  instance.loadCommand createXcbSurfaceKHR
-  instance.loadCommand getPhysicalDeviceXcbPresentationSupportKHR
+proc loadAllVK_KHR_xcb_surface*(instance: Instance) = instance.loadCommands:
+  createXcbSurfaceKHR
+  getPhysicalDeviceXcbPresentationSupportKHR
+proc loadVK_KHR_xcb_surface*(instance: Instance) = instance.loadCommands:
+  createXcbSurfaceKHR
+  getPhysicalDeviceXcbPresentationSupportKHR

@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_EXT_multi_draw
 
 import ../platform
@@ -46,9 +46,9 @@ proc cmdDrawMultiIndexedEXT*(
       pVertexOffset = default(ptr int32);
     ): void {.cdecl, lazyload("vkCmdDrawMultiIndexedEXT", DeviceLevel).}
 
-proc loadAllVK_EXT_multi_draw*(instance: Instance) =
-  instance.loadCommand cmdDrawMultiEXT
-  instance.loadCommand cmdDrawMultiIndexedEXT
-proc loadVK_EXT_multi_draw*(device: Device) =
-  device.loadCommand cmdDrawMultiEXT
-  device.loadCommand cmdDrawMultiIndexedEXT
+proc loadAllVK_EXT_multi_draw*(instance: Instance) = instance.loadCommands:
+  cmdDrawMultiEXT
+  cmdDrawMultiIndexedEXT
+proc loadVK_EXT_multi_draw*(device: Device) = device.loadCommands:
+  cmdDrawMultiEXT
+  cmdDrawMultiIndexedEXT

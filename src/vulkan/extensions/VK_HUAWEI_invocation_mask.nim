@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_HUAWEI_invocation_mask
 
 import ../platform
@@ -26,7 +26,7 @@ proc cmdBindInvocationMaskHUAWEI*(
       imageLayout: ImageLayout;
     ): void {.cdecl, lazyload("vkCmdBindInvocationMaskHUAWEI", DeviceLevel).}
 
-proc loadAllVK_HUAWEI_invocation_mask*(instance: Instance) =
-  instance.loadCommand cmdBindInvocationMaskHUAWEI
-proc loadVK_HUAWEI_invocation_mask*(device: Device) =
-  device.loadCommand cmdBindInvocationMaskHUAWEI
+proc loadAllVK_HUAWEI_invocation_mask*(instance: Instance) = instance.loadCommands:
+  cmdBindInvocationMaskHUAWEI
+proc loadVK_HUAWEI_invocation_mask*(device: Device) = device.loadCommands:
+  cmdBindInvocationMaskHUAWEI

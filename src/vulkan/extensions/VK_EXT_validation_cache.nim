@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_EXT_validation_cache
 
 import ../platform
@@ -56,13 +56,13 @@ proc getValidationCacheDataEXT*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
       lazyload("vkGetValidationCacheDataEXT", DeviceLevel).}
 
-proc loadAllVK_EXT_validation_cache*(instance: Instance) =
-  instance.loadCommand createValidationCacheEXT
-  instance.loadCommand destroyValidationCacheEXT
-  instance.loadCommand mergeValidationCachesEXT
-  instance.loadCommand getValidationCacheDataEXT
-proc loadVK_EXT_validation_cache*(device: Device) =
-  device.loadCommand createValidationCacheEXT
-  device.loadCommand destroyValidationCacheEXT
-  device.loadCommand mergeValidationCachesEXT
-  device.loadCommand getValidationCacheDataEXT
+proc loadAllVK_EXT_validation_cache*(instance: Instance) = instance.loadCommands:
+  createValidationCacheEXT
+  destroyValidationCacheEXT
+  mergeValidationCachesEXT
+  getValidationCacheDataEXT
+proc loadVK_EXT_validation_cache*(device: Device) = device.loadCommands:
+  createValidationCacheEXT
+  destroyValidationCacheEXT
+  mergeValidationCachesEXT
+  getValidationCacheDataEXT

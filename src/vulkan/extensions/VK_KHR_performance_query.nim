@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_performance_query
 
 import ../platform
@@ -86,14 +86,14 @@ proc releaseProfilingLockKHR*(
       device: Device;
     ): void {.cdecl, lazyload("vkReleaseProfilingLockKHR", DeviceLevel).}
 
-proc loadAllVK_KHR_performance_query*(instance: Instance) =
-  instance.loadCommand enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR
-  instance.loadCommand getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR
-  instance.loadCommand acquireProfilingLockKHR
-  instance.loadCommand releaseProfilingLockKHR
-proc loadVK_KHR_performance_query*(instance: Instance) =
-  instance.loadCommand enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR
-  instance.loadCommand getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR
-proc loadVK_KHR_performance_query*(device: Device) =
-  device.loadCommand acquireProfilingLockKHR
-  device.loadCommand releaseProfilingLockKHR
+proc loadAllVK_KHR_performance_query*(instance: Instance) = instance.loadCommands:
+  enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR
+  getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR
+  acquireProfilingLockKHR
+  releaseProfilingLockKHR
+proc loadVK_KHR_performance_query*(instance: Instance) = instance.loadCommands:
+  enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR
+  getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR
+proc loadVK_KHR_performance_query*(device: Device) = device.loadCommands:
+  acquireProfilingLockKHR
+  releaseProfilingLockKHR

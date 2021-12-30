@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_external_semaphore_fd
 
 import ../platform
@@ -42,9 +42,9 @@ proc getSemaphoreFdKHR*(
       errorCodes(errorTooManyObjects, errorOutOfHostMemory),
       lazyload("vkGetSemaphoreFdKHR", DeviceLevel).}
 
-proc loadAllVK_KHR_external_semaphore_fd*(instance: Instance) =
-  instance.loadCommand importSemaphoreFdKHR
-  instance.loadCommand getSemaphoreFdKHR
-proc loadVK_KHR_external_semaphore_fd*(device: Device) =
-  device.loadCommand importSemaphoreFdKHR
-  device.loadCommand getSemaphoreFdKHR
+proc loadAllVK_KHR_external_semaphore_fd*(instance: Instance) = instance.loadCommands:
+  importSemaphoreFdKHR
+  getSemaphoreFdKHR
+proc loadVK_KHR_external_semaphore_fd*(device: Device) = device.loadCommands:
+  importSemaphoreFdKHR
+  getSemaphoreFdKHR

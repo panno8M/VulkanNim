@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_EXT_line_rasterization
 
 import ../platform
@@ -40,7 +40,7 @@ proc cmdSetLineStippleEXT*(
       lineStipplePattern: uint16;
     ): void {.cdecl, lazyload("vkCmdSetLineStippleEXT", DeviceLevel).}
 
-proc loadAllVK_EXT_line_rasterization*(instance: Instance) =
-  instance.loadCommand cmdSetLineStippleEXT
-proc loadVK_EXT_line_rasterization*(device: Device) =
-  device.loadCommand cmdSetLineStippleEXT
+proc loadAllVK_EXT_line_rasterization*(instance: Instance) = instance.loadCommands:
+  cmdSetLineStippleEXT
+proc loadVK_EXT_line_rasterization*(device: Device) = device.loadCommands:
+  cmdSetLineStippleEXT

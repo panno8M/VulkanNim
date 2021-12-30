@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_EXT_extended_dynamic_state2
 
 import ../platform
@@ -41,15 +41,15 @@ proc cmdSetPrimitiveRestartEnableEXT*(
       primitiveRestartEnable: Bool32;
     ): void {.cdecl, lazyload("vkCmdSetPrimitiveRestartEnableEXT", DeviceLevel).}
 
-proc loadAllVK_EXT_extended_dynamic_state2*(instance: Instance) =
-  instance.loadCommand cmdSetPatchControlPointsEXT
-  instance.loadCommand cmdSetRasterizerDiscardEnableEXT
-  instance.loadCommand cmdSetDepthBiasEnableEXT
-  instance.loadCommand cmdSetLogicOpEXT
-  instance.loadCommand cmdSetPrimitiveRestartEnableEXT
-proc loadVK_EXT_extended_dynamic_state2*(device: Device) =
-  device.loadCommand cmdSetPatchControlPointsEXT
-  device.loadCommand cmdSetRasterizerDiscardEnableEXT
-  device.loadCommand cmdSetDepthBiasEnableEXT
-  device.loadCommand cmdSetLogicOpEXT
-  device.loadCommand cmdSetPrimitiveRestartEnableEXT
+proc loadAllVK_EXT_extended_dynamic_state2*(instance: Instance) = instance.loadCommands:
+  cmdSetPatchControlPointsEXT
+  cmdSetRasterizerDiscardEnableEXT
+  cmdSetDepthBiasEnableEXT
+  cmdSetLogicOpEXT
+  cmdSetPrimitiveRestartEnableEXT
+proc loadVK_EXT_extended_dynamic_state2*(device: Device) = device.loadCommands:
+  cmdSetPatchControlPointsEXT
+  cmdSetRasterizerDiscardEnableEXT
+  cmdSetDepthBiasEnableEXT
+  cmdSetLogicOpEXT
+  cmdSetPrimitiveRestartEnableEXT

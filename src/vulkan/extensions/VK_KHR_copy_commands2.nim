@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_copy_commands2
 
 import ../platform
@@ -127,17 +127,17 @@ proc cmdResolveImage2KHR*(
       pResolveImageInfo: ptr ResolveImageInfo2KHR;
     ): void {.cdecl, lazyload("vkCmdResolveImage2KHR", DeviceLevel).}
 
-proc loadAllVK_KHR_copy_commands2*(instance: Instance) =
-  instance.loadCommand cmdCopyBuffer2KHR
-  instance.loadCommand cmdCopyImage2KHR
-  instance.loadCommand cmdCopyBufferToImage2KHR
-  instance.loadCommand cmdCopyImageToBuffer2KHR
-  instance.loadCommand cmdBlitImage2KHR
-  instance.loadCommand cmdResolveImage2KHR
-proc loadVK_KHR_copy_commands2*(device: Device) =
-  device.loadCommand cmdCopyBuffer2KHR
-  device.loadCommand cmdCopyImage2KHR
-  device.loadCommand cmdCopyBufferToImage2KHR
-  device.loadCommand cmdCopyImageToBuffer2KHR
-  device.loadCommand cmdBlitImage2KHR
-  device.loadCommand cmdResolveImage2KHR
+proc loadAllVK_KHR_copy_commands2*(instance: Instance) = instance.loadCommands:
+  cmdCopyBuffer2KHR
+  cmdCopyImage2KHR
+  cmdCopyBufferToImage2KHR
+  cmdCopyImageToBuffer2KHR
+  cmdBlitImage2KHR
+  cmdResolveImage2KHR
+proc loadVK_KHR_copy_commands2*(device: Device) = device.loadCommands:
+  cmdCopyBuffer2KHR
+  cmdCopyImage2KHR
+  cmdCopyBufferToImage2KHR
+  cmdCopyImageToBuffer2KHR
+  cmdBlitImage2KHR
+  cmdResolveImage2KHR

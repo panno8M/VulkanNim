@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:10:58Z
 # VK_KHR_surface
 # VK_KHR_display
 
@@ -180,31 +180,31 @@ proc createDisplayPlaneSurfaceKHR*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
       lazyload("vkCreateDisplayPlaneSurfaceKHR", InstanceLevel).}
 
-proc loadAllVK_KHR_surface*(instance: Instance) =
-  instance.loadCommand destroySurfaceKHR
-  instance.loadCommand getPhysicalDeviceSurfaceSupportKHR
-  instance.loadCommand getPhysicalDeviceSurfaceCapabilitiesKHR
-  instance.loadCommand getPhysicalDeviceSurfaceFormatsKHR
-  instance.loadCommand getPhysicalDeviceSurfacePresentModesKHR
-proc loadAllVK_KHR_display*(instance: Instance) =
-  instance.loadCommand getPhysicalDeviceDisplayPropertiesKHR
-  instance.loadCommand getPhysicalDeviceDisplayPlanePropertiesKHR
-  instance.loadCommand getDisplayPlaneSupportedDisplaysKHR
-  instance.loadCommand getDisplayModePropertiesKHR
-  instance.loadCommand createDisplayModeKHR
-  instance.loadCommand getDisplayPlaneCapabilitiesKHR
-  instance.loadCommand createDisplayPlaneSurfaceKHR
-proc loadVK_KHR_surface*(instance: Instance) =
-  instance.loadCommand destroySurfaceKHR
-  instance.loadCommand getPhysicalDeviceSurfaceSupportKHR
-  instance.loadCommand getPhysicalDeviceSurfaceCapabilitiesKHR
-  instance.loadCommand getPhysicalDeviceSurfaceFormatsKHR
-  instance.loadCommand getPhysicalDeviceSurfacePresentModesKHR
-proc loadVK_KHR_display*(instance: Instance) =
-  instance.loadCommand getPhysicalDeviceDisplayPropertiesKHR
-  instance.loadCommand getPhysicalDeviceDisplayPlanePropertiesKHR
-  instance.loadCommand getDisplayPlaneSupportedDisplaysKHR
-  instance.loadCommand getDisplayModePropertiesKHR
-  instance.loadCommand createDisplayModeKHR
-  instance.loadCommand getDisplayPlaneCapabilitiesKHR
-  instance.loadCommand createDisplayPlaneSurfaceKHR
+proc loadAllVK_KHR_surface*(instance: Instance) = instance.loadCommands:
+  destroySurfaceKHR
+  getPhysicalDeviceSurfaceSupportKHR
+  getPhysicalDeviceSurfaceCapabilitiesKHR
+  getPhysicalDeviceSurfaceFormatsKHR
+  getPhysicalDeviceSurfacePresentModesKHR
+proc loadAllVK_KHR_display*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceDisplayPropertiesKHR
+  getPhysicalDeviceDisplayPlanePropertiesKHR
+  getDisplayPlaneSupportedDisplaysKHR
+  getDisplayModePropertiesKHR
+  createDisplayModeKHR
+  getDisplayPlaneCapabilitiesKHR
+  createDisplayPlaneSurfaceKHR
+proc loadVK_KHR_surface*(instance: Instance) = instance.loadCommands:
+  destroySurfaceKHR
+  getPhysicalDeviceSurfaceSupportKHR
+  getPhysicalDeviceSurfaceCapabilitiesKHR
+  getPhysicalDeviceSurfaceFormatsKHR
+  getPhysicalDeviceSurfacePresentModesKHR
+proc loadVK_KHR_display*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceDisplayPropertiesKHR
+  getPhysicalDeviceDisplayPlanePropertiesKHR
+  getDisplayPlaneSupportedDisplaysKHR
+  getDisplayModePropertiesKHR
+  createDisplayModeKHR
+  getDisplayPlaneCapabilitiesKHR
+  createDisplayPlaneSurfaceKHR

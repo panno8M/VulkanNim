@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:10:58Z
 # VK_KHR_wayland_surface
 
 import ../platform
@@ -35,9 +35,9 @@ proc getPhysicalDeviceWaylandPresentationSupportKHR*(
       display: ptr wl_display;
     ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceWaylandPresentationSupportKHR", InstanceLevel).}
 
-proc loadAllVK_KHR_wayland_surface*(instance: Instance) =
-  instance.loadCommand createWaylandSurfaceKHR
-  instance.loadCommand getPhysicalDeviceWaylandPresentationSupportKHR
-proc loadVK_KHR_wayland_surface*(instance: Instance) =
-  instance.loadCommand createWaylandSurfaceKHR
-  instance.loadCommand getPhysicalDeviceWaylandPresentationSupportKHR
+proc loadAllVK_KHR_wayland_surface*(instance: Instance) = instance.loadCommands:
+  createWaylandSurfaceKHR
+  getPhysicalDeviceWaylandPresentationSupportKHR
+proc loadVK_KHR_wayland_surface*(instance: Instance) = instance.loadCommands:
+  createWaylandSurfaceKHR
+  getPhysicalDeviceWaylandPresentationSupportKHR

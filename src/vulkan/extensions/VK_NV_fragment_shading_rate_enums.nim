@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_NV_fragment_shading_rate_enums
 
 import ../platform
@@ -36,7 +36,7 @@ proc cmdSetFragmentShadingRateEnumNV*(
       combinerOps: FragmentShadingRateCombinerOpKHR;
     ): void {.cdecl, lazyload("vkCmdSetFragmentShadingRateEnumNV", DeviceLevel).}
 
-proc loadAllVK_NV_fragment_shading_rate_enums*(instance: Instance) =
-  instance.loadCommand cmdSetFragmentShadingRateEnumNV
-proc loadVK_NV_fragment_shading_rate_enums*(device: Device) =
-  device.loadCommand cmdSetFragmentShadingRateEnumNV
+proc loadAllVK_NV_fragment_shading_rate_enums*(instance: Instance) = instance.loadCommands:
+  cmdSetFragmentShadingRateEnumNV
+proc loadVK_NV_fragment_shading_rate_enums*(device: Device) = device.loadCommands:
+  cmdSetFragmentShadingRateEnumNV

@@ -1,14 +1,11 @@
 # Generated at 2021-12-26T08:21:06Z
 # platform
-import std/strformat
 import std/macros
-import std/sequtils
-import std/options
 export macros.hasCustomPragma, macros.getCustomPragmaVal
 
 import xcb/xcb
 
-const vkDllPath =
+const vkDllPath* =
   when defined(windows):
     "vulkan-1.dll"
   elif defined(macosx):
@@ -42,69 +39,6 @@ export XcbConnection
 export XcbWindow
 export XcbVisualid
 
-type LoadWith* {.pure.} = enum
-  Instance, Device
-const InstanceLevel* = {LoadWith.Instance}
-const DeviceLevel* = {LoadWith.Instance, LoadWith.Device}
-
-template loadable*(loadFrom: string, with = InstanceLevel) {.pragma.}
-template loadInto*[T: proc](cage: var Option[T]) {.pragma.}
-
-macro preload*(loadFrom: string, def: untyped): untyped =
-  def.expectKind nnkProcDef
-  if def.body.kind != nnkEmpty: error("the body must be empty")
-  def.addPragma ident"discardable"
-  def.addPragma ident"dynlib".newCall(newStrLitNode(vkDllPath))
-  def.addPragma ident"importc".newCall(newStrLitNode($loadFrom))
-  return def
-macro lazyload*(loadFrom: string; with = InstanceLevel; def: untyped): untyped =
-  ## The proc expands to something like:
-  ##
-  ## var procName: procDef {.[procPragma], loadable(loadFrom, with).}
-  ##
-  ## As you can see the proc pointer has loadable pragma so, you can use load macro to dynamic load.
-  
-  proc isExported(n: NimNode): bool =
-    n.kind == nnkPostfix and n[0].eqIdent "*"
-
-  def.expectKind nnkProcDef
-  if def.body.kind != nnkEmpty: error("the body must be empty")
-
-  let
-    procTyPragma = newNimNode(nnkPragma).add(concat(
-      def.pragma[0..^1],
-      @[ident"loadable".newCall(loadFrom, with)],
-    ))
-    procTy = newNimNode(nnkProcTy).add(
-      def.params,
-      procTyPragma)
-
-    typeName = ident(&"PFN_{def.name}")
-    cageName = ident(&"{def.name}_CAGE")
-    exportableTypeName =
-      if def[0].isExported: typeName.postfix("*")
-      else: typeName
-
-    typeDef = quote do:
-      type `exportableTypeName` = `procTy`
-
-    cageDef = quote do:
-      var `cageName`: Option[`typeName`]
-
-    accessorDef = newProc(
-      name= def[0],
-      params= def.params[0..^1],
-      body= ident"get".newCall(cageName).newCall def.params[1..^1].mapIt( if it[0].kind == nnkPragmaExpr: it[0][0] else: it[0] ),
-      pragmas= newNimNode(nnkPragma).add(
-        ident"loadInto".newCall(cageName),
-        ident"discardable"
-      )
-    )
-
-  quote do:
-    `typeDef`
-    `cageDef`
-    `accessorDef`
 
 template optional* {.pragma.}
 template constant*(v: typed) {.pragma.}
@@ -119,4 +53,4 @@ template prepareVulkanLibDef* =
   import vulkan/basetypes
   import vulkan/handles
   import vulkan/enums
-  import vulkan/commandLoaders
+  import vulkan/commandLoaders {.all.}

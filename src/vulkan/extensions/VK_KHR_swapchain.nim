@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_swapchain
 
 import ../platform
@@ -151,24 +151,24 @@ proc acquireNextImage2KHR*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost, errorOutOfDateKhr, errorSurfaceLostKhr, errorFullScreenExclusiveModeLostExt),
       lazyload("vkAcquireNextImage2KHR", DeviceLevel).}
 
-proc loadAllVK_KHR_swapchain*(instance: Instance) =
-  instance.loadCommand createSwapchainKHR
-  instance.loadCommand destroySwapchainKHR
-  instance.loadCommand getSwapchainImagesKHR
-  instance.loadCommand acquireNextImageKHR
-  instance.loadCommand queuePresentKHR
-  instance.loadCommand getDeviceGroupPresentCapabilitiesKHR
-  instance.loadCommand getDeviceGroupSurfacePresentModesKHR
-  instance.loadCommand getPhysicalDevicePresentRectanglesKHR
-  instance.loadCommand acquireNextImage2KHR
-proc loadVK_KHR_swapchain*(instance: Instance) =
-  instance.loadCommand getPhysicalDevicePresentRectanglesKHR
-proc loadVK_KHR_swapchain*(device: Device) =
-  device.loadCommand createSwapchainKHR
-  device.loadCommand destroySwapchainKHR
-  device.loadCommand getSwapchainImagesKHR
-  device.loadCommand acquireNextImageKHR
-  device.loadCommand queuePresentKHR
-  device.loadCommand getDeviceGroupPresentCapabilitiesKHR
-  device.loadCommand getDeviceGroupSurfacePresentModesKHR
-  device.loadCommand acquireNextImage2KHR
+proc loadAllVK_KHR_swapchain*(instance: Instance) = instance.loadCommands:
+  createSwapchainKHR
+  destroySwapchainKHR
+  getSwapchainImagesKHR
+  acquireNextImageKHR
+  queuePresentKHR
+  getDeviceGroupPresentCapabilitiesKHR
+  getDeviceGroupSurfacePresentModesKHR
+  getPhysicalDevicePresentRectanglesKHR
+  acquireNextImage2KHR
+proc loadVK_KHR_swapchain*(instance: Instance) = instance.loadCommands:
+  getPhysicalDevicePresentRectanglesKHR
+proc loadVK_KHR_swapchain*(device: Device) = device.loadCommands:
+  createSwapchainKHR
+  destroySwapchainKHR
+  getSwapchainImagesKHR
+  acquireNextImageKHR
+  queuePresentKHR
+  getDeviceGroupPresentCapabilitiesKHR
+  getDeviceGroupSurfacePresentModesKHR
+  acquireNextImage2KHR

@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_INTEL_performance_query
 
 import ../platform
@@ -111,23 +111,23 @@ proc getPerformanceParameterINTEL*(
       errorCodes(errorTooManyObjects, errorOutOfHostMemory),
       lazyload("vkGetPerformanceParameterINTEL", DeviceLevel).}
 
-proc loadAllVK_INTEL_performance_query*(instance: Instance) =
-  instance.loadCommand initializePerformanceApiINTEL
-  instance.loadCommand uninitializePerformanceApiINTEL
-  instance.loadCommand cmdSetPerformanceMarkerINTEL
-  instance.loadCommand cmdSetPerformanceStreamMarkerINTEL
-  instance.loadCommand cmdSetPerformanceOverrideINTEL
-  instance.loadCommand acquirePerformanceConfigurationINTEL
-  instance.loadCommand releasePerformanceConfigurationINTEL
-  instance.loadCommand queueSetPerformanceConfigurationINTEL
-  instance.loadCommand getPerformanceParameterINTEL
-proc loadVK_INTEL_performance_query*(device: Device) =
-  device.loadCommand initializePerformanceApiINTEL
-  device.loadCommand uninitializePerformanceApiINTEL
-  device.loadCommand cmdSetPerformanceMarkerINTEL
-  device.loadCommand cmdSetPerformanceStreamMarkerINTEL
-  device.loadCommand cmdSetPerformanceOverrideINTEL
-  device.loadCommand acquirePerformanceConfigurationINTEL
-  device.loadCommand releasePerformanceConfigurationINTEL
-  device.loadCommand queueSetPerformanceConfigurationINTEL
-  device.loadCommand getPerformanceParameterINTEL
+proc loadAllVK_INTEL_performance_query*(instance: Instance) = instance.loadCommands:
+  initializePerformanceApiINTEL
+  uninitializePerformanceApiINTEL
+  cmdSetPerformanceMarkerINTEL
+  cmdSetPerformanceStreamMarkerINTEL
+  cmdSetPerformanceOverrideINTEL
+  acquirePerformanceConfigurationINTEL
+  releasePerformanceConfigurationINTEL
+  queueSetPerformanceConfigurationINTEL
+  getPerformanceParameterINTEL
+proc loadVK_INTEL_performance_query*(device: Device) = device.loadCommands:
+  initializePerformanceApiINTEL
+  uninitializePerformanceApiINTEL
+  cmdSetPerformanceMarkerINTEL
+  cmdSetPerformanceStreamMarkerINTEL
+  cmdSetPerformanceOverrideINTEL
+  acquirePerformanceConfigurationINTEL
+  releasePerformanceConfigurationINTEL
+  queueSetPerformanceConfigurationINTEL
+  getPerformanceParameterINTEL

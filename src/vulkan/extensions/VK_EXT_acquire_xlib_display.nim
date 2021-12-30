@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:10:58Z
 # VK_EXT_acquire_xlib_display
 
 import ../platform
@@ -30,9 +30,9 @@ proc getRandROutputDisplayEXT*(
       errorCodes(errorOutOfHostMemory),
       lazyload("vkGetRandROutputDisplayEXT", InstanceLevel).}
 
-proc loadAllVK_EXT_acquire_xlib_display*(instance: Instance) =
-  instance.loadCommand acquireXlibDisplayEXT
-  instance.loadCommand getRandROutputDisplayEXT
-proc loadVK_EXT_acquire_xlib_display*(instance: Instance) =
-  instance.loadCommand acquireXlibDisplayEXT
-  instance.loadCommand getRandROutputDisplayEXT
+proc loadAllVK_EXT_acquire_xlib_display*(instance: Instance) = instance.loadCommands:
+  acquireXlibDisplayEXT
+  getRandROutputDisplayEXT
+proc loadVK_EXT_acquire_xlib_display*(instance: Instance) = instance.loadCommands:
+  acquireXlibDisplayEXT
+  getRandROutputDisplayEXT

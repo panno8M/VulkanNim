@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_ray_tracing_pipeline
 
 import ../platform
@@ -135,19 +135,19 @@ proc cmdSetRayTracingPipelineStackSizeKHR*(
       pipelineStackSize: uint32;
     ): void {.cdecl, lazyload("vkCmdSetRayTracingPipelineStackSizeKHR", DeviceLevel).}
 
-proc loadAllVK_KHR_ray_tracing_pipeline*(instance: Instance) =
-  instance.loadCommand cmdTraceRaysKHR
-  instance.loadCommand createRayTracingPipelinesKHR
-  instance.loadCommand getRayTracingShaderGroupHandlesKHR
-  instance.loadCommand getRayTracingCaptureReplayShaderGroupHandlesKHR
-  instance.loadCommand cmdTraceRaysIndirectKHR
-  instance.loadCommand getRayTracingShaderGroupStackSizeKHR
-  instance.loadCommand cmdSetRayTracingPipelineStackSizeKHR
-proc loadVK_KHR_ray_tracing_pipeline*(device: Device) =
-  device.loadCommand cmdTraceRaysKHR
-  device.loadCommand createRayTracingPipelinesKHR
-  device.loadCommand getRayTracingShaderGroupHandlesKHR
-  device.loadCommand getRayTracingCaptureReplayShaderGroupHandlesKHR
-  device.loadCommand cmdTraceRaysIndirectKHR
-  device.loadCommand getRayTracingShaderGroupStackSizeKHR
-  device.loadCommand cmdSetRayTracingPipelineStackSizeKHR
+proc loadAllVK_KHR_ray_tracing_pipeline*(instance: Instance) = instance.loadCommands:
+  cmdTraceRaysKHR
+  createRayTracingPipelinesKHR
+  getRayTracingShaderGroupHandlesKHR
+  getRayTracingCaptureReplayShaderGroupHandlesKHR
+  cmdTraceRaysIndirectKHR
+  getRayTracingShaderGroupStackSizeKHR
+  cmdSetRayTracingPipelineStackSizeKHR
+proc loadVK_KHR_ray_tracing_pipeline*(device: Device) = device.loadCommands:
+  cmdTraceRaysKHR
+  createRayTracingPipelinesKHR
+  getRayTracingShaderGroupHandlesKHR
+  getRayTracingCaptureReplayShaderGroupHandlesKHR
+  cmdTraceRaysIndirectKHR
+  getRayTracingShaderGroupStackSizeKHR
+  cmdSetRayTracingPipelineStackSizeKHR

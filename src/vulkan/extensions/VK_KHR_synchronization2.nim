@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_synchronization2
 
 import ../platform
@@ -172,21 +172,21 @@ proc getQueueCheckpointData2NV*(
       pCheckpointData {.length: pCheckpointDataCount.} = default(arrPtr[CheckpointData2NV]);
     ): void {.cdecl, lazyload("vkGetQueueCheckpointData2NV", DeviceLevel).}
 
-proc loadAllVK_KHR_synchronization2*(instance: Instance) =
-  instance.loadCommand cmdSetEvent2KHR
-  instance.loadCommand cmdResetEvent2KHR
-  instance.loadCommand cmdWaitEvents2KHR
-  instance.loadCommand cmdPipelineBarrier2KHR
-  instance.loadCommand cmdWriteTimestamp2KHR
-  instance.loadCommand queueSubmit2KHR
-  instance.loadCommand cmdWriteBufferMarker2AMD
-  instance.loadCommand getQueueCheckpointData2NV
-proc loadVK_KHR_synchronization2*(device: Device) =
-  device.loadCommand cmdSetEvent2KHR
-  device.loadCommand cmdResetEvent2KHR
-  device.loadCommand cmdWaitEvents2KHR
-  device.loadCommand cmdPipelineBarrier2KHR
-  device.loadCommand cmdWriteTimestamp2KHR
-  device.loadCommand queueSubmit2KHR
-  device.loadCommand cmdWriteBufferMarker2AMD
-  device.loadCommand getQueueCheckpointData2NV
+proc loadAllVK_KHR_synchronization2*(instance: Instance) = instance.loadCommands:
+  cmdSetEvent2KHR
+  cmdResetEvent2KHR
+  cmdWaitEvents2KHR
+  cmdPipelineBarrier2KHR
+  cmdWriteTimestamp2KHR
+  queueSubmit2KHR
+  cmdWriteBufferMarker2AMD
+  getQueueCheckpointData2NV
+proc loadVK_KHR_synchronization2*(device: Device) = device.loadCommands:
+  cmdSetEvent2KHR
+  cmdResetEvent2KHR
+  cmdWaitEvents2KHR
+  cmdPipelineBarrier2KHR
+  cmdWriteTimestamp2KHR
+  queueSubmit2KHR
+  cmdWriteBufferMarker2AMD
+  getQueueCheckpointData2NV

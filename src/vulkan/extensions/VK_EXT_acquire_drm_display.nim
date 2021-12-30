@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:10:58Z
 # VK_EXT_acquire_drm_display
 
 import ../platform
@@ -30,9 +30,9 @@ proc getDrmDisplayEXT*(
       errorCodes(errorInitializationFailed, errorOutOfHostMemory),
       lazyload("vkGetDrmDisplayEXT", InstanceLevel).}
 
-proc loadAllVK_EXT_acquire_drm_display*(instance: Instance) =
-  instance.loadCommand acquireDrmDisplayEXT
-  instance.loadCommand getDrmDisplayEXT
-proc loadVK_EXT_acquire_drm_display*(instance: Instance) =
-  instance.loadCommand acquireDrmDisplayEXT
-  instance.loadCommand getDrmDisplayEXT
+proc loadAllVK_EXT_acquire_drm_display*(instance: Instance) = instance.loadCommands:
+  acquireDrmDisplayEXT
+  getDrmDisplayEXT
+proc loadVK_EXT_acquire_drm_display*(instance: Instance) = instance.loadCommands:
+  acquireDrmDisplayEXT
+  getDrmDisplayEXT

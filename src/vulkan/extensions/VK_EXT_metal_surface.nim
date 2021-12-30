@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:10:58Z
 # VK_EXT_metal_surface
 
 import ../platform
@@ -29,7 +29,7 @@ proc createMetalSurfaceEXT*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorNativeWindowInUseKhr),
       lazyload("vkCreateMetalSurfaceEXT", InstanceLevel).}
 
-proc loadAllVK_EXT_metal_surface*(instance: Instance) =
-  instance.loadCommand createMetalSurfaceEXT
-proc loadVK_EXT_metal_surface*(instance: Instance) =
-  instance.loadCommand createMetalSurfaceEXT
+proc loadAllVK_EXT_metal_surface*(instance: Instance) = instance.loadCommands:
+  createMetalSurfaceEXT
+proc loadVK_EXT_metal_surface*(instance: Instance) = instance.loadCommands:
+  createMetalSurfaceEXT

@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_EXT_hdr_metadata
 
 import ../platform
@@ -36,7 +36,7 @@ proc setHdrMetadataEXT*(
       pMetadata {.length: swapchainCount.}: arrPtr[HdrMetadataEXT];
     ): void {.cdecl, lazyload("vkSetHdrMetadataEXT", DeviceLevel).}
 
-proc loadAllVK_EXT_hdr_metadata*(instance: Instance) =
-  instance.loadCommand setHdrMetadataEXT
-proc loadVK_EXT_hdr_metadata*(device: Device) =
-  device.loadCommand setHdrMetadataEXT
+proc loadAllVK_EXT_hdr_metadata*(instance: Instance) = instance.loadCommands:
+  setHdrMetadataEXT
+proc loadVK_EXT_hdr_metadata*(device: Device) = device.loadCommands:
+  setHdrMetadataEXT

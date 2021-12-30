@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_EXT_sample_locations
 
 import ../platform
@@ -64,10 +64,10 @@ proc getPhysicalDeviceMultisamplePropertiesEXT*(
       pMultisampleProperties: ptr MultisamplePropertiesEXT;
     ): void {.cdecl, lazyload("vkGetPhysicalDeviceMultisamplePropertiesEXT", InstanceLevel).}
 
-proc loadAllVK_EXT_sample_locations*(instance: Instance) =
-  instance.loadCommand cmdSetSampleLocationsEXT
-  instance.loadCommand getPhysicalDeviceMultisamplePropertiesEXT
-proc loadVK_EXT_sample_locations*(instance: Instance) =
-  instance.loadCommand getPhysicalDeviceMultisamplePropertiesEXT
-proc loadVK_EXT_sample_locations*(device: Device) =
-  device.loadCommand cmdSetSampleLocationsEXT
+proc loadAllVK_EXT_sample_locations*(instance: Instance) = instance.loadCommands:
+  cmdSetSampleLocationsEXT
+  getPhysicalDeviceMultisamplePropertiesEXT
+proc loadVK_EXT_sample_locations*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceMultisamplePropertiesEXT
+proc loadVK_EXT_sample_locations*(device: Device) = device.loadCommands:
+  cmdSetSampleLocationsEXT

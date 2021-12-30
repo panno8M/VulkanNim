@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:10:58Z
 # VK_EXT_headless_surface
 
 import ../platform
@@ -28,7 +28,7 @@ proc createHeadlessSurfaceEXT*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
       lazyload("vkCreateHeadlessSurfaceEXT", InstanceLevel).}
 
-proc loadAllVK_EXT_headless_surface*(instance: Instance) =
-  instance.loadCommand createHeadlessSurfaceEXT
-proc loadVK_EXT_headless_surface*(instance: Instance) =
-  instance.loadCommand createHeadlessSurfaceEXT
+proc loadAllVK_EXT_headless_surface*(instance: Instance) = instance.loadCommands:
+  createHeadlessSurfaceEXT
+proc loadVK_EXT_headless_surface*(instance: Instance) = instance.loadCommands:
+  createHeadlessSurfaceEXT

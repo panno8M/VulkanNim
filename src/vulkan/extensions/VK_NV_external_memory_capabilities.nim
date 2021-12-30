@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:10:58Z
 # VK_NV_external_memory_capabilities
 
 import ../platform
@@ -32,7 +32,7 @@ proc getPhysicalDeviceExternalImageFormatPropertiesNV*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorFormatNotSupported),
       lazyload("vkGetPhysicalDeviceExternalImageFormatPropertiesNV", InstanceLevel).}
 
-proc loadAllVK_NV_external_memory_capabilities*(instance: Instance) =
-  instance.loadCommand getPhysicalDeviceExternalImageFormatPropertiesNV
-proc loadVK_NV_external_memory_capabilities*(instance: Instance) =
-  instance.loadCommand getPhysicalDeviceExternalImageFormatPropertiesNV
+proc loadAllVK_NV_external_memory_capabilities*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceExternalImageFormatPropertiesNV
+proc loadVK_NV_external_memory_capabilities*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceExternalImageFormatPropertiesNV

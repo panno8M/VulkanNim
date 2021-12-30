@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_EXT_extended_dynamic_state
 
 import ../platform
@@ -78,29 +78,29 @@ proc cmdSetStencilOpEXT*(
       compareOp: CompareOp;
     ): void {.cdecl, lazyload("vkCmdSetStencilOpEXT", DeviceLevel).}
 
-proc loadAllVK_EXT_extended_dynamic_state*(instance: Instance) =
-  instance.loadCommand cmdSetCullModeEXT
-  instance.loadCommand cmdSetFrontFaceEXT
-  instance.loadCommand cmdSetPrimitiveTopologyEXT
-  instance.loadCommand cmdSetViewportWithCountEXT
-  instance.loadCommand cmdSetScissorWithCountEXT
-  instance.loadCommand cmdBindVertexBuffers2EXT
-  instance.loadCommand cmdSetDepthTestEnableEXT
-  instance.loadCommand cmdSetDepthWriteEnableEXT
-  instance.loadCommand cmdSetDepthCompareOpEXT
-  instance.loadCommand cmdSetDepthBoundsTestEnableEXT
-  instance.loadCommand cmdSetStencilTestEnableEXT
-  instance.loadCommand cmdSetStencilOpEXT
-proc loadVK_EXT_extended_dynamic_state*(device: Device) =
-  device.loadCommand cmdSetCullModeEXT
-  device.loadCommand cmdSetFrontFaceEXT
-  device.loadCommand cmdSetPrimitiveTopologyEXT
-  device.loadCommand cmdSetViewportWithCountEXT
-  device.loadCommand cmdSetScissorWithCountEXT
-  device.loadCommand cmdBindVertexBuffers2EXT
-  device.loadCommand cmdSetDepthTestEnableEXT
-  device.loadCommand cmdSetDepthWriteEnableEXT
-  device.loadCommand cmdSetDepthCompareOpEXT
-  device.loadCommand cmdSetDepthBoundsTestEnableEXT
-  device.loadCommand cmdSetStencilTestEnableEXT
-  device.loadCommand cmdSetStencilOpEXT
+proc loadAllVK_EXT_extended_dynamic_state*(instance: Instance) = instance.loadCommands:
+  cmdSetCullModeEXT
+  cmdSetFrontFaceEXT
+  cmdSetPrimitiveTopologyEXT
+  cmdSetViewportWithCountEXT
+  cmdSetScissorWithCountEXT
+  cmdBindVertexBuffers2EXT
+  cmdSetDepthTestEnableEXT
+  cmdSetDepthWriteEnableEXT
+  cmdSetDepthCompareOpEXT
+  cmdSetDepthBoundsTestEnableEXT
+  cmdSetStencilTestEnableEXT
+  cmdSetStencilOpEXT
+proc loadVK_EXT_extended_dynamic_state*(device: Device) = device.loadCommands:
+  cmdSetCullModeEXT
+  cmdSetFrontFaceEXT
+  cmdSetPrimitiveTopologyEXT
+  cmdSetViewportWithCountEXT
+  cmdSetScissorWithCountEXT
+  cmdBindVertexBuffers2EXT
+  cmdSetDepthTestEnableEXT
+  cmdSetDepthWriteEnableEXT
+  cmdSetDepthCompareOpEXT
+  cmdSetDepthBoundsTestEnableEXT
+  cmdSetStencilTestEnableEXT
+  cmdSetStencilOpEXT

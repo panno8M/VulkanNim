@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_EXT_display_control
 
 import ../platform
@@ -69,13 +69,13 @@ proc getSwapchainCounterEXT*(
       errorCodes(errorOutOfHostMemory, errorDeviceLost, errorOutOfDateKhr),
       lazyload("vkGetSwapchainCounterEXT", DeviceLevel).}
 
-proc loadAllVK_EXT_display_control*(instance: Instance) =
-  instance.loadCommand displayPowerControlEXT
-  instance.loadCommand registerDeviceEventEXT
-  instance.loadCommand registerDisplayEventEXT
-  instance.loadCommand getSwapchainCounterEXT
-proc loadVK_EXT_display_control*(device: Device) =
-  device.loadCommand displayPowerControlEXT
-  device.loadCommand registerDeviceEventEXT
-  device.loadCommand registerDisplayEventEXT
-  device.loadCommand getSwapchainCounterEXT
+proc loadAllVK_EXT_display_control*(instance: Instance) = instance.loadCommands:
+  displayPowerControlEXT
+  registerDeviceEventEXT
+  registerDisplayEventEXT
+  getSwapchainCounterEXT
+proc loadVK_EXT_display_control*(device: Device) = device.loadCommands:
+  displayPowerControlEXT
+  registerDeviceEventEXT
+  registerDisplayEventEXT
+  getSwapchainCounterEXT

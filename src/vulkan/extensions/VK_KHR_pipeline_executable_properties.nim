@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_pipeline_executable_properties
 
 import ../platform
@@ -82,11 +82,11 @@ proc getPipelineExecutableInternalRepresentationsKHR*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
       lazyload("vkGetPipelineExecutableInternalRepresentationsKHR", DeviceLevel).}
 
-proc loadAllVK_KHR_pipeline_executable_properties*(instance: Instance) =
-  instance.loadCommand getPipelineExecutablePropertiesKHR
-  instance.loadCommand getPipelineExecutableStatisticsKHR
-  instance.loadCommand getPipelineExecutableInternalRepresentationsKHR
-proc loadVK_KHR_pipeline_executable_properties*(device: Device) =
-  device.loadCommand getPipelineExecutablePropertiesKHR
-  device.loadCommand getPipelineExecutableStatisticsKHR
-  device.loadCommand getPipelineExecutableInternalRepresentationsKHR
+proc loadAllVK_KHR_pipeline_executable_properties*(instance: Instance) = instance.loadCommands:
+  getPipelineExecutablePropertiesKHR
+  getPipelineExecutableStatisticsKHR
+  getPipelineExecutableInternalRepresentationsKHR
+proc loadVK_KHR_pipeline_executable_properties*(device: Device) = device.loadCommands:
+  getPipelineExecutablePropertiesKHR
+  getPipelineExecutableStatisticsKHR
+  getPipelineExecutableInternalRepresentationsKHR

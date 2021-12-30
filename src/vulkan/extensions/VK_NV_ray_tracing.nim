@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_NV_ray_tracing
 
 import ../platform
@@ -211,27 +211,27 @@ proc compileDeferredNV*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
       lazyload("vkCompileDeferredNV", DeviceLevel).}
 
-proc loadAllVK_NV_ray_tracing*(instance: Instance) =
-  instance.loadCommand createAccelerationStructureNV
-  instance.loadCommand destroyAccelerationStructureNV
-  instance.loadCommand getAccelerationStructureMemoryRequirementsNV
-  instance.loadCommand bindAccelerationStructureMemoryNV
-  instance.loadCommand cmdBuildAccelerationStructureNV
-  instance.loadCommand cmdCopyAccelerationStructureNV
-  instance.loadCommand cmdTraceRaysNV
-  instance.loadCommand createRayTracingPipelinesNV
-  instance.loadCommand getAccelerationStructureHandleNV
-  instance.loadCommand cmdWriteAccelerationStructuresPropertiesNV
-  instance.loadCommand compileDeferredNV
-proc loadVK_NV_ray_tracing*(device: Device) =
-  device.loadCommand createAccelerationStructureNV
-  device.loadCommand destroyAccelerationStructureNV
-  device.loadCommand getAccelerationStructureMemoryRequirementsNV
-  device.loadCommand bindAccelerationStructureMemoryNV
-  device.loadCommand cmdBuildAccelerationStructureNV
-  device.loadCommand cmdCopyAccelerationStructureNV
-  device.loadCommand cmdTraceRaysNV
-  device.loadCommand createRayTracingPipelinesNV
-  device.loadCommand getAccelerationStructureHandleNV
-  device.loadCommand cmdWriteAccelerationStructuresPropertiesNV
-  device.loadCommand compileDeferredNV
+proc loadAllVK_NV_ray_tracing*(instance: Instance) = instance.loadCommands:
+  createAccelerationStructureNV
+  destroyAccelerationStructureNV
+  getAccelerationStructureMemoryRequirementsNV
+  bindAccelerationStructureMemoryNV
+  cmdBuildAccelerationStructureNV
+  cmdCopyAccelerationStructureNV
+  cmdTraceRaysNV
+  createRayTracingPipelinesNV
+  getAccelerationStructureHandleNV
+  cmdWriteAccelerationStructuresPropertiesNV
+  compileDeferredNV
+proc loadVK_NV_ray_tracing*(device: Device) = device.loadCommands:
+  createAccelerationStructureNV
+  destroyAccelerationStructureNV
+  getAccelerationStructureMemoryRequirementsNV
+  bindAccelerationStructureMemoryNV
+  cmdBuildAccelerationStructureNV
+  cmdCopyAccelerationStructureNV
+  cmdTraceRaysNV
+  createRayTracingPipelinesNV
+  getAccelerationStructureHandleNV
+  cmdWriteAccelerationStructuresPropertiesNV
+  compileDeferredNV

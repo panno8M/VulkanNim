@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:10:58Z
 # VK_KHR_android_surface
 
 import ../platform
@@ -29,7 +29,7 @@ proc createAndroidSurfaceKHR*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorNativeWindowInUseKhr),
       lazyload("vkCreateAndroidSurfaceKHR", InstanceLevel).}
 
-proc loadAllVK_KHR_android_surface*(instance: Instance) =
-  instance.loadCommand createAndroidSurfaceKHR
-proc loadVK_KHR_android_surface*(instance: Instance) =
-  instance.loadCommand createAndroidSurfaceKHR
+proc loadAllVK_KHR_android_surface*(instance: Instance) = instance.loadCommands:
+  createAndroidSurfaceKHR
+proc loadVK_KHR_android_surface*(instance: Instance) = instance.loadCommands:
+  createAndroidSurfaceKHR

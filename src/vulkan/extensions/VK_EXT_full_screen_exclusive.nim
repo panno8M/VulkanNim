@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_EXT_full_screen_exclusive
 
 import ../platform
@@ -71,16 +71,16 @@ proc getDeviceGroupSurfacePresentModes2EXT*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorSurfaceLostKhr),
       lazyload("vkGetDeviceGroupSurfacePresentModes2EXT", DeviceLevel).}
 
-proc loadAllVK_EXT_full_screen_exclusive*(instance: Instance) =
-  instance.loadCommand getPhysicalDeviceSurfacePresentModes2EXT
-  instance.loadCommand acquireFullScreenExclusiveModeEXT
-  instance.loadCommand releaseFullScreenExclusiveModeEXT
-  instance.loadCommand getDeviceGroupSurfacePresentModes2EXT
-  instance.loadCommand getDeviceGroupSurfacePresentModes2EXT
-proc loadVK_EXT_full_screen_exclusive*(instance: Instance) =
-  instance.loadCommand getPhysicalDeviceSurfacePresentModes2EXT
-proc loadVK_EXT_full_screen_exclusive*(device: Device) =
-  device.loadCommand acquireFullScreenExclusiveModeEXT
-  device.loadCommand releaseFullScreenExclusiveModeEXT
-  device.loadCommand getDeviceGroupSurfacePresentModes2EXT
-  device.loadCommand getDeviceGroupSurfacePresentModes2EXT
+proc loadAllVK_EXT_full_screen_exclusive*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceSurfacePresentModes2EXT
+  acquireFullScreenExclusiveModeEXT
+  releaseFullScreenExclusiveModeEXT
+  getDeviceGroupSurfacePresentModes2EXT
+  getDeviceGroupSurfacePresentModes2EXT
+proc loadVK_EXT_full_screen_exclusive*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceSurfacePresentModes2EXT
+proc loadVK_EXT_full_screen_exclusive*(device: Device) = device.loadCommands:
+  acquireFullScreenExclusiveModeEXT
+  releaseFullScreenExclusiveModeEXT
+  getDeviceGroupSurfacePresentModes2EXT
+  getDeviceGroupSurfacePresentModes2EXT

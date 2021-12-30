@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:10:58Z
 # VK_EXT_directfb_surface
 
 import ../platform
@@ -35,9 +35,9 @@ proc getPhysicalDeviceDirectFBPresentationSupportEXT*(
       dfb: ptr IDirectFB;
     ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceDirectFBPresentationSupportEXT", InstanceLevel).}
 
-proc loadAllVK_EXT_directfb_surface*(instance: Instance) =
-  instance.loadCommand createDirectFBSurfaceEXT
-  instance.loadCommand getPhysicalDeviceDirectFBPresentationSupportEXT
-proc loadVK_EXT_directfb_surface*(instance: Instance) =
-  instance.loadCommand createDirectFBSurfaceEXT
-  instance.loadCommand getPhysicalDeviceDirectFBPresentationSupportEXT
+proc loadAllVK_EXT_directfb_surface*(instance: Instance) = instance.loadCommands:
+  createDirectFBSurfaceEXT
+  getPhysicalDeviceDirectFBPresentationSupportEXT
+proc loadVK_EXT_directfb_surface*(instance: Instance) = instance.loadCommands:
+  createDirectFBSurfaceEXT
+  getPhysicalDeviceDirectFBPresentationSupportEXT

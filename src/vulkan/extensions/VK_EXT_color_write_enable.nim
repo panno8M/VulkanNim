@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_EXT_color_write_enable
 
 import ../platform
@@ -29,7 +29,7 @@ proc cmdSetColorWriteEnableEXT*(
       pColorWriteEnables {.length: attachmentCount.}: arrPtr[Bool32];
     ): void {.cdecl, lazyload("vkCmdSetColorWriteEnableEXT", DeviceLevel).}
 
-proc loadAllVK_EXT_color_write_enable*(instance: Instance) =
-  instance.loadCommand cmdSetColorWriteEnableEXT
-proc loadVK_EXT_color_write_enable*(device: Device) =
-  device.loadCommand cmdSetColorWriteEnableEXT
+proc loadAllVK_EXT_color_write_enable*(instance: Instance) = instance.loadCommands:
+  cmdSetColorWriteEnableEXT
+proc loadVK_EXT_color_write_enable*(device: Device) = device.loadCommands:
+  cmdSetColorWriteEnableEXT

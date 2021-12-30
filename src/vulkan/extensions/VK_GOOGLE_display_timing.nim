@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_GOOGLE_display_timing
 
 import ../platform
@@ -48,9 +48,9 @@ proc getPastPresentationTimingGOOGLE*(
       errorCodes(errorOutOfHostMemory, errorDeviceLost, errorOutOfDateKhr, errorSurfaceLostKhr),
       lazyload("vkGetPastPresentationTimingGOOGLE", DeviceLevel).}
 
-proc loadAllVK_GOOGLE_display_timing*(instance: Instance) =
-  instance.loadCommand getRefreshCycleDurationGOOGLE
-  instance.loadCommand getPastPresentationTimingGOOGLE
-proc loadVK_GOOGLE_display_timing*(device: Device) =
-  device.loadCommand getRefreshCycleDurationGOOGLE
-  device.loadCommand getPastPresentationTimingGOOGLE
+proc loadAllVK_GOOGLE_display_timing*(instance: Instance) = instance.loadCommands:
+  getRefreshCycleDurationGOOGLE
+  getPastPresentationTimingGOOGLE
+proc loadVK_GOOGLE_display_timing*(device: Device) = device.loadCommands:
+  getRefreshCycleDurationGOOGLE
+  getPastPresentationTimingGOOGLE

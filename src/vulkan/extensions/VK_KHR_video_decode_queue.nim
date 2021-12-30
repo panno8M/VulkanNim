@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_video_decode_queue
 
 import ../platform
@@ -36,7 +36,7 @@ proc cmdDecodeVideoKHR*(
       pFrameInfo: ptr VideoDecodeInfoKHR;
     ): void {.cdecl, lazyload("vkCmdDecodeVideoKHR", DeviceLevel).}
 
-proc loadAllVK_KHR_video_decode_queue*(instance: Instance) =
-  instance.loadCommand cmdDecodeVideoKHR
-proc loadVK_KHR_video_decode_queue*(device: Device) =
-  device.loadCommand cmdDecodeVideoKHR
+proc loadAllVK_KHR_video_decode_queue*(instance: Instance) = instance.loadCommands:
+  cmdDecodeVideoKHR
+proc loadVK_KHR_video_decode_queue*(device: Device) = device.loadCommands:
+  cmdDecodeVideoKHR

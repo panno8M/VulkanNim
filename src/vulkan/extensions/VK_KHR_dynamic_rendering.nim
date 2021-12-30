@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_dynamic_rendering
 
 import ../platform
@@ -104,9 +104,9 @@ proc cmdEndRenderingKHR*(
       commandBuffer: CommandBuffer;
     ): void {.cdecl, lazyload("vkCmdEndRenderingKHR", DeviceLevel).}
 
-proc loadAllVK_KHR_dynamic_rendering*(instance: Instance) =
-  instance.loadCommand cmdBeginRenderingKHR
-  instance.loadCommand cmdEndRenderingKHR
-proc loadVK_KHR_dynamic_rendering*(device: Device) =
-  device.loadCommand cmdBeginRenderingKHR
-  device.loadCommand cmdEndRenderingKHR
+proc loadAllVK_KHR_dynamic_rendering*(instance: Instance) = instance.loadCommands:
+  cmdBeginRenderingKHR
+  cmdEndRenderingKHR
+proc loadVK_KHR_dynamic_rendering*(device: Device) = device.loadCommands:
+  cmdBeginRenderingKHR
+  cmdEndRenderingKHR

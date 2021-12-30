@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:10:58Z
 # VK_NV_acquire_winrt_display
 
 import ../platform
@@ -28,9 +28,9 @@ proc getWinrtDisplayNV*(
       errorCodes(errorOutOfHostMemory, errorDeviceLost, errorInitializationFailed),
       lazyload("vkGetWinrtDisplayNV", InstanceLevel).}
 
-proc loadAllVK_NV_acquire_winrt_display*(instance: Instance) =
-  instance.loadCommand acquireWinrtDisplayNV
-  instance.loadCommand getWinrtDisplayNV
-proc loadVK_NV_acquire_winrt_display*(instance: Instance) =
-  instance.loadCommand acquireWinrtDisplayNV
-  instance.loadCommand getWinrtDisplayNV
+proc loadAllVK_NV_acquire_winrt_display*(instance: Instance) = instance.loadCommands:
+  acquireWinrtDisplayNV
+  getWinrtDisplayNV
+proc loadVK_NV_acquire_winrt_display*(instance: Instance) = instance.loadCommands:
+  acquireWinrtDisplayNV
+  getWinrtDisplayNV

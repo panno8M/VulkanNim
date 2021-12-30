@@ -17,9 +17,13 @@ type CommandRenderingMode = enum
   crmInstance
   crmDevice
 
-proc renderCommandLoaderComponent*(require: NodeRequire; resources: Resources; commandRenderingMode = crmAll): Option[string] =
-  template needsLoader(command: NodeCommand): bool =
-    command.kind != nkbrAlias and command.loadMode != lmPreload
+proc renderCommandLoaderComponent*(require: NodeRequire; resources: Resources; renderingMode = crmAll): Option[string] =
+  template needsLoader(command: NodeCommand; current: CommandRenderingMode): bool =
+    command.kind != nkbrAlias and (
+      case command.loadMode
+      of lmWithInstance: current in {crmAll, crmInstance}
+      of lmWithDevice:   current in {crmAll, crmDevice}
+      of lmPreload:      false)
 
   if require.targets.filterIt(it.kind == nkrCommand).len == 0: return
   var commandLoaderDef = newSeq[string]()
@@ -27,17 +31,8 @@ proc renderCommandLoaderComponent*(require: NodeRequire; resources: Resources; c
   for req in require.targets.filter(x => x.kind == nkrCommand):
     try:
       let command = resources.commands[req.name]
-      if not command.needsLoader: continue
-
-      commandLoaderDef.add case commandRenderingMode
-        of crmInstance:
-          if command.loadMode != lmWithInstance: continue
-          "instance.loadCommand {req.name.parseCommandname}".fmt
-        of crmDevice:
-          if command.loadMode != lmWithDevice: continue
-          "device.loadCommand {req.name.parseCommandname}".fmt
-        of crmAll:
-          "instance.loadCommand {req.name.parseCommandname}".fmt
+      if not command.needsLoader(renderingMode): continue
+      commandLoaderDef.add req.name.parseCommandname
     except KeyError: discard
 
   if commandLoaderDef.len != 0:
@@ -55,9 +50,9 @@ proc renderCommandLoader*(libFile: LibFile; resources: Resources; commandRenderi
   for i, fileRequire in libFile.requires:
     let loaderName = loaderNames[i]
     var commandLoaderDefs = sstring(kind: skBlock, title: case commandRenderingMode
-      of crmAll: "proc loadAll{loaderName}*(instance: Instance) =".fmt
-      of crmInstance: "proc load{loaderName}*(instance: Instance) =".fmt
-      of crmDevice: "proc load{loaderName}*(device: Device) =".fmt)
+      of crmAll: "proc loadAll{loaderName}*(instance: Instance) = instance.loadCommands:".fmt
+      of crmInstance: "proc load{loaderName}*(instance: Instance) = instance.loadCommands:".fmt
+      of crmDevice: "proc load{loaderName}*(device: Device) = device.loadCommands:".fmt)
     for require in fileRequire: commandLoaderDefs.add do:
       require.renderCommandLoaderComponent(resources, commandRenderingMode)
 

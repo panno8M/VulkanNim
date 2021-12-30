@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:10:58Z
 # VK_GGP_stream_descriptor_surface
 
 import ../platform
@@ -29,7 +29,7 @@ proc createStreamDescriptorSurfaceGGP*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorNativeWindowInUseKhr),
       lazyload("vkCreateStreamDescriptorSurfaceGGP", InstanceLevel).}
 
-proc loadAllVK_GGP_stream_descriptor_surface*(instance: Instance) =
-  instance.loadCommand createStreamDescriptorSurfaceGGP
-proc loadVK_GGP_stream_descriptor_surface*(instance: Instance) =
-  instance.loadCommand createStreamDescriptorSurfaceGGP
+proc loadAllVK_GGP_stream_descriptor_surface*(instance: Instance) = instance.loadCommands:
+  createStreamDescriptorSurfaceGGP
+proc loadVK_GGP_stream_descriptor_surface*(instance: Instance) = instance.loadCommands:
+  createStreamDescriptorSurfaceGGP

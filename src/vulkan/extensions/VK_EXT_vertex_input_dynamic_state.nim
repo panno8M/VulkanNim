@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_EXT_vertex_input_dynamic_state
 
 import ../platform
@@ -40,7 +40,7 @@ proc cmdSetVertexInputEXT*(
       pVertexAttributeDescriptions {.length: vertexAttributeDescriptionCount.}: arrPtr[VertexInputAttributeDescription2EXT];
     ): void {.cdecl, lazyload("vkCmdSetVertexInputEXT", DeviceLevel).}
 
-proc loadAllVK_EXT_vertex_input_dynamic_state*(instance: Instance) =
-  instance.loadCommand cmdSetVertexInputEXT
-proc loadVK_EXT_vertex_input_dynamic_state*(device: Device) =
-  device.loadCommand cmdSetVertexInputEXT
+proc loadAllVK_EXT_vertex_input_dynamic_state*(instance: Instance) = instance.loadCommands:
+  cmdSetVertexInputEXT
+proc loadVK_EXT_vertex_input_dynamic_state*(device: Device) = device.loadCommands:
+  cmdSetVertexInputEXT

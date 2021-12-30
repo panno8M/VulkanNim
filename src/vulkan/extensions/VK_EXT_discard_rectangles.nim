@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_EXT_discard_rectangles
 
 import ../platform
@@ -32,7 +32,7 @@ proc cmdSetDiscardRectangleEXT*(
       pDiscardRectangles {.length: discardRectangleCount.}: arrPtr[Rect2D];
     ): void {.cdecl, lazyload("vkCmdSetDiscardRectangleEXT", DeviceLevel).}
 
-proc loadAllVK_EXT_discard_rectangles*(instance: Instance) =
-  instance.loadCommand cmdSetDiscardRectangleEXT
-proc loadVK_EXT_discard_rectangles*(device: Device) =
-  device.loadCommand cmdSetDiscardRectangleEXT
+proc loadAllVK_EXT_discard_rectangles*(instance: Instance) = instance.loadCommands:
+  cmdSetDiscardRectangleEXT
+proc loadVK_EXT_discard_rectangles*(device: Device) = device.loadCommands:
+  cmdSetDiscardRectangleEXT

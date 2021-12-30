@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_deferred_host_operations
 
 import ../platform
@@ -42,15 +42,15 @@ proc deferredOperationJoinKHR*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
       lazyload("vkDeferredOperationJoinKHR", DeviceLevel).}
 
-proc loadAllVK_KHR_deferred_host_operations*(instance: Instance) =
-  instance.loadCommand createDeferredOperationKHR
-  instance.loadCommand destroyDeferredOperationKHR
-  instance.loadCommand getDeferredOperationMaxConcurrencyKHR
-  instance.loadCommand getDeferredOperationResultKHR
-  instance.loadCommand deferredOperationJoinKHR
-proc loadVK_KHR_deferred_host_operations*(device: Device) =
-  device.loadCommand createDeferredOperationKHR
-  device.loadCommand destroyDeferredOperationKHR
-  device.loadCommand getDeferredOperationMaxConcurrencyKHR
-  device.loadCommand getDeferredOperationResultKHR
-  device.loadCommand deferredOperationJoinKHR
+proc loadAllVK_KHR_deferred_host_operations*(instance: Instance) = instance.loadCommands:
+  createDeferredOperationKHR
+  destroyDeferredOperationKHR
+  getDeferredOperationMaxConcurrencyKHR
+  getDeferredOperationResultKHR
+  deferredOperationJoinKHR
+proc loadVK_KHR_deferred_host_operations*(device: Device) = device.loadCommands:
+  createDeferredOperationKHR
+  destroyDeferredOperationKHR
+  getDeferredOperationMaxConcurrencyKHR
+  getDeferredOperationResultKHR
+  deferredOperationJoinKHR

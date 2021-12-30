@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_FUCHSIA_external_semaphore
 
 import ../platform
@@ -44,9 +44,9 @@ proc getSemaphoreZirconHandleFUCHSIA*(
       errorCodes(errorTooManyObjects, errorOutOfHostMemory),
       lazyload("vkGetSemaphoreZirconHandleFUCHSIA", DeviceLevel).}
 
-proc loadAllVK_FUCHSIA_external_semaphore*(instance: Instance) =
-  instance.loadCommand importSemaphoreZirconHandleFUCHSIA
-  instance.loadCommand getSemaphoreZirconHandleFUCHSIA
-proc loadVK_FUCHSIA_external_semaphore*(device: Device) =
-  device.loadCommand importSemaphoreZirconHandleFUCHSIA
-  device.loadCommand getSemaphoreZirconHandleFUCHSIA
+proc loadAllVK_FUCHSIA_external_semaphore*(instance: Instance) = instance.loadCommands:
+  importSemaphoreZirconHandleFUCHSIA
+  getSemaphoreZirconHandleFUCHSIA
+proc loadVK_FUCHSIA_external_semaphore*(device: Device) = device.loadCommands:
+  importSemaphoreZirconHandleFUCHSIA
+  getSemaphoreZirconHandleFUCHSIA

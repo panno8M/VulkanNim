@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:10:58Z
 # VK_EXT_debug_report
 
 import ../platform
@@ -54,11 +54,11 @@ proc debugReportMessageEXT*(
       pMessage: cstring;
     ): void {.cdecl, lazyload("vkDebugReportMessageEXT", InstanceLevel).}
 
-proc loadAllVK_EXT_debug_report*(instance: Instance) =
-  instance.loadCommand createDebugReportCallbackEXT
-  instance.loadCommand destroyDebugReportCallbackEXT
-  instance.loadCommand debugReportMessageEXT
-proc loadVK_EXT_debug_report*(instance: Instance) =
-  instance.loadCommand createDebugReportCallbackEXT
-  instance.loadCommand destroyDebugReportCallbackEXT
-  instance.loadCommand debugReportMessageEXT
+proc loadAllVK_EXT_debug_report*(instance: Instance) = instance.loadCommands:
+  createDebugReportCallbackEXT
+  destroyDebugReportCallbackEXT
+  debugReportMessageEXT
+proc loadVK_EXT_debug_report*(instance: Instance) = instance.loadCommands:
+  createDebugReportCallbackEXT
+  destroyDebugReportCallbackEXT
+  debugReportMessageEXT

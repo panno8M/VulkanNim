@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:10:58Z
 # VK_EXT_direct_mode_display
 
 import ../platform
@@ -19,7 +19,7 @@ proc releaseDisplayEXT*(
       successCodes(success),
       lazyload("vkReleaseDisplayEXT", InstanceLevel).}
 
-proc loadAllVK_EXT_direct_mode_display*(instance: Instance) =
-  instance.loadCommand releaseDisplayEXT
-proc loadVK_EXT_direct_mode_display*(instance: Instance) =
-  instance.loadCommand releaseDisplayEXT
+proc loadAllVK_EXT_direct_mode_display*(instance: Instance) = instance.loadCommands:
+  releaseDisplayEXT
+proc loadVK_EXT_direct_mode_display*(instance: Instance) = instance.loadCommands:
+  releaseDisplayEXT

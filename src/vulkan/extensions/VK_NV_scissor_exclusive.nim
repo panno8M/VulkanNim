@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_NV_scissor_exclusive
 
 import ../platform
@@ -30,7 +30,7 @@ proc cmdSetExclusiveScissorNV*(
       pExclusiveScissors {.length: exclusiveScissorCount.}: arrPtr[Rect2D];
     ): void {.cdecl, lazyload("vkCmdSetExclusiveScissorNV", DeviceLevel).}
 
-proc loadAllVK_NV_scissor_exclusive*(instance: Instance) =
-  instance.loadCommand cmdSetExclusiveScissorNV
-proc loadVK_NV_scissor_exclusive*(device: Device) =
-  device.loadCommand cmdSetExclusiveScissorNV
+proc loadAllVK_NV_scissor_exclusive*(instance: Instance) = instance.loadCommands:
+  cmdSetExclusiveScissorNV
+proc loadVK_NV_scissor_exclusive*(device: Device) = device.loadCommands:
+  cmdSetExclusiveScissorNV

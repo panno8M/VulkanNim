@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:42Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_external_semaphore_win32
 
 import ../platform
@@ -56,9 +56,9 @@ proc getSemaphoreWin32HandleKHR*(
       errorCodes(errorTooManyObjects, errorOutOfHostMemory),
       lazyload("vkGetSemaphoreWin32HandleKHR", DeviceLevel).}
 
-proc loadAllVK_KHR_external_semaphore_win32*(instance: Instance) =
-  instance.loadCommand importSemaphoreWin32HandleKHR
-  instance.loadCommand getSemaphoreWin32HandleKHR
-proc loadVK_KHR_external_semaphore_win32*(device: Device) =
-  device.loadCommand importSemaphoreWin32HandleKHR
-  device.loadCommand getSemaphoreWin32HandleKHR
+proc loadAllVK_KHR_external_semaphore_win32*(instance: Instance) = instance.loadCommands:
+  importSemaphoreWin32HandleKHR
+  getSemaphoreWin32HandleKHR
+proc loadVK_KHR_external_semaphore_win32*(device: Device) = device.loadCommands:
+  importSemaphoreWin32HandleKHR
+  getSemaphoreWin32HandleKHR

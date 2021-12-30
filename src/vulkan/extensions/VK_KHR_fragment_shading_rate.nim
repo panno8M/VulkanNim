@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_fragment_shading_rate
 
 import ../platform
@@ -73,10 +73,10 @@ proc cmdSetFragmentShadingRateKHR*(
       combinerOps: FragmentShadingRateCombinerOpKHR;
     ): void {.cdecl, lazyload("vkCmdSetFragmentShadingRateKHR", DeviceLevel).}
 
-proc loadAllVK_KHR_fragment_shading_rate*(instance: Instance) =
-  instance.loadCommand getPhysicalDeviceFragmentShadingRatesKHR
-  instance.loadCommand cmdSetFragmentShadingRateKHR
-proc loadVK_KHR_fragment_shading_rate*(instance: Instance) =
-  instance.loadCommand getPhysicalDeviceFragmentShadingRatesKHR
-proc loadVK_KHR_fragment_shading_rate*(device: Device) =
-  device.loadCommand cmdSetFragmentShadingRateKHR
+proc loadAllVK_KHR_fragment_shading_rate*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceFragmentShadingRatesKHR
+  cmdSetFragmentShadingRateKHR
+proc loadVK_KHR_fragment_shading_rate*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceFragmentShadingRatesKHR
+proc loadVK_KHR_fragment_shading_rate*(device: Device) = device.loadCommands:
+  cmdSetFragmentShadingRateKHR

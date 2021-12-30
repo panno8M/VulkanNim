@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_EXT_external_memory_host
 
 import ../platform
@@ -37,7 +37,7 @@ proc getMemoryHostPointerPropertiesEXT*(
       errorCodes(errorOutOfHostMemory, errorInvalidExternalHandle),
       lazyload("vkGetMemoryHostPointerPropertiesEXT", DeviceLevel).}
 
-proc loadAllVK_EXT_external_memory_host*(instance: Instance) =
-  instance.loadCommand getMemoryHostPointerPropertiesEXT
-proc loadVK_EXT_external_memory_host*(device: Device) =
-  device.loadCommand getMemoryHostPointerPropertiesEXT
+proc loadAllVK_EXT_external_memory_host*(instance: Instance) = instance.loadCommands:
+  getMemoryHostPointerPropertiesEXT
+proc loadVK_EXT_external_memory_host*(device: Device) = device.loadCommands:
+  getMemoryHostPointerPropertiesEXT

@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_device_group
 
 import ../platform
@@ -103,14 +103,14 @@ proc acquireNextImage2KHR*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost, errorOutOfDateKhr, errorSurfaceLostKhr, errorFullScreenExclusiveModeLostExt),
       lazyload("vkAcquireNextImage2KHR", DeviceLevel).}
 
-proc loadAllVK_KHR_device_group*(instance: Instance) =
-  instance.loadCommand getDeviceGroupPresentCapabilitiesKHR
-  instance.loadCommand getDeviceGroupSurfacePresentModesKHR
-  instance.loadCommand getPhysicalDevicePresentRectanglesKHR
-  instance.loadCommand acquireNextImage2KHR
-proc loadVK_KHR_device_group*(instance: Instance) =
-  instance.loadCommand getPhysicalDevicePresentRectanglesKHR
-proc loadVK_KHR_device_group*(device: Device) =
-  device.loadCommand getDeviceGroupPresentCapabilitiesKHR
-  device.loadCommand getDeviceGroupSurfacePresentModesKHR
-  device.loadCommand acquireNextImage2KHR
+proc loadAllVK_KHR_device_group*(instance: Instance) = instance.loadCommands:
+  getDeviceGroupPresentCapabilitiesKHR
+  getDeviceGroupSurfacePresentModesKHR
+  getPhysicalDevicePresentRectanglesKHR
+  acquireNextImage2KHR
+proc loadVK_KHR_device_group*(instance: Instance) = instance.loadCommands:
+  getPhysicalDevicePresentRectanglesKHR
+proc loadVK_KHR_device_group*(device: Device) = device.loadCommands:
+  getDeviceGroupPresentCapabilitiesKHR
+  getDeviceGroupSurfacePresentModesKHR
+  acquireNextImage2KHR

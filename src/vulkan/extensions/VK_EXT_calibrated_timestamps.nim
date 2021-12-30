@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_EXT_calibrated_timestamps
 
 import ../platform
@@ -37,10 +37,10 @@ proc getCalibratedTimestampsEXT*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
       lazyload("vkGetCalibratedTimestampsEXT", DeviceLevel).}
 
-proc loadAllVK_EXT_calibrated_timestamps*(instance: Instance) =
-  instance.loadCommand getPhysicalDeviceCalibrateableTimeDomainsEXT
-  instance.loadCommand getCalibratedTimestampsEXT
-proc loadVK_EXT_calibrated_timestamps*(instance: Instance) =
-  instance.loadCommand getPhysicalDeviceCalibrateableTimeDomainsEXT
-proc loadVK_EXT_calibrated_timestamps*(device: Device) =
-  device.loadCommand getCalibratedTimestampsEXT
+proc loadAllVK_EXT_calibrated_timestamps*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceCalibrateableTimeDomainsEXT
+  getCalibratedTimestampsEXT
+proc loadVK_EXT_calibrated_timestamps*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceCalibrateableTimeDomainsEXT
+proc loadVK_EXT_calibrated_timestamps*(device: Device) = device.loadCommands:
+  getCalibratedTimestampsEXT

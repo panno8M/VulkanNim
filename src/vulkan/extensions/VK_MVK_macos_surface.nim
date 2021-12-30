@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:10:58Z
 # VK_MVK_macos_surface
 
 import ../platform
@@ -29,7 +29,7 @@ proc createMacOSSurfaceMVK*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorNativeWindowInUseKhr),
       lazyload("vkCreateMacOSSurfaceMVK", InstanceLevel).}
 
-proc loadAllVK_MVK_macos_surface*(instance: Instance) =
-  instance.loadCommand createMacOSSurfaceMVK
-proc loadVK_MVK_macos_surface*(instance: Instance) =
-  instance.loadCommand createMacOSSurfaceMVK
+proc loadAllVK_MVK_macos_surface*(instance: Instance) = instance.loadCommands:
+  createMacOSSurfaceMVK
+proc loadVK_MVK_macos_surface*(instance: Instance) = instance.loadCommands:
+  createMacOSSurfaceMVK

@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_NV_device_generated_commands
 
 import ../platform
@@ -142,17 +142,17 @@ proc destroyIndirectCommandsLayoutNV*(
       pAllocator = default(ptr AllocationCallbacks);
     ): void {.cdecl, lazyload("vkDestroyIndirectCommandsLayoutNV", DeviceLevel).}
 
-proc loadAllVK_NV_device_generated_commands*(instance: Instance) =
-  instance.loadCommand getGeneratedCommandsMemoryRequirementsNV
-  instance.loadCommand cmdPreprocessGeneratedCommandsNV
-  instance.loadCommand cmdExecuteGeneratedCommandsNV
-  instance.loadCommand cmdBindPipelineShaderGroupNV
-  instance.loadCommand createIndirectCommandsLayoutNV
-  instance.loadCommand destroyIndirectCommandsLayoutNV
-proc loadVK_NV_device_generated_commands*(device: Device) =
-  device.loadCommand getGeneratedCommandsMemoryRequirementsNV
-  device.loadCommand cmdPreprocessGeneratedCommandsNV
-  device.loadCommand cmdExecuteGeneratedCommandsNV
-  device.loadCommand cmdBindPipelineShaderGroupNV
-  device.loadCommand createIndirectCommandsLayoutNV
-  device.loadCommand destroyIndirectCommandsLayoutNV
+proc loadAllVK_NV_device_generated_commands*(instance: Instance) = instance.loadCommands:
+  getGeneratedCommandsMemoryRequirementsNV
+  cmdPreprocessGeneratedCommandsNV
+  cmdExecuteGeneratedCommandsNV
+  cmdBindPipelineShaderGroupNV
+  createIndirectCommandsLayoutNV
+  destroyIndirectCommandsLayoutNV
+proc loadVK_NV_device_generated_commands*(device: Device) = device.loadCommands:
+  getGeneratedCommandsMemoryRequirementsNV
+  cmdPreprocessGeneratedCommandsNV
+  cmdExecuteGeneratedCommandsNV
+  cmdBindPipelineShaderGroupNV
+  createIndirectCommandsLayoutNV
+  destroyIndirectCommandsLayoutNV

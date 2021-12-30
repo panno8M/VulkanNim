@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_EXT_pageable_device_local_memory
 
 import ../platform
@@ -24,7 +24,7 @@ proc setDeviceMemoryPriorityEXT*(
       priority: float32;
     ): void {.cdecl, lazyload("vkSetDeviceMemoryPriorityEXT", DeviceLevel).}
 
-proc loadAllVK_EXT_pageable_device_local_memory*(instance: Instance) =
-  instance.loadCommand setDeviceMemoryPriorityEXT
-proc loadVK_EXT_pageable_device_local_memory*(device: Device) =
-  device.loadCommand setDeviceMemoryPriorityEXT
+proc loadAllVK_EXT_pageable_device_local_memory*(instance: Instance) = instance.loadCommands:
+  setDeviceMemoryPriorityEXT
+proc loadVK_EXT_pageable_device_local_memory*(device: Device) = device.loadCommands:
+  setDeviceMemoryPriorityEXT

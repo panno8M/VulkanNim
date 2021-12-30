@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_external_memory_fd
 
 import ../platform
@@ -46,9 +46,9 @@ proc getMemoryFdPropertiesKHR*(
       errorCodes(errorOutOfHostMemory, errorInvalidExternalHandle),
       lazyload("vkGetMemoryFdPropertiesKHR", DeviceLevel).}
 
-proc loadAllVK_KHR_external_memory_fd*(instance: Instance) =
-  instance.loadCommand getMemoryFdKHR
-  instance.loadCommand getMemoryFdPropertiesKHR
-proc loadVK_KHR_external_memory_fd*(device: Device) =
-  device.loadCommand getMemoryFdKHR
-  device.loadCommand getMemoryFdPropertiesKHR
+proc loadAllVK_KHR_external_memory_fd*(instance: Instance) = instance.loadCommands:
+  getMemoryFdKHR
+  getMemoryFdPropertiesKHR
+proc loadVK_KHR_external_memory_fd*(device: Device) = device.loadCommands:
+  getMemoryFdKHR
+  getMemoryFdPropertiesKHR

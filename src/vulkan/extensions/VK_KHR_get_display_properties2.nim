@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:10:58Z
 # VK_KHR_get_display_properties2
 
 import ../platform
@@ -69,13 +69,13 @@ proc getDisplayPlaneCapabilities2KHR*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
       lazyload("vkGetDisplayPlaneCapabilities2KHR", InstanceLevel).}
 
-proc loadAllVK_KHR_get_display_properties2*(instance: Instance) =
-  instance.loadCommand getPhysicalDeviceDisplayProperties2KHR
-  instance.loadCommand getPhysicalDeviceDisplayPlaneProperties2KHR
-  instance.loadCommand getDisplayModeProperties2KHR
-  instance.loadCommand getDisplayPlaneCapabilities2KHR
-proc loadVK_KHR_get_display_properties2*(instance: Instance) =
-  instance.loadCommand getPhysicalDeviceDisplayProperties2KHR
-  instance.loadCommand getPhysicalDeviceDisplayPlaneProperties2KHR
-  instance.loadCommand getDisplayModeProperties2KHR
-  instance.loadCommand getDisplayPlaneCapabilities2KHR
+proc loadAllVK_KHR_get_display_properties2*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceDisplayProperties2KHR
+  getPhysicalDeviceDisplayPlaneProperties2KHR
+  getDisplayModeProperties2KHR
+  getDisplayPlaneCapabilities2KHR
+proc loadVK_KHR_get_display_properties2*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceDisplayProperties2KHR
+  getPhysicalDeviceDisplayPlaneProperties2KHR
+  getDisplayModeProperties2KHR
+  getDisplayPlaneCapabilities2KHR

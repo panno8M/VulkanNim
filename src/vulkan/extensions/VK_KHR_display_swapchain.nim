@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:42Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_display_swapchain
 
 import ../platform
@@ -33,7 +33,7 @@ proc createSharedSwapchainsKHR*(
       errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorIncompatibleDisplayKhr, errorDeviceLost, errorSurfaceLostKhr),
       lazyload("vkCreateSharedSwapchainsKHR", DeviceLevel).}
 
-proc loadAllVK_KHR_display_swapchain*(instance: Instance) =
-  instance.loadCommand createSharedSwapchainsKHR
-proc loadVK_KHR_display_swapchain*(device: Device) =
-  device.loadCommand createSharedSwapchainsKHR
+proc loadAllVK_KHR_display_swapchain*(instance: Instance) = instance.loadCommands:
+  createSharedSwapchainsKHR
+proc loadVK_KHR_display_swapchain*(device: Device) = device.loadCommands:
+  createSharedSwapchainsKHR

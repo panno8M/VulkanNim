@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T16:35:41Z
+# Generated at 2021-12-30T17:13:13Z
 # VK_EXT_debug_utils
 
 import ../platform
@@ -116,28 +116,28 @@ proc submitDebugUtilsMessageEXT*(
       pCallbackData: ptr DebugUtilsMessengerCallbackDataEXT;
     ): void {.cdecl, lazyload("vkSubmitDebugUtilsMessageEXT", InstanceLevel).}
 
-proc loadAllVK_EXT_debug_utils*(instance: Instance) =
-  instance.loadCommand setDebugUtilsObjectNameEXT
-  instance.loadCommand setDebugUtilsObjectTagEXT
-  instance.loadCommand queueBeginDebugUtilsLabelEXT
-  instance.loadCommand queueEndDebugUtilsLabelEXT
-  instance.loadCommand queueInsertDebugUtilsLabelEXT
-  instance.loadCommand cmdBeginDebugUtilsLabelEXT
-  instance.loadCommand cmdEndDebugUtilsLabelEXT
-  instance.loadCommand cmdInsertDebugUtilsLabelEXT
-  instance.loadCommand createDebugUtilsMessengerEXT
-  instance.loadCommand destroyDebugUtilsMessengerEXT
-  instance.loadCommand submitDebugUtilsMessageEXT
-proc loadVK_EXT_debug_utils*(instance: Instance) =
-  instance.loadCommand createDebugUtilsMessengerEXT
-  instance.loadCommand destroyDebugUtilsMessengerEXT
-  instance.loadCommand submitDebugUtilsMessageEXT
-proc loadVK_EXT_debug_utils*(device: Device) =
-  device.loadCommand setDebugUtilsObjectNameEXT
-  device.loadCommand setDebugUtilsObjectTagEXT
-  device.loadCommand queueBeginDebugUtilsLabelEXT
-  device.loadCommand queueEndDebugUtilsLabelEXT
-  device.loadCommand queueInsertDebugUtilsLabelEXT
-  device.loadCommand cmdBeginDebugUtilsLabelEXT
-  device.loadCommand cmdEndDebugUtilsLabelEXT
-  device.loadCommand cmdInsertDebugUtilsLabelEXT
+proc loadAllVK_EXT_debug_utils*(instance: Instance) = instance.loadCommands:
+  setDebugUtilsObjectNameEXT
+  setDebugUtilsObjectTagEXT
+  queueBeginDebugUtilsLabelEXT
+  queueEndDebugUtilsLabelEXT
+  queueInsertDebugUtilsLabelEXT
+  cmdBeginDebugUtilsLabelEXT
+  cmdEndDebugUtilsLabelEXT
+  cmdInsertDebugUtilsLabelEXT
+  createDebugUtilsMessengerEXT
+  destroyDebugUtilsMessengerEXT
+  submitDebugUtilsMessageEXT
+proc loadVK_EXT_debug_utils*(instance: Instance) = instance.loadCommands:
+  createDebugUtilsMessengerEXT
+  destroyDebugUtilsMessengerEXT
+  submitDebugUtilsMessageEXT
+proc loadVK_EXT_debug_utils*(device: Device) = device.loadCommands:
+  setDebugUtilsObjectNameEXT
+  setDebugUtilsObjectTagEXT
+  queueBeginDebugUtilsLabelEXT
+  queueEndDebugUtilsLabelEXT
+  queueInsertDebugUtilsLabelEXT
+  cmdBeginDebugUtilsLabelEXT
+  cmdEndDebugUtilsLabelEXT
+  cmdInsertDebugUtilsLabelEXT
