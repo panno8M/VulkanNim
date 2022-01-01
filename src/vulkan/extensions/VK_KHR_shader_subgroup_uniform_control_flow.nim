@@ -1,10 +1,7 @@
-# Generated at 2021-12-26T16:57:01Z
 # VK_KHR_shader_subgroup_uniform_control_flow
 
-import ../platform
-
 import ../features/vk10
-
+import ../platform
 prepareVulkanLibDef()
 
 const

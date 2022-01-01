@@ -1,11 +1,8 @@
-# Generated at 2021-12-26T16:57:02Z
 # VK_EXT_border_color_swizzle
 
-import ../platform
-
 import ../features/vk10
-import ./VK_EXT_custom_border_color
-export VK_EXT_custom_border_color
+import VK_EXT_custom_border_color
+import ../platform
 prepareVulkanLibDef()
 
 const

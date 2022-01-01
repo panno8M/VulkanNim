@@ -1,13 +1,9 @@
-# Generated at 2021-12-31T11:28:24Z
 # VK_KHR_present_wait
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_swapchain
-import ./VK_KHR_present_id
-export VK_KHR_swapchain
-export VK_KHR_present_id
+import VK_KHR_swapchain
+import VK_KHR_present_id
+import ../platform
 prepareVulkanLibDef()
 
 const

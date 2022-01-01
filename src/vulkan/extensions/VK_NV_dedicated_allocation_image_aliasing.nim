@@ -1,11 +1,8 @@
-# Generated at 2021-12-26T10:42:47Z
 # VK_NV_dedicated_allocation_image_aliasing
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_dedicated_allocation
-export VK_KHR_dedicated_allocation
+import VK_KHR_dedicated_allocation
+import ../platform
 prepareVulkanLibDef()
 
 const

@@ -1,13 +1,9 @@
-# Generated at 2021-12-31T11:28:23Z
 # VK_NV_ray_tracing
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_get_physical_device_properties2
-import ./VK_KHR_get_memory_requirements2
-export VK_KHR_get_physical_device_properties2
-export VK_KHR_get_memory_requirements2
+import VK_KHR_get_physical_device_properties2
+import VK_KHR_get_memory_requirements2
+import ../platform
 prepareVulkanLibDef()
 
 const

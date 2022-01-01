@@ -1,13 +1,9 @@
-# Generated at 2021-12-31T11:28:24Z
 # VK_HUAWEI_subpass_shading
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_create_renderpass2
-import ./VK_KHR_synchronization2
-export VK_KHR_create_renderpass2
-export VK_KHR_synchronization2
+import VK_KHR_create_renderpass2
+import VK_KHR_synchronization2
+import ../platform
 prepareVulkanLibDef()
 
 const

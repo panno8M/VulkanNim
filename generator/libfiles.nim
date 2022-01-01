@@ -5,7 +5,6 @@ import std/sugar
 import std/strformat
 import std/options
 import std/tables
-import std/times
 
 import ./utils
 import ./nodedefs
@@ -16,6 +15,28 @@ type CommandRenderingMode = enum
   crmAll
   crmInstance
   crmDevice
+
+type
+  Feature* = ref object
+    affiliation*: LibFile
+    name*: string
+    imports*: seq[string]
+    header*: Option[string]
+    footer*: Option[string]
+    requires*: seq[NodeRequire]
+  LibFile* = ref object
+    path*: string
+    header*: Option[string]
+    footer*: Option[string]
+    features*: seq[string]
+    dummy*: bool
+  # LibFile.features .. Feature.affiliation
+  # Feature.deps is used for import section
+
+
+proc affiliate*(feature: Feature; libFile: LibFile) =
+  libFile.features.add feature.name
+  feature.affiliation = libFile
 
 proc renderCommandLoaderComponent*(require: NodeRequire; resources: Resources; renderingMode = crmAll): Option[string] =
   template needsLoader(command: NodeCommand; current: CommandRenderingMode): bool =
@@ -42,71 +63,90 @@ proc renderCommandLoaderComponent*(require: NodeRequire; resources: Resources; r
 
 
 
-proc renderCommandLoader*(libFile: LibFile; resources: Resources; commandRenderingMode = crmAll): Option[string] =
+proc renderCommandLoader*(libFile: LibFile; featureTable: TableRef[string, Feature]; resources: Resources; commandRenderingMode = crmAll): Option[string] =
   var resultDefs = sstring(kind: skBlock)
-  let loaderNames = concat(@[libFile.fileName], libFile.mergedFileNames)
-    .mapIt(it.splitFile.name.capitalizeAscii)
 
-  for i, fileRequire in libFile.requires:
-    let loaderName = loaderNames[i]
+  for feature in libFile.features:
+    let feature = featureTable[feature]
+    let loaderName = feature.name.splitFile.name.capitalizeAscii
     var commandLoaderDefs = sstring(kind: skBlock, title: case commandRenderingMode
       of crmAll: "proc loadAll{loaderName}*(instance: Instance) = instance.loadCommands:".fmt
       of crmInstance: "proc load{loaderName}*(instance: Instance) = instance.loadCommands:".fmt
       of crmDevice: "proc load{loaderName}*(device: Device) = device.loadCommands:".fmt)
-    for require in fileRequire: commandLoaderDefs.add do:
+    for require in feature.requires: commandLoaderDefs.add do:
       require.renderCommandLoaderComponent(resources, commandRenderingMode)
 
     if commandLoaderDefs.sons.len != 0:
-      # commandLoaderDefs.add ""
       resultDefs.add commandLoaderDefs
+
   if resultDefs.sons.len != 0:
     return some $resultDefs
 
-proc render*(libFile: LibFile; library: Library; resources: Resources): string =
+
+proc isChanged*(newText, oldPath: string): bool =
+  let oldText =
+    if oldPath.fileExists: oldPath.readFile
+    else: return true
+  newText != oldText
+
+proc solveImports*(libFile: LibFile; featureTable: TableRef[string, Feature]): Option[string] =
+  var deps = libFile.features.mapIt(featureTable[it].imports).concat().deduplicate()
+  for feature in libFile.features:
+    let idx = deps.find(feature)
+    if idx != -1:
+      deps.delete(idx)
+
+  if deps.len == 0: return
+
+  let filepathes = deps.mapIt(featureTable[it].affiliation.path).deduplicate
+
+  let currentDir = libFile.path.splitFile.dir.parseWords({'/'})
+
+  let importPathes = filepathes.map proc(it: string): string =
+    result = "import "
+    let spl = it.splitFile
+    var dir = spl.dir.parseWords({'/'})
+    var current = currentDir
+    let name = spl.name
+
+    var branchidx: int
+    for i in 0..<min(dir.len, current.len):
+      if dir[i] == current[i]:
+        branchidx = i+1
+      else: break
+
+    result.add "../".repeat(current.len-branchidx)
+    if branchidx < dir.len:
+      result.add dir[branchidx..^1].mapIt(it & "/").join()
+    
+    result.add name
+
+  some importPathes.join("\n")
+
+
+proc render*(libFile: LibFile; featureTable: TableRef[string, Feature]; resources: Resources): Option[string] =
+  if libFile.dummy: return
+
+  var res: string
+
   var renderedNodes: seq[string]
-  result.add "# Generated at {now().utc()}\n".fmt
-  result.add libFile.fileName.splitFile.name.commentify
-  result.add "\n"
-  if libFile.mergedFileNames.len != 0:
-    result.add libFile.mergedFileNames.mapIt(it.splitFile.name).join("\n").commentify
-    result.add "\n"
-  if not libFile.fileHeader.isEmptyOrWhitespace:
-    result.add libFile.fileHeader
-    result.add "\n"
+  res.add libFile.features.mapIt(featureTable[it].name).join("\n").commentify
+  res.add "\n"
+  if libFile.header.isSome:
+    res.add libFile.header.get
+    res.add "\n"
 
-  result.add "\n"
+  res.add "\n"
 
-  let dependencies = libFile
-    .deps
-    .mapIt( block:
-      let (idir, iname, iext) = library[it.fileName].fileName.splitFile
-      let (ldir, lname, lext) = libFile.fileName.splitFile
-      if libFile.fileName == "extensions/VK_EXT_debug_marker" and
-         iname == "VK_EXT_debug_report":
-        (fileName: "", exportit: false)
-      elif idir == ldir: (fileName: "."/iname, exportit: it.exportit)
-      else: (fileName: ".."/idir/iname, exportit: it.exportit))
-    .filterIt(not it.fileName.isEmptyOrWhitespace)
-    .deduplicate
-  if dependencies.len != 0:
-    result.add dependencies
-      .mapIt("import {it.fileName}".fmt)
-      .join("\n")
-    result.add "\n"
-    if dependencies.filterIt(it.exportit).len != 0:
-      result.add dependencies
-        .filterIt(it.exportIt)
-        .mapIt("export {it.fileName.splitFile.name}".fmt)
-        .join("\n")
-    result.add "\n"
+  res.add libFile.solveImports(featureTable)
+  res.add "\n"
 
-  if libFile.fileName != "platform":
-    result.add "prepareVulkanLibDef()\n\n"
+  res.add "prepareVulkanLibDef()\n\n"
 
   block Solve_consts:
     var reqDefs: seq[seq[string]]
-    for fileRequire in libFile.requires:
-      for require in fileRequire:
+    for feature in libFile.features:
+      for require in featureTable[feature].requires:
         var reqDef: seq[string]
 
         for req in require.targets.filter(x => x.kind in {nkrApiConst, nkrConst, nkrConstAlias, nkrType}):
@@ -128,17 +168,17 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
             of true: concat(@[require.comment.get.commentify], reqDef)
             of false: reqDef
     if reqDefs.len != 0:
-      result.add "const\n"
-      result.add reqDefs
+      res.add "const\n"
+      res.add reqDefs
         .mapIt(it.map(s => s.indent(2)).join("\n"))
         .join("\n\n")
-      result.add "\n"
-      result.add "\n"
+      res.add "\n"
+      res.add "\n"
 
   block Solve_types:
     var typeDefs: seq[seq[string]]
-    for fileRequire in libFile.requires:
-      for require in fileRequire:
+    for feature in libFile.features:
+      for require in featureTable[feature].requires:
         let typeTargets = require.targets.filterIt(it.kind in {nkrType})
         if typeTargets.len == 0: continue
 
@@ -160,14 +200,14 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
             of false: typeDef
 
     if typeDefs.len != 0:
-      result.add "type\n"
-      result.add typeDefs.mapIt(it.join("\n").indent(2)).join("\n\n")
-      result.add "\n\n"
+      res.add "type\n"
+      res.add typeDefs.mapIt(it.join("\n").indent(2)).join("\n\n")
+      res.add "\n\n"
 
   block Solve_others:
     var reqDefs: seq[seq[string]]
-    for fileRequire in libFile.requires:
-      for require in fileRequire:
+    for feature in libFile.features:
+      for require in featureTable[feature].requires:
         var reqDef: seq[string]
 
         for req in require.targets.filter(x => x.kind == nkrType):
@@ -189,36 +229,17 @@ proc render*(libFile: LibFile; library: Library; resources: Resources): string =
         reqDefs.add reqDef
 
     if reqDefs.len != 0:
-      result.add reqDefs.mapIt(it.join("\n")).filterIt(it.len != 0).join("\n\n\n")
-      result.add "\n\n"
+      res.add reqDefs.mapIt(it.join("\n")).filterIt(it.len != 0).join("\n\n\n")
+      res.add "\n\n"
 
   for renderingMode in CommandRenderingMode:
-    let rendered = libFile.renderCommandLoader(resources, renderingMode)
+    let rendered = libFile.renderCommandLoader(featureTable, resources, renderingMode)
     if rendered.isSome:
-      result.add rendered.get
-      result.add "\n"
+      res.add rendered.get
+      res.add "\n"
 
-  if not libFile.fileFooter.isEmptyOrWhitespace:
-    result.add "\n"
-    result.add libFile.fileFooter
-
-
-proc merge*(library: var Library; base: string; materials: varargs[string]) =
-  if not library.hasKey(base) or
-     materials.anyIt(not library.hasKey(it)):
-    return
-
-  var result: LibFile = library[base]
-  for material in materials:
-    let lib = library[material]
-    library[material] = result
-    result.requires.add lib.requires
-    result.deps.add lib.deps
-    result.mergedFileNames.add lib.fileName
-
-  result.requires = result.requires.deduplicate
-
-  for i in countdown(result.deps.high, result.deps.low):
-    if result.deps[i].filename in materials or
-       result.deps[i].filename == result.fileName:
-      result.deps.delete(i)
+  if libFile.footer.isSome:
+    res.add "\n"
+    res.add libFile.footer
+  
+  return some res

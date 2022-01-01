@@ -1,11 +1,8 @@
-# Generated at 2021-12-31T11:28:24Z
 # VK_EXT_metal_surface
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_surface
-export VK_KHR_surface
+import VK_KHR_surface
+import ../platform
 prepareVulkanLibDef()
 
 const

@@ -1,11 +1,8 @@
-# Generated at 2021-12-26T10:42:47Z
 # VK_NVX_multiview_per_view_attributes
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_multiview
-export VK_KHR_multiview
+import VK_KHR_multiview
+import ../platform
 prepareVulkanLibDef()
 
 const

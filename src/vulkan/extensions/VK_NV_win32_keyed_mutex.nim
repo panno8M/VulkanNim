@@ -1,13 +1,9 @@
-# Generated at 2021-12-26T10:42:47Z
 # VK_NV_win32_keyed_mutex
 
-import ../platform
-
 import ../features/vk10
-import ./VK_NV_external_memory_win32
-import ./VK_KHR_win32_keyed_mutex
-export VK_NV_external_memory_win32
-export VK_KHR_win32_keyed_mutex
+import VK_NV_external_memory_win32
+import VK_KHR_win32_keyed_mutex
+import ../platform
 prepareVulkanLibDef()
 
 const

@@ -1,10 +1,7 @@
-# Generated at 2021-12-26T16:57:01Z
 # VK_NV_inherited_viewport_scissor
 
-import ../platform
-
 import ../features/vk10
-
+import ../platform
 prepareVulkanLibDef()
 
 const

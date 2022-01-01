@@ -1,11 +1,8 @@
-# Generated at 2021-12-31T11:28:23Z
 # VK_NV_coverage_reduction_mode
 
-import ../platform
-
 import ../features/vk10
-import ./VK_NV_framebuffer_mixed_samples
-export VK_NV_framebuffer_mixed_samples
+import VK_NV_framebuffer_mixed_samples
+import ../platform
 prepareVulkanLibDef()
 
 const

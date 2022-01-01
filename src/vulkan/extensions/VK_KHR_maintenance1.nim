@@ -1,11 +1,8 @@
-# Generated at 2021-12-26T16:57:02Z
 # VK_KHR_maintenance1
-
-import ../platform
 
 import ../features/vk10
 import ../features/vk11
-
+import ../platform
 prepareVulkanLibDef()
 
 const

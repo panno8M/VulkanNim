@@ -1,11 +1,7 @@
-# Generated at 2021-12-31T11:28:24Z
-# vk12
-# Vulkan 1.2 core API interface definitions.
-# ==========================================
+# VK_VERSION_1_2
+
 import ../platform
 import vk11
-export vk11
-
 prepareVulkanLibDef()
 
 const

@@ -1,10 +1,7 @@
-# Generated at 2021-12-30T17:13:13Z
 # VK_NV_clip_space_w_scaling
 
-import ../platform
-
 import ../features/vk10
-
+import ../platform
 prepareVulkanLibDef()
 
 const

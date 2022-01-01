@@ -1,10 +1,7 @@
-# Generated at 2021-12-26T10:16:14Z
 # VK_NV_geometry_shader_passthrough
 
-import ../platform
-
 import ../features/vk10
-
+import ../platform
 prepareVulkanLibDef()
 
 const

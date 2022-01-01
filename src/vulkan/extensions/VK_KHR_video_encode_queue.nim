@@ -1,15 +1,10 @@
-# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_video_encode_queue
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_video_queue
-import ./VK_KHR_synchronization2
-import ./VK_KHR_format_feature_flags2
-export VK_KHR_video_queue
-export VK_KHR_synchronization2
-export VK_KHR_format_feature_flags2
+import VK_KHR_video_queue
+import VK_KHR_synchronization2
+import ../platform
+import VK_KHR_format_feature_flags2
 prepareVulkanLibDef()
 
 const

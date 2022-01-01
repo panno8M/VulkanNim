@@ -1,11 +1,8 @@
-# Generated at 2021-12-30T17:13:13Z
 # VK_EXT_pageable_device_local_memory
 
-import ../platform
-
 import ../features/vk10
-import ./VK_EXT_memory_priority
-export VK_EXT_memory_priority
+import VK_EXT_memory_priority
+import ../platform
 prepareVulkanLibDef()
 
 const

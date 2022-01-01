@@ -1,11 +1,8 @@
-# Generated at 2021-12-31T11:28:24Z
 # VK_KHR_external_memory_win32
 
-import ../platform
-
 import ../features/vk11
-import ./VK_KHR_external_memory
-export VK_KHR_external_memory
+import VK_KHR_external_memory
+import ../platform
 prepareVulkanLibDef()
 
 const

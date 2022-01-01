@@ -49,6 +49,10 @@ proc add*[T](x: var seq[T], y: Option[T]) {.noSideEffect.} =
   if y.isSome:
     x.add y.get
 
+proc add*(x: var string, y: Option[string]) {.noSideEffect.} =
+  if y.isSome:
+    x.add y.get
+
 proc attrOrNone*(node: XmlNode; attrName: string): Option[string] =
   let attribute = node.attr(attrName)
   if not attribute.isEmptyOrWhitespace:
@@ -268,13 +272,6 @@ proc parseTypeName*(str: string; dim: seq[NodeArrayDimention]): string =
         else: $it.value)
       .concat(@[x])
       .foldr("array[{a}, {b}]".fmt))
-
-proc parseFileName*(str: string): string =
-  case str
-  of "VK_VERSION_1_0": "features/vk10"
-  of "VK_VERSION_1_1": "features/vk11"
-  of "VK_VERSION_1_2": "features/vk12"
-  else: "extensions"/str
 
 proc filterInvalidArgParams*[T](s: openArray[T]): seq[T] =
   s.filterIt(it notin ["const", "unsigned", "signed", "struct", "typedef", "VKAPI_PTR"])

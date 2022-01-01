@@ -1,11 +1,8 @@
-# Generated at 2021-12-26T16:57:01Z
 # VK_EXT_video_encode_h264
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_video_encode_queue
-export VK_KHR_video_encode_queue
+import VK_KHR_video_encode_queue
+import ../platform
 prepareVulkanLibDef()
 
 const

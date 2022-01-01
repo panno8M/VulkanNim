@@ -1,15 +1,10 @@
-# Generated at 2021-12-31T11:28:24Z
 # VK_KHR_shared_presentable_image
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_swapchain
-import ./VK_KHR_get_physical_device_properties2
-import ./VK_KHR_get_surface_capabilities2
-export VK_KHR_swapchain
-export VK_KHR_get_physical_device_properties2
-export VK_KHR_get_surface_capabilities2
+import VK_KHR_swapchain
+import VK_KHR_get_physical_device_properties2
+import VK_KHR_get_surface_capabilities2
+import ../platform
 prepareVulkanLibDef()
 
 const

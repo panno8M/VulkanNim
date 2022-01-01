@@ -1,10 +1,7 @@
-# Generated at 2021-12-31T11:28:24Z
 # VK_AMD_shader_info
 
-import ../platform
-
 import ../features/vk10
-
+import ../platform
 prepareVulkanLibDef()
 
 const

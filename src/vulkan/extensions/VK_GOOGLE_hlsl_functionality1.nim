@@ -1,10 +1,7 @@
-# Generated at 2021-12-26T16:57:01Z
 # VK_GOOGLE_hlsl_functionality1
 
-import ../platform
-
 import ../features/vk10
-
+import ../platform
 prepareVulkanLibDef()
 
 const

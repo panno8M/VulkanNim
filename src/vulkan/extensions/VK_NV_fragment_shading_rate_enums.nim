@@ -1,11 +1,8 @@
-# Generated at 2021-12-30T17:13:13Z
 # VK_NV_fragment_shading_rate_enums
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_fragment_shading_rate
-export VK_KHR_fragment_shading_rate
+import VK_KHR_fragment_shading_rate
+import ../platform
 prepareVulkanLibDef()
 
 const

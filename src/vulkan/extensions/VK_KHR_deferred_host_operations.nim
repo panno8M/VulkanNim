@@ -1,10 +1,7 @@
-# Generated at 2021-12-31T11:28:24Z
 # VK_KHR_deferred_host_operations
 
-import ../platform
-
 import ../features/vk10
-
+import ../platform
 prepareVulkanLibDef()
 
 const

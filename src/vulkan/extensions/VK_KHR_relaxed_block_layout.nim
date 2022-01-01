@@ -1,11 +1,8 @@
-# Generated at 2021-12-26T10:16:14Z
 # VK_KHR_relaxed_block_layout
-
-import ../platform
 
 import ../features/vk10
 import ../features/vk11
-
+import ../platform
 prepareVulkanLibDef()
 
 const

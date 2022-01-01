@@ -1,11 +1,8 @@
-# Generated at 2021-12-31T11:28:23Z
 # VK_GOOGLE_display_timing
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_swapchain
-export VK_KHR_swapchain
+import VK_KHR_swapchain
+import ../platform
 prepareVulkanLibDef()
 
 const

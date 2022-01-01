@@ -2,7 +2,6 @@ import xmltree
 import strformat
 import strutils
 import sequtils
-import parseutils
 import tables
 import logging
 import options
@@ -192,117 +191,132 @@ import basetypes
 
     file.write $results
 
+proc isValidExtension(name: string): bool =
+  let words = name.parseWords({'_'})
+  if words.len >= 1 and words[1] == "RESERVED": return false
 
-proc isChanged*(newText, oldPath: string): bool =
-  let oldText =
-    if oldPath.fileExists: oldPath.readFile
-    else: return true
-  let
-    newStart = newText.skipUntil('\n')
-    oldStart = oldText.skipUntil('\n')
-  newText[newStart..^1] != oldText[oldStart..^1]
+  if words.len == 4 and words[2] == "extension":
+    try:
+      discard words[3].parseInt
+      return false
+    except: discard
+
+  return true
 
 proc generate*() =
-  var library = new Library
-  let fileGroup = [
-    ("extensions/VK_KHR_surface", @["extensions/VK_KHR_display", #["extensions/VK_KHR_swapchain"]#]),
-    ("extensions/VK_KHR_draw_indirect_count", @["extensions/VK_AMD_draw_indirect_count",]),
-    ("extensions/VK_KHR_ray_tracing", @["extensions/VK_NV_ray_tracing",]),
-  ].newTable
-  # let fileGroup = newTable[string, seq[string]]()
+  var features = new TableRef[string, Feature]
+  var libfiles: seq[LibFile]
 
-  for feature in xml.findAll("feature"):
+  let
+    platformFile = LibFile(path: "platform", dummy: true)
+    platformFeature = Feature(name: "platform")
+  platformFeature.affiliate platformFile
+  features["platform"] = platformFeature
+
+  # = VULKAN FEATURES =
+
+  for featureXML in xml.findAll("feature"):
 
     let
-      comment = feature{"comment"}
-      name = feature{"name"}
-    var
-      libFile = LibFile(
-          requires: @[newSeq[NodeRequire]()],
-          fileName: name.parseFileName,
-        )
+      comment = featureXML{"comment"}
+      name = featureXML{"name"}
+
+    var feature = Feature(name: name)
+    features[name] = feature
 
     if (?comment).isSome:
-      libFile.fileHeader.add comment.underline('=').commentify
+      feature.header = some comment.underline('=').commentify
 
-    libFile.fileHeader.add "\nimport ../platform"
-    case libFile.filename
-    of "features/vk10": discard
-    of "features/vk11": libFile.fileHeader.add "\nimport vk10\nexport vk10"
-    of "features/vk12": libFile.fileHeader.add "\nimport vk11\nexport vk11"
+    for require in featureXML.findAll("require"):
+      feature.requires.add require.extractNodeRequire
+
+    var file = new LibFile
+    libfiles.add file
+
+    feature.affiliate file
+    feature.imports.add platformFeature.name
+    case feature.name
+    of "VK_VERSION_1_0":
+      file.path = "features/vk10"
+    of "VK_VERSION_1_1":
+      file.path = "features/vk11"
+      feature.imports.add "VK_VERSION_1_0"
+    of "VK_VERSION_1_2":
+      file.path = "features/vk12"
+      feature.imports.add "VK_VERSION_1_1"
     else: discard
 
-    for require in feature.findAll("require"):
-      libFile.requires[^1].add require.extractNodeRequire
+  # = VULKAN EXTENSIONS =
 
-    library[libFile.fileName] = libFile
+  when true:
+    let customVersion = [
+      ("VK_ANDROID_external_memory_android_hardware_buffer", @["VK_VERSION_1_0", "VK_VERSION_1_1"]),
+      ("VK_EXT_external_memory_host",                        @["VK_VERSION_1_0", "VK_VERSION_1_1"]),
+      ("VK_KHR_push_descriptor",                             @["VK_VERSION_1_0", "VK_VERSION_1_1"]),
+      ("VK_KHR_ray_tracing",                                 @["VK_VERSION_1_0", "VK_VERSION_1_1"]),
+      ("VK_KHR_external_memory_win32",                       @["VK_VERSION_1_0", "VK_VERSION_1_1"]),
+      ("VK_KHR_external_semaphore_fd",                       @["VK_VERSION_1_0", "VK_VERSION_1_1"]),
+      ("VK_KHR_external_semaphore_win32",                    @["VK_VERSION_1_0", "VK_VERSION_1_1"]),
+      ("VK_NV_device_generated_commands",                    @["VK_VERSION_1_0", "VK_VERSION_1_1"]),
+      ("VK_EXT_buffer_device_address",                       @["VK_VERSION_1_0", "VK_VERSION_1_1", "VK_VERSION_1_2"]),
+      ("VK_KHR_ray_tracing",                                 @["VK_VERSION_1_0", "VK_EXT_debug_report"])
+    ].newTable
+    for extension in xml["extensions"].findAll("extension"):
+      let name = extension{"name"}
+      if not name.isValidExtension: continue
 
-  let customFeature = [
-    ("extensions/VK_ANDROID_external_memory_android_hardware_buffer", "features/vk11"),
-    ("extensions/VK_EXT_external_memory_host", "features/vk11"),
-    ("extensions/VK_KHR_push_descriptor", "features/vk11"),
-    ("extensions/VK_KHR_ray_tracing", "features/vk11"),
-    ("extensions/VK_KHR_external_memory_win32", "features/vk11"),
-    ("extensions/VK_KHR_external_semaphore_fd", "features/vk11"),
-    ("extensions/VK_KHR_external_semaphore_win32", "features/vk11"),
-    ("extensions/VK_NV_device_generated_commands", "features/vk11"),
-    ("extensions/VK_EXT_buffer_device_address", "features/vk12"),
+      var feature = Feature(name: name)
+
+      let needsImport = extension{"requires"}.parseWords({','})
+      let promotedto = ?extension{"promotedto"}
+
+      if customVersion.hasKey(feature.name):
+        feature.imports.add customVersion[feature.name]
+      else: feature.imports.add "VK_VERSION_1_0"
+      feature.imports.add needsImport
+      if promotedto.isSome:
+        feature.imports.add promotedto.get
+
+      if (?extension.comment).isSome:
+        feature.header = some extension.comment.underline('=').commentify
+
+      feature.imports.add platformFeature.name
+
+      for require in extension.findAll("require"):
+        if (?require{"extension"}).isSome:
+          feature.imports.add require{"extension"}
+        feature.requires.add require.extractNodeRequire
+
+      if feature.requires.len != 0:
+        features[name] = feature
+
+      # MAKE FILE
+      var file = new LibFile
+      file.path = "extensions"/feature.name
+      
+      feature.affiliate file
+      libfiles.add file
+
+
+  # = MERGE AND RENDER =
+  let fileGroup = [
+    ("VK_KHR_surface", @["VK_KHR_display", #["VK_KHR_swapchain"]#]),
+    ("VK_KHR_draw_indirect_count", @["VK_AMD_draw_indirect_count",]),
+    ("VK_KHR_ray_tracing", @["VK_NV_ray_tracing",]),
   ].newTable
-  let customExtensions = [
-    ("extensions/VK_KHR_ray_tracing", @["extensions/VK_EXT_debug_report"])
-  ].newTable
-  for extension in xml["extensions"].findAll("extension"):
-    let name = extension{"name"}
-    block Invalid_Extension_Test:
-      let words = name.parseWords({'_'})
-      if words.len == 4 and words[2] == "extension":
-        try: discard words[3].parseInt; continue
-        finally: discard
-      if words[1] == "RESERVED": continue
-    let requires = extension{"requires"}.parseWords({','}).mapIt((it.parseFileName, it.parseFileName.splitFile.dir == "extensions"))
-    let promotedto =
-      if (?extension{"promotedto"}).isSome:
-        some (extension{"promotedto"}.parseFileName, extension{"promotedto"}.parseFileName.splitFile.dir == "extensions")
-      else: none (string, bool)
 
-    var
-      libFile = LibFile(
-        requires: @[newSeq[NodeRequire]()],
-        fileName: name.parseFileName,
-      )
-    if customFeature.hasKey(libFile.fileName):
-      libFile.deps.add (customFeature[libFile.fileName], false)
-    else: libFile.deps.add ("features/vk10", false)
-    if customExtensions.hasKey(libFile.fileName):
-      libFile.deps.add customExtensions[libFile.fileName].mapIt((it, false))
-    libFile.deps.add requires
-    if promotedto.isSome:
-      libFile.deps.add promotedto.get
-
-    if (?extension.comment).isSome:
-      libFile.fileHeader.add extension.comment.underline('=').commentify
-
-    libFile.fileHeader.add "\nimport ../platform"
-
-    for require in extension.findAll("require"):
-      if (?require{"extension"}).isSome:
-        libFile.deps.add (require{"extension"}.parseFileName, true)
-      libFile.requires[^1].add require.extractNodeRequire
-
-    if libFile.requires.len != 0:
-      library[libFile.fileName] = libFile
-
-  for fileName, mergeMaterials in fileGroup:
-    library.merge(fileName, mergeMaterials)
+  # for fileName, mergeMaterials in fileGroup:
+  #   library.merge(fileName, mergeMaterials)
 
   var updatedFiles: seq[string]
-  for fileName, libFile in library:
+  for libFile in libfiles:
     if libFile.isNil: continue
     let
-      res = libFile.render(library, resources)
-      filePath = &"{libRoot/libFile.fileName}.nim"
-    if res.isChanged(filePath):
-      filePath.writeFile res
+      res = libFile.render(features, resources)
+      filePath = &"{libRoot/libFile.path}.nim"
+    if res.isNone: continue
+    if res.get.isChanged(filePath):
+      filePath.writeFile res.get
       updatedFiles.add filePath
 
   if updatedFiles.len == 0:

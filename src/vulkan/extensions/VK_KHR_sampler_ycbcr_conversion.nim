@@ -1,20 +1,13 @@
-# Generated at 2021-12-26T10:42:47Z
 # VK_KHR_sampler_ycbcr_conversion
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_maintenance1
-import ./VK_KHR_bind_memory2
-import ./VK_KHR_get_memory_requirements2
-import ./VK_KHR_get_physical_device_properties2
+import VK_KHR_maintenance1
+import VK_KHR_bind_memory2
+import VK_KHR_get_memory_requirements2
+import VK_KHR_get_physical_device_properties2
 import ../features/vk11
-import ./VK_EXT_debug_report
-export VK_KHR_maintenance1
-export VK_KHR_bind_memory2
-export VK_KHR_get_memory_requirements2
-export VK_KHR_get_physical_device_properties2
-export VK_EXT_debug_report
+import ../platform
+import VK_EXT_debug_report
 prepareVulkanLibDef()
 
 const

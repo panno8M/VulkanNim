@@ -1,11 +1,8 @@
-# Generated at 2021-12-31T11:28:23Z
 # VK_EXT_acquire_xlib_display
 
-import ../platform
-
 import ../features/vk10
-import ./VK_EXT_direct_mode_display
-export VK_EXT_direct_mode_display
+import VK_EXT_direct_mode_display
+import ../platform
 prepareVulkanLibDef()
 
 const

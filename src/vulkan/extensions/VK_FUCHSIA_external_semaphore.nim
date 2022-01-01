@@ -1,13 +1,9 @@
-# Generated at 2021-12-31T11:28:24Z
 # VK_FUCHSIA_external_semaphore
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_external_semaphore_capabilities
-import ./VK_KHR_external_semaphore
-export VK_KHR_external_semaphore_capabilities
-export VK_KHR_external_semaphore
+import VK_KHR_external_semaphore_capabilities
+import VK_KHR_external_semaphore
+import ../platform
 prepareVulkanLibDef()
 
 const

@@ -1,13 +1,9 @@
-# Generated at 2021-12-26T16:57:02Z
 # VK_KHR_ray_query
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_spirv_1_4
-import ./VK_KHR_acceleration_structure
-export VK_KHR_spirv_1_4
-export VK_KHR_acceleration_structure
+import VK_KHR_spirv_1_4
+import VK_KHR_acceleration_structure
+import ../platform
 prepareVulkanLibDef()
 
 const

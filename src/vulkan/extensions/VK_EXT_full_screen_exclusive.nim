@@ -1,21 +1,13 @@
-# Generated at 2021-12-31T11:28:23Z
 # VK_EXT_full_screen_exclusive
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_get_physical_device_properties2
-import ./VK_KHR_surface
-import ./VK_KHR_get_surface_capabilities2
-import ./VK_KHR_swapchain
-import ./VK_KHR_win32_surface
-import ./VK_KHR_device_group
-export VK_KHR_get_physical_device_properties2
-export VK_KHR_surface
-export VK_KHR_get_surface_capabilities2
-export VK_KHR_swapchain
-export VK_KHR_win32_surface
-export VK_KHR_device_group
+import VK_KHR_get_physical_device_properties2
+import VK_KHR_surface
+import VK_KHR_get_surface_capabilities2
+import VK_KHR_swapchain
+import ../platform
+import VK_KHR_win32_surface
+import VK_KHR_device_group
 prepareVulkanLibDef()
 
 const

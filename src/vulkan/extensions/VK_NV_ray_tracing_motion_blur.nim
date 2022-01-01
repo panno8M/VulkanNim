@@ -1,11 +1,8 @@
-# Generated at 2021-12-26T16:57:02Z
 # VK_NV_ray_tracing_motion_blur
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_ray_tracing_pipeline
-export VK_KHR_ray_tracing_pipeline
+import VK_KHR_ray_tracing_pipeline
+import ../platform
 prepareVulkanLibDef()
 
 const

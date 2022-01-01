@@ -1,11 +1,8 @@
-# Generated at 2021-12-26T16:57:02Z
 # VK_EXT_ycbcr_2plane_444_formats
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_sampler_ycbcr_conversion
-export VK_KHR_sampler_ycbcr_conversion
+import VK_KHR_sampler_ycbcr_conversion
+import ../platform
 prepareVulkanLibDef()
 
 const

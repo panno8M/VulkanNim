@@ -1,10 +1,7 @@
-# Generated at 2021-12-26T16:57:02Z
 # VK_EXT_primitive_topology_list_restart
 
-import ../platform
-
 import ../features/vk10
-
+import ../platform
 prepareVulkanLibDef()
 
 const

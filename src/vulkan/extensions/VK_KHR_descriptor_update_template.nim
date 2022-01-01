@@ -1,14 +1,10 @@
-# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_descriptor_update_template
-
-import ../platform
 
 import ../features/vk10
 import ../features/vk11
-import ./VK_KHR_push_descriptor
-import ./VK_EXT_debug_report
-export VK_KHR_push_descriptor
-export VK_EXT_debug_report
+import ../platform
+import VK_KHR_push_descriptor
+import VK_EXT_debug_report
 prepareVulkanLibDef()
 
 const

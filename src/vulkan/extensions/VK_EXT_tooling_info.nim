@@ -1,15 +1,10 @@
-# Generated at 2021-12-31T11:28:24Z
 # VK_EXT_tooling_info
 
-import ../platform
-
 import ../features/vk10
-import ./VK_EXT_debug_report
-import ./VK_EXT_debug_marker
-import ./VK_EXT_debug_utils
-export VK_EXT_debug_report
-export VK_EXT_debug_marker
-export VK_EXT_debug_utils
+import ../platform
+import VK_EXT_debug_report
+import VK_EXT_debug_marker
+import VK_EXT_debug_utils
 prepareVulkanLibDef()
 
 const

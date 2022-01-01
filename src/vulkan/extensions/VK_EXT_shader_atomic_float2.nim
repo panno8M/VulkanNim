@@ -1,11 +1,8 @@
-# Generated at 2021-12-26T16:57:01Z
 # VK_EXT_shader_atomic_float2
 
-import ../platform
-
 import ../features/vk10
-import ./VK_EXT_shader_atomic_float
-export VK_EXT_shader_atomic_float
+import VK_EXT_shader_atomic_float
+import ../platform
 prepareVulkanLibDef()
 
 const

@@ -1,37 +1,21 @@
-# Generated at 2021-12-31T11:28:23Z
 # VK_KHR_synchronization2
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_get_physical_device_properties2
-import ./VK_EXT_transform_feedback
-import ./VK_EXT_conditional_rendering
-import ./VK_NV_device_generated_commands
-import ./VK_KHR_fragment_shading_rate
-import ./VK_NV_shading_rate_image
-import ./VK_KHR_acceleration_structure
-import ./VK_KHR_ray_tracing_pipeline
-import ./VK_NV_ray_tracing
-import ./VK_EXT_fragment_density_map
-import ./VK_EXT_blend_operation_advanced
-import ./VK_NV_mesh_shader
-import ./VK_AMD_buffer_marker
-import ./VK_NV_device_diagnostic_checkpoints
-export VK_KHR_get_physical_device_properties2
-export VK_EXT_transform_feedback
-export VK_EXT_conditional_rendering
-export VK_NV_device_generated_commands
-export VK_KHR_fragment_shading_rate
-export VK_NV_shading_rate_image
-export VK_KHR_acceleration_structure
-export VK_KHR_ray_tracing_pipeline
-export VK_NV_ray_tracing
-export VK_EXT_fragment_density_map
-export VK_EXT_blend_operation_advanced
-export VK_NV_mesh_shader
-export VK_AMD_buffer_marker
-export VK_NV_device_diagnostic_checkpoints
+import VK_KHR_get_physical_device_properties2
+import ../platform
+import VK_EXT_transform_feedback
+import VK_EXT_conditional_rendering
+import VK_NV_device_generated_commands
+import VK_KHR_fragment_shading_rate
+import VK_NV_shading_rate_image
+import VK_KHR_acceleration_structure
+import VK_KHR_ray_tracing_pipeline
+import VK_NV_ray_tracing
+import VK_EXT_fragment_density_map
+import VK_EXT_blend_operation_advanced
+import VK_NV_mesh_shader
+import VK_AMD_buffer_marker
+import VK_NV_device_diagnostic_checkpoints
 prepareVulkanLibDef()
 
 const

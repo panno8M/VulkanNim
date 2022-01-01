@@ -1,10 +1,7 @@
-# Generated at 2021-12-31T11:28:23Z
 # VK_NVX_binary_import
 
-import ../platform
-
 import ../features/vk10
-
+import ../platform
 prepareVulkanLibDef()
 
 const

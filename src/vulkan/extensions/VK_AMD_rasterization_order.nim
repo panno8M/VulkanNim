@@ -1,10 +1,7 @@
-# Generated at 2021-12-26T10:16:14Z
 # VK_AMD_rasterization_order
 
-import ../platform
-
 import ../features/vk10
-
+import ../platform
 prepareVulkanLibDef()
 
 const

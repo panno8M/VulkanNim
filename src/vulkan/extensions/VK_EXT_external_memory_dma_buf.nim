@@ -1,11 +1,8 @@
-# Generated at 2021-12-26T10:42:47Z
 # VK_EXT_external_memory_dma_buf
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_external_memory_fd
-export VK_KHR_external_memory_fd
+import VK_KHR_external_memory_fd
+import ../platform
 prepareVulkanLibDef()
 
 const

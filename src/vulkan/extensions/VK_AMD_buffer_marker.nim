@@ -1,10 +1,7 @@
-# Generated at 2021-12-30T17:13:13Z
 # VK_AMD_buffer_marker
 
-import ../platform
-
 import ../features/vk10
-
+import ../platform
 prepareVulkanLibDef()
 
 const

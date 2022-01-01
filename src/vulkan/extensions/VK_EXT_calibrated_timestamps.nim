@@ -1,11 +1,8 @@
-# Generated at 2021-12-31T11:28:23Z
 # VK_EXT_calibrated_timestamps
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_get_physical_device_properties2
-export VK_KHR_get_physical_device_properties2
+import VK_KHR_get_physical_device_properties2
+import ../platform
 prepareVulkanLibDef()
 
 const

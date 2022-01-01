@@ -1,11 +1,8 @@
-# Generated at 2021-12-31T11:28:23Z
 # VK_KHR_external_fence_win32
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_external_fence
-export VK_KHR_external_fence
+import VK_KHR_external_fence
+import ../platform
 prepareVulkanLibDef()
 
 const

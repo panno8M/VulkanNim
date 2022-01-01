@@ -1,10 +1,7 @@
-# Generated at 2021-12-31T11:28:23Z
 # VK_EXT_validation_cache
 
-import ../platform
-
 import ../features/vk10
-
+import ../platform
 prepareVulkanLibDef()
 
 const

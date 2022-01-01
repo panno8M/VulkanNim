@@ -1,19 +1,12 @@
-# Generated at 2021-12-31T11:28:23Z
 # VK_EXT_image_drm_format_modifier
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_bind_memory2
-import ./VK_KHR_get_physical_device_properties2
-import ./VK_KHR_image_format_list
-import ./VK_KHR_sampler_ycbcr_conversion
-import ./VK_KHR_format_feature_flags2
-export VK_KHR_bind_memory2
-export VK_KHR_get_physical_device_properties2
-export VK_KHR_image_format_list
-export VK_KHR_sampler_ycbcr_conversion
-export VK_KHR_format_feature_flags2
+import VK_KHR_bind_memory2
+import VK_KHR_get_physical_device_properties2
+import VK_KHR_image_format_list
+import VK_KHR_sampler_ycbcr_conversion
+import ../platform
+import VK_KHR_format_feature_flags2
 prepareVulkanLibDef()
 
 const

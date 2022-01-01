@@ -1,13 +1,9 @@
-# Generated at 2021-12-30T17:13:13Z
 # VK_HUAWEI_invocation_mask
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_ray_tracing_pipeline
-import ./VK_KHR_synchronization2
-export VK_KHR_ray_tracing_pipeline
-export VK_KHR_synchronization2
+import VK_KHR_ray_tracing_pipeline
+import VK_KHR_synchronization2
+import ../platform
 prepareVulkanLibDef()
 
 const

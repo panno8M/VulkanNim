@@ -1,21 +1,13 @@
-# Generated at 2021-12-30T17:13:13Z
 # VK_KHR_dynamic_rendering
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_get_physical_device_properties2
-import ./VK_KHR_fragment_shading_rate
-import ./VK_EXT_fragment_density_map
-import ./VK_AMD_mixed_attachment_samples
-import ./VK_NV_framebuffer_mixed_samples
-import ./VK_NVX_multiview_per_view_attributes
-export VK_KHR_get_physical_device_properties2
-export VK_KHR_fragment_shading_rate
-export VK_EXT_fragment_density_map
-export VK_AMD_mixed_attachment_samples
-export VK_NV_framebuffer_mixed_samples
-export VK_NVX_multiview_per_view_attributes
+import VK_KHR_get_physical_device_properties2
+import ../platform
+import VK_KHR_fragment_shading_rate
+import VK_EXT_fragment_density_map
+import VK_AMD_mixed_attachment_samples
+import VK_NV_framebuffer_mixed_samples
+import VK_NVX_multiview_per_view_attributes
 prepareVulkanLibDef()
 
 const

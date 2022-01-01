@@ -1,10 +1,7 @@
-# Generated at 2021-12-26T10:16:13Z
 # VK_NV_shader_subgroup_partitioned
 
-import ../platform
-
 import ../features/vk10
-
+import ../platform
 prepareVulkanLibDef()
 
 const

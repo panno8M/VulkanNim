@@ -1,13 +1,9 @@
-# Generated at 2021-12-31T11:28:24Z
 # VK_FUCHSIA_buffer_collection
 
-import ../platform
-
 import ../features/vk10
-import ./VK_FUCHSIA_external_memory
-import ./VK_KHR_sampler_ycbcr_conversion
-export VK_FUCHSIA_external_memory
-export VK_KHR_sampler_ycbcr_conversion
+import VK_FUCHSIA_external_memory
+import VK_KHR_sampler_ycbcr_conversion
+import ../platform
 prepareVulkanLibDef()
 
 const

@@ -1,11 +1,8 @@
-# Generated at 2021-12-26T10:16:14Z
 # VK_KHR_storage_buffer_storage_class
-
-import ../platform
 
 import ../features/vk10
 import ../features/vk11
-
+import ../platform
 prepareVulkanLibDef()
 
 const

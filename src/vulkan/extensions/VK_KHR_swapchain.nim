@@ -1,11 +1,8 @@
-# Generated at 2021-12-31T11:28:23Z
 # VK_KHR_swapchain
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_surface
-export VK_KHR_surface
+import VK_KHR_surface
+import ../platform
 prepareVulkanLibDef()
 
 const

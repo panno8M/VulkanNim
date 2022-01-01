@@ -1,11 +1,8 @@
-# Generated at 2021-12-30T17:13:13Z
 # VK_EXT_hdr_metadata
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_swapchain
-export VK_KHR_swapchain
+import VK_KHR_swapchain
+import ../platform
 prepareVulkanLibDef()
 
 const

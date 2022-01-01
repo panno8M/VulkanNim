@@ -1,11 +1,8 @@
-# Generated at 2021-12-31T11:28:23Z
 # VK_KHR_external_memory_fd
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_external_memory
-export VK_KHR_external_memory
+import VK_KHR_external_memory
+import ../platform
 prepareVulkanLibDef()
 
 const

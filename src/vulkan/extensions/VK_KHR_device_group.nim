@@ -1,18 +1,12 @@
-# Generated at 2021-12-31T11:28:24Z
 # VK_KHR_device_group
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_device_group_creation
+import VK_KHR_device_group_creation
 import ../features/vk11
-import ./VK_KHR_bind_memory2
-import ./VK_KHR_surface
-import ./VK_KHR_swapchain
-export VK_KHR_device_group_creation
-export VK_KHR_bind_memory2
-export VK_KHR_surface
-export VK_KHR_swapchain
+import ../platform
+import VK_KHR_bind_memory2
+import VK_KHR_surface
+import VK_KHR_swapchain
 prepareVulkanLibDef()
 
 const

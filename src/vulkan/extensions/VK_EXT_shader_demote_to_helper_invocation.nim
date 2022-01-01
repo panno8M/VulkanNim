@@ -1,11 +1,8 @@
-# Generated at 2021-12-26T10:42:47Z
 # VK_EXT_shader_demote_to_helper_invocation
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_get_physical_device_properties2
-export VK_KHR_get_physical_device_properties2
+import VK_KHR_get_physical_device_properties2
+import ../platform
 prepareVulkanLibDef()
 
 const

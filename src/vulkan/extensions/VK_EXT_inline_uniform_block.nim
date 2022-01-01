@@ -1,13 +1,9 @@
-# Generated at 2021-12-26T10:42:47Z
 # VK_EXT_inline_uniform_block
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_get_physical_device_properties2
-import ./VK_KHR_maintenance1
-export VK_KHR_get_physical_device_properties2
-export VK_KHR_maintenance1
+import VK_KHR_get_physical_device_properties2
+import VK_KHR_maintenance1
+import ../platform
 prepareVulkanLibDef()
 
 const

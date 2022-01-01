@@ -1,13 +1,9 @@
-# Generated at 2021-12-31T11:28:23Z
 # VK_KHR_video_queue
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_get_physical_device_properties2
-import ./VK_KHR_sampler_ycbcr_conversion
-export VK_KHR_get_physical_device_properties2
-export VK_KHR_sampler_ycbcr_conversion
+import VK_KHR_get_physical_device_properties2
+import VK_KHR_sampler_ycbcr_conversion
+import ../platform
 prepareVulkanLibDef()
 
 const

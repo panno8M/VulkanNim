@@ -1,11 +1,8 @@
-# Generated at 2021-12-30T17:13:13Z
 # VK_EXT_sample_locations
 
-import ../platform
-
 import ../features/vk10
-import ./VK_KHR_get_physical_device_properties2
-export VK_KHR_get_physical_device_properties2
+import VK_KHR_get_physical_device_properties2
+import ../platform
 prepareVulkanLibDef()
 
 const

@@ -1,13 +1,9 @@
-# Generated at 2021-12-31T11:28:24Z
 # VK_EXT_display_control
 
-import ../platform
-
 import ../features/vk10
-import ./VK_EXT_display_surface_counter
-import ./VK_KHR_swapchain
-export VK_EXT_display_surface_counter
-export VK_KHR_swapchain
+import VK_EXT_display_surface_counter
+import VK_KHR_swapchain
+import ../platform
 prepareVulkanLibDef()
 
 const

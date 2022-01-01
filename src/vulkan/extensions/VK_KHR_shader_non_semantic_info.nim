@@ -1,10 +1,7 @@
-# Generated at 2021-12-26T10:16:13Z
 # VK_KHR_shader_non_semantic_info
 
-import ../platform
-
 import ../features/vk10
-
+import ../platform
 prepareVulkanLibDef()
 
 const

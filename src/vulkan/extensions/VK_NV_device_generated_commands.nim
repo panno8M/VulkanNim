@@ -1,11 +1,8 @@
-# Generated at 2021-12-31T11:28:24Z
 # VK_NV_device_generated_commands
 
-import ../platform
-
 import ../features/vk11
-import ./VK_KHR_buffer_device_address
-export VK_KHR_buffer_device_address
+import VK_KHR_buffer_device_address
+import ../platform
 prepareVulkanLibDef()
 
 const
