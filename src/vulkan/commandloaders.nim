@@ -26,7 +26,6 @@ macro preload(loadFrom: string; body): untyped =
   result = body
   result.expectKind nnkProcDef
   result.pragma.add(
-    (quote do: discardable        ),
     (quote do: dynlib(`vkDllPath`)),
     (quote do: importc(`loadFrom`)))
 
@@ -54,7 +53,7 @@ macro lazyload(loadFrom: string; with = InstanceLevel; body): untyped =
   ##    proc queuePresentKHR*(
   ##          queue: Queue;
   ##          pPresentInfo: ptr PresentInfoKHR;
-  ##        ): Result {.loadInto: queuePresentKHR_CAGE, discardable.}
+  ##        ): Result {.loadInto: queuePresentKHR_CAGE.}
   ##      get(queuePresentKHR_CAGE)(queue, pPresentInfo)
   proc isExported(n: NimNode): bool =
     n.kind == nnkPostfix and n[0].eqIdent "*"
@@ -66,7 +65,6 @@ macro lazyload(loadFrom: string; with = InstanceLevel; body): untyped =
     procTyPragma = newNimNode(nnkPragma)
     .add( body.pragma[0..^1] )
     .add( quote do: loadable(`loadFrom`, `with`) )
-    .add( quote do: discardable )
     procTy = newNimNode(nnkProcTy).add(
       body.params,
       procTyPragma)

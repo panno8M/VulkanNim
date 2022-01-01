@@ -23,7 +23,7 @@ macro genErrorResults =
 
 genErrorResults
 
-macro withCheck*(p: proc; args: varargs[untyped]): void = 
+macro withCheck*(p: proc; args: varargs[untyped]): Result = 
   let errors = p.customPragmaNode().findChild(it.len > 0 and it[0].repr == "errorCodes")[1][1][0..^1]
   if errors.len == 0:
     return quote do: `p`(`args`)
@@ -36,10 +36,15 @@ macro withCheck*(p: proc; args: varargs[untyped]): void =
         raise newException(`defect`, $`defect`)
     )
 
-  nnkCaseStmt.newNimNode
-    .add(quote do: `p`(`args`))
-    .add(errorCases)
-    .add(nnkElse.newTree(quote do: discard))
+  let res = quote do:
+    let res = `p`(`args`)
+    res
+  result = newStmtList(
+    nnkCaseStmt.newNimNode
+      .add(res)
+      .add(errorCases)
+      .add( nnkElse.newTree(res[1]) )
+  )
 
 
 
@@ -51,4 +56,22 @@ when isMainModule:
   var ci = InstanceCreateInfo{}
   var x: Instance
 
-  createInstance.withCheck(addr ci, nil, addr x)
+
+  echo createInstance.withCheck(addr ci, nil, addr x)
+
+  # echo case (
+  #   let res = createInstance(addr ci, nil, addr x)
+  #   res)
+  # of errorOutOfHostMemory:
+  #   raise newException(OutOfHostMemoryDefect, $OutOfHostMemoryDefect)
+  # of errorOutOfDeviceMemory:
+  #   raise newException(OutOfDeviceMemoryDefect, $OutOfDeviceMemoryDefect)
+  # of errorInitializationFailed:
+  #   raise newException(InitializationFailedDefect, $InitializationFailedDefect)
+  # of errorLayerNotPresent:
+  #   raise newException(LayerNotPresentDefect, $LayerNotPresentDefect)
+  # of errorExtensionNotPresent:
+  #   raise newException(ExtensionNotPresentDefect, $ExtensionNotPresentDefect)
+  # of errorIncompatibleDriver:
+  #   raise newException(IncompatibleDriverDefect, $IncompatibleDriverDefect)
+  # else: res
