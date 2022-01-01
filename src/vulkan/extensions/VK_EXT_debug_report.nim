@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:10:58Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_EXT_debug_report
 
 import ../platform
@@ -35,8 +35,8 @@ proc createDebugReportCallbackEXT*(
       pAllocator = default(ptr AllocationCallbacks);
       pCallback: ptr DebugReportCallbackEXT;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory],
       lazyload("vkCreateDebugReportCallbackEXT", InstanceLevel).}
 proc destroyDebugReportCallbackEXT*(
       instance: Instance;

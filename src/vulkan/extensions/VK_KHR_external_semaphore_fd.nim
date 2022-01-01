@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:23Z
 # VK_KHR_external_semaphore_fd
 
 import ../platform
@@ -30,16 +30,16 @@ proc importSemaphoreFdKHR*(
       device: Device;
       pImportSemaphoreFdInfo: ptr ImportSemaphoreFdInfoKHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorInvalidExternalHandle),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidExternalHandle],
       lazyload("vkImportSemaphoreFdKHR", DeviceLevel).}
 proc getSemaphoreFdKHR*(
       device: Device;
       pGetFdInfo: ptr SemaphoreGetFdInfoKHR;
       pFd: ptr int;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorTooManyObjects, errorOutOfHostMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory],
       lazyload("vkGetSemaphoreFdKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_external_semaphore_fd*(instance: Instance) = instance.loadCommands:

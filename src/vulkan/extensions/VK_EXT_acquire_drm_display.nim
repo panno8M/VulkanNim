@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:10:58Z
+# Generated at 2021-12-31T11:28:23Z
 # VK_EXT_acquire_drm_display
 
 import ../platform
@@ -17,8 +17,8 @@ proc acquireDrmDisplayEXT*(
       drmFd: int32;
       display: DisplayKHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorInitializationFailed),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorInitializationFailed],
       lazyload("vkAcquireDrmDisplayEXT", InstanceLevel).}
 proc getDrmDisplayEXT*(
       physicalDevice: PhysicalDevice;
@@ -26,8 +26,8 @@ proc getDrmDisplayEXT*(
       connectorId: uint32;
       display: ptr DisplayKHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorInitializationFailed, errorOutOfHostMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorInitializationFailed, Result.errorOutOfHostMemory],
       lazyload("vkGetDrmDisplayEXT", InstanceLevel).}
 
 proc loadAllVK_EXT_acquire_drm_display*(instance: Instance) = instance.loadCommands:

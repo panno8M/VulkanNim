@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_NVX_image_view_handle
 
 import ../platform
@@ -33,8 +33,8 @@ proc getImageViewAddressNVX*(
       imageView: ImageView;
       pProperties: ptr ImageViewAddressPropertiesNVX;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorUnknown),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorUnknown],
       lazyload("vkGetImageViewAddressNVX", DeviceLevel).}
 
 proc loadAllVK_NVX_image_view_handle*(instance: Instance) = instance.loadCommands:

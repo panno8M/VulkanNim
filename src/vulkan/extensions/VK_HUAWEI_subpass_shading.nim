@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_HUAWEI_subpass_shading
 
 import ../platform
@@ -34,8 +34,8 @@ proc getDeviceSubpassShadingMaxWorkgroupSizeHUAWEI*(
       renderpass: RenderPass;
       pMaxWorkgroupSize: ptr Extent2D;
     ): Result {.cdecl,
-      successCodes(success, incomplete),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorSurfaceLostKhr),
+      successCodes: @[Result.success, Result.incomplete],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr],
       lazyload("vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI", DeviceLevel).}
 proc cmdSubpassShadingHUAWEI*(
       commandBuffer: CommandBuffer;

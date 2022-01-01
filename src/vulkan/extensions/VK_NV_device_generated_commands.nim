@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_NV_device_generated_commands
 
 import ../platform
@@ -133,8 +133,8 @@ proc createIndirectCommandsLayoutNV*(
       pAllocator = default(ptr AllocationCallbacks);
       pIndirectCommandsLayout: ptr IndirectCommandsLayoutNV;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       lazyload("vkCreateIndirectCommandsLayoutNV", DeviceLevel).}
 proc destroyIndirectCommandsLayoutNV*(
       device: Device;

@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_NV_external_memory_rdma
 
 import ../platform
@@ -28,8 +28,8 @@ proc getMemoryRemoteAddressNV*(
       pMemoryGetRemoteAddressInfo: ptr MemoryGetRemoteAddressInfoNV;
       pAddress: ptr RemoteAddressNV;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorInvalidExternalHandle),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorInvalidExternalHandle],
       lazyload("vkGetMemoryRemoteAddressNV", DeviceLevel).}
 
 proc loadAllVK_NV_external_memory_rdma*(instance: Instance) = instance.loadCommands:

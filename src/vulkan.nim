@@ -3,6 +3,7 @@ import vulkan/handles
 import vulkan/enums
 import vulkan/basetypes
 import vulkan/commandloaders
+import vulkan/resulttraits
 import vulkan/additionaloperations
 
 
@@ -11,4 +12,5 @@ export handles
 export enums
 export basetypes
 export commandloaders
+export resulttraits
 export additionaloperations

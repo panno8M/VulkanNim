@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:23Z
 # VK_NV_ray_tracing
 
 import ../platform
@@ -118,8 +118,8 @@ proc createAccelerationStructureNV*(
       pAllocator = default(ptr AllocationCallbacks);
       pAccelerationStructure: ptr AccelerationStructureNV;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory],
       lazyload("vkCreateAccelerationStructureNV", DeviceLevel).}
 proc destroyAccelerationStructureNV*(
       device: Device;
@@ -136,8 +136,8 @@ proc bindAccelerationStructureMemoryNV*(
       bindInfoCount: uint32;
       pBindInfos {.length: bindInfoCount.}: arrPtr[BindAccelerationStructureMemoryInfoNV];
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       lazyload("vkBindAccelerationStructureMemoryNV", DeviceLevel).}
 proc cmdBuildAccelerationStructureNV*(
       commandBuffer: CommandBuffer;
@@ -181,8 +181,8 @@ proc createRayTracingPipelinesNV*(
       pAllocator = default(ptr AllocationCallbacks);
       pPipelines {.length: createInfoCount.}: arrPtr[Pipeline];
     ): Result {.cdecl,
-      successCodes(success, pipelineCompileRequiredExt),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidShaderNv),
+      successCodes: @[Result.success, Result.pipelineCompileRequiredExt],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorInvalidShaderNv],
       lazyload("vkCreateRayTracingPipelinesNV", DeviceLevel).}
 const getRayTracingShaderGroupHandlesNV* = getRayTracingShaderGroupHandlesKHR
 proc getAccelerationStructureHandleNV*(
@@ -191,8 +191,8 @@ proc getAccelerationStructureHandleNV*(
       dataSize: uint;
       pData {.length: dataSize.}: pointer;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       lazyload("vkGetAccelerationStructureHandleNV", DeviceLevel).}
 proc cmdWriteAccelerationStructuresPropertiesNV*(
       commandBuffer: CommandBuffer;
@@ -207,8 +207,8 @@ proc compileDeferredNV*(
       pipeline: Pipeline;
       shader: uint32;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       lazyload("vkCompileDeferredNV", DeviceLevel).}
 
 proc loadAllVK_NV_ray_tracing*(instance: Instance) = instance.loadCommands:

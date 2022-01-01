@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:10:58Z
+# Generated at 2021-12-31T11:28:23Z
 # VK_EXT_direct_mode_display
 
 import ../platform
@@ -16,7 +16,7 @@ proc releaseDisplayEXT*(
       physicalDevice: PhysicalDevice;
       display: DisplayKHR;
     ): Result {.cdecl,
-      successCodes(success),
+      successCodes: @[Result.success],
       lazyload("vkReleaseDisplayEXT", InstanceLevel).}
 
 proc loadAllVK_EXT_direct_mode_display*(instance: Instance) = instance.loadCommands:

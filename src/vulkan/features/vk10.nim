@@ -1,4 +1,4 @@
-# Generated at 2021-12-26T17:37:10Z
+# Generated at 2021-12-31T11:28:23Z
 # vk10
 # Vulkan core API interface definitions
 # =====================================
@@ -1038,8 +1038,8 @@ proc createInstance*(
       pAllocator = default(ptr AllocationCallbacks);
       pInstance: ptr Instance;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInitializationFailed, errorLayerNotPresent, errorExtensionNotPresent, errorIncompatibleDriver),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorInitializationFailed, Result.errorLayerNotPresent, Result.errorExtensionNotPresent, Result.errorIncompatibleDriver],
       preload("vkCreateInstance").}
 proc destroyInstance*(
       instance = default(Instance);
@@ -1050,8 +1050,8 @@ proc enumeratePhysicalDevices*(
       pPhysicalDeviceCount: ptr uint32;
       pPhysicalDevices {.length: pPhysicalDeviceCount.} = default(arrPtr[PhysicalDevice]);
     ): Result {.cdecl,
-      successCodes(success, incomplete),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInitializationFailed),
+      successCodes: @[Result.success, Result.incomplete],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorInitializationFailed],
       preload("vkEnumeratePhysicalDevices").}
 proc getPhysicalDeviceFeatures*(
       physicalDevice: PhysicalDevice;
@@ -1071,8 +1071,8 @@ proc getPhysicalDeviceImageFormatProperties*(
       flags = default(ImageCreateFlags);
       pImageFormatProperties: ptr ImageFormatProperties;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorFormatNotSupported),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorFormatNotSupported],
       preload("vkGetPhysicalDeviceImageFormatProperties").}
 proc getPhysicalDeviceProperties*(
       physicalDevice: PhysicalDevice;
@@ -1105,8 +1105,8 @@ proc createDevice*(
       pAllocator = default(ptr AllocationCallbacks);
       pDevice: ptr Device;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInitializationFailed, errorExtensionNotPresent, errorFeatureNotPresent, errorTooManyObjects, errorDeviceLost),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorInitializationFailed, Result.errorExtensionNotPresent, Result.errorFeatureNotPresent, Result.errorTooManyObjects, Result.errorDeviceLost],
       preload("vkCreateDevice").}
 proc destroyDevice*(
       device = default(Device);
@@ -1121,8 +1121,8 @@ proc enumerateInstanceExtensionProperties*(
       pPropertyCount: ptr uint32;
       pProperties {.length: pPropertyCount.} = default(arrPtr[ExtensionProperties]);
     ): Result {.cdecl,
-      successCodes(success, incomplete),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorLayerNotPresent),
+      successCodes: @[Result.success, Result.incomplete],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorLayerNotPresent],
       preload("vkEnumerateInstanceExtensionProperties").}
 proc enumerateDeviceExtensionProperties*(
       physicalDevice: PhysicalDevice;
@@ -1130,8 +1130,8 @@ proc enumerateDeviceExtensionProperties*(
       pPropertyCount: ptr uint32;
       pProperties {.length: pPropertyCount.} = default(arrPtr[ExtensionProperties]);
     ): Result {.cdecl,
-      successCodes(success, incomplete),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorLayerNotPresent),
+      successCodes: @[Result.success, Result.incomplete],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorLayerNotPresent],
       preload("vkEnumerateDeviceExtensionProperties").}
 
 
@@ -1141,16 +1141,16 @@ proc enumerateInstanceLayerProperties*(
       pPropertyCount: ptr uint32;
       pProperties {.length: pPropertyCount.} = default(arrPtr[LayerProperties]);
     ): Result {.cdecl,
-      successCodes(success, incomplete),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success, Result.incomplete],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkEnumerateInstanceLayerProperties").}
 proc enumerateDeviceLayerProperties*(
       physicalDevice: PhysicalDevice;
       pPropertyCount: ptr uint32;
       pProperties {.length: pPropertyCount.} = default(arrPtr[LayerProperties]);
     ): Result {.cdecl,
-      successCodes(success, incomplete),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success, Result.incomplete],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkEnumerateDeviceLayerProperties").}
 
 
@@ -1168,20 +1168,20 @@ proc queueSubmit*(
       pSubmits {.length: submitCount.}: arrPtr[SubmitInfo];
       fence = default(Fence);
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost],
       preload("vkQueueSubmit").}
 proc queueWaitIdle*(
       queue: Queue;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost],
       preload("vkQueueWaitIdle").}
 proc deviceWaitIdle*(
       device: Device;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost],
       preload("vkDeviceWaitIdle").}
 
 
@@ -1193,8 +1193,8 @@ proc allocateMemory*(
       pAllocator = default(ptr AllocationCallbacks);
       pMemory: ptr DeviceMemory;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidExternalHandle, errorInvalidOpaqueCaptureAddressKhr),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorInvalidExternalHandle, Result.errorInvalidOpaqueCaptureAddressKhr],
       preload("vkAllocateMemory").}
 proc freeMemory*(
       device: Device;
@@ -1209,8 +1209,8 @@ proc mapMemory*(
       flags = default(MemoryMapFlags);
       ppData: ptr pointer;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorMemoryMapFailed),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorMemoryMapFailed],
       preload("vkMapMemory").}
 proc unmapMemory*(
       device: Device;
@@ -1221,16 +1221,16 @@ proc flushMappedMemoryRanges*(
       memoryRangeCount: uint32;
       pMemoryRanges {.length: memoryRangeCount.}: arrPtr[MappedMemoryRange];
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkFlushMappedMemoryRanges").}
 proc invalidateMappedMemoryRanges*(
       device: Device;
       memoryRangeCount: uint32;
       pMemoryRanges {.length: memoryRangeCount.}: arrPtr[MappedMemoryRange];
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkInvalidateMappedMemoryRanges").}
 proc getDeviceMemoryCommitment*(
       device: Device;
@@ -1247,8 +1247,8 @@ proc bindBufferMemory*(
       memory: DeviceMemory;
       memoryOffset: DeviceSize;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidOpaqueCaptureAddressKhr),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorInvalidOpaqueCaptureAddressKhr],
       preload("vkBindBufferMemory").}
 proc bindImageMemory*(
       device: Device;
@@ -1256,8 +1256,8 @@ proc bindImageMemory*(
       memory: DeviceMemory;
       memoryOffset: DeviceSize;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkBindImageMemory").}
 proc getBufferMemoryRequirements*(
       device: Device;
@@ -1295,8 +1295,8 @@ proc queueBindSparse*(
       pBindInfo {.length: bindInfoCount.}: arrPtr[BindSparseInfo];
       fence = default(Fence);
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost],
       preload("vkQueueBindSparse").}
 
 
@@ -1308,8 +1308,8 @@ proc createFence*(
       pAllocator = default(ptr AllocationCallbacks);
       pFence: ptr Fence;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkCreateFence").}
 proc destroyFence*(
       device: Device;
@@ -1321,15 +1321,15 @@ proc resetFences*(
       fenceCount: uint32;
       pFences {.length: fenceCount.}: arrPtr[Fence];
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfDeviceMemory],
       preload("vkResetFences").}
 proc getFenceStatus*(
       device: Device;
       fence: Fence;
     ): Result {.cdecl,
-      successCodes(success, notReady),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      successCodes: @[Result.success, Result.notReady],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost],
       preload("vkGetFenceStatus").}
 proc waitForFences*(
       device: Device;
@@ -1338,8 +1338,8 @@ proc waitForFences*(
       waitAll: Bool32;
       timeout: uint64;
     ): Result {.cdecl,
-      successCodes(success, timeout),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      successCodes: @[Result.success, Result.timeout],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost],
       preload("vkWaitForFences").}
 
 
@@ -1351,8 +1351,8 @@ proc createSemaphore*(
       pAllocator = default(ptr AllocationCallbacks);
       pSemaphore: ptr Semaphore;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkCreateSemaphore").}
 proc destroySemaphore*(
       device: Device;
@@ -1369,8 +1369,8 @@ proc createEvent*(
       pAllocator = default(ptr AllocationCallbacks);
       pEvent: ptr Event;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkCreateEvent").}
 proc destroyEvent*(
       device: Device;
@@ -1381,22 +1381,22 @@ proc getEventStatus*(
       device: Device;
       event: Event;
     ): Result {.cdecl,
-      successCodes(eventSet, eventReset),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      successCodes: @[Result.eventSet, Result.eventReset],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost],
       preload("vkGetEventStatus").}
 proc setEvent*(
       device: Device;
       event: Event;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkSetEvent").}
 proc resetEvent*(
       device: Device;
       event: Event;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfDeviceMemory],
       preload("vkResetEvent").}
 
 
@@ -1408,8 +1408,8 @@ proc createQueryPool*(
       pAllocator = default(ptr AllocationCallbacks);
       pQueryPool: ptr QueryPool;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkCreateQueryPool").}
 proc destroyQueryPool*(
       device: Device;
@@ -1426,8 +1426,8 @@ proc getQueryPoolResults*(
       stride: DeviceSize;
       flags = default(QueryResultFlags);
     ): Result {.cdecl,
-      successCodes(success, notReady),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      successCodes: @[Result.success, Result.notReady],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost],
       preload("vkGetQueryPoolResults").}
 
 
@@ -1439,8 +1439,8 @@ proc createBuffer*(
       pAllocator = default(ptr AllocationCallbacks);
       pBuffer: ptr Buffer;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidOpaqueCaptureAddressKhr),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorInvalidOpaqueCaptureAddressKhr],
       preload("vkCreateBuffer").}
 proc destroyBuffer*(
       device: Device;
@@ -1457,8 +1457,8 @@ proc createBufferView*(
       pAllocator = default(ptr AllocationCallbacks);
       pView: ptr BufferView;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkCreateBufferView").}
 proc destroyBufferView*(
       device: Device;
@@ -1475,8 +1475,8 @@ proc createImage*(
       pAllocator = default(ptr AllocationCallbacks);
       pImage: ptr Image;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkCreateImage").}
 proc destroyImage*(
       device: Device;
@@ -1499,8 +1499,8 @@ proc createImageView*(
       pAllocator = default(ptr AllocationCallbacks);
       pView: ptr ImageView;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkCreateImageView").}
 proc destroyImageView*(
       device: Device;
@@ -1517,8 +1517,8 @@ proc createShaderModule*(
       pAllocator = default(ptr AllocationCallbacks);
       pShaderModule: ptr ShaderModule;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidShaderNv),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorInvalidShaderNv],
       preload("vkCreateShaderModule").}
 proc destroyShaderModule*(
       device: Device;
@@ -1535,8 +1535,8 @@ proc createPipelineCache*(
       pAllocator = default(ptr AllocationCallbacks);
       pPipelineCache: ptr PipelineCache;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkCreatePipelineCache").}
 proc destroyPipelineCache*(
       device: Device;
@@ -1549,8 +1549,8 @@ proc getPipelineCacheData*(
       pDataSize: ptr uint;
       pData {.length: pDataSize.} = default(pointer);
     ): Result {.cdecl,
-      successCodes(success, incomplete),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success, Result.incomplete],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkGetPipelineCacheData").}
 proc mergePipelineCaches*(
       device: Device;
@@ -1558,8 +1558,8 @@ proc mergePipelineCaches*(
       srcCacheCount: uint32;
       pSrcCaches {.length: srcCacheCount.}: arrPtr[PipelineCache];
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkMergePipelineCaches").}
 
 
@@ -1573,8 +1573,8 @@ proc createGraphicsPipelines*(
       pAllocator = default(ptr AllocationCallbacks);
       pPipelines {.length: createInfoCount.}: arrPtr[Pipeline];
     ): Result {.cdecl,
-      successCodes(success, pipelineCompileRequiredExt),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidShaderNv),
+      successCodes: @[Result.success, Result.pipelineCompileRequiredExt],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorInvalidShaderNv],
       preload("vkCreateGraphicsPipelines").}
 proc createComputePipelines*(
       device: Device;
@@ -1584,8 +1584,8 @@ proc createComputePipelines*(
       pAllocator = default(ptr AllocationCallbacks);
       pPipelines {.length: createInfoCount.}: arrPtr[Pipeline];
     ): Result {.cdecl,
-      successCodes(success, pipelineCompileRequiredExt),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidShaderNv),
+      successCodes: @[Result.success, Result.pipelineCompileRequiredExt],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorInvalidShaderNv],
       preload("vkCreateComputePipelines").}
 proc destroyPipeline*(
       device: Device;
@@ -1602,8 +1602,8 @@ proc createPipelineLayout*(
       pAllocator = default(ptr AllocationCallbacks);
       pPipelineLayout: ptr PipelineLayout;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkCreatePipelineLayout").}
 proc destroyPipelineLayout*(
       device: Device;
@@ -1620,8 +1620,8 @@ proc createSampler*(
       pAllocator = default(ptr AllocationCallbacks);
       pSampler: ptr Sampler;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkCreateSampler").}
 proc destroySampler*(
       device: Device;
@@ -1638,8 +1638,8 @@ proc createDescriptorSetLayout*(
       pAllocator = default(ptr AllocationCallbacks);
       pSetLayout: ptr DescriptorSetLayout;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkCreateDescriptorSetLayout").}
 proc destroyDescriptorSetLayout*(
       device: Device;
@@ -1652,8 +1652,8 @@ proc createDescriptorPool*(
       pAllocator = default(ptr AllocationCallbacks);
       pDescriptorPool: ptr DescriptorPool;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorFragmentationExt),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorFragmentationExt],
       preload("vkCreateDescriptorPool").}
 proc destroyDescriptorPool*(
       device: Device;
@@ -1665,15 +1665,15 @@ proc resetDescriptorPool*(
       descriptorPool: DescriptorPool;
       flags = default(DescriptorPoolResetFlags);
     ): Result {.cdecl,
-      successCodes(success),
+      successCodes: @[Result.success],
       preload("vkResetDescriptorPool").}
 proc allocateDescriptorSets*(
       device: Device;
       pAllocateInfo: ptr DescriptorSetAllocateInfo;
       pDescriptorSets {.length: pAllocateInfo.descriptorSetCount.}: arrPtr[DescriptorSet];
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorFragmentedPool, errorOutOfPoolMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorFragmentedPool, Result.errorOutOfPoolMemory],
       preload("vkAllocateDescriptorSets").}
 proc freeDescriptorSets*(
       device: Device;
@@ -1681,7 +1681,7 @@ proc freeDescriptorSets*(
       descriptorSetCount: uint32;
       pDescriptorSets {.length: descriptorSetCount.}: arrPtr[DescriptorSet];
     ): Result {.cdecl,
-      successCodes(success),
+      successCodes: @[Result.success],
       preload("vkFreeDescriptorSets").}
 proc updateDescriptorSets*(
       device: Device;
@@ -1700,8 +1700,8 @@ proc createFramebuffer*(
       pAllocator = default(ptr AllocationCallbacks);
       pFramebuffer: ptr Framebuffer;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkCreateFramebuffer").}
 proc destroyFramebuffer*(
       device: Device;
@@ -1714,8 +1714,8 @@ proc createRenderPass*(
       pAllocator = default(ptr AllocationCallbacks);
       pRenderPass: ptr RenderPass;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkCreateRenderPass").}
 proc destroyRenderPass*(
       device: Device;
@@ -1737,8 +1737,8 @@ proc createCommandPool*(
       pAllocator = default(ptr AllocationCallbacks);
       pCommandPool: ptr CommandPool;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkCreateCommandPool").}
 proc destroyCommandPool*(
       device: Device;
@@ -1750,8 +1750,8 @@ proc resetCommandPool*(
       commandPool: CommandPool;
       flags = default(CommandPoolResetFlags);
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfDeviceMemory],
       preload("vkResetCommandPool").}
 
 
@@ -1762,8 +1762,8 @@ proc allocateCommandBuffers*(
       pAllocateInfo: ptr CommandBufferAllocateInfo;
       pCommandBuffers {.length: pAllocateInfo.commandBufferCount.}: arrPtr[CommandBuffer];
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkAllocateCommandBuffers").}
 proc freeCommandBuffers*(
       device: Device;
@@ -1775,21 +1775,21 @@ proc beginCommandBuffer*(
       commandBuffer: CommandBuffer;
       pBeginInfo: ptr CommandBufferBeginInfo;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkBeginCommandBuffer").}
 proc endCommandBuffer*(
       commandBuffer: CommandBuffer;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkEndCommandBuffer").}
 proc resetCommandBuffer*(
       commandBuffer: CommandBuffer;
       flags = default(CommandBufferResetFlags);
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfDeviceMemory],
       preload("vkResetCommandBuffer").}
 
 

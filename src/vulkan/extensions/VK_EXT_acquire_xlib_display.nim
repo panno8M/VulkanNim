@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:10:58Z
+# Generated at 2021-12-31T11:28:23Z
 # VK_EXT_acquire_xlib_display
 
 import ../platform
@@ -17,8 +17,8 @@ proc acquireXlibDisplayEXT*(
       dpy: ptr Display;
       display: DisplayKHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorInitializationFailed),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInitializationFailed],
       lazyload("vkAcquireXlibDisplayEXT", InstanceLevel).}
 proc getRandROutputDisplayEXT*(
       physicalDevice: PhysicalDevice;
@@ -26,8 +26,8 @@ proc getRandROutputDisplayEXT*(
       rrOutput: RROutput;
       pDisplay: ptr DisplayKHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory],
       lazyload("vkGetRandROutputDisplayEXT", InstanceLevel).}
 
 proc loadAllVK_EXT_acquire_xlib_display*(instance: Instance) = instance.loadCommands:

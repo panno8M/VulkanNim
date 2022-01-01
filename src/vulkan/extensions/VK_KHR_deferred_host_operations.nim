@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_KHR_deferred_host_operations
 
 import ../platform
@@ -16,8 +16,8 @@ proc createDeferredOperationKHR*(
       pAllocator = default(ptr AllocationCallbacks);
       pDeferredOperation: ptr DeferredOperationKHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory],
       lazyload("vkCreateDeferredOperationKHR", DeviceLevel).}
 proc destroyDeferredOperationKHR*(
       device: Device;
@@ -32,14 +32,14 @@ proc getDeferredOperationResultKHR*(
       device: Device;
       operation: DeferredOperationKHR;
     ): Result {.cdecl,
-      successCodes(success, notReady),
+      successCodes: @[Result.success, Result.notReady],
       lazyload("vkGetDeferredOperationResultKHR", DeviceLevel).}
 proc deferredOperationJoinKHR*(
       device: Device;
       operation: DeferredOperationKHR;
     ): Result {.cdecl,
-      successCodes(success, threadDoneKhr, threadIdleKhr),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success, Result.threadDoneKhr, Result.threadIdleKhr],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       lazyload("vkDeferredOperationJoinKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_deferred_host_operations*(instance: Instance) = instance.loadCommands:

@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_KHR_present_wait
 
 import ../platform
@@ -26,8 +26,8 @@ proc waitForPresentKHR*(
       presentId: uint64;
       timeout: uint64;
     ): Result {.cdecl,
-      successCodes(success, timeout),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      successCodes: @[Result.success, Result.timeout],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost],
       lazyload("vkWaitForPresentKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_present_wait*(instance: Instance) = instance.loadCommands:

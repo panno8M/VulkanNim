@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:23Z
 # VK_KHR_pipeline_executable_properties
 
 import ../platform
@@ -60,8 +60,8 @@ proc getPipelineExecutablePropertiesKHR*(
       pExecutableCount: ptr uint32;
       pProperties {.length: pExecutableCount.} = default(arrPtr[PipelineExecutablePropertiesKHR]);
     ): Result {.cdecl,
-      successCodes(success, incomplete),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success, Result.incomplete],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       lazyload("vkGetPipelineExecutablePropertiesKHR", DeviceLevel).}
 proc getPipelineExecutableStatisticsKHR*(
       device: Device;
@@ -69,8 +69,8 @@ proc getPipelineExecutableStatisticsKHR*(
       pStatisticCount: ptr uint32;
       pStatistics {.length: pStatisticCount.} = default(arrPtr[PipelineExecutableStatisticKHR]);
     ): Result {.cdecl,
-      successCodes(success, incomplete),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success, Result.incomplete],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       lazyload("vkGetPipelineExecutableStatisticsKHR", DeviceLevel).}
 proc getPipelineExecutableInternalRepresentationsKHR*(
       device: Device;
@@ -78,8 +78,8 @@ proc getPipelineExecutableInternalRepresentationsKHR*(
       pInternalRepresentationCount: ptr uint32;
       pInternalRepresentations {.length: pInternalRepresentationCount.} = default(arrPtr[PipelineExecutableInternalRepresentationKHR]);
     ): Result {.cdecl,
-      successCodes(success, incomplete),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success, Result.incomplete],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       lazyload("vkGetPipelineExecutableInternalRepresentationsKHR", DeviceLevel).}
 
 proc loadAllVK_KHR_pipeline_executable_properties*(instance: Instance) = instance.loadCommands:

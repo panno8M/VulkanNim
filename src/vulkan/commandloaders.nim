@@ -63,10 +63,10 @@ macro lazyload(loadFrom: string; with = InstanceLevel; body): untyped =
   if body.body.kind != nnkEmpty: error("the body must be empty")
 
   let
-    procTyPragma = newNimNode(nnkPragma).add(concat(
-      body.pragma[0..^1],
-      @[ident"loadable".newCall(loadFrom, with)],
-    ))
+    procTyPragma = newNimNode(nnkPragma)
+    .add( body.pragma[0..^1] )
+    .add( quote do: loadable(`loadFrom`, `with`) )
+    .add( quote do: discardable )
     procTy = newNimNode(nnkProcTy).add(
       body.params,
       procTyPragma)
@@ -83,14 +83,14 @@ macro lazyload(loadFrom: string; with = InstanceLevel; body): untyped =
     cageDef = quote do:
       var `cageName`: Option[`typeName`]
 
+    cageparams = body.params[1..^1].mapIt( if it[0].kind == nnkPragmaExpr: it[0][0] else: it[0] )
     accessorDef = newProc(
       name= body[0],
       params= body.params[0..^1],
-      body= ident"get".newCall(cageName).newCall body.params[1..^1].mapIt( if it[0].kind == nnkPragmaExpr: it[0][0] else: it[0] ),
-      pragmas= newNimNode(nnkPragma).add(
-        ident"loadInto".newCall(cageName),
-        ident"discardable"
-      )
+      body= ("get".newCall(cageName).newCall cageparams),
+      pragmas= newNimNode(nnkPragma)
+        .add(procTyPragma[0..^1])
+        .add(quote do: loadInto(`cageName`))
     )
 
   quote do:

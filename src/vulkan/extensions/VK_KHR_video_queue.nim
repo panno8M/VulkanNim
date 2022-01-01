@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:23Z
 # VK_KHR_video_queue
 
 import ../platform
@@ -122,8 +122,8 @@ proc getPhysicalDeviceVideoCapabilitiesKHR*(
       pVideoProfile: ptr VideoProfileKHR;
       pCapabilities: ptr VideoCapabilitiesKHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorExtensionNotPresent, errorInitializationFailed, errorFeatureNotPresent, errorFormatNotSupported),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorExtensionNotPresent, Result.errorInitializationFailed, Result.errorFeatureNotPresent, Result.errorFormatNotSupported],
       lazyload("vkGetPhysicalDeviceVideoCapabilitiesKHR", InstanceLevel).}
 proc getPhysicalDeviceVideoFormatPropertiesKHR*(
       physicalDevice: PhysicalDevice;
@@ -131,8 +131,8 @@ proc getPhysicalDeviceVideoFormatPropertiesKHR*(
       pVideoFormatPropertyCount: ptr uint32;
       pVideoFormatProperties {.length: pVideoFormatPropertyCount.} = default(arrPtr[VideoFormatPropertiesKHR]);
     ): Result {.cdecl,
-      successCodes(success, incomplete),
-      errorCodes(errorExtensionNotPresent, errorInitializationFailed, errorFormatNotSupported),
+      successCodes: @[Result.success, Result.incomplete],
+      errorCodes: @[Result.errorExtensionNotPresent, Result.errorInitializationFailed, Result.errorFormatNotSupported],
       lazyload("vkGetPhysicalDeviceVideoFormatPropertiesKHR", InstanceLevel).}
 proc createVideoSessionKHR*(
       device: Device;
@@ -140,8 +140,8 @@ proc createVideoSessionKHR*(
       pAllocator = default(ptr AllocationCallbacks);
       pVideoSession: ptr VideoSessionKHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInitializationFailed, errorIncompatibleDriver, errorFeatureNotPresent),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorInitializationFailed, Result.errorIncompatibleDriver, Result.errorFeatureNotPresent],
       lazyload("vkCreateVideoSessionKHR", DeviceLevel).}
 proc destroyVideoSessionKHR*(
       device: Device;
@@ -154,8 +154,8 @@ proc getVideoSessionMemoryRequirementsKHR*(
       pVideoSessionMemoryRequirementsCount: ptr uint32;
       pVideoSessionMemoryRequirements {.length: pVideoSessionMemoryRequirementsCount.} = default(arrPtr[VideoGetMemoryPropertiesKHR]);
     ): Result {.cdecl,
-      successCodes(success, incomplete),
-      errorCodes(errorInitializationFailed),
+      successCodes: @[Result.success, Result.incomplete],
+      errorCodes: @[Result.errorInitializationFailed],
       lazyload("vkGetVideoSessionMemoryRequirementsKHR", DeviceLevel).}
 proc bindVideoSessionMemoryKHR*(
       device: Device;
@@ -163,8 +163,8 @@ proc bindVideoSessionMemoryKHR*(
       videoSessionBindMemoryCount: uint32;
       pVideoSessionBindMemories {.length: videoSessionBindMemoryCount.}: arrPtr[VideoBindMemoryKHR];
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInitializationFailed),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorInitializationFailed],
       lazyload("vkBindVideoSessionMemoryKHR", DeviceLevel).}
 proc createVideoSessionParametersKHR*(
       device: Device;
@@ -172,16 +172,16 @@ proc createVideoSessionParametersKHR*(
       pAllocator = default(ptr AllocationCallbacks);
       pVideoSessionParameters: ptr VideoSessionParametersKHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorInitializationFailed, errorOutOfHostMemory, errorOutOfDeviceMemory, errorTooManyObjects),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorInitializationFailed, Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorTooManyObjects],
       lazyload("vkCreateVideoSessionParametersKHR", DeviceLevel).}
 proc updateVideoSessionParametersKHR*(
       device: Device;
       videoSessionParameters: VideoSessionParametersKHR;
       pUpdateInfo: ptr VideoSessionParametersUpdateInfoKHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorInitializationFailed, errorTooManyObjects),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorInitializationFailed, Result.errorTooManyObjects],
       lazyload("vkUpdateVideoSessionParametersKHR", DeviceLevel).}
 proc destroyVideoSessionParametersKHR*(
       device: Device;

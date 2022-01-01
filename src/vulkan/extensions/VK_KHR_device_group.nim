@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_KHR_device_group
 
 import ../platform
@@ -72,16 +72,16 @@ proc getDeviceGroupPresentCapabilitiesKHR*(
       device: Device;
       pDeviceGroupPresentCapabilities: ptr DeviceGroupPresentCapabilitiesKHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       lazyload("vkGetDeviceGroupPresentCapabilitiesKHR", DeviceLevel).}
 proc getDeviceGroupSurfacePresentModesKHR*(
       device: Device;
       surface: SurfaceKHR;
       pModes: ptr DeviceGroupPresentModeFlagsKHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorSurfaceLostKhr),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr],
       lazyload("vkGetDeviceGroupSurfacePresentModesKHR", DeviceLevel).}
 proc getPhysicalDevicePresentRectanglesKHR*(
       physicalDevice: PhysicalDevice;
@@ -89,8 +89,8 @@ proc getPhysicalDevicePresentRectanglesKHR*(
       pRectCount: ptr uint32;
       pRects {.length: pRectCount.} = default(arrPtr[Rect2D]);
     ): Result {.cdecl,
-      successCodes(success, incomplete),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success, Result.incomplete],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       lazyload("vkGetPhysicalDevicePresentRectanglesKHR", InstanceLevel).}
 
 
@@ -99,8 +99,8 @@ proc acquireNextImage2KHR*(
       pAcquireInfo: ptr AcquireNextImageInfoKHR;
       pImageIndex: ptr uint32;
     ): Result {.cdecl,
-      successCodes(success, timeout, notReady, suboptimalKhr),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost, errorOutOfDateKhr, errorSurfaceLostKhr, errorFullScreenExclusiveModeLostExt),
+      successCodes: @[Result.success, Result.timeout, Result.notReady, Result.suboptimalKhr],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost, Result.errorOutOfDateKhr, Result.errorSurfaceLostKhr, Result.errorFullScreenExclusiveModeLostExt],
       lazyload("vkAcquireNextImage2KHR", DeviceLevel).}
 
 proc loadAllVK_KHR_device_group*(instance: Instance) = instance.loadCommands:

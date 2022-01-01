@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:10:58Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_NV_cooperative_matrix
 
 import ../platform
@@ -39,8 +39,8 @@ proc getPhysicalDeviceCooperativeMatrixPropertiesNV*(
       pPropertyCount: ptr uint32;
       pProperties {.length: pPropertyCount.} = default(arrPtr[CooperativeMatrixPropertiesNV]);
     ): Result {.cdecl,
-      successCodes(success, incomplete),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success, Result.incomplete],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       lazyload("vkGetPhysicalDeviceCooperativeMatrixPropertiesNV", InstanceLevel).}
 
 proc loadAllVK_NV_cooperative_matrix*(instance: Instance) = instance.loadCommands:

@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_FUCHSIA_external_semaphore
 
 import ../platform
@@ -32,16 +32,16 @@ proc importSemaphoreZirconHandleFUCHSIA*(
       device: Device;
       pImportSemaphoreZirconHandleInfo: ptr ImportSemaphoreZirconHandleInfoFUCHSIA;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorInvalidExternalHandle),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidExternalHandle],
       lazyload("vkImportSemaphoreZirconHandleFUCHSIA", DeviceLevel).}
 proc getSemaphoreZirconHandleFUCHSIA*(
       device: Device;
       pGetZirconHandleInfo: ptr SemaphoreGetZirconHandleInfoFUCHSIA;
       pZirconHandle: ptr zx_handle_t;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorTooManyObjects, errorOutOfHostMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory],
       lazyload("vkGetSemaphoreZirconHandleFUCHSIA", DeviceLevel).}
 
 proc loadAllVK_FUCHSIA_external_semaphore*(instance: Instance) = instance.loadCommands:

@@ -234,9 +234,9 @@ proc render*(command: NodeCommand): string =
     let procFutter = block:
       var futter = "    ): {theType} {{.cdecl,".fmt
       if command.successCodes.len != 0:
-        futter.add "\n      successCodes(" & command.successCodes.mapIt(it.parseEnumValue("", @[])).join(", ") & "),"
+        futter.add "\n      successCodes: @[" & command.successCodes.mapIt("Result." & it.parseEnumValue("", @[])).join(", ") & "],"
       if command.errorCodes.len != 0:
-        futter.add "\n      errorCodes(" & command.errorCodes.mapIt(it.parseEnumValue("", @[])).join(", ") & "),"
+        futter.add "\n      errorCodes: @[" & command.errorCodes.mapIt("Result." & it.parseEnumValue("", @[])).join(", ") & "],"
       if command.successCodes.len+command.errorCodes.len != 0:
         futter.add "\n      " & loadMethod
       else: futter.add " " & loadMethod

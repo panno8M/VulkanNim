@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_ANDROID_external_memory_android_hardware_buffer
 
 import ../platform
@@ -71,16 +71,16 @@ proc getAndroidHardwareBufferPropertiesANDROID*(
       buffer: ptr AHardwareBuffer;
       pProperties: ptr AndroidHardwareBufferPropertiesANDROID;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorInvalidExternalHandleKhr),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidExternalHandleKhr],
       lazyload("vkGetAndroidHardwareBufferPropertiesANDROID", DeviceLevel).}
 proc getMemoryAndroidHardwareBufferANDROID*(
       device: Device;
       pInfo: ptr MemoryGetAndroidHardwareBufferInfoANDROID;
       pBuffer: ptr ptr AHardwareBuffer;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorTooManyObjects, errorOutOfHostMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory],
       lazyload("vkGetMemoryAndroidHardwareBufferANDROID", DeviceLevel).}
 
 proc loadAllVK_ANDROID_external_memory_android_hardware_buffer*(instance: Instance) = instance.loadCommands:

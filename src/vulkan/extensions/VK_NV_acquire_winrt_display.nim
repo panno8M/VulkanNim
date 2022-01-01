@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:10:58Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_NV_acquire_winrt_display
 
 import ../platform
@@ -16,16 +16,16 @@ proc acquireWinrtDisplayNV*(
       physicalDevice: PhysicalDevice;
       display: DisplayKHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorDeviceLost, errorInitializationFailed),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorDeviceLost, Result.errorInitializationFailed],
       lazyload("vkAcquireWinrtDisplayNV", InstanceLevel).}
 proc getWinrtDisplayNV*(
       physicalDevice: PhysicalDevice;
       deviceRelativeId: uint32;
       pDisplay: ptr DisplayKHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorDeviceLost, errorInitializationFailed),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorDeviceLost, Result.errorInitializationFailed],
       lazyload("vkGetWinrtDisplayNV", InstanceLevel).}
 
 proc loadAllVK_NV_acquire_winrt_display*(instance: Instance) = instance.loadCommands:

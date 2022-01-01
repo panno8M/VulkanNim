@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_KHR_acceleration_structure
 
 import ../platform
@@ -160,8 +160,8 @@ proc createAccelerationStructureKHR*(
       pAllocator = default(ptr AllocationCallbacks);
       pAccelerationStructure: ptr AccelerationStructureKHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorInvalidOpaqueCaptureAddressKhr),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidOpaqueCaptureAddressKhr],
       lazyload("vkCreateAccelerationStructureKHR", DeviceLevel).}
 proc destroyAccelerationStructureKHR*(
       device: Device;
@@ -189,32 +189,32 @@ proc buildAccelerationStructuresKHR*(
       pInfos {.length: infoCount.}: arrPtr[AccelerationStructureBuildGeometryInfoKHR];
       ppBuildRangeInfos {.length: infoCount.}: arrPtr[arrPtr[AccelerationStructureBuildRangeInfoKHR]];
     ): Result {.cdecl,
-      successCodes(success, operationDeferredKhr, operationNotDeferredKhr),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success, Result.operationDeferredKhr, Result.operationNotDeferredKhr],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       lazyload("vkBuildAccelerationStructuresKHR", DeviceLevel).}
 proc copyAccelerationStructureKHR*(
       device: Device;
       deferredOperation = default(DeferredOperationKHR);
       pInfo: ptr CopyAccelerationStructureInfoKHR;
     ): Result {.cdecl,
-      successCodes(success, operationDeferredKhr, operationNotDeferredKhr),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success, Result.operationDeferredKhr, Result.operationNotDeferredKhr],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       lazyload("vkCopyAccelerationStructureKHR", DeviceLevel).}
 proc copyAccelerationStructureToMemoryKHR*(
       device: Device;
       deferredOperation = default(DeferredOperationKHR);
       pInfo: ptr CopyAccelerationStructureToMemoryInfoKHR;
     ): Result {.cdecl,
-      successCodes(success, operationDeferredKhr, operationNotDeferredKhr),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success, Result.operationDeferredKhr, Result.operationNotDeferredKhr],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       lazyload("vkCopyAccelerationStructureToMemoryKHR", DeviceLevel).}
 proc copyMemoryToAccelerationStructureKHR*(
       device: Device;
       deferredOperation = default(DeferredOperationKHR);
       pInfo: ptr CopyMemoryToAccelerationStructureInfoKHR;
     ): Result {.cdecl,
-      successCodes(success, operationDeferredKhr, operationNotDeferredKhr),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success, Result.operationDeferredKhr, Result.operationNotDeferredKhr],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       lazyload("vkCopyMemoryToAccelerationStructureKHR", DeviceLevel).}
 proc writeAccelerationStructuresPropertiesKHR*(
       device: Device;
@@ -225,8 +225,8 @@ proc writeAccelerationStructuresPropertiesKHR*(
       pData {.length: dataSize.}: pointer;
       stride: uint;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       lazyload("vkWriteAccelerationStructuresPropertiesKHR", DeviceLevel).}
 proc cmdCopyAccelerationStructureKHR*(
       commandBuffer: CommandBuffer;

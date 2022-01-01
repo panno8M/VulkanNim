@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_KHR_fragment_shading_rate
 
 import ../platform
@@ -64,8 +64,8 @@ proc getPhysicalDeviceFragmentShadingRatesKHR*(
       pFragmentShadingRateCount: ptr uint32;
       pFragmentShadingRates {.length: pFragmentShadingRateCount.} = default(arrPtr[PhysicalDeviceFragmentShadingRateKHR]);
     ): Result {.cdecl,
-      successCodes(success, incomplete),
-      errorCodes(errorOutOfHostMemory),
+      successCodes: @[Result.success, Result.incomplete],
+      errorCodes: @[Result.errorOutOfHostMemory],
       lazyload("vkGetPhysicalDeviceFragmentShadingRatesKHR", InstanceLevel).}
 proc cmdSetFragmentShadingRateKHR*(
       commandBuffer: CommandBuffer;

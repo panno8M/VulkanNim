@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_NV_external_memory_win32
 
 import ../platform
@@ -30,8 +30,8 @@ proc getMemoryWin32HandleNV*(
       handleType: ExternalMemoryHandleTypeFlagsNV;
       pHandle: ptr Win32Handle;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorTooManyObjects, errorOutOfHostMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory],
       lazyload("vkGetMemoryWin32HandleNV", DeviceLevel).}
 
 proc loadAllVK_NV_external_memory_win32*(instance: Instance) = instance.loadCommands:

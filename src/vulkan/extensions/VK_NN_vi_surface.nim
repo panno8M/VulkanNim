@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:10:58Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_NN_vi_surface
 
 import ../platform
@@ -25,8 +25,8 @@ proc createViSurfaceNN*(
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorNativeWindowInUseKhr),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorNativeWindowInUseKhr],
       lazyload("vkCreateViSurfaceNN", InstanceLevel).}
 
 proc loadAllVK_NN_vi_surface*(instance: Instance) = instance.loadCommands:

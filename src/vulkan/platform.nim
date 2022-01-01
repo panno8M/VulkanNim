@@ -3,6 +3,8 @@
 import std/macros
 export macros.hasCustomPragma, macros.getCustomPragmaVal
 
+import enums
+
 import xcb/xcb
 
 const vkDllPath* =
@@ -45,8 +47,8 @@ template constant*(v: typed) {.pragma.}
 
 template length*(v: untyped) {.pragma.}
 
-template successCodes*(v: varargs[untyped]) {.pragma.}
-template errorCodes*(v: varargs[untyped]) {.pragma.}
+template successCodes*(v: seq[Result]) {.pragma.}
+template errorCodes*(v: seq[Result]) {.pragma.}
 
 template prepareVulkanLibDef* =
   import std/options

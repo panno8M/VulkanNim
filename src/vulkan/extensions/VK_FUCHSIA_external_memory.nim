@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:23Z
 # VK_FUCHSIA_external_memory
 
 import ../platform
@@ -35,8 +35,8 @@ proc getMemoryZirconHandleFUCHSIA*(
       pGetZirconHandleInfo: ptr MemoryGetZirconHandleInfoFUCHSIA;
       pZirconHandle: ptr zx_handle_t;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorTooManyObjects, errorOutOfHostMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory],
       lazyload("vkGetMemoryZirconHandleFUCHSIA", DeviceLevel).}
 proc getMemoryZirconHandlePropertiesFUCHSIA*(
       device: Device;
@@ -44,8 +44,8 @@ proc getMemoryZirconHandlePropertiesFUCHSIA*(
       zirconHandle: zx_handle_t;
       pMemoryZirconHandleProperties: ptr MemoryZirconHandlePropertiesFUCHSIA;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorInvalidExternalHandle),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorInvalidExternalHandle],
       lazyload("vkGetMemoryZirconHandlePropertiesFUCHSIA", DeviceLevel).}
 
 proc loadAllVK_FUCHSIA_external_memory*(instance: Instance) = instance.loadCommands:

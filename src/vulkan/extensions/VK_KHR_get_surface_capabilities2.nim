@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:10:58Z
+# Generated at 2021-12-31T11:28:23Z
 # VK_KHR_get_surface_capabilities2
 
 import ../platform
@@ -31,8 +31,8 @@ proc getPhysicalDeviceSurfaceCapabilities2KHR*(
       pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR;
       pSurfaceCapabilities: ptr SurfaceCapabilities2KHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorSurfaceLostKhr),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr],
       lazyload("vkGetPhysicalDeviceSurfaceCapabilities2KHR", InstanceLevel).}
 proc getPhysicalDeviceSurfaceFormats2KHR*(
       physicalDevice: PhysicalDevice;
@@ -40,8 +40,8 @@ proc getPhysicalDeviceSurfaceFormats2KHR*(
       pSurfaceFormatCount: ptr uint32;
       pSurfaceFormats {.length: pSurfaceFormatCount.} = default(arrPtr[SurfaceFormat2KHR]);
     ): Result {.cdecl,
-      successCodes(success, incomplete),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorSurfaceLostKhr),
+      successCodes: @[Result.success, Result.incomplete],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr],
       lazyload("vkGetPhysicalDeviceSurfaceFormats2KHR", InstanceLevel).}
 
 proc loadAllVK_KHR_get_surface_capabilities2*(instance: Instance) = instance.loadCommands:

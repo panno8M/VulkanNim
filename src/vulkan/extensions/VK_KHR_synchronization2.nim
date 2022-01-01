@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:23Z
 # VK_KHR_synchronization2
 
 import ../platform
@@ -152,8 +152,8 @@ proc queueSubmit2KHR*(
       pSubmits {.length: submitCount.}: arrPtr[SubmitInfo2KHR];
       fence = default(Fence);
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost],
       lazyload("vkQueueSubmit2KHR", DeviceLevel).}
 
 

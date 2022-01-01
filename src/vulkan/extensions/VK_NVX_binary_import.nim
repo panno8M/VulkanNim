@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:23Z
 # VK_NVX_binary_import
 
 import ../platform
@@ -44,8 +44,8 @@ proc createCuModuleNVX*(
       pAllocator = default(ptr AllocationCallbacks);
       pModule: ptr CuModuleNVX;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorInitializationFailed),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInitializationFailed],
       lazyload("vkCreateCuModuleNVX", DeviceLevel).}
 proc createCuFunctionNVX*(
       device: Device;
@@ -53,8 +53,8 @@ proc createCuFunctionNVX*(
       pAllocator = default(ptr AllocationCallbacks);
       pFunction: ptr CuFunctionNVX;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorInitializationFailed),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInitializationFailed],
       lazyload("vkCreateCuFunctionNVX", DeviceLevel).}
 proc destroyCuModuleNVX*(
       device: Device;

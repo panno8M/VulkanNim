@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_KHR_performance_query
 
 import ../platform
@@ -67,8 +67,8 @@ proc enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR*(
       pCounters {.length: pCounterCount.} = default(arrPtr[PerformanceCounterKHR]);
       pCounterDescriptions {.length: pCounterCount.} = default(arrPtr[PerformanceCounterDescriptionKHR]);
     ): Result {.cdecl,
-      successCodes(success, incomplete),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInitializationFailed),
+      successCodes: @[Result.success, Result.incomplete],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorInitializationFailed],
       lazyload("vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR", InstanceLevel).}
 proc getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR*(
       physicalDevice: PhysicalDevice;
@@ -79,8 +79,8 @@ proc acquireProfilingLockKHR*(
       device: Device;
       pInfo: ptr AcquireProfilingLockInfoKHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, timeout),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.timeout],
       lazyload("vkAcquireProfilingLockKHR", DeviceLevel).}
 proc releaseProfilingLockKHR*(
       device: Device;

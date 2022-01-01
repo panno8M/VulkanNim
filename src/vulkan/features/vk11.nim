@@ -1,4 +1,4 @@
-# Generated at 2021-12-27T08:17:46Z
+# Generated at 2021-12-31T11:28:23Z
 # vk11
 # Vulkan 1.1 core API interface definitions.
 # ==========================================
@@ -436,8 +436,8 @@ template apiVersion11*(): untyped = makeApiVersion(0, 1, 1, 0)
 proc enumerateInstanceVersion*(
       pApiVersion: ptr uint32;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory],
       preload("vkEnumerateInstanceVersion").}
 
 
@@ -448,16 +448,16 @@ proc bindBufferMemory2*(
       bindInfoCount: uint32;
       pBindInfos {.length: bindInfoCount.}: arrPtr[BindBufferMemoryInfo];
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidOpaqueCaptureAddressKhr),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorInvalidOpaqueCaptureAddressKhr],
       preload("vkBindBufferMemory2").}
 proc bindImageMemory2*(
       device: Device;
       bindInfoCount: uint32;
       pBindInfos {.length: bindInfoCount.}: arrPtr[BindImageMemoryInfo];
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkBindImageMemory2").}
 
 
@@ -492,8 +492,8 @@ proc enumeratePhysicalDeviceGroups*(
       pPhysicalDeviceGroupCount: ptr uint32;
       pPhysicalDeviceGroupProperties {.length: pPhysicalDeviceGroupCount.} = default(arrPtr[PhysicalDeviceGroupProperties]);
     ): Result {.cdecl,
-      successCodes(success, incomplete),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInitializationFailed),
+      successCodes: @[Result.success, Result.incomplete],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorInitializationFailed],
       preload("vkEnumeratePhysicalDeviceGroups").}
 
 
@@ -537,8 +537,8 @@ proc getPhysicalDeviceImageFormatProperties2*(
       pImageFormatInfo: ptr PhysicalDeviceImageFormatInfo2;
       pImageFormatProperties: ptr ImageFormatProperties2;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorFormatNotSupported),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorFormatNotSupported],
       preload("vkGetPhysicalDeviceImageFormatProperties2").}
 proc getPhysicalDeviceQueueFamilyProperties2*(
       physicalDevice: PhysicalDevice;
@@ -583,8 +583,8 @@ proc createSamplerYcbcrConversion*(
       pAllocator = default(ptr AllocationCallbacks);
       pYcbcrConversion: ptr SamplerYcbcrConversion;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkCreateSamplerYcbcrConversion").}
 proc destroySamplerYcbcrConversion*(
       device: Device;
@@ -601,8 +601,8 @@ proc createDescriptorUpdateTemplate*(
       pAllocator = default(ptr AllocationCallbacks);
       pDescriptorUpdateTemplate: ptr DescriptorUpdateTemplate;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkCreateDescriptorUpdateTemplate").}
 proc destroyDescriptorUpdateTemplate*(
       device: Device;

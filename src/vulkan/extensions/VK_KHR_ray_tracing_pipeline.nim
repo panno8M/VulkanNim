@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_KHR_ray_tracing_pipeline
 
 import ../platform
@@ -91,8 +91,8 @@ proc createRayTracingPipelinesKHR*(
       pAllocator = default(ptr AllocationCallbacks);
       pPipelines {.length: createInfoCount.}: arrPtr[Pipeline];
     ): Result {.cdecl,
-      successCodes(success, operationDeferredKhr, operationNotDeferredKhr, pipelineCompileRequiredExt),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInvalidOpaqueCaptureAddress),
+      successCodes: @[Result.success, Result.operationDeferredKhr, Result.operationNotDeferredKhr, Result.pipelineCompileRequiredExt],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorInvalidOpaqueCaptureAddress],
       lazyload("vkCreateRayTracingPipelinesKHR", DeviceLevel).}
 proc getRayTracingShaderGroupHandlesKHR*(
       device: Device;
@@ -102,8 +102,8 @@ proc getRayTracingShaderGroupHandlesKHR*(
       dataSize: uint;
       pData {.length: dataSize.}: pointer;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       lazyload("vkGetRayTracingShaderGroupHandlesKHR", DeviceLevel).}
 proc getRayTracingCaptureReplayShaderGroupHandlesKHR*(
       device: Device;
@@ -113,8 +113,8 @@ proc getRayTracingCaptureReplayShaderGroupHandlesKHR*(
       dataSize: uint;
       pData {.length: dataSize.}: pointer;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       lazyload("vkGetRayTracingCaptureReplayShaderGroupHandlesKHR", DeviceLevel).}
 proc cmdTraceRaysIndirectKHR*(
       commandBuffer: CommandBuffer;

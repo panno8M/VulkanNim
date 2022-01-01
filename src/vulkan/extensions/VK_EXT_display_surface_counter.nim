@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:10:58Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_EXT_display_surface_counter
 
 import ../platform
@@ -33,8 +33,8 @@ proc getPhysicalDeviceSurfaceCapabilities2EXT*(
       surface: SurfaceKHR;
       pSurfaceCapabilities: ptr SurfaceCapabilities2EXT;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorSurfaceLostKhr),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr],
       lazyload("vkGetPhysicalDeviceSurfaceCapabilities2EXT", InstanceLevel).}
 
 proc loadAllVK_EXT_display_surface_counter*(instance: Instance) = instance.loadCommands:

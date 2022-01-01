@@ -1,4 +1,4 @@
-# Generated at 2021-12-27T08:17:46Z
+# Generated at 2021-12-31T11:28:24Z
 # vk12
 # Vulkan 1.2 core API interface definitions.
 # ==========================================
@@ -567,8 +567,8 @@ proc createRenderPass2*(
       pAllocator = default(ptr AllocationCallbacks);
       pRenderPass: ptr RenderPass;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkCreateRenderPass2").}
 proc cmdBeginRenderPass2*(
       commandBuffer: CommandBuffer;
@@ -603,23 +603,23 @@ proc getSemaphoreCounterValue*(
       semaphore: Semaphore;
       pValue: ptr uint64;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost],
       preload("vkGetSemaphoreCounterValue").}
 proc waitSemaphores*(
       device: Device;
       pWaitInfo: ptr SemaphoreWaitInfo;
       timeout: uint64;
     ): Result {.cdecl,
-      successCodes(success, timeout),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorDeviceLost),
+      successCodes: @[Result.success, Result.timeout],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost],
       preload("vkWaitSemaphores").}
 proc signalSemaphore*(
       device: Device;
       pSignalInfo: ptr SemaphoreSignalInfo;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       preload("vkSignalSemaphore").}
 
 

@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_FUCHSIA_buffer_collection
 
 import ../platform
@@ -89,24 +89,24 @@ proc createBufferCollectionFUCHSIA*(
       pAllocator = default(ptr AllocationCallbacks);
       pCollection: ptr BufferCollectionFUCHSIA;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorInvalidExternalHandle, errorInitializationFailed),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidExternalHandle, Result.errorInitializationFailed],
       lazyload("vkCreateBufferCollectionFUCHSIA", DeviceLevel).}
 proc setBufferCollectionImageConstraintsFUCHSIA*(
       device: Device;
       collection: BufferCollectionFUCHSIA;
       pImageConstraintsInfo: ptr ImageConstraintsInfoFUCHSIA;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorInitializationFailed, errorOutOfHostMemory, errorFormatNotSupported),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorInitializationFailed, Result.errorOutOfHostMemory, Result.errorFormatNotSupported],
       lazyload("vkSetBufferCollectionImageConstraintsFUCHSIA", DeviceLevel).}
 proc setBufferCollectionBufferConstraintsFUCHSIA*(
       device: Device;
       collection: BufferCollectionFUCHSIA;
       pBufferConstraintsInfo: ptr BufferConstraintsInfoFUCHSIA;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorInitializationFailed, errorOutOfHostMemory, errorFormatNotSupported),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorInitializationFailed, Result.errorOutOfHostMemory, Result.errorFormatNotSupported],
       lazyload("vkSetBufferCollectionBufferConstraintsFUCHSIA", DeviceLevel).}
 proc destroyBufferCollectionFUCHSIA*(
       device: Device;
@@ -118,8 +118,8 @@ proc getBufferCollectionPropertiesFUCHSIA*(
       collection: BufferCollectionFUCHSIA;
       pProperties: ptr BufferCollectionPropertiesFUCHSIA;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorInitializationFailed),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInitializationFailed],
       lazyload("vkGetBufferCollectionPropertiesFUCHSIA", DeviceLevel).}
 
 proc loadAllVK_FUCHSIA_buffer_collection*(instance: Instance) = instance.loadCommands:

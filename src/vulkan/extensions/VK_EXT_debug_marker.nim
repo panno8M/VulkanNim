@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_EXT_debug_marker
 
 import ../platform
@@ -37,15 +37,15 @@ proc debugMarkerSetObjectTagEXT*(
       device: Device;
       pTagInfo: ptr DebugMarkerObjectTagInfoEXT;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       lazyload("vkDebugMarkerSetObjectTagEXT", DeviceLevel).}
 proc debugMarkerSetObjectNameEXT*(
       device: Device;
       pNameInfo: ptr DebugMarkerObjectNameInfoEXT;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       lazyload("vkDebugMarkerSetObjectNameEXT", DeviceLevel).}
 proc cmdDebugMarkerBeginEXT*(
       commandBuffer: CommandBuffer;

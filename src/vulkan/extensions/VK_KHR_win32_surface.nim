@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:10:58Z
+# Generated at 2021-12-31T11:28:24Z
 # VK_KHR_win32_surface
 
 import ../platform
@@ -26,8 +26,8 @@ proc createWin32SurfaceKHR*(
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
       lazyload("vkCreateWin32SurfaceKHR", InstanceLevel).}
 proc getPhysicalDeviceWin32PresentationSupportKHR*(
       physicalDevice: PhysicalDevice;

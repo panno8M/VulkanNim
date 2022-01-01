@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:23Z
 # VK_EXT_full_screen_exclusive
 
 import ../platform
@@ -43,22 +43,22 @@ proc getPhysicalDeviceSurfacePresentModes2EXT*(
       pPresentModeCount: ptr uint32;
       pPresentModes {.length: pPresentModeCount.} = default(arrPtr[PresentModeKHR]);
     ): Result {.cdecl,
-      successCodes(success, incomplete),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorSurfaceLostKhr),
+      successCodes: @[Result.success, Result.incomplete],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr],
       lazyload("vkGetPhysicalDeviceSurfacePresentModes2EXT", InstanceLevel).}
 proc acquireFullScreenExclusiveModeEXT*(
       device: Device;
       swapchain: SwapchainKHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorInitializationFailed, errorSurfaceLostKhr),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorInitializationFailed, Result.errorSurfaceLostKhr],
       lazyload("vkAcquireFullScreenExclusiveModeEXT", DeviceLevel).}
 proc releaseFullScreenExclusiveModeEXT*(
       device: Device;
       swapchain: SwapchainKHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorSurfaceLostKhr),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr],
       lazyload("vkReleaseFullScreenExclusiveModeEXT", DeviceLevel).}
 
 
@@ -67,8 +67,8 @@ proc getDeviceGroupSurfacePresentModes2EXT*(
       pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR;
       pModes: ptr DeviceGroupPresentModeFlagsKHR;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory, errorOutOfDeviceMemory, errorSurfaceLostKhr),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr],
       lazyload("vkGetDeviceGroupSurfacePresentModes2EXT", DeviceLevel).}
 
 proc loadAllVK_EXT_full_screen_exclusive*(instance: Instance) = instance.loadCommands:

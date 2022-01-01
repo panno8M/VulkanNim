@@ -1,4 +1,4 @@
-# Generated at 2021-12-30T17:13:13Z
+# Generated at 2021-12-31T11:28:23Z
 # VK_EXT_image_drm_format_modifier
 
 import ../platform
@@ -68,8 +68,8 @@ proc getImageDrmFormatModifierPropertiesEXT*(
       image: Image;
       pProperties: ptr ImageDrmFormatModifierPropertiesEXT;
     ): Result {.cdecl,
-      successCodes(success),
-      errorCodes(errorOutOfHostMemory),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory],
       lazyload("vkGetImageDrmFormatModifierPropertiesEXT", DeviceLevel).}
 
 proc loadAllVK_EXT_image_drm_format_modifier*(instance: Instance) = instance.loadCommands:
