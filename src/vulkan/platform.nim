@@ -51,7 +51,6 @@ template successCodes*(v: seq[Result]) {.pragma.}
 template errorCodes*(v: seq[Result]) {.pragma.}
 
 template prepareVulkanLibDef* =
-  import std/options
   import vulkan/basetypes
   import vulkan/handles
   import vulkan/enums

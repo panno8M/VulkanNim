@@ -3,7 +3,6 @@
 import std/macros {.all.}
 import std/strformat
 import std/sequtils
-import std/options
 
 import vulkan/platform
 import vulkan/handles
@@ -20,7 +19,7 @@ const DeviceLevel {.used.} = {LoadWith.Instance, LoadWith.Device}
 
 {.push, used.}
 template loadable(loadFrom: string, with = InstanceLevel) {.pragma.}
-template loadInto[T: proc](cage: var Option[T]) {.pragma.}
+template loadInto[T: proc](cage: var T) {.pragma.}
 
 macro preload(loadFrom: string; body): untyped =
   result = body
@@ -71,6 +70,8 @@ macro lazyload(loadFrom: string; with = InstanceLevel; body): untyped =
 
     typeName = ident(&"PFN_{body.name}")
     cageName = ident(&"{body.name}_CAGE")
+    defectStr = newStrLitNode("\"" & $body.name & "\" has been called which has not yet been loaded.")
+    
     exportableTypeName =
       if body[0].isExported: typeName.postfix("*")
       else: typeName
@@ -79,13 +80,18 @@ macro lazyload(loadFrom: string; with = InstanceLevel; body): untyped =
       type `exportableTypeName` = `procTy`
 
     cageDef = quote do:
-      var `cageName`: Option[`typeName`]
+      var `cageName`: `typeName`
 
     cageparams = body.params[1..^1].mapIt( if it[0].kind == nnkPragmaExpr: it[0][0] else: it[0] )
     accessorDef = newProc(
       name= body[0],
       params= body.params[0..^1],
-      body= ("get".newCall(cageName).newCall cageparams),
+      body= newStmtList(
+        (quote do:
+          if `cageName`.isNil: raise newException(UnloadedDefect, `defectStr`)
+        ),
+        cageName.newCall(cageparams)
+      ),
       pragmas= newNimNode(nnkPragma)
         .add(procTyPragma[0..^1])
         .add(quote do: loadInto(`cageName`))
@@ -100,6 +106,8 @@ macro lazyload(loadFrom: string; with = InstanceLevel; body): untyped =
 
 # =================================================================// Internal #
 
+
+type UnloadedDefect* = object of NilAccessDefect
 
 macro loadCommand*[T: proc](handle: Instance or Device; procType: typedesc[T]): T =
   ## .. code-block:: Nim
@@ -171,7 +179,7 @@ macro loadCommand*[T: proc](handle: Instance or Device; procAccessor: T) =
   let cageName = procAccessor.customPragmaNode()
     .findChild(it.len > 0 and it[0].repr == "loadInto")[1]
   quote do:
-    `cageName` = option `handle`.loadCommand(`cageName`.unsafeGet.typeof)
+    `cageName` = `handle`.loadCommand(`cageName`.typeof)
 
 macro loadCommands*(handle: Instance or Device; body): untyped =
   newStmtList(

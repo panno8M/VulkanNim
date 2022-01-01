@@ -49,15 +49,44 @@ macro withCheck*(p: proc; args: varargs[untyped]): Result =
 
 
 when isMainModule:
+  import std/sugar
+
   import vulkan/features/vk10
+  import vulkan/extensions/VK_EXT_debug_utils {.all.}
+  import vulkan/enums
+  import vulkan/commandloaders {.all.}
+  import vulkan/basetypes
   import vulkan/handles
   import vulkan/additionalOperations
 
-  var ci = InstanceCreateInfo{}
-  var x: Instance
+  proc callback(
+        messageSeverity: DebugUtilsMessageSeverityFlagBitsEXT;
+        messageTypes: DebugUtilsMessageTypeFlagsEXT;
+        pCallbackData: ptr DebugUtilsMessengerCallbackDataEXT;
+        pUserData: pointer;
+      ): Bool32 {.cdecl.} =
+    echo pCallbackData[].pMessage
+
+  var
+    instance_ci = InstanceCreateInfo{
+      enabledExtensionCount: 1,
+      ppEnabledExtensionNames: [ExtDebugUtilsExtensionName].allocCStringArray()
+      }
+    instance: Instance
+
+    debugger_ci = DebugUtilsMessengerCreateInfoEXT{
+      messageSeverity: DebugUtilsMessageSeverityFlagBitsEXT.errorExt,
+      messageType: DebugUtilsMessageTypeFlagsEXT.all,
+      pfnUserCallback: callback
+      }
+    debugger: DebugUtilsMessengerEXT
 
 
-  echo createInstance.withCheck(addr ci, nil, addr x)
+  dump createInstance.withCheck(addr instance_ci, nil, addr instance)
+
+  instance.loadCommand createDebugUtilsMessengerEXT
+
+  dump createDebugUtilsMessengerEXT.withCheck(instance, addr debugger_ci, nil, addr debugger)
 
   # echo case (
   #   let res = createInstance(addr ci, nil, addr x)
