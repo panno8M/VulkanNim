@@ -1,7 +1,6 @@
 # VK_EXT_4444_formats
 
 import ../features/vk10
-import VK_KHR_get_physical_device_properties2
 import ../platform
 prepareVulkanLibDef()
 

@@ -1,7 +1,6 @@
 import xmltree
 import strformat
 import strutils
-import sequtils
 import tables
 import logging
 import options
@@ -31,37 +30,6 @@ const warningText = """
 # Note that any changes to this file will be reset by the execution of
 # the generated program.
 """
-
-let components = newTable [
-  ("android", @[
-    "VK_ANDROID_external_memory_android_hardware_buffer",
-    "VK_ANDROID_native_buffer",
-    "VK_KHR_android_surface"]),
-  ("wayland", @[
-    "VK_KHR_wayland_surface"]),
-  ("win32", @[
-    "VK_KHR_win32_surface"]),
-  ("xcb", @[
-    "VK_KHR_xcb_surface"]),
-  ("xlib", @[
-    "VK_KHR_xlib_surface"]),
-  ("ios", @[
-    "VK_MVK_ios_surface"]),
-  ("macos", @[
-    "VK_MVK_macos_surface"]),
-  ("vi", @[
-    "VK_NN_vi_surface"]),
-  ("mir", @[
-    "VK_KHR_mir_surface"]),
-  ("ggp", @[
-    "VK_GGP_stream_descriptor_surface"]),
-  ("directfb", @[
-    "VK_EXT_directfb_surface"]),
-  ("metal", @[
-    "VK_EXT_metal_surface"]),
-  ("fuchsia", @[
-    "VK_FUCHSIA_imagepipe_surface"]),
-]
 
 
 proc genBaseTypes*() =
@@ -248,18 +216,55 @@ proc generate*() =
 
   # = VULKAN EXTENSIONS =
 
+  let envfile = (
+    windows : LibFile(path: "extensions"/"environment"/"windows" ),
+    linux   : LibFile(path: "extensions"/"environment"/"linux"   ),
+    directfb: LibFile(path: "extensions"/"environment"/"directfb"),
+    metal   : LibFile(path: "extensions"/"environment"/"metal"   ),
+    macos   : LibFile(path: "extensions"/"environment"/"macos"   ),
+    ios     : LibFile(path: "extensions"/"environment"/"ios"     ),
+    android : LibFile(path: "extensions"/"environment"/"android" ),
+  )
+  libfiles.add envfile.windows
+  libfiles.add envfile.linux
+  libfiles.add envfile.directfb
+  libfiles.add envfile.metal
+  libfiles.add envfile.macos
+  libfiles.add envfile.ios
+  libfiles.add envfile.android
+
+  let vendorFile = (
+    ggp    : LibFile(path: "extensions"/"vendor"/"ggp"    ),
+    fuchsia: LibFile(path: "extensions"/"vendor"/"fuchsia"),
+  )
+  libfiles.add vendorFile.ggp
+  libfiles.add vendorFile.fuchsia
+
+  let functionFile = (
+    maintenance: LibFile(path: "extensions"/"function"/"maintenance"    ),
+  )
+  libfiles.add functionFile.maintenance
+
+  let fileGroup = [
+    ("win32", envfile.windows),
+    ("wayland", envfile.linux),
+    ("xlib", envfile.linux),
+    ("xcb", envfile.linux),
+    ("directfb", envfile.directfb),
+    ("metal", envfile.metal),
+    ("macos", envfile.macos),
+    ("ios", envfile.ios),
+    ("android", envfile.android),
+    ("VK_ANDROID", envfile.android),
+    ("VK_GGP", vendorFile.ggp),
+    ("VK_FUCHSIA", vendorFile.fuchsia),
+    ("VK_KHR_maintenance", functionFile.maintenance),
+  ].newTable
+
   when true:
     let customVersion = [
-      ("VK_ANDROID_external_memory_android_hardware_buffer", @["VK_VERSION_1_0", "VK_VERSION_1_1"]),
-      ("VK_EXT_external_memory_host",                        @["VK_VERSION_1_0", "VK_VERSION_1_1"]),
-      ("VK_KHR_push_descriptor",                             @["VK_VERSION_1_0", "VK_VERSION_1_1"]),
-      ("VK_KHR_ray_tracing",                                 @["VK_VERSION_1_0", "VK_VERSION_1_1"]),
-      ("VK_KHR_external_memory_win32",                       @["VK_VERSION_1_0", "VK_VERSION_1_1"]),
-      ("VK_KHR_external_semaphore_fd",                       @["VK_VERSION_1_0", "VK_VERSION_1_1"]),
-      ("VK_KHR_external_semaphore_win32",                    @["VK_VERSION_1_0", "VK_VERSION_1_1"]),
-      ("VK_NV_device_generated_commands",                    @["VK_VERSION_1_0", "VK_VERSION_1_1"]),
-      ("VK_EXT_buffer_device_address",                       @["VK_VERSION_1_0", "VK_VERSION_1_1", "VK_VERSION_1_2"]),
-      ("VK_KHR_ray_tracing",                                 @["VK_VERSION_1_0", "VK_EXT_debug_report"])
+      ("VK_NV_device_generated_commands", @["VK_VERSION_1_0", "VK_VERSION_1_1"]),
+      ("VK_EXT_buffer_device_address",    @["VK_VERSION_1_2"]),
     ].newTable
     for extension in xml["extensions"].findAll("extension"):
       let name = extension{"name"}
@@ -267,13 +272,13 @@ proc generate*() =
 
       var feature = Feature(name: name)
 
-      let needsImport = extension{"requires"}.parseWords({','})
+      # let needsImport = extension{"requires"}.parseWords({','})
       let promotedto = ?extension{"promotedto"}
 
       if customVersion.hasKey(feature.name):
         feature.imports.add customVersion[feature.name]
       else: feature.imports.add "VK_VERSION_1_0"
-      feature.imports.add needsImport
+      # feature.imports.add needsImport
       if promotedto.isSome:
         feature.imports.add promotedto.get
 
@@ -283,30 +288,28 @@ proc generate*() =
       feature.imports.add platformFeature.name
 
       for require in extension.findAll("require"):
-        if (?require{"extension"}).isSome:
-          feature.imports.add require{"extension"}
+        # if (?require{"extension"}).isSome:
+        #   feature.imports.add require{"extension"}
         feature.requires.add require.extractNodeRequire
 
       if feature.requires.len != 0:
         features[name] = feature
 
-      # MAKE FILE
-      var file = new LibFile
-      file.path = "extensions"/feature.name
-      
-      feature.affiliate file
-      libfiles.add file
+      block MAKE_FILE:
+        if feature.affiliation.isNil:
+          for keyword, file in fileGroup:
+            if feature.name.find(keyword) != -1:
+              feature.affiliate file
+              break MAKE_FILE
+          
+        var file = new LibFile
+        libfiles.add file
+
+        file.path = "extensions"/feature.name
+        feature.affiliate file
 
 
   # = MERGE AND RENDER =
-  let fileGroup = [
-    ("VK_KHR_surface", @["VK_KHR_display", #["VK_KHR_swapchain"]#]),
-    ("VK_KHR_draw_indirect_count", @["VK_AMD_draw_indirect_count",]),
-    ("VK_KHR_ray_tracing", @["VK_NV_ray_tracing",]),
-  ].newTable
-
-  # for fileName, mergeMaterials in fileGroup:
-  #   library.merge(fileName, mergeMaterials)
 
   var updatedFiles: seq[string]
   for libFile in libfiles:

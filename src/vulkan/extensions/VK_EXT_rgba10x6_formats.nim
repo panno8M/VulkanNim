@@ -1,7 +1,6 @@
 # VK_EXT_rgba10x6_formats
 
 import ../features/vk10
-import VK_KHR_sampler_ycbcr_conversion
 import ../platform
 prepareVulkanLibDef()
 

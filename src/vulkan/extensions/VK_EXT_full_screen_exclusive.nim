@@ -1,13 +1,7 @@
 # VK_EXT_full_screen_exclusive
 
 import ../features/vk10
-import VK_KHR_get_physical_device_properties2
-import VK_KHR_surface
-import VK_KHR_get_surface_capabilities2
-import VK_KHR_swapchain
 import ../platform
-import VK_KHR_win32_surface
-import VK_KHR_device_group
 prepareVulkanLibDef()
 
 const

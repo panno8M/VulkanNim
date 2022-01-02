@@ -1,7 +1,6 @@
 # VK_KHR_external_fence_fd
 
 import ../features/vk10
-import VK_KHR_external_fence
 import ../platform
 prepareVulkanLibDef()
 

@@ -1,8 +1,6 @@
 # VK_EXT_display_control
 
 import ../features/vk10
-import VK_EXT_display_surface_counter
-import VK_KHR_swapchain
 import ../platform
 prepareVulkanLibDef()
 

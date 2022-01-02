@@ -1,7 +1,6 @@
 # VK_NV_coverage_reduction_mode
 
 import ../features/vk10
-import VK_NV_framebuffer_mixed_samples
 import ../platform
 prepareVulkanLibDef()
 

@@ -2,9 +2,6 @@
 
 import ../features/vk10
 import ../platform
-import VK_EXT_debug_report
-import VK_EXT_debug_marker
-import VK_EXT_debug_utils
 prepareVulkanLibDef()
 
 const

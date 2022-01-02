@@ -1,7 +1,6 @@
 # VK_KHR_buffer_device_address
 
 import ../features/vk10
-import VK_KHR_get_physical_device_properties2
 import ../features/vk12
 import ../platform
 prepareVulkanLibDef()

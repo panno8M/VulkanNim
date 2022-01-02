@@ -1,7 +1,6 @@
 # VK_NN_vi_surface
 
 import ../features/vk10
-import VK_KHR_surface
 import ../platform
 prepareVulkanLibDef()
 

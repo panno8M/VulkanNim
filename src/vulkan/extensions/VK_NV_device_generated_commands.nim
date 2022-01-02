@@ -1,7 +1,7 @@
 # VK_NV_device_generated_commands
 
+import ../features/vk10
 import ../features/vk11
-import VK_KHR_buffer_device_address
 import ../platform
 prepareVulkanLibDef()
 

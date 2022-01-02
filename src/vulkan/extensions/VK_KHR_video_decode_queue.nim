@@ -1,10 +1,7 @@
 # VK_KHR_video_decode_queue
 
 import ../features/vk10
-import VK_KHR_video_queue
-import VK_KHR_synchronization2
 import ../platform
-import VK_KHR_format_feature_flags2
 prepareVulkanLibDef()
 
 const

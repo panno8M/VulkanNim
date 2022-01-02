@@ -1,21 +1,7 @@
 # VK_KHR_synchronization2
 
 import ../features/vk10
-import VK_KHR_get_physical_device_properties2
 import ../platform
-import VK_EXT_transform_feedback
-import VK_EXT_conditional_rendering
-import VK_NV_device_generated_commands
-import VK_KHR_fragment_shading_rate
-import VK_NV_shading_rate_image
-import VK_KHR_acceleration_structure
-import VK_KHR_ray_tracing_pipeline
-import VK_NV_ray_tracing
-import VK_EXT_fragment_density_map
-import VK_EXT_blend_operation_advanced
-import VK_NV_mesh_shader
-import VK_AMD_buffer_marker
-import VK_NV_device_diagnostic_checkpoints
 prepareVulkanLibDef()
 
 const

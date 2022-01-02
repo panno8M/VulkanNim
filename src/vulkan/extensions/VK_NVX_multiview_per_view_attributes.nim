@@ -1,7 +1,6 @@
 # VK_NVX_multiview_per_view_attributes
 
 import ../features/vk10
-import VK_KHR_multiview
 import ../platform
 prepareVulkanLibDef()
 

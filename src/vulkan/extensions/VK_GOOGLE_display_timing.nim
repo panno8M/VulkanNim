@@ -1,7 +1,6 @@
 # VK_GOOGLE_display_timing
 
 import ../features/vk10
-import VK_KHR_swapchain
 import ../platform
 prepareVulkanLibDef()
 

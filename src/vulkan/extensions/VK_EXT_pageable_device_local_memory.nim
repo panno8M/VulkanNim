@@ -1,7 +1,6 @@
 # VK_EXT_pageable_device_local_memory
 
 import ../features/vk10
-import VK_EXT_memory_priority
 import ../platform
 prepareVulkanLibDef()
 

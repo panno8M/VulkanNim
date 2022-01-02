@@ -1,7 +1,6 @@
 # VK_EXT_shader_atomic_float2
 
 import ../features/vk10
-import VK_EXT_shader_atomic_float
 import ../platform
 prepareVulkanLibDef()
 

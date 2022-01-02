@@ -1,7 +1,6 @@
 # VK_VALVE_mutable_descriptor_type
 
 import ../features/vk10
-import VK_KHR_maintenance3
 import ../platform
 prepareVulkanLibDef()
 

@@ -1,8 +1,7 @@
 # VK_MVK_macos_surface
 
-import ../features/vk10
-import VK_KHR_surface
-import ../platform
+import ../../features/vk10
+import ../../platform
 prepareVulkanLibDef()
 
 const

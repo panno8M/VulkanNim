@@ -1,7 +1,6 @@
 # VK_EXT_direct_mode_display
 
 import ../features/vk10
-import VK_KHR_display
 import ../platform
 prepareVulkanLibDef()
 

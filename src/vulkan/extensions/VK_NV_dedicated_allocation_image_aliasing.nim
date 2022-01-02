@@ -1,7 +1,6 @@
 # VK_NV_dedicated_allocation_image_aliasing
 
 import ../features/vk10
-import VK_KHR_dedicated_allocation
 import ../platform
 prepareVulkanLibDef()
 

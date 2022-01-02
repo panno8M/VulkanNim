@@ -1,7 +1,6 @@
 # VK_EXT_hdr_metadata
 
 import ../features/vk10
-import VK_KHR_swapchain
 import ../platform
 prepareVulkanLibDef()
 

@@ -1,8 +1,6 @@
 # VK_HUAWEI_subpass_shading
 
 import ../features/vk10
-import VK_KHR_create_renderpass2
-import VK_KHR_synchronization2
 import ../platform
 prepareVulkanLibDef()
 

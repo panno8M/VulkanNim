@@ -2,7 +2,6 @@
 
 import ../features/vk10
 import ../platform
-import VK_KHR_format_feature_flags2
 prepareVulkanLibDef()
 
 const

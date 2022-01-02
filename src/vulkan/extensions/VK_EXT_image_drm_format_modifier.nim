@@ -1,12 +1,7 @@
 # VK_EXT_image_drm_format_modifier
 
 import ../features/vk10
-import VK_KHR_bind_memory2
-import VK_KHR_get_physical_device_properties2
-import VK_KHR_image_format_list
-import VK_KHR_sampler_ycbcr_conversion
 import ../platform
-import VK_KHR_format_feature_flags2
 prepareVulkanLibDef()
 
 const

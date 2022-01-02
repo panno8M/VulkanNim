@@ -1,7 +1,6 @@
 # VK_NV_external_memory
 
 import ../features/vk10
-import VK_NV_external_memory_capabilities
 import ../platform
 prepareVulkanLibDef()
 

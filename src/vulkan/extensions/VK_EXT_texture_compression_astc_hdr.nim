@@ -1,7 +1,6 @@
 # VK_EXT_texture_compression_astc_hdr
 
 import ../features/vk10
-import VK_KHR_get_physical_device_properties2
 import ../platform
 prepareVulkanLibDef()
 

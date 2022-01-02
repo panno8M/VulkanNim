@@ -1,8 +1,6 @@
 # VK_QCOM_render_pass_transform
 
 import ../features/vk10
-import VK_KHR_swapchain
-import VK_KHR_surface
 import ../platform
 prepareVulkanLibDef()
 

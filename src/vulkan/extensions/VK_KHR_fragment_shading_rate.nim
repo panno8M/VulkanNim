@@ -1,10 +1,7 @@
 # VK_KHR_fragment_shading_rate
 
 import ../features/vk10
-import VK_KHR_create_renderpass2
-import VK_KHR_get_physical_device_properties2
 import ../platform
-import VK_KHR_format_feature_flags2
 prepareVulkanLibDef()
 
 const

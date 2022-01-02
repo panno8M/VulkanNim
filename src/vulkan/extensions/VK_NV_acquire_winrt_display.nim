@@ -1,7 +1,6 @@
 # VK_NV_acquire_winrt_display
 
 import ../features/vk10
-import VK_EXT_direct_mode_display
 import ../platform
 prepareVulkanLibDef()
 

@@ -1,11 +1,7 @@
 # VK_KHR_acceleration_structure
 
 import ../features/vk10
-import VK_EXT_descriptor_indexing
-import VK_KHR_buffer_device_address
-import VK_KHR_deferred_host_operations
 import ../platform
-import VK_KHR_format_feature_flags2
 prepareVulkanLibDef()
 
 const

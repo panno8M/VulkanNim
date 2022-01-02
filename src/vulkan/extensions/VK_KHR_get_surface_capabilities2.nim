@@ -1,7 +1,6 @@
 # VK_KHR_get_surface_capabilities2
 
 import ../features/vk10
-import VK_KHR_surface
 import ../platform
 prepareVulkanLibDef()
 

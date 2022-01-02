@@ -1,7 +1,6 @@
 # VK_EXT_video_encode_h265
 
 import ../features/vk10
-import VK_KHR_video_encode_queue
 import ../platform
 prepareVulkanLibDef()
 

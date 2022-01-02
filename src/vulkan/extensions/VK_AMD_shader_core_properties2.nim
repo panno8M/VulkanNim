@@ -1,7 +1,6 @@
 # VK_AMD_shader_core_properties2
 
 import ../features/vk10
-import VK_AMD_shader_core_properties
 import ../platform
 prepareVulkanLibDef()
 

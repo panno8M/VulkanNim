@@ -1,8 +1,6 @@
 # VK_NV_ray_tracing
 
 import ../features/vk10
-import VK_KHR_get_physical_device_properties2
-import VK_KHR_get_memory_requirements2
 import ../platform
 prepareVulkanLibDef()
 

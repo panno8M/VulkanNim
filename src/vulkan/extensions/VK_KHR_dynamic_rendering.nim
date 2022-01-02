@@ -1,13 +1,7 @@
 # VK_KHR_dynamic_rendering
 
 import ../features/vk10
-import VK_KHR_get_physical_device_properties2
 import ../platform
-import VK_KHR_fragment_shading_rate
-import VK_EXT_fragment_density_map
-import VK_AMD_mixed_attachment_samples
-import VK_NV_framebuffer_mixed_samples
-import VK_NVX_multiview_per_view_attributes
 prepareVulkanLibDef()
 
 const

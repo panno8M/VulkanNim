@@ -1,7 +1,6 @@
 # VK_NV_external_memory_rdma
 
 import ../features/vk10
-import VK_KHR_external_memory
 import ../platform
 prepareVulkanLibDef()
 

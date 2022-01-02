@@ -1,9 +1,7 @@
 # VK_EXT_fragment_density_map
 
 import ../features/vk10
-import VK_KHR_get_physical_device_properties2
 import ../platform
-import VK_KHR_format_feature_flags2
 prepareVulkanLibDef()
 
 const

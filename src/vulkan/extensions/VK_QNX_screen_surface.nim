@@ -1,7 +1,6 @@
 # VK_QNX_screen_surface
 
 import ../features/vk10
-import VK_KHR_surface
 import ../platform
 prepareVulkanLibDef()
 

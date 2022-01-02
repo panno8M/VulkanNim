@@ -1,7 +1,6 @@
 # VK_EXT_border_color_swizzle
 
 import ../features/vk10
-import VK_EXT_custom_border_color
 import ../platform
 prepareVulkanLibDef()
 

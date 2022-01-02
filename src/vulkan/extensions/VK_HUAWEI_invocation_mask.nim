@@ -1,8 +1,6 @@
 # VK_HUAWEI_invocation_mask
 
 import ../features/vk10
-import VK_KHR_ray_tracing_pipeline
-import VK_KHR_synchronization2
 import ../platform
 prepareVulkanLibDef()
 

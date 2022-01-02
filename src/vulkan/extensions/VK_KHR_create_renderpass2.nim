@@ -1,8 +1,6 @@
 # VK_KHR_create_renderpass2
 
 import ../features/vk10
-import VK_KHR_multiview
-import VK_KHR_maintenance2
 import ../features/vk12
 import ../platform
 prepareVulkanLibDef()

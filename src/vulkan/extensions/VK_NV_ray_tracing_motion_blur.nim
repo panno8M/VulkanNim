@@ -1,7 +1,6 @@
 # VK_NV_ray_tracing_motion_blur
 
 import ../features/vk10
-import VK_KHR_ray_tracing_pipeline
 import ../platform
 prepareVulkanLibDef()
 

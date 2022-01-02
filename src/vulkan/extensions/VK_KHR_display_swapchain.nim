@@ -1,8 +1,6 @@
 # VK_KHR_display_swapchain
 
 import ../features/vk10
-import VK_KHR_swapchain
-import VK_KHR_display
 import ../platform
 prepareVulkanLibDef()
 

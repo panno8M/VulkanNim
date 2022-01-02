@@ -1,15 +1,43 @@
+# VK_KHR_maintenance1
+# VK_KHR_maintenance2
+# VK_KHR_maintenance3
 # VK_KHR_maintenance4
 
-import ../features/vk10
-import ../platform
+import ../../features/vk10
+import ../../features/vk11
+import ../../platform
 prepareVulkanLibDef()
 
 const
+  KhrMaintenance1SpecVersion* = 2
+  KhrMaintenance1ExtensionName* = "VK_KHR_maintenance1"
+  KhrMaintenance1SpecVersion* = KhrMaintenance1SpecVersion
+  KhrMaintenance1ExtensionName* = KhrMaintenance1ExtensionName
+
+  KhrMaintenance2SpecVersion* = 1
+  KhrMaintenance2ExtensionName* = "VK_KHR_maintenance2"
+  KhrMaintenance2SpecVersion* = KhrMaintenance2SpecVersion
+  KhrMaintenance2ExtensionName* = KhrMaintenance2ExtensionName
+
+  KhrMaintenance3SpecVersion* = 1
+  KhrMaintenance3ExtensionName* = "VK_KHR_maintenance3"
+  KhrMaintenance3SpecVersion* = KhrMaintenance3SpecVersion
+  KhrMaintenance3ExtensionName* = KhrMaintenance3ExtensionName
+
   KhrMaintenance4SpecVersion* = 2
   KhrMaintenance4ExtensionName* = "VK_KHR_maintenance4"
   ImageAspectNoneKhr* = 0
 
 type
+  PhysicalDevicePointClippingPropertiesKHR* = object
+  RenderPassInputAttachmentAspectCreateInfoKHR* = object
+  InputAttachmentAspectReferenceKHR* = object
+  ImageViewUsageCreateInfoKHR* = object
+  PipelineTessellationDomainOriginStateCreateInfoKHR* = object
+
+  PhysicalDeviceMaintenance3PropertiesKHR* = object
+  DescriptorSetLayoutSupportKHR* = object
+
   PhysicalDeviceMaintenance4FeaturesKHR* = object
     sType* {.constant: (StructureType.physicalDeviceMaintenance4FeaturesKhr).}: StructureType
     pNext* {.optional.}: pointer
@@ -27,6 +55,12 @@ type
     pNext* {.optional.}: pointer
     pCreateInfo*: ptr ImageCreateInfo
     planeAspect*: ImageAspectFlagBits
+
+const trimCommandPoolKHR* = trimCommandPool
+
+
+const getDescriptorSetLayoutSupportKHR* = getDescriptorSetLayoutSupport
+
 
 proc getDeviceBufferMemoryRequirementsKHR*(
       device: Device;

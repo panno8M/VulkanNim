@@ -1,8 +1,6 @@
 # VK_KHR_present_wait
 
 import ../features/vk10
-import VK_KHR_swapchain
-import VK_KHR_present_id
 import ../platform
 prepareVulkanLibDef()
 

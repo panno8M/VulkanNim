@@ -1,9 +1,6 @@
 # VK_KHR_shared_presentable_image
 
 import ../features/vk10
-import VK_KHR_swapchain
-import VK_KHR_get_physical_device_properties2
-import VK_KHR_get_surface_capabilities2
 import ../platform
 prepareVulkanLibDef()
 

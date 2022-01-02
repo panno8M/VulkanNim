@@ -1,7 +1,6 @@
 # VK_EXT_external_memory_host
 
-import ../features/vk11
-import VK_KHR_external_memory
+import ../features/vk10
 import ../platform
 prepareVulkanLibDef()
 

@@ -1,7 +1,6 @@
 # VK_KHR_present_id
 
 import ../features/vk10
-import VK_KHR_swapchain
 import ../platform
 prepareVulkanLibDef()
 

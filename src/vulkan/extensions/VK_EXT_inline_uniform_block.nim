@@ -1,8 +1,6 @@
 # VK_EXT_inline_uniform_block
 
 import ../features/vk10
-import VK_KHR_get_physical_device_properties2
-import VK_KHR_maintenance1
 import ../platform
 prepareVulkanLibDef()
 

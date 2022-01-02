@@ -1,7 +1,6 @@
 # VK_EXT_display_surface_counter
 
 import ../features/vk10
-import VK_KHR_display
 import ../platform
 prepareVulkanLibDef()
 

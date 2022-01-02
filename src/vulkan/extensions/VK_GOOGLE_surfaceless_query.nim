@@ -1,7 +1,6 @@
 # VK_GOOGLE_surfaceless_query
 
 import ../features/vk10
-import VK_KHR_surface
 import ../platform
 prepareVulkanLibDef()
 

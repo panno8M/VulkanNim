@@ -1,7 +1,6 @@
 # VK_NV_corner_sampled_image
 
 import ../features/vk10
-import VK_KHR_get_physical_device_properties2
 import ../platform
 prepareVulkanLibDef()
 

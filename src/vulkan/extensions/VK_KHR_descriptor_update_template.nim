@@ -3,8 +3,6 @@
 import ../features/vk10
 import ../features/vk11
 import ../platform
-import VK_KHR_push_descriptor
-import VK_EXT_debug_report
 prepareVulkanLibDef()
 
 const

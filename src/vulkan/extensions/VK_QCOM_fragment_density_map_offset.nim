@@ -1,8 +1,6 @@
 # VK_QCOM_fragment_density_map_offset
 
 import ../features/vk10
-import VK_KHR_get_physical_device_properties2
-import VK_EXT_fragment_density_map
 import ../platform
 prepareVulkanLibDef()
 

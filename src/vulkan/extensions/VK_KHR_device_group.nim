@@ -1,12 +1,8 @@
 # VK_KHR_device_group
 
 import ../features/vk10
-import VK_KHR_device_group_creation
 import ../features/vk11
 import ../platform
-import VK_KHR_bind_memory2
-import VK_KHR_surface
-import VK_KHR_swapchain
 prepareVulkanLibDef()
 
 const

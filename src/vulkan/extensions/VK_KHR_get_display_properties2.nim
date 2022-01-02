@@ -1,7 +1,6 @@
 # VK_KHR_get_display_properties2
 
 import ../features/vk10
-import VK_KHR_display
 import ../platform
 prepareVulkanLibDef()
 

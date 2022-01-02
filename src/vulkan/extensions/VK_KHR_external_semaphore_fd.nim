@@ -1,7 +1,6 @@
 # VK_KHR_external_semaphore_fd
 
-import ../features/vk11
-import VK_KHR_external_semaphore
+import ../features/vk10
 import ../platform
 prepareVulkanLibDef()
 

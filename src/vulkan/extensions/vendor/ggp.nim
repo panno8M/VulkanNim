@@ -1,13 +1,16 @@
 # VK_GGP_stream_descriptor_surface
+# VK_GGP_frame_token
 
-import ../features/vk10
-import VK_KHR_surface
-import ../platform
+import ../../features/vk10
+import ../../platform
 prepareVulkanLibDef()
 
 const
   GgpStreamDescriptorSurfaceSpecVersion* = 1
   GgpStreamDescriptorSurfaceExtensionName* = "VK_GGP_stream_descriptor_surface"
+
+  GgpFrameTokenSpecVersion* = 1
+  GgpFrameTokenExtensionName* = "VK_GGP_frame_token"
 
 type
   StreamDescriptorSurfaceCreateInfoGGP* = object
@@ -15,6 +18,11 @@ type
     pNext* {.optional.}: pointer
     flags* {.optional.}: StreamDescriptorSurfaceCreateFlagsGGP
     streamDescriptor*: GgpStreamDescriptor
+
+  PresentFrameTokenGGP* = object
+    sType* {.constant: (StructureType.presentFrameTokenGgp).}: StructureType
+    pNext* {.optional.}: pointer
+    frameToken*: GgpFrameToken
 
 proc createStreamDescriptorSurfaceGGP*(
       instance: Instance;

@@ -1,8 +1,6 @@
 # VK_KHR_video_queue
 
 import ../features/vk10
-import VK_KHR_get_physical_device_properties2
-import VK_KHR_sampler_ycbcr_conversion
 import ../platform
 prepareVulkanLibDef()
 

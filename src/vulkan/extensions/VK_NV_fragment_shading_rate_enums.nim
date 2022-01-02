@@ -1,7 +1,6 @@
 # VK_NV_fragment_shading_rate_enums
 
 import ../features/vk10
-import VK_KHR_fragment_shading_rate
 import ../platform
 prepareVulkanLibDef()
 
