@@ -13,8 +13,8 @@ type
     numUsedVgprs*: uint32
     numUsedSgprs*: uint32
     ldsSizePerLocalWorkGroup*: uint32
-    ldsUsageSizeInBytes*: uint
-    scratchMemUsageInBytes*: uint
+    ldsUsageSizeInBytes*: uint32
+    scratchMemUsageInBytes*: uint32
   ShaderStatisticsInfoAMD* = object
     shaderStageMask*: ShaderStageFlags
     resourceUsage*: ShaderResourceUsageAMD
@@ -29,7 +29,7 @@ proc getShaderInfoAMD*(
       pipeline: Pipeline;
       shaderStage: ShaderStageFlagBits;
       infoType: ShaderInfoTypeAMD;
-      pInfoSize: ptr uint;
+      pInfoSize: ptr uint32;
       pInfo {.length: pInfoSize.} = default(pointer);
     ): Result {.cdecl,
       successCodes: @[Result.success, Result.incomplete],

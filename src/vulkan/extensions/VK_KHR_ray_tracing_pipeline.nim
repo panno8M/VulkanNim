@@ -93,7 +93,7 @@ proc getRayTracingShaderGroupHandlesKHR*(
       pipeline: Pipeline;
       firstGroup: uint32;
       groupCount: uint32;
-      dataSize: uint;
+      dataSize: uint32;
       pData {.length: dataSize.}: pointer;
     ): Result {.cdecl,
       successCodes: @[Result.success],
@@ -104,7 +104,7 @@ proc getRayTracingCaptureReplayShaderGroupHandlesKHR*(
       pipeline: Pipeline;
       firstGroup: uint32;
       groupCount: uint32;
-      dataSize: uint;
+      dataSize: uint32;
       pData {.length: dataSize.}: pointer;
     ): Result {.cdecl,
       successCodes: @[Result.success],

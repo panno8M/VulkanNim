@@ -220,7 +220,7 @@ proc replaceBasicTypes*(str: string): string =
     .replace("int32_t", "int32")
     .replace("int16_t", "int16")
     .replace("int8_t", "int8")
-    .replace("size_t", "uint") # uint matches pointer size just like size_t
+    .replace("size_t", "uint32") # uint matches pointer size just like size_t
     .replace("float", "float32")
     .replace("double", "float64")
     .replace("double", "float64")

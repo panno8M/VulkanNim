@@ -302,8 +302,8 @@ type
     dstArrayElement*: uint32
     descriptorCount*: uint32
     descriptorType*: DescriptorType
-    offset*: uint
-    stride*: uint
+    offset*: uint32
+    stride*: uint32
   DescriptorUpdateTemplateCreateInfo* = object
     sType* {.constant: (StructureType.descriptorUpdateTemplateCreateInfo).}: StructureType
     pNext* {.optional.}: pointer

@@ -182,7 +182,7 @@ const getRayTracingShaderGroupHandlesNV* = getRayTracingShaderGroupHandlesKHR
 proc getAccelerationStructureHandleNV*(
       device: Device;
       accelerationStructure: AccelerationStructureNV;
-      dataSize: uint;
+      dataSize: uint32;
       pData {.length: dataSize.}: pointer;
     ): Result {.cdecl,
       successCodes: @[Result.success],
