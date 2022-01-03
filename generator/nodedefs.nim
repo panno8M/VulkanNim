@@ -124,6 +124,7 @@ type
     of nkbrNormal:
       handleKind*: HandleKind
       parent*: Option[string]
+      objectType*: string
     of nkbrAlias:
       alias*: string
   NodeCommandParam* = ref object

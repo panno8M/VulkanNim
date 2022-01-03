@@ -182,23 +182,20 @@ proc render*(bitmask: NodeBitmask): string =
     "{name}* = {alias}".fmt
 
 
-proc renderHandleType*(handle: NodeHandle): Option[string] =
+proc render*(handle: NodeHandle; vendorTags: VendorTags): string =
   let name = handle.name.replaceBasicTypes
   case handle.kind
   of nkbrNormal:
-    case handle.handleKind
-    of HandleKind.Handle               : some "Ht" & name
-    of HandleKind.NonDispatchableHandle: some "Ht" & name
-  of nkbrAlias                         : none string
-proc render*(handle: NodeHandle): string =
-  let name = handle.name.replaceBasicTypes
-  case handle.kind
-  of nkbrNormal:
-    case handle.handleKind
-    of HandleKind.Handle:
-      "{name}* = Handle[Ht{name}]".fmt
-    of HandleKind.NonDispatchableHandle:
-      "{name}* = NonDispatchableHandle[Ht{name}]".fmt
+    let
+      objectType = "ObjectType." & handle.objectType.parseEnumValue("ObjectType", vendorTags)
+      parentpragma =
+        if handle.parent.isNone: ""
+        else: " {.parent: " & handle.parent.get.parseTypeName & ".}"
+    "{name}*{parentpragma} =\n  ".fmt.`&` case handle.handleKind
+      of HandleKind.Handle:
+        "Handle[{objectType}]".fmt
+      of HandleKind.NonDispatchableHandle:
+        "NonDispatchableHandle[{objectType}]".fmt
   of nkbrAlias:
     let alias = handle.alias.replaceBasicTypes
     "{name}* = {alias}".fmt

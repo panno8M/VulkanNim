@@ -315,6 +315,7 @@ func extractNodeHandle*(typeDef: XmlNode): NodeHandle {.raises: [UnexpectedXmlSt
     NodeHandle(
       kind: nkbrNormal,
       name: typeDef["name"].innerText.parseWords[0],
+      objectType: typeDef{"objtypeenum"},
       handleKind: case typeDef["type"].innerText.parseWords[0]
         of "VK_DEFINE_HANDLE": HandleKind.Handle
         of "VK_DEFINE_NON_DISPATCHABLE_HANDLE": HandleKind.NonDispatchableHandle

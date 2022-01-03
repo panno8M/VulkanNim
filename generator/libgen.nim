@@ -56,31 +56,19 @@ proc genBaseTypes*() =
   file.write $consts
 
 proc genHandles* =
-  block HandleTypes:
-    let file = open("src/vulkan/handles/handleTypes.nim", fmWrite)
-    defer: close file
-    file.write warningText
-
-    var handleTypes = sstring(kind: skBlock, title: "type HandleTypes* = enum")
-    handleTypes.add %"HtNil"
-    for key, val in resources.handles:
-      let str = val.renderHandleType()
-      handleTypes.add str
-    file.write $handleTypes
-
   block Handles:
     let file = open("src/vulkan/handles/handleConcretes.nim", fmWrite)
     defer: close file
     file.write warningText
 
     file.write """
-import handleTypes
+from ../enums import ObjectType
 import handleOperations
 
 """
 
     var handles = sstring(kind: skBlock, title: "type")
-    for key, val in resources.handles: handles.add %val.render()
+    for key, val in resources.handles: handles.add %val.render(resources.vendorTags)
 
     file.write $handles
 
