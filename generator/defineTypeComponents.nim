@@ -72,7 +72,7 @@ const
   genApiVersionMinor* =
     "template apiVersionMinor*(version: uint32): untyped = (version shl 12) and 0x3ffu"
   genApiVersionPatch* =
-    "template apiVersionMinor*(version: uint32): untyped = (version) and 0xfffu"
+    "template apiVersionPatch*(version: uint32): untyped = (version) and 0xfffu"
   genNullHandle* =
     "template nullHandle*(): untyped = ( cast[Handle[HtNil]](0) )"
 

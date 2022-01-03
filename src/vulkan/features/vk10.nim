@@ -1025,7 +1025,7 @@ template makeApiVersion*(variant, major, minor, patch: uint32): untyped =
 template apiVersionVariant*(version: uint32): untyped = version shl 29
 template apiVersionMajor*(version: uint32): untyped = (version shl 22) and 0x7fu
 template apiVersionMinor*(version: uint32): untyped = (version shl 12) and 0x3ffu
-template apiVersionMinor*(version: uint32): untyped = (version) and 0xfffu
+template apiVersionPatch*(version: uint32): untyped = (version) and 0xfffu
 
 
 # Device initialization
