@@ -1,3 +1,4 @@
+# VK_KHR_surface
 # VK_KHR_swapchain
 # VK_KHR_display
 # VK_KHR_display_swapchain
@@ -9,6 +10,7 @@
 # VK_KHR_get_display_properties2
 # VK_KHR_swapchain_mutable_format
 # VK_AMD_display_native_hdr
+# VK_KHR_surface_protected_capabilities
 # VK_EXT_acquire_drm_display
 # VK_NV_acquire_winrt_display
 
@@ -17,6 +19,9 @@ import ../../platform
 prepareVulkanLibDef()
 
 const
+  KhrSurfaceSpecVersion* = 25
+  KhrSurfaceExtensionName* = "VK_KHR_surface"
+
   KhrSwapchainSpecVersion* = 70
   KhrSwapchainExtensionName* = "VK_KHR_swapchain"
 
@@ -50,6 +55,9 @@ const
   AmdDisplayNativeHdrSpecVersion* = 1
   AmdDisplayNativeHdrExtensionName* = "VK_AMD_display_native_hdr"
 
+  KhrSurfaceProtectedCapabilitiesSpecVersion* = 1
+  KhrSurfaceProtectedCapabilitiesExtensionName* = "VK_KHR_surface_protected_capabilities"
+
   ExtAcquireDrmDisplaySpecVersion* = 1
   ExtAcquireDrmDisplayExtensionName* = "VK_EXT_acquire_drm_display"
 
@@ -57,6 +65,21 @@ const
   NvAcquireWinrtDisplayExtensionName* = "VK_NV_acquire_winrt_display"
 
 type
+  SurfaceCapabilitiesKHR* = object
+    minImageCount*: uint32
+    maxImageCount*: uint32
+    currentExtent*: Extent2D
+    minImageExtent*: Extent2D
+    maxImageExtent*: Extent2D
+    maxImageArrayLayers*: uint32
+    supportedTransforms*: SurfaceTransformFlagsKHR
+    currentTransform*: SurfaceTransformFlagBitsKHR
+    supportedCompositeAlpha*: CompositeAlphaFlagsKHR
+    supportedUsageFlags*: ImageUsageFlags
+  SurfaceFormatKHR* = object
+    format*: Format
+    colorSpace*: ColorSpaceKHR
+
   SwapchainCreateInfoKHR* = object
     sType* {.constant: (StructureType.swapchainCreateInfoKhr).}: StructureType
     pNext* {.optional.}: pointer
@@ -249,6 +272,53 @@ type
     sType* {.constant: (StructureType.swapchainDisplayNativeHdrCreateInfoAmd).}: StructureType
     pNext* {.optional.}: pointer
     localDimmingEnable*: Bool32
+
+  SurfaceProtectedCapabilitiesKHR* = object
+    sType* {.constant: (StructureType.surfaceProtectedCapabilitiesKhr).}: StructureType
+    pNext* {.optional.}: pointer
+    supportsProtected*: Bool32
+
+proc destroySurfaceKHR*(
+      instance: Instance;
+      surface = default(SurfaceKHR);
+      pAllocator = default(ptr AllocationCallbacks);
+    ): void {.cdecl, lazyload("vkDestroySurfaceKHR", InstanceLevel).}
+proc getPhysicalDeviceSurfaceSupportKHR*(
+      physicalDevice: PhysicalDevice;
+      queueFamilyIndex: uint32;
+      surface: SurfaceKHR;
+      pSupported: ptr Bool32;
+    ): Result {.cdecl,
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr],
+      lazyload("vkGetPhysicalDeviceSurfaceSupportKHR", InstanceLevel).}
+proc getPhysicalDeviceSurfaceCapabilitiesKHR*(
+      physicalDevice: PhysicalDevice;
+      surface: SurfaceKHR;
+      pSurfaceCapabilities: ptr SurfaceCapabilitiesKHR;
+    ): Result {.cdecl,
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr],
+      lazyload("vkGetPhysicalDeviceSurfaceCapabilitiesKHR", InstanceLevel).}
+proc getPhysicalDeviceSurfaceFormatsKHR*(
+      physicalDevice: PhysicalDevice;
+      surface = default(SurfaceKHR);
+      pSurfaceFormatCount: ptr uint32;
+      pSurfaceFormats {.length: pSurfaceFormatCount.} = default(arrPtr[SurfaceFormatKHR]);
+    ): Result {.cdecl,
+      successCodes: @[Result.success, Result.incomplete],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr],
+      lazyload("vkGetPhysicalDeviceSurfaceFormatsKHR", InstanceLevel).}
+proc getPhysicalDeviceSurfacePresentModesKHR*(
+      physicalDevice: PhysicalDevice;
+      surface = default(SurfaceKHR);
+      pPresentModeCount: ptr uint32;
+      pPresentModes {.length: pPresentModeCount.} = default(arrPtr[PresentModeKHR]);
+    ): Result {.cdecl,
+      successCodes: @[Result.success, Result.incomplete],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr],
+      lazyload("vkGetPhysicalDeviceSurfacePresentModesKHR", InstanceLevel).}
+
 
 proc createSwapchainKHR*(
       device: Device;
@@ -555,6 +625,12 @@ proc getWinrtDisplayNV*(
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorDeviceLost, Result.errorInitializationFailed],
       lazyload("vkGetWinrtDisplayNV", InstanceLevel).}
 
+proc loadAllVK_KHR_surface*(instance: Instance) = instance.loadCommands:
+  destroySurfaceKHR
+  getPhysicalDeviceSurfaceSupportKHR
+  getPhysicalDeviceSurfaceCapabilitiesKHR
+  getPhysicalDeviceSurfaceFormatsKHR
+  getPhysicalDeviceSurfacePresentModesKHR
 proc loadAllVK_KHR_swapchain*(instance: Instance) = instance.loadCommands:
   createSwapchainKHR
   destroySwapchainKHR
@@ -600,6 +676,12 @@ proc loadAllVK_EXT_acquire_drm_display*(instance: Instance) = instance.loadComma
 proc loadAllVK_NV_acquire_winrt_display*(instance: Instance) = instance.loadCommands:
   acquireWinrtDisplayNV
   getWinrtDisplayNV
+proc loadVK_KHR_surface*(instance: Instance) = instance.loadCommands:
+  destroySurfaceKHR
+  getPhysicalDeviceSurfaceSupportKHR
+  getPhysicalDeviceSurfaceCapabilitiesKHR
+  getPhysicalDeviceSurfaceFormatsKHR
+  getPhysicalDeviceSurfacePresentModesKHR
 proc loadVK_KHR_swapchain*(instance: Instance) = instance.loadCommands:
   getPhysicalDevicePresentRectanglesKHR
 proc loadVK_KHR_display*(instance: Instance) = instance.loadCommands:

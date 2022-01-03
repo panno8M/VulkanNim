@@ -1,6 +1,5 @@
 # extensions
 
-import extensions/VK_KHR_surface
 import extensions/function/display
 import extensions/environment/linux
 import extensions/VK_KHR_mir_surface
@@ -165,7 +164,6 @@ import extensions/VK_EXT_shader_image_atomic_int64
 import extensions/VK_KHR_spirv_1_4
 import extensions/VK_EXT_memory_budget
 import extensions/VK_EXT_memory_priority
-import extensions/VK_KHR_surface_protected_capabilities
 import extensions/VK_NV_dedicated_allocation_image_aliasing
 import extensions/VK_KHR_separate_depth_stencil_layouts
 import extensions/VK_EXT_buffer_device_address

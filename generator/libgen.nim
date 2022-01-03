@@ -266,6 +266,7 @@ proc generate*() =
     ("VK_KHR_maintenance", functionFile.maintenance),
     ("display", functionFile.display),
     ("swapchain", functionFile.display),
+    ("VK_KHR_surface", functionFile.display),
     ("draw_indirect_count", functionFile.drawIndirectCount)
   ].newTable
 
