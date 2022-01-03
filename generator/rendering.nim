@@ -257,7 +257,7 @@ proc render*(basetype: NodeBasetype): string =
   let name = basetype.name.removeVkPrefix
   case basetype.kind
   of nkbNormal:
-    let theType = basetype.theType.replaceBasicTypes
+    let theType = basetype.theType.replaceBasicTypes.replace("void", "pointer")
     case name
     of "Flags": "{name}*[Flagbits] = distinct {theType}".fmt
     else: "{name}* = distinct {theType}".fmt

@@ -1,6 +1,7 @@
 import xmltree
 import strformat
 import strutils
+import sequtils
 import tables
 import logging
 import options
@@ -211,10 +212,16 @@ proc generate*() =
       feature.imports.add "VK_VERSION_1_0"
     of "VK_VERSION_1_2":
       file.path = "features/vk12"
-      feature.imports.add "VK_VERSION_1_1"
+      feature.imports.add @["VK_VERSION_1_0", "VK_VERSION_1_1"]
     else: discard
 
   # = VULKAN EXTENSIONS =
+
+  let allextfile = LibFile(path: "extensions")
+  let allextfeat = Feature(name: "extensions")
+  allextfeat.affiliate allextfile
+  libfiles.add allextfile
+  features[allextfeat.name] = allextfeat
 
   let envfile = (
     windows : LibFile(path: "extensions"/"environment"/"windows" ),
@@ -225,25 +232,35 @@ proc generate*() =
     ios     : LibFile(path: "extensions"/"environment"/"ios"     ),
     android : LibFile(path: "extensions"/"environment"/"android" ),
   )
-  libfiles.add envfile.windows
-  libfiles.add envfile.linux
-  libfiles.add envfile.directfb
-  libfiles.add envfile.metal
-  libfiles.add envfile.macos
-  libfiles.add envfile.ios
-  libfiles.add envfile.android
 
   let vendorFile = (
     ggp    : LibFile(path: "extensions"/"vendor"/"ggp"    ),
     fuchsia: LibFile(path: "extensions"/"vendor"/"fuchsia"),
   )
-  libfiles.add vendorFile.ggp
-  libfiles.add vendorFile.fuchsia
 
   let functionFile = (
-    maintenance: LibFile(path: "extensions"/"function"/"maintenance"    ),
+    maintenance:       LibFile(path: "extensions"/"function"/"maintenance"      ),
+    display:           Libfile(path: "extensions"/"function"/"display"          ),
+    drawIndirectCount: LibFile(path: "extensions"/"function"/"drawindirectcount"),
   )
-  libfiles.add functionFile.maintenance
+  
+  let specifics = [
+    envfile.windows,
+    envfile.linux,
+    envfile.directfb,
+    envfile.metal,
+    envfile.macos,
+    envfile.ios,
+    envfile.android,
+
+    vendorFile.ggp,
+    vendorFile.fuchsia,
+
+    functionFile.maintenance,
+    functionFile.display,
+    functionFile.drawIndirectCount,
+    ]
+  libfiles.add specifics
 
   let fileGroup = [
     ("win32", envfile.windows),
@@ -259,6 +276,9 @@ proc generate*() =
     ("VK_GGP", vendorFile.ggp),
     ("VK_FUCHSIA", vendorFile.fuchsia),
     ("VK_KHR_maintenance", functionFile.maintenance),
+    ("display", functionFile.display),
+    ("swapchain", functionFile.display),
+    ("draw_indirect_count", functionFile.drawIndirectCount)
   ].newTable
 
   when true:
@@ -296,6 +316,8 @@ proc generate*() =
         features[name] = feature
 
       block MAKE_FILE:
+        allextfeat.imports.add feature.name
+
         if feature.affiliation.isNil:
           for keyword, file in fileGroup:
             if feature.name.find(keyword) != -1:

@@ -1,6 +1,7 @@
 # VK_VERSION_1_2
 
 import ../platform
+import vk10
 import vk11
 prepareVulkanLibDef()
 

@@ -137,11 +137,13 @@ proc render*(libFile: LibFile; featureTable: TableRef[string, Feature]; resource
     res.add "\n"
 
   res.add "\n"
-
-  res.add libFile.solveImports(featureTable)
+  
+  let imports = libFile.solveImports(featureTable)
+  res.add imports
   res.add "\n"
 
-  res.add "prepareVulkanLibDef()\n\n"
+  if imports.isSome and imports.get.find("platform") != -1:
+    res.add "prepareVulkanLibDef()\n\n"
 
   block Solve_consts:
     var reqDefs: seq[seq[string]]

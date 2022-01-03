@@ -3,7 +3,7 @@
 # the generated program.
 type
   AHardwareBuffer* = distinct object
-  RemoteAddressNV* = distinct void
+  RemoteAddressNV* = distinct pointer
   SampleMask* = distinct uint32
   ANativeWindow* = distinct object
   Flags64* = distinct uint64
