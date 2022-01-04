@@ -42,7 +42,7 @@ proc render*(enums: NodeEnum; vendorTags: VendorTags): sstring =
     result.add comment enums.comment.get
 
   if enums.enumVals.len == 0:
-    result.add %"{name}* = distinct UnusedEnum".fmt
+    result.add %"{name}* = UnusedEnum".fmt
     return
 
   result.add sstring(kind: skBlock,
@@ -176,7 +176,7 @@ proc render*(bitmask: NodeBitmask): string =
     if bitmask.flagbitsReq.isSome:
       "{name}* = Flags[{bitmask.flagbitsReq.get.removeVkPrefix}]".fmt
     else:
-      "{name}* = Flags[distinct UnusedEnum]".fmt
+      "{name}* = Flags[UnusedEnum]".fmt
   of nkbrAlias:
     let alias = bitmask.alias.replaceBasicTypes
     "{name}* = {alias}".fmt

@@ -125,11 +125,11 @@ proc genEnums*() =
     return none sstring
 
   block:
-    openFile( "src/vulkan/enums.nim" )
+    openFile( "src/vulkan/enums/typedef.nim" )
     file.write """
 
-import utils/enumutilities
-import basetypes
+import tools
+import ../basetypes
 
 """
     var enumAliases = newTable[string, NodeEnumAliases]()
