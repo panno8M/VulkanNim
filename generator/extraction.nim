@@ -440,7 +440,10 @@ proc extractAllNodeEnumExtensions*(rootXml: XmlNode; resources: var Resources) {
           try:
             nodeEnumVal.value =
               if value.isSome: value.get
-              else: "1000{extnumber.get-1:03}{offset.get:03}".fmt.parseInt
+              else:
+                let val = "1000{extnumber.get-1:03}{offset.get:03}".fmt.parseInt
+                if theEnum{"dir"} == "-": -val
+                else: val
             if resources.enums[nodeEnumVal.extends].enumVals.findIt(it.kind == nkeValue and it.value == nodeEnumVal.value) == nil:
               resources.enums[nodeEnumVal.extends].enumVals.add nodeEnumVal
           except ValueError:

@@ -10,6 +10,30 @@ type
   # -----------
   # API result codes
   Result* {.vkEnum.} = enum
+    # Provided by VK_VERSION_1_2
+    errorInvalidOpaqueCaptureAddress = -1000257000
+    # Provided by VK_EXT_full_screen_exclusive
+    errorFullScreenExclusiveModeLostExt = -1000255000
+    # Provided by VK_EXT_global_priority
+    errorNotPermittedExt = -1000174001
+    # Provided by VK_VERSION_1_2
+    errorFragmentation = -1000161000
+    # Provided by VK_EXT_image_drm_format_modifier
+    errorInvalidDrmFormatModifierPlaneLayoutExt = -1000158000
+    # Provided by VK_VERSION_1_1
+    errorInvalidExternalHandle = -1000072003
+    errorOutOfPoolMemory = -1000069000
+    # Provided by VK_NV_glsl_shader
+    errorInvalidShaderNv = -1000012000
+    # Provided by VK_EXT_debug_report
+    errorValidationFailedExt = -1000011001
+    # Provided by VK_KHR_display_swapchain
+    errorIncompatibleDisplayKhr = -1000003001
+    # Provided by VK_KHR_swapchain
+    errorOutOfDateKhr = -1000001004
+    # Provided by VK_KHR_surface
+    errorNativeWindowInUseKhr = -1000000001
+    errorSurfaceLostKhr = -1000000000
     errorUnknown = -13 # An unknown error has occurred, due to an implementation or application bug
     errorFragmentedPool = -12 # A requested pool allocation has failed due to fragmentation of the pool's memory
     errorFormatNotSupported = -11 # Requested format is not supported on this device
@@ -29,31 +53,8 @@ type
     eventSet = 3 # An event is signaled
     eventReset = 4 # An event is unsignaled
     incomplete = 5 # A return array was too small for the result
-    # Provided by VK_KHR_surface
-    errorSurfaceLostKhr = 1000000000
-    errorNativeWindowInUseKhr = 1000000001
     # Provided by VK_KHR_swapchain
     suboptimalKhr = 1000001003
-    errorOutOfDateKhr = 1000001004
-    # Provided by VK_KHR_display_swapchain
-    errorIncompatibleDisplayKhr = 1000003001
-    # Provided by VK_EXT_debug_report
-    errorValidationFailedExt = 1000011001
-    # Provided by VK_NV_glsl_shader
-    errorInvalidShaderNv = 1000012000
-    # Provided by VK_VERSION_1_1
-    errorOutOfPoolMemory = 1000069000
-    errorInvalidExternalHandle = 1000072003
-    # Provided by VK_EXT_image_drm_format_modifier
-    errorInvalidDrmFormatModifierPlaneLayoutExt = 1000158000
-    # Provided by VK_VERSION_1_2
-    errorFragmentation = 1000161000
-    # Provided by VK_EXT_global_priority
-    errorNotPermittedExt = 1000174001
-    # Provided by VK_EXT_full_screen_exclusive
-    errorFullScreenExclusiveModeLostExt = 1000255000
-    # Provided by VK_VERSION_1_2
-    errorInvalidOpaqueCaptureAddress = 1000257000
     # Provided by VK_KHR_deferred_host_operations
     threadIdleKhr = 1000268000
     threadDoneKhr = 1000268001
