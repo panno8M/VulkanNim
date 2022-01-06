@@ -200,7 +200,7 @@ proc generate*() =
       feature.imports.add "VK_VERSION_1_0"
     of "VK_VERSION_1_2":
       file.path = "features/vk12"
-      feature.imports.add @["VK_VERSION_1_0", "VK_VERSION_1_1"]
+      feature.imports.add "VK_VERSION_1_0"
     else: discard
 
   # = VULKAN EXTENSIONS =

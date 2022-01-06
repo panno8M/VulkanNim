@@ -2,7 +2,6 @@
 
 import ../platform
 import vk10
-import vk11
 prepareVulkanLibDef()
 
 const
