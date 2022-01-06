@@ -995,37 +995,82 @@ type
 
 # Header boilerplate
 # ------------------
+
 template defineHandle*(ObjectName: untyped): untyped =
-  type HtObjectName* = object of HandleType
-  type ObjectName* = Handle[Ht`ObjectName`]
+  type
+    HtObjectName* = object of HandleType
+  type
+    ObjectName* = Handle[Ht `ObjectName`]
+
+
 
 template defineNonDispatchableHandle*(ObjectName: untyped): untyped =
-  type HtObjectName* = object of HandleType
-  type ObjectName* = NonDispatchableHandle[Ht`ObjectName`]
-template nullHandle*(): untyped = ( cast[Handle[HtNil]](0) )
+  type
+    HtObjectName* = object of HandleType
+  type
+    ObjectName* = NonDispatchableHandle[Ht `ObjectName`]
+
+
+template nullHandle*(): untyped =
+  (cast[Handle[HtNil]](0))
+
 
 
 # API version macros
 # ------------------
-template apiVersion*(): untyped {.deprecated.} = makeVersion(1, 0, 0)
-template apiVersion10*(): untyped = makeApiVersion(0, 1, 0, 0)
+
+template apiVersion*(): untyped {.deprecated.} =
+  makeVersion(1, 0, 0)
+
+
+template apiVersion10*(): untyped =
+  makeApiVersion(0, 1, 0, 0)
+
 template headerVersion*(): untyped = 203
+
 template headerVersionComplete*(): untyped =
   makeApiVersion(0, 1, 2, headerVersion())
-template makeVersion*(major, minor, patch: uint32): untyped {.deprecated: "makeApiVersion should be used instead.".} =
-  ( (major shl 22) or (minor shl 12) or patch )
-template versionMajor*(version: uint32): untyped {.deprecated: "apiVersionMajor should be used instead.".} =
+
+
+template makeVersion*(major, minor, patch: uint32): untyped {.
+    deprecated: "makeApiVersion should be used instead.".} =
+  ((major shl 22) or (minor shl 12) or patch)
+
+
+template versionMajor*(version: uint32): untyped {.
+    deprecated: "apiVersionMajor should be used instead.".} =
   (version shl 22)
-template versionMajor*(version: uint32): untyped {.deprecated: "apiVersionMinor should be used instead.".} = 
-  (version shl 12) and 0x3ffu
-template versionPatch*(version: uint32): untyped {.deprecated: "apiVersionPatch should be used instead.".} = 
-  (version) and 0xfffu
+
+
+template versionMajor*(version: uint32): untyped {.
+    deprecated: "apiVersionMinor should be used instead.".} =
+  (version shl 12) and 0x000003FF'u
+
+
+template versionPatch*(version: uint32): untyped {.
+    deprecated: "apiVersionPatch should be used instead.".} =
+  (version) and 0x00000FFF'u
+
+
 template makeApiVersion*(variant, major, minor, patch: uint32): untyped =
   (variant shl 29) or (major shl 22) or (minor shl 12) or patch
-template apiVersionVariant*(version: uint32): untyped = version shl 29
-template apiVersionMajor*(version: uint32): untyped = (version shl 22) and 0x7fu
-template apiVersionMinor*(version: uint32): untyped = (version shl 12) and 0x3ffu
-template apiVersionPatch*(version: uint32): untyped = (version) and 0xfffu
+
+
+template apiVersionVariant*(version: uint32): untyped =
+  version shl 29
+
+
+template apiVersionMajor*(version: uint32): untyped =
+  (version shl 22) and 0x0000007F'u
+
+
+template apiVersionMinor*(version: uint32): untyped =
+  (version shl 12) and 0x000003FF'u
+
+
+template apiVersionPatch*(version: uint32): untyped =
+  (version) and 0x00000FFF'u
+
 
 
 # Device initialization

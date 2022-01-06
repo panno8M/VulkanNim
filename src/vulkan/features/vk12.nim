@@ -530,7 +530,10 @@ type
     pNext* {.optional.}: pointer
     memory*: DeviceMemory
 
-template apiVersion12*(): untyped = makeApiVersion(0, 1, 2, 0)
+
+template apiVersion12*(): untyped =
+  makeApiVersion(0, 1, 2, 0)
+
 
 
 # Promoted from VK_KHR_draw_indirect_count (extension 170)

@@ -1,11 +1,11 @@
-import sequtils
-import strutils
-import strformat
-import xmltree
-import xmlparser
-import sugar
-import os
-import options
+import std/sequtils
+import std/strutils
+import std/strformat
+import std/xmltree
+import std/xmlparser
+import std/sugar
+import std/options
+import std/macros
 
 import ./nodedefs
 
@@ -52,14 +52,6 @@ proc add*[T](x: var seq[T], y: Option[T]) {.noSideEffect.} =
 proc add*(x: var string, y: Option[string]) {.noSideEffect.} =
   if y.isSome:
     x.add y.get
-
-proc attrOrNone*(node: XmlNode; attrName: string): Option[string] =
-  let attribute = node.attr(attrName)
-  if not attribute.isEmptyOrWhitespace:
-    return some(attribute)
-
-template find*[T](arr: openArray[T]; op: proc(x: T): bool {.closure.})  =
-  arr.filter(op)[0]
 
 template findIt*(s, pred: untyped): untyped  =
   var result: typeof(s[0])
@@ -121,29 +113,11 @@ proc parseStatement*(str: string): string =
 
   str.substr(cStart, cLast)
 
-proc filter*[T](s: openArray[T], pred: proc(i: Natural, x: T): bool {.closure.}): seq[T]
-                                                                  {.inline.} =
+proc filter*[T](s: openArray[T], pred: proc(i: Natural, x: T): bool): seq[T] {.inline.} =
   result = newSeq[T]()
   for i in 0 ..< s.len:
     if pred(i, s[i]):
       result.add(s[i])
-
-#               00
-#       01              02
-#   03      04      05      06
-# 07  08  09  10  11  12  13  14
-#  2i+1 = i_right
-#  2i+2 = i_left
-type
-  Sbt*[T] = ref object # String Binary Tree
-    tree*: seq[tuple[id: string; item: T]]
-proc nextCapacity*(x: Natural = 0): Natural =
-  if x < 10: 10
-  else: 2 * x
-proc newSbt*[T](): Sbt[T] =
-  new result
-  result.tree.setLen(nextCapacity())
-# proc add*[T](sbt: Sbt[T]; item: T) =
 
 # general ==============================================================
 # ----------------------------------------------------------------------
@@ -290,3 +264,6 @@ template `[]`*(xmlNode: XmlNode, childStr: string): untyped =
 template `?`*(str: string): Option[string] =
   if str.isEmptyOrWhitespace: none(string)
   else: some(str)
+
+macro stringify*(body): string =
+  newStrLitNode body.repr

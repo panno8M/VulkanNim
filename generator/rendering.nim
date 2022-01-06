@@ -1,8 +1,8 @@
-import strutils
-import sequtils
-import strformat
-import options
-import algorithm
+import std/strutils
+import std/sequtils
+import std/strformat
+import std/options
+import std/algorithm
 
 import ./utils
 import ./nodedefs

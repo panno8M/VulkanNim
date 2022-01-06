@@ -424,7 +424,10 @@ type
     pNext* {.optional.}: pointer
     shaderDrawParameters*: Bool32
 
-template apiVersion11*(): untyped = makeApiVersion(0, 1, 1, 0)
+
+template apiVersion11*(): untyped =
+  makeApiVersion(0, 1, 1, 0)
+
 
 
 # Device Initialization

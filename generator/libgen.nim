@@ -1,11 +1,10 @@
-import xmltree
-import strformat
-import strutils
-import sequtils
-import tables
-import logging
-import options
-import os
+import std/xmltree
+import std/strformat
+import std/strutils
+import std/tables
+import std/logging
+import std/options
+import std/os
 
 import ./utils
 import ./nodedefs

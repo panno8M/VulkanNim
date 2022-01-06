@@ -1,5 +1,5 @@
-import tables
-import options
+import std/tables
+import std/options
 
 type
   VendorTag* = object

@@ -1,8 +1,8 @@
-import logging
-import sequtils
-import strutils
-import os
-import times
+import std/logging
+import std/sequtils
+import std/strutils
+import std/os
+import std/times
 
 type
   LoggingFailure* = object of CatchableError

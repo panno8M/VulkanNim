@@ -1,14 +1,14 @@
 {.experimental: "strictFuncs".}
 
-import strutils
-import sequtils
-import sugar
-import strformat
-import options
-import xmltree
-import tables
-import logging
-import times
+import std/strutils
+import std/sequtils
+import std/sugar
+import std/strformat
+import std/options
+import std/xmltree
+import std/tables
+import std/logging
+import std/times
 
 import ./utils
 import ./nodedefs
