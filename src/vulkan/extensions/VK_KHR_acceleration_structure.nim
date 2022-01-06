@@ -211,9 +211,9 @@ proc writeAccelerationStructuresPropertiesKHR*(
       accelerationStructureCount: uint32;
       pAccelerationStructures {.length: accelerationStructureCount.}: arrPtr[AccelerationStructureKHR];
       queryType: QueryType;
-      dataSize: uint32;
+      dataSize: uint;
       pData {.length: dataSize.}: pointer;
-      stride: uint32;
+      stride: uint;
     ): Result {.cdecl,
       successCodes: @[Result.success],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],

@@ -13,7 +13,7 @@ type
     sType* {.constant: (StructureType.validationCacheCreateInfoExt).}: StructureType
     pNext* {.optional.}: pointer
     flags* {.optional.}: ValidationCacheCreateFlagsEXT
-    initialDataSize* {.optional.}: uint32
+    initialDataSize* {.optional.}: uint
     pInitialData* {.length: initialDataSize.}: pointer
   ShaderModuleValidationCacheCreateInfoEXT* = object
     sType* {.constant: (StructureType.shaderModuleValidationCacheCreateInfoExt).}: StructureType
@@ -46,7 +46,7 @@ proc mergeValidationCachesEXT*(
 proc getValidationCacheDataEXT*(
       device: Device;
       validationCache: ValidationCacheEXT;
-      pDataSize: ptr uint32;
+      pDataSize: ptr uint;
       pData {.length: pDataSize.} = default(pointer);
     ): Result {.cdecl,
       successCodes: @[Result.success, Result.incomplete],

@@ -84,8 +84,8 @@ type
   # ---------------------
   PFN_AllocationFunction* = proc(
       pUserData: pointer;
-      size: uint32;
-      alignment: uint32;
+      size: uint;
+      alignment: uint;
       allocationScope: SystemAllocationScope;
     ): pointer {.cdecl.}
   PFN_FreeFunction* = proc(
@@ -94,21 +94,21 @@ type
     ): void {.cdecl.}
   PFN_InternalAllocationNotification* = proc(
       pUserData: pointer;
-      size: uint32;
+      size: uint;
       allocationType: InternalAllocationType;
       allocationScope: SystemAllocationScope;
     ): void {.cdecl.}
   PFN_InternalFreeNotification* = proc(
       pUserData: pointer;
-      size: uint32;
+      size: uint;
       allocationType: InternalAllocationType;
       allocationScope: SystemAllocationScope;
     ): void {.cdecl.}
   PFN_ReallocationFunction* = proc(
       pUserData: pointer;
       pOriginal: pointer;
-      size: uint32;
-      alignment: uint32;
+      size: uint;
+      alignment: uint;
       allocationScope: SystemAllocationScope;
     ): pointer {.cdecl.}
   PFN_VoidFunction* = proc(): void {.cdecl.}
@@ -275,7 +275,7 @@ type
     maxViewportDimensions*: array[2, uint32]
     viewportBoundsRange*: array[2, float32]
     viewportSubPixelBits*: uint32
-    minMemoryMapAlignment*: uint32
+    minMemoryMapAlignment*: uint
     minTexelBufferOffsetAlignment*: DeviceSize
     minUniformBufferOffsetAlignment*: DeviceSize
     minStorageBufferOffsetAlignment*: DeviceSize
@@ -574,7 +574,7 @@ type
     sType* {.constant: (StructureType.shaderModuleCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
     flags* {.optional.}: ShaderModuleCreateFlags
-    codeSize*: uint32
+    codeSize*: uint
     pCode* {.length: codeSize / 4.}: arrPtr[uint32]
 
   # Pipeline Cache commands
@@ -583,7 +583,7 @@ type
     sType* {.constant: (StructureType.pipelineCacheCreateInfo).}: StructureType
     pNext* {.optional.}: pointer
     flags* {.optional.}: PipelineCacheCreateFlags
-    initialDataSize* {.optional.}: uint32
+    initialDataSize* {.optional.}: uint
     pInitialData* {.length: initialDataSize.}: pointer
 
   # Pipeline commands
@@ -715,12 +715,12 @@ type
   SpecializationInfo* = object
     mapEntryCount* {.optional.}: uint32
     pMapEntries* {.length: mapEntryCount.}: arrPtr[SpecializationMapEntry]
-    dataSize* {.optional.}: uint32
+    dataSize* {.optional.}: uint
     pData* {.length: dataSize.}: pointer
   SpecializationMapEntry* = object
     constantID*: uint32
     offset*: uint32
-    size*: uint32
+    size*: uint
   StencilOpState* = object
     failOp*: StencilOp
     passOp*: StencilOp
@@ -1418,7 +1418,7 @@ proc getQueryPoolResults*(
       queryPool: QueryPool;
       firstQuery: uint32;
       queryCount: uint32;
-      dataSize: uint32;
+      dataSize: uint;
       pData {.length: dataSize.}: pointer;
       stride: DeviceSize;
       flags = default(QueryResultFlags);
@@ -1543,7 +1543,7 @@ proc destroyPipelineCache*(
 proc getPipelineCacheData*(
       device: Device;
       pipelineCache: PipelineCache;
-      pDataSize: ptr uint32;
+      pDataSize: ptr uint;
       pData {.length: pDataSize.} = default(pointer);
     ): Result {.cdecl,
       successCodes: @[Result.success, Result.incomplete],

@@ -12,7 +12,7 @@ type
   CuModuleCreateInfoNVX* = object
     sType* {.constant: (StructureType.cuModuleCreateInfoNvx).}: StructureType
     pNext* {.optional.}: pointer
-    dataSize*: uint32
+    dataSize*: uint
     pData* {.length: dataSize.}: pointer
   CuFunctionCreateInfoNVX* = object
     sType* {.constant: (StructureType.cuFunctionCreateInfoNvx).}: StructureType
@@ -30,9 +30,9 @@ type
     blockDimY*: uint32
     blockDimZ*: uint32
     sharedMemBytes*: uint32
-    paramCount* {.optional.}: uint32
+    paramCount* {.optional.}: uint
     pParams* {.length: paramCount.}: arrPtr[pointer]
-    extraCount* {.optional.}: uint32
+    extraCount* {.optional.}: uint
     pExtras* {.length: extraCount.}: arrPtr[pointer]
 
 proc createCuModuleNVX*(

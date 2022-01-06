@@ -22,7 +22,7 @@ type
     objectType*: DebugReportObjectTypeEXT
     `object`*: uint64
     tagName*: uint64
-    tagSize*: uint32
+    tagSize*: uint
     pTag* {.length: tagSize.}: pointer
   DebugMarkerMarkerInfoEXT* = object
     sType* {.constant: (StructureType.debugMarkerMarkerInfoExt).}: StructureType

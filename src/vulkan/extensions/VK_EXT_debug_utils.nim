@@ -53,7 +53,7 @@ type
     objectType*: ObjectType
     objectHandle*: uint64
     tagName*: uint64
-    tagSize*: uint32
+    tagSize*: uint
     pTag* {.length: tagSize.}: pointer
 
 proc setDebugUtilsObjectNameEXT*(

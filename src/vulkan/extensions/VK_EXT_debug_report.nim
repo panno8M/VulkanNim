@@ -13,7 +13,7 @@ type
       flags: DebugReportFlagsEXT;
       objectType: DebugReportObjectTypeEXT;
       `object`: uint64;
-      location: uint32;
+      location: uint;
       messageCode: int32;
       pLayerPrefix: cstring;
       pMessage: cstring;
@@ -45,7 +45,7 @@ proc debugReportMessageEXT*(
       flags: DebugReportFlagsEXT;
       objectType: DebugReportObjectTypeEXT;
       `object`: uint64;
-      location: uint32;
+      location: uint;
       messageCode: int32;
       pLayerPrefix: cstring;
       pMessage: cstring;

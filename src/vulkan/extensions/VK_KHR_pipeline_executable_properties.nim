@@ -47,7 +47,7 @@ type
     name*: array[MaxDescriptionSize, char]
     description*: array[MaxDescriptionSize, char]
     isText*: Bool32
-    dataSize*: uint32
+    dataSize*: uint
     pData* {.optional, length: dataSize.}: pointer
 
 proc getPipelineExecutablePropertiesKHR*(
