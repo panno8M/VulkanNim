@@ -51,7 +51,7 @@ proc genBaseTypes*() =
   consts.add %"# == Constants == #"
   for key, val in resources.consts      : consts.add %val.render()
   consts.add %"# == Aliases == #"
-  for key, val in resources.constAliases: consts.add %val.render()
+  for key, val in resources.constAliases: consts.add val.render()
   file.write $consts
 
 proc genHandles* =

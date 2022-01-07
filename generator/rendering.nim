@@ -100,12 +100,14 @@ proc render*(cons: NodeConst): string =
     result.add " # " & cons.comment.get
 
 
-proc render*(consAlias: NodeConstAlias): string =
+proc render*(consAlias: NodeConstAlias): Option[string] =
   let name = consAlias.name.parseVariableNameFromSnake
   let alias = consAlias.alias.parseVariableNameFromSnake
-  result = "{name}* = {alias}".fmt
+  if name == alias: return
+  var res = "{name}* = {alias}".fmt
   if consAlias.comment.isSome:
-    result.add " # " & consAlias.comment.get
+    res.add " # " & consAlias.comment.get
+  some res
 
 
 proc render*(funcPtr: NodeFuncPtr): string =
