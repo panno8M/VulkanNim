@@ -197,6 +197,7 @@ proc replaceBasicTypes*(str: string): string =
     .replace("size_t", "uint") # uint matches pointer size just like size_t
     .replace("float", "float32")
     .replace("double", "float64")
+    .replace("_screen_", "screen_")
     .replace("xcb_window_t", "XcbWindow")
     .replace("xcb_connection_t", "XcbConnection")
     .replace("xcb_visualid_t", "XcbVisualid")

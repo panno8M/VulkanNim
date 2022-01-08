@@ -131,13 +131,14 @@ proc render*(define: NodeDefine): string = define.str
 
 proc render*(struct: Nodestruct): string =
   if struct.comment.isSome:
-    result.add struct.comment.get.commentify
-    result.add "\n"
+    result.add struct.comment.get.commentify & "\n"
+
   let name = struct.name.removeVkPrefix
 
   result.add case struct.isUnion
     of true: "{name}* {{.union.}} = object".fmt
     of false: "{name}* = object".fmt
+
 
   let members = struct.members.mapIt(block:
     let
@@ -157,14 +158,17 @@ proc render*(struct: Nodestruct): string =
           if it.arrayStyle == nasPtr:
             let annotated = it.ptrLen.filterIt(it.isSome)
             if annotated.len != 0:
-              @["length: " & annotated.mapIt(it.get).join(", ")]
+              @["length: " & annotated.mapIt(it.get)[0]]
             else: newSeq[string]()
           else: newSeq[string]()
         )
-    if pragmas.len != 0:
-      "  {name}* {{.{pragmas.join(\", \")}.}}: {theType}".fmt
-    else:
-      "  {name}*: {theType}".fmt
+    var def =
+      if pragmas.len != 0:
+        "  {name}* {{.{pragmas.join(\", \")}.}}: {theType}".fmt
+      else:
+        "  {name}*: {theType}".fmt
+    if it.comment.isNone: def
+    else: def & " " & it.comment.get.commentify
   )
   if members.len != 0:
     result.add "\n"
@@ -249,7 +253,7 @@ proc render*(command: NodeCommand): string =
     return
   of nkbrAlias:
     let alias = command.alias.parseCommandName
-    return "const {name}* = {alias}".fmt
+    return "template {name}* = {alias}".fmt
 
 
 proc render*(basetype: NodeBasetype): string =

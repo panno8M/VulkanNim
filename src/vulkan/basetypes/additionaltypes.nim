@@ -1,0 +1,1 @@
+type arrPtr*[T] = ptr T

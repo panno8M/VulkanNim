@@ -200,57 +200,59 @@ func extractNodeDefine*(typeDef: XmlNode): NodeDefine {.raises: [UnexpectedXmlSt
     ))
 
 func extractNodeStructMember*(typeDef: XmlNode): (NodeStructMember, seq[string]) {.raises: [].} =
+  result[0] = NodeStructMember(
+    theType: typeDef["type"].innerText.parseWords[0],
+    name: typeDef["name"].innerText.parseWords[0],
+    comment: 
+      if typedef["comment"] == nil: none string
+      else: some(typedef["comment"].innerText),
+    arrayStyle:
+      if ((?typeDef{"len"}).isSome or (?typeDef{"altlen"}).isSome):
+        nasPtr
+      elif typeDef.findAll("enum").len != 0 or typeDef.innerText.find({'[', ']'}) != -1:
+        nasFix
+      else:
+        nasNotArray
+  )
 
-    result[0] = NodeStructMember(
-      theType: typeDef["type"].innerText.parseWords[0],
-      name: typeDef["name"].innerText.parseWords[0],
-      arrayStyle:
-        if ((?typeDef{"len"}).isSome or (?typeDef{"altlen"}).isSome):
-          nasPtr
-        elif typeDef.findAll("enum").len != 0 or typeDef.innerText.find({'[', ']'}) != -1:
-          nasFix
-        else:
-          nasNotArray
-    )
-
-    if (?typeDef{"values"}).isSome:
-      result[0].values = some typeDef{"values"}
-    else:
-      result[0].optional = (typeDef{"optional"} == "true") or (result[0].name == "pNext")
+  if (?typeDef{"values"}).isSome:
+    result[0].values = some typeDef{"values"}
+  else:
+    result[0].optional = (typeDef{"optional"} == "true") or (result[0].name == "pNext")
 
 
-    if result[0].arrayStyle == nasPtr:
-      let ptrcnt = typedef.`$`.count("*")
-      if ptrcnt != 0:
-        result[0].ptrLen.setlen(ptrcnt)
+  if result[0].arrayStyle == nasPtr:
+    let ptrcnt = typedef.`$`.count("*")
+    if ptrcnt != 0:
+      result[0].ptrLen.setlen(ptrcnt)
 
-      if (?typeDef{"altlen"}).isSome:
-        result[0].ptrLen[0] = some typeDef{"altlen"}.replace("/", " /")
-      elif (?typeDef{"len"}).isSome:
-        for i, v in typeDef{"len"}.parseWords({','}):
-          if v == "null-terminated": continue
-          result[0].ptrLen[i] = some v
+    if (?typeDef{"altlen"}).isSome:
+      result[0].ptrLen[0] = some typeDef{"altlen"}.replace("/", " /")
+    elif (?typeDef{"len"}).isSome:
+      for i, v in typeDef{"len"}.parseWords({','}):
+        if v == "null-terminated": continue
+        result[0].ptrLen[i] = some v
 
-    if result[0].arrayStyle == nasNotArray:
-      result[0].ptrLv = typedef.`$`.count("*")
+  if result[0].arrayStyle == nasNotArray:
+    result[0].ptrLv = typedef.`$`.count("*")
 
-    for m in typeDef:
-      if m.kind == xnElement and m.tag == "enum":
-        result[0].dim.add NodeArrayDimention(useConst: true, name: m.innerText.parseWords[0])
-        result[1].add m.innerText.parseWords[0]
+  for m in typeDef:
+    if m.kind == xnElement and m.tag == "enum":
+      result[0].dim.add NodeArrayDimention(useConst: true, name: m.innerText.parseWords[0])
+      result[1].add m.innerText.parseWords[0]
 
-      if m.kind != xnText: continue
-      let words = m.text.parseWords.filterInvalidArgParams
-      if words.len == 0: continue
-      #  E.g. "[3]", "[2][3]" or "[1][2][3]".
-      #  Raise exception if it pattern is as "[a][b]"
-      if words[0][0] == '[' and words[0][^1] == ']':
-        result[0].dim.add words[0]
-          .parseWords({'[', ']'})
-          .mapIt(try:    some it.parseInt.Natural
-                 except: none Natural)
-          .filterIt(it.isSome)
-          .mapIt(NodeArrayDimention(useConst: false, value: it.get))
+    if m.kind != xnText: continue
+    let words = m.text.parseWords.filterInvalidArgParams
+    if words.len == 0: continue
+    #  E.g. "[3]", "[2][3]" or "[1][2][3]".
+    #  Raise exception if it pattern is as "[a][b]"
+    if words[0][0] == '[' and words[0][^1] == ']':
+      result[0].dim.add words[0]
+        .parseWords({'[', ']'})
+        .mapIt(try:    some it.parseInt.Natural
+                except: none Natural)
+        .filterIt(it.isSome)
+        .mapIt(NodeArrayDimention(useConst: false, value: it.get))
 
 
 func extractNodeStruct*(typeDef: XmlNode): NodeStruct {.raises: [UnexpectedXmlStructureError].} =
@@ -267,9 +269,12 @@ func extractNodeStruct*(typeDef: XmlNode): NodeStruct {.raises: [UnexpectedXmlSt
      typeDef.category notin ["struct", "union"]:
     xmlError invalidStructure("struct Extraction"): $typeDef
 
+  let comment =
+    if typeDef["comment"] == nil: none string
+    else: some typeDef["comment"].innerText
   result = NodeStruct(
     name: typeDef.name,
-    comment: ?typeDef.comment,
+    comment: comment,
     isUnion: typeDef.category == "union")
   for member in typeDef.findAll("member"):
     let (memberNode, requiredConsts) = member.extractNodeStructMember

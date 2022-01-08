@@ -78,8 +78,6 @@ const
 
 func define*(id: string; typeDef: XmlNode): Option[string] {.raises: [].} =
   case id
-  of "VK_DEFINE_HANDLE": some defineHandle
-  of "VK_DEFINE_NON_DISPATCHABLE_HANDLE": some defineNonDispatchableHandle
   of "VK_MAKE_VERSION": some makeVersion
   of "VK_API_VERSION": some apiVersion
   of "VK_API_VERSION_1_0": some apiVersion10
@@ -93,11 +91,13 @@ func define*(id: string; typeDef: XmlNode): Option[string] {.raises: [].} =
   of "VK_VERSION_MAJOR": some versionMajor
   of "VK_VERSION_MINOR": some versionMinor
   of "VK_VERSION_PATCH": some versionPatch
-  of "VK_NULL_HANDLE": some nullHandle
   of "VK_HEADER_VERSION": genVkHeaderVersion(typeDef)
   of "VK_HEADER_VERSION_COMPLETE": genVkHeaderVersionComplete(typeDef)
 
   # TODO
+  of "VK_DEFINE_HANDLE": some ""
+  of "VK_DEFINE_NON_DISPATCHABLE_HANDLE": some ""
+  of "VK_NULL_HANDLE": some ""
   of "VK_USE_64_BIT_PTR_DEFINES": some ""
 
   else: none string

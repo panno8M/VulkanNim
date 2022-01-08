@@ -41,7 +41,7 @@ proc get*(ss: sstring): var string = ss.item
 proc `$`*(ss: sstring): string =
   case ss.kind
   of skLeaf: ss.item
-  of skComment: "# " & ss.item
+  of skComment: ss.item.splitLines.mapIt("# " & it).join("\n")
   of skBlock:
     if ss.title.isEmptyOrWhitespace:
       ss.sons.mapIt($it).join("\n")

@@ -21,17 +21,12 @@ type
     affiliation*: LibFile
     name*: string
     imports*: seq[string]
-    header*: Option[string]
-    footer*: Option[string]
+    exports*: seq[string]
     requires*: seq[NodeRequire]
+    comment*: Option[string]
   LibFile* = ref object
     path*: string
-    header*: Option[string]
-    footer*: Option[string]
     features*: seq[string]
-    dummy*: bool
-  # LibFile.features .. Feature.affiliation
-  # Feature.deps is used for import section
 
 
 proc affiliate*(feature: Feature; libFile: LibFile) =
@@ -83,22 +78,60 @@ proc renderCommandLoader*(libFile: LibFile; featureTable: TableRef[string, Featu
     return some $resultDefs
 
 
-proc isChanged*(newText, oldPath: string): bool =
-  let oldText =
-    if oldPath.fileExists: oldPath.readFile
-    else: return true
-  newText != oldText
+var libfileDepsLookup = new TableRef[string, seq[LibFile]]
+
+proc getAllLibFilesNeeded(libFile: LibFile; featureTable: TableRef[string, Feature]): seq[LibFile] =
+  if libfileDepsLookup.hasKey(libFile.path):
+    return libfileDepsLookup[libfile.path]
+
+  let imports = libFile
+    .features
+    .mapIt(featureTable[it].imports)
+    .concat
+    .deduplicate
+  
+  if imports.len == 0:
+    libfileDepsLookup[libFile.path] = @[libFile]
+    return @[libFile]
+
+  let importFiles = imports
+    .mapIt(featureTable[it].affiliation)
+    .deduplicate
+    .filterIt(it.path != libFile.path)
+
+  result.add libFile
+  result.add importfiles
+  # NOTE: for cyclic import
+  libfileDepsLookup[libFile.path] = result.deduplicate
+
+  result.add importFiles
+    .mapIt(it.getAllLibFilesNeeded(featureTable))
+    .concat.deduplicate
+  libfileDepsLookup[libFile.path] = result.deduplicate
+
+  libfileDepsLookup[libFile.path]
 
 proc solveImports*(libFile: LibFile; featureTable: TableRef[string, Feature]): Option[string] =
-  var deps = libFile.features.mapIt(featureTable[it].imports).concat().deduplicate()
+
+  # var deps = libFile.features.mapIt(featureTable[it].imports).concat.deduplicate
+  var depfiles = libFile.getAllLibFilesNeeded(featureTable)
+
+
+  var depimports = depfiles
+    .mapIt(it.features)
+    .concat
+    .deduplicate
+    .mapIt(featureTable[it].imports)
+    .concat
+    .deduplicate
   for feature in libFile.features:
-    let idx = deps.find(feature)
+    let idx = depimports.find(feature)
     if idx != -1:
-      deps.delete(idx)
+      depimports.delete(idx)
 
-  if deps.len == 0: return
+  if depimports.len == 0: return
 
-  let filepathes = deps.mapIt(featureTable[it].affiliation.path).deduplicate
+  let filepathes = depimports.mapIt(featureTable[it].affiliation.path).deduplicate
 
   let currentDir = libFile.path.splitFile.dir.parseWords({'/'})
 
@@ -123,125 +156,106 @@ proc solveImports*(libFile: LibFile; featureTable: TableRef[string, Feature]): O
 
   some importPathes.join("\n")
 
+proc solveExports*(libFile: LibFile; featureTable: TableRef[string, Feature]): Option[string] =
+  let res = libfile
+    .features
+    .mapIt(featureTable[it].exports)
+    .concat
+    .deduplicate
+    .mapIt(featureTable[it].affiliation.path.splitFile.name)
+    .deduplicate
+    .mapIt("export " & it)
+    .join("\n")
+  if not res.isEmptyOrWhitespace: return some res
 
-proc render*(libFile: LibFile; featureTable: TableRef[string, Feature]; resources: Resources): Option[string] =
-  if libFile.dummy: return
 
-  var res: string
-
+proc renderCommands*(libFile: LibFile; featureTable: TableRef[string, Feature]; resources: Resources): sstring =
+  result = sstring(kind: skBlock)
   var renderedNodes: seq[string]
-  res.add libFile.features.mapIt(featureTable[it].name).join("\n").commentify
-  res.add "\n"
-  if libFile.header.isSome:
-    res.add libFile.header.get
-    res.add "\n"
 
-  res.add "\n"
-  
+  var headerStr = sstring(kind: skBlock)
+
+  var constStr = sstring(kind: skBlock, title: "const")
+  var commandsStr = sstring(kind: skBlock)
+
+  for feature in libFile.features:
+    var featureStr = sstring(kind: skBlock)
+    for require in featureTable[feature].requires:
+      var reqStr = sstring(kind: skBlock)
+
+      for req in require.targets.filter(x => x.kind in {nkrApiConst, nkrConst, nkrConstAlias, nkrType}):
+        if req.name in renderedNodes: continue
+
+        case req.kind
+        of nkrConst:
+          reqStr.add render NodeConst(name: req.name, value: req.value)
+          renderedNodes.add req.name
+
+        of nkrConstAlias:
+          reqStr.add render NodeConstAlias(name: req.name, alias: req.alias)
+          renderedNodes.add req.name
+
+        else: discard
+
+      if reqStr.sons.len != 0:
+        if require.comment.isSome:
+          reqStr.sons.insert(comment require.comment.get, 0)
+        featureStr.add reqStr
+    if featureStr.sons.len != 0:
+      featureStr.sons.insert(comment feature, 0)
+      constStr.add featureStr
+
+  for feature in libFile.features:
+    var featureStr = sstring(kind: skBlock)
+    var needsTools: bool
+    for require in featureTable[feature].requires:
+      var reqStr = sstring(kind: skBlock)
+
+      for req in require.targets.filter(x => x.kind == nkrType):
+        if req.name notin renderedNodes:
+          if resources.defines.hasKey(req.name):
+            reqStr.add render resources.defines[req.name]
+            renderedNodes.add req.name
+
+      let reqCommands = require.targets.filter(x => x.kind == nkrCommand)
+      if reqCommands.len != 0:
+        for reqCommand in reqCommands:
+          if reqCommand.name in renderedNodes: continue
+          if resources.commands.hasKey(reqCommand.name):
+            reqStr.add render resources.commands[reqCommand.name]
+            renderedNodes.add reqCommand.name
+            if resources.commands[reqCommand.name].kind == nkbrNormal:
+              needsTools = true
+
+      if reqStr.sons.len != 0:
+        if require.comment.isSome:
+          reqStr.sons.insert(comment require.comment.get, 0)
+        featureStr.add reqStr
+        if needsTools:
+          featureTable[feature].imports.add "tools"
+    if featureStr.sons.len != 0:
+      featureStr.sons.insert(comment feature.underline('='), 0)
+      commandsStr.add featureStr
+      commandsStr.add ""
+
+  for feature in libfile.features:
+    headerStr.add feature.comment
+  headerStr.add ""
   let imports = libFile.solveImports(featureTable)
-  res.add imports
-  res.add "\n"
+  headerStr.add imports
+  let exports = libFile.solveExports(featureTable)
+  headerStr.add exports
 
-  if imports.isSome and imports.get.find("platform") != -1:
-    res.add "prepareVulkanLibDef()\n\n"
+  result.add headerStr
+  if constStr.sons.len != 0:
+    result.add constStr
+  result.add "\n"
+  if commandsStr.sons.len != 0:
+    result.add commandsStr
+    result.add ""
 
-  block Solve_consts:
-    var reqDefs: seq[seq[string]]
-    for feature in libFile.features:
-      for require in featureTable[feature].requires:
-        var reqDef: seq[string]
-
-        for req in require.targets.filter(x => x.kind in {nkrApiConst, nkrConst, nkrConstAlias, nkrType}):
-          if req.name in renderedNodes: continue
-
-          case req.kind
-          of nkrConst:
-            reqDef.add NodeConst(name: req.name, value: req.value).render
-            renderedNodes.add req.name
-
-          of nkrConstAlias:
-            reqDef.add NodeConstAlias(name: req.name, alias: req.alias).render
-            renderedNodes.add req.name
-
-
-          else: discard
-        if reqDef.len != 0:
-          reqDefs.add case require.comment.isSome
-            of true: concat(@[require.comment.get.commentify], reqDef)
-            of false: reqDef
-    if reqDefs.len != 0:
-      res.add "const\n"
-      res.add reqDefs
-        .mapIt(it.map(s => s.indent(2)).join("\n"))
-        .join("\n\n")
-      res.add "\n"
-      res.add "\n"
-
-  block Solve_types:
-    var typeDefs: seq[seq[string]]
-    for feature in libFile.features:
-      for require in featureTable[feature].requires:
-        let typeTargets = require.targets.filterIt(it.kind in {nkrType})
-        if typeTargets.len == 0: continue
-
-        var typeDef: seq[string]
-
-        for req in typeTargets:
-          if req.name in renderedNodes: continue
-
-          if resources.structs.hasKey(req.name):
-            typeDef.add resources.structs[req.name].render
-            renderedNodes.add req.name
-          elif resources.funcPtrs.hasKey(req.name):
-            typeDef.add resources.funcPtrs[req.name].render
-            renderedNodes.add req.name
-
-        if typeDef.len != 0:
-          typeDefs.add case require.comment.isSome
-            of true: concat(@[require.comment.get.underline('-').commentify], typeDef)
-            of false: typeDef
-
-    if typeDefs.len != 0:
-      res.add "type\n"
-      res.add typeDefs.mapIt(it.join("\n").indent(2)).join("\n\n")
-      res.add "\n\n"
-
-  block Solve_others:
-    var reqDefs: seq[seq[string]]
-    for feature in libFile.features:
-      for require in featureTable[feature].requires:
-        var reqDef: seq[string]
-
-        for req in require.targets.filter(x => x.kind == nkrType):
-          if req.name notin renderedNodes:
-            if resources.defines.hasKey(req.name):
-              reqDef.add resources.defines[req.name].render
-              renderedNodes.add req.name
-
-        let reqCommands = require.targets.filter(x => x.kind == nkrCommand)
-        if reqCommands.len != 0:
-          for reqCommand in reqCommands:
-            if reqCommand.name in renderedNodes: continue
-            if resources.commands.hasKey(reqCommand.name):
-              reqDef.add resources.commands[reqCommand.name].render
-              renderedNodes.add reqCommand.name
-
-        if reqDef.len != 0 and require.comment.isSome:
-          reqDef.insert(require.comment.get.underline('-').commentify, 0)
-        reqDefs.add reqDef
-
-    if reqDefs.len != 0:
-      res.add reqDefs.mapIt(it.join("\n")).filterIt(it.len != 0).join("\n\n\n")
-      res.add "\n\n"
 
   for renderingMode in CommandRenderingMode:
     let rendered = libFile.renderCommandLoader(featureTable, resources, renderingMode)
     if rendered.isSome:
-      res.add rendered.get
-      res.add "\n"
-
-  if libFile.footer.isSome:
-    res.add "\n"
-    res.add libFile.footer
-  
-  return some res
+      result.add rendered.get

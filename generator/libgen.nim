@@ -1,6 +1,7 @@
 import std/xmltree
 import std/strformat
 import std/strutils
+import std/sequtils
 import std/tables
 import std/logging
 import std/options
@@ -15,7 +16,6 @@ import ./libfiles
 import ./structuredstring
 
 
-# let logger = newMyLogger(open("log", fmWrite), fmtStr="[$time] - \x1b[32m$levelname\x1b[0m ")
 let logger = newMyLogger(open("log", fmWrite), fmtStr="[$time] - $levelname ".fmt)
 addHandler(logger)
 
@@ -33,7 +33,7 @@ const warningText = """
 
 
 proc genBaseTypes*() =
-  let file = open("src/vulkan/basetypes.nim", fmWrite)
+  let file = open("src/vulkan/basetypes/typedefs.nim", fmWrite)
   defer: close file
   file.write warningText
   file.write "type\n"
@@ -48,50 +48,50 @@ proc genBaseTypes*() =
   file.write "\n"
 
   var consts = sstring(kind: skBlock, title: "const")
-  consts.add %"# == Constants == #"
+  consts.add "# == Constants == #"
   for key, val in resources.consts      : consts.add %val.render()
-  consts.add %"# == Aliases == #"
+  consts.add "# == Aliases == #"
   for key, val in resources.constAliases: consts.add val.render()
   file.write $consts
 
 proc genHandles* =
-  block Handles:
-    let file = open("src/vulkan/handles/handleConcretes.nim", fmWrite)
-    defer: close file
-    file.write warningText
+  let file = open("src/vulkan/handles/handle_concretes.nim", fmWrite)
+  defer: close file
+  file.write warningText
 
-    file.write """
-from ../enums import ObjectType
-import handleOperations
+  file.write "from ../enums import ObjectType\n"
+  file.write "import handle_operations\n"
 
-"""
+  var handles = sstring(kind: skBlock, title: "type")
+  for key, val in resources.handles: handles.add %val.render(resources.vendorTags)
 
-    var handles = sstring(kind: skBlock, title: "type")
-    for key, val in resources.handles: handles.add %val.render(resources.vendorTags)
-
-    file.write $handles
+  file.write $handles
 
 proc genEnums*() =
+  var res = sstring(kind: skBlock, title: "type")
   var rendered: seq[string]
+  let file = "src/vulkan/enums/enumdefs.nim".open(fmWrite)
+  defer: close file
+  file.write warningText
 
-  template openFile(filePath: string) =
-    let file {.inject.} = filePath.open(fmWrite)
-    defer: close file
-    file.write warningText
+  file.write "import tools\n"
+  file.write "import ../basetypes\n"
 
-
-  proc renderComponent(feature: XmlNode, enumAliases: TableRef[string, NodeEnumAliases], rendered: var seq[string]): Option[sstring] =
-    var res = sstring(kind: skBlock)
+  var enumAliases = newTable[string, NodeEnumAliases]()
+  for feature in concat(xml.findAll("feature"), xml.findAll("extension")):
+    var featureStr = sstring(kind: skBlock)
     for requiresXml in feature.findAll("require"):
-      for req in requiresXml.extractNodeRequire.targets:
+      var requires = requiresXml.extractNodeRequire
+      var reqStr = sstring(kind: skBlock)
+      for req in requires.targets:
         if req.name in rendered: continue
         case req.kind
 
         of nkrType:
           if resources.enums.haskey(req.name):
-            res.add render( resources.enums[req.name], resources.vendorTags )
+            reqStr.add render( resources.enums[req.name], resources.vendorTags )
           elif resources.bitmasks.hasKey(req.name):
-            res.add render( resources.bitmasks[req.name] )
+            reqStr.add render( resources.bitmasks[req.name] )
           if resources.enumAliases.hasKey(req.name):
             enumAliases[req.name] = resources.enumAliases[req.name]
           rendered.add req.name
@@ -113,39 +113,61 @@ proc genEnums*() =
 
         else: discard
 
-    if res.sons.len > 0:
-      res.sons.insert( %feature{"name"}
+      if reqstr.sons.len > 0:
+        if requires.comment.isSome:
+          reqStr.sons.insert(comment requires.comment.get.underline('-'), 0)
+        featureStr.add reqstr
+    if featureStr.sons.len > 0:
+      res.add comment feature{"name"}
         .removeVkPrefix
         .replace("_", " ")
-        .underline('-')
-        .commentify,
-        0)
-      return some res
-    return none sstring
+        .underline('=')
+      res.add featureStr
 
-  block:
-    openFile( "src/vulkan/enums/typedef.nim" )
-    file.write """
+  file.write res
+  file.write "\n\n\n"
 
-import tools
-import ../basetypes
+  res = sstring(kind: skBlock)
+  for key, val in enumAliases:
+    res.add val.render(resources.vendorTags)
 
-"""
-    var enumAliases = newTable[string, NodeEnumAliases]()
-    var results = sstring(kind: skBlock, title: "type")
-    for x in xml.findAll("feature"):
-      results.add renderComponent(x, enumAliases, rendered)
-    for x in xml.findAll("extensions"):
-      results.add renderComponent(x, enumAliases, rendered)
-    
-    file.write results
-    file.write "\n\n\n"
+  file.write res
 
-    results = sstring(kind: skBlock)
-    for key, val in enumAliases:
-      results.add val.render(resources.vendorTags)
+proc genObjects =
+  var res = sstring(kind: skBlock, title: "type")
+  var rendered: Table[string, bool]
+  let commonfile = open("src/vulkan/objects/objectdefs_common.nim", fmWrite)
+  defer: commonfile.close
+  commonfile.write warningText
+  commonfile.write "import tools\n"
+  commonfile.write "import temp_externalobjects\n"
 
-    file.write $results
+  for feature in concat(xml.findAll("feature"), xml.findAll("extension")):
+    var featureStr = sstring(kind: skBlock)
+    for requiresXml in feature.findAll("require"):
+      let requires = requiresXml.extractNodeRequire
+      var reqStr = sstring(kind: skBlock)
+      for req in requires.targets:
+        if req.kind != nkrType: continue
+        if rendered.hasKey(req.name): continue
+        rendered[req.name] = true
+        if resources.structs.hasKey(req.name):
+          reqStr.add render(resources.structs[req.name])
+        elif resources.funcPtrs.hasKey(req.name):
+          reqStr.add render(resources.funcPtrs[req.name])
+
+      if reqStr.sons.len != 0:
+        if requires.comment.isSome:
+          reqStr.sons.insert(comment requires.comment.get, 0)
+        featureStr.add reqStr
+    if featureStr.sons.len > 0:
+      res.add comment feature{"name"}
+        .removeVkPrefix
+        .replace("_", " ")
+        .underline('=')
+      res.add featureStr
+  
+  commonfile.write res
 
 proc isValidExtension(name: string): bool =
   let words = name.parseWords({'_'})
@@ -159,15 +181,18 @@ proc isValidExtension(name: string): bool =
 
   return true
 
-proc generate*() =
+proc genCommands*() =
+  const commandsDir = "commands"
+
+  const featDir = commandsDir/"features"
   var features = new TableRef[string, Feature]
   var libfiles: seq[LibFile]
 
   let
-    platformFile = LibFile(path: "platform", dummy: true)
-    platformFeature = Feature(name: "platform")
-  platformFeature.affiliate platformFile
-  features["platform"] = platformFeature
+    toolsFile = LibFile(path: commandsDir/"tools")
+    toolsFeature = Feature(name: "tools")
+  toolsFeature.affiliate toolsFile
+  features["tools"] = toolsFeature
 
   # = VULKAN FEATURES =
 
@@ -181,7 +206,7 @@ proc generate*() =
     features[name] = feature
 
     if (?comment).isSome:
-      feature.header = some comment.underline('=').commentify
+      feature.comment = some comment.underline('=').commentify
 
     for require in featureXML.findAll("require"):
       feature.requires.add require.extractNodeRequire
@@ -190,45 +215,48 @@ proc generate*() =
     libfiles.add file
 
     feature.affiliate file
-    feature.imports.add platformFeature.name
     case feature.name
     of "VK_VERSION_1_0":
-      file.path = "features/vk10"
+      file.path = featDir/"vk10"
     of "VK_VERSION_1_1":
-      file.path = "features/vk11"
-      feature.imports.add "VK_VERSION_1_0"
+      file.path = featDir/"vk11"
     of "VK_VERSION_1_2":
-      file.path = "features/vk12"
-      feature.imports.add "VK_VERSION_1_0"
+      file.path = featDir/"vk12"
     else: discard
 
   # = VULKAN EXTENSIONS =
 
-  let allextfile = LibFile(path: "extensions")
+  const
+    extDir = commandsDir/"extensions"
+    envDir = extDir/"environment"
+    vndDir = extDir/"vendor"
+    fncDir = extDir/"function"
+
+  let allextfile = LibFile(path: extDir)
   let allextfeat = Feature(name: "extensions")
   allextfeat.affiliate allextfile
   libfiles.add allextfile
   features[allextfeat.name] = allextfeat
 
   let envfile = (
-    windows : LibFile(path: "extensions"/"environment"/"windows" ),
-    linux   : LibFile(path: "extensions"/"environment"/"linux"   ),
-    directfb: LibFile(path: "extensions"/"environment"/"directfb"),
-    metal   : LibFile(path: "extensions"/"environment"/"metal"   ),
-    macos   : LibFile(path: "extensions"/"environment"/"macos"   ),
-    ios     : LibFile(path: "extensions"/"environment"/"ios"     ),
-    android : LibFile(path: "extensions"/"environment"/"android" ),
+    windows : LibFile(path: envDir/"windows" ),
+    linux   : LibFile(path: envDir/"linux"   ),
+    directfb: LibFile(path: envDir/"directfb"),
+    metal   : LibFile(path: envDir/"metal"   ),
+    macos   : LibFile(path: envDir/"macos"   ),
+    ios     : LibFile(path: envDir/"ios"     ),
+    android : LibFile(path: envDir/"android" ),
   )
 
   let vendorFile = (
-    ggp    : LibFile(path: "extensions"/"vendor"/"ggp"    ),
-    fuchsia: LibFile(path: "extensions"/"vendor"/"fuchsia"),
+    ggp    : LibFile(path: vndDir/"ggp"    ),
+    fuchsia: LibFile(path: vndDir/"fuchsia"),
   )
 
   let functionFile = (
-    maintenance:       LibFile(path: "extensions"/"function"/"maintenance"      ),
-    display:           Libfile(path: "extensions"/"function"/"display"          ),
-    drawIndirectCount: LibFile(path: "extensions"/"function"/"drawindirectcount"),
+    maintenance:       LibFile(path: fncDir/"maintenance"      ),
+    display:           Libfile(path: fncDir/"display"          ),
+    drawIndirectCount: LibFile(path: fncDir/"drawindirectcount"),
   )
   
   let specifics = [
@@ -269,77 +297,64 @@ proc generate*() =
     ("draw_indirect_count", functionFile.drawIndirectCount)
   ].newTable
 
-  when true:
-    let customVersion = [
-      ("VK_NV_device_generated_commands", @["VK_VERSION_1_0", "VK_VERSION_1_1"]),
-      ("VK_EXT_buffer_device_address",    @["VK_VERSION_1_2"]),
-    ].newTable
-    for extension in xml["extensions"].findAll("extension"):
-      let name = extension{"name"}
-      if not name.isValidExtension: continue
+  for extension in xml["extensions"].findAll("extension"):
+    let name = extension{"name"}
+    if not name.isValidExtension: continue
 
-      var feature = Feature(name: name)
+    var feature = Feature(name: name)
 
-      # let needsImport = extension{"requires"}.parseWords({','})
-      let promotedto = ?extension{"promotedto"}
+    # let needsImport = extension{"requires"}.parseWords({','})
+    # let promotedto = ?extension{"promotedto"}
 
-      if customVersion.hasKey(feature.name):
-        feature.imports.add customVersion[feature.name]
-      else: feature.imports.add "VK_VERSION_1_0"
-      # feature.imports.add needsImport
-      if promotedto.isSome:
-        feature.imports.add promotedto.get
+    # feature.imports.add needsImport
+    # if promotedto.isSome:
+    #   feature.imports.add promotedto.get
 
-      if (?extension.comment).isSome:
-        feature.header = some extension.comment.underline('=').commentify
+    if (?extension.comment).isSome:
+      feature.comment = some extension.comment.underline('=').commentify
 
-      feature.imports.add platformFeature.name
+    # feature.imports.add platformFeature.name
 
-      for require in extension.findAll("require"):
-        # if (?require{"extension"}).isSome:
-        #   feature.imports.add require{"extension"}
-        feature.requires.add require.extractNodeRequire
+    for require in extension.findAll("require"):
+      # if (?require{"extension"}).isSome:
+      #   feature.imports.add require{"extension"}
+      feature.requires.add require.extractNodeRequire
 
-      if feature.requires.len != 0:
-        features[name] = feature
+    if feature.requires.len != 0:
+      features[name] = feature
 
-      block MAKE_FILE:
-        allextfeat.imports.add feature.name
+    block MAKE_FILE:
+      allextfeat.imports.add feature.name
+      allextfeat.exports.add feature.name
 
-        if feature.affiliation.isNil:
-          for keyword, file in fileGroup:
-            if feature.name.find(keyword) != -1:
-              feature.affiliate file
-              break MAKE_FILE
+      if feature.affiliation.isNil:
+        for keyword, file in fileGroup:
+          if feature.name.find(keyword) != -1:
+            feature.affiliate file
+            break MAKE_FILE
           
-        var file = new LibFile
-        libfiles.add file
+      var file = new LibFile
+      libfiles.add file
 
-        file.path = "extensions"/feature.name
-        feature.affiliate file
+      file.path = extDir/feature.name
+      feature.affiliate file
 
+  # = RENDER =
 
-  # = MERGE AND RENDER =
-
-  var updatedFiles: seq[string]
   for libFile in libfiles:
     if libFile.isNil: continue
     let
-      res = libFile.render(features, resources)
+      res = libFile.renderCommands(features, resources)
       filePath = &"{libRoot/libFile.path}.nim"
-    if res.isNone: continue
-    if res.get.isChanged(filePath):
-      filePath.writeFile res.get
-      updatedFiles.add filePath
-
-  if updatedFiles.len == 0:
-    notice title"Generate Complate! No API files have been updated."
-  else:
-    notice title"Generate Complate! Following API files have been updated:":
-      updatedFiles.join("\n").indent(2)
+      file = filePath.open(fmwrite)
+    defer: file.close
+    file.write warningText
+    file.write "\n"
+    file.write $res
 
 when isMainModule:
-  generate()
   genBaseTypes()
   genHandles()
   genEnums()
+  genObjects()
+  genCommands()

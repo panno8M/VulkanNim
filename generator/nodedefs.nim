@@ -96,6 +96,7 @@ type
     theType*: string
     optional*: bool
     values*: Option[string]
+    comment*: Option[string]
     case arrayStyle*: NodeArrayStyle
     of nasNotArray:
       ptrLv*: Natural

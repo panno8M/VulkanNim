@@ -1,5 +1,5 @@
-import handles/handleOperations
-import handles/handleConcretes
+import handles/handle_operations
+import handles/handle_concretes
 
-export handleOperations
-export handleConcretes
+export handle_operations
+export handle_concretes

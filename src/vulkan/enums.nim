@@ -1,5 +1,5 @@
-import enums/typedef
+import enums/enumdefs
 import enums/enumoperations
 
-export typedef
+export enumdefs
 export enumoperations
