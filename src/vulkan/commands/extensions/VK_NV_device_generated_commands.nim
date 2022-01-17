@@ -17,36 +17,35 @@ proc getGeneratedCommandsMemoryRequirementsNV*(
       device: Device;
       pInfo: ptr GeneratedCommandsMemoryRequirementsInfoNV;
       pMemoryRequirements: ptr MemoryRequirements2;
-    ): void {.cdecl, lazyload("vkGetGeneratedCommandsMemoryRequirementsNV", DeviceLevel).}
+    ): void {.lazyload("vkGetGeneratedCommandsMemoryRequirementsNV", DeviceLevel).}
 proc cmdPreprocessGeneratedCommandsNV*(
       commandBuffer: CommandBuffer;
       pGeneratedCommandsInfo: ptr GeneratedCommandsInfoNV;
-    ): void {.cdecl, lazyload("vkCmdPreprocessGeneratedCommandsNV", DeviceLevel).}
+    ): void {.lazyload("vkCmdPreprocessGeneratedCommandsNV", DeviceLevel), cmdchain.}
 proc cmdExecuteGeneratedCommandsNV*(
       commandBuffer: CommandBuffer;
       isPreprocessed: Bool32;
       pGeneratedCommandsInfo: ptr GeneratedCommandsInfoNV;
-    ): void {.cdecl, lazyload("vkCmdExecuteGeneratedCommandsNV", DeviceLevel).}
+    ): void {.lazyload("vkCmdExecuteGeneratedCommandsNV", DeviceLevel), cmdchain.}
 proc cmdBindPipelineShaderGroupNV*(
       commandBuffer: CommandBuffer;
       pipelineBindPoint: PipelineBindPoint;
       pipeline: Pipeline;
       groupIndex: uint32;
-    ): void {.cdecl, lazyload("vkCmdBindPipelineShaderGroupNV", DeviceLevel).}
+    ): void {.lazyload("vkCmdBindPipelineShaderGroupNV", DeviceLevel), cmdchain.}
 proc createIndirectCommandsLayoutNV*(
       device: Device;
       pCreateInfo: ptr IndirectCommandsLayoutCreateInfoNV;
       pAllocator = default(ptr AllocationCallbacks);
       pIndirectCommandsLayout: ptr IndirectCommandsLayoutNV;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCreateIndirectCommandsLayoutNV", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
-      lazyload("vkCreateIndirectCommandsLayoutNV", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 proc destroyIndirectCommandsLayoutNV*(
       device: Device;
       indirectCommandsLayout = default(IndirectCommandsLayoutNV);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyIndirectCommandsLayoutNV", DeviceLevel).}
+    ): void {.lazyload("vkDestroyIndirectCommandsLayoutNV", DeviceLevel).}
 
 
 proc loadAllVK_NV_device_generated_commands*(instance: Instance) = instance.loadCommands:

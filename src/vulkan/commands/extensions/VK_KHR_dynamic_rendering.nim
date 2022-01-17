@@ -16,10 +16,10 @@ const
 proc cmdBeginRenderingKHR*(
       commandBuffer: CommandBuffer;
       pRenderingInfo: ptr RenderingInfoKHR;
-    ): void {.cdecl, lazyload("vkCmdBeginRenderingKHR", DeviceLevel).}
+    ): void {.lazyload("vkCmdBeginRenderingKHR", DeviceLevel), cmdchain.}
 proc cmdEndRenderingKHR*(
       commandBuffer: CommandBuffer;
-    ): void {.cdecl, lazyload("vkCmdEndRenderingKHR", DeviceLevel).}
+    ): void {.lazyload("vkCmdEndRenderingKHR", DeviceLevel), cmdchain.}
 
 
 proc loadAllVK_KHR_dynamic_rendering*(instance: Instance) = instance.loadCommands:

@@ -38,18 +38,18 @@ proc getDeviceBufferMemoryRequirementsKHR*(
       device: Device;
       pInfo: ptr DeviceBufferMemoryRequirementsKHR;
       pMemoryRequirements: ptr MemoryRequirements2;
-    ): void {.cdecl, lazyload("vkGetDeviceBufferMemoryRequirementsKHR", DeviceLevel).}
+    ): void {.lazyload("vkGetDeviceBufferMemoryRequirementsKHR", DeviceLevel).}
 proc getDeviceImageMemoryRequirementsKHR*(
       device: Device;
       pInfo: ptr DeviceImageMemoryRequirementsKHR;
       pMemoryRequirements: ptr MemoryRequirements2;
-    ): void {.cdecl, lazyload("vkGetDeviceImageMemoryRequirementsKHR", DeviceLevel).}
+    ): void {.lazyload("vkGetDeviceImageMemoryRequirementsKHR", DeviceLevel).}
 proc getDeviceImageSparseMemoryRequirementsKHR*(
       device: Device;
       pInfo: ptr DeviceImageMemoryRequirementsKHR;
       pSparseMemoryRequirementCount: ptr uint32;
       pSparseMemoryRequirements {.length: pSparseMemoryRequirementCount.} = default(arrPtr[SparseImageMemoryRequirements2]);
-    ): void {.cdecl, lazyload("vkGetDeviceImageSparseMemoryRequirementsKHR", DeviceLevel).}
+    ): void {.lazyload("vkGetDeviceImageSparseMemoryRequirementsKHR", DeviceLevel).}
 
 
 proc loadAllVK_KHR_maintenance4*(instance: Instance) = instance.loadCommands:

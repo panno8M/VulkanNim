@@ -235,14 +235,13 @@ proc render*(command: NodeCommand): string =
       of lmWithInstance: "lazyload(\"{command.name}\", InstanceLevel)".fmt
       of lmWithDevice: "lazyload(\"{command.name}\", DeviceLevel)".fmt
     let procFutter = block:
-      var futter = "    ): {theType} {{.cdecl,".fmt
+      var futter = "    ): {theType} {{.{loadMethod}".fmt
+      if name[0..2] == "cmd" or name in ["begin", "end", "reset"].mapIt(it & "CommandBuffer"):
+        futter.add ", cmdchain"
       if command.successCodes.len != 0:
-        futter.add "\n      successCodes: @[" & command.successCodes.mapIt("Result." & it.parseEnumValue("", @[])).join(", ") & "],"
+        futter.add ",\n      successCodes: @[" & command.successCodes.mapIt("Result." & it.parseEnumValue("", @[])).join(", ") & "]"
       if command.errorCodes.len != 0:
-        futter.add "\n      errorCodes: @[" & command.errorCodes.mapIt("Result." & it.parseEnumValue("", @[])).join(", ") & "],"
-      if command.successCodes.len+command.errorCodes.len != 0:
-        futter.add "\n      " & loadMethod
-      else: futter.add " " & loadMethod
+        futter.add ",\n      errorCodes: @[" & command.errorCodes.mapIt("Result." & it.parseEnumValue("", @[])).join(", ") & "]"
       futter & ".}"
 
     result.add procHeader

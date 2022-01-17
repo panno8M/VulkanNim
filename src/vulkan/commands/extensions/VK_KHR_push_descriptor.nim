@@ -21,14 +21,14 @@ proc cmdPushDescriptorSetKHR*(
       set: uint32;
       descriptorWriteCount: uint32;
       pDescriptorWrites {.length: descriptorWriteCount.}: arrPtr[WriteDescriptorSet];
-    ): void {.cdecl, lazyload("vkCmdPushDescriptorSetKHR", DeviceLevel).}
+    ): void {.lazyload("vkCmdPushDescriptorSetKHR", DeviceLevel), cmdchain.}
 proc cmdPushDescriptorSetWithTemplateKHR*(
       commandBuffer: CommandBuffer;
       descriptorUpdateTemplate: DescriptorUpdateTemplate;
       layout: PipelineLayout;
       set: uint32;
       pData: pointer;
-    ): void {.cdecl, lazyload("vkCmdPushDescriptorSetWithTemplateKHR", DeviceLevel).}
+    ): void {.lazyload("vkCmdPushDescriptorSetWithTemplateKHR", DeviceLevel), cmdchain.}
 
 
 proc loadAllVK_KHR_push_descriptor*(instance: Instance) = instance.loadCommands:

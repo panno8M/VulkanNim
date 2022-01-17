@@ -16,59 +16,56 @@ const
 proc setDebugUtilsObjectNameEXT*(
       device: Device;
       pNameInfo: ptr DebugUtilsObjectNameInfoEXT;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkSetDebugUtilsObjectNameEXT", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
-      lazyload("vkSetDebugUtilsObjectNameEXT", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 proc setDebugUtilsObjectTagEXT*(
       device: Device;
       pTagInfo: ptr DebugUtilsObjectTagInfoEXT;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkSetDebugUtilsObjectTagEXT", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
-      lazyload("vkSetDebugUtilsObjectTagEXT", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 proc queueBeginDebugUtilsLabelEXT*(
       queue: Queue;
       pLabelInfo: ptr DebugUtilsLabelEXT;
-    ): void {.cdecl, lazyload("vkQueueBeginDebugUtilsLabelEXT", DeviceLevel).}
+    ): void {.lazyload("vkQueueBeginDebugUtilsLabelEXT", DeviceLevel).}
 proc queueEndDebugUtilsLabelEXT*(
       queue: Queue;
-    ): void {.cdecl, lazyload("vkQueueEndDebugUtilsLabelEXT", DeviceLevel).}
+    ): void {.lazyload("vkQueueEndDebugUtilsLabelEXT", DeviceLevel).}
 proc queueInsertDebugUtilsLabelEXT*(
       queue: Queue;
       pLabelInfo: ptr DebugUtilsLabelEXT;
-    ): void {.cdecl, lazyload("vkQueueInsertDebugUtilsLabelEXT", DeviceLevel).}
+    ): void {.lazyload("vkQueueInsertDebugUtilsLabelEXT", DeviceLevel).}
 proc cmdBeginDebugUtilsLabelEXT*(
       commandBuffer: CommandBuffer;
       pLabelInfo: ptr DebugUtilsLabelEXT;
-    ): void {.cdecl, lazyload("vkCmdBeginDebugUtilsLabelEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdBeginDebugUtilsLabelEXT", DeviceLevel), cmdchain.}
 proc cmdEndDebugUtilsLabelEXT*(
       commandBuffer: CommandBuffer;
-    ): void {.cdecl, lazyload("vkCmdEndDebugUtilsLabelEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdEndDebugUtilsLabelEXT", DeviceLevel), cmdchain.}
 proc cmdInsertDebugUtilsLabelEXT*(
       commandBuffer: CommandBuffer;
       pLabelInfo: ptr DebugUtilsLabelEXT;
-    ): void {.cdecl, lazyload("vkCmdInsertDebugUtilsLabelEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdInsertDebugUtilsLabelEXT", DeviceLevel), cmdchain.}
 proc createDebugUtilsMessengerEXT*(
       instance: Instance;
       pCreateInfo: ptr DebugUtilsMessengerCreateInfoEXT;
       pAllocator = default(ptr AllocationCallbacks);
       pMessenger: ptr DebugUtilsMessengerEXT;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCreateDebugUtilsMessengerEXT", InstanceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory],
-      lazyload("vkCreateDebugUtilsMessengerEXT", InstanceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory].}
 proc destroyDebugUtilsMessengerEXT*(
       instance: Instance;
       messenger = default(DebugUtilsMessengerEXT);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyDebugUtilsMessengerEXT", InstanceLevel).}
+    ): void {.lazyload("vkDestroyDebugUtilsMessengerEXT", InstanceLevel).}
 proc submitDebugUtilsMessageEXT*(
       instance: Instance;
       messageSeverity: DebugUtilsMessageSeverityFlagBitsEXT;
       messageTypes: DebugUtilsMessageTypeFlagsEXT;
       pCallbackData: ptr DebugUtilsMessengerCallbackDataEXT;
-    ): void {.cdecl, lazyload("vkSubmitDebugUtilsMessageEXT", InstanceLevel).}
+    ): void {.lazyload("vkSubmitDebugUtilsMessageEXT", InstanceLevel).}
 
 
 proc loadAllVK_EXT_debug_utils*(instance: Instance) = instance.loadCommands:

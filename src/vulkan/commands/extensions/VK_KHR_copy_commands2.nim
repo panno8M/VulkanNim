@@ -16,27 +16,27 @@ const
 proc cmdCopyBuffer2KHR*(
       commandBuffer: CommandBuffer;
       pCopyBufferInfo: ptr CopyBufferInfo2KHR;
-    ): void {.cdecl, lazyload("vkCmdCopyBuffer2KHR", DeviceLevel).}
+    ): void {.lazyload("vkCmdCopyBuffer2KHR", DeviceLevel), cmdchain.}
 proc cmdCopyImage2KHR*(
       commandBuffer: CommandBuffer;
       pCopyImageInfo: ptr CopyImageInfo2KHR;
-    ): void {.cdecl, lazyload("vkCmdCopyImage2KHR", DeviceLevel).}
+    ): void {.lazyload("vkCmdCopyImage2KHR", DeviceLevel), cmdchain.}
 proc cmdCopyBufferToImage2KHR*(
       commandBuffer: CommandBuffer;
       pCopyBufferToImageInfo: ptr CopyBufferToImageInfo2KHR;
-    ): void {.cdecl, lazyload("vkCmdCopyBufferToImage2KHR", DeviceLevel).}
+    ): void {.lazyload("vkCmdCopyBufferToImage2KHR", DeviceLevel), cmdchain.}
 proc cmdCopyImageToBuffer2KHR*(
       commandBuffer: CommandBuffer;
       pCopyImageToBufferInfo: ptr CopyImageToBufferInfo2KHR;
-    ): void {.cdecl, lazyload("vkCmdCopyImageToBuffer2KHR", DeviceLevel).}
+    ): void {.lazyload("vkCmdCopyImageToBuffer2KHR", DeviceLevel), cmdchain.}
 proc cmdBlitImage2KHR*(
       commandBuffer: CommandBuffer;
       pBlitImageInfo: ptr BlitImageInfo2KHR;
-    ): void {.cdecl, lazyload("vkCmdBlitImage2KHR", DeviceLevel).}
+    ): void {.lazyload("vkCmdBlitImage2KHR", DeviceLevel), cmdchain.}
 proc cmdResolveImage2KHR*(
       commandBuffer: CommandBuffer;
       pResolveImageInfo: ptr ResolveImageInfo2KHR;
-    ): void {.cdecl, lazyload("vkCmdResolveImage2KHR", DeviceLevel).}
+    ): void {.lazyload("vkCmdResolveImage2KHR", DeviceLevel), cmdchain.}
 
 
 proc loadAllVK_KHR_copy_commands2*(instance: Instance) = instance.loadCommands:

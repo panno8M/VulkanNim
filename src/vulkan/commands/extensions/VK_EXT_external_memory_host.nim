@@ -18,10 +18,9 @@ proc getMemoryHostPointerPropertiesEXT*(
       handleType: ExternalMemoryHandleTypeFlagBits;
       pHostPointer: pointer;
       pMemoryHostPointerProperties: ptr MemoryHostPointerPropertiesEXT;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetMemoryHostPointerPropertiesEXT", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidExternalHandle],
-      lazyload("vkGetMemoryHostPointerPropertiesEXT", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidExternalHandle].}
 
 
 proc loadAllVK_EXT_external_memory_host*(instance: Instance) = instance.loadCommands:

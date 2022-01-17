@@ -30,10 +30,9 @@ proc createImagePipeSurfaceFUCHSIA*(
       pCreateInfo: ptr ImagePipeSurfaceCreateInfoFUCHSIA;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCreateImagePipeSurfaceFUCHSIA", InstanceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
-      lazyload("vkCreateImagePipeSurfaceFUCHSIA", InstanceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 
 # VK_FUCHSIA_external_memory
 # ==========================
@@ -41,37 +40,33 @@ proc getMemoryZirconHandleFUCHSIA*(
       device: Device;
       pGetZirconHandleInfo: ptr MemoryGetZirconHandleInfoFUCHSIA;
       pZirconHandle: ptr zx_handle_t;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetMemoryZirconHandleFUCHSIA", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory],
-      lazyload("vkGetMemoryZirconHandleFUCHSIA", DeviceLevel).}
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 proc getMemoryZirconHandlePropertiesFUCHSIA*(
       device: Device;
       handleType: ExternalMemoryHandleTypeFlagBits;
       zirconHandle: zx_handle_t;
       pMemoryZirconHandleProperties: ptr MemoryZirconHandlePropertiesFUCHSIA;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetMemoryZirconHandlePropertiesFUCHSIA", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorInvalidExternalHandle],
-      lazyload("vkGetMemoryZirconHandlePropertiesFUCHSIA", DeviceLevel).}
+      errorCodes: @[Result.errorInvalidExternalHandle].}
 
 # VK_FUCHSIA_external_semaphore
 # =============================
 proc importSemaphoreZirconHandleFUCHSIA*(
       device: Device;
       pImportSemaphoreZirconHandleInfo: ptr ImportSemaphoreZirconHandleInfoFUCHSIA;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkImportSemaphoreZirconHandleFUCHSIA", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidExternalHandle],
-      lazyload("vkImportSemaphoreZirconHandleFUCHSIA", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidExternalHandle].}
 proc getSemaphoreZirconHandleFUCHSIA*(
       device: Device;
       pGetZirconHandleInfo: ptr SemaphoreGetZirconHandleInfoFUCHSIA;
       pZirconHandle: ptr zx_handle_t;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetSemaphoreZirconHandleFUCHSIA", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory],
-      lazyload("vkGetSemaphoreZirconHandleFUCHSIA", DeviceLevel).}
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 
 # VK_FUCHSIA_buffer_collection
 # ============================
@@ -80,39 +75,35 @@ proc createBufferCollectionFUCHSIA*(
       pCreateInfo: ptr BufferCollectionCreateInfoFUCHSIA;
       pAllocator = default(ptr AllocationCallbacks);
       pCollection: ptr BufferCollectionFUCHSIA;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCreateBufferCollectionFUCHSIA", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidExternalHandle, Result.errorInitializationFailed],
-      lazyload("vkCreateBufferCollectionFUCHSIA", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidExternalHandle, Result.errorInitializationFailed].}
 proc setBufferCollectionImageConstraintsFUCHSIA*(
       device: Device;
       collection: BufferCollectionFUCHSIA;
       pImageConstraintsInfo: ptr ImageConstraintsInfoFUCHSIA;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkSetBufferCollectionImageConstraintsFUCHSIA", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorInitializationFailed, Result.errorOutOfHostMemory, Result.errorFormatNotSupported],
-      lazyload("vkSetBufferCollectionImageConstraintsFUCHSIA", DeviceLevel).}
+      errorCodes: @[Result.errorInitializationFailed, Result.errorOutOfHostMemory, Result.errorFormatNotSupported].}
 proc setBufferCollectionBufferConstraintsFUCHSIA*(
       device: Device;
       collection: BufferCollectionFUCHSIA;
       pBufferConstraintsInfo: ptr BufferConstraintsInfoFUCHSIA;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkSetBufferCollectionBufferConstraintsFUCHSIA", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorInitializationFailed, Result.errorOutOfHostMemory, Result.errorFormatNotSupported],
-      lazyload("vkSetBufferCollectionBufferConstraintsFUCHSIA", DeviceLevel).}
+      errorCodes: @[Result.errorInitializationFailed, Result.errorOutOfHostMemory, Result.errorFormatNotSupported].}
 proc destroyBufferCollectionFUCHSIA*(
       device: Device;
       collection: BufferCollectionFUCHSIA;
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyBufferCollectionFUCHSIA", DeviceLevel).}
+    ): void {.lazyload("vkDestroyBufferCollectionFUCHSIA", DeviceLevel).}
 proc getBufferCollectionPropertiesFUCHSIA*(
       device: Device;
       collection: BufferCollectionFUCHSIA;
       pProperties: ptr BufferCollectionPropertiesFUCHSIA;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetBufferCollectionPropertiesFUCHSIA", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInitializationFailed],
-      lazyload("vkGetBufferCollectionPropertiesFUCHSIA", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInitializationFailed].}
 
 
 proc loadAllVK_FUCHSIA_imagepipe_surface*(instance: Instance) = instance.loadCommands:

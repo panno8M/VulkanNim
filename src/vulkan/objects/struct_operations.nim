@@ -1,17 +1,7 @@
 import std/sequtils
 import std/options
-import std/sets
 import std/sugar
 import std/macros {.all.}
-
-import tools
-
-converter toArrPtr*[T](x: var seq[T]): arrPtr[T] =
-  if x.len == 0: nil
-  else: addr x[0]
-converter toArrPtr*[I, T](x: var array[I, T]): arrPtr[T] =
-  when x.len == 0: nil
-  else: addr x[0]
 
 macro `{}`*[T: object](Struct: typedesc[T]; args: varargs[untyped]): T =
   ## It makes it easier to understand what is optional, what is

@@ -28,10 +28,9 @@ proc createAndroidSurfaceKHR*(
       pCreateInfo: ptr AndroidSurfaceCreateInfoKHR;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCreateAndroidSurfaceKHR", InstanceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorNativeWindowInUseKhr],
-      lazyload("vkCreateAndroidSurfaceKHR", InstanceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorNativeWindowInUseKhr].}
 
 # VK_ANDROID_native_buffer
 # ========================
@@ -40,21 +39,21 @@ proc getSwapchainGrallocUsageANDROID*(
       format: Format;
       imageUsage: ImageUsageFlags;
       grallocUsage: ptr int;
-    ): Result {.cdecl, lazyload("vkGetSwapchainGrallocUsageANDROID", DeviceLevel).}
+    ): Result {.lazyload("vkGetSwapchainGrallocUsageANDROID", DeviceLevel).}
 proc acquireImageANDROID*(
       device: Device;
       image: Image;
       nativeFenceFd: int;
       semaphore: Semaphore;
       fence: Fence;
-    ): Result {.cdecl, lazyload("vkAcquireImageANDROID", DeviceLevel).}
+    ): Result {.lazyload("vkAcquireImageANDROID", DeviceLevel).}
 proc queueSignalReleaseImageANDROID*(
       queue: Queue;
       waitSemaphoreCount: uint32;
       pWaitSemaphores {.length: waitSemaphoreCount.}: arrPtr[Semaphore];
       image: Image;
       pNativeFenceFd: ptr int;
-    ): Result {.cdecl, lazyload("vkQueueSignalReleaseImageANDROID", DeviceLevel).}
+    ): Result {.lazyload("vkQueueSignalReleaseImageANDROID", DeviceLevel).}
 proc getSwapchainGrallocUsage2ANDROID*(
       device: Device;
       format: Format;
@@ -62,7 +61,7 @@ proc getSwapchainGrallocUsage2ANDROID*(
       swapchainImageUsage: SwapchainImageUsageFlagsANDROID;
       grallocConsumerUsage: ptr uint64;
       grallocProducerUsage: ptr uint64;
-    ): Result {.cdecl, lazyload("vkGetSwapchainGrallocUsage2ANDROID", DeviceLevel).}
+    ): Result {.lazyload("vkGetSwapchainGrallocUsage2ANDROID", DeviceLevel).}
 
 # VK_ANDROID_external_memory_android_hardware_buffer
 # ==================================================
@@ -70,18 +69,16 @@ proc getAndroidHardwareBufferPropertiesANDROID*(
       device: Device;
       buffer: ptr AHardwareBuffer;
       pProperties: ptr AndroidHardwareBufferPropertiesANDROID;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetAndroidHardwareBufferPropertiesANDROID", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidExternalHandleKhr],
-      lazyload("vkGetAndroidHardwareBufferPropertiesANDROID", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidExternalHandleKhr].}
 proc getMemoryAndroidHardwareBufferANDROID*(
       device: Device;
       pInfo: ptr MemoryGetAndroidHardwareBufferInfoANDROID;
       pBuffer: ptr ptr AHardwareBuffer;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetMemoryAndroidHardwareBufferANDROID", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory],
-      lazyload("vkGetMemoryAndroidHardwareBufferANDROID", DeviceLevel).}
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 
 
 proc loadAllVK_KHR_android_surface*(instance: Instance) = instance.loadCommands:

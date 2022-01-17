@@ -30,7 +30,7 @@ proc cmdDrawIndirectCount*(
       countBufferOffset: DeviceSize;
       maxDrawCount: uint32;
       stride: uint32;
-    ): void {.cdecl, preload("vkCmdDrawIndirectCount").}
+    ): void {.preload("vkCmdDrawIndirectCount"), cmdchain.}
 proc cmdDrawIndexedIndirectCount*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
@@ -39,73 +39,69 @@ proc cmdDrawIndexedIndirectCount*(
       countBufferOffset: DeviceSize;
       maxDrawCount: uint32;
       stride: uint32;
-    ): void {.cdecl, preload("vkCmdDrawIndexedIndirectCount").}
+    ): void {.preload("vkCmdDrawIndexedIndirectCount"), cmdchain.}
 # Promoted from VK_KHR_create_renderpass2 (extension 110)
 proc createRenderPass2*(
       device: Device;
       pCreateInfo: ptr RenderPassCreateInfo2;
       pAllocator = default(ptr AllocationCallbacks);
       pRenderPass: ptr RenderPass;
-    ): Result {.cdecl,
+    ): Result {.preload("vkCreateRenderPass2"),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
-      preload("vkCreateRenderPass2").}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 proc cmdBeginRenderPass2*(
       commandBuffer: CommandBuffer;
       pRenderPassBegin: ptr RenderPassBeginInfo;
       pSubpassBeginInfo: ptr SubpassBeginInfo;
-    ): void {.cdecl, preload("vkCmdBeginRenderPass2").}
+    ): void {.preload("vkCmdBeginRenderPass2"), cmdchain.}
 proc cmdNextSubpass2*(
       commandBuffer: CommandBuffer;
       pSubpassBeginInfo: ptr SubpassBeginInfo;
       pSubpassEndInfo: ptr SubpassEndInfo;
-    ): void {.cdecl, preload("vkCmdNextSubpass2").}
+    ): void {.preload("vkCmdNextSubpass2"), cmdchain.}
 proc cmdEndRenderPass2*(
       commandBuffer: CommandBuffer;
       pSubpassEndInfo: ptr SubpassEndInfo;
-    ): void {.cdecl, preload("vkCmdEndRenderPass2").}
+    ): void {.preload("vkCmdEndRenderPass2"), cmdchain.}
 # Promoted from VK_EXT_host_query_reset (extension 262)
 proc resetQueryPool*(
       device: Device;
       queryPool: QueryPool;
       firstQuery: uint32;
       queryCount: uint32;
-    ): void {.cdecl, preload("vkResetQueryPool").}
+    ): void {.preload("vkResetQueryPool").}
 # Promoted from VK_KHR_timeline_semaphore (extension 208)
 proc getSemaphoreCounterValue*(
       device: Device;
       semaphore: Semaphore;
       pValue: ptr uint64;
-    ): Result {.cdecl,
+    ): Result {.preload("vkGetSemaphoreCounterValue"),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost],
-      preload("vkGetSemaphoreCounterValue").}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost].}
 proc waitSemaphores*(
       device: Device;
       pWaitInfo: ptr SemaphoreWaitInfo;
       timeout: uint64;
-    ): Result {.cdecl,
+    ): Result {.preload("vkWaitSemaphores"),
       successCodes: @[Result.success, Result.timeout],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost],
-      preload("vkWaitSemaphores").}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost].}
 proc signalSemaphore*(
       device: Device;
       pSignalInfo: ptr SemaphoreSignalInfo;
-    ): Result {.cdecl,
+    ): Result {.preload("vkSignalSemaphore"),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
-      preload("vkSignalSemaphore").}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 # Promoted from VK_KHR_buffer_device_address (extension 258)
 proc getBufferDeviceAddress*(
       device: Device;
       pInfo: ptr BufferDeviceAddressInfo;
-    ): DeviceAddress {.cdecl, preload("vkGetBufferDeviceAddress").}
+    ): DeviceAddress {.preload("vkGetBufferDeviceAddress").}
 proc getBufferOpaqueCaptureAddress*(
       device: Device;
       pInfo: ptr BufferDeviceAddressInfo;
-    ): uint64 {.cdecl, preload("vkGetBufferOpaqueCaptureAddress").}
+    ): uint64 {.preload("vkGetBufferOpaqueCaptureAddress").}
 proc getDeviceMemoryOpaqueCaptureAddress*(
       device: Device;
       pInfo: ptr DeviceMemoryOpaqueCaptureAddressInfo;
-    ): uint64 {.cdecl, preload("vkGetDeviceMemoryOpaqueCaptureAddress").}
+    ): uint64 {.preload("vkGetDeviceMemoryOpaqueCaptureAddress").}
 

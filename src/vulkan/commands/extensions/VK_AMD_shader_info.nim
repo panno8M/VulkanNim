@@ -20,10 +20,9 @@ proc getShaderInfoAMD*(
       infoType: ShaderInfoTypeAMD;
       pInfoSize: ptr uint;
       pInfo {.length: pInfoSize.} = default(pointer);
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetShaderInfoAMD", DeviceLevel),
       successCodes: @[Result.success, Result.incomplete],
-      errorCodes: @[Result.errorFeatureNotPresent, Result.errorOutOfHostMemory],
-      lazyload("vkGetShaderInfoAMD", DeviceLevel).}
+      errorCodes: @[Result.errorFeatureNotPresent, Result.errorOutOfHostMemory].}
 
 
 proc loadAllVK_AMD_shader_info*(instance: Instance) = instance.loadCommands:

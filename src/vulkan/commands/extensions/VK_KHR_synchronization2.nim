@@ -19,49 +19,48 @@ proc cmdSetEvent2KHR*(
       commandBuffer: CommandBuffer;
       event: Event;
       pDependencyInfo: ptr DependencyInfoKHR;
-    ): void {.cdecl, lazyload("vkCmdSetEvent2KHR", DeviceLevel).}
+    ): void {.lazyload("vkCmdSetEvent2KHR", DeviceLevel), cmdchain.}
 proc cmdResetEvent2KHR*(
       commandBuffer: CommandBuffer;
       event: Event;
       stageMask = default(PipelineStageFlags2KHR);
-    ): void {.cdecl, lazyload("vkCmdResetEvent2KHR", DeviceLevel).}
+    ): void {.lazyload("vkCmdResetEvent2KHR", DeviceLevel), cmdchain.}
 proc cmdWaitEvents2KHR*(
       commandBuffer: CommandBuffer;
       eventCount: uint32;
       pEvents {.length: eventCount.}: arrPtr[Event];
       pDependencyInfos {.length: eventCount.}: arrPtr[DependencyInfoKHR];
-    ): void {.cdecl, lazyload("vkCmdWaitEvents2KHR", DeviceLevel).}
+    ): void {.lazyload("vkCmdWaitEvents2KHR", DeviceLevel), cmdchain.}
 proc cmdPipelineBarrier2KHR*(
       commandBuffer: CommandBuffer;
       pDependencyInfo: ptr DependencyInfoKHR;
-    ): void {.cdecl, lazyload("vkCmdPipelineBarrier2KHR", DeviceLevel).}
+    ): void {.lazyload("vkCmdPipelineBarrier2KHR", DeviceLevel), cmdchain.}
 proc cmdWriteTimestamp2KHR*(
       commandBuffer: CommandBuffer;
       stage = default(PipelineStageFlags2KHR);
       queryPool: QueryPool;
       query: uint32;
-    ): void {.cdecl, lazyload("vkCmdWriteTimestamp2KHR", DeviceLevel).}
+    ): void {.lazyload("vkCmdWriteTimestamp2KHR", DeviceLevel), cmdchain.}
 proc queueSubmit2KHR*(
       queue: Queue;
       submitCount = default(uint32);
       pSubmits {.length: submitCount.}: arrPtr[SubmitInfo2KHR];
       fence = default(Fence);
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkQueueSubmit2KHR", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost],
-      lazyload("vkQueueSubmit2KHR", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost].}
 proc cmdWriteBufferMarker2AMD*(
       commandBuffer: CommandBuffer;
       stage = default(PipelineStageFlags2KHR);
       dstBuffer: Buffer;
       dstOffset: DeviceSize;
       marker: uint32;
-    ): void {.cdecl, lazyload("vkCmdWriteBufferMarker2AMD", DeviceLevel).}
+    ): void {.lazyload("vkCmdWriteBufferMarker2AMD", DeviceLevel), cmdchain.}
 proc getQueueCheckpointData2NV*(
       queue: Queue;
       pCheckpointDataCount: ptr uint32;
       pCheckpointData {.length: pCheckpointDataCount.} = default(arrPtr[CheckpointData2NV]);
-    ): void {.cdecl, lazyload("vkGetQueueCheckpointData2NV", DeviceLevel).}
+    ): void {.lazyload("vkGetQueueCheckpointData2NV", DeviceLevel).}
 
 
 proc loadAllVK_KHR_synchronization2*(instance: Instance) = instance.loadCommands:

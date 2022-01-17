@@ -16,28 +16,26 @@ const
 proc debugMarkerSetObjectTagEXT*(
       device: Device;
       pTagInfo: ptr DebugMarkerObjectTagInfoEXT;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkDebugMarkerSetObjectTagEXT", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
-      lazyload("vkDebugMarkerSetObjectTagEXT", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 proc debugMarkerSetObjectNameEXT*(
       device: Device;
       pNameInfo: ptr DebugMarkerObjectNameInfoEXT;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkDebugMarkerSetObjectNameEXT", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
-      lazyload("vkDebugMarkerSetObjectNameEXT", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 proc cmdDebugMarkerBeginEXT*(
       commandBuffer: CommandBuffer;
       pMarkerInfo: ptr DebugMarkerMarkerInfoEXT;
-    ): void {.cdecl, lazyload("vkCmdDebugMarkerBeginEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdDebugMarkerBeginEXT", DeviceLevel), cmdchain.}
 proc cmdDebugMarkerEndEXT*(
       commandBuffer: CommandBuffer;
-    ): void {.cdecl, lazyload("vkCmdDebugMarkerEndEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdDebugMarkerEndEXT", DeviceLevel), cmdchain.}
 proc cmdDebugMarkerInsertEXT*(
       commandBuffer: CommandBuffer;
       pMarkerInfo: ptr DebugMarkerMarkerInfoEXT;
-    ): void {.cdecl, lazyload("vkCmdDebugMarkerInsertEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdDebugMarkerInsertEXT", DeviceLevel), cmdchain.}
 
 
 proc loadAllVK_EXT_debug_marker*(instance: Instance) = instance.loadCommands:

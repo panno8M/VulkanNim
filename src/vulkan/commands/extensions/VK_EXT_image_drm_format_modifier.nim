@@ -17,10 +17,9 @@ proc getImageDrmFormatModifierPropertiesEXT*(
       device: Device;
       image: Image;
       pProperties: ptr ImageDrmFormatModifierPropertiesEXT;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetImageDrmFormatModifierPropertiesEXT", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory],
-      lazyload("vkGetImageDrmFormatModifierPropertiesEXT", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory].}
 
 
 proc loadAllVK_EXT_image_drm_format_modifier*(instance: Instance) = instance.loadCommands:

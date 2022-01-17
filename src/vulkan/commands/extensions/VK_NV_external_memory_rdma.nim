@@ -17,10 +17,9 @@ proc getMemoryRemoteAddressNV*(
       device: Device;
       pMemoryGetRemoteAddressInfo: ptr MemoryGetRemoteAddressInfoNV;
       pAddress: ptr RemoteAddressNV;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetMemoryRemoteAddressNV", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorInvalidExternalHandle],
-      lazyload("vkGetMemoryRemoteAddressNV", DeviceLevel).}
+      errorCodes: @[Result.errorInvalidExternalHandle].}
 
 
 proc loadAllVK_NV_external_memory_rdma*(instance: Instance) = instance.loadCommands:

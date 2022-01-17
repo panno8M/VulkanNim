@@ -16,12 +16,12 @@ const
 proc cmdSetSampleLocationsEXT*(
       commandBuffer: CommandBuffer;
       pSampleLocationsInfo: ptr SampleLocationsInfoEXT;
-    ): void {.cdecl, lazyload("vkCmdSetSampleLocationsEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdSetSampleLocationsEXT", DeviceLevel), cmdchain.}
 proc getPhysicalDeviceMultisamplePropertiesEXT*(
       physicalDevice: PhysicalDevice;
       samples: SampleCountFlagBits;
       pMultisampleProperties: ptr MultisamplePropertiesEXT;
-    ): void {.cdecl, lazyload("vkGetPhysicalDeviceMultisamplePropertiesEXT", InstanceLevel).}
+    ): void {.lazyload("vkGetPhysicalDeviceMultisamplePropertiesEXT", InstanceLevel).}
 
 
 proc loadAllVK_EXT_sample_locations*(instance: Instance) = instance.loadCommands:

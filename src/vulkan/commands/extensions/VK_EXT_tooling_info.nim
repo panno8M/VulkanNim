@@ -17,10 +17,9 @@ proc getPhysicalDeviceToolPropertiesEXT*(
       physicalDevice: PhysicalDevice;
       pToolCount: ptr uint32;
       pToolProperties {.length: pToolCount.} = default(arrPtr[PhysicalDeviceToolPropertiesEXT]);
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetPhysicalDeviceToolPropertiesEXT", InstanceLevel),
       successCodes: @[Result.success, Result.incomplete],
-      errorCodes: @[Result.errorOutOfHostMemory],
-      lazyload("vkGetPhysicalDeviceToolPropertiesEXT", InstanceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory].}
 
 
 proc loadAllVK_EXT_tooling_info*(instance: Instance) = instance.loadCommands:

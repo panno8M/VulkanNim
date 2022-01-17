@@ -23,9 +23,12 @@ template loadInto*[T: proc](cage: var T) {.pragma.}
 macro preload*(loadFrom: string; body): untyped =
   result = body
   result.expectKind nnkProcDef
-  result.pragma.add(
+  result.pragma = nnkPragma.newTree concat(
+    @[(quote do: cdecl),
     (quote do: dynlib(`vkDllPath`)),
-    (quote do: importc(`loadFrom`)))
+    (quote do: importc(`loadFrom`))],
+    result.pragma[0..^1],
+  )
 
 
 macro lazyload*(loadFrom: string; with = InstanceLevel; body): untyped =
@@ -33,7 +36,7 @@ macro lazyload*(loadFrom: string; with = InstanceLevel; body): untyped =
   ##    proc queuePresentKHR*(
   ##          queue: Queue;
   ##          pPresentInfo: ptr PresentInfoKHR;
-  ##        ): Result {.cdecl, lazyload("vkQueuePresentKHR", DeviceLevel).}
+  ##        ): Result {.lazyload("vkQueuePresentKHR", DeviceLevel), yourPragma.}
   ##
   ## is expanded as:
   ##
@@ -43,13 +46,15 @@ macro lazyload*(loadFrom: string; with = InstanceLevel; body): untyped =
   ##          pPresentInfo: ptr PresentInfoKHR;
   ##        ): Result {.cdecl, loadable("vkQueuePresentKHR", DeviceLevel).}
   ##
-  ##    var queuePresentKHR_CAGE: Option[PFN_queuePresentKHR]
+  ##    var queuePresentKHR_CAGE: PFN_queuePresentKHR
   ##
   ##    proc queuePresentKHR*(
   ##          queue: Queue;
   ##          pPresentInfo: ptr PresentInfoKHR;
-  ##        ): Result {.loadInto: queuePresentKHR_CAGE.}
-  ##      get(queuePresentKHR_CAGE)(queue, pPresentInfo)
+  ##        ): Result {.cdecl, loadInto: queuePresentKHR_CAGE, yourPragma.}
+  ##      if queuePresentKHR_CAGE.isNil:
+  ##        raise newException(UnloadedDefect, "\"queuePresentKHR\" has been called which has not yet been loaded.")
+  ##      queuePresentKHR_CAGE(queue, pPresentInfo)
   proc isExported(n: NimNode): bool =
     n.kind == nnkPostfix and n[0].eqIdent "*"
 
@@ -57,12 +62,11 @@ macro lazyload*(loadFrom: string; with = InstanceLevel; body): untyped =
   if body.body.kind != nnkEmpty: error("the body must be empty")
 
   let
-    procTyPragma = newNimNode(nnkPragma)
-    .add( body.pragma[0..^1] )
-    .add( quote do: loadable(`loadFrom`, `with`) )
-    procTy = newNimNode(nnkProcTy).add(
+    procTy = nnkProcTy.newTree(
       body.params,
-      procTyPragma)
+      nnkPragma.newTree(
+        ident"cdecl",
+        ident"loadable".newCall(loadFrom, with)))
 
     typeName = ident(&"PFN_{body.name}")
     cageName = ident(&"{body.name}_CAGE")
@@ -88,12 +92,12 @@ macro lazyload*(loadFrom: string; with = InstanceLevel; body): untyped =
         ),
         cageName.newCall(cageparams)
       ),
-      pragmas= newNimNode(nnkPragma)
-        .add(procTyPragma[0..^1])
-        .add(quote do: loadInto(`cageName`))
+      pragmas= nnkPragma.newTree(
+        ident"cdecl",
+        ident"loadInto".newCall(cageName))
+      .add(body.pragma[0..^1])
     )
-
-  quote do:
-    `typeDef`
-    `cageDef`
-    `accessorDef`
+  newStmtList(
+    typeDef,
+    cageDef,
+    accessorDef)

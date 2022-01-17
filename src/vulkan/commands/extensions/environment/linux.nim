@@ -30,16 +30,15 @@ proc createXlibSurfaceKHR*(
       pCreateInfo: ptr XlibSurfaceCreateInfoKHR;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCreateXlibSurfaceKHR", InstanceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
-      lazyload("vkCreateXlibSurfaceKHR", InstanceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 proc getPhysicalDeviceXlibPresentationSupportKHR*(
       physicalDevice: PhysicalDevice;
       queueFamilyIndex: uint32;
       dpy: ptr Display;
       visualID: VisualID;
-    ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceXlibPresentationSupportKHR", InstanceLevel).}
+    ): Bool32 {.lazyload("vkGetPhysicalDeviceXlibPresentationSupportKHR", InstanceLevel).}
 
 # VK_KHR_xcb_surface
 # ==================
@@ -48,16 +47,15 @@ proc createXcbSurfaceKHR*(
       pCreateInfo: ptr XcbSurfaceCreateInfoKHR;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCreateXcbSurfaceKHR", InstanceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
-      lazyload("vkCreateXcbSurfaceKHR", InstanceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 proc getPhysicalDeviceXcbPresentationSupportKHR*(
       physicalDevice: PhysicalDevice;
       queueFamilyIndex: uint32;
       connection: ptr XcbConnection;
       visual_id: XcbVisualid;
-    ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceXcbPresentationSupportKHR", InstanceLevel).}
+    ): Bool32 {.lazyload("vkGetPhysicalDeviceXcbPresentationSupportKHR", InstanceLevel).}
 
 # VK_KHR_wayland_surface
 # ======================
@@ -66,15 +64,14 @@ proc createWaylandSurfaceKHR*(
       pCreateInfo: ptr WaylandSurfaceCreateInfoKHR;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCreateWaylandSurfaceKHR", InstanceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
-      lazyload("vkCreateWaylandSurfaceKHR", InstanceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 proc getPhysicalDeviceWaylandPresentationSupportKHR*(
       physicalDevice: PhysicalDevice;
       queueFamilyIndex: uint32;
       display: ptr wl_display;
-    ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceWaylandPresentationSupportKHR", InstanceLevel).}
+    ): Bool32 {.lazyload("vkGetPhysicalDeviceWaylandPresentationSupportKHR", InstanceLevel).}
 
 # VK_EXT_acquire_xlib_display
 # ===========================
@@ -82,19 +79,17 @@ proc acquireXlibDisplayEXT*(
       physicalDevice: PhysicalDevice;
       dpy: ptr Display;
       display: DisplayKHR;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkAcquireXlibDisplayEXT", InstanceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInitializationFailed],
-      lazyload("vkAcquireXlibDisplayEXT", InstanceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInitializationFailed].}
 proc getRandROutputDisplayEXT*(
       physicalDevice: PhysicalDevice;
       dpy: ptr Display;
       rrOutput: RROutput;
       pDisplay: ptr DisplayKHR;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetRandROutputDisplayEXT", InstanceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory],
-      lazyload("vkGetRandROutputDisplayEXT", InstanceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory].}
 
 
 proc loadAllVK_KHR_xlib_surface*(instance: Instance) = instance.loadCommands:

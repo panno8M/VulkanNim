@@ -18,32 +18,30 @@ proc createPrivateDataSlotEXT*(
       pCreateInfo: ptr PrivateDataSlotCreateInfoEXT;
       pAllocator = default(ptr AllocationCallbacks);
       pPrivateDataSlot: ptr PrivateDataSlotEXT;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCreatePrivateDataSlotEXT", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory],
-      lazyload("vkCreatePrivateDataSlotEXT", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory].}
 proc destroyPrivateDataSlotEXT*(
       device: Device;
       privateDataSlot = default(PrivateDataSlotEXT);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyPrivateDataSlotEXT", DeviceLevel).}
+    ): void {.lazyload("vkDestroyPrivateDataSlotEXT", DeviceLevel).}
 proc setPrivateDataEXT*(
       device: Device;
       objectType: ObjectType;
       objectHandle: uint64;
       privateDataSlot: PrivateDataSlotEXT;
       data: uint64;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkSetPrivateDataEXT", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory],
-      lazyload("vkSetPrivateDataEXT", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory].}
 proc getPrivateDataEXT*(
       device: Device;
       objectType: ObjectType;
       objectHandle: uint64;
       privateDataSlot: PrivateDataSlotEXT;
       pData: ptr uint64;
-    ): void {.cdecl, lazyload("vkGetPrivateDataEXT", DeviceLevel).}
+    ): void {.lazyload("vkGetPrivateDataEXT", DeviceLevel).}
 
 
 proc loadAllVK_EXT_private_data*(instance: Instance) = instance.loadCommands:

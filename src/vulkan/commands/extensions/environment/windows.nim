@@ -42,14 +42,13 @@ proc createWin32SurfaceKHR*(
       pCreateInfo: ptr Win32SurfaceCreateInfoKHR;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCreateWin32SurfaceKHR", InstanceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
-      lazyload("vkCreateWin32SurfaceKHR", InstanceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 proc getPhysicalDeviceWin32PresentationSupportKHR*(
       physicalDevice: PhysicalDevice;
       queueFamilyIndex: uint32;
-    ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceWin32PresentationSupportKHR", InstanceLevel).}
+    ): Bool32 {.lazyload("vkGetPhysicalDeviceWin32PresentationSupportKHR", InstanceLevel).}
 
 # VK_NV_external_memory_win32
 # ===========================
@@ -58,10 +57,9 @@ proc getMemoryWin32HandleNV*(
       memory: DeviceMemory;
       handleType: ExternalMemoryHandleTypeFlagsNV;
       pHandle: ptr Win32Handle;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetMemoryWin32HandleNV", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory],
-      lazyload("vkGetMemoryWin32HandleNV", DeviceLevel).}
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 
 # VK_KHR_external_memory_win32
 # ============================
@@ -69,55 +67,49 @@ proc getMemoryWin32HandleKHR*(
       device: Device;
       pGetWin32HandleInfo: ptr MemoryGetWin32HandleInfoKHR;
       pHandle: ptr Win32Handle;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetMemoryWin32HandleKHR", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory],
-      lazyload("vkGetMemoryWin32HandleKHR", DeviceLevel).}
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 proc getMemoryWin32HandlePropertiesKHR*(
       device: Device;
       handleType: ExternalMemoryHandleTypeFlagBits;
       handle: Win32Handle;
       pMemoryWin32HandleProperties: ptr MemoryWin32HandlePropertiesKHR;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetMemoryWin32HandlePropertiesKHR", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidExternalHandle],
-      lazyload("vkGetMemoryWin32HandlePropertiesKHR", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidExternalHandle].}
 
 # VK_KHR_external_semaphore_win32
 # ===============================
 proc importSemaphoreWin32HandleKHR*(
       device: Device;
       pImportSemaphoreWin32HandleInfo: ptr ImportSemaphoreWin32HandleInfoKHR;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkImportSemaphoreWin32HandleKHR", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidExternalHandle],
-      lazyload("vkImportSemaphoreWin32HandleKHR", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidExternalHandle].}
 proc getSemaphoreWin32HandleKHR*(
       device: Device;
       pGetWin32HandleInfo: ptr SemaphoreGetWin32HandleInfoKHR;
       pHandle: ptr Win32Handle;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetSemaphoreWin32HandleKHR", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory],
-      lazyload("vkGetSemaphoreWin32HandleKHR", DeviceLevel).}
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 
 # VK_KHR_external_fence_win32
 # ===========================
 proc importFenceWin32HandleKHR*(
       device: Device;
       pImportFenceWin32HandleInfo: ptr ImportFenceWin32HandleInfoKHR;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkImportFenceWin32HandleKHR", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidExternalHandle],
-      lazyload("vkImportFenceWin32HandleKHR", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidExternalHandle].}
 proc getFenceWin32HandleKHR*(
       device: Device;
       pGetWin32HandleInfo: ptr FenceGetWin32HandleInfoKHR;
       pHandle: ptr Win32Handle;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetFenceWin32HandleKHR", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory],
-      lazyload("vkGetFenceWin32HandleKHR", DeviceLevel).}
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 
 
 proc loadAllVK_KHR_win32_surface*(instance: Instance) = instance.loadCommands:

@@ -18,28 +18,25 @@ proc getPipelineExecutablePropertiesKHR*(
       pPipelineInfo: ptr PipelineInfoKHR;
       pExecutableCount: ptr uint32;
       pProperties {.length: pExecutableCount.} = default(arrPtr[PipelineExecutablePropertiesKHR]);
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetPipelineExecutablePropertiesKHR", DeviceLevel),
       successCodes: @[Result.success, Result.incomplete],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
-      lazyload("vkGetPipelineExecutablePropertiesKHR", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 proc getPipelineExecutableStatisticsKHR*(
       device: Device;
       pExecutableInfo: ptr PipelineExecutableInfoKHR;
       pStatisticCount: ptr uint32;
       pStatistics {.length: pStatisticCount.} = default(arrPtr[PipelineExecutableStatisticKHR]);
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetPipelineExecutableStatisticsKHR", DeviceLevel),
       successCodes: @[Result.success, Result.incomplete],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
-      lazyload("vkGetPipelineExecutableStatisticsKHR", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 proc getPipelineExecutableInternalRepresentationsKHR*(
       device: Device;
       pExecutableInfo: ptr PipelineExecutableInfoKHR;
       pInternalRepresentationCount: ptr uint32;
       pInternalRepresentations {.length: pInternalRepresentationCount.} = default(arrPtr[PipelineExecutableInternalRepresentationKHR]);
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetPipelineExecutableInternalRepresentationsKHR", DeviceLevel),
       successCodes: @[Result.success, Result.incomplete],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
-      lazyload("vkGetPipelineExecutableInternalRepresentationsKHR", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 
 
 proc loadAllVK_KHR_pipeline_executable_properties*(instance: Instance) = instance.loadCommands:

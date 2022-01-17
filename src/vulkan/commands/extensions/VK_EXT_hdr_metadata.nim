@@ -18,7 +18,7 @@ proc setHdrMetadataEXT*(
       swapchainCount: uint32;
       pSwapchains {.length: swapchainCount.}: arrPtr[SwapchainKHR];
       pMetadata {.length: swapchainCount.}: arrPtr[HdrMetadataEXT];
-    ): void {.cdecl, lazyload("vkSetHdrMetadataEXT", DeviceLevel).}
+    ): void {.lazyload("vkSetHdrMetadataEXT", DeviceLevel).}
 
 
 proc loadAllVK_EXT_hdr_metadata*(instance: Instance) = instance.loadCommands:

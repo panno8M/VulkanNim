@@ -16,10 +16,10 @@ const
 proc cmdBeginConditionalRenderingEXT*(
       commandBuffer: CommandBuffer;
       pConditionalRenderingBegin: ptr ConditionalRenderingBeginInfoEXT;
-    ): void {.cdecl, lazyload("vkCmdBeginConditionalRenderingEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdBeginConditionalRenderingEXT", DeviceLevel), cmdchain.}
 proc cmdEndConditionalRenderingEXT*(
       commandBuffer: CommandBuffer;
-    ): void {.cdecl, lazyload("vkCmdEndConditionalRenderingEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdEndConditionalRenderingEXT", DeviceLevel), cmdchain.}
 
 
 proc loadAllVK_EXT_conditional_rendering*(instance: Instance) = instance.loadCommands:

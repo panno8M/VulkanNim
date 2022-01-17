@@ -16,15 +16,14 @@ const
 proc getImageViewHandleNVX*(
       device: Device;
       pInfo: ptr ImageViewHandleInfoNVX;
-    ): uint32 {.cdecl, lazyload("vkGetImageViewHandleNVX", DeviceLevel).}
+    ): uint32 {.lazyload("vkGetImageViewHandleNVX", DeviceLevel).}
 proc getImageViewAddressNVX*(
       device: Device;
       imageView: ImageView;
       pProperties: ptr ImageViewAddressPropertiesNVX;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetImageViewAddressNVX", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorUnknown],
-      lazyload("vkGetImageViewAddressNVX", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorUnknown].}
 
 
 proc loadAllVK_NVX_image_view_handle*(instance: Instance) = instance.loadCommands:

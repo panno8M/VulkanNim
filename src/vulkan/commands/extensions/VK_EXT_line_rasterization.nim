@@ -17,7 +17,7 @@ proc cmdSetLineStippleEXT*(
       commandBuffer: CommandBuffer;
       lineStippleFactor: uint32;
       lineStipplePattern: uint16;
-    ): void {.cdecl, lazyload("vkCmdSetLineStippleEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdSetLineStippleEXT", DeviceLevel), cmdchain.}
 
 
 proc loadAllVK_EXT_line_rasterization*(instance: Instance) = instance.loadCommands:

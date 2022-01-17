@@ -16,12 +16,12 @@ const
 proc cmdSetCheckpointNV*(
       commandBuffer: CommandBuffer;
       pCheckpointMarker: pointer;
-    ): void {.cdecl, lazyload("vkCmdSetCheckpointNV", DeviceLevel).}
+    ): void {.lazyload("vkCmdSetCheckpointNV", DeviceLevel), cmdchain.}
 proc getQueueCheckpointDataNV*(
       queue: Queue;
       pCheckpointDataCount: ptr uint32;
       pCheckpointData {.length: pCheckpointDataCount.} = default(arrPtr[CheckpointDataNV]);
-    ): void {.cdecl, lazyload("vkGetQueueCheckpointDataNV", DeviceLevel).}
+    ): void {.lazyload("vkGetQueueCheckpointDataNV", DeviceLevel).}
 
 
 proc loadAllVK_NV_device_diagnostic_checkpoints*(instance: Instance) = instance.loadCommands:

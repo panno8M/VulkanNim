@@ -16,64 +16,56 @@ const
 proc initializePerformanceApiINTEL*(
       device: Device;
       pInitializeInfo: ptr InitializePerformanceApiInfoINTEL;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkInitializePerformanceApiINTEL", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory],
-      lazyload("vkInitializePerformanceApiINTEL", DeviceLevel).}
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 proc uninitializePerformanceApiINTEL*(
       device: Device;
-    ): void {.cdecl, lazyload("vkUninitializePerformanceApiINTEL", DeviceLevel).}
+    ): void {.lazyload("vkUninitializePerformanceApiINTEL", DeviceLevel).}
 proc cmdSetPerformanceMarkerINTEL*(
       commandBuffer: CommandBuffer;
       pMarkerInfo: ptr PerformanceMarkerInfoINTEL;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCmdSetPerformanceMarkerINTEL", DeviceLevel), cmdchain,
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory],
-      lazyload("vkCmdSetPerformanceMarkerINTEL", DeviceLevel).}
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 proc cmdSetPerformanceStreamMarkerINTEL*(
       commandBuffer: CommandBuffer;
       pMarkerInfo: ptr PerformanceStreamMarkerInfoINTEL;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCmdSetPerformanceStreamMarkerINTEL", DeviceLevel), cmdchain,
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory],
-      lazyload("vkCmdSetPerformanceStreamMarkerINTEL", DeviceLevel).}
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 proc cmdSetPerformanceOverrideINTEL*(
       commandBuffer: CommandBuffer;
       pOverrideInfo: ptr PerformanceOverrideInfoINTEL;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCmdSetPerformanceOverrideINTEL", DeviceLevel), cmdchain,
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory],
-      lazyload("vkCmdSetPerformanceOverrideINTEL", DeviceLevel).}
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 proc acquirePerformanceConfigurationINTEL*(
       device: Device;
       pAcquireInfo: ptr PerformanceConfigurationAcquireInfoINTEL;
       pConfiguration: ptr PerformanceConfigurationINTEL;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkAcquirePerformanceConfigurationINTEL", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory],
-      lazyload("vkAcquirePerformanceConfigurationINTEL", DeviceLevel).}
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 proc releasePerformanceConfigurationINTEL*(
       device: Device;
       configuration = default(PerformanceConfigurationINTEL);
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkReleasePerformanceConfigurationINTEL", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory],
-      lazyload("vkReleasePerformanceConfigurationINTEL", DeviceLevel).}
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 proc queueSetPerformanceConfigurationINTEL*(
       queue: Queue;
       configuration: PerformanceConfigurationINTEL;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkQueueSetPerformanceConfigurationINTEL", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory],
-      lazyload("vkQueueSetPerformanceConfigurationINTEL", DeviceLevel).}
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 proc getPerformanceParameterINTEL*(
       device: Device;
       parameter: PerformanceParameterTypeINTEL;
       pValue: ptr PerformanceValueINTEL;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetPerformanceParameterINTEL", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory],
-      lazyload("vkGetPerformanceParameterINTEL", DeviceLevel).}
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 
 
 proc loadAllVK_INTEL_performance_query*(instance: Instance) = instance.loadCommands:

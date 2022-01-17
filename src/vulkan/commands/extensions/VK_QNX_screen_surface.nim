@@ -18,15 +18,14 @@ proc createScreenSurfaceQNX*(
       pCreateInfo: ptr ScreenSurfaceCreateInfoQNX;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCreateScreenSurfaceQNX", InstanceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
-      lazyload("vkCreateScreenSurfaceQNX", InstanceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 proc getPhysicalDeviceScreenPresentationSupportQNX*(
       physicalDevice: PhysicalDevice;
       queueFamilyIndex: uint32;
       window: ptr screen_window;
-    ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceScreenPresentationSupportQNX", InstanceLevel).}
+    ): Bool32 {.lazyload("vkGetPhysicalDeviceScreenPresentationSupportQNX", InstanceLevel).}
 
 
 proc loadAllVK_QNX_screen_surface*(instance: Instance) = instance.loadCommands:

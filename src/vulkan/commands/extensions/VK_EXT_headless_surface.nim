@@ -18,10 +18,9 @@ proc createHeadlessSurfaceEXT*(
       pCreateInfo: ptr HeadlessSurfaceCreateInfoEXT;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCreateHeadlessSurfaceEXT", InstanceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
-      lazyload("vkCreateHeadlessSurfaceEXT", InstanceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 
 
 proc loadAllVK_EXT_headless_surface*(instance: Instance) = instance.loadCommands:

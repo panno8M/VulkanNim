@@ -20,34 +20,34 @@ proc cmdBindTransformFeedbackBuffersEXT*(
       pBuffers {.length: bindingCount.}: arrPtr[Buffer];
       pOffsets {.length: bindingCount.}: arrPtr[DeviceSize];
       pSizes {.length: bindingCount.} = default(arrPtr[DeviceSize]);
-    ): void {.cdecl, lazyload("vkCmdBindTransformFeedbackBuffersEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdBindTransformFeedbackBuffersEXT", DeviceLevel), cmdchain.}
 proc cmdBeginTransformFeedbackEXT*(
       commandBuffer: CommandBuffer;
       firstCounterBuffer: uint32;
       counterBufferCount = default(uint32);
       pCounterBuffers {.length: counterBufferCount.}: arrPtr[Buffer];
       pCounterBufferOffsets {.length: counterBufferCount.} = default(arrPtr[DeviceSize]);
-    ): void {.cdecl, lazyload("vkCmdBeginTransformFeedbackEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdBeginTransformFeedbackEXT", DeviceLevel), cmdchain.}
 proc cmdEndTransformFeedbackEXT*(
       commandBuffer: CommandBuffer;
       firstCounterBuffer: uint32;
       counterBufferCount = default(uint32);
       pCounterBuffers {.length: counterBufferCount.}: arrPtr[Buffer];
       pCounterBufferOffsets {.length: counterBufferCount.} = default(arrPtr[DeviceSize]);
-    ): void {.cdecl, lazyload("vkCmdEndTransformFeedbackEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdEndTransformFeedbackEXT", DeviceLevel), cmdchain.}
 proc cmdBeginQueryIndexedEXT*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
       query: uint32;
       flags = default(QueryControlFlags);
       index: uint32;
-    ): void {.cdecl, lazyload("vkCmdBeginQueryIndexedEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdBeginQueryIndexedEXT", DeviceLevel), cmdchain.}
 proc cmdEndQueryIndexedEXT*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
       query: uint32;
       index: uint32;
-    ): void {.cdecl, lazyload("vkCmdEndQueryIndexedEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdEndQueryIndexedEXT", DeviceLevel), cmdchain.}
 proc cmdDrawIndirectByteCountEXT*(
       commandBuffer: CommandBuffer;
       instanceCount: uint32;
@@ -56,7 +56,7 @@ proc cmdDrawIndirectByteCountEXT*(
       counterBufferOffset: DeviceSize;
       counterOffset: uint32;
       vertexStride: uint32;
-    ): void {.cdecl, lazyload("vkCmdDrawIndirectByteCountEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdDrawIndirectByteCountEXT", DeviceLevel), cmdchain.}
 
 
 proc loadAllVK_EXT_transform_feedback*(instance: Instance) = instance.loadCommands:

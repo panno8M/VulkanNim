@@ -17,13 +17,12 @@ proc getDeviceSubpassShadingMaxWorkgroupSizeHUAWEI*(
       device: Device;
       renderpass: RenderPass;
       pMaxWorkgroupSize: ptr Extent2D;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI", DeviceLevel),
       successCodes: @[Result.success, Result.incomplete],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr],
-      lazyload("vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr].}
 proc cmdSubpassShadingHUAWEI*(
       commandBuffer: CommandBuffer;
-    ): void {.cdecl, lazyload("vkCmdSubpassShadingHUAWEI", DeviceLevel).}
+    ): void {.lazyload("vkCmdSubpassShadingHUAWEI", DeviceLevel), cmdchain.}
 
 
 proc loadAllVK_HUAWEI_subpass_shading*(instance: Instance) = instance.loadCommands:

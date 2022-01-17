@@ -18,10 +18,9 @@ proc createMetalSurfaceEXT*(
       pCreateInfo: ptr MetalSurfaceCreateInfoEXT;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCreateMetalSurfaceEXT", InstanceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorNativeWindowInUseKhr],
-      lazyload("vkCreateMetalSurfaceEXT", InstanceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorNativeWindowInUseKhr].}
 
 
 proc loadAllVK_EXT_metal_surface*(instance: Instance) = instance.loadCommands:

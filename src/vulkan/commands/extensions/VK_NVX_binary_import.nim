@@ -18,33 +18,31 @@ proc createCuModuleNVX*(
       pCreateInfo: ptr CuModuleCreateInfoNVX;
       pAllocator = default(ptr AllocationCallbacks);
       pModule: ptr CuModuleNVX;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCreateCuModuleNVX", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInitializationFailed],
-      lazyload("vkCreateCuModuleNVX", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInitializationFailed].}
 proc createCuFunctionNVX*(
       device: Device;
       pCreateInfo: ptr CuFunctionCreateInfoNVX;
       pAllocator = default(ptr AllocationCallbacks);
       pFunction: ptr CuFunctionNVX;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCreateCuFunctionNVX", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInitializationFailed],
-      lazyload("vkCreateCuFunctionNVX", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInitializationFailed].}
 proc destroyCuModuleNVX*(
       device: Device;
       module: CuModuleNVX;
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyCuModuleNVX", DeviceLevel).}
+    ): void {.lazyload("vkDestroyCuModuleNVX", DeviceLevel).}
 proc destroyCuFunctionNVX*(
       device: Device;
       function: CuFunctionNVX;
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyCuFunctionNVX", DeviceLevel).}
+    ): void {.lazyload("vkDestroyCuFunctionNVX", DeviceLevel).}
 proc cmdCuLaunchKernelNVX*(
       commandBuffer: CommandBuffer;
       pLaunchInfo: ptr CuLaunchInfoNVX;
-    ): void {.cdecl, lazyload("vkCmdCuLaunchKernelNVX", DeviceLevel).}
+    ): void {.lazyload("vkCmdCuLaunchKernelNVX", DeviceLevel), cmdchain.}
 
 
 proc loadAllVK_NVX_binary_import*(instance: Instance) = instance.loadCommands:

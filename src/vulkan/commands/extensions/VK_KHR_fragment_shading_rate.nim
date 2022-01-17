@@ -17,15 +17,14 @@ proc getPhysicalDeviceFragmentShadingRatesKHR*(
       physicalDevice: PhysicalDevice;
       pFragmentShadingRateCount: ptr uint32;
       pFragmentShadingRates {.length: pFragmentShadingRateCount.} = default(arrPtr[PhysicalDeviceFragmentShadingRateKHR]);
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetPhysicalDeviceFragmentShadingRatesKHR", InstanceLevel),
       successCodes: @[Result.success, Result.incomplete],
-      errorCodes: @[Result.errorOutOfHostMemory],
-      lazyload("vkGetPhysicalDeviceFragmentShadingRatesKHR", InstanceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory].}
 proc cmdSetFragmentShadingRateKHR*(
       commandBuffer: CommandBuffer;
       pFragmentSize: ptr Extent2D;
       combinerOps: FragmentShadingRateCombinerOpKHR;
-    ): void {.cdecl, lazyload("vkCmdSetFragmentShadingRateKHR", DeviceLevel).}
+    ): void {.lazyload("vkCmdSetFragmentShadingRateKHR", DeviceLevel), cmdchain.}
 
 
 proc loadAllVK_KHR_fragment_shading_rate*(instance: Instance) = instance.loadCommands:

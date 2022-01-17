@@ -4,6 +4,7 @@ import ../enums
 import ../objects
 import loadercomponents
 import commandloaders
+import cmdchain
 
 import ../objects/tools as objecttools
 import ../objects/temp_externalobjects
@@ -14,6 +15,7 @@ export enums
 export objects
 export loadercomponents
 export commandloaders
+export cmdchain
 
 export objecttools
 export temp_externalobjects

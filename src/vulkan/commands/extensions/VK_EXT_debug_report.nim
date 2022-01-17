@@ -18,15 +18,14 @@ proc createDebugReportCallbackEXT*(
       pCreateInfo: ptr DebugReportCallbackCreateInfoEXT;
       pAllocator = default(ptr AllocationCallbacks);
       pCallback: ptr DebugReportCallbackEXT;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCreateDebugReportCallbackEXT", InstanceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory],
-      lazyload("vkCreateDebugReportCallbackEXT", InstanceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory].}
 proc destroyDebugReportCallbackEXT*(
       instance: Instance;
       callback = default(DebugReportCallbackEXT);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyDebugReportCallbackEXT", InstanceLevel).}
+    ): void {.lazyload("vkDestroyDebugReportCallbackEXT", InstanceLevel).}
 proc debugReportMessageEXT*(
       instance: Instance;
       flags: DebugReportFlagsEXT;
@@ -36,7 +35,7 @@ proc debugReportMessageEXT*(
       messageCode: int32;
       pLayerPrefix: cstring;
       pMessage: cstring;
-    ): void {.cdecl, lazyload("vkDebugReportMessageEXT", InstanceLevel).}
+    ): void {.lazyload("vkDebugReportMessageEXT", InstanceLevel).}
 
 
 proc loadAllVK_EXT_debug_report*(instance: Instance) = instance.loadCommands:

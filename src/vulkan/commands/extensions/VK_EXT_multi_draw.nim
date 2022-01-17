@@ -20,7 +20,7 @@ proc cmdDrawMultiEXT*(
       instanceCount: uint32;
       firstInstance: uint32;
       stride: uint32;
-    ): void {.cdecl, lazyload("vkCmdDrawMultiEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdDrawMultiEXT", DeviceLevel), cmdchain.}
 proc cmdDrawMultiIndexedEXT*(
       commandBuffer: CommandBuffer;
       drawCount = default(uint32);
@@ -29,7 +29,7 @@ proc cmdDrawMultiIndexedEXT*(
       firstInstance: uint32;
       stride: uint32;
       pVertexOffset = default(ptr int32);
-    ): void {.cdecl, lazyload("vkCmdDrawMultiIndexedEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdDrawMultiIndexedEXT", DeviceLevel), cmdchain.}
 
 
 proc loadAllVK_EXT_multi_draw*(instance: Instance) = instance.loadCommands:

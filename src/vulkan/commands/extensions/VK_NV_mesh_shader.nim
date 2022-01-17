@@ -17,14 +17,14 @@ proc cmdDrawMeshTasksNV*(
       commandBuffer: CommandBuffer;
       taskCount: uint32;
       firstTask: uint32;
-    ): void {.cdecl, lazyload("vkCmdDrawMeshTasksNV", DeviceLevel).}
+    ): void {.lazyload("vkCmdDrawMeshTasksNV", DeviceLevel), cmdchain.}
 proc cmdDrawMeshTasksIndirectNV*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
       offset: DeviceSize;
       drawCount: uint32;
       stride: uint32;
-    ): void {.cdecl, lazyload("vkCmdDrawMeshTasksIndirectNV", DeviceLevel).}
+    ): void {.lazyload("vkCmdDrawMeshTasksIndirectNV", DeviceLevel), cmdchain.}
 proc cmdDrawMeshTasksIndirectCountNV*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
@@ -33,7 +33,7 @@ proc cmdDrawMeshTasksIndirectCountNV*(
       countBufferOffset: DeviceSize;
       maxDrawCount: uint32;
       stride: uint32;
-    ): void {.cdecl, lazyload("vkCmdDrawMeshTasksIndirectCountNV", DeviceLevel).}
+    ): void {.lazyload("vkCmdDrawMeshTasksIndirectCountNV", DeviceLevel), cmdchain.}
 
 
 proc loadAllVK_NV_mesh_shader*(instance: Instance) = instance.loadCommands:

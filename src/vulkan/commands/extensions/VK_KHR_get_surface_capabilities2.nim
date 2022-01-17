@@ -17,19 +17,17 @@ proc getPhysicalDeviceSurfaceCapabilities2KHR*(
       physicalDevice: PhysicalDevice;
       pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR;
       pSurfaceCapabilities: ptr SurfaceCapabilities2KHR;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetPhysicalDeviceSurfaceCapabilities2KHR", InstanceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr],
-      lazyload("vkGetPhysicalDeviceSurfaceCapabilities2KHR", InstanceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr].}
 proc getPhysicalDeviceSurfaceFormats2KHR*(
       physicalDevice: PhysicalDevice;
       pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR;
       pSurfaceFormatCount: ptr uint32;
       pSurfaceFormats {.length: pSurfaceFormatCount.} = default(arrPtr[SurfaceFormat2KHR]);
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetPhysicalDeviceSurfaceFormats2KHR", InstanceLevel),
       successCodes: @[Result.success, Result.incomplete],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr],
-      lazyload("vkGetPhysicalDeviceSurfaceFormats2KHR", InstanceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr].}
 
 
 proc loadAllVK_KHR_get_surface_capabilities2*(instance: Instance) = instance.loadCommands:

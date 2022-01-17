@@ -18,33 +18,30 @@ proc createValidationCacheEXT*(
       pCreateInfo: ptr ValidationCacheCreateInfoEXT;
       pAllocator = default(ptr AllocationCallbacks);
       pValidationCache: ptr ValidationCacheEXT;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCreateValidationCacheEXT", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory],
-      lazyload("vkCreateValidationCacheEXT", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory].}
 proc destroyValidationCacheEXT*(
       device: Device;
       validationCache = default(ValidationCacheEXT);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyValidationCacheEXT", DeviceLevel).}
+    ): void {.lazyload("vkDestroyValidationCacheEXT", DeviceLevel).}
 proc mergeValidationCachesEXT*(
       device: Device;
       dstCache: ValidationCacheEXT;
       srcCacheCount: uint32;
       pSrcCaches {.length: srcCacheCount.}: arrPtr[ValidationCacheEXT];
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkMergeValidationCachesEXT", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
-      lazyload("vkMergeValidationCachesEXT", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 proc getValidationCacheDataEXT*(
       device: Device;
       validationCache: ValidationCacheEXT;
       pDataSize: ptr uint;
       pData {.length: pDataSize.} = default(pointer);
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetValidationCacheDataEXT", DeviceLevel),
       successCodes: @[Result.success, Result.incomplete],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
-      lazyload("vkGetValidationCacheDataEXT", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 
 
 proc loadAllVK_EXT_validation_cache*(instance: Instance) = instance.loadCommands:

@@ -18,15 +18,14 @@ proc createDirectFBSurfaceEXT*(
       pCreateInfo: ptr DirectFBSurfaceCreateInfoEXT;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCreateDirectFBSurfaceEXT", InstanceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
-      lazyload("vkCreateDirectFBSurfaceEXT", InstanceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 proc getPhysicalDeviceDirectFBPresentationSupportEXT*(
       physicalDevice: PhysicalDevice;
       queueFamilyIndex: uint32;
       dfb: ptr IDirectFB;
-    ): Bool32 {.cdecl, lazyload("vkGetPhysicalDeviceDirectFBPresentationSupportEXT", InstanceLevel).}
+    ): Bool32 {.lazyload("vkGetPhysicalDeviceDirectFBPresentationSupportEXT", InstanceLevel).}
 
 
 proc loadAllVK_EXT_directfb_surface*(instance: Instance) = instance.loadCommands:

@@ -16,7 +16,7 @@ const
 proc cmdDecodeVideoKHR*(
       commandBuffer: CommandBuffer;
       pFrameInfo: ptr VideoDecodeInfoKHR;
-    ): void {.cdecl, lazyload("vkCmdDecodeVideoKHR", DeviceLevel).}
+    ): void {.lazyload("vkCmdDecodeVideoKHR", DeviceLevel), cmdchain.}
 
 
 proc loadAllVK_KHR_video_decode_queue*(instance: Instance) = instance.loadCommands:

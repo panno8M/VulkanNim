@@ -18,10 +18,9 @@ proc waitForPresentKHR*(
       swapchain: SwapchainKHR;
       presentId: uint64;
       timeout: uint64;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkWaitForPresentKHR", DeviceLevel),
       successCodes: @[Result.success, Result.timeout],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost],
-      lazyload("vkWaitForPresentKHR", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost].}
 
 
 proc loadAllVK_KHR_present_wait*(instance: Instance) = instance.loadCommands:

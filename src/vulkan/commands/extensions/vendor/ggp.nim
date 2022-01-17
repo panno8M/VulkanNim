@@ -22,10 +22,9 @@ proc createStreamDescriptorSurfaceGGP*(
       pCreateInfo: ptr StreamDescriptorSurfaceCreateInfoGGP;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCreateStreamDescriptorSurfaceGGP", InstanceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorNativeWindowInUseKhr],
-      lazyload("vkCreateStreamDescriptorSurfaceGGP", InstanceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorNativeWindowInUseKhr].}
 
 
 proc loadAllVK_GGP_stream_descriptor_surface*(instance: Instance) = instance.loadCommands:

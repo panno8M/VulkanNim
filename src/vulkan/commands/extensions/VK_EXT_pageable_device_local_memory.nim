@@ -17,7 +17,7 @@ proc setDeviceMemoryPriorityEXT*(
       device: Device;
       memory: DeviceMemory;
       priority: float32;
-    ): void {.cdecl, lazyload("vkSetDeviceMemoryPriorityEXT", DeviceLevel).}
+    ): void {.lazyload("vkSetDeviceMemoryPriorityEXT", DeviceLevel).}
 
 
 proc loadAllVK_EXT_pageable_device_local_memory*(instance: Instance) = instance.loadCommands:

@@ -17,19 +17,17 @@ proc getMemoryFdKHR*(
       device: Device;
       pGetFdInfo: ptr MemoryGetFdInfoKHR;
       pFd: ptr int;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetMemoryFdKHR", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory],
-      lazyload("vkGetMemoryFdKHR", DeviceLevel).}
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 proc getMemoryFdPropertiesKHR*(
       device: Device;
       handleType: ExternalMemoryHandleTypeFlagBits;
       fd: int;
       pMemoryFdProperties: ptr MemoryFdPropertiesKHR;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetMemoryFdPropertiesKHR", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidExternalHandle],
-      lazyload("vkGetMemoryFdPropertiesKHR", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidExternalHandle].}
 
 
 proc loadAllVK_KHR_external_memory_fd*(instance: Instance) = instance.loadCommands:

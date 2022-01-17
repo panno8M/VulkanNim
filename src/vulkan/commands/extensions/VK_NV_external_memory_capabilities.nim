@@ -22,10 +22,9 @@ proc getPhysicalDeviceExternalImageFormatPropertiesNV*(
       flags = default(ImageCreateFlags);
       externalHandleType = default(ExternalMemoryHandleTypeFlagsNV);
       pExternalImageFormatProperties: ptr ExternalImageFormatPropertiesNV;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetPhysicalDeviceExternalImageFormatPropertiesNV", InstanceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorFormatNotSupported],
-      lazyload("vkGetPhysicalDeviceExternalImageFormatPropertiesNV", InstanceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorFormatNotSupported].}
 
 
 proc loadAllVK_NV_external_memory_capabilities*(instance: Instance) = instance.loadCommands:

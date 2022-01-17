@@ -16,10 +16,9 @@ const
 proc getSwapchainStatusKHR*(
       device: Device;
       swapchain: SwapchainKHR;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkGetSwapchainStatusKHR", DeviceLevel),
       successCodes: @[Result.success, Result.suboptimalKhr],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost, Result.errorOutOfDateKhr, Result.errorSurfaceLostKhr, Result.errorFullScreenExclusiveModeLostExt],
-      lazyload("vkGetSwapchainStatusKHR", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost, Result.errorOutOfDateKhr, Result.errorSurfaceLostKhr, Result.errorFullScreenExclusiveModeLostExt].}
 
 
 proc loadAllVK_KHR_shared_presentable_image*(instance: Instance) = instance.loadCommands:

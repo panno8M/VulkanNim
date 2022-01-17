@@ -17,32 +17,29 @@ proc createDeferredOperationKHR*(
       device: Device;
       pAllocator = default(ptr AllocationCallbacks);
       pDeferredOperation: ptr DeferredOperationKHR;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkCreateDeferredOperationKHR", DeviceLevel),
       successCodes: @[Result.success],
-      errorCodes: @[Result.errorOutOfHostMemory],
-      lazyload("vkCreateDeferredOperationKHR", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory].}
 proc destroyDeferredOperationKHR*(
       device: Device;
       operation = default(DeferredOperationKHR);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.cdecl, lazyload("vkDestroyDeferredOperationKHR", DeviceLevel).}
+    ): void {.lazyload("vkDestroyDeferredOperationKHR", DeviceLevel).}
 proc getDeferredOperationMaxConcurrencyKHR*(
       device: Device;
       operation: DeferredOperationKHR;
-    ): uint32 {.cdecl, lazyload("vkGetDeferredOperationMaxConcurrencyKHR", DeviceLevel).}
+    ): uint32 {.lazyload("vkGetDeferredOperationMaxConcurrencyKHR", DeviceLevel).}
 proc getDeferredOperationResultKHR*(
       device: Device;
       operation: DeferredOperationKHR;
-    ): Result {.cdecl,
-      successCodes: @[Result.success, Result.notReady],
-      lazyload("vkGetDeferredOperationResultKHR", DeviceLevel).}
+    ): Result {.lazyload("vkGetDeferredOperationResultKHR", DeviceLevel),
+      successCodes: @[Result.success, Result.notReady].}
 proc deferredOperationJoinKHR*(
       device: Device;
       operation: DeferredOperationKHR;
-    ): Result {.cdecl,
+    ): Result {.lazyload("vkDeferredOperationJoinKHR", DeviceLevel),
       successCodes: @[Result.success, Result.threadDoneKhr, Result.threadIdleKhr],
-      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory],
-      lazyload("vkDeferredOperationJoinKHR", DeviceLevel).}
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 
 
 proc loadAllVK_KHR_deferred_host_operations*(instance: Instance) = instance.loadCommands:

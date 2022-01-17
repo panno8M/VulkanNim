@@ -16,23 +16,23 @@ const
 proc cmdSetPatchControlPointsEXT*(
       commandBuffer: CommandBuffer;
       patchControlPoints: uint32;
-    ): void {.cdecl, lazyload("vkCmdSetPatchControlPointsEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdSetPatchControlPointsEXT", DeviceLevel), cmdchain.}
 proc cmdSetRasterizerDiscardEnableEXT*(
       commandBuffer: CommandBuffer;
       rasterizerDiscardEnable: Bool32;
-    ): void {.cdecl, lazyload("vkCmdSetRasterizerDiscardEnableEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdSetRasterizerDiscardEnableEXT", DeviceLevel), cmdchain.}
 proc cmdSetDepthBiasEnableEXT*(
       commandBuffer: CommandBuffer;
       depthBiasEnable: Bool32;
-    ): void {.cdecl, lazyload("vkCmdSetDepthBiasEnableEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdSetDepthBiasEnableEXT", DeviceLevel), cmdchain.}
 proc cmdSetLogicOpEXT*(
       commandBuffer: CommandBuffer;
       logicOp: LogicOp;
-    ): void {.cdecl, lazyload("vkCmdSetLogicOpEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdSetLogicOpEXT", DeviceLevel), cmdchain.}
 proc cmdSetPrimitiveRestartEnableEXT*(
       commandBuffer: CommandBuffer;
       primitiveRestartEnable: Bool32;
-    ): void {.cdecl, lazyload("vkCmdSetPrimitiveRestartEnableEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdSetPrimitiveRestartEnableEXT", DeviceLevel), cmdchain.}
 
 
 proc loadAllVK_EXT_extended_dynamic_state2*(instance: Instance) = instance.loadCommands:

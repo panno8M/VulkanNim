@@ -16,25 +16,25 @@ const
 proc cmdSetCullModeEXT*(
       commandBuffer: CommandBuffer;
       cullMode = default(CullModeFlags);
-    ): void {.cdecl, lazyload("vkCmdSetCullModeEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdSetCullModeEXT", DeviceLevel), cmdchain.}
 proc cmdSetFrontFaceEXT*(
       commandBuffer: CommandBuffer;
       frontFace: FrontFace;
-    ): void {.cdecl, lazyload("vkCmdSetFrontFaceEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdSetFrontFaceEXT", DeviceLevel), cmdchain.}
 proc cmdSetPrimitiveTopologyEXT*(
       commandBuffer: CommandBuffer;
       primitiveTopology: PrimitiveTopology;
-    ): void {.cdecl, lazyload("vkCmdSetPrimitiveTopologyEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdSetPrimitiveTopologyEXT", DeviceLevel), cmdchain.}
 proc cmdSetViewportWithCountEXT*(
       commandBuffer: CommandBuffer;
       viewportCount: uint32;
       pViewports {.length: viewportCount.}: arrPtr[Viewport];
-    ): void {.cdecl, lazyload("vkCmdSetViewportWithCountEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdSetViewportWithCountEXT", DeviceLevel), cmdchain.}
 proc cmdSetScissorWithCountEXT*(
       commandBuffer: CommandBuffer;
       scissorCount: uint32;
       pScissors {.length: scissorCount.}: arrPtr[Rect2D];
-    ): void {.cdecl, lazyload("vkCmdSetScissorWithCountEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdSetScissorWithCountEXT", DeviceLevel), cmdchain.}
 proc cmdBindVertexBuffers2EXT*(
       commandBuffer: CommandBuffer;
       firstBinding: uint32;
@@ -43,27 +43,27 @@ proc cmdBindVertexBuffers2EXT*(
       pOffsets {.length: bindingCount.}: arrPtr[DeviceSize];
       pSizes {.length: bindingCount.} = default(arrPtr[DeviceSize]);
       pStrides {.length: bindingCount.} = default(arrPtr[DeviceSize]);
-    ): void {.cdecl, lazyload("vkCmdBindVertexBuffers2EXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdBindVertexBuffers2EXT", DeviceLevel), cmdchain.}
 proc cmdSetDepthTestEnableEXT*(
       commandBuffer: CommandBuffer;
       depthTestEnable: Bool32;
-    ): void {.cdecl, lazyload("vkCmdSetDepthTestEnableEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdSetDepthTestEnableEXT", DeviceLevel), cmdchain.}
 proc cmdSetDepthWriteEnableEXT*(
       commandBuffer: CommandBuffer;
       depthWriteEnable: Bool32;
-    ): void {.cdecl, lazyload("vkCmdSetDepthWriteEnableEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdSetDepthWriteEnableEXT", DeviceLevel), cmdchain.}
 proc cmdSetDepthCompareOpEXT*(
       commandBuffer: CommandBuffer;
       depthCompareOp: CompareOp;
-    ): void {.cdecl, lazyload("vkCmdSetDepthCompareOpEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdSetDepthCompareOpEXT", DeviceLevel), cmdchain.}
 proc cmdSetDepthBoundsTestEnableEXT*(
       commandBuffer: CommandBuffer;
       depthBoundsTestEnable: Bool32;
-    ): void {.cdecl, lazyload("vkCmdSetDepthBoundsTestEnableEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdSetDepthBoundsTestEnableEXT", DeviceLevel), cmdchain.}
 proc cmdSetStencilTestEnableEXT*(
       commandBuffer: CommandBuffer;
       stencilTestEnable: Bool32;
-    ): void {.cdecl, lazyload("vkCmdSetStencilTestEnableEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdSetStencilTestEnableEXT", DeviceLevel), cmdchain.}
 proc cmdSetStencilOpEXT*(
       commandBuffer: CommandBuffer;
       faceMask: StencilFaceFlags;
@@ -71,7 +71,7 @@ proc cmdSetStencilOpEXT*(
       passOp: StencilOp;
       depthFailOp: StencilOp;
       compareOp: CompareOp;
-    ): void {.cdecl, lazyload("vkCmdSetStencilOpEXT", DeviceLevel).}
+    ): void {.lazyload("vkCmdSetStencilOpEXT", DeviceLevel), cmdchain.}
 
 
 proc loadAllVK_EXT_extended_dynamic_state*(instance: Instance) = instance.loadCommands:
