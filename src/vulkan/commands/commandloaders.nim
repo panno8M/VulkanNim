@@ -87,5 +87,5 @@ macro loadCommands*(handle: Instance or Device; body): untyped =
   )
 
 template withLoad*[T: proc](procAccessor: T; handle: Instance or Device): T =
-  procAccessor.load(handle)
+  procAccessor.loadCommand(handle)
   procAccessor

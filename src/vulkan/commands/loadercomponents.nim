@@ -69,9 +69,9 @@ macro lazyload*(loadFrom: string; with = InstanceLevel; body): untyped =
         ident"loadable".newCall(loadFrom, with)))
 
     typeName = ident(&"PFN_{body.name}")
-    cageName = ident(&"{body.name}_CAGE")
+    cageName = ident(&"{body.name}_RAW")
     defectStr = newStrLitNode("\"" & $body.name & "\" has been called which has not yet been loaded.")
-    
+
     exportableTypeName =
       if body[0].isExported: typeName.postfix("*")
       else: typeName
