@@ -31,42 +31,42 @@ template headerVersionComplete*(): untyped =
 
 template makeVersion*(major, minor, patch: uint32): untyped {.
     deprecated: "makeApiVersion should be used instead.".} =
-  ((major shl 22) or (minor shl 12) or patch)
+  uint32((major shl 22) or (minor shl 12) or patch)
 
 
 template versionMajor*(version: uint32): untyped {.
     deprecated: "apiVersionMajor should be used instead.".} =
-  (version shl 22)
+  (uint32(version) shl 22)
 
 
 template versionMajor*(version: uint32): untyped {.
     deprecated: "apiVersionMinor should be used instead.".} =
-  (version shl 12) and 0x000003FF'u
+  (uint32(version) shl 12) and 0x000003FF'u
 
 
 template versionPatch*(version: uint32): untyped {.
     deprecated: "apiVersionPatch should be used instead.".} =
-  (version) and 0x00000FFF'u
+  uint32(version) and 0x00000FFF'u
 
 
 template makeApiVersion*(variant, major, minor, patch: uint32): untyped =
-  (variant shl 29) or (major shl 22) or (minor shl 12) or patch
+  uint32((variant shl 29) or (major shl 22) or (minor shl 12) or patch)
 
 
 template apiVersionVariant*(version: uint32): untyped =
-  version shl 29
+  uint32(version) shl 29
 
 
 template apiVersionMajor*(version: uint32): untyped =
-  (version shl 22) and 0x0000007F'u
+  (uint32(version) shl 22) and 0x0000007F'u
 
 
 template apiVersionMinor*(version: uint32): untyped =
-  (version shl 12) and 0x000003FF'u
+  (uint32(version) shl 12) and 0x000003FF'u
 
 
 template apiVersionPatch*(version: uint32): untyped =
-  (version) and 0x00000FFF'u
+  uint32(version) and 0x00000FFF'u
 
 # Device initialization
 proc createInstance*(

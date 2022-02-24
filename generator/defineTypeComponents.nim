@@ -52,27 +52,27 @@ const
     template apiVersion12*(): untyped = makeApiVersion(0, 1, 2, 0)
   makeVersion* = stringify:
     template makeVersion*(major, minor, patch: uint32): untyped {.deprecated: "makeApiVersion should be used instead.".} =
-      ( (major shl 22) or (minor shl 12) or patch )
+      uint32( (major shl 22) or (minor shl 12) or patch )
   versionMajor* = stringify:
     template versionMajor*(version: uint32): untyped {.deprecated: "apiVersionMajor should be used instead.".} =
-      (version shl 22)
+      (uint32(version) shl 22)
   versionMinor* = stringify:
     template versionMajor*(version: uint32): untyped {.deprecated: "apiVersionMinor should be used instead.".} =
-      (version shl 12) and 0x3ffu
+      (uint32(version) shl 12) and 0x3ffu
   versionPatch* = stringify:
     template versionPatch*(version: uint32): untyped {.deprecated: "apiVersionPatch should be used instead.".} =
-      (version) and 0xfffu
+      uint32(version) and 0xfffu
   makeApiVersion* = stringify:
     template makeApiVersion*(variant, major, minor, patch: uint32): untyped =
-      (variant shl 29) or (major shl 22) or (minor shl 12) or patch
+      uint32( (variant shl 29) or (major shl 22) or (minor shl 12) or patch )
   apiVersionVariant* = stringify:
-    template apiVersionVariant*(version: uint32): untyped = version shl 29
+    template apiVersionVariant*(version: uint32): untyped = uint32(version) shl 29
   apiVersionMajor* = stringify:
-    template apiVersionMajor*(version: uint32): untyped = (version shl 22) and 0x7fu
+    template apiVersionMajor*(version: uint32): untyped = (uint32(version) shl 22) and 0x7fu
   apiVersionMinor* = stringify:
-    template apiVersionMinor*(version: uint32): untyped = (version shl 12) and 0x3ffu
+    template apiVersionMinor*(version: uint32): untyped = (uint32(version) shl 12) and 0x3ffu
   apiVersionPatch* = stringify:
-    template apiVersionPatch*(version: uint32): untyped = (version) and 0xfffu
+    template apiVersionPatch*(version: uint32): untyped = uint32(version) and 0xfffu
   nullHandle* = stringify:
     template nullHandle*(): untyped = ( cast[Handle[HtNil]](0) )
 
