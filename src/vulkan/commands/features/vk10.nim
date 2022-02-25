@@ -39,7 +39,7 @@ template versionMajor*(version: uint32): untyped {.
   (uint32(version) shl 22)
 
 
-template versionMajor*(version: uint32): untyped {.
+template versionMinor*(version: uint32): untyped {.
     deprecated: "apiVersionMinor should be used instead.".} =
   (uint32(version) shl 12) and 0x000003FF'u
 

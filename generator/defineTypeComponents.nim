@@ -57,7 +57,7 @@ const
     template versionMajor*(version: uint32): untyped {.deprecated: "apiVersionMajor should be used instead.".} =
       (uint32(version) shl 22)
   versionMinor* = stringify:
-    template versionMajor*(version: uint32): untyped {.deprecated: "apiVersionMinor should be used instead.".} =
+    template versionMinor*(version: uint32): untyped {.deprecated: "apiVersionMinor should be used instead.".} =
       (uint32(version) shl 12) and 0x3ffu
   versionPatch* = stringify:
     template versionPatch*(version: uint32): untyped {.deprecated: "apiVersionPatch should be used instead.".} =
