@@ -55,10 +55,10 @@ const
       uint32( (major shl 22) or (minor shl 12) or patch )
   versionMajor* = stringify:
     template versionMajor*(version: uint32): untyped {.deprecated: "apiVersionMajor should be used instead.".} =
-      (uint32(version) shl 22)
+      (uint32(version) shr 22)
   versionMinor* = stringify:
     template versionMinor*(version: uint32): untyped {.deprecated: "apiVersionMinor should be used instead.".} =
-      (uint32(version) shl 12) and 0x3ffu
+      (uint32(version) shr 12) and 0x3ffu
   versionPatch* = stringify:
     template versionPatch*(version: uint32): untyped {.deprecated: "apiVersionPatch should be used instead.".} =
       uint32(version) and 0xfffu
@@ -66,11 +66,11 @@ const
     template makeApiVersion*(variant, major, minor, patch: uint32): untyped =
       uint32( (variant shl 29) or (major shl 22) or (minor shl 12) or patch )
   apiVersionVariant* = stringify:
-    template apiVersionVariant*(version: uint32): untyped = uint32(version) shl 29
+    template apiVersionVariant*(version: uint32): untyped = uint32(version) shr 29
   apiVersionMajor* = stringify:
-    template apiVersionMajor*(version: uint32): untyped = (uint32(version) shl 22) and 0x7fu
+    template apiVersionMajor*(version: uint32): untyped = (uint32(version) shr 22) and 0x7fu
   apiVersionMinor* = stringify:
-    template apiVersionMinor*(version: uint32): untyped = (uint32(version) shl 12) and 0x3ffu
+    template apiVersionMinor*(version: uint32): untyped = (uint32(version) shr 12) and 0x3ffu
   apiVersionPatch* = stringify:
     template apiVersionPatch*(version: uint32): untyped = uint32(version) and 0xfffu
   nullHandle* = stringify:

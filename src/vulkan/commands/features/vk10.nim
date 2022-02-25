@@ -36,12 +36,12 @@ template makeVersion*(major, minor, patch: uint32): untyped {.
 
 template versionMajor*(version: uint32): untyped {.
     deprecated: "apiVersionMajor should be used instead.".} =
-  (uint32(version) shl 22)
+  (uint32(version) shr 22)
 
 
 template versionMinor*(version: uint32): untyped {.
     deprecated: "apiVersionMinor should be used instead.".} =
-  (uint32(version) shl 12) and 0x000003FF'u
+  (uint32(version) shr 12) and 0x000003FF'u
 
 
 template versionPatch*(version: uint32): untyped {.
@@ -54,15 +54,15 @@ template makeApiVersion*(variant, major, minor, patch: uint32): untyped =
 
 
 template apiVersionVariant*(version: uint32): untyped =
-  uint32(version) shl 29
+  uint32(version) shr 29
 
 
 template apiVersionMajor*(version: uint32): untyped =
-  (uint32(version) shl 22) and 0x0000007F'u
+  (uint32(version) shr 22) and 0x0000007F'u
 
 
 template apiVersionMinor*(version: uint32): untyped =
-  (uint32(version) shl 12) and 0x000003FF'u
+  (uint32(version) shr 12) and 0x000003FF'u
 
 
 template apiVersionPatch*(version: uint32): untyped =

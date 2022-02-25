@@ -146,6 +146,9 @@ proc `-=`*[Flagbits: enum](a: var Flags[Flagbits]; b: Flags[Flagbits]) = a = a -
 proc contains*[Flagbits: enum](flags: Flags[Flagbits]; flagbits: Flagbits): bool =
   (flags and flagbits) != flags.none
 
+proc contains*[Flagbits: enum](a, b: Flags[Flagbits]): bool =
+  b - a == b.none
+
 converter toString*[Flagbits: enum](flags: Flags[Flagbits]): string =
   $flags.toFlagSets
 proc `$`*[Flagbits: enum](flags: Flags[Flagbits]): string =
@@ -173,3 +176,29 @@ proc `carefulNot`*[Flagbits: enum](flags: Flags[Flagbits]): Flags[Flagbits] =
 proc `carefulNot`*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
   ## Mainly used for flags with non-contiguous bits, such as the DebugUtilsMessageSeverity flag.
   carefulNot flagbits.toFlags
+
+when isMainModule:
+  import std/unittest
+  import vulkan/enums
+
+  test "flagsA contains flagsB":
+    let
+      a = QueueFlagBits{graphics}
+      b = QueueFlagBits{graphics, transfer}
+      c = QueueFlagBits{transfer}
+      d = QueueFlagBits{graphics, transfer, compute}
+      e = QueueFlagBits{compute}
+
+    check a in a
+
+    check a in b
+    check b notin a
+
+    check a notin c
+    check c notin a
+
+    check b in d
+    check d notin b
+
+    check b notin e
+    check e notin b
