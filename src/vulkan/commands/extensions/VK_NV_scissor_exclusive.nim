@@ -18,7 +18,8 @@ proc cmdSetExclusiveScissorNV*(
       firstExclusiveScissor: uint32;
       exclusiveScissorCount: uint32;
       pExclusiveScissors {.length: exclusiveScissorCount.}: arrPtr[Rect2D];
-    ): void {.lazyload("vkCmdSetExclusiveScissorNV", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetExclusiveScissorNV", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 
 
 proc loadAllVK_NV_scissor_exclusive*(instance: Instance) = instance.loadCommands:

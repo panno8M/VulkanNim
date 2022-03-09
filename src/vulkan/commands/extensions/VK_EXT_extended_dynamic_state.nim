@@ -16,25 +16,30 @@ const
 proc cmdSetCullModeEXT*(
       commandBuffer: CommandBuffer;
       cullMode = default(CullModeFlags);
-    ): void {.lazyload("vkCmdSetCullModeEXT", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetCullModeEXT", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdSetFrontFaceEXT*(
       commandBuffer: CommandBuffer;
       frontFace: FrontFace;
-    ): void {.lazyload("vkCmdSetFrontFaceEXT", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetFrontFaceEXT", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdSetPrimitiveTopologyEXT*(
       commandBuffer: CommandBuffer;
       primitiveTopology: PrimitiveTopology;
-    ): void {.lazyload("vkCmdSetPrimitiveTopologyEXT", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetPrimitiveTopologyEXT", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdSetViewportWithCountEXT*(
       commandBuffer: CommandBuffer;
       viewportCount: uint32;
       pViewports {.length: viewportCount.}: arrPtr[Viewport];
-    ): void {.lazyload("vkCmdSetViewportWithCountEXT", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetViewportWithCountEXT", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdSetScissorWithCountEXT*(
       commandBuffer: CommandBuffer;
       scissorCount: uint32;
       pScissors {.length: scissorCount.}: arrPtr[Rect2D];
-    ): void {.lazyload("vkCmdSetScissorWithCountEXT", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetScissorWithCountEXT", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdBindVertexBuffers2EXT*(
       commandBuffer: CommandBuffer;
       firstBinding: uint32;
@@ -43,27 +48,33 @@ proc cmdBindVertexBuffers2EXT*(
       pOffsets {.length: bindingCount.}: arrPtr[DeviceSize];
       pSizes {.length: bindingCount.} = default(arrPtr[DeviceSize]);
       pStrides {.length: bindingCount.} = default(arrPtr[DeviceSize]);
-    ): void {.lazyload("vkCmdBindVertexBuffers2EXT", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdBindVertexBuffers2EXT", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdSetDepthTestEnableEXT*(
       commandBuffer: CommandBuffer;
       depthTestEnable: Bool32;
-    ): void {.lazyload("vkCmdSetDepthTestEnableEXT", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetDepthTestEnableEXT", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdSetDepthWriteEnableEXT*(
       commandBuffer: CommandBuffer;
       depthWriteEnable: Bool32;
-    ): void {.lazyload("vkCmdSetDepthWriteEnableEXT", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetDepthWriteEnableEXT", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdSetDepthCompareOpEXT*(
       commandBuffer: CommandBuffer;
       depthCompareOp: CompareOp;
-    ): void {.lazyload("vkCmdSetDepthCompareOpEXT", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetDepthCompareOpEXT", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdSetDepthBoundsTestEnableEXT*(
       commandBuffer: CommandBuffer;
       depthBoundsTestEnable: Bool32;
-    ): void {.lazyload("vkCmdSetDepthBoundsTestEnableEXT", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetDepthBoundsTestEnableEXT", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdSetStencilTestEnableEXT*(
       commandBuffer: CommandBuffer;
       stencilTestEnable: Bool32;
-    ): void {.lazyload("vkCmdSetStencilTestEnableEXT", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetStencilTestEnableEXT", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdSetStencilOpEXT*(
       commandBuffer: CommandBuffer;
       faceMask: StencilFaceFlags;
@@ -71,7 +82,8 @@ proc cmdSetStencilOpEXT*(
       passOp: StencilOp;
       depthFailOp: StencilOp;
       compareOp: CompareOp;
-    ): void {.lazyload("vkCmdSetStencilOpEXT", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetStencilOpEXT", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 
 
 proc loadAllVK_EXT_extended_dynamic_state*(instance: Instance) = instance.loadCommands:

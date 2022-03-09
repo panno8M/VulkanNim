@@ -21,18 +21,21 @@ proc getGeneratedCommandsMemoryRequirementsNV*(
 proc cmdPreprocessGeneratedCommandsNV*(
       commandBuffer: CommandBuffer;
       pGeneratedCommandsInfo: ptr GeneratedCommandsInfoNV;
-    ): void {.lazyload("vkCmdPreprocessGeneratedCommandsNV", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdPreprocessGeneratedCommandsNV", DeviceLevel),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 proc cmdExecuteGeneratedCommandsNV*(
       commandBuffer: CommandBuffer;
       isPreprocessed: Bool32;
       pGeneratedCommandsInfo: ptr GeneratedCommandsInfoNV;
-    ): void {.lazyload("vkCmdExecuteGeneratedCommandsNV", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdExecuteGeneratedCommandsNV", DeviceLevel),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 proc cmdBindPipelineShaderGroupNV*(
       commandBuffer: CommandBuffer;
       pipelineBindPoint: PipelineBindPoint;
       pipeline: Pipeline;
       groupIndex: uint32;
-    ): void {.lazyload("vkCmdBindPipelineShaderGroupNV", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdBindPipelineShaderGroupNV", DeviceLevel),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 proc createIndirectCommandsLayoutNV*(
       device: Device;
       pCreateInfo: ptr IndirectCommandsLayoutCreateInfoNV;

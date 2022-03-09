@@ -17,7 +17,8 @@ proc cmdBindInvocationMaskHUAWEI*(
       commandBuffer: CommandBuffer;
       imageView = default(ImageView);
       imageLayout: ImageLayout;
-    ): void {.lazyload("vkCmdBindInvocationMaskHUAWEI", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdBindInvocationMaskHUAWEI", DeviceLevel),
+      queues: QueueFlags{compute}, cmdchain.}
 
 
 proc loadAllVK_HUAWEI_invocation_mask*(instance: Instance) = instance.loadCommands:

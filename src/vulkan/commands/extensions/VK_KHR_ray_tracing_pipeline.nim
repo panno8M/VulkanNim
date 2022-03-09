@@ -22,7 +22,8 @@ proc cmdTraceRaysKHR*(
       width: uint32;
       height: uint32;
       depth: uint32;
-    ): void {.lazyload("vkCmdTraceRaysKHR", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdTraceRaysKHR", DeviceLevel),
+      queues: QueueFlags{compute}, cmdchain.}
 proc createRayTracingPipelinesKHR*(
       device: Device;
       deferredOperation = default(DeferredOperationKHR);
@@ -61,7 +62,8 @@ proc cmdTraceRaysIndirectKHR*(
       pHitShaderBindingTable: ptr StridedDeviceAddressRegionKHR;
       pCallableShaderBindingTable: ptr StridedDeviceAddressRegionKHR;
       indirectDeviceAddress: DeviceAddress;
-    ): void {.lazyload("vkCmdTraceRaysIndirectKHR", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdTraceRaysIndirectKHR", DeviceLevel),
+      queues: QueueFlags{compute}, cmdchain.}
 proc getRayTracingShaderGroupStackSizeKHR*(
       device: Device;
       pipeline: Pipeline;
@@ -71,7 +73,8 @@ proc getRayTracingShaderGroupStackSizeKHR*(
 proc cmdSetRayTracingPipelineStackSizeKHR*(
       commandBuffer: CommandBuffer;
       pipelineStackSize: uint32;
-    ): void {.lazyload("vkCmdSetRayTracingPipelineStackSizeKHR", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetRayTracingPipelineStackSizeKHR", DeviceLevel),
+      queues: QueueFlags{compute}, cmdchain.}
 
 
 proc loadAllVK_KHR_ray_tracing_pipeline*(instance: Instance) = instance.loadCommands:

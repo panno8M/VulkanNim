@@ -236,6 +236,8 @@ proc render*(command: NodeCommand): string =
       of lmWithDevice: "lazyload(\"{command.name}\", DeviceLevel)".fmt
     let procFutter = block:
       var futter = "    ): {theType} {{.{loadMethod}".fmt
+      if command.queues.len != 0:
+        futter.add ",\n      queues: QueueFlags{" & command.queues.join(", ") & "}"
       if name[0..2] == "cmd" or name in ["begin", "end", "reset"].mapIt(it & "CommandBuffer"):
         futter.add ", cmdchain"
       if command.successCodes.len != 0:

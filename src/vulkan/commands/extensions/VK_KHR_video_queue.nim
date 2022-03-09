@@ -80,15 +80,18 @@ proc destroyVideoSessionParametersKHR*(
 proc cmdBeginVideoCodingKHR*(
       commandBuffer: CommandBuffer;
       pBeginInfo: ptr VideoBeginCodingInfoKHR;
-    ): void {.lazyload("vkCmdBeginVideoCodingKHR", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdBeginVideoCodingKHR", DeviceLevel),
+      queues: QueueFlags{decode, encode}, cmdchain.}
 proc cmdEndVideoCodingKHR*(
       commandBuffer: CommandBuffer;
       pEndCodingInfo: ptr VideoEndCodingInfoKHR;
-    ): void {.lazyload("vkCmdEndVideoCodingKHR", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdEndVideoCodingKHR", DeviceLevel),
+      queues: QueueFlags{decode, encode}, cmdchain.}
 proc cmdControlVideoCodingKHR*(
       commandBuffer: CommandBuffer;
       pCodingControlInfo: ptr VideoCodingControlInfoKHR;
-    ): void {.lazyload("vkCmdControlVideoCodingKHR", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdControlVideoCodingKHR", DeviceLevel),
+      queues: QueueFlags{decode, encode}, cmdchain.}
 
 
 proc loadAllVK_KHR_video_queue*(instance: Instance) = instance.loadCommands:

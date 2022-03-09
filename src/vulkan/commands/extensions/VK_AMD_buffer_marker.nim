@@ -19,7 +19,8 @@ proc cmdWriteBufferMarkerAMD*(
       dstBuffer: Buffer;
       dstOffset: DeviceSize;
       marker: uint32;
-    ): void {.lazyload("vkCmdWriteBufferMarkerAMD", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdWriteBufferMarkerAMD", DeviceLevel),
+      queues: QueueFlags{transfer, graphics, compute}, cmdchain.}
 
 
 proc loadAllVK_AMD_buffer_marker*(instance: Instance) = instance.loadCommands:

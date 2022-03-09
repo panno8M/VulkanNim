@@ -17,19 +17,22 @@ proc cmdBindShadingRateImageNV*(
       commandBuffer: CommandBuffer;
       imageView = default(ImageView);
       imageLayout: ImageLayout;
-    ): void {.lazyload("vkCmdBindShadingRateImageNV", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdBindShadingRateImageNV", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdSetViewportShadingRatePaletteNV*(
       commandBuffer: CommandBuffer;
       firstViewport: uint32;
       viewportCount: uint32;
       pShadingRatePalettes {.length: viewportCount.}: arrPtr[ShadingRatePaletteNV];
-    ): void {.lazyload("vkCmdSetViewportShadingRatePaletteNV", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetViewportShadingRatePaletteNV", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdSetCoarseSampleOrderNV*(
       commandBuffer: CommandBuffer;
       sampleOrderType: CoarseSampleOrderTypeNV;
       customSampleOrderCount = default(uint32);
       pCustomSampleOrders {.length: customSampleOrderCount.}: arrPtr[CoarseSampleOrderCustomNV];
-    ): void {.lazyload("vkCmdSetCoarseSampleOrderNV", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetCoarseSampleOrderNV", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 
 
 proc loadAllVK_NV_shading_rate_image*(instance: Instance) = instance.loadCommands:

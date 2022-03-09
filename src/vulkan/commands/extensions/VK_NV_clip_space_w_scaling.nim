@@ -18,7 +18,8 @@ proc cmdSetViewportWScalingNV*(
       firstViewport: uint32;
       viewportCount: uint32;
       pViewportWScalings {.length: viewportCount.}: arrPtr[ViewportWScalingNV];
-    ): void {.lazyload("vkCmdSetViewportWScalingNV", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetViewportWScalingNV", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 
 
 proc loadAllVK_NV_clip_space_w_scaling*(instance: Instance) = instance.loadCommands:

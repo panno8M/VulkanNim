@@ -19,28 +19,33 @@ proc cmdSetEvent2KHR*(
       commandBuffer: CommandBuffer;
       event: Event;
       pDependencyInfo: ptr DependencyInfoKHR;
-    ): void {.lazyload("vkCmdSetEvent2KHR", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetEvent2KHR", DeviceLevel),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 proc cmdResetEvent2KHR*(
       commandBuffer: CommandBuffer;
       event: Event;
       stageMask = default(PipelineStageFlags2KHR);
-    ): void {.lazyload("vkCmdResetEvent2KHR", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdResetEvent2KHR", DeviceLevel),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 proc cmdWaitEvents2KHR*(
       commandBuffer: CommandBuffer;
       eventCount: uint32;
       pEvents {.length: eventCount.}: arrPtr[Event];
       pDependencyInfos {.length: eventCount.}: arrPtr[DependencyInfoKHR];
-    ): void {.lazyload("vkCmdWaitEvents2KHR", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdWaitEvents2KHR", DeviceLevel),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 proc cmdPipelineBarrier2KHR*(
       commandBuffer: CommandBuffer;
       pDependencyInfo: ptr DependencyInfoKHR;
-    ): void {.lazyload("vkCmdPipelineBarrier2KHR", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdPipelineBarrier2KHR", DeviceLevel),
+      queues: QueueFlags{transfer, graphics, compute}, cmdchain.}
 proc cmdWriteTimestamp2KHR*(
       commandBuffer: CommandBuffer;
       stage = default(PipelineStageFlags2KHR);
       queryPool: QueryPool;
       query: uint32;
-    ): void {.lazyload("vkCmdWriteTimestamp2KHR", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdWriteTimestamp2KHR", DeviceLevel),
+      queues: QueueFlags{transfer, graphics, compute, decode, encode}, cmdchain.}
 proc queueSubmit2KHR*(
       queue: Queue;
       submitCount = default(uint32);
@@ -55,7 +60,8 @@ proc cmdWriteBufferMarker2AMD*(
       dstBuffer: Buffer;
       dstOffset: DeviceSize;
       marker: uint32;
-    ): void {.lazyload("vkCmdWriteBufferMarker2AMD", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdWriteBufferMarker2AMD", DeviceLevel),
+      queues: QueueFlags{transfer, graphics, compute}, cmdchain.}
 proc getQueueCheckpointData2NV*(
       queue: Queue;
       pCheckpointDataCount: ptr uint32;

@@ -146,6 +146,7 @@ type
       theType*: string
       successCodes*: seq[string]
       errorCodes*: seq[string]
+      queues*: seq[string]
       params*: seq[NodeCommandParam]
     of nkbrAlias:
       alias*: string

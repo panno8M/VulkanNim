@@ -39,14 +39,17 @@ proc queueInsertDebugUtilsLabelEXT*(
 proc cmdBeginDebugUtilsLabelEXT*(
       commandBuffer: CommandBuffer;
       pLabelInfo: ptr DebugUtilsLabelEXT;
-    ): void {.lazyload("vkCmdBeginDebugUtilsLabelEXT", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdBeginDebugUtilsLabelEXT", DeviceLevel),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 proc cmdEndDebugUtilsLabelEXT*(
       commandBuffer: CommandBuffer;
-    ): void {.lazyload("vkCmdEndDebugUtilsLabelEXT", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdEndDebugUtilsLabelEXT", DeviceLevel),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 proc cmdInsertDebugUtilsLabelEXT*(
       commandBuffer: CommandBuffer;
       pLabelInfo: ptr DebugUtilsLabelEXT;
-    ): void {.lazyload("vkCmdInsertDebugUtilsLabelEXT", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdInsertDebugUtilsLabelEXT", DeviceLevel),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 proc createDebugUtilsMessengerEXT*(
       instance: Instance;
       pCreateInfo: ptr DebugUtilsMessengerCreateInfoEXT;

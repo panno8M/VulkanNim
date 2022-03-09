@@ -48,13 +48,15 @@ proc cmdBuildAccelerationStructureNV*(
       src = default(AccelerationStructureNV);
       scratch: Buffer;
       scratchOffset: DeviceSize;
-    ): void {.lazyload("vkCmdBuildAccelerationStructureNV", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdBuildAccelerationStructureNV", DeviceLevel),
+      queues: QueueFlags{compute}, cmdchain.}
 proc cmdCopyAccelerationStructureNV*(
       commandBuffer: CommandBuffer;
       dst: AccelerationStructureNV;
       src: AccelerationStructureNV;
       mode: CopyAccelerationStructureModeKHR;
-    ): void {.lazyload("vkCmdCopyAccelerationStructureNV", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdCopyAccelerationStructureNV", DeviceLevel),
+      queues: QueueFlags{compute}, cmdchain.}
 proc cmdTraceRaysNV*(
       commandBuffer: CommandBuffer;
       raygenShaderBindingTableBuffer: Buffer;
@@ -71,7 +73,8 @@ proc cmdTraceRaysNV*(
       width: uint32;
       height: uint32;
       depth: uint32;
-    ): void {.lazyload("vkCmdTraceRaysNV", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdTraceRaysNV", DeviceLevel),
+      queues: QueueFlags{compute}, cmdchain.}
 proc createRayTracingPipelinesNV*(
       device: Device;
       pipelineCache = default(PipelineCache);
@@ -98,7 +101,8 @@ proc cmdWriteAccelerationStructuresPropertiesNV*(
       queryType: QueryType;
       queryPool: QueryPool;
       firstQuery: uint32;
-    ): void {.lazyload("vkCmdWriteAccelerationStructuresPropertiesNV", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdWriteAccelerationStructuresPropertiesNV", DeviceLevel),
+      queues: QueueFlags{compute}, cmdchain.}
 proc compileDeferredNV*(
       device: Device;
       pipeline: Pipeline;

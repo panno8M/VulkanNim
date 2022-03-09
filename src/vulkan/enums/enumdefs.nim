@@ -1428,9 +1428,9 @@ type
     # Provided by VK_VERSION_1_1
     protected = 0x00000000010 # Queues may support protected operations
     # Provided by VK_KHR_video_decode_queue
-    videoDecodeKhr = 0x00000000020
+    decode = 0x00000000020
     # Provided by VK_KHR_video_encode_queue
-    videoEncodeKhr = 0x00000000040
+    encode = 0x00000000040
     # Provided by VK_QCOM_extension_440
     reserved7Qcom = 0x00000000080
   QueueFlags* = Flags[QueueFlagBits]

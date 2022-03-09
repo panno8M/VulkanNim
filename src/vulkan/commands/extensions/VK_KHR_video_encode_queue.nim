@@ -16,7 +16,8 @@ const
 proc cmdEncodeVideoKHR*(
       commandBuffer: CommandBuffer;
       pEncodeInfo: ptr VideoEncodeInfoKHR;
-    ): void {.lazyload("vkCmdEncodeVideoKHR", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdEncodeVideoKHR", DeviceLevel),
+      queues: QueueFlags{encode}, cmdchain.}
 
 
 proc loadAllVK_KHR_video_encode_queue*(instance: Instance) = instance.loadCommands:

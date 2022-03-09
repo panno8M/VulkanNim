@@ -1,12 +1,15 @@
 import std/macros {.all.}
+from std/strutils import replace
 
-import tools
-
+import ./tools
+from ./enumdefs import QueueFlags
 from ../basetypes import Flags
 
 # Bitmask operations
 # Utility for bitmask operation added independently
 # =================================================
+
+template queues*(v: QueueFlags) {.pragma.}
 
 proc toFlags*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
   Flags[Flagbits](flagbits)
@@ -19,7 +22,7 @@ macro makeFlags*[Flagbits: enum](Type: typedesc[Flags[Flagbits]]; bits: varargs[
     error "Expect the enum that has Flagbits pragma", FlagBitsType
 
   if bits.len == 0:
-    return ident"none".newCall nnkBracketExpr.newTree(ident"Flags", FlagBitsType)
+    return ident"none".newCall Type
 
   for i, bit in bits:
     result =
@@ -94,18 +97,35 @@ proc `-=`*[Flagbits: enum](a: var Flags[Flagbits]; b: Flagbits) =        a = a -
 proc `-=`*[Flagbits: enum](a: var Flags[Flagbits]; b: Flags[Flagbits]) = a = a - b
 
 proc contains*[Flagbits: enum](flags: Flags[Flagbits]; flagbits: Flagbits): bool =
-  (flags and flagbits) != flags.none
+  (flagbits or flags) == flags
 
 proc contains*[Flagbits: enum](a, b: Flags[Flagbits]): bool =
   b - a == b.none
 
 iterator items*[FlagBits: enum](flags: Flags[FlagBits]): FlagBits =
   for bit in FlagBits.low.ord..FlagBits.high.ord:
-    if cast[FlagBits](bit) in flags: yield cast[FlagBits](bit)
+    if cast[FlagBits](bit) in flags:
+      yield cast[FlagBits](bit)
+
+iterator pairs*[FlagBits: enum](flags: Flags[FlagBits]): (int, FlagBits) =
+  var i: int
+  for bit in FlagBits.low.ord..FlagBits.high.ord:
+    if cast[FlagBits](bit) in flags:
+      yield (i, cast[FlagBits](bit))
+      inc i
 
 proc len*[FlagBits: enum](flags: Flags[FlagBits]): Natural =
   for bit in flags:
     inc result
+
+proc `$`*[FlagBits: enum](flags: Flags[FlagBits]): string =
+  result = ($FlagBits).replace("Bit", "")
+  result.add "{ "
+  for i, bit in flags:
+    if i != 0: result.add ", "
+    result.add $bit
+  result.add " }"
+
 {.pop.}
 
 when isMainModule:

@@ -17,7 +17,8 @@ proc cmdSetFragmentShadingRateEnumNV*(
       commandBuffer: CommandBuffer;
       shadingRate: FragmentShadingRateNV;
       combinerOps: FragmentShadingRateCombinerOpKHR;
-    ): void {.lazyload("vkCmdSetFragmentShadingRateEnumNV", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetFragmentShadingRateEnumNV", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 
 
 proc loadAllVK_NV_fragment_shading_rate_enums*(instance: Instance) = instance.loadCommands:

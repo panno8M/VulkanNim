@@ -16,7 +16,8 @@ const
 proc cmdSetSampleLocationsEXT*(
       commandBuffer: CommandBuffer;
       pSampleLocationsInfo: ptr SampleLocationsInfoEXT;
-    ): void {.lazyload("vkCmdSetSampleLocationsEXT", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetSampleLocationsEXT", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc getPhysicalDeviceMultisamplePropertiesEXT*(
       physicalDevice: PhysicalDevice;
       samples: SampleCountFlagBits;

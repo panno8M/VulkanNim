@@ -45,7 +45,8 @@ proc getDeviceGroupPeerMemoryFeatures*(
 proc cmdSetDeviceMask*(
       commandBuffer: CommandBuffer;
       deviceMask: uint32;
-    ): void {.preload("vkCmdSetDeviceMask"), cmdchain.}
+    ): void {.preload("vkCmdSetDeviceMask"),
+      queues: QueueFlags{graphics, compute, transfer}, cmdchain.}
 proc cmdDispatchBase*(
       commandBuffer: CommandBuffer;
       baseGroupX: uint32;
@@ -54,7 +55,8 @@ proc cmdDispatchBase*(
       groupCountX: uint32;
       groupCountY: uint32;
       groupCountZ: uint32;
-    ): void {.preload("vkCmdDispatchBase"), cmdchain.}
+    ): void {.preload("vkCmdDispatchBase"),
+      queues: QueueFlags{compute}, cmdchain.}
 # Promoted from VK_KHR_device_group_creation
 proc enumeratePhysicalDeviceGroups*(
       instance: Instance;

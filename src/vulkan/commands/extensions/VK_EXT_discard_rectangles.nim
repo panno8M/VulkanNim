@@ -18,7 +18,8 @@ proc cmdSetDiscardRectangleEXT*(
       firstDiscardRectangle: uint32;
       discardRectangleCount: uint32;
       pDiscardRectangles {.length: discardRectangleCount.}: arrPtr[Rect2D];
-    ): void {.lazyload("vkCmdSetDiscardRectangleEXT", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetDiscardRectangleEXT", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 
 
 proc loadAllVK_EXT_discard_rectangles*(instance: Instance) = instance.loadCommands:

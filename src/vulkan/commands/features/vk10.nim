@@ -293,6 +293,7 @@ proc queueBindSparse*(
       pBindInfo {.length: bindInfoCount.}: arrPtr[BindSparseInfo];
       fence = default(Fence);
     ): Result {.preload("vkQueueBindSparse"),
+      queues: QueueFlags{sparse_binding},
       successCodes: @[Result.success],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost].}
 # Fence commands
@@ -706,53 +707,63 @@ proc cmdBindPipeline*(
       commandBuffer: CommandBuffer;
       pipelineBindPoint: PipelineBindPoint;
       pipeline: Pipeline;
-    ): void {.preload("vkCmdBindPipeline"), cmdchain.}
+    ): void {.preload("vkCmdBindPipeline"),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 proc cmdSetViewport*(
       commandBuffer: CommandBuffer;
       firstViewport: uint32;
       viewportCount: uint32;
       pViewports {.length: viewportCount.}: arrPtr[Viewport];
-    ): void {.preload("vkCmdSetViewport"), cmdchain.}
+    ): void {.preload("vkCmdSetViewport"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdSetScissor*(
       commandBuffer: CommandBuffer;
       firstScissor: uint32;
       scissorCount: uint32;
       pScissors {.length: scissorCount.}: arrPtr[Rect2D];
-    ): void {.preload("vkCmdSetScissor"), cmdchain.}
+    ): void {.preload("vkCmdSetScissor"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdSetLineWidth*(
       commandBuffer: CommandBuffer;
       lineWidth: float32;
-    ): void {.preload("vkCmdSetLineWidth"), cmdchain.}
+    ): void {.preload("vkCmdSetLineWidth"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdSetDepthBias*(
       commandBuffer: CommandBuffer;
       depthBiasConstantFactor: float32;
       depthBiasClamp: float32;
       depthBiasSlopeFactor: float32;
-    ): void {.preload("vkCmdSetDepthBias"), cmdchain.}
+    ): void {.preload("vkCmdSetDepthBias"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdSetBlendConstants*(
       commandBuffer: CommandBuffer;
       blendConstants: float32;
-    ): void {.preload("vkCmdSetBlendConstants"), cmdchain.}
+    ): void {.preload("vkCmdSetBlendConstants"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdSetDepthBounds*(
       commandBuffer: CommandBuffer;
       minDepthBounds: float32;
       maxDepthBounds: float32;
-    ): void {.preload("vkCmdSetDepthBounds"), cmdchain.}
+    ): void {.preload("vkCmdSetDepthBounds"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdSetStencilCompareMask*(
       commandBuffer: CommandBuffer;
       faceMask: StencilFaceFlags;
       compareMask: uint32;
-    ): void {.preload("vkCmdSetStencilCompareMask"), cmdchain.}
+    ): void {.preload("vkCmdSetStencilCompareMask"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdSetStencilWriteMask*(
       commandBuffer: CommandBuffer;
       faceMask: StencilFaceFlags;
       writeMask: uint32;
-    ): void {.preload("vkCmdSetStencilWriteMask"), cmdchain.}
+    ): void {.preload("vkCmdSetStencilWriteMask"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdSetStencilReference*(
       commandBuffer: CommandBuffer;
       faceMask: StencilFaceFlags;
       reference: uint32;
-    ): void {.preload("vkCmdSetStencilReference"), cmdchain.}
+    ): void {.preload("vkCmdSetStencilReference"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdBindDescriptorSets*(
       commandBuffer: CommandBuffer;
       pipelineBindPoint: PipelineBindPoint;
@@ -762,27 +773,31 @@ proc cmdBindDescriptorSets*(
       pDescriptorSets {.length: descriptorSetCount.}: arrPtr[DescriptorSet];
       dynamicOffsetCount = default(uint32);
       pDynamicOffsets {.length: dynamicOffsetCount.}: arrPtr[uint32];
-    ): void {.preload("vkCmdBindDescriptorSets"), cmdchain.}
+    ): void {.preload("vkCmdBindDescriptorSets"),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 proc cmdBindIndexBuffer*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
       offset: DeviceSize;
       indexType: IndexType;
-    ): void {.preload("vkCmdBindIndexBuffer"), cmdchain.}
+    ): void {.preload("vkCmdBindIndexBuffer"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdBindVertexBuffers*(
       commandBuffer: CommandBuffer;
       firstBinding: uint32;
       bindingCount: uint32;
       pBuffers {.length: bindingCount.}: arrPtr[Buffer];
       pOffsets {.length: bindingCount.}: arrPtr[DeviceSize];
-    ): void {.preload("vkCmdBindVertexBuffers"), cmdchain.}
+    ): void {.preload("vkCmdBindVertexBuffers"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdDraw*(
       commandBuffer: CommandBuffer;
       vertexCount: uint32;
       instanceCount: uint32;
       firstVertex: uint32;
       firstInstance: uint32;
-    ): void {.preload("vkCmdDraw"), cmdchain.}
+    ): void {.preload("vkCmdDraw"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdDrawIndexed*(
       commandBuffer: CommandBuffer;
       indexCount: uint32;
@@ -790,39 +805,45 @@ proc cmdDrawIndexed*(
       firstIndex: uint32;
       vertexOffset: int32;
       firstInstance: uint32;
-    ): void {.preload("vkCmdDrawIndexed"), cmdchain.}
+    ): void {.preload("vkCmdDrawIndexed"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdDrawIndirect*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
       offset: DeviceSize;
       drawCount: uint32;
       stride: uint32;
-    ): void {.preload("vkCmdDrawIndirect"), cmdchain.}
+    ): void {.preload("vkCmdDrawIndirect"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdDrawIndexedIndirect*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
       offset: DeviceSize;
       drawCount: uint32;
       stride: uint32;
-    ): void {.preload("vkCmdDrawIndexedIndirect"), cmdchain.}
+    ): void {.preload("vkCmdDrawIndexedIndirect"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdDispatch*(
       commandBuffer: CommandBuffer;
       groupCountX: uint32;
       groupCountY: uint32;
       groupCountZ: uint32;
-    ): void {.preload("vkCmdDispatch"), cmdchain.}
+    ): void {.preload("vkCmdDispatch"),
+      queues: QueueFlags{compute}, cmdchain.}
 proc cmdDispatchIndirect*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
       offset: DeviceSize;
-    ): void {.preload("vkCmdDispatchIndirect"), cmdchain.}
+    ): void {.preload("vkCmdDispatchIndirect"),
+      queues: QueueFlags{compute}, cmdchain.}
 proc cmdCopyBuffer*(
       commandBuffer: CommandBuffer;
       srcBuffer: Buffer;
       dstBuffer: Buffer;
       regionCount: uint32;
       pRegions {.length: regionCount.}: arrPtr[BufferCopy];
-    ): void {.preload("vkCmdCopyBuffer"), cmdchain.}
+    ): void {.preload("vkCmdCopyBuffer"),
+      queues: QueueFlags{transfer, graphics, compute}, cmdchain.}
 proc cmdCopyImage*(
       commandBuffer: CommandBuffer;
       srcImage: Image;
@@ -831,7 +852,8 @@ proc cmdCopyImage*(
       dstImageLayout: ImageLayout;
       regionCount: uint32;
       pRegions {.length: regionCount.}: arrPtr[ImageCopy];
-    ): void {.preload("vkCmdCopyImage"), cmdchain.}
+    ): void {.preload("vkCmdCopyImage"),
+      queues: QueueFlags{transfer, graphics, compute}, cmdchain.}
 proc cmdBlitImage*(
       commandBuffer: CommandBuffer;
       srcImage: Image;
@@ -841,7 +863,8 @@ proc cmdBlitImage*(
       regionCount: uint32;
       pRegions {.length: regionCount.}: arrPtr[ImageBlit];
       filter: Filter;
-    ): void {.preload("vkCmdBlitImage"), cmdchain.}
+    ): void {.preload("vkCmdBlitImage"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdCopyBufferToImage*(
       commandBuffer: CommandBuffer;
       srcBuffer: Buffer;
@@ -849,7 +872,8 @@ proc cmdCopyBufferToImage*(
       dstImageLayout: ImageLayout;
       regionCount: uint32;
       pRegions {.length: regionCount.}: arrPtr[BufferImageCopy];
-    ): void {.preload("vkCmdCopyBufferToImage"), cmdchain.}
+    ): void {.preload("vkCmdCopyBufferToImage"),
+      queues: QueueFlags{transfer, graphics, compute}, cmdchain.}
 proc cmdCopyImageToBuffer*(
       commandBuffer: CommandBuffer;
       srcImage: Image;
@@ -857,21 +881,24 @@ proc cmdCopyImageToBuffer*(
       dstBuffer: Buffer;
       regionCount: uint32;
       pRegions {.length: regionCount.}: arrPtr[BufferImageCopy];
-    ): void {.preload("vkCmdCopyImageToBuffer"), cmdchain.}
+    ): void {.preload("vkCmdCopyImageToBuffer"),
+      queues: QueueFlags{transfer, graphics, compute}, cmdchain.}
 proc cmdUpdateBuffer*(
       commandBuffer: CommandBuffer;
       dstBuffer: Buffer;
       dstOffset: DeviceSize;
       dataSize: DeviceSize;
       pData {.length: dataSize.}: pointer;
-    ): void {.preload("vkCmdUpdateBuffer"), cmdchain.}
+    ): void {.preload("vkCmdUpdateBuffer"),
+      queues: QueueFlags{transfer, graphics, compute}, cmdchain.}
 proc cmdFillBuffer*(
       commandBuffer: CommandBuffer;
       dstBuffer: Buffer;
       dstOffset: DeviceSize;
       size: DeviceSize;
       data: uint32;
-    ): void {.preload("vkCmdFillBuffer"), cmdchain.}
+    ): void {.preload("vkCmdFillBuffer"),
+      queues: QueueFlags{transfer, graphics, compute}, cmdchain.}
 proc cmdClearColorImage*(
       commandBuffer: CommandBuffer;
       image: Image;
@@ -879,7 +906,8 @@ proc cmdClearColorImage*(
       pColor: ptr ClearColorValue;
       rangeCount: uint32;
       pRanges {.length: rangeCount.}: arrPtr[ImageSubresourceRange];
-    ): void {.preload("vkCmdClearColorImage"), cmdchain.}
+    ): void {.preload("vkCmdClearColorImage"),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 proc cmdClearDepthStencilImage*(
       commandBuffer: CommandBuffer;
       image: Image;
@@ -887,14 +915,16 @@ proc cmdClearDepthStencilImage*(
       pDepthStencil: ptr ClearDepthStencilValue;
       rangeCount: uint32;
       pRanges {.length: rangeCount.}: arrPtr[ImageSubresourceRange];
-    ): void {.preload("vkCmdClearDepthStencilImage"), cmdchain.}
+    ): void {.preload("vkCmdClearDepthStencilImage"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdClearAttachments*(
       commandBuffer: CommandBuffer;
       attachmentCount: uint32;
       pAttachments {.length: attachmentCount.}: arrPtr[ClearAttachment];
       rectCount: uint32;
       pRects {.length: rectCount.}: arrPtr[ClearRect];
-    ): void {.preload("vkCmdClearAttachments"), cmdchain.}
+    ): void {.preload("vkCmdClearAttachments"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdResolveImage*(
       commandBuffer: CommandBuffer;
       srcImage: Image;
@@ -903,17 +933,20 @@ proc cmdResolveImage*(
       dstImageLayout: ImageLayout;
       regionCount: uint32;
       pRegions {.length: regionCount.}: arrPtr[ImageResolve];
-    ): void {.preload("vkCmdResolveImage"), cmdchain.}
+    ): void {.preload("vkCmdResolveImage"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdSetEvent*(
       commandBuffer: CommandBuffer;
       event: Event;
       stageMask = default(PipelineStageFlags);
-    ): void {.preload("vkCmdSetEvent"), cmdchain.}
+    ): void {.preload("vkCmdSetEvent"),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 proc cmdResetEvent*(
       commandBuffer: CommandBuffer;
       event: Event;
       stageMask = default(PipelineStageFlags);
-    ): void {.preload("vkCmdResetEvent"), cmdchain.}
+    ): void {.preload("vkCmdResetEvent"),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 proc cmdWaitEvents*(
       commandBuffer: CommandBuffer;
       eventCount: uint32;
@@ -926,7 +959,8 @@ proc cmdWaitEvents*(
       pBufferMemoryBarriers {.length: bufferMemoryBarrierCount.}: arrPtr[BufferMemoryBarrier];
       imageMemoryBarrierCount = default(uint32);
       pImageMemoryBarriers {.length: imageMemoryBarrierCount.}: arrPtr[ImageMemoryBarrier];
-    ): void {.preload("vkCmdWaitEvents"), cmdchain.}
+    ): void {.preload("vkCmdWaitEvents"),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 proc cmdPipelineBarrier*(
       commandBuffer: CommandBuffer;
       srcStageMask = default(PipelineStageFlags);
@@ -938,30 +972,35 @@ proc cmdPipelineBarrier*(
       pBufferMemoryBarriers {.length: bufferMemoryBarrierCount.}: arrPtr[BufferMemoryBarrier];
       imageMemoryBarrierCount = default(uint32);
       pImageMemoryBarriers {.length: imageMemoryBarrierCount.}: arrPtr[ImageMemoryBarrier];
-    ): void {.preload("vkCmdPipelineBarrier"), cmdchain.}
+    ): void {.preload("vkCmdPipelineBarrier"),
+      queues: QueueFlags{transfer, graphics, compute}, cmdchain.}
 proc cmdBeginQuery*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
       query: uint32;
       flags = default(QueryControlFlags);
-    ): void {.preload("vkCmdBeginQuery"), cmdchain.}
+    ): void {.preload("vkCmdBeginQuery"),
+      queues: QueueFlags{graphics, compute, decode, encode}, cmdchain.}
 proc cmdEndQuery*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
       query: uint32;
-    ): void {.preload("vkCmdEndQuery"), cmdchain.}
+    ): void {.preload("vkCmdEndQuery"),
+      queues: QueueFlags{graphics, compute, decode, encode}, cmdchain.}
 proc cmdResetQueryPool*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
       firstQuery: uint32;
       queryCount: uint32;
-    ): void {.preload("vkCmdResetQueryPool"), cmdchain.}
+    ): void {.preload("vkCmdResetQueryPool"),
+      queues: QueueFlags{graphics, compute, decode, encode}, cmdchain.}
 proc cmdWriteTimestamp*(
       commandBuffer: CommandBuffer;
       pipelineStage: PipelineStageFlagBits;
       queryPool: QueryPool;
       query: uint32;
-    ): void {.preload("vkCmdWriteTimestamp"), cmdchain.}
+    ): void {.preload("vkCmdWriteTimestamp"),
+      queues: QueueFlags{transfer, graphics, compute, decode, encode}, cmdchain.}
 proc cmdCopyQueryPoolResults*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
@@ -971,7 +1010,8 @@ proc cmdCopyQueryPoolResults*(
       dstOffset: DeviceSize;
       stride: DeviceSize;
       flags = default(QueryResultFlags);
-    ): void {.preload("vkCmdCopyQueryPoolResults"), cmdchain.}
+    ): void {.preload("vkCmdCopyQueryPoolResults"),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 proc cmdPushConstants*(
       commandBuffer: CommandBuffer;
       layout: PipelineLayout;
@@ -979,22 +1019,27 @@ proc cmdPushConstants*(
       offset: uint32;
       size: uint32;
       pValues {.length: size.}: pointer;
-    ): void {.preload("vkCmdPushConstants"), cmdchain.}
+    ): void {.preload("vkCmdPushConstants"),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 proc cmdBeginRenderPass*(
       commandBuffer: CommandBuffer;
       pRenderPassBegin: ptr RenderPassBeginInfo;
       contents: SubpassContents;
-    ): void {.preload("vkCmdBeginRenderPass"), cmdchain.}
+    ): void {.preload("vkCmdBeginRenderPass"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdNextSubpass*(
       commandBuffer: CommandBuffer;
       contents: SubpassContents;
-    ): void {.preload("vkCmdNextSubpass"), cmdchain.}
+    ): void {.preload("vkCmdNextSubpass"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdEndRenderPass*(
       commandBuffer: CommandBuffer;
-    ): void {.preload("vkCmdEndRenderPass"), cmdchain.}
+    ): void {.preload("vkCmdEndRenderPass"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdExecuteCommands*(
       commandBuffer: CommandBuffer;
       commandBufferCount: uint32;
       pCommandBuffers {.length: commandBufferCount.}: arrPtr[CommandBuffer];
-    ): void {.preload("vkCmdExecuteCommands"), cmdchain.}
+    ): void {.preload("vkCmdExecuteCommands"),
+      queues: QueueFlags{transfer, graphics, compute}, cmdchain.}
 

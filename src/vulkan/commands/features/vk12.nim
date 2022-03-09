@@ -30,7 +30,8 @@ proc cmdDrawIndirectCount*(
       countBufferOffset: DeviceSize;
       maxDrawCount: uint32;
       stride: uint32;
-    ): void {.preload("vkCmdDrawIndirectCount"), cmdchain.}
+    ): void {.preload("vkCmdDrawIndirectCount"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdDrawIndexedIndirectCount*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
@@ -39,7 +40,8 @@ proc cmdDrawIndexedIndirectCount*(
       countBufferOffset: DeviceSize;
       maxDrawCount: uint32;
       stride: uint32;
-    ): void {.preload("vkCmdDrawIndexedIndirectCount"), cmdchain.}
+    ): void {.preload("vkCmdDrawIndexedIndirectCount"),
+      queues: QueueFlags{graphics}, cmdchain.}
 # Promoted from VK_KHR_create_renderpass2 (extension 110)
 proc createRenderPass2*(
       device: Device;
@@ -53,16 +55,19 @@ proc cmdBeginRenderPass2*(
       commandBuffer: CommandBuffer;
       pRenderPassBegin: ptr RenderPassBeginInfo;
       pSubpassBeginInfo: ptr SubpassBeginInfo;
-    ): void {.preload("vkCmdBeginRenderPass2"), cmdchain.}
+    ): void {.preload("vkCmdBeginRenderPass2"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdNextSubpass2*(
       commandBuffer: CommandBuffer;
       pSubpassBeginInfo: ptr SubpassBeginInfo;
       pSubpassEndInfo: ptr SubpassEndInfo;
-    ): void {.preload("vkCmdNextSubpass2"), cmdchain.}
+    ): void {.preload("vkCmdNextSubpass2"),
+      queues: QueueFlags{graphics}, cmdchain.}
 proc cmdEndRenderPass2*(
       commandBuffer: CommandBuffer;
       pSubpassEndInfo: ptr SubpassEndInfo;
-    ): void {.preload("vkCmdEndRenderPass2"), cmdchain.}
+    ): void {.preload("vkCmdEndRenderPass2"),
+      queues: QueueFlags{graphics}, cmdchain.}
 # Promoted from VK_EXT_host_query_reset (extension 262)
 proc resetQueryPool*(
       device: Device;

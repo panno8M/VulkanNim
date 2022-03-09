@@ -23,7 +23,8 @@ proc cmdPushDescriptorSetWithTemplateKHR*(
       layout: PipelineLayout;
       set: uint32;
       pData: pointer;
-    ): void {.lazyload("vkCmdPushDescriptorSetWithTemplateKHR", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdPushDescriptorSetWithTemplateKHR", DeviceLevel),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 
 
 proc loadAllVK_KHR_descriptor_update_template*(instance: Instance) = instance.loadCommands:

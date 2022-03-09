@@ -25,19 +25,22 @@ proc uninitializePerformanceApiINTEL*(
 proc cmdSetPerformanceMarkerINTEL*(
       commandBuffer: CommandBuffer;
       pMarkerInfo: ptr PerformanceMarkerInfoINTEL;
-    ): Result {.lazyload("vkCmdSetPerformanceMarkerINTEL", DeviceLevel), cmdchain,
+    ): Result {.lazyload("vkCmdSetPerformanceMarkerINTEL", DeviceLevel),
+      queues: QueueFlags{graphics, compute, transfer}, cmdchain,
       successCodes: @[Result.success],
       errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 proc cmdSetPerformanceStreamMarkerINTEL*(
       commandBuffer: CommandBuffer;
       pMarkerInfo: ptr PerformanceStreamMarkerInfoINTEL;
-    ): Result {.lazyload("vkCmdSetPerformanceStreamMarkerINTEL", DeviceLevel), cmdchain,
+    ): Result {.lazyload("vkCmdSetPerformanceStreamMarkerINTEL", DeviceLevel),
+      queues: QueueFlags{graphics, compute, transfer}, cmdchain,
       successCodes: @[Result.success],
       errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 proc cmdSetPerformanceOverrideINTEL*(
       commandBuffer: CommandBuffer;
       pOverrideInfo: ptr PerformanceOverrideInfoINTEL;
-    ): Result {.lazyload("vkCmdSetPerformanceOverrideINTEL", DeviceLevel), cmdchain,
+    ): Result {.lazyload("vkCmdSetPerformanceOverrideINTEL", DeviceLevel),
+      queues: QueueFlags{graphics, compute, transfer}, cmdchain,
       successCodes: @[Result.success],
       errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 proc acquirePerformanceConfigurationINTEL*(

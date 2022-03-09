@@ -19,7 +19,8 @@ proc cmdSetVertexInputEXT*(
       pVertexBindingDescriptions {.length: vertexBindingDescriptionCount.}: arrPtr[VertexInputBindingDescription2EXT];
       vertexAttributeDescriptionCount = default(uint32);
       pVertexAttributeDescriptions {.length: vertexAttributeDescriptionCount.}: arrPtr[VertexInputAttributeDescription2EXT];
-    ): void {.lazyload("vkCmdSetVertexInputEXT", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetVertexInputEXT", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 
 
 proc loadAllVK_EXT_vertex_input_dynamic_state*(instance: Instance) = instance.loadCommands:

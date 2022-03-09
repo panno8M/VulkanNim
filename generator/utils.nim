@@ -183,6 +183,8 @@ proc parseEnumValue*(str: string; enumsName: string; vendorTags: VendorTags): st
   of "and": "`and`"
   of "xor": "`xor`"
   of "or": "`or`"
+  of "videoDecodeKhr": "decode"
+  of "videoEncodeKhr": "encode"
   else: result
 
 proc replaceBasicTypes*(str: string): string =

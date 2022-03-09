@@ -16,7 +16,8 @@ const
 proc cmdSetCheckpointNV*(
       commandBuffer: CommandBuffer;
       pCheckpointMarker: pointer;
-    ): void {.lazyload("vkCmdSetCheckpointNV", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetCheckpointNV", DeviceLevel),
+      queues: QueueFlags{graphics, compute, transfer}, cmdchain.}
 proc getQueueCheckpointDataNV*(
       queue: Queue;
       pCheckpointDataCount: ptr uint32;

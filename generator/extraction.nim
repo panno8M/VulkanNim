@@ -353,6 +353,7 @@ proc extractNodeCommand*(typeDef: XmlNode): NodeCommand {.raises: [UnexpectedXml
   of nkbrNormal:
     result.successCodes = typeDef{"successcodes"}.parseWords({','})
     result.errorCodes = typeDef{"errorcodes"}.parseWords({','})
+    result.queues = typeDef{"queues"}.parseWords({','})
     result.name = typeDef["proto"]["name"].innerText.parseWords[0]
     result.theType = typeDef["proto"]["type"].innerText.parseWords[0]
     for param in typeDef:

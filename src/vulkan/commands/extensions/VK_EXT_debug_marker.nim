@@ -28,14 +28,17 @@ proc debugMarkerSetObjectNameEXT*(
 proc cmdDebugMarkerBeginEXT*(
       commandBuffer: CommandBuffer;
       pMarkerInfo: ptr DebugMarkerMarkerInfoEXT;
-    ): void {.lazyload("vkCmdDebugMarkerBeginEXT", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdDebugMarkerBeginEXT", DeviceLevel),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 proc cmdDebugMarkerEndEXT*(
       commandBuffer: CommandBuffer;
-    ): void {.lazyload("vkCmdDebugMarkerEndEXT", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdDebugMarkerEndEXT", DeviceLevel),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 proc cmdDebugMarkerInsertEXT*(
       commandBuffer: CommandBuffer;
       pMarkerInfo: ptr DebugMarkerMarkerInfoEXT;
-    ): void {.lazyload("vkCmdDebugMarkerInsertEXT", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdDebugMarkerInsertEXT", DeviceLevel),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 
 
 proc loadAllVK_EXT_debug_marker*(instance: Instance) = instance.loadCommands:

@@ -22,7 +22,8 @@ proc getDeviceSubpassShadingMaxWorkgroupSizeHUAWEI*(
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr].}
 proc cmdSubpassShadingHUAWEI*(
       commandBuffer: CommandBuffer;
-    ): void {.lazyload("vkCmdSubpassShadingHUAWEI", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSubpassShadingHUAWEI", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 
 
 proc loadAllVK_HUAWEI_subpass_shading*(instance: Instance) = instance.loadCommands:

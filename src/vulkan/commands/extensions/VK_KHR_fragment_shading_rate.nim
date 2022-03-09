@@ -24,7 +24,8 @@ proc cmdSetFragmentShadingRateKHR*(
       commandBuffer: CommandBuffer;
       pFragmentSize: ptr Extent2D;
       combinerOps: FragmentShadingRateCombinerOpKHR;
-    ): void {.lazyload("vkCmdSetFragmentShadingRateKHR", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdSetFragmentShadingRateKHR", DeviceLevel),
+      queues: QueueFlags{graphics}, cmdchain.}
 
 
 proc loadAllVK_KHR_fragment_shading_rate*(instance: Instance) = instance.loadCommands:

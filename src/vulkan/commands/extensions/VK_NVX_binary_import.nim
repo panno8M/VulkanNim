@@ -42,7 +42,8 @@ proc destroyCuFunctionNVX*(
 proc cmdCuLaunchKernelNVX*(
       commandBuffer: CommandBuffer;
       pLaunchInfo: ptr CuLaunchInfoNVX;
-    ): void {.lazyload("vkCmdCuLaunchKernelNVX", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdCuLaunchKernelNVX", DeviceLevel),
+      queues: QueueFlags{graphics, compute}, cmdchain.}
 
 
 proc loadAllVK_NVX_binary_import*(instance: Instance) = instance.loadCommands:

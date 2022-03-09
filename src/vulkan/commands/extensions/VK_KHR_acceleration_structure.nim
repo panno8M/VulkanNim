@@ -31,7 +31,8 @@ proc cmdBuildAccelerationStructuresKHR*(
       infoCount: uint32;
       pInfos {.length: infoCount.}: arrPtr[AccelerationStructureBuildGeometryInfoKHR];
       ppBuildRangeInfos {.length: infoCount.}: arrPtr[arrPtr[AccelerationStructureBuildRangeInfoKHR]];
-    ): void {.lazyload("vkCmdBuildAccelerationStructuresKHR", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdBuildAccelerationStructuresKHR", DeviceLevel),
+      queues: QueueFlags{compute}, cmdchain.}
 proc cmdBuildAccelerationStructuresIndirectKHR*(
       commandBuffer: CommandBuffer;
       infoCount: uint32;
@@ -39,7 +40,8 @@ proc cmdBuildAccelerationStructuresIndirectKHR*(
       pIndirectDeviceAddresses {.length: infoCount.}: arrPtr[DeviceAddress];
       pIndirectStrides {.length: infoCount.}: arrPtr[uint32];
       ppMaxPrimitiveCounts {.length: infoCount.}: arrPtr[arrPtr[uint32]];
-    ): void {.lazyload("vkCmdBuildAccelerationStructuresIndirectKHR", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdBuildAccelerationStructuresIndirectKHR", DeviceLevel),
+      queues: QueueFlags{compute}, cmdchain.}
 proc buildAccelerationStructuresKHR*(
       device: Device;
       deferredOperation = default(DeferredOperationKHR);
@@ -84,15 +86,18 @@ proc writeAccelerationStructuresPropertiesKHR*(
 proc cmdCopyAccelerationStructureKHR*(
       commandBuffer: CommandBuffer;
       pInfo: ptr CopyAccelerationStructureInfoKHR;
-    ): void {.lazyload("vkCmdCopyAccelerationStructureKHR", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdCopyAccelerationStructureKHR", DeviceLevel),
+      queues: QueueFlags{compute}, cmdchain.}
 proc cmdCopyAccelerationStructureToMemoryKHR*(
       commandBuffer: CommandBuffer;
       pInfo: ptr CopyAccelerationStructureToMemoryInfoKHR;
-    ): void {.lazyload("vkCmdCopyAccelerationStructureToMemoryKHR", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdCopyAccelerationStructureToMemoryKHR", DeviceLevel),
+      queues: QueueFlags{compute}, cmdchain.}
 proc cmdCopyMemoryToAccelerationStructureKHR*(
       commandBuffer: CommandBuffer;
       pInfo: ptr CopyMemoryToAccelerationStructureInfoKHR;
-    ): void {.lazyload("vkCmdCopyMemoryToAccelerationStructureKHR", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdCopyMemoryToAccelerationStructureKHR", DeviceLevel),
+      queues: QueueFlags{compute}, cmdchain.}
 proc getAccelerationStructureDeviceAddressKHR*(
       device: Device;
       pInfo: ptr AccelerationStructureDeviceAddressInfoKHR;
@@ -104,7 +109,8 @@ proc cmdWriteAccelerationStructuresPropertiesKHR*(
       queryType: QueryType;
       queryPool: QueryPool;
       firstQuery: uint32;
-    ): void {.lazyload("vkCmdWriteAccelerationStructuresPropertiesKHR", DeviceLevel), cmdchain.}
+    ): void {.lazyload("vkCmdWriteAccelerationStructuresPropertiesKHR", DeviceLevel),
+      queues: QueueFlags{compute}, cmdchain.}
 proc getDeviceAccelerationStructureCompatibilityKHR*(
       device: Device;
       pVersionInfo: ptr AccelerationStructureVersionInfoKHR;

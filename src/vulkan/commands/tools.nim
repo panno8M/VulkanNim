@@ -1,24 +1,13 @@
-import ../basetypes
-import ../handles
-import ../enums
-import ../objects
-import loadercomponents
-import commandloaders
-import cmdchain
+import ../basetypes;     export basetypes
+import ../handles;       export handles
+import ../enums;         export enums
+import ../objects;       export objects
+import loadercomponents; export loadercomponents
+import commandloaders;   export commandloaders
+import cmdchain;         export cmdchain
 
-import ../objects/tools as objecttools
-import ../objects/temp_externalobjects
-
-export basetypes
-export handles
-export enums
-export objects
-export loadercomponents
-export commandloaders
-export cmdchain
-
-export objecttools
-export temp_externalobjects
+import ../objects/tools as objecttools; export objecttools
+import ../objects/temp_externalobjects; export temp_externalobjects
 
 
 proc getInstanceProcAddr*(
