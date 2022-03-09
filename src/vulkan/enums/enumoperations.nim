@@ -1,15 +1,8 @@
-import std/strutils
-import std/sequtils
-import std/options
-import std/sets
 import std/macros {.all.}
 
 import tools
 
 from ../basetypes import Flags
-
-export sets
-
 
 # Bitmask operations
 # Utility for bitmask operation added independently
@@ -18,71 +11,51 @@ export sets
 proc `==`*[Flagbits: enum](a, b: Flags[Flagbits]): bool =
   a.uint32 == b.uint32
 
-macro `toFlagSets`*[Flagbits: enum](Type: typedesc[Flagbits]; bits: varargs[untyped]): HashSet[Flagbits] =
-  if Type.customPragmaNode().findChild(it.len == 1 and it[0].repr == "flagbits") == nil:
-    error("Expect the enum that has Flagbits pragma", Type)
-
-  result = quote do:
-    toHashSet []
-
-  result[1].expectKind nnkBracket
-  result[1].add do:
-    bits.mapIt:
-      quote do: `Type`.`it`
-
-template `{}`*[Flagbits: enum](Type: typedesc[Flagbits]; bits: varargs[untyped]): HashSet[Flagbits] =
-  Type.toFlagSets(bits)
-
-converter toFlagSets*[Flagbits: enum](flags: Flags[Flagbits]): HashSet[Flagbits] =
-  var val = 1.uint32
-  let flags = flags.uint32
-  while val <= flags:
-    if (val and flags) != 0:
-      result.incl Flagbits(val)
-    val = val shl 1
-proc `{}`*[Flagbits: enum](flags: Flags[Flagbits]): HashSet[Flagbits] =
-  flags.toFlagSets
-
-converter toFlags*[Flagbits: enum](flagsets: HashSet[Flagbits]): Flags[Flagbits] =
-  for flagset in flagsets:
-    result = result or flagset
-proc `<+>`*[Flagbits: enum](flagsets: HashSet[Flagbits]): Flags[Flagbits] =
-  flagsets.toFlags
-
-converter toFlags*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
+proc toFlags*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
   Flags[Flagbits](flagbits)
-proc `<+>`*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
+template `{}`*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
   flagbits.toFlags
 
-proc `all`*[Flagbits: enum](Type: typedesc[Flags[Flagbits]]): Flags[Flagbits] =
-  Flags[Flagbits](Flagbits.high.ord.shl(1) - 1)
-proc `all`*[Flagbits: enum](flags: Flags[Flagbits]): Flags[Flagbits] = flags.typeof.all
-proc `all`*[Flagbits: enum](Type: typedesc[HashSet[Flagbits]]): HashSet[Flagbits] = Flags[Flagbits].all.toFlagSets
-proc `all`*[Flagbits: enum](flagsets: HashSet[Flagbits]): HashSet[Flagbits] = flagsets.typeof.all
+macro makeFlags*[Flagbits: enum](Type: typedesc[Flags[Flagbits]]; bits: varargs[untyped]): Flags[Flagbits] =
+  let FlagBitsType = Type.getTypeImpl[1].getImpl[2][1]
+  if FlagBitsType.customPragmaNode().findChild(it.len == 1 and it[0].repr == "flagbits") == nil:
+    error "Expect the enum that has Flagbits pragma", FlagBitsType
 
-proc `none`*[Flagbits: enum](Type: typedesc[HashSet[Flagbits]]): HashSet[Flagbits] = return
-proc `none`*[Flagbits: enum](flagsets: HashSet[Flagbits]): HashSet[Flagbits] = flagsets.typeof.none
+  if bits.len == 0:
+    return ident"none".newCall nnkBracketExpr.newTree(ident"Flags", FlagBitsType)
+
+  for i, bit in bits:
+    result =
+      if i == 0:
+        ident"toFlags".newCall newDotExpr(FlagBitsType, bit)
+      else:
+        infix result, "or", newDotExpr(FlagBitsType, bit)
+template `{}`*[Flagbits: enum](Type: typedesc[Flags[Flagbits]]; bits: varargs[untyped]): Flags[Flagbits] =
+  Type.makeFlags(bits)
+
+proc `all`*[Flagbits: enum](Type: typedesc[Flags[Flagbits]]): Flags[Flagbits] =
+  Flags[Flagbits] Flagbits.high.ord.shl(1) - 1
+proc `all`*[Flagbits: enum](flags: Flags[Flagbits]): Flags[Flagbits] = flags.typeof.all
+
 proc `none`*[Flagbits: enum](Type: typedesc[Flags[Flagbits]]): Flags[Flagbits] = return
-proc `none`*[Flagbits: enum](flags: Flags[Flagbits]): Flags[Flagbits] = flags.typeof.none
-proc `none`*(flags: typedesc[Flags[UnusedEnum]]): Flags[UnusedEnum] = Flags[UnusedEnum](0)
+proc `none`*[Flagbits: enum](flags: Flags[Flagbits]): Flags[Flagbits] = return
+proc `none`*(flags: typedesc[Flags[UnusedEnum]]): Flags[UnusedEnum] = return
 
 proc isSome*[Flagbits: enum](flags: Flags[Flagbits]): bool = flags != Flags[Flagbits].none
-proc isSome*[Flagbits: enum](flagsets: HashSet[Flagbits]): bool = flagsets.len != 0
 
 proc isNone*[Flagbits: enum](flags: Flags[Flagbits]): bool = flags == Flags[Flagbits].none
-proc isNone*[Flagbits: enum](flagsets: HashSet[Flagbits]): bool = flagsets.len == 0
-
-proc `and`*[Flagbits: enum](a, b: Flags[Flagbits]): Flags[Flagbits] =
-  Flags[Flagbits]((a.uint32 and b.uint32) and Flags[Flagbits].all.uint32)
-proc `and`*[Flagbits: enum](a: Flags[Flagbits]; b: Flagbits): Flags[Flagbits] = a and <+>b
-proc `and`*[Flagbits: enum](a: Flagbits; b: Flags[Flagbits]): Flags[Flagbits] = b and a
-proc `and`*[Flagbits: enum](a, b: Flagbits):                  Flags[Flagbits] = <+>a and <+>b
 
 proc `or`*[Flagbits: enum](a, b: Flags[Flagbits]): Flags[Flagbits] =
-  Flags[Flagbits]((a.uint32 or b.uint32) and Flags[Flagbits].all.uint32)
-proc `or`*[Flagbits: enum](a: Flags[Flagbits]; b: Flagbits): Flags[Flagbits] = a or <+>b
+  Flags[Flagbits] a.uint32 or b.uint32
+proc `or`*[Flagbits: enum](a: Flags[Flagbits]; b: Flagbits): Flags[Flagbits] = a or b{}
 proc `or`*[Flagbits: enum](a: Flagbits; b: Flags[Flagbits]): Flags[Flagbits] = b or a
-proc `or`*[Flagbits: enum](a, b: Flagbits):                  Flags[Flagbits] = <+>a or <+>b
+proc `or`*[Flagbits: enum](a, b: Flagbits):                  Flags[Flagbits] = a{} or b{}
+
+proc `and`*[Flagbits: enum](a, b: Flags[Flagbits]): Flags[Flagbits] =
+  Flags[Flagbits] (a.uint32 and b.uint32)
+proc `and`*[Flagbits: enum](a: Flags[Flagbits]; b: Flagbits): Flags[Flagbits] = a and b{}
+proc `and`*[Flagbits: enum](a: Flagbits; b: Flags[Flagbits]): Flags[Flagbits] = b and a
+proc `and`*[Flagbits: enum](a, b: Flagbits):                  Flags[Flagbits] = a{} and b{}
 
 proc `xor`*[Flagbits: enum](a, b: Flags[Flagbits]): Flags[Flagbits] =
   # if Flags.all is 00011111:
@@ -90,18 +63,15 @@ proc `xor`*[Flagbits: enum](a, b: Flags[Flagbits]): Flags[Flagbits] =
   # 00011100 xor 10000000 = 00011100
   #              ^ overflowed value must be ignored.
   not (a and b) and (a or b)
-proc `xor`*[Flagbits: enum](a: Flags[Flagbits]; b: Flagbits): Flags[Flagbits] = a xor <+>b
+proc `xor`*[Flagbits: enum](a: Flags[Flagbits]; b: Flagbits): Flags[Flagbits] = a xor b{}
 proc `xor`*[Flagbits: enum](a: Flagbits; b: Flags[Flagbits]): Flags[Flagbits] = b xor a
-proc `xor`*[Flagbits: enum](a, b: Flagbits):                  Flags[Flagbits] = <+>a xor <+>b
+proc `xor`*[Flagbits: enum](a, b: Flagbits):                  Flags[Flagbits] = a{} xor b{}
 
 proc `not`*[Flagbits: enum](flags: Flags[Flagbits]): Flags[Flagbits] =
   Flags[Flagbits](flags.all.uint32 and not flags.uint32)
 
 proc `not`*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
   not flagbits.toFlags
-
-proc `not`*[Flagbits: enum](flagsets: HashSet[Flagbits]): HashSet[Flagbits] =
-  (not flagsets.toFlags).toFlagSets
 
 proc `*`*[Flagbits: enum](a, b: Flagbits):                  Flags[Flagbits] = a and b
 proc `*`*[Flagbits: enum](a: Flags[Flagbits]; b: Flagbits): Flags[Flagbits] = a and b
@@ -149,10 +119,13 @@ proc contains*[Flagbits: enum](flags: Flags[Flagbits]; flagbits: Flagbits): bool
 proc contains*[Flagbits: enum](a, b: Flags[Flagbits]): bool =
   b - a == b.none
 
-converter toString*[Flagbits: enum](flags: Flags[Flagbits]): string =
-  $flags.toFlagSets
-proc `$`*[Flagbits: enum](flags: Flags[Flagbits]): string =
-  flags.toString
+iterator items*[FlagBits: enum](flags: Flags[FlagBits]): FlagBits =
+  for bit in FlagBits.low.ord..FlagBits.high.ord:
+    if cast[FlagBits](bit) in flags: yield cast[FlagBits](bit)
+
+proc len*[FlagBits: enum](flags: Flags[FlagBits]): Natural =
+  for bit in flags:
+    inc result
 
 import tables
 var flagbitsCache = newTable[string, uint32]()
@@ -181,13 +154,21 @@ when isMainModule:
   import std/unittest
   import vulkan/enums
 
+  macro makeFlagsTest*[Flagbits: enum](Type: typedesc[Flags[Flagbits]]) =
+    hint treeRepr Type.getTypeImpl[1].getImpl[2][1].customPragmaNode
+  macro makeFlagsTest*[Flagbits: enum](Type: typedesc[Flagbits]) =
+    hint treeRepr Type.customPragmaNode
+
+  QueueFlags.makeFlagsTest
+  QueueFB.makeFlagsTest
+
   test "flagsA contains flagsB":
     let
-      a = QueueFlagBits{graphics}
-      b = QueueFlagBits{graphics, transfer}
-      c = QueueFlagBits{transfer}
-      d = QueueFlagBits{graphics, transfer, compute}
-      e = QueueFlagBits{compute}
+      a = QueueFlags{graphics}
+      b = QueueFlags{graphics, transfer}
+      c = QueueFlags{transfer}
+      d = QueueFlags{graphics, transfer, compute}
+      e = QueueFlags{compute}
 
     check a in a
 

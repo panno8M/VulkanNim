@@ -2,8 +2,6 @@ import std/macros {.all.}
 import std/strformat
 import std/sequtils
 
-import ../enums
-
 const vkDllPath* =
   when defined(windows):
     "vulkan-1.dll"
@@ -70,7 +68,7 @@ macro lazyload*(loadFrom: string; with = InstanceLevel; body): untyped =
 
     typeName = ident(&"PFN_{body.name}")
     cageName = ident(&"{body.name}_RAW")
-    defectStr = newStrLitNode("\"" & $body.name & "\" has been called which has not yet been loaded.")
+    defectStr = newStrLitNode(&"\"{body.name}\" has been called which has not yet been loaded.")
 
     exportableTypeName =
       if body[0].isExported: typeName.postfix("*")

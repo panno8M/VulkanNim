@@ -36,7 +36,7 @@ proc render*(enumVal: NodeEnumVal; vendorTags: VendorTags; enumsName: string): s
 
 proc render*(enums: NodeEnum; vendorTags: VendorTags): sstring =
   result = sstring(kind: skBlock)
-  let name = enums.name.removeVkPrefix
+  let name = enums.name.parseTypeName
 
   if enums.comment.isSome:
     result.add comment enums.comment.get
@@ -47,7 +47,7 @@ proc render*(enums: NodeEnum; vendorTags: VendorTags): sstring =
 
   result.add sstring(kind: skBlock,
     title:
-      if name.find("FlagBits") == -1:
+      if enums.name.find("FlagBits") == -1:
         "{name}* {{.vkEnum.}} = enum".fmt
       else:
         "{name}* {{.vkFlagBits.}} = enum".fmt
@@ -76,7 +76,7 @@ proc render*(enumAlias: NodeEnumAlias; vendorTags: VendorTags; enumName: string)
 
 proc render*(enumAliases: NodeEnumAliases; vendorTags: VendorTags): Option[string] =
   if enumAliases.aliases.len == 0: return
-  let name = enumAliases.name.removeVkPrefix
+  let name = enumAliases.name.parseTypeName
   var res: string
   var hasAny: bool
   res.add "{name}.defineAliases:\n".fmt
@@ -133,7 +133,7 @@ proc render*(struct: Nodestruct): string =
   if struct.comment.isSome:
     result.add struct.comment.get.commentify & "\n"
 
-  let name = struct.name.removeVkPrefix
+  let name = struct.name.parseTypeName
 
   result.add case struct.isUnion
     of true: "{name}* {{.union.}} = object".fmt
@@ -180,7 +180,7 @@ proc render*(bitmask: NodeBitmask): string =
   case bitmask.kind
   of nkbrNormal:
     if bitmask.flagbitsReq.isSome:
-      "{name}* = Flags[{bitmask.flagbitsReq.get.removeVkPrefix}]".fmt
+      "{name}* = Flags[{bitmask.flagbitsReq.get.parseTypeName}]".fmt
     else:
       "{name}* = Flags[UnusedEnum]".fmt
   of nkbrAlias:
@@ -256,7 +256,7 @@ proc render*(command: NodeCommand): string =
 
 
 proc render*(basetype: NodeBasetype): string =
-  let name = basetype.name.removeVkPrefix
+  let name = basetype.name.parseTypeName
   case basetype.kind
   of nkbNormal:
     let theType = basetype.theType.replaceBasicTypes.replace("void", "pointer")

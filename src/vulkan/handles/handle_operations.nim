@@ -13,5 +13,6 @@ proc `==`*[T](a, b: NonDispatchableHandle[T]): bool = a.pointer == b.pointer
 proc isValid*[T](h: Handle[T]): bool = h.pointer != nil
 proc isValid*[T](h: NonDispatchableHandle[T]): bool = h.pointer != nil
 
+template isInvalid*(h): bool = not h.isValid
 
 template parent*(prt: untyped) {.pragma.}
