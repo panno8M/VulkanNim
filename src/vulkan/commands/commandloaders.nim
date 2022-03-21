@@ -9,7 +9,7 @@ import loadercomponents
 
 type UnloadedDefect* = object of NilAccessDefect
 
-macro loadCommand*[T: proc](handle: Instance or Device; procType: typedesc[T]): T =
+macro loadCommand*(handle: Instance or Device; procType: typedesc[proc]): proc =
   ## .. code-block:: Nim
   ##    type PFN_queuePresentKHR* = proc(
   ##          queue: Queue;
@@ -75,15 +75,17 @@ macro loadCommand*[T: proc](handle: Instance or Device; procType: typedesc[T]): 
 
   else: error "Type of the handle must be Instance or Device", procType
 
-macro loadCommand*[T: proc](handle: Instance or Device; procAccessor: T) =
+macro loadCommand*(handle: Instance or Device; procAccessor: proc) =
+  if procAccessor.kind notin [nnkSym]:
+    error "procAccessor must be nnkSym, not " & $procAccessor.kind, procAccessor
   let cageName = procAccessor.customPragmaNode()
     .findChild(it.len > 0 and it[0].repr == "loadInto")[1]
   quote do:
     `cageName` = `handle`.loadCommand(`cageName`.typeof)
 
-macro loadCommands*(handle: Instance or Device; body): untyped =
+macro loadCommands*(handle: Instance or Device; body) =
   newStmtList(
-    body.mapIt( quote do: `handle`.loadCommand `it` )
+    body.mapIt( ident"loadCommand".newCall(handle, it) )
   )
 
 template withLoad*[T: proc](procAccessor: T; handle: Instance or Device): T =

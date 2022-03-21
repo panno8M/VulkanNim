@@ -28,6 +28,10 @@ proc add*(ss: sstring; item: string) =
 proc add*(ss: sstring; item: Option[string]) =
   if item.isSome: ss.add item.get
 
+proc add*(ss: sstring; items: varargs[sstring]) =
+  for item in items:
+    ss.add item
+
 proc `&=`*(ss: sstring; item: string) =
   ss.item.add item
 

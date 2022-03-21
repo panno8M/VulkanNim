@@ -228,15 +228,7 @@ proc genCommands*() =
 
   const
     extDir = commandsDir/"extensions"
-    envDir = extDir/"environment"
-    vndDir = extDir/"vendor"
-    fncDir = extDir/"function"
-
-  let allextfile = LibFile(path: extDir)
-  let allextfeat = Feature(name: "extensions")
-  allextfeat.affiliate allextfile
-  libfiles.add allextfile
-  features[allextfeat.name] = allextfeat
+    envDir = commandsDir/"envdeps"
 
   let envfile = (
     windows : LibFile(path: envDir/"windows" ),
@@ -247,18 +239,7 @@ proc genCommands*() =
     ios     : LibFile(path: envDir/"ios"     ),
     android : LibFile(path: envDir/"android" ),
   )
-
-  let vendorFile = (
-    ggp    : LibFile(path: vndDir/"ggp"    ),
-    fuchsia: LibFile(path: vndDir/"fuchsia"),
-  )
-
-  let functionFile = (
-    maintenance:       LibFile(path: fncDir/"maintenance"      ),
-    display:           Libfile(path: fncDir/"display"          ),
-    drawIndirectCount: LibFile(path: fncDir/"drawindirectcount"),
-  )
-  
+  let stdfile = LibFile(path: commandsDir/"extension")
   let specifics = [
     envfile.windows,
     envfile.linux,
@@ -267,13 +248,7 @@ proc genCommands*() =
     envfile.macos,
     envfile.ios,
     envfile.android,
-
-    vendorFile.ggp,
-    vendorFile.fuchsia,
-
-    functionFile.maintenance,
-    functionFile.display,
-    functionFile.drawIndirectCount,
+    stdfile
     ]
   libfiles.add specifics
 
@@ -288,14 +263,9 @@ proc genCommands*() =
     ("ios", envfile.ios),
     ("android", envfile.android),
     ("VK_ANDROID", envfile.android),
-    ("VK_GGP", vendorFile.ggp),
-    ("VK_FUCHSIA", vendorFile.fuchsia),
-    ("VK_KHR_maintenance", functionFile.maintenance),
-    ("display", functionFile.display),
-    ("swapchain", functionFile.display),
-    ("VK_KHR_surface", functionFile.display),
-    ("draw_indirect_count", functionFile.drawIndirectCount)
-  ].newTable
+
+    ("VK_", stdfile)
+  ].toTable
 
   for extension in xml["extensions"].findAll("extension"):
     let name = extension{"name"}
@@ -303,36 +273,22 @@ proc genCommands*() =
 
     var feature = Feature(name: name)
 
-    # let needsImport = extension{"requires"}.parseWords({','})
-    # let promotedto = ?extension{"promotedto"}
-
-    # feature.imports.add needsImport
-    # if promotedto.isSome:
-    #   feature.imports.add promotedto.get
-
     if (?extension.comment).isSome:
       feature.comment = some extension.comment.underline('=').commentify
 
-    # feature.imports.add platformFeature.name
-
     for require in extension.findAll("require"):
-      # if (?require{"extension"}).isSome:
-      #   feature.imports.add require{"extension"}
       feature.requires.add require.extractNodeRequire
 
     if feature.requires.len != 0:
       features[name] = feature
 
     block MAKE_FILE:
-      allextfeat.imports.add feature.name
-      allextfeat.exports.add feature.name
-
       if feature.affiliation.isNil:
         for keyword, file in fileGroup:
           if feature.name.find(keyword) != -1:
             feature.affiliate file
             break MAKE_FILE
-          
+
       var file = new LibFile
       libfiles.add file
 

@@ -46,7 +46,7 @@ proc cmdSetDeviceMask*(
       commandBuffer: CommandBuffer;
       deviceMask: uint32;
     ): void {.preload("vkCmdSetDeviceMask"),
-      queues: QueueFlags{graphics, compute, transfer}, cmdchain.}
+      queues: QueueFlags{graphics, compute, transfer}.}
 proc cmdDispatchBase*(
       commandBuffer: CommandBuffer;
       baseGroupX: uint32;
@@ -56,7 +56,7 @@ proc cmdDispatchBase*(
       groupCountY: uint32;
       groupCountZ: uint32;
     ): void {.preload("vkCmdDispatchBase"),
-      queues: QueueFlags{compute}, cmdchain.}
+      queues: QueueFlags{compute}.}
 # Promoted from VK_KHR_device_group_creation
 proc enumeratePhysicalDeviceGroups*(
       instance: Instance;

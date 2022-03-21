@@ -5,6 +5,7 @@ import std/sugar
 import std/strformat
 import std/options
 import std/tables
+import std/algorithm
 
 import ./utils
 import ./nodedefs
@@ -238,8 +239,11 @@ proc renderCommands*(libFile: LibFile; featureTable: TableRef[string, Feature]; 
       commandsStr.add featureStr
       commandsStr.add ""
 
+  var featureInfos: seq[string]
   for feature in libfile.features:
-    headerStr.add feature.comment
+    featureInfos.add $feature.comment
+  featureInfos.sort
+  headerStr.add featureInfos.join("\n")
   headerStr.add ""
   let imports = libFile.solveImports(featureTable)
   headerStr.add imports

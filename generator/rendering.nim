@@ -238,8 +238,8 @@ proc render*(command: NodeCommand): string =
       var futter = "    ): {theType} {{.{loadMethod}".fmt
       if command.queues.len != 0:
         futter.add ",\n      queues: QueueFlags{" & command.queues.join(", ") & "}"
-      if name[0..2] == "cmd" or name in ["begin", "end", "reset"].mapIt(it & "CommandBuffer"):
-        futter.add ", cmdchain"
+      # if name[0..2] == "cmd" or name in ["begin", "end", "reset"].mapIt(it & "CommandBuffer"):
+      #   futter.add ", cmdchain"
       if command.successCodes.len != 0:
         futter.add ",\n      successCodes: @[" & command.successCodes.mapIt("Result." & it.parseEnumValue("", @[])).join(", ") & "]"
       if command.errorCodes.len != 0:
