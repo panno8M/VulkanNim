@@ -3,6 +3,7 @@
 # the generated program.
 import tools
 import temp_externalobjects
+{.push byref.}
 type
   # VERSION 1 0
   # ===========
@@ -124,7 +125,7 @@ type
     applicationVersion*: uint32
     pEngineName* {.optional.}: cstring
     engineVersion*: uint32
-    apiVersion*: uint32
+    apiVersion*: ApiVersion
   FormatProperties* = object
     linearTilingFeatures* {.optional.}: FormatFeatureFlags # Format features in case of linear tiling
     optimalTilingFeatures* {.optional.}: FormatFeatureFlags # Format features in case of optimal tiling
@@ -320,7 +321,7 @@ type
     memoryHeapCount*: uint32
     memoryHeaps*: array[MaxMemoryHeaps, MemoryHeap]
   PhysicalDeviceProperties* = object
-    apiVersion*: uint32
+    apiVersion*: ApiVersion
     driverVersion*: uint32
     vendorID*: uint32
     deviceID*: uint32

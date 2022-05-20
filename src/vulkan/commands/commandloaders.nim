@@ -9,7 +9,7 @@ import loadercomponents
 
 type UnloadedDefect* = object of NilAccessDefect
 
-macro loadCommand*(handle: Instance or Device; procType: typedesc[proc]): proc =
+macro loadCommand*[TH: Instance|Device](handle: TH; procType: typedesc[proc]): proc =
   ## .. code-block:: Nim
   ##    type PFN_queuePresentKHR* = proc(
   ##          queue: Queue;
@@ -57,31 +57,27 @@ macro loadCommand*(handle: Instance or Device; procType: typedesc[proc]): proc =
       loadFrom: loadablePragma[1],
       loadWith: loadablePragma[2][0..^1].mapIt(LoadWith(it.intVal))
     )
-
-  case handle.getTypeInst.repr
-  of Instance.getTypeInst.repr:
-    if LoadWith.Instance in loadWith:
-      return quote do:
+  quote do:
+    when typeof(`handle`) is Instance:
+      when LoadWith.Instance in `loadWith`:
         cast[`procType`](`handle`.getInstanceProcAddr(`loadFrom`))
-    else:
-      error "Not available to load with instance.", handle
-
-  of Device.getTypeInst.repr:
-    if LoadWith.Device in loadWith:
-      return quote do:
+      else:
+        {.error: "Not available to load with instance.".}
+    elif typeof(`handle`) is Device:
+      when LoadWith.Device in `loadWith`:
         cast[`procType`](`handle`.getDeviceProcAddr(`loadFrom`))
+      else:
+        {.error: "Not available to load with device.".}
     else:
-      error "Not available to load with device.", handle
+      {.error: "Type of the handle must be Instance or Device, not " & repr(typeof(`handle`)).}
 
-  else: error "Type of the handle must be Instance or Device", procType
-
-macro loadCommand*(handle: Instance or Device; procAccessor: proc) =
+macro loadCommand*(handle: Instance|Device; procAccessor: proc) =
   if procAccessor.kind notin [nnkSym]:
     error "procAccessor must be nnkSym, not " & $procAccessor.kind, procAccessor
   let cageName = procAccessor.customPragmaNode()
     .findChild(it.len > 0 and it[0].repr == "loadInto")[1]
   quote do:
-    `cageName` = `handle`.loadCommand(`cageName`.typeof)
+    `cageName` = `handle`.loadCommand(typeof `cageName`)
 
 macro loadCommands*(handle: Instance or Device; body) =
   newStmtList(

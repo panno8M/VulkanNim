@@ -8,61 +8,103 @@ macro `{}`*[T: object](Struct: typedesc[T]; args: varargs[untyped]): T =
   ## implicitly determined, and what needs to be explicitly set
   ## for many items in the vulkan structure. It also makes it
   ## easier to write the creation of structures.
-
-  let structMemDefs = Struct.getImpl[2][2][0..^1]
-  type StructArg = object
+  type UniqueOption = enum
+    none
+    isOptional
+    isConstant
+  type AdditionalInfomations = enum
+    length
+  type MemberInfo = object
     name: NimNode
     kind: NimNode
-    isOptional: bool
-    constant: Option[NimNode]
+    case uniqueOption: UniqueOption
+    of isConstant:
+      constantValue: NimNode
+    else: discard
     length: Option[NimNode]
 
-  let structArgs = structMemDefs.map proc(it: NimNode): StructArg =
-    result.name = it[0]
-    result.kind = it[1]
-    var pragma: Option[NimNode]
-    if it[0].kind == nnkPragmaExpr:
-      result.name = it[0][0]
-      pragma = some it[0][1]
-    var exportIt: bool
-    if result.name.kind == nnkPostfix and result.name[0].eqIdent "*":
-      exportIt = true
-      result.name = result.name[1]
-    if pragma.isSome:
-      for p in pragma.get:
-        if p.kind == nnkSym and $p == "optional":
-          result.isOptional = true
-        if p.kind == nnkExprColonExpr:
-          if p[0].kind == nnkSym and $p[0] == "constant":
-            result.constant = some p[1]
-          if p[0].kind == nnkSym and $p[0] == "length":
-            result.length = some p[1]
-  let argsCanNotFill = structArgs.filterIt: it.constant.isSome
-  let argsOptional = structArgs.filterIt: it.isOptional
-  let argsFilledOptional = args
-    .mapIt(argsOptional.filter(x => eqIdent(x.name, it[0]) and x.isOptional))
-    .filterIt(it.len != 0)
-    .mapIt(it[0])
-  let argsBlankOptional = argsOptional.filter(x => not argsFilledOptional.anyIt(it == x))
-  var argsNeedFill = structArgs.filterIt: not it.isOptional and it.constant.isNone
+  # let StructName = Struct.getImpl[0]
+  # let StructPragma = Struct.getImpl[1]
+  let StructInstance = Struct.getImpl[2]
+  let StructReqList = StructInstance[2]
+
+  var membersConstant: seq[MemberInfo]
+  var membersRequired: seq[MemberInfo]
+  var membersOptional: seq[MemberInfo]
+  var membersRequiredReceived: seq[MemberInfo]
+  var membersRequiredNotReceived: seq[MemberInfo]
+  var membersOptionalReceived: seq[MemberInfo]
+  var membersOptionalNotReceived: seq[MemberInfo]
+  for i, memberNode in StructReqList:
+    var pragmaExpr: Option[NimNode]
+    if memberNode[0].kind == nnkPragmaExpr:
+      pragmaExpr = some memberNode[0][1]
+
+    var memberInfo: MemberInfo
+    if pragmaExpr.isSome:
+      block CreateMemberInfo:
+        for p in pragmaExpr.get:
+          if p.kind in [nnkSym] and p.eqIdent "optional":
+            memberInfo = MemberInfo(uniqueOption: isOptional)
+            break CreateMemberInfo
+          elif p.kind in [nnkExprColonExpr] and p[0].kind in [nnkSym] and p[0].eqIdent "constant":
+            memberInfo = MemberInfo(
+              uniqueOption: isConstant,
+              constantValue: p[1])
+            break CreateMemberInfo
+        memberInfo = MemberInfo(uniqueOption: none)
+      for p in pragmaExpr.get:
+        if p.kind in [nnkExprColonExpr]:
+          if p[0].kind in [nnkSym] and p[0].eqIdent "length":
+            memberInfo.length = some p[1]
+
+    memberInfo.kind = memberNode[1]
+    memberInfo.name = case memberNode[0].kind
+      of nnkPragmaExpr:
+        if memberNode[0][0].kind == nnkPostfix:
+          memberNode[0][0][1]
+        else:
+          memberNode[0][0]
+      of nnkPostfix:
+        memberNode[0][1]
+      else:
+        memberNode[0]
+
+    if memberInfo.uniqueOption == isConstant: membersConstant.add memberInfo
+    elif memberInfo.uniqueOption == isOptional: membersOptional.add memberInfo
+    else: membersRequired.add memberInfo
+  for memberOptional in membersOptional:
+    if args.anyIt(it[0].eqIdent memberOptional.name):
+      membersOptionalReceived.add memberOptional
+    else:
+      membersOptionalNotReceived.add memberOptional
+
   # Mark param with the "length" pragma that point to other optional param as optional.
-  for i in countdown(argsNeedFill.high, argsNeedFill.low):
-    if argsNeedFill[i].length.isNone: continue
-    if argsBlankOptional
-        .anyIt(eqIdent(it.name, argsneedFill[i].length.get)):
-      argsNeedFill.delete i
+  for i in countdown(membersRequired.high, membersRequired.low):
+    if membersRequired[i].length.isNone: continue
+    if membersOptionalNotReceived
+        .anyIt(it.name.eqIdent membersRequired[i].length.get):
+      membersRequired.delete i
+
+  for memberRequired in membersRequired:
+    if args.anyIt(it[0].eqIdent memberRequired.name):
+      membersRequiredReceived.add memberRequired
+    else:
+      membersRequiredNotReceived.add memberRequired
 
   block errorCheck:
+    var errorMsg: string
     for arg in args:
-      if argsCanNotFill.anyIt(eqIdent(it.name, arg[0])):
-        error "\"" & $arg[0] & "\" is marked as constant so cannot fill it manuary", arg
-    for argneed in argsNeedFill:
-      if not args.anyIt(eqIdent(it[0], argneed.name)):
-        error "\"" & argneed.name.repr & ": " & argneed.kind.repr & "\" is not optional. must be filled", Struct
+      if membersConstant.anyIt(it.name.eqIdent arg[0]):
+        errorMsg.add "\"" & $arg[0] & "\" is marked as constant so cannot fill it manuary\n"
+    for memberRequiredNotReceived in membersRequiredNotReceived:
+      errorMsg.add "\"" & memberRequiredNotReceived.name.repr & ": " & memberRequiredNotReceived.kind.repr & "\" is not optional. must be filled\n"
+    if errorMsg != "": error errorMsg, Struct
 
-  newNimNode(nnkObjConstr)
-    .add(Struct)
-    .add(structArgs
-      .filterIt(it.constant.isSome)
-      .mapIt(newNimNode(nnkExprColonExpr).add(it.name, it.constant.get)))
-    .add(args[0..^1])
+  nnkObjConstr.newTree(Struct)
+    .add(
+      membersConstant
+        .mapIt(nnkExprColonExpr.newTree(it.name, it.constantValue))
+    ).add(
+      args[0..^1]
+    )

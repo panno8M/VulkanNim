@@ -23,9 +23,12 @@
 # VK_AMD_shader_info
 # VK_AMD_shader_trinary_minmax
 # VK_AMD_texture_gather_bias_lod
+# VK_ANDROID_external_memory_android_hardware_buffer
+# VK_ANDROID_native_buffer
 # VK_ARM_rasterization_order_attachment_access
 # VK_EXT_4444_formats
 # VK_EXT_acquire_drm_display
+# VK_EXT_acquire_xlib_display
 # VK_EXT_astc_decode_mode
 # VK_EXT_blend_operation_advanced
 # VK_EXT_border_color_swizzle
@@ -44,6 +47,7 @@
 # VK_EXT_descriptor_indexing
 # VK_EXT_device_memory_report
 # VK_EXT_direct_mode_display
+# VK_EXT_directfb_surface
 # VK_EXT_disable_cube_map_wrap
 # VK_EXT_discard_rectangles
 # VK_EXT_display_control
@@ -71,6 +75,7 @@
 # VK_EXT_load_store_op_none
 # VK_EXT_memory_budget
 # VK_EXT_memory_priority
+# VK_EXT_metal_surface
 # VK_EXT_multi_draw
 # VK_EXT_pageable_device_local_memory
 # VK_EXT_pci_bus_info
@@ -133,6 +138,7 @@
 # VK_KHR_16bit_storage
 # VK_KHR_8bit_storage
 # VK_KHR_acceleration_structure
+# VK_KHR_android_surface
 # VK_KHR_bind_memory2
 # VK_KHR_buffer_device_address
 # VK_KHR_copy_commands2
@@ -213,10 +219,14 @@
 # VK_KHR_video_encode_queue
 # VK_KHR_video_queue
 # VK_KHR_vulkan_memory_model
+# VK_KHR_wayland_surface
 # VK_KHR_win32_keyed_mutex
 # VK_KHR_win32_surface
 # VK_KHR_workgroup_memory_explicit_layout
+# VK_KHR_xcb_surface
+# VK_KHR_xlib_surface
 # VK_KHR_zero_initialize_workgroup_memory
+# VK_MVK_ios_surface
 # VK_MVK_macos_surface
 # VK_MVK_moltenvk
 # VK_NN_vi_surface
@@ -283,12 +293,29 @@ const
   # VK_KHR_display_swapchain
   KhrDisplaySwapchainSpecVersion* = 10
   KhrDisplaySwapchainExtensionName* = "VK_KHR_display_swapchain"
+  # VK_KHR_xlib_surface
+  KhrXlibSurfaceSpecVersion* = 6
+  KhrXlibSurfaceExtensionName* = "VK_KHR_xlib_surface"
+  # VK_KHR_xcb_surface
+  KhrXcbSurfaceSpecVersion* = 6
+  KhrXcbSurfaceExtensionName* = "VK_KHR_xcb_surface"
+  # VK_KHR_wayland_surface
+  KhrWaylandSurfaceSpecVersion* = 6
+  KhrWaylandSurfaceExtensionName* = "VK_KHR_wayland_surface"
   # VK_KHR_mir_surface
   KhrMirSurfaceSpecVersion* = 4
   KhrMirSurfaceExtensionName* = "VK_KHR_mir_surface"
+  # VK_KHR_android_surface
+  KhrAndroidSurfaceSpecVersion* = 6
+  KhrAndroidSurfaceExtensionName* = "VK_KHR_android_surface"
   # VK_KHR_win32_surface
   KhrWin32SurfaceSpecVersion* = 6
   KhrWin32SurfaceExtensionName* = "VK_KHR_win32_surface"
+  # VK_ANDROID_native_buffer
+  AndroidNativeBufferSpecVersion* = 8
+  AndroidNativeBufferNumber* = 11
+  AndroidNativeBufferExtensionName* = "VK_ANDROID_native_buffer"
+  AndroidNativeBufferName* = AndroidNativeBufferExtensionName
   # VK_EXT_debug_report
   ExtDebugReportSpecVersion* = 10
   ExtDebugReportExtensionName* = "VK_EXT_debug_report"
@@ -483,6 +510,9 @@ const
   # VK_EXT_direct_mode_display
   ExtDirectModeDisplaySpecVersion* = 1
   ExtDirectModeDisplayExtensionName* = "VK_EXT_direct_mode_display"
+  # VK_EXT_acquire_xlib_display
+  ExtAcquireXlibDisplaySpecVersion* = 1
+  ExtAcquireXlibDisplayExtensionName* = "VK_EXT_acquire_xlib_display"
   # VK_EXT_display_surface_counter
   ExtDisplaySurfaceCounterSpecVersion* = 1
   ExtDisplaySurfaceCounterExtensionName* = "VK_EXT_display_surface_counter"
@@ -558,6 +588,9 @@ const
   # VK_KHR_get_display_properties2
   KhrGetDisplayProperties2SpecVersion* = 1
   KhrGetDisplayProperties2ExtensionName* = "VK_KHR_get_display_properties2"
+  # VK_MVK_ios_surface
+  MiosSurfaceSpecVersion* = 3
+  MiosSurfaceExtensionName* = "VK_MVK_ios_surface"
   # VK_MVK_macos_surface
   MmacosSurfaceSpecVersion* = 3
   MmacosSurfaceExtensionName* = "VK_MVK_macos_surface"
@@ -576,6 +609,9 @@ const
   # VK_EXT_debug_utils
   ExtDebugUtilsSpecVersion* = 2
   ExtDebugUtilsExtensionName* = "VK_EXT_debug_utils"
+  # VK_ANDROID_external_memory_android_hardware_buffer
+  AndroidExternalMemoryAndroidHardwareBufferSpecVersion* = 4
+  AndroidExternalMemoryAndroidHardwareBufferExtensionName* = "VK_ANDROID_external_memory_android_hardware_buffer"
   # VK_EXT_sampler_filter_minmax
   ExtSamplerFilterMinmaxSpecVersion* = 2
   ExtSamplerFilterMinmaxExtensionName* = "VK_EXT_sampler_filter_minmax"
@@ -780,6 +816,9 @@ const
   # VK_KHR_shader_terminate_invocation
   KhrShaderTerminateInvocationSpecVersion* = 1
   KhrShaderTerminateInvocationExtensionName* = "VK_KHR_shader_terminate_invocation"
+  # VK_EXT_metal_surface
+  ExtMetalSurfaceSpecVersion* = 1
+  ExtMetalSurfaceExtensionName* = "VK_EXT_metal_surface"
   # VK_EXT_fragment_density_map
   ExtFragmentDensityMapSpecVersion* = 2
   ExtFragmentDensityMapExtensionName* = "VK_EXT_fragment_density_map"
@@ -995,6 +1034,9 @@ const
   # VK_NV_acquire_winrt_display
   NvAcquireWinrtDisplaySpecVersion* = 1
   NvAcquireWinrtDisplayExtensionName* = "VK_NV_acquire_winrt_display"
+  # VK_EXT_directfb_surface
+  ExtDirectfbSurfaceSpecVersion* = 1
+  ExtDirectfbSurfaceExtensionName* = "VK_EXT_directfb_surface"
   # VK_VALVE_mutable_descriptor_type
   ValveMutableDescriptorTypeSpecVersion* = 1
   ValveMutableDescriptorTypeExtensionName* = "VK_VALVE_mutable_descriptor_type"
@@ -1082,20 +1124,20 @@ proc destroySurfaceKHR*(
       instance: Instance;
       surface = default(SurfaceKHR);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.lazyload("vkDestroySurfaceKHR", InstanceLevel).}
+    ): void {.preload("vkDestroySurfaceKHR").}
 proc getPhysicalDeviceSurfaceSupportKHR*(
       physicalDevice: PhysicalDevice;
       queueFamilyIndex: uint32;
       surface: SurfaceKHR;
       pSupported: ptr Bool32;
-    ): Result {.lazyload("vkGetPhysicalDeviceSurfaceSupportKHR", InstanceLevel),
+    ): Result {.preload("vkGetPhysicalDeviceSurfaceSupportKHR"),
       successCodes: @[Result.success],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr].}
 proc getPhysicalDeviceSurfaceCapabilitiesKHR*(
       physicalDevice: PhysicalDevice;
       surface: SurfaceKHR;
       pSurfaceCapabilities: ptr SurfaceCapabilitiesKHR;
-    ): Result {.lazyload("vkGetPhysicalDeviceSurfaceCapabilitiesKHR", InstanceLevel),
+    ): Result {.preload("vkGetPhysicalDeviceSurfaceCapabilitiesKHR"),
       successCodes: @[Result.success],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr].}
 proc getPhysicalDeviceSurfaceFormatsKHR*(
@@ -1103,7 +1145,7 @@ proc getPhysicalDeviceSurfaceFormatsKHR*(
       surface = default(SurfaceKHR);
       pSurfaceFormatCount: ptr uint32;
       pSurfaceFormats {.length: pSurfaceFormatCount.} = default(arrPtr[SurfaceFormatKHR]);
-    ): Result {.lazyload("vkGetPhysicalDeviceSurfaceFormatsKHR", InstanceLevel),
+    ): Result {.preload("vkGetPhysicalDeviceSurfaceFormatsKHR"),
       successCodes: @[Result.success, Result.incomplete],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr].}
 proc getPhysicalDeviceSurfacePresentModesKHR*(
@@ -1111,7 +1153,7 @@ proc getPhysicalDeviceSurfacePresentModesKHR*(
       surface = default(SurfaceKHR);
       pPresentModeCount: ptr uint32;
       pPresentModes {.length: pPresentModeCount.} = default(arrPtr[PresentModeKHR]);
-    ): Result {.lazyload("vkGetPhysicalDeviceSurfacePresentModesKHR", InstanceLevel),
+    ): Result {.preload("vkGetPhysicalDeviceSurfacePresentModesKHR"),
       successCodes: @[Result.success, Result.incomplete],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr].}
 
@@ -1122,14 +1164,14 @@ proc createSwapchainKHR*(
       pCreateInfo: ptr SwapchainCreateInfoKHR;
       pAllocator = default(ptr AllocationCallbacks);
       pSwapchain: ptr SwapchainKHR;
-    ): Result {.lazyload("vkCreateSwapchainKHR", DeviceLevel),
+    ): Result {.preload("vkCreateSwapchainKHR"),
       successCodes: @[Result.success],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorDeviceLost, Result.errorSurfaceLostKhr, Result.errorNativeWindowInUseKhr, Result.errorInitializationFailed].}
 proc destroySwapchainKHR*(
       device: Device;
       swapchain = default(SwapchainKHR);
       pAllocator = default(ptr AllocationCallbacks);
-    ): void {.lazyload("vkDestroySwapchainKHR", DeviceLevel).}
+    ): void {.preload("vkDestroySwapchainKHR").}
 proc getSwapchainImagesKHR*(
       device: Device;
       swapchain: SwapchainKHR;
@@ -1237,7 +1279,7 @@ proc createDisplayPlaneSurfaceKHR*(
       pCreateInfo: ptr DisplaySurfaceCreateInfoKHR;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.lazyload("vkCreateDisplayPlaneSurfaceKHR", InstanceLevel),
+    ): Result {.preload("vkCreateDisplayPlaneSurfaceKHR"),
       successCodes: @[Result.success],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 
@@ -1253,6 +1295,67 @@ proc createSharedSwapchainsKHR*(
       successCodes: @[Result.success],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorIncompatibleDisplayKhr, Result.errorDeviceLost, Result.errorSurfaceLostKhr].}
 
+# VK_KHR_xlib_surface
+# ===================
+proc createXlibSurfaceKHR*(
+      instance: Instance;
+      pCreateInfo: ptr XlibSurfaceCreateInfoKHR;
+      pAllocator = default(ptr AllocationCallbacks);
+      pSurface: ptr SurfaceKHR;
+    ): Result {.preload("vkCreateXlibSurfaceKHR"),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
+proc getPhysicalDeviceXlibPresentationSupportKHR*(
+      physicalDevice: PhysicalDevice;
+      queueFamilyIndex: uint32;
+      dpy: ptr Display;
+      visualID: VisualID;
+    ): Bool32 {.lazyload("vkGetPhysicalDeviceXlibPresentationSupportKHR", InstanceLevel).}
+
+# VK_KHR_xcb_surface
+# ==================
+proc createXcbSurfaceKHR*(
+      instance: Instance;
+      pCreateInfo: ptr XcbSurfaceCreateInfoKHR;
+      pAllocator = default(ptr AllocationCallbacks);
+      pSurface: ptr SurfaceKHR;
+    ): Result {.preload("vkCreateXcbSurfaceKHR"),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
+proc getPhysicalDeviceXcbPresentationSupportKHR*(
+      physicalDevice: PhysicalDevice;
+      queueFamilyIndex: uint32;
+      connection: ptr XcbConnection;
+      visual_id: XcbVisualid;
+    ): Bool32 {.lazyload("vkGetPhysicalDeviceXcbPresentationSupportKHR", InstanceLevel).}
+
+# VK_KHR_wayland_surface
+# ======================
+proc createWaylandSurfaceKHR*(
+      instance: Instance;
+      pCreateInfo: ptr WaylandSurfaceCreateInfoKHR;
+      pAllocator = default(ptr AllocationCallbacks);
+      pSurface: ptr SurfaceKHR;
+    ): Result {.preload("vkCreateWaylandSurfaceKHR"),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
+proc getPhysicalDeviceWaylandPresentationSupportKHR*(
+      physicalDevice: PhysicalDevice;
+      queueFamilyIndex: uint32;
+      display: ptr wl_display;
+    ): Bool32 {.lazyload("vkGetPhysicalDeviceWaylandPresentationSupportKHR", InstanceLevel).}
+
+# VK_KHR_android_surface
+# ======================
+proc createAndroidSurfaceKHR*(
+      instance: Instance;
+      pCreateInfo: ptr AndroidSurfaceCreateInfoKHR;
+      pAllocator = default(ptr AllocationCallbacks);
+      pSurface: ptr SurfaceKHR;
+    ): Result {.preload("vkCreateAndroidSurfaceKHR"),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorNativeWindowInUseKhr].}
+
 # VK_KHR_win32_surface
 # ====================
 proc createWin32SurfaceKHR*(
@@ -1260,13 +1363,44 @@ proc createWin32SurfaceKHR*(
       pCreateInfo: ptr Win32SurfaceCreateInfoKHR;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.lazyload("vkCreateWin32SurfaceKHR", InstanceLevel),
+    ): Result {.preload("vkCreateWin32SurfaceKHR"),
       successCodes: @[Result.success],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 proc getPhysicalDeviceWin32PresentationSupportKHR*(
       physicalDevice: PhysicalDevice;
       queueFamilyIndex: uint32;
     ): Bool32 {.lazyload("vkGetPhysicalDeviceWin32PresentationSupportKHR", InstanceLevel).}
+
+# VK_ANDROID_native_buffer
+# ========================
+proc getSwapchainGrallocUsageANDROID*(
+      device: Device;
+      format: Format;
+      imageUsage: ImageUsageFlags;
+      grallocUsage: ptr int;
+    ): Result {.lazyload("vkGetSwapchainGrallocUsageANDROID", DeviceLevel).}
+proc acquireImageANDROID*(
+      device: Device;
+      image: Image;
+      nativeFenceFd: int;
+      semaphore: Semaphore;
+      fence: Fence;
+    ): Result {.lazyload("vkAcquireImageANDROID", DeviceLevel).}
+proc queueSignalReleaseImageANDROID*(
+      queue: Queue;
+      waitSemaphoreCount: uint32;
+      pWaitSemaphores {.length: waitSemaphoreCount.}: arrPtr[Semaphore];
+      image: Image;
+      pNativeFenceFd: ptr int;
+    ): Result {.lazyload("vkQueueSignalReleaseImageANDROID", DeviceLevel).}
+proc getSwapchainGrallocUsage2ANDROID*(
+      device: Device;
+      format: Format;
+      imageUsage: ImageUsageFlags;
+      swapchainImageUsage: SwapchainImageUsageFlagsANDROID;
+      grallocConsumerUsage: ptr uint64;
+      grallocProducerUsage: ptr uint64;
+    ): Result {.lazyload("vkGetSwapchainGrallocUsage2ANDROID", DeviceLevel).}
 
 # VK_EXT_debug_report
 # ===================
@@ -1312,16 +1446,19 @@ proc cmdDebugMarkerBeginEXT*(
       commandBuffer: CommandBuffer;
       pMarkerInfo: ptr DebugMarkerMarkerInfoEXT;
     ): void {.lazyload("vkCmdDebugMarkerBeginEXT", DeviceLevel),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdDebugMarkerEndEXT*(
       commandBuffer: CommandBuffer;
     ): void {.lazyload("vkCmdDebugMarkerEndEXT", DeviceLevel),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdDebugMarkerInsertEXT*(
       commandBuffer: CommandBuffer;
       pMarkerInfo: ptr DebugMarkerMarkerInfoEXT;
     ): void {.lazyload("vkCmdDebugMarkerInsertEXT", DeviceLevel),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_KHR_video_queue
 # ==================
@@ -1393,17 +1530,20 @@ proc cmdBeginVideoCodingKHR*(
       commandBuffer: CommandBuffer;
       pBeginInfo: ptr VideoBeginCodingInfoKHR;
     ): void {.lazyload("vkCmdBeginVideoCodingKHR", DeviceLevel),
-      queues: QueueFlags{decode, encode}.}
+      queues: QueueFlags{decode, encode},
+      cmdbufferlevel: @[primary].}
 proc cmdEndVideoCodingKHR*(
       commandBuffer: CommandBuffer;
       pEndCodingInfo: ptr VideoEndCodingInfoKHR;
     ): void {.lazyload("vkCmdEndVideoCodingKHR", DeviceLevel),
-      queues: QueueFlags{decode, encode}.}
+      queues: QueueFlags{decode, encode},
+      cmdbufferlevel: @[primary].}
 proc cmdControlVideoCodingKHR*(
       commandBuffer: CommandBuffer;
       pCodingControlInfo: ptr VideoCodingControlInfoKHR;
     ): void {.lazyload("vkCmdControlVideoCodingKHR", DeviceLevel),
-      queues: QueueFlags{decode, encode}.}
+      queues: QueueFlags{decode, encode},
+      cmdbufferlevel: @[primary].}
 
 # VK_KHR_video_decode_queue
 # =========================
@@ -1411,7 +1551,8 @@ proc cmdDecodeVideoKHR*(
       commandBuffer: CommandBuffer;
       pFrameInfo: ptr VideoDecodeInfoKHR;
     ): void {.lazyload("vkCmdDecodeVideoKHR", DeviceLevel),
-      queues: QueueFlags{decode}.}
+      queues: QueueFlags{decode},
+      cmdbufferlevel: @[primary].}
 
 # VK_EXT_transform_feedback
 # =========================
@@ -1423,7 +1564,8 @@ proc cmdBindTransformFeedbackBuffersEXT*(
       pOffsets {.length: bindingCount.}: arrPtr[DeviceSize];
       pSizes {.length: bindingCount.} = default(arrPtr[DeviceSize]);
     ): void {.lazyload("vkCmdBindTransformFeedbackBuffersEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdBeginTransformFeedbackEXT*(
       commandBuffer: CommandBuffer;
       firstCounterBuffer: uint32;
@@ -1431,7 +1573,8 @@ proc cmdBeginTransformFeedbackEXT*(
       pCounterBuffers {.length: counterBufferCount.}: arrPtr[Buffer];
       pCounterBufferOffsets {.length: counterBufferCount.} = default(arrPtr[DeviceSize]);
     ): void {.lazyload("vkCmdBeginTransformFeedbackEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdEndTransformFeedbackEXT*(
       commandBuffer: CommandBuffer;
       firstCounterBuffer: uint32;
@@ -1439,7 +1582,8 @@ proc cmdEndTransformFeedbackEXT*(
       pCounterBuffers {.length: counterBufferCount.}: arrPtr[Buffer];
       pCounterBufferOffsets {.length: counterBufferCount.} = default(arrPtr[DeviceSize]);
     ): void {.lazyload("vkCmdEndTransformFeedbackEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdBeginQueryIndexedEXT*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
@@ -1447,14 +1591,16 @@ proc cmdBeginQueryIndexedEXT*(
       flags = default(QueryControlFlags);
       index: uint32;
     ): void {.lazyload("vkCmdBeginQueryIndexedEXT", DeviceLevel),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdEndQueryIndexedEXT*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
       query: uint32;
       index: uint32;
     ): void {.lazyload("vkCmdEndQueryIndexedEXT", DeviceLevel),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdDrawIndirectByteCountEXT*(
       commandBuffer: CommandBuffer;
       instanceCount: uint32;
@@ -1464,7 +1610,8 @@ proc cmdDrawIndirectByteCountEXT*(
       counterOffset: uint32;
       vertexStride: uint32;
     ): void {.lazyload("vkCmdDrawIndirectByteCountEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_NVX_binary_import
 # ====================
@@ -1498,7 +1645,8 @@ proc cmdCuLaunchKernelNVX*(
       commandBuffer: CommandBuffer;
       pLaunchInfo: ptr CuLaunchInfoNVX;
     ): void {.lazyload("vkCmdCuLaunchKernelNVX", DeviceLevel),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_NVX_image_view_handle
 # ========================
@@ -1538,11 +1686,13 @@ proc cmdBeginRenderingKHR*(
       commandBuffer: CommandBuffer;
       pRenderingInfo: ptr RenderingInfoKHR;
     ): void {.lazyload("vkCmdBeginRenderingKHR", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdEndRenderingKHR*(
       commandBuffer: CommandBuffer;
     ): void {.lazyload("vkCmdEndRenderingKHR", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_GGP_stream_descriptor_surface
 # ================================
@@ -1551,7 +1701,7 @@ proc createStreamDescriptorSurfaceGGP*(
       pCreateInfo: ptr StreamDescriptorSurfaceCreateInfoGGP;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.lazyload("vkCreateStreamDescriptorSurfaceGGP", InstanceLevel),
+    ): Result {.preload("vkCreateStreamDescriptorSurfaceGGP"),
       successCodes: @[Result.success],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorNativeWindowInUseKhr].}
 
@@ -1604,7 +1754,7 @@ proc createViSurfaceNN*(
       pCreateInfo: ptr ViSurfaceCreateInfoNN;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.lazyload("vkCreateViSurfaceNN", InstanceLevel),
+    ): Result {.preload("vkCreateViSurfaceNN"),
       successCodes: @[Result.success],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorNativeWindowInUseKhr].}
 
@@ -1702,7 +1852,8 @@ proc cmdPushDescriptorSetKHR*(
       descriptorWriteCount: uint32;
       pDescriptorWrites {.length: descriptorWriteCount.}: arrPtr[WriteDescriptorSet];
     ): void {.lazyload("vkCmdPushDescriptorSetKHR", DeviceLevel),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdPushDescriptorSetWithTemplateKHR*(
       commandBuffer: CommandBuffer;
       descriptorUpdateTemplate: DescriptorUpdateTemplate;
@@ -1710,7 +1861,8 @@ proc cmdPushDescriptorSetWithTemplateKHR*(
       set: uint32;
       pData: pointer;
     ): void {.lazyload("vkCmdPushDescriptorSetWithTemplateKHR", DeviceLevel),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_EXT_conditional_rendering
 # ============================
@@ -1718,11 +1870,13 @@ proc cmdBeginConditionalRenderingEXT*(
       commandBuffer: CommandBuffer;
       pConditionalRenderingBegin: ptr ConditionalRenderingBeginInfoEXT;
     ): void {.lazyload("vkCmdBeginConditionalRenderingEXT", DeviceLevel),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdEndConditionalRenderingEXT*(
       commandBuffer: CommandBuffer;
     ): void {.lazyload("vkCmdEndConditionalRenderingEXT", DeviceLevel),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_KHR_descriptor_update_template
 # =================================
@@ -1738,7 +1892,8 @@ proc cmdSetViewportWScalingNV*(
       viewportCount: uint32;
       pViewportWScalings {.length: viewportCount.}: arrPtr[ViewportWScalingNV];
     ): void {.lazyload("vkCmdSetViewportWScalingNV", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_EXT_direct_mode_display
 # ==========================
@@ -1748,13 +1903,31 @@ proc releaseDisplayEXT*(
     ): Result {.lazyload("vkReleaseDisplayEXT", InstanceLevel),
       successCodes: @[Result.success].}
 
+# VK_EXT_acquire_xlib_display
+# ===========================
+proc acquireXlibDisplayEXT*(
+      physicalDevice: PhysicalDevice;
+      dpy: ptr Display;
+      display: DisplayKHR;
+    ): Result {.lazyload("vkAcquireXlibDisplayEXT", InstanceLevel),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInitializationFailed].}
+proc getRandROutputDisplayEXT*(
+      physicalDevice: PhysicalDevice;
+      dpy: ptr Display;
+      rrOutput: RROutput;
+      pDisplay: ptr DisplayKHR;
+    ): Result {.lazyload("vkGetRandROutputDisplayEXT", InstanceLevel),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory].}
+
 # VK_EXT_display_surface_counter
 # ==============================
 proc getPhysicalDeviceSurfaceCapabilities2EXT*(
       physicalDevice: PhysicalDevice;
       surface: SurfaceKHR;
       pSurfaceCapabilities: ptr SurfaceCapabilities2EXT;
-    ): Result {.lazyload("vkGetPhysicalDeviceSurfaceCapabilities2EXT", InstanceLevel),
+    ): Result {.preload("vkGetPhysicalDeviceSurfaceCapabilities2EXT"),
       successCodes: @[Result.success],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr].}
 
@@ -1819,7 +1992,8 @@ proc cmdSetDiscardRectangleEXT*(
       discardRectangleCount: uint32;
       pDiscardRectangles {.length: discardRectangleCount.}: arrPtr[Rect2D];
     ): void {.lazyload("vkCmdSetDiscardRectangleEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_EXT_hdr_metadata
 # ===================
@@ -1914,7 +2088,7 @@ proc getPhysicalDeviceSurfaceCapabilities2KHR*(
       physicalDevice: PhysicalDevice;
       pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR;
       pSurfaceCapabilities: ptr SurfaceCapabilities2KHR;
-    ): Result {.lazyload("vkGetPhysicalDeviceSurfaceCapabilities2KHR", InstanceLevel),
+    ): Result {.preload("vkGetPhysicalDeviceSurfaceCapabilities2KHR"),
       successCodes: @[Result.success],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr].}
 proc getPhysicalDeviceSurfaceFormats2KHR*(
@@ -1922,7 +2096,7 @@ proc getPhysicalDeviceSurfaceFormats2KHR*(
       pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR;
       pSurfaceFormatCount: ptr uint32;
       pSurfaceFormats {.length: pSurfaceFormatCount.} = default(arrPtr[SurfaceFormat2KHR]);
-    ): Result {.lazyload("vkGetPhysicalDeviceSurfaceFormats2KHR", InstanceLevel),
+    ): Result {.preload("vkGetPhysicalDeviceSurfaceFormats2KHR"),
       successCodes: @[Result.success, Result.incomplete],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr].}
 
@@ -1958,6 +2132,17 @@ proc getDisplayPlaneCapabilities2KHR*(
       successCodes: @[Result.success],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 
+# VK_MVK_ios_surface
+# ==================
+proc createIOSSurfaceMVK*(
+      instance: Instance;
+      pCreateInfo: ptr IOSSurfaceCreateInfoMVK;
+      pAllocator = default(ptr AllocationCallbacks);
+      pSurface: ptr SurfaceKHR;
+    ): Result {.preload("vkCreateIOSSurfaceMVK"),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorNativeWindowInUseKhr].}
+
 # VK_MVK_macos_surface
 # ====================
 proc createMacOSSurfaceMVK*(
@@ -1965,7 +2150,7 @@ proc createMacOSSurfaceMVK*(
       pCreateInfo: ptr MacOSSurfaceCreateInfoMVK;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.lazyload("vkCreateMacOSSurfaceMVK", InstanceLevel),
+    ): Result {.preload("vkCreateMacOSSurfaceMVK"),
       successCodes: @[Result.success],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorNativeWindowInUseKhr].}
 
@@ -1998,16 +2183,19 @@ proc cmdBeginDebugUtilsLabelEXT*(
       commandBuffer: CommandBuffer;
       pLabelInfo: ptr DebugUtilsLabelEXT;
     ): void {.lazyload("vkCmdBeginDebugUtilsLabelEXT", DeviceLevel),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdEndDebugUtilsLabelEXT*(
       commandBuffer: CommandBuffer;
     ): void {.lazyload("vkCmdEndDebugUtilsLabelEXT", DeviceLevel),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdInsertDebugUtilsLabelEXT*(
       commandBuffer: CommandBuffer;
       pLabelInfo: ptr DebugUtilsLabelEXT;
     ): void {.lazyload("vkCmdInsertDebugUtilsLabelEXT", DeviceLevel),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc createDebugUtilsMessengerEXT*(
       instance: Instance;
       pCreateInfo: ptr DebugUtilsMessengerCreateInfoEXT;
@@ -2028,13 +2216,31 @@ proc submitDebugUtilsMessageEXT*(
       pCallbackData: ptr DebugUtilsMessengerCallbackDataEXT;
     ): void {.lazyload("vkSubmitDebugUtilsMessageEXT", InstanceLevel).}
 
+# VK_ANDROID_external_memory_android_hardware_buffer
+# ==================================================
+proc getAndroidHardwareBufferPropertiesANDROID*(
+      device: Device;
+      buffer: ptr AHardwareBuffer;
+      pProperties: ptr AndroidHardwareBufferPropertiesANDROID;
+    ): Result {.lazyload("vkGetAndroidHardwareBufferPropertiesANDROID", DeviceLevel),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorInvalidExternalHandleKhr].}
+proc getMemoryAndroidHardwareBufferANDROID*(
+      device: Device;
+      pInfo: ptr MemoryGetAndroidHardwareBufferInfoANDROID;
+      pBuffer: ptr ptr AHardwareBuffer;
+    ): Result {.lazyload("vkGetMemoryAndroidHardwareBufferANDROID", DeviceLevel),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
+
 # VK_EXT_sample_locations
 # =======================
 proc cmdSetSampleLocationsEXT*(
       commandBuffer: CommandBuffer;
       pSampleLocationsInfo: ptr SampleLocationsInfoEXT;
     ): void {.lazyload("vkCmdSetSampleLocationsEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc getPhysicalDeviceMultisamplePropertiesEXT*(
       physicalDevice: PhysicalDevice;
       samples: SampleCountFlagBits;
@@ -2068,7 +2274,8 @@ proc cmdBuildAccelerationStructuresKHR*(
       pInfos {.length: infoCount.}: arrPtr[AccelerationStructureBuildGeometryInfoKHR];
       ppBuildRangeInfos {.length: infoCount.}: arrPtr[arrPtr[AccelerationStructureBuildRangeInfoKHR]];
     ): void {.lazyload("vkCmdBuildAccelerationStructuresKHR", DeviceLevel),
-      queues: QueueFlags{compute}.}
+      queues: QueueFlags{compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdBuildAccelerationStructuresIndirectKHR*(
       commandBuffer: CommandBuffer;
       infoCount: uint32;
@@ -2077,7 +2284,8 @@ proc cmdBuildAccelerationStructuresIndirectKHR*(
       pIndirectStrides {.length: infoCount.}: arrPtr[uint32];
       ppMaxPrimitiveCounts {.length: infoCount.}: arrPtr[arrPtr[uint32]];
     ): void {.lazyload("vkCmdBuildAccelerationStructuresIndirectKHR", DeviceLevel),
-      queues: QueueFlags{compute}.}
+      queues: QueueFlags{compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc buildAccelerationStructuresKHR*(
       device: Device;
       deferredOperation = default(DeferredOperationKHR);
@@ -2123,17 +2331,20 @@ proc cmdCopyAccelerationStructureKHR*(
       commandBuffer: CommandBuffer;
       pInfo: ptr CopyAccelerationStructureInfoKHR;
     ): void {.lazyload("vkCmdCopyAccelerationStructureKHR", DeviceLevel),
-      queues: QueueFlags{compute}.}
+      queues: QueueFlags{compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdCopyAccelerationStructureToMemoryKHR*(
       commandBuffer: CommandBuffer;
       pInfo: ptr CopyAccelerationStructureToMemoryInfoKHR;
     ): void {.lazyload("vkCmdCopyAccelerationStructureToMemoryKHR", DeviceLevel),
-      queues: QueueFlags{compute}.}
+      queues: QueueFlags{compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdCopyMemoryToAccelerationStructureKHR*(
       commandBuffer: CommandBuffer;
       pInfo: ptr CopyMemoryToAccelerationStructureInfoKHR;
     ): void {.lazyload("vkCmdCopyMemoryToAccelerationStructureKHR", DeviceLevel),
-      queues: QueueFlags{compute}.}
+      queues: QueueFlags{compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc getAccelerationStructureDeviceAddressKHR*(
       device: Device;
       pInfo: ptr AccelerationStructureDeviceAddressInfoKHR;
@@ -2146,7 +2357,8 @@ proc cmdWriteAccelerationStructuresPropertiesKHR*(
       queryPool: QueryPool;
       firstQuery: uint32;
     ): void {.lazyload("vkCmdWriteAccelerationStructuresPropertiesKHR", DeviceLevel),
-      queues: QueueFlags{compute}.}
+      queues: QueueFlags{compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc getDeviceAccelerationStructureCompatibilityKHR*(
       device: Device;
       pVersionInfo: ptr AccelerationStructureVersionInfoKHR;
@@ -2172,7 +2384,8 @@ proc cmdTraceRaysKHR*(
       height: uint32;
       depth: uint32;
     ): void {.lazyload("vkCmdTraceRaysKHR", DeviceLevel),
-      queues: QueueFlags{compute}.}
+      queues: QueueFlags{compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc createRayTracingPipelinesKHR*(
       device: Device;
       deferredOperation = default(DeferredOperationKHR);
@@ -2212,7 +2425,8 @@ proc cmdTraceRaysIndirectKHR*(
       pCallableShaderBindingTable: ptr StridedDeviceAddressRegionKHR;
       indirectDeviceAddress: DeviceAddress;
     ): void {.lazyload("vkCmdTraceRaysIndirectKHR", DeviceLevel),
-      queues: QueueFlags{compute}.}
+      queues: QueueFlags{compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc getRayTracingShaderGroupStackSizeKHR*(
       device: Device;
       pipeline: Pipeline;
@@ -2223,7 +2437,8 @@ proc cmdSetRayTracingPipelineStackSizeKHR*(
       commandBuffer: CommandBuffer;
       pipelineStackSize: uint32;
     ): void {.lazyload("vkCmdSetRayTracingPipelineStackSizeKHR", DeviceLevel),
-      queues: QueueFlags{compute}.}
+      queues: QueueFlags{compute},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_KHR_sampler_ycbcr_conversion
 # ===============================
@@ -2284,21 +2499,24 @@ proc cmdBindShadingRateImageNV*(
       imageView = default(ImageView);
       imageLayout: ImageLayout;
     ): void {.lazyload("vkCmdBindShadingRateImageNV", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetViewportShadingRatePaletteNV*(
       commandBuffer: CommandBuffer;
       firstViewport: uint32;
       viewportCount: uint32;
       pShadingRatePalettes {.length: viewportCount.}: arrPtr[ShadingRatePaletteNV];
     ): void {.lazyload("vkCmdSetViewportShadingRatePaletteNV", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetCoarseSampleOrderNV*(
       commandBuffer: CommandBuffer;
       sampleOrderType: CoarseSampleOrderTypeNV;
       customSampleOrderCount = default(uint32);
       pCustomSampleOrders {.length: customSampleOrderCount.}: arrPtr[CoarseSampleOrderCustomNV];
     ): void {.lazyload("vkCmdSetCoarseSampleOrderNV", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_NV_ray_tracing
 # =================
@@ -2338,14 +2556,16 @@ proc cmdBuildAccelerationStructureNV*(
       scratch: Buffer;
       scratchOffset: DeviceSize;
     ): void {.lazyload("vkCmdBuildAccelerationStructureNV", DeviceLevel),
-      queues: QueueFlags{compute}.}
+      queues: QueueFlags{compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdCopyAccelerationStructureNV*(
       commandBuffer: CommandBuffer;
       dst: AccelerationStructureNV;
       src: AccelerationStructureNV;
       mode: CopyAccelerationStructureModeKHR;
     ): void {.lazyload("vkCmdCopyAccelerationStructureNV", DeviceLevel),
-      queues: QueueFlags{compute}.}
+      queues: QueueFlags{compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdTraceRaysNV*(
       commandBuffer: CommandBuffer;
       raygenShaderBindingTableBuffer: Buffer;
@@ -2363,7 +2583,8 @@ proc cmdTraceRaysNV*(
       height: uint32;
       depth: uint32;
     ): void {.lazyload("vkCmdTraceRaysNV", DeviceLevel),
-      queues: QueueFlags{compute}.}
+      queues: QueueFlags{compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc createRayTracingPipelinesNV*(
       device: Device;
       pipelineCache = default(PipelineCache);
@@ -2391,7 +2612,8 @@ proc cmdWriteAccelerationStructuresPropertiesNV*(
       queryPool: QueryPool;
       firstQuery: uint32;
     ): void {.lazyload("vkCmdWriteAccelerationStructuresPropertiesNV", DeviceLevel),
-      queues: QueueFlags{compute}.}
+      queues: QueueFlags{compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc compileDeferredNV*(
       device: Device;
       pipeline: Pipeline;
@@ -2429,7 +2651,8 @@ proc cmdWriteBufferMarkerAMD*(
       dstOffset: DeviceSize;
       marker: uint32;
     ): void {.lazyload("vkCmdWriteBufferMarkerAMD", DeviceLevel),
-      queues: QueueFlags{transfer, graphics, compute}.}
+      queues: QueueFlags{transfer, graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_EXT_calibrated_timestamps
 # ============================
@@ -2457,7 +2680,8 @@ proc cmdDrawMeshTasksNV*(
       taskCount: uint32;
       firstTask: uint32;
     ): void {.lazyload("vkCmdDrawMeshTasksNV", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdDrawMeshTasksIndirectNV*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
@@ -2465,7 +2689,8 @@ proc cmdDrawMeshTasksIndirectNV*(
       drawCount: uint32;
       stride: uint32;
     ): void {.lazyload("vkCmdDrawMeshTasksIndirectNV", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdDrawMeshTasksIndirectCountNV*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
@@ -2475,7 +2700,8 @@ proc cmdDrawMeshTasksIndirectCountNV*(
       maxDrawCount: uint32;
       stride: uint32;
     ): void {.lazyload("vkCmdDrawMeshTasksIndirectCountNV", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_NV_scissor_exclusive
 # =======================
@@ -2485,7 +2711,8 @@ proc cmdSetExclusiveScissorNV*(
       exclusiveScissorCount: uint32;
       pExclusiveScissors {.length: exclusiveScissorCount.}: arrPtr[Rect2D];
     ): void {.lazyload("vkCmdSetExclusiveScissorNV", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_NV_device_diagnostic_checkpoints
 # ===================================
@@ -2493,7 +2720,8 @@ proc cmdSetCheckpointNV*(
       commandBuffer: CommandBuffer;
       pCheckpointMarker: pointer;
     ): void {.lazyload("vkCmdSetCheckpointNV", DeviceLevel),
-      queues: QueueFlags{graphics, compute, transfer}.}
+      queues: QueueFlags{graphics, compute, transfer},
+      cmdbufferlevel: @[primary, secondary].}
 proc getQueueCheckpointDataNV*(
       queue: Queue;
       pCheckpointDataCount: ptr uint32;
@@ -2522,6 +2750,7 @@ proc cmdSetPerformanceMarkerINTEL*(
       pMarkerInfo: ptr PerformanceMarkerInfoINTEL;
     ): Result {.lazyload("vkCmdSetPerformanceMarkerINTEL", DeviceLevel),
       queues: QueueFlags{graphics, compute, transfer},
+      cmdbufferlevel: @[primary, secondary],
       successCodes: @[Result.success],
       errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 proc cmdSetPerformanceStreamMarkerINTEL*(
@@ -2529,6 +2758,7 @@ proc cmdSetPerformanceStreamMarkerINTEL*(
       pMarkerInfo: ptr PerformanceStreamMarkerInfoINTEL;
     ): Result {.lazyload("vkCmdSetPerformanceStreamMarkerINTEL", DeviceLevel),
       queues: QueueFlags{graphics, compute, transfer},
+      cmdbufferlevel: @[primary, secondary],
       successCodes: @[Result.success],
       errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 proc cmdSetPerformanceOverrideINTEL*(
@@ -2536,6 +2766,7 @@ proc cmdSetPerformanceOverrideINTEL*(
       pOverrideInfo: ptr PerformanceOverrideInfoINTEL;
     ): Result {.lazyload("vkCmdSetPerformanceOverrideINTEL", DeviceLevel),
       queues: QueueFlags{graphics, compute, transfer},
+      cmdbufferlevel: @[primary, secondary],
       successCodes: @[Result.success],
       errorCodes: @[Result.errorTooManyObjects, Result.errorOutOfHostMemory].}
 proc acquirePerformanceConfigurationINTEL*(
@@ -2580,9 +2811,20 @@ proc createImagePipeSurfaceFUCHSIA*(
       pCreateInfo: ptr ImagePipeSurfaceCreateInfoFUCHSIA;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.lazyload("vkCreateImagePipeSurfaceFUCHSIA", InstanceLevel),
+    ): Result {.preload("vkCreateImagePipeSurfaceFUCHSIA"),
       successCodes: @[Result.success],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
+
+# VK_EXT_metal_surface
+# ====================
+proc createMetalSurfaceEXT*(
+      instance: Instance;
+      pCreateInfo: ptr MetalSurfaceCreateInfoEXT;
+      pAllocator = default(ptr AllocationCallbacks);
+      pSurface: ptr SurfaceKHR;
+    ): Result {.preload("vkCreateMetalSurfaceEXT"),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorNativeWindowInUseKhr].}
 
 # VK_KHR_fragment_shading_rate
 # ============================
@@ -2598,7 +2840,8 @@ proc cmdSetFragmentShadingRateKHR*(
       pFragmentSize: ptr Extent2D;
       combinerOps: FragmentShadingRateCombinerOpKHR;
     ): void {.lazyload("vkCmdSetFragmentShadingRateKHR", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_EXT_buffer_device_address
 # ============================
@@ -2652,7 +2895,7 @@ proc getPhysicalDeviceSurfacePresentModes2EXT*(
       pSurfaceInfo: ptr PhysicalDeviceSurfaceInfo2KHR;
       pPresentModeCount: ptr uint32;
       pPresentModes {.length: pPresentModeCount.} = default(arrPtr[PresentModeKHR]);
-    ): Result {.lazyload("vkGetPhysicalDeviceSurfacePresentModes2EXT", InstanceLevel),
+    ): Result {.preload("vkGetPhysicalDeviceSurfacePresentModes2EXT"),
       successCodes: @[Result.success, Result.incomplete],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory, Result.errorSurfaceLostKhr].}
 proc acquireFullScreenExclusiveModeEXT*(
@@ -2682,7 +2925,7 @@ proc createHeadlessSurfaceEXT*(
       pCreateInfo: ptr HeadlessSurfaceCreateInfoEXT;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.lazyload("vkCreateHeadlessSurfaceEXT", InstanceLevel),
+    ): Result {.preload("vkCreateHeadlessSurfaceEXT"),
       successCodes: @[Result.success],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 
@@ -2699,7 +2942,8 @@ proc cmdSetLineStippleEXT*(
       lineStippleFactor: uint32;
       lineStipplePattern: uint16;
     ): void {.lazyload("vkCmdSetLineStippleEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_EXT_host_query_reset
 # =======================
@@ -2711,29 +2955,34 @@ proc cmdSetCullModeEXT*(
       commandBuffer: CommandBuffer;
       cullMode = default(CullModeFlags);
     ): void {.lazyload("vkCmdSetCullModeEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetFrontFaceEXT*(
       commandBuffer: CommandBuffer;
       frontFace: FrontFace;
     ): void {.lazyload("vkCmdSetFrontFaceEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetPrimitiveTopologyEXT*(
       commandBuffer: CommandBuffer;
       primitiveTopology: PrimitiveTopology;
     ): void {.lazyload("vkCmdSetPrimitiveTopologyEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetViewportWithCountEXT*(
       commandBuffer: CommandBuffer;
       viewportCount: uint32;
       pViewports {.length: viewportCount.}: arrPtr[Viewport];
     ): void {.lazyload("vkCmdSetViewportWithCountEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetScissorWithCountEXT*(
       commandBuffer: CommandBuffer;
       scissorCount: uint32;
       pScissors {.length: scissorCount.}: arrPtr[Rect2D];
     ): void {.lazyload("vkCmdSetScissorWithCountEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdBindVertexBuffers2EXT*(
       commandBuffer: CommandBuffer;
       firstBinding: uint32;
@@ -2743,32 +2992,38 @@ proc cmdBindVertexBuffers2EXT*(
       pSizes {.length: bindingCount.} = default(arrPtr[DeviceSize]);
       pStrides {.length: bindingCount.} = default(arrPtr[DeviceSize]);
     ): void {.lazyload("vkCmdBindVertexBuffers2EXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetDepthTestEnableEXT*(
       commandBuffer: CommandBuffer;
       depthTestEnable: Bool32;
     ): void {.lazyload("vkCmdSetDepthTestEnableEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetDepthWriteEnableEXT*(
       commandBuffer: CommandBuffer;
       depthWriteEnable: Bool32;
     ): void {.lazyload("vkCmdSetDepthWriteEnableEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetDepthCompareOpEXT*(
       commandBuffer: CommandBuffer;
       depthCompareOp: CompareOp;
     ): void {.lazyload("vkCmdSetDepthCompareOpEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetDepthBoundsTestEnableEXT*(
       commandBuffer: CommandBuffer;
       depthBoundsTestEnable: Bool32;
     ): void {.lazyload("vkCmdSetDepthBoundsTestEnableEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetStencilTestEnableEXT*(
       commandBuffer: CommandBuffer;
       stencilTestEnable: Bool32;
     ): void {.lazyload("vkCmdSetStencilTestEnableEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetStencilOpEXT*(
       commandBuffer: CommandBuffer;
       faceMask: StencilFaceFlags;
@@ -2777,7 +3032,8 @@ proc cmdSetStencilOpEXT*(
       depthFailOp: StencilOp;
       compareOp: CompareOp;
     ): void {.lazyload("vkCmdSetStencilOpEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_KHR_deferred_host_operations
 # ===============================
@@ -2847,20 +3103,23 @@ proc cmdPreprocessGeneratedCommandsNV*(
       commandBuffer: CommandBuffer;
       pGeneratedCommandsInfo: ptr GeneratedCommandsInfoNV;
     ): void {.lazyload("vkCmdPreprocessGeneratedCommandsNV", DeviceLevel),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdExecuteGeneratedCommandsNV*(
       commandBuffer: CommandBuffer;
       isPreprocessed: Bool32;
       pGeneratedCommandsInfo: ptr GeneratedCommandsInfoNV;
     ): void {.lazyload("vkCmdExecuteGeneratedCommandsNV", DeviceLevel),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdBindPipelineShaderGroupNV*(
       commandBuffer: CommandBuffer;
       pipelineBindPoint: PipelineBindPoint;
       pipeline: Pipeline;
       groupIndex: uint32;
     ): void {.lazyload("vkCmdBindPipelineShaderGroupNV", DeviceLevel),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc createIndirectCommandsLayoutNV*(
       device: Device;
       pCreateInfo: ptr IndirectCommandsLayoutCreateInfoNV;
@@ -2931,7 +3190,8 @@ proc cmdEncodeVideoKHR*(
       commandBuffer: CommandBuffer;
       pEncodeInfo: ptr VideoEncodeInfoKHR;
     ): void {.lazyload("vkCmdEncodeVideoKHR", DeviceLevel),
-      queues: QueueFlags{encode}.}
+      queues: QueueFlags{encode},
+      cmdbufferlevel: @[primary].}
 
 # VK_KHR_synchronization2
 # =======================
@@ -2940,32 +3200,37 @@ proc cmdSetEvent2KHR*(
       event: Event;
       pDependencyInfo: ptr DependencyInfoKHR;
     ): void {.lazyload("vkCmdSetEvent2KHR", DeviceLevel),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdResetEvent2KHR*(
       commandBuffer: CommandBuffer;
       event: Event;
       stageMask = default(PipelineStageFlags2KHR);
     ): void {.lazyload("vkCmdResetEvent2KHR", DeviceLevel),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdWaitEvents2KHR*(
       commandBuffer: CommandBuffer;
       eventCount: uint32;
       pEvents {.length: eventCount.}: arrPtr[Event];
       pDependencyInfos {.length: eventCount.}: arrPtr[DependencyInfoKHR];
     ): void {.lazyload("vkCmdWaitEvents2KHR", DeviceLevel),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdPipelineBarrier2KHR*(
       commandBuffer: CommandBuffer;
       pDependencyInfo: ptr DependencyInfoKHR;
     ): void {.lazyload("vkCmdPipelineBarrier2KHR", DeviceLevel),
-      queues: QueueFlags{transfer, graphics, compute}.}
+      queues: QueueFlags{transfer, graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdWriteTimestamp2KHR*(
       commandBuffer: CommandBuffer;
       stage = default(PipelineStageFlags2KHR);
       queryPool: QueryPool;
       query: uint32;
     ): void {.lazyload("vkCmdWriteTimestamp2KHR", DeviceLevel),
-      queues: QueueFlags{transfer, graphics, compute, decode, encode}.}
+      queues: QueueFlags{transfer, graphics, compute, decode, encode},
+      cmdbufferlevel: @[primary, secondary].}
 proc queueSubmit2KHR*(
       queue: Queue;
       submitCount = default(uint32);
@@ -2981,7 +3246,8 @@ proc cmdWriteBufferMarker2AMD*(
       dstOffset: DeviceSize;
       marker: uint32;
     ): void {.lazyload("vkCmdWriteBufferMarker2AMD", DeviceLevel),
-      queues: QueueFlags{transfer, graphics, compute}.}
+      queues: QueueFlags{transfer, graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc getQueueCheckpointData2NV*(
       queue: Queue;
       pCheckpointDataCount: ptr uint32;
@@ -2995,7 +3261,8 @@ proc cmdSetFragmentShadingRateEnumNV*(
       shadingRate: FragmentShadingRateNV;
       combinerOps: FragmentShadingRateCombinerOpKHR;
     ): void {.lazyload("vkCmdSetFragmentShadingRateEnumNV", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_KHR_copy_commands2
 # =====================
@@ -3003,32 +3270,38 @@ proc cmdCopyBuffer2KHR*(
       commandBuffer: CommandBuffer;
       pCopyBufferInfo: ptr CopyBufferInfo2KHR;
     ): void {.lazyload("vkCmdCopyBuffer2KHR", DeviceLevel),
-      queues: QueueFlags{transfer, graphics, compute}.}
+      queues: QueueFlags{transfer, graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdCopyImage2KHR*(
       commandBuffer: CommandBuffer;
       pCopyImageInfo: ptr CopyImageInfo2KHR;
     ): void {.lazyload("vkCmdCopyImage2KHR", DeviceLevel),
-      queues: QueueFlags{transfer, graphics, compute}.}
+      queues: QueueFlags{transfer, graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdCopyBufferToImage2KHR*(
       commandBuffer: CommandBuffer;
       pCopyBufferToImageInfo: ptr CopyBufferToImageInfo2KHR;
     ): void {.lazyload("vkCmdCopyBufferToImage2KHR", DeviceLevel),
-      queues: QueueFlags{transfer, graphics, compute}.}
+      queues: QueueFlags{transfer, graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdCopyImageToBuffer2KHR*(
       commandBuffer: CommandBuffer;
       pCopyImageToBufferInfo: ptr CopyImageToBufferInfo2KHR;
     ): void {.lazyload("vkCmdCopyImageToBuffer2KHR", DeviceLevel),
-      queues: QueueFlags{transfer, graphics, compute}.}
+      queues: QueueFlags{transfer, graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdBlitImage2KHR*(
       commandBuffer: CommandBuffer;
       pBlitImageInfo: ptr BlitImageInfo2KHR;
     ): void {.lazyload("vkCmdBlitImage2KHR", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdResolveImage2KHR*(
       commandBuffer: CommandBuffer;
       pResolveImageInfo: ptr ResolveImageInfo2KHR;
     ): void {.lazyload("vkCmdResolveImage2KHR", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_NV_acquire_winrt_display
 # ===========================
@@ -3046,6 +3319,22 @@ proc getWinrtDisplayNV*(
       successCodes: @[Result.success],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorDeviceLost, Result.errorInitializationFailed].}
 
+# VK_EXT_directfb_surface
+# =======================
+proc createDirectFBSurfaceEXT*(
+      instance: Instance;
+      pCreateInfo: ptr DirectFBSurfaceCreateInfoEXT;
+      pAllocator = default(ptr AllocationCallbacks);
+      pSurface: ptr SurfaceKHR;
+    ): Result {.preload("vkCreateDirectFBSurfaceEXT"),
+      successCodes: @[Result.success],
+      errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
+proc getPhysicalDeviceDirectFBPresentationSupportEXT*(
+      physicalDevice: PhysicalDevice;
+      queueFamilyIndex: uint32;
+      dfb: ptr IDirectFB;
+    ): Bool32 {.lazyload("vkGetPhysicalDeviceDirectFBPresentationSupportEXT", InstanceLevel).}
+
 # VK_EXT_vertex_input_dynamic_state
 # =================================
 proc cmdSetVertexInputEXT*(
@@ -3055,7 +3344,8 @@ proc cmdSetVertexInputEXT*(
       vertexAttributeDescriptionCount = default(uint32);
       pVertexAttributeDescriptions {.length: vertexAttributeDescriptionCount.}: arrPtr[VertexInputAttributeDescription2EXT];
     ): void {.lazyload("vkCmdSetVertexInputEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_FUCHSIA_external_memory
 # ==========================
@@ -3140,7 +3430,8 @@ proc getDeviceSubpassShadingMaxWorkgroupSizeHUAWEI*(
 proc cmdSubpassShadingHUAWEI*(
       commandBuffer: CommandBuffer;
     ): void {.lazyload("vkCmdSubpassShadingHUAWEI", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_HUAWEI_invocation_mask
 # =========================
@@ -3149,7 +3440,8 @@ proc cmdBindInvocationMaskHUAWEI*(
       imageView = default(ImageView);
       imageLayout: ImageLayout;
     ): void {.lazyload("vkCmdBindInvocationMaskHUAWEI", DeviceLevel),
-      queues: QueueFlags{compute}.}
+      queues: QueueFlags{compute},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_NV_external_memory_rdma
 # ==========================
@@ -3167,27 +3459,32 @@ proc cmdSetPatchControlPointsEXT*(
       commandBuffer: CommandBuffer;
       patchControlPoints: uint32;
     ): void {.lazyload("vkCmdSetPatchControlPointsEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetRasterizerDiscardEnableEXT*(
       commandBuffer: CommandBuffer;
       rasterizerDiscardEnable: Bool32;
     ): void {.lazyload("vkCmdSetRasterizerDiscardEnableEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetDepthBiasEnableEXT*(
       commandBuffer: CommandBuffer;
       depthBiasEnable: Bool32;
     ): void {.lazyload("vkCmdSetDepthBiasEnableEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetLogicOpEXT*(
       commandBuffer: CommandBuffer;
       logicOp: LogicOp;
     ): void {.lazyload("vkCmdSetLogicOpEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetPrimitiveRestartEnableEXT*(
       commandBuffer: CommandBuffer;
       primitiveRestartEnable: Bool32;
     ): void {.lazyload("vkCmdSetPrimitiveRestartEnableEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_QNX_screen_surface
 # =====================
@@ -3196,7 +3493,7 @@ proc createScreenSurfaceQNX*(
       pCreateInfo: ptr ScreenSurfaceCreateInfoQNX;
       pAllocator = default(ptr AllocationCallbacks);
       pSurface: ptr SurfaceKHR;
-    ): Result {.lazyload("vkCreateScreenSurfaceQNX", InstanceLevel),
+    ): Result {.preload("vkCreateScreenSurfaceQNX"),
       successCodes: @[Result.success],
       errorCodes: @[Result.errorOutOfHostMemory, Result.errorOutOfDeviceMemory].}
 proc getPhysicalDeviceScreenPresentationSupportQNX*(
@@ -3212,7 +3509,8 @@ proc cmdSetColorWriteEnableEXT*(
       attachmentCount: uint32;
       pColorWriteEnables {.length: attachmentCount.}: arrPtr[Bool32];
     ): void {.lazyload("vkCmdSetColorWriteEnableEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_EXT_multi_draw
 # =================
@@ -3224,7 +3522,8 @@ proc cmdDrawMultiEXT*(
       firstInstance: uint32;
       stride: uint32;
     ): void {.lazyload("vkCmdDrawMultiEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdDrawMultiIndexedEXT*(
       commandBuffer: CommandBuffer;
       drawCount = default(uint32);
@@ -3234,7 +3533,8 @@ proc cmdDrawMultiIndexedEXT*(
       stride: uint32;
       pVertexOffset = default(ptr int32);
     ): void {.lazyload("vkCmdDrawMultiIndexedEXT", DeviceLevel),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 
 # VK_EXT_pageable_device_local_memory
 # ===================================
@@ -3264,15 +3564,7 @@ proc getDeviceImageSparseMemoryRequirementsKHR*(
     ): void {.lazyload("vkGetDeviceImageSparseMemoryRequirementsKHR", DeviceLevel).}
 
 
-proc loadAllVK_KHR_surface*(instance: Instance) = instance.loadCommands:
-  destroySurfaceKHR
-  getPhysicalDeviceSurfaceSupportKHR
-  getPhysicalDeviceSurfaceCapabilitiesKHR
-  getPhysicalDeviceSurfaceFormatsKHR
-  getPhysicalDeviceSurfacePresentModesKHR
 proc loadAllVK_KHR_swapchain*(instance: Instance) = instance.loadCommands:
-  createSwapchainKHR
-  destroySwapchainKHR
   getSwapchainImagesKHR
   acquireNextImageKHR
   queuePresentKHR
@@ -3287,12 +3579,21 @@ proc loadAllVK_KHR_display*(instance: Instance) = instance.loadCommands:
   getDisplayModePropertiesKHR
   createDisplayModeKHR
   getDisplayPlaneCapabilitiesKHR
-  createDisplayPlaneSurfaceKHR
 proc loadAllVK_KHR_display_swapchain*(instance: Instance) = instance.loadCommands:
   createSharedSwapchainsKHR
+proc loadAllVK_KHR_xlib_surface*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceXlibPresentationSupportKHR
+proc loadAllVK_KHR_xcb_surface*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceXcbPresentationSupportKHR
+proc loadAllVK_KHR_wayland_surface*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceWaylandPresentationSupportKHR
 proc loadAllVK_KHR_win32_surface*(instance: Instance) = instance.loadCommands:
-  createWin32SurfaceKHR
   getPhysicalDeviceWin32PresentationSupportKHR
+proc loadAllVK_ANDROID_native_buffer*(instance: Instance) = instance.loadCommands:
+  getSwapchainGrallocUsageANDROID
+  acquireImageANDROID
+  queueSignalReleaseImageANDROID
+  getSwapchainGrallocUsage2ANDROID
 proc loadAllVK_EXT_debug_report*(instance: Instance) = instance.loadCommands:
   createDebugReportCallbackEXT
   destroyDebugReportCallbackEXT
@@ -3339,8 +3640,6 @@ proc loadAllVK_AMD_shader_info*(instance: Instance) = instance.loadCommands:
 proc loadAllVK_KHR_dynamic_rendering*(instance: Instance) = instance.loadCommands:
   cmdBeginRenderingKHR
   cmdEndRenderingKHR
-proc loadAllVK_GGP_stream_descriptor_surface*(instance: Instance) = instance.loadCommands:
-  createStreamDescriptorSurfaceGGP
 proc loadAllVK_NV_external_memory_capabilities*(instance: Instance) = instance.loadCommands:
   getPhysicalDeviceExternalImageFormatPropertiesNV
 proc loadAllVK_NV_external_memory_win32*(instance: Instance) = instance.loadCommands:
@@ -3350,8 +3649,6 @@ proc loadAllVK_KHR_device_group*(instance: Instance) = instance.loadCommands:
   getDeviceGroupSurfacePresentModesKHR
   getPhysicalDevicePresentRectanglesKHR
   acquireNextImage2KHR
-proc loadAllVK_NN_vi_surface*(instance: Instance) = instance.loadCommands:
-  createViSurfaceNN
 proc loadAllVK_KHR_external_memory_win32*(instance: Instance) = instance.loadCommands:
   getMemoryWin32HandleKHR
   getMemoryWin32HandlePropertiesKHR
@@ -3377,8 +3674,9 @@ proc loadAllVK_NV_clip_space_w_scaling*(instance: Instance) = instance.loadComma
   cmdSetViewportWScalingNV
 proc loadAllVK_EXT_direct_mode_display*(instance: Instance) = instance.loadCommands:
   releaseDisplayEXT
-proc loadAllVK_EXT_display_surface_counter*(instance: Instance) = instance.loadCommands:
-  getPhysicalDeviceSurfaceCapabilities2EXT
+proc loadAllVK_EXT_acquire_xlib_display*(instance: Instance) = instance.loadCommands:
+  acquireXlibDisplayEXT
+  getRandROutputDisplayEXT
 proc loadAllVK_EXT_display_control*(instance: Instance) = instance.loadCommands:
   displayPowerControlEXT
   registerDeviceEventEXT
@@ -3404,16 +3702,11 @@ proc loadAllVK_KHR_performance_query*(instance: Instance) = instance.loadCommand
   getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR
   acquireProfilingLockKHR
   releaseProfilingLockKHR
-proc loadAllVK_KHR_get_surface_capabilities2*(instance: Instance) = instance.loadCommands:
-  getPhysicalDeviceSurfaceCapabilities2KHR
-  getPhysicalDeviceSurfaceFormats2KHR
 proc loadAllVK_KHR_get_display_properties2*(instance: Instance) = instance.loadCommands:
   getPhysicalDeviceDisplayProperties2KHR
   getPhysicalDeviceDisplayPlaneProperties2KHR
   getDisplayModeProperties2KHR
   getDisplayPlaneCapabilities2KHR
-proc loadAllVK_MVK_macos_surface*(instance: Instance) = instance.loadCommands:
-  createMacOSSurfaceMVK
 proc loadAllVK_EXT_debug_utils*(instance: Instance) = instance.loadCommands:
   setDebugUtilsObjectNameEXT
   setDebugUtilsObjectTagEXT
@@ -3426,6 +3719,9 @@ proc loadAllVK_EXT_debug_utils*(instance: Instance) = instance.loadCommands:
   createDebugUtilsMessengerEXT
   destroyDebugUtilsMessengerEXT
   submitDebugUtilsMessageEXT
+proc loadAllVK_ANDROID_external_memory_android_hardware_buffer*(instance: Instance) = instance.loadCommands:
+  getAndroidHardwareBufferPropertiesANDROID
+  getMemoryAndroidHardwareBufferANDROID
 proc loadAllVK_EXT_sample_locations*(instance: Instance) = instance.loadCommands:
   cmdSetSampleLocationsEXT
   getPhysicalDeviceMultisamplePropertiesEXT
@@ -3505,8 +3801,6 @@ proc loadAllVK_INTEL_performance_query*(instance: Instance) = instance.loadComma
   getPerformanceParameterINTEL
 proc loadAllVK_AMD_display_native_hdr*(instance: Instance) = instance.loadCommands:
   setLocalDimmingAMD
-proc loadAllVK_FUCHSIA_imagepipe_surface*(instance: Instance) = instance.loadCommands:
-  createImagePipeSurfaceFUCHSIA
 proc loadAllVK_KHR_fragment_shading_rate*(instance: Instance) = instance.loadCommands:
   getPhysicalDeviceFragmentShadingRatesKHR
   cmdSetFragmentShadingRateKHR
@@ -3519,13 +3813,10 @@ proc loadAllVK_NV_cooperative_matrix*(instance: Instance) = instance.loadCommand
 proc loadAllVK_NV_coverage_reduction_mode*(instance: Instance) = instance.loadCommands:
   getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV
 proc loadAllVK_EXT_full_screen_exclusive*(instance: Instance) = instance.loadCommands:
-  getPhysicalDeviceSurfacePresentModes2EXT
   acquireFullScreenExclusiveModeEXT
   releaseFullScreenExclusiveModeEXT
   getDeviceGroupSurfacePresentModes2EXT
   getDeviceGroupSurfacePresentModes2EXT
-proc loadAllVK_EXT_headless_surface*(instance: Instance) = instance.loadCommands:
-  createHeadlessSurfaceEXT
 proc loadAllVK_EXT_line_rasterization*(instance: Instance) = instance.loadCommands:
   cmdSetLineStippleEXT
 proc loadAllVK_EXT_extended_dynamic_state*(instance: Instance) = instance.loadCommands:
@@ -3589,6 +3880,8 @@ proc loadAllVK_KHR_copy_commands2*(instance: Instance) = instance.loadCommands:
 proc loadAllVK_NV_acquire_winrt_display*(instance: Instance) = instance.loadCommands:
   acquireWinrtDisplayNV
   getWinrtDisplayNV
+proc loadAllVK_EXT_directfb_surface*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceDirectFBPresentationSupportEXT
 proc loadAllVK_EXT_vertex_input_dynamic_state*(instance: Instance) = instance.loadCommands:
   cmdSetVertexInputEXT
 proc loadAllVK_FUCHSIA_external_memory*(instance: Instance) = instance.loadCommands:
@@ -3617,7 +3910,6 @@ proc loadAllVK_EXT_extended_dynamic_state2*(instance: Instance) = instance.loadC
   cmdSetLogicOpEXT
   cmdSetPrimitiveRestartEnableEXT
 proc loadAllVK_QNX_screen_surface*(instance: Instance) = instance.loadCommands:
-  createScreenSurfaceQNX
   getPhysicalDeviceScreenPresentationSupportQNX
 proc loadAllVK_EXT_color_write_enable*(instance: Instance) = instance.loadCommands:
   cmdSetColorWriteEnableEXT
@@ -3630,12 +3922,6 @@ proc loadAllVK_KHR_maintenance4*(instance: Instance) = instance.loadCommands:
   getDeviceBufferMemoryRequirementsKHR
   getDeviceImageMemoryRequirementsKHR
   getDeviceImageSparseMemoryRequirementsKHR
-proc loadVK_KHR_surface*(instance: Instance) = instance.loadCommands:
-  destroySurfaceKHR
-  getPhysicalDeviceSurfaceSupportKHR
-  getPhysicalDeviceSurfaceCapabilitiesKHR
-  getPhysicalDeviceSurfaceFormatsKHR
-  getPhysicalDeviceSurfacePresentModesKHR
 proc loadVK_KHR_swapchain*(instance: Instance) = instance.loadCommands:
   getPhysicalDevicePresentRectanglesKHR
 proc loadVK_KHR_display*(instance: Instance) = instance.loadCommands:
@@ -3645,9 +3931,13 @@ proc loadVK_KHR_display*(instance: Instance) = instance.loadCommands:
   getDisplayModePropertiesKHR
   createDisplayModeKHR
   getDisplayPlaneCapabilitiesKHR
-  createDisplayPlaneSurfaceKHR
+proc loadVK_KHR_xlib_surface*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceXlibPresentationSupportKHR
+proc loadVK_KHR_xcb_surface*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceXcbPresentationSupportKHR
+proc loadVK_KHR_wayland_surface*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceWaylandPresentationSupportKHR
 proc loadVK_KHR_win32_surface*(instance: Instance) = instance.loadCommands:
-  createWin32SurfaceKHR
   getPhysicalDeviceWin32PresentationSupportKHR
 proc loadVK_EXT_debug_report*(instance: Instance) = instance.loadCommands:
   createDebugReportCallbackEXT
@@ -3656,31 +3946,23 @@ proc loadVK_EXT_debug_report*(instance: Instance) = instance.loadCommands:
 proc loadVK_KHR_video_queue*(instance: Instance) = instance.loadCommands:
   getPhysicalDeviceVideoCapabilitiesKHR
   getPhysicalDeviceVideoFormatPropertiesKHR
-proc loadVK_GGP_stream_descriptor_surface*(instance: Instance) = instance.loadCommands:
-  createStreamDescriptorSurfaceGGP
 proc loadVK_NV_external_memory_capabilities*(instance: Instance) = instance.loadCommands:
   getPhysicalDeviceExternalImageFormatPropertiesNV
 proc loadVK_KHR_device_group*(instance: Instance) = instance.loadCommands:
   getPhysicalDevicePresentRectanglesKHR
-proc loadVK_NN_vi_surface*(instance: Instance) = instance.loadCommands:
-  createViSurfaceNN
 proc loadVK_EXT_direct_mode_display*(instance: Instance) = instance.loadCommands:
   releaseDisplayEXT
-proc loadVK_EXT_display_surface_counter*(instance: Instance) = instance.loadCommands:
-  getPhysicalDeviceSurfaceCapabilities2EXT
+proc loadVK_EXT_acquire_xlib_display*(instance: Instance) = instance.loadCommands:
+  acquireXlibDisplayEXT
+  getRandROutputDisplayEXT
 proc loadVK_KHR_performance_query*(instance: Instance) = instance.loadCommands:
   enumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR
   getPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR
-proc loadVK_KHR_get_surface_capabilities2*(instance: Instance) = instance.loadCommands:
-  getPhysicalDeviceSurfaceCapabilities2KHR
-  getPhysicalDeviceSurfaceFormats2KHR
 proc loadVK_KHR_get_display_properties2*(instance: Instance) = instance.loadCommands:
   getPhysicalDeviceDisplayProperties2KHR
   getPhysicalDeviceDisplayPlaneProperties2KHR
   getDisplayModeProperties2KHR
   getDisplayPlaneCapabilities2KHR
-proc loadVK_MVK_macos_surface*(instance: Instance) = instance.loadCommands:
-  createMacOSSurfaceMVK
 proc loadVK_EXT_debug_utils*(instance: Instance) = instance.loadCommands:
   createDebugUtilsMessengerEXT
   destroyDebugUtilsMessengerEXT
@@ -3689,8 +3971,6 @@ proc loadVK_EXT_sample_locations*(instance: Instance) = instance.loadCommands:
   getPhysicalDeviceMultisamplePropertiesEXT
 proc loadVK_EXT_calibrated_timestamps*(instance: Instance) = instance.loadCommands:
   getPhysicalDeviceCalibrateableTimeDomainsEXT
-proc loadVK_FUCHSIA_imagepipe_surface*(instance: Instance) = instance.loadCommands:
-  createImagePipeSurfaceFUCHSIA
 proc loadVK_KHR_fragment_shading_rate*(instance: Instance) = instance.loadCommands:
   getPhysicalDeviceFragmentShadingRatesKHR
 proc loadVK_EXT_tooling_info*(instance: Instance) = instance.loadCommands:
@@ -3699,22 +3979,17 @@ proc loadVK_NV_cooperative_matrix*(instance: Instance) = instance.loadCommands:
   getPhysicalDeviceCooperativeMatrixPropertiesNV
 proc loadVK_NV_coverage_reduction_mode*(instance: Instance) = instance.loadCommands:
   getPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV
-proc loadVK_EXT_full_screen_exclusive*(instance: Instance) = instance.loadCommands:
-  getPhysicalDeviceSurfacePresentModes2EXT
-proc loadVK_EXT_headless_surface*(instance: Instance) = instance.loadCommands:
-  createHeadlessSurfaceEXT
 proc loadVK_EXT_acquire_drm_display*(instance: Instance) = instance.loadCommands:
   acquireDrmDisplayEXT
   getDrmDisplayEXT
 proc loadVK_NV_acquire_winrt_display*(instance: Instance) = instance.loadCommands:
   acquireWinrtDisplayNV
   getWinrtDisplayNV
+proc loadVK_EXT_directfb_surface*(instance: Instance) = instance.loadCommands:
+  getPhysicalDeviceDirectFBPresentationSupportEXT
 proc loadVK_QNX_screen_surface*(instance: Instance) = instance.loadCommands:
-  createScreenSurfaceQNX
   getPhysicalDeviceScreenPresentationSupportQNX
 proc loadVK_KHR_swapchain*(device: Device) = device.loadCommands:
-  createSwapchainKHR
-  destroySwapchainKHR
   getSwapchainImagesKHR
   acquireNextImageKHR
   queuePresentKHR
@@ -3723,6 +3998,11 @@ proc loadVK_KHR_swapchain*(device: Device) = device.loadCommands:
   acquireNextImage2KHR
 proc loadVK_KHR_display_swapchain*(device: Device) = device.loadCommands:
   createSharedSwapchainsKHR
+proc loadVK_ANDROID_native_buffer*(device: Device) = device.loadCommands:
+  getSwapchainGrallocUsageANDROID
+  acquireImageANDROID
+  queueSignalReleaseImageANDROID
+  getSwapchainGrallocUsage2ANDROID
 proc loadVK_EXT_debug_marker*(device: Device) = device.loadCommands:
   debugMarkerSetObjectTagEXT
   debugMarkerSetObjectNameEXT
@@ -3824,6 +4104,9 @@ proc loadVK_EXT_debug_utils*(device: Device) = device.loadCommands:
   cmdBeginDebugUtilsLabelEXT
   cmdEndDebugUtilsLabelEXT
   cmdInsertDebugUtilsLabelEXT
+proc loadVK_ANDROID_external_memory_android_hardware_buffer*(device: Device) = device.loadCommands:
+  getAndroidHardwareBufferPropertiesANDROID
+  getMemoryAndroidHardwareBufferANDROID
 proc loadVK_EXT_sample_locations*(device: Device) = device.loadCommands:
   cmdSetSampleLocationsEXT
 proc loadVK_KHR_acceleration_structure*(device: Device) = device.loadCommands:

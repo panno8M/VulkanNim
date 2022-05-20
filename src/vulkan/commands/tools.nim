@@ -20,3 +20,5 @@ proc getDeviceProcAddr*(
 
 template successCodes*(v: seq[Result]) {.pragma.}
 template errorCodes*(v: seq[Result]) {.pragma.}
+template queues*(v: QueueFlags) {.pragma.}
+template cmdbufferlevel*(v: seq[CommandBufferLevel]) {.pragma.}

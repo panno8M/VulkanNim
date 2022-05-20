@@ -147,6 +147,7 @@ type
       successCodes*: seq[string]
       errorCodes*: seq[string]
       queues*: seq[string]
+      cmdbufferlevel*: seq[string]
       params*: seq[NodeCommandParam]
     of nkbrAlias:
       alias*: string

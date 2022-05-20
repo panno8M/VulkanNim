@@ -9,7 +9,7 @@ from ../basetypes import Flags
 # Utility for bitmask operation added independently
 # =================================================
 
-template queues*(v: QueueFlags) {.pragma.}
+# template queues*(v: QueueFlags) {.pragma.}
 
 proc toFlags*[Flagbits: enum](flagbits: Flagbits): Flags[Flagbits] =
   Flags[Flagbits](flagbits)
@@ -103,16 +103,22 @@ proc contains*[Flagbits: enum](a, b: Flags[Flagbits]): bool =
   b - a == b.none
 
 iterator items*[FlagBits: enum](flags: Flags[FlagBits]): FlagBits =
-  for bit in FlagBits.low.ord..FlagBits.high.ord:
-    if cast[FlagBits](bit) in flags:
-      yield cast[FlagBits](bit)
+  {.warning[HoleEnumConv]: off.}
+  var i_bit: int = 1
+  while i_bit < FlagBits.high.ord:
+    if FlagBits(i_bit) in flags:
+      yield FlagBits(i_bit)
+    i_bit = i_bit shl 1
 
 iterator pairs*[FlagBits: enum](flags: Flags[FlagBits]): (int, FlagBits) =
-  var i: int
-  for bit in FlagBits.low.ord..FlagBits.high.ord:
-    if cast[FlagBits](bit) in flags:
-      yield (i, cast[FlagBits](bit))
-      inc i
+  {.warning[HoleEnumConv]: off.}
+  var idx_itr: int
+  var i_bit: int = 1
+  while i_bit < FlagBits.high.ord:
+    if FlagBits(i_bit) in flags:
+      yield (idx_itr, FlagBits(i_bit))
+      inc idx_itr
+    i_bit = i_bit shl 1
 
 proc len*[FlagBits: enum](flags: Flags[FlagBits]): Natural =
   for bit in flags:

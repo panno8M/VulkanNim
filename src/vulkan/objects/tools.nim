@@ -1,5 +1,5 @@
 import ../enums/enumdefs
-import ../handles/handle_concretes
+import ../handles
 import ../basetypes
 
 template optional* {.pragma.}
@@ -8,5 +8,5 @@ template constant*(v: typed) {.pragma.}
 template length*(v: untyped) {.pragma.}
 
 export enumdefs
-export handle_concretes
+export handles
 export basetypes

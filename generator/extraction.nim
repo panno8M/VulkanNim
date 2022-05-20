@@ -354,6 +354,7 @@ proc extractNodeCommand*(typeDef: XmlNode): NodeCommand {.raises: [UnexpectedXml
     result.successCodes = typeDef{"successcodes"}.parseWords({','})
     result.errorCodes = typeDef{"errorcodes"}.parseWords({','})
     result.queues = typeDef{"queues"}.parseWords({','})
+    result.cmdbufferlevel = typeDef{"cmdbufferlevel"}.parseWords({','})
     result.name = typeDef["proto"]["name"].innerText.parseWords[0]
     result.theType = typeDef["proto"]["type"].innerText.parseWords[0]
     for param in typeDef:
@@ -380,6 +381,9 @@ proc extractNodeCommand*(typeDef: XmlNode): NodeCommand {.raises: [UnexpectedXml
     result.loadMode =
       # All of commands provided by extensions has vendor suffix and that is upper case.
       if result.name[^1].isLowerAscii or result.name[^1].isDigit: lmPreload
+      elif result.name in ["vkCreateSwapchainKHR", "vkDestroySwapchainKHR", "vkDestroySurfaceKHR"]: lmPreload
+      elif result.name.find("Create") != -1 and result.name.find("Surface") != -1: lmPreload
+      elif result.name.find("GetPhysicalDeviceSurface") != -1: lmPreload
       elif result.params[0].theType in ["VkInstance", "VkPhysicalDevice"]: lmWithInstance
       else: lmWithDevice
 

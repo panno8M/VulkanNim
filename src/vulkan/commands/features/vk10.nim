@@ -16,57 +16,50 @@ import ../tools
 
 # API version macros
 
-template apiVersion*(): untyped {.deprecated.} =
-  makeVersion(1, 0, 0)
 
-
-template apiVersion10*(): untyped =
+template apiVersion10*(): ApiVersion =
   makeApiVersion(0, 1, 0, 0)
 
-template headerVersion*(): untyped = 203
+template headerVersion*(): uint32 = 203
 
-template headerVersionComplete*(): untyped =
+template headerVersionComplete*(): ApiVersion =
   makeApiVersion(0, 1, 2, headerVersion())
 
 
-template makeVersion*(major, minor, patch: uint32): untyped {.
-    deprecated: "makeApiVersion should be used instead.".} =
-  uint32((major shl 22) or (minor shl 12) or patch)
 
 
-template versionMajor*(version: uint32): untyped {.
-    deprecated: "apiVersionMajor should be used instead.".} =
-  (uint32(version) shr 22)
 
 
-template versionMinor*(version: uint32): untyped {.
-    deprecated: "apiVersionMinor should be used instead.".} =
-  (uint32(version) shr 12) and 0x000003FF'u
+template makeApiVersion*(variant, major, minor, patch: uint32): ApiVersion =
+  ApiVersion((variant shl 29) or (major shl 22) or (minor shl 12) or patch)
 
 
-template versionPatch*(version: uint32): untyped {.
-    deprecated: "apiVersionPatch should be used instead.".} =
-  uint32(version) and 0x00000FFF'u
-
-
-template makeApiVersion*(variant, major, minor, patch: uint32): untyped =
-  uint32((variant shl 29) or (major shl 22) or (minor shl 12) or patch)
-
-
-template apiVersionVariant*(version: uint32): untyped =
+template apiVersionVariant*(version: ApiVersion): uint32 =
   uint32(version) shr 29
 
-
-template apiVersionMajor*(version: uint32): untyped =
-  (uint32(version) shr 22) and 0x0000007F'u
-
-
-template apiVersionMinor*(version: uint32): untyped =
-  (uint32(version) shr 12) and 0x000003FF'u
+template variant*(version: ApiVersion): uint32 =
+  apiVersionVariant(version)
 
 
-template apiVersionPatch*(version: uint32): untyped =
-  uint32(version) and 0x00000FFF'u
+template apiVersionMajor*(version: ApiVersion): uint32 =
+  (uint32(version) shr 22) and 0x0000007F'u32
+
+template major*(version: ApiVersion): uint32 =
+  apiVersionMajor(version)
+
+
+template apiVersionMinor*(version: ApiVersion): uint32 =
+  (uint32(version) shr 12) and 0x000003FF'u32
+
+template minor*(version: ApiVersion): uint32 =
+  apiVersionMinor(version)
+
+
+template apiVersionPatch*(version: ApiVersion): uint32 =
+  uint32(version) and 0x00000FFF'u32
+
+template patch*(version: ApiVersion): uint32 =
+  apiVersionPatch(version)
 
 # Device initialization
 proc createInstance*(
@@ -708,62 +701,72 @@ proc cmdBindPipeline*(
       pipelineBindPoint: PipelineBindPoint;
       pipeline: Pipeline;
     ): void {.preload("vkCmdBindPipeline"),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetViewport*(
       commandBuffer: CommandBuffer;
       firstViewport: uint32;
       viewportCount: uint32;
       pViewports {.length: viewportCount.}: arrPtr[Viewport];
     ): void {.preload("vkCmdSetViewport"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetScissor*(
       commandBuffer: CommandBuffer;
       firstScissor: uint32;
       scissorCount: uint32;
       pScissors {.length: scissorCount.}: arrPtr[Rect2D];
     ): void {.preload("vkCmdSetScissor"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetLineWidth*(
       commandBuffer: CommandBuffer;
       lineWidth: float32;
     ): void {.preload("vkCmdSetLineWidth"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetDepthBias*(
       commandBuffer: CommandBuffer;
       depthBiasConstantFactor: float32;
       depthBiasClamp: float32;
       depthBiasSlopeFactor: float32;
     ): void {.preload("vkCmdSetDepthBias"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetBlendConstants*(
       commandBuffer: CommandBuffer;
       blendConstants: float32;
     ): void {.preload("vkCmdSetBlendConstants"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetDepthBounds*(
       commandBuffer: CommandBuffer;
       minDepthBounds: float32;
       maxDepthBounds: float32;
     ): void {.preload("vkCmdSetDepthBounds"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetStencilCompareMask*(
       commandBuffer: CommandBuffer;
       faceMask: StencilFaceFlags;
       compareMask: uint32;
     ): void {.preload("vkCmdSetStencilCompareMask"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetStencilWriteMask*(
       commandBuffer: CommandBuffer;
       faceMask: StencilFaceFlags;
       writeMask: uint32;
     ): void {.preload("vkCmdSetStencilWriteMask"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetStencilReference*(
       commandBuffer: CommandBuffer;
       faceMask: StencilFaceFlags;
       reference: uint32;
     ): void {.preload("vkCmdSetStencilReference"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdBindDescriptorSets*(
       commandBuffer: CommandBuffer;
       pipelineBindPoint: PipelineBindPoint;
@@ -774,14 +777,16 @@ proc cmdBindDescriptorSets*(
       dynamicOffsetCount = default(uint32);
       pDynamicOffsets {.length: dynamicOffsetCount.}: arrPtr[uint32];
     ): void {.preload("vkCmdBindDescriptorSets"),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdBindIndexBuffer*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
       offset: DeviceSize;
       indexType: IndexType;
     ): void {.preload("vkCmdBindIndexBuffer"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdBindVertexBuffers*(
       commandBuffer: CommandBuffer;
       firstBinding: uint32;
@@ -789,7 +794,8 @@ proc cmdBindVertexBuffers*(
       pBuffers {.length: bindingCount.}: arrPtr[Buffer];
       pOffsets {.length: bindingCount.}: arrPtr[DeviceSize];
     ): void {.preload("vkCmdBindVertexBuffers"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdDraw*(
       commandBuffer: CommandBuffer;
       vertexCount: uint32;
@@ -797,7 +803,8 @@ proc cmdDraw*(
       firstVertex: uint32;
       firstInstance: uint32;
     ): void {.preload("vkCmdDraw"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdDrawIndexed*(
       commandBuffer: CommandBuffer;
       indexCount: uint32;
@@ -806,7 +813,8 @@ proc cmdDrawIndexed*(
       vertexOffset: int32;
       firstInstance: uint32;
     ): void {.preload("vkCmdDrawIndexed"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdDrawIndirect*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
@@ -814,7 +822,8 @@ proc cmdDrawIndirect*(
       drawCount: uint32;
       stride: uint32;
     ): void {.preload("vkCmdDrawIndirect"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdDrawIndexedIndirect*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
@@ -822,20 +831,23 @@ proc cmdDrawIndexedIndirect*(
       drawCount: uint32;
       stride: uint32;
     ): void {.preload("vkCmdDrawIndexedIndirect"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdDispatch*(
       commandBuffer: CommandBuffer;
       groupCountX: uint32;
       groupCountY: uint32;
       groupCountZ: uint32;
     ): void {.preload("vkCmdDispatch"),
-      queues: QueueFlags{compute}.}
+      queues: QueueFlags{compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdDispatchIndirect*(
       commandBuffer: CommandBuffer;
       buffer: Buffer;
       offset: DeviceSize;
     ): void {.preload("vkCmdDispatchIndirect"),
-      queues: QueueFlags{compute}.}
+      queues: QueueFlags{compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdCopyBuffer*(
       commandBuffer: CommandBuffer;
       srcBuffer: Buffer;
@@ -843,7 +855,8 @@ proc cmdCopyBuffer*(
       regionCount: uint32;
       pRegions {.length: regionCount.}: arrPtr[BufferCopy];
     ): void {.preload("vkCmdCopyBuffer"),
-      queues: QueueFlags{transfer, graphics, compute}.}
+      queues: QueueFlags{transfer, graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdCopyImage*(
       commandBuffer: CommandBuffer;
       srcImage: Image;
@@ -853,7 +866,8 @@ proc cmdCopyImage*(
       regionCount: uint32;
       pRegions {.length: regionCount.}: arrPtr[ImageCopy];
     ): void {.preload("vkCmdCopyImage"),
-      queues: QueueFlags{transfer, graphics, compute}.}
+      queues: QueueFlags{transfer, graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdBlitImage*(
       commandBuffer: CommandBuffer;
       srcImage: Image;
@@ -864,7 +878,8 @@ proc cmdBlitImage*(
       pRegions {.length: regionCount.}: arrPtr[ImageBlit];
       filter: Filter;
     ): void {.preload("vkCmdBlitImage"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdCopyBufferToImage*(
       commandBuffer: CommandBuffer;
       srcBuffer: Buffer;
@@ -873,7 +888,8 @@ proc cmdCopyBufferToImage*(
       regionCount: uint32;
       pRegions {.length: regionCount.}: arrPtr[BufferImageCopy];
     ): void {.preload("vkCmdCopyBufferToImage"),
-      queues: QueueFlags{transfer, graphics, compute}.}
+      queues: QueueFlags{transfer, graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdCopyImageToBuffer*(
       commandBuffer: CommandBuffer;
       srcImage: Image;
@@ -882,7 +898,8 @@ proc cmdCopyImageToBuffer*(
       regionCount: uint32;
       pRegions {.length: regionCount.}: arrPtr[BufferImageCopy];
     ): void {.preload("vkCmdCopyImageToBuffer"),
-      queues: QueueFlags{transfer, graphics, compute}.}
+      queues: QueueFlags{transfer, graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdUpdateBuffer*(
       commandBuffer: CommandBuffer;
       dstBuffer: Buffer;
@@ -890,7 +907,8 @@ proc cmdUpdateBuffer*(
       dataSize: DeviceSize;
       pData {.length: dataSize.}: pointer;
     ): void {.preload("vkCmdUpdateBuffer"),
-      queues: QueueFlags{transfer, graphics, compute}.}
+      queues: QueueFlags{transfer, graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdFillBuffer*(
       commandBuffer: CommandBuffer;
       dstBuffer: Buffer;
@@ -898,7 +916,8 @@ proc cmdFillBuffer*(
       size: DeviceSize;
       data: uint32;
     ): void {.preload("vkCmdFillBuffer"),
-      queues: QueueFlags{transfer, graphics, compute}.}
+      queues: QueueFlags{transfer, graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdClearColorImage*(
       commandBuffer: CommandBuffer;
       image: Image;
@@ -907,7 +926,8 @@ proc cmdClearColorImage*(
       rangeCount: uint32;
       pRanges {.length: rangeCount.}: arrPtr[ImageSubresourceRange];
     ): void {.preload("vkCmdClearColorImage"),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdClearDepthStencilImage*(
       commandBuffer: CommandBuffer;
       image: Image;
@@ -916,7 +936,8 @@ proc cmdClearDepthStencilImage*(
       rangeCount: uint32;
       pRanges {.length: rangeCount.}: arrPtr[ImageSubresourceRange];
     ): void {.preload("vkCmdClearDepthStencilImage"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdClearAttachments*(
       commandBuffer: CommandBuffer;
       attachmentCount: uint32;
@@ -924,7 +945,8 @@ proc cmdClearAttachments*(
       rectCount: uint32;
       pRects {.length: rectCount.}: arrPtr[ClearRect];
     ): void {.preload("vkCmdClearAttachments"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdResolveImage*(
       commandBuffer: CommandBuffer;
       srcImage: Image;
@@ -934,19 +956,22 @@ proc cmdResolveImage*(
       regionCount: uint32;
       pRegions {.length: regionCount.}: arrPtr[ImageResolve];
     ): void {.preload("vkCmdResolveImage"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdSetEvent*(
       commandBuffer: CommandBuffer;
       event: Event;
       stageMask = default(PipelineStageFlags);
     ): void {.preload("vkCmdSetEvent"),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdResetEvent*(
       commandBuffer: CommandBuffer;
       event: Event;
       stageMask = default(PipelineStageFlags);
     ): void {.preload("vkCmdResetEvent"),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdWaitEvents*(
       commandBuffer: CommandBuffer;
       eventCount: uint32;
@@ -960,7 +985,8 @@ proc cmdWaitEvents*(
       imageMemoryBarrierCount = default(uint32);
       pImageMemoryBarriers {.length: imageMemoryBarrierCount.}: arrPtr[ImageMemoryBarrier];
     ): void {.preload("vkCmdWaitEvents"),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdPipelineBarrier*(
       commandBuffer: CommandBuffer;
       srcStageMask = default(PipelineStageFlags);
@@ -973,34 +999,39 @@ proc cmdPipelineBarrier*(
       imageMemoryBarrierCount = default(uint32);
       pImageMemoryBarriers {.length: imageMemoryBarrierCount.}: arrPtr[ImageMemoryBarrier];
     ): void {.preload("vkCmdPipelineBarrier"),
-      queues: QueueFlags{transfer, graphics, compute}.}
+      queues: QueueFlags{transfer, graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdBeginQuery*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
       query: uint32;
       flags = default(QueryControlFlags);
     ): void {.preload("vkCmdBeginQuery"),
-      queues: QueueFlags{graphics, compute, decode, encode}.}
+      queues: QueueFlags{graphics, compute, decode, encode},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdEndQuery*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
       query: uint32;
     ): void {.preload("vkCmdEndQuery"),
-      queues: QueueFlags{graphics, compute, decode, encode}.}
+      queues: QueueFlags{graphics, compute, decode, encode},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdResetQueryPool*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
       firstQuery: uint32;
       queryCount: uint32;
     ): void {.preload("vkCmdResetQueryPool"),
-      queues: QueueFlags{graphics, compute, decode, encode}.}
+      queues: QueueFlags{graphics, compute, decode, encode},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdWriteTimestamp*(
       commandBuffer: CommandBuffer;
       pipelineStage: PipelineStageFlagBits;
       queryPool: QueryPool;
       query: uint32;
     ): void {.preload("vkCmdWriteTimestamp"),
-      queues: QueueFlags{transfer, graphics, compute, decode, encode}.}
+      queues: QueueFlags{transfer, graphics, compute, decode, encode},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdCopyQueryPoolResults*(
       commandBuffer: CommandBuffer;
       queryPool: QueryPool;
@@ -1011,7 +1042,8 @@ proc cmdCopyQueryPoolResults*(
       stride: DeviceSize;
       flags = default(QueryResultFlags);
     ): void {.preload("vkCmdCopyQueryPoolResults"),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdPushConstants*(
       commandBuffer: CommandBuffer;
       layout: PipelineLayout;
@@ -1020,26 +1052,31 @@ proc cmdPushConstants*(
       size: uint32;
       pValues {.length: size.}: pointer;
     ): void {.preload("vkCmdPushConstants"),
-      queues: QueueFlags{graphics, compute}.}
+      queues: QueueFlags{graphics, compute},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdBeginRenderPass*(
       commandBuffer: CommandBuffer;
       pRenderPassBegin: ptr RenderPassBeginInfo;
       contents: SubpassContents;
     ): void {.preload("vkCmdBeginRenderPass"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary].}
 proc cmdNextSubpass*(
       commandBuffer: CommandBuffer;
       contents: SubpassContents;
     ): void {.preload("vkCmdNextSubpass"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary].}
 proc cmdEndRenderPass*(
       commandBuffer: CommandBuffer;
     ): void {.preload("vkCmdEndRenderPass"),
-      queues: QueueFlags{graphics}.}
+      queues: QueueFlags{graphics},
+      cmdbufferlevel: @[primary].}
 proc cmdExecuteCommands*(
       commandBuffer: CommandBuffer;
       commandBufferCount: uint32;
       pCommandBuffers {.length: commandBufferCount.}: arrPtr[CommandBuffer];
     ): void {.preload("vkCmdExecuteCommands"),
-      queues: QueueFlags{transfer, graphics, compute}.}
+      queues: QueueFlags{transfer, graphics, compute},
+      cmdbufferlevel: @[primary].}
 

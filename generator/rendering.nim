@@ -141,12 +141,12 @@ proc render*(struct: Nodestruct): string =
 
 
   let members = struct.members.mapIt(block:
-    let
-      theType =
+    var theType =
         case it.arrayStyle
         of nasPtr: it.theType.parseTypeName(ptrLen= it.ptrLen)
         of nasFix: it.theType.parseTypeName(dim= it.dim)
         of nasNotArray: it.theType.parseTypeName(ptrLv= it.ptrLv)
+    let
       name = it.name.parseParamName
       pragmas =
         ( if it.optional: @["optional"]
@@ -162,6 +162,8 @@ proc render*(struct: Nodestruct): string =
             else: newSeq[string]()
           else: newSeq[string]()
         )
+    if name == "apiVersion" and theType == "uint32":
+      theType = "ApiVersion"
     var def =
       if pragmas.len != 0:
         "  {name}* {{.{pragmas.join(\", \")}.}}: {theType}".fmt
@@ -192,16 +194,11 @@ proc render*(handle: NodeHandle; vendorTags: VendorTags): string =
   let name = handle.name.replaceBasicTypes
   case handle.kind
   of nkbrNormal:
-    let
-      objectType = "ObjectType." & handle.objectType.parseEnumValue("ObjectType", vendorTags)
-      parentpragma =
-        if handle.parent.isNone: ""
-        else: " {.parent: " & handle.parent.get.parseTypeName & ".}"
-    "{name}*{parentpragma} =\n  ".fmt.`&` case handle.handleKind
-      of HandleKind.Handle:
-        "Handle[{objectType}]".fmt
-      of HandleKind.NonDispatchableHandle:
-        "NonDispatchableHandle[{objectType}]".fmt
+    let def = case handle.handleKind
+    of HandleKind.Handle: "Handle"
+    of HandleKind.NonDispatchableHandle: "NonDispatchableHandle"
+    def & " " & name
+
   of nkbrAlias:
     let alias = handle.alias.replaceBasicTypes
     "{name}* = {alias}".fmt
@@ -238,6 +235,8 @@ proc render*(command: NodeCommand): string =
       var futter = "    ): {theType} {{.{loadMethod}".fmt
       if command.queues.len != 0:
         futter.add ",\n      queues: QueueFlags{" & command.queues.join(", ") & "}"
+      if command.cmdbufferlevel.len != 0:
+        futter.add ",\n      cmdbufferlevel: @[" & command.cmdbufferlevel.join(", ") & "]"
       # if name[0..2] == "cmd" or name in ["begin", "end", "reset"].mapIt(it & "CommandBuffer"):
       #   futter.add ", cmdchain"
       if command.successCodes.len != 0:

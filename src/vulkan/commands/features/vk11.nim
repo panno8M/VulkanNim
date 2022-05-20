@@ -10,7 +10,7 @@ import ../tools
 # VK_VERSION_1_1
 # ==============
 
-template apiVersion11*(): untyped =
+template apiVersion11*(): ApiVersion =
   makeApiVersion(0, 1, 1, 0)
 
 # Device Initialization
@@ -46,7 +46,8 @@ proc cmdSetDeviceMask*(
       commandBuffer: CommandBuffer;
       deviceMask: uint32;
     ): void {.preload("vkCmdSetDeviceMask"),
-      queues: QueueFlags{graphics, compute, transfer}.}
+      queues: QueueFlags{graphics, compute, transfer},
+      cmdbufferlevel: @[primary, secondary].}
 proc cmdDispatchBase*(
       commandBuffer: CommandBuffer;
       baseGroupX: uint32;
@@ -56,7 +57,8 @@ proc cmdDispatchBase*(
       groupCountY: uint32;
       groupCountZ: uint32;
     ): void {.preload("vkCmdDispatchBase"),
-      queues: QueueFlags{compute}.}
+      queues: QueueFlags{compute},
+      cmdbufferlevel: @[primary, secondary].}
 # Promoted from VK_KHR_device_group_creation
 proc enumeratePhysicalDeviceGroups*(
       instance: Instance;

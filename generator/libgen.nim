@@ -55,17 +55,28 @@ proc genBaseTypes*() =
   file.write $consts
 
 proc genHandles* =
-  let file = open("src/vulkan/handles/handle_concretes.nim", fmWrite)
+  let file = open("src/vulkan/handles.nim", fmWrite)
   defer: close file
   file.write warningText
 
-  file.write "from ../enums import ObjectType\n"
-  file.write "import handle_operations\n"
+  file.write "include handles/handle_operations\n"
 
-  var handles = sstring(kind: skBlock, title: "type")
-  for key, val in resources.handles: handles.add %val.render(resources.vendorTags)
-
+  var handles = sstring(kind: skBlock)
+  var ndhandles = sstring(kind: skBlock)
+  var aliases = sstring(kind: skBlock, title: "type")
+  for key, val in resources.handles:
+    if val.kind == nkbrNormal:
+      if val.handleKind == Handle:
+        handles.add %val.render(resources.vendorTags)
+      else:
+        ndhandles.add %val.render(resources.vendorTags)
+    else:
+      aliases.add %val.render(resources.vendorTags)
   file.write $handles
+  file.write "\n"
+  file.write $ndhandles
+  file.write "\n\n"
+  file.write $aliases
 
 proc genEnums*() =
   var res = sstring(kind: skBlock, title: "type")
@@ -141,6 +152,7 @@ proc genObjects =
   commonfile.write warningText
   commonfile.write "import tools\n"
   commonfile.write "import temp_externalobjects\n"
+  commonfile.write "{.push byref.}\n"
 
   for feature in concat(xml.findAll("feature"), xml.findAll("extension")):
     var featureStr = sstring(kind: skBlock)
@@ -230,42 +242,42 @@ proc genCommands*() =
     extDir = commandsDir/"extensions"
     envDir = commandsDir/"envdeps"
 
-  let envfile = (
-    windows : LibFile(path: envDir/"windows" ),
-    linux   : LibFile(path: envDir/"linux"   ),
-    directfb: LibFile(path: envDir/"directfb"),
-    metal   : LibFile(path: envDir/"metal"   ),
-    macos   : LibFile(path: envDir/"macos"   ),
-    ios     : LibFile(path: envDir/"ios"     ),
-    android : LibFile(path: envDir/"android" ),
-  )
-  let stdfile = LibFile(path: commandsDir/"extension")
+  # let envfile = (
+  #   windows : LibFile(path: envDir/"windows" ),
+  #   linux   : LibFile(path: envDir/"linux"   ),
+  #   directfb: LibFile(path: envDir/"directfb"),
+  #   metal   : LibFile(path: envDir/"metal"   ),
+  #   macos   : LibFile(path: envDir/"macos"   ),
+  #   ios     : LibFile(path: envDir/"ios"     ),
+  #   android : LibFile(path: envDir/"android" ),
+  # )
+  let stdfile = LibFile(path: commandsDir/"extensions")
   let specifics = [
-    envfile.windows,
-    envfile.linux,
-    envfile.directfb,
-    envfile.metal,
-    envfile.macos,
-    envfile.ios,
-    envfile.android,
+    # envfile.windows,
+    # envfile.linux,
+    # envfile.directfb,
+    # envfile.metal,
+    # envfile.macos,
+    # envfile.ios,
+    # envfile.android,
     stdfile
     ]
   libfiles.add specifics
 
   let fileGroup = [
-    ("win32", envfile.windows),
-    ("wayland", envfile.linux),
-    ("xlib", envfile.linux),
-    ("xcb", envfile.linux),
-    ("directfb", envfile.directfb),
-    ("metal", envfile.metal),
-    ("macos", envfile.macos),
-    ("ios", envfile.ios),
-    ("android", envfile.android),
-    ("VK_ANDROID", envfile.android),
+    # ("win32", envfile.windows),
+    # ("wayland", envfile.linux),
+    # ("xlib", envfile.linux),
+    # ("xcb", envfile.linux),
+    # ("directfb", envfile.directfb),
+    # ("metal", envfile.metal),
+    # ("macos", envfile.macos),
+    # ("ios", envfile.ios),
+    # ("android", envfile.android),
+    # ("VK_ANDROID", envfile.android),
 
-    ("VK_", stdfile)
-  ].toTable
+    ("VK", stdfile),
+  ].toOrderedTable
 
   for extension in xml["extensions"].findAll("extension"):
     let name = extension{"name"}

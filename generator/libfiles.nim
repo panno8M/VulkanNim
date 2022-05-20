@@ -31,8 +31,9 @@ type
 
 
 proc affiliate*(feature: Feature; libFile: LibFile) =
-  libFile.features.add feature.name
-  feature.affiliation = libFile
+  if feature.affiliation == typeof(Feature.affiliation).default:
+    libFile.features.add feature.name
+    feature.affiliation = libFile
 
 proc renderCommandLoaderComponent*(require: NodeRequire; resources: Resources; renderingMode = crmAll): Option[string] =
   template needsLoader(command: NodeCommand; current: CommandRenderingMode): bool =
