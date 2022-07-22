@@ -8,7 +8,6 @@ type
   ANativeWindow* = distinct object
   Flags64* = distinct uint64
   DeviceAddress* = distinct uint64
-  Bool32* = distinct uint32
   Flags*[Flagbits] = distinct uint32
   CAMetalLayer* = distinct object
   DeviceSize* = distinct uint64
@@ -27,16 +26,14 @@ const
   MaxExtensionNameSize* = 256
   UuidSize* = 16
   MaxDescriptionSize* = 256
-  True* = Bool32(1)
   MaxMemoryHeaps* = 16 # The maximum number of unique memory heaps, each of which supporting 1 or more memory types
   SubpassExternal* = (uint32.high)
   AttachmentUnused* = (uint32.high)
   MaxDriverNameSize* = 256
   LuidSize* = 8
   MaxMemoryTypes* = 32
-  False* = Bool32(0)
-  WholeSize* = (uint64.high)
   MaxDeviceGroupSize* = 32
+  WholeSize* = (uint64.high)
   MaxPhysicalDeviceNameSize* = 256
   # == Aliases == #
   MaxDriverInfoSizeKhr* = MaxDriverInfoSize

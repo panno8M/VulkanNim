@@ -18,6 +18,9 @@ import ./defineTypeComponents
 type UnexpectedXmlStructureError* = object of CatchableError
 template xmlError*(title: Title; strs: varargs[string, `$`]): untyped =
   raise UnexpectedXmlStructureError.newException(logMsg(title, strs))
+
+type BlackListed* = object of CatchableError
+
 func invalidStructure*(at: string): Title =
     title("@" & at & " > invalid structure")
 
@@ -107,7 +110,7 @@ func extractNodeEnum*(enumDef: XmlNode): (Option[NodeEnum], Option[NodeEnumAlias
   result[0] = some resultEnum
   if resultAliases.aliases.len != 0: result[1] = some resultAliases
 
-func extractNodeApiConstVal*(typeDef: XmlNode): (Option[NodeConst], Option[NodeConstAlias]) {.raises: [UnexpectedXmlStructureError].} =
+proc extractNodeApiConstVal*(typeDef: XmlNode): (Option[NodeConst], Option[NodeConstAlias]) {.raises: [UnexpectedXmlStructureError].} =
   if typeDef.tag != "enum":
     xmlError title"@API constant value Extraction >": $typeDef
   result = if (?typeDef.value).isSome: (
@@ -130,6 +133,11 @@ func extractNodeApiConstVal*(typeDef: XmlNode): (Option[NodeConst], Option[NodeC
     )
   else:
     xmlError title"@API constant value Extraction >": $typeDef
+
+  const blackList = ["VK_TRUE", "VK_FALSE"]
+
+  if result[0].get(NodeConst()).name in blackList:
+    result[0] = none NodeConst
 
 func extractVendorTags*(tags: XmlNode): VendorTags {.raises: [UnexpectedXmlStructureError].} =
   if tags.kind != xnElement or tags.tag != "tags":
@@ -388,12 +396,15 @@ proc extractNodeCommand*(typeDef: XmlNode): NodeCommand {.raises: [UnexpectedXml
       else: lmWithDevice
 
 
-func extractNodeBasetype*(typeDef: XmlNode): NodeBasetype {.raises: [UnexpectedXmlStructureError].} =
+func extractNodeBasetype*(typeDef: XmlNode): NodeBasetype {.raises: [UnexpectedXmlStructureError, BlackListed].} =
   if typeDef.kind != xnElement or
      typeDef.tag != "type" or
      typeDef.category != "basetype":
     xmlError invalidStructure("basetype Extraction"): $typeDef
-  NodeBasetype(
+
+  const blacklist = ["VkBool32"]
+
+  result = NodeBasetype(
     kind: nkbNormal,
     name: typeDef["name"].innerText.parseWords[0],
     theType: block:
@@ -401,6 +412,10 @@ func extractNodeBasetype*(typeDef: XmlNode): NodeBasetype {.raises: [UnexpectedX
       if ctype != nil: ctype.innerText.parseWords[0]
       else: "object"
   )
+
+  if result.name in blacklist:
+    raise BlackListed.newException("")
+
 func extractNodeExternalReq*(typeDef: XmlNode): NodeBasetype {.raises: [UnexpectedXmlStructureError].} =
   if typeDef.kind != xnElement or
      typeDef.tag != "type" or
@@ -552,22 +567,35 @@ proc extractResources*(rootXml: XmlNode): Resources {.raises: [LoggingFailure, E
     .mapIt(it.extractNodeCommand)
     .zipTable
 
-  for xmlType in typeXmlSeq.filterByCategory("enum"):
+  block:
+    let custom = [
+      NodeEnum(
+        name: "VkBool32",
+        enumVals: @[
+          NodeEnumVal(name: "`false`", kind: nkeValue, value: 0, isExtended: false),
+          NodeEnumVal(name: "`true`", kind: nkeValue, value: 1, isExtended: false),
+          ],
+      ),
+    ]
+    for xmlType in typeXmlSeq.filterByCategory("enum"):
+      try:
+        let (theEnum, enumAliases) = enumsXmlTable[xmlType.name].extractNodeEnum()
+        if theEnum.isSome:
+          result.enums[xmlType.name] = theEnum.get
+        if enumAliases.isSome:
+          result.enumAliases[xmlType.name] = enumAliases.get
+      except KeyError:
+        result.enums[xmlType.name] = NodeEnum(name: xmlType.name, enumVals: @[])
+      except UnexpectedXmlStructureError:
+        error getCurrentExceptionMsg()
+
     try:
-      let (theEnum, enumAliases) = enumsXmlTable[xmlType.name].extractNodeEnum()
-      if theEnum.isSome:
-        result.enums[xmlType.name] = theEnum.get
-      if enumAliases.isSome:
-        result.enumAliases[xmlType.name] = enumAliases.get
-    except KeyError:
-      result.enums[xmlType.name] = NodeEnum(name: xmlType.name, enumVals: @[])
+      rootXml.extractAllNodeEnumExtensions(result)
     except UnexpectedXmlStructureError:
       error getCurrentExceptionMsg()
 
-  try:
-    rootXml.extractAllNodeEnumExtensions(result)
-  except UnexpectedXmlStructureError:
-    error getCurrentExceptionMsg()
+    for cst in custom:
+      result.enums[cst.name] = cst
 
   for xmlStruct in typeXmlSeq.filterByCategory("struct", "union"):
     try:
@@ -592,13 +620,17 @@ proc extractResources*(rootXml: XmlNode): Resources {.raises: [LoggingFailure, E
         error getCurrentExceptionMsg(); nil)
     .filterIt(not it.isNil)
     .zipTable
-  result.basetypes = concat(
-    typeXmlSeq
-      .filterByCategory("basetype")
-      .mapIt(it.extractNodeBasetype),
-    typeXmlSeq.filterIt((?it{"requires"}).isSome)
-      .mapIt(it.extractNodeExternalReq),
-    ).zipTable
+
+  block:
+    var basetypes: seq[NodeBasetype]
+    for bt in typeXmlSeq.filterByCategory("basetype"):
+      try: basetypes.add bt.extractNodeBasetype
+      except BlackListed: discard
+    let externals = typeXmlSeq
+      .filterIt((?it{"requires"}).isSome)
+      .mapIt(it.extractNodeExternalReq)
+    result.basetypes = concat( basetypes, externals,).zipTable
+
   result.handles = typeXmlSeq
     .filterByCategory("handle")
     .mapIt(it.extractNodehandle)

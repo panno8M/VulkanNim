@@ -8,6 +8,9 @@ type
   # ===========
   # Fundamental types used by many commands and structures
   # ------------------------------------------------------
+  Bool32* {.vkEnum.} = enum
+    `false` = 0
+    `true` = 1
   # API result codes
   Result* {.vkEnum.} = enum
     # Provided by VK_VERSION_1_2
